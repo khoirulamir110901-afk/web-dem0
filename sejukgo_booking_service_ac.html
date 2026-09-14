@@ -1,0 +1,2770 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SEJUKGO — Panggil Teknisi. Beres. | Service & Maintenance AC</title>
+  
+  <!-- Preload Critical Images -->
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=900&q=80" />
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=800&q=80" />
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f0f8ff',
+              100: '#e0f2fe',
+              200: '#bae6fd',
+              300: '#7dd3fc',
+              400: '#38bdf8',
+              500: '#0ea5e9',
+              600: '#0284c7', // Bright primary blue
+              700: '#0369a1',
+              800: '#075985',
+              900: '#0c4a6e',
+            },
+            navy: {
+              800: '#1e293b',
+              900: '#0f172a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: #ffffff;
+      color: #0f172a;
+      -webkit-font-smoothing: antialiased;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .choice-card {
+      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .choice-card:hover {
+      border-color: #0284c7;
+      transform: translateY(-2px);
+    }
+    .choice-card.active {
+      border-color: #0284c7;
+      background-color: #f0f8ff;
+      box-shadow: 0 0 0 2px #0284c7;
+    }
+    .modal-backdrop {
+      background-color: rgba(15, 23, 42, 0.55);
+      backdrop-filter: blur(5px);
+    }
+    .tab-active {
+      border-bottom: 2px solid #0284c7;
+      color: #0284c7;
+      font-weight: 700;
+    }
+    /* Toast Animation */
+    @keyframes slideDownFade {
+      0% { transform: translate(-50%, -20px); opacity: 0; }
+      100% { transform: translate(-50%, 0); opacity: 1; }
+    }
+    .toast-anim {
+      animation: slideDownFade 0.25s ease forwards;
+    }
+  </style>
+</head>
+<body class="bg-white text-navy-900 selection:bg-brand-100 selection:text-brand-700 pb-24 lg:pb-0">
+
+  <!-- NOTIFICATION TOAST CONTAINER -->
+  <div id="toast-box" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 pointer-events-none transition-all duration-300 opacity-0 transform -translate-y-4">
+    <div id="toast-content" class="bg-navy-900 text-white px-5 py-3 rounded-xl shadow-xl border border-slate-700 text-xs sm:text-sm font-semibold flex items-center gap-2.5">
+      <span id="toast-icon">✓</span>
+      <span id="toast-msg">Perubahan berhasil disimpan</span>
+    </div>
+  </div>
+
+  <!-- 2. HEADER — SERVICE COMMAND BAR -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
+      <!-- Left: Brand Logo -->
+      <a href="#" class="flex flex-col group">
+        <span class="text-xl sm:text-2xl font-black tracking-tight text-brand-600 flex items-center gap-1.5" id="brand-logo-text">
+          SEJUKGO
+          <span class="inline-block w-2 h-2 rounded-full bg-brand-500"></span>
+        </span>
+        <span class="text-[10px] sm:text-[11px] tracking-widest font-bold text-slate-500 uppercase -mt-0.5" id="brand-tagline-text">
+          AC SERVICE & MAINTENANCE
+        </span>
+      </a>
+
+      <!-- Center: Navigation Links (Desktop) -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
+        <a href="#layanan" class="hover:text-brand-600 transition-colors">Layanan</a>
+        <a href="#harga" class="hover:text-brand-600 transition-colors">Harga</a>
+        <a href="#cara-kerja" class="hover:text-brand-600 transition-colors">Cara Kerja</a>
+        <a href="#area" class="hover:text-brand-600 transition-colors">Area</a>
+        <a href="#cek-status" class="hover:text-brand-600 transition-colors flex items-center gap-1.5 text-slate-700">
+          <span>Lacak Booking</span>
+          <span class="text-[10px] bg-slate-100 border border-slate-200 px-1.5 py-0.5 rounded text-slate-600 font-bold">LIVE</span>
+        </a>
+      </nav>
+
+      <!-- Right: Online Status, Admin Button & CTA -->
+      <div class="flex items-center gap-2.5 sm:gap-3">
+        <div class="hidden sm:flex items-center gap-1.5 px-2.5 py-1 bg-emerald-50 border border-emerald-200 rounded-full text-xs font-semibold text-emerald-700">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span>ONLINE</span>
+        </div>
+
+        <button onclick="openBookingModal()" id="btn-header-cta" class="inline-flex items-center justify-center px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-lg bg-brand-600 hover:bg-brand-700 active:scale-95 text-white font-bold text-xs sm:text-sm shadow-sm transition-all">
+          PESAN TEKNISI
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 3. HERO — BOOKING PANEL -->
+  <section class="bg-white pt-8 pb-12 sm:pt-14 sm:pb-16 border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+        
+        <!-- Booking Panel Container (Left 7.5 Cols) -->
+        <div class="lg:col-span-8 bg-white border border-slate-200/90 rounded-2xl p-5 sm:p-8 shadow-sm">
+          <!-- Small Blue Badge -->
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-brand-50 border border-brand-200 text-brand-700 text-xs font-bold uppercase tracking-wider mb-4" id="hero-badge">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            HOME SERVICE AC
+          </div>
+
+          <!-- Headline & Subheadline -->
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-navy-900 tracking-tight leading-[1.15] mb-3" id="hero-headline">
+            AC BERMASALAH?<br/>
+            <span class="text-brand-600">PESAN TEKNISI SEKARANG.</span>
+          </h1>
+          <p class="text-slate-600 text-sm sm:text-base mb-7 leading-relaxed max-w-2xl" id="hero-subheadline">
+            Service AC langsung ke rumah, kantor, toko, apartemen, dan properti Anda. Teknisi profesional bersertifikat, bergaransi, dan datang tepat waktu.
+          </p>
+
+          <!-- Diagnostic Selector: "APA YANG TERJADI DENGAN AC ANDA?" -->
+          <div class="border-t border-slate-100 pt-6">
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-xs sm:text-sm font-bold tracking-wider text-slate-800 uppercase flex items-center gap-2">
+                <span>APA YANG TERJADI DENGAN AC ANDA?</span>
+              </h2>
+              <span class="text-xs text-brand-600 font-medium hidden sm:inline">Pilih salah satu untuk booking instan</span>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3" id="hero-diagnostic-grid">
+              <!-- Item 1: Tidak Dingin -->
+              <button onclick="handleQuickSelect('Tidak Dingin', 'Diagnosis & Service')" class="choice-card group p-3.5 rounded-xl border border-slate-200 bg-white text-left flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-blue-50 text-brand-600 flex items-center justify-center shrink-0 group-hover:bg-brand-600 group-hover:text-white transition-colors">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07L19.07 4.93M8 4l4 4-4 4M16 4l-4 4 4 4M4 8l4 4-4 4M20 8l-4 4 4 4"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="font-bold text-sm text-navy-900">Tidak Dingin</div>
+                  <div class="text-[11px] text-slate-500">Hanya hembusan angin</div>
+                </div>
+              </button>
+
+              <!-- Item 2: Bocor -->
+              <button onclick="handleQuickSelect('Bocor Air', 'Pemeriksaan Saluran & Cuci')" class="choice-card group p-3.5 rounded-xl border border-slate-200 bg-white text-left flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-blue-50 text-brand-600 flex items-center justify-center shrink-0 group-hover:bg-brand-600 group-hover:text-white transition-colors">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="font-bold text-sm text-navy-900">Bocor Air</div>
+                  <div class="text-[11px] text-slate-500">Menetes di dalam ruangan</div>
+                </div>
+              </button>
+
+              <!-- Item 3: Berisik -->
+              <button onclick="handleQuickSelect('Berisik / Bergetar', 'Perbaikan Unit')" class="choice-card group p-3.5 rounded-xl border border-slate-200 bg-white text-left flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-blue-50 text-brand-600 flex items-center justify-center shrink-0 group-hover:bg-brand-600 group-hover:text-white transition-colors">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M11 5L6 9H2v6h4l5 4V5zM15.54 8.46a5 5 0 010 7.07M19.07 4.93a10 10 0 010 14.14"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="font-bold text-sm text-navy-900">Berisik</div>
+                  <div class="text-[11px] text-slate-500">Suara dengung / getar</div>
+                </div>
+              </button>
+
+              <!-- Item 4: Kurang Dingin -->
+              <button onclick="handleQuickSelect('Kurang Dingin', 'Cuci AC & Cek Freon')" class="choice-card group p-3.5 rounded-xl border border-slate-200 bg-white text-left flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-blue-50 text-brand-600 flex items-center justify-center shrink-0 group-hover:bg-brand-600 group-hover:text-white transition-colors">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.59 4.59A2 2 0 1111 8H2m10.59 11.41A2 2 0 1014 16H2m15.73-8.27A2.5 2.5 0 1119.5 12H2"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="font-bold text-sm text-navy-900">Kurang Dingin</div>
+                  <div class="text-[11px] text-slate-500">Lama mencapai suhu</div>
+                </div>
+              </button>
+
+              <!-- Item 5: Mati Total -->
+              <button onclick="handleQuickSelect('Mati Total', 'Pemeriksaan Kelistrikan')" class="choice-card group p-3.5 rounded-xl border border-slate-200 bg-white text-left flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-blue-50 text-brand-600 flex items-center justify-center shrink-0 group-hover:bg-brand-600 group-hover:text-white transition-colors">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="font-bold text-sm text-navy-900">Mati Total</div>
+                  <div class="text-[11px] text-slate-500">Tidak ada respon remote</div>
+                </div>
+              </button>
+
+              <!-- Item 6: Mau Cuci -->
+              <button onclick="handleQuickSelect('Mau Cuci Rutin', 'Cuci AC Standar')" class="choice-card group p-3.5 rounded-xl border border-slate-200 bg-white text-left flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-blue-50 text-brand-600 flex items-center justify-center shrink-0 group-hover:bg-brand-600 group-hover:text-white transition-colors">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4M4 19h4M13 3l1.5 4.5L19 9l-4.5 1.5L13 15l-1.5-4.5L7 9l4.5-1.5L13 3z"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="font-bold text-sm text-navy-900">Mau Cuci</div>
+                  <div class="text-[11px] text-slate-500">Perawatan berkala 3 bln</div>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Supporting Realistic Visual (Right 4.5 Cols) with Robust Dual URL + Fallback -->
+        <div class="lg:col-span-4 flex flex-col gap-4">
+          <div class="relative rounded-2xl overflow-hidden border border-slate-200 bg-slate-100 shadow-sm aspect-[4/3] lg:aspect-[4/3.8]">
+            <img 
+              id="hero-img-element"
+              src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=900&q=80" 
+              data-fallback-step="0"
+              data-backup-url="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=900&q=80"
+              alt="Teknisi SEJUKGO sedang memeriksa unit AC dengan teliti" 
+              class="w-full h-full object-cover object-center"
+              loading="eager"
+              onerror="handleRobustImgError(this)"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-navy-900/80 via-transparent to-transparent flex flex-col justify-end p-5">
+              <div class="inline-flex items-center gap-1.5 text-xs text-white/90 font-medium mb-1">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                Teknisi Terverifikasi & Bersertifikat
+              </div>
+              <p class="text-white text-sm font-semibold" id="hero-img-caption">
+                Perlengkapan komplit, SOP bersih, & jaminan tanpa kotor di ruangan.
+              </p>
+            </div>
+          </div>
+
+          <!-- Quick Trust Metrics Strip -->
+          <div class="grid grid-cols-2 gap-3">
+            <div class="p-3.5 bg-slate-50 border border-slate-200/80 rounded-xl">
+              <div class="text-xl sm:text-2xl font-black text-navy-900" id="trust-metric-1">30 Hari</div>
+              <div class="text-xs text-slate-500 font-medium">Garansi Servis Resmi</div>
+            </div>
+            <div class="p-3.5 bg-slate-50 border border-slate-200/80 rounded-xl">
+              <div class="text-xl sm:text-2xl font-black text-navy-900" id="trust-metric-2">± 45 Mnt</div>
+              <div class="text-xs text-slate-500 font-medium">Estimasi Tiba di Lokasi</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. SMART BOOKING BAR -->
+  <section class="bg-brand-600 text-white py-4 sm:py-5 border-y border-brand-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        
+        <!-- Left: Steps info -->
+        <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs sm:text-sm font-medium">
+          <span class="font-black tracking-wider uppercase text-sky-200 text-xs sm:text-sm">
+            PESAN TEKNISI DALAM 3 LANGKAH
+          </span>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 px-2 py-0.5 rounded text-white font-bold text-xs">01</span>
+            <span>Pilih layanan</span>
+          </div>
+          <span class="text-sky-300">→</span>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 px-2 py-0.5 rounded text-white font-bold text-xs">02</span>
+            <span>Pilih jadwal</span>
+          </div>
+          <span class="text-sky-300">→</span>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 px-2 py-0.5 rounded text-white font-bold text-xs">03</span>
+            <span>Teknisi datang</span>
+          </div>
+        </div>
+
+        <!-- Right: Action Trigger -->
+        <button onclick="openBookingModal()" id="btn-smart-bar" class="self-start md:self-auto inline-flex items-center gap-2 bg-white hover:bg-sky-50 text-brand-700 font-extrabold text-xs sm:text-sm px-5 py-2.5 rounded-lg shadow-sm active:scale-95 transition-all">
+          <span>MULAI BOOKING</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </button>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. SECTION — PILIH CARA SERVICE -->
+  <section class="py-16 bg-white border-b border-slate-100" id="cara-kerja">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-10">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-navy-900 tracking-tight">
+          BUTUH YANG MANA?
+        </h2>
+        <p class="text-slate-500 text-sm mt-1">Pilih kategori utama sesuai kondisi AC Anda saat ini.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Card 1: QUICK FIX -->
+        <div class="border border-slate-200 rounded-2xl p-6 sm:p-7 flex flex-col justify-between hover:border-brand-500 transition-all bg-white shadow-sm">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="px-2.5 py-1 rounded bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold uppercase tracking-wider">
+                URGENT / TROUBLE
+              </span>
+              <svg class="w-6 h-6 text-brand-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <h3 class="text-xl font-bold text-navy-900 mb-1">QUICK FIX</h3>
+            <p class="text-xs font-semibold text-brand-600 mb-4">AC sedang bermasalah</p>
+            <div class="border-t border-slate-100 pt-4 mb-6">
+              <p class="text-xs text-slate-500 font-medium mb-2">Cocok untuk:</p>
+              <ul class="space-y-1.5 text-xs text-slate-700 font-medium">
+                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span>Tidak dingin sama sekali</li>
+                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span>Bocor air menetes deras</li>
+                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span>Suara berisik / bergetar</li>
+                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span>Unit indoor/outdoor mati</li>
+              </ul>
+            </div>
+          </div>
+          <button onclick="handleCategorySelect('QUICK FIX', 'Perbaikan AC')" class="w-full py-2.5 px-4 rounded-lg bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs sm:text-sm transition-colors text-center">
+            Perbaiki AC
+          </button>
+        </div>
+
+        <!-- Card 2: CLEAN & FRESH -->
+        <div class="border-2 border-brand-500 rounded-2xl p-6 sm:p-7 flex flex-col justify-between bg-brand-50/40 shadow-sm relative">
+          <div class="absolute -top-3 right-6 bg-brand-600 text-white text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full">
+            PALING SERING DIPESAN
+          </div>
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="px-2.5 py-1 rounded bg-brand-100 text-brand-800 text-xs font-bold uppercase tracking-wider">
+                REGULAR CARE
+              </span>
+              <svg class="w-6 h-6 text-brand-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4M4 19h4M13 3l1.5 4.5L19 9l-4.5 1.5L13 15l-1.5-4.5L7 9l4.5-1.5L13 3z"/></svg>
+            </div>
+            <h3 class="text-xl font-bold text-navy-900 mb-1">CLEAN & FRESH</h3>
+            <p class="text-xs font-semibold text-brand-600 mb-4">AC masih menyala tapi perlu dirawat</p>
+            <div class="border-t border-brand-100 pt-4 mb-6">
+              <p class="text-xs text-slate-500 font-medium mb-2">Cocok untuk:</p>
+              <ul class="space-y-1.5 text-xs text-slate-700 font-medium">
+                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span>Cuci AC berkala (indoor + outdoor)</li>
+                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span>Deep cleaning debu & jamur</li>
+                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span>Maintenance pencegahan bau</li>
+                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span>Pembersihan filter & talang air</li>
+              </ul>
+            </div>
+          </div>
+          <button onclick="handleCategorySelect('CLEAN & FRESH', 'Cuci & Perawatan AC')" class="w-full py-2.5 px-4 rounded-lg bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs sm:text-sm transition-colors text-center">
+            Rawat AC
+          </button>
+        </div>
+
+        <!-- Card 3: NEW INSTALLATION -->
+        <div class="border border-slate-200 rounded-2xl p-6 sm:p-7 flex flex-col justify-between hover:border-brand-500 transition-all bg-white shadow-sm">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="px-2.5 py-1 rounded bg-slate-100 text-slate-700 text-xs font-bold uppercase tracking-wider">
+                UNIT RELOCATION
+              </span>
+              <svg class="w-6 h-6 text-brand-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+            </div>
+            <h3 class="text-xl font-bold text-navy-900 mb-1">NEW INSTALLATION</h3>
+            <p class="text-xs font-semibold text-brand-600 mb-4">Butuh pasang atau pindah AC</p>
+            <div class="border-t border-slate-100 pt-4 mb-6">
+              <p class="text-xs text-slate-500 font-medium mb-2">Cocok untuk:</p>
+              <ul class="space-y-1.5 text-xs text-slate-700 font-medium">
+                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span>Instalasi unit AC baru / bekas</li>
+                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span>Bongkar pasang pindah rumah/ruangan</li>
+                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span>Relokasi unit outdoor/indoor</li>
+                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span>Pemasangan pipa & vacuum standar</li>
+              </ul>
+            </div>
+          </div>
+          <button onclick="handleCategorySelect('NEW INSTALLATION', 'Instalasi & Pasang AC')" class="w-full py-2.5 px-4 rounded-lg bg-navy-900 hover:bg-slate-800 text-white font-bold text-xs sm:text-sm transition-colors text-center">
+            Pasang AC
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. SECTION — SERVICE MENU (DYNAMICALLY EDITABLE & EXTENDABLE) -->
+  <section class="py-16 bg-white border-b border-slate-100" id="layanan">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 pb-4 border-b border-slate-200">
+        <div>
+          <span class="text-xs font-extrabold uppercase tracking-widest text-brand-600">KATALOG MENU</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-navy-900 tracking-tight mt-1" id="section-catalog-title">
+            SEMUA LAYANAN
+          </h2>
+        </div>
+        <div class="flex items-center gap-3 mt-2 sm:mt-0">
+          <p class="text-xs text-slate-500 font-medium">Klik pada baris untuk langsung memilih & booking</p>
+          <button onclick="openAdminModal('tab-catalog')" class="hidden sm:inline-flex items-center gap-1 text-xs text-brand-600 hover:text-brand-800 font-bold px-2 py-1 bg-brand-50 rounded border border-brand-200">
+            + Tambah / Edit Layanan
+          </button>
+        </div>
+      </div>
+
+      <!-- App-style Dynamic Service List Container -->
+      <div id="service-list-container" class="divide-y divide-slate-200/80">
+        <!-- Rendered dynamically by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. SECTION — WHY PEOPLE BOOK US -->
+  <section class="py-16 bg-brand-50/60 border-b border-brand-100/70">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-12 text-center max-w-2xl mx-auto">
+        <span class="text-xs font-extrabold uppercase tracking-widest text-brand-600">KEUNGGULAN SEJUKGO</span>
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-navy-900 tracking-tight mt-1">
+          KENAPA CUSTOMER PILIH SEJUKGO?
+        </h2>
+        <p class="text-slate-600 text-sm mt-2">Dibuat khusus untuk memberikan kepastian servis tanpa ribet.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+        <!-- 01 -->
+        <div class="bg-white p-6 sm:p-7 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
+          <div>
+            <span class="text-3xl font-black text-brand-600 block mb-3">01</span>
+            <h3 class="text-lg font-bold text-navy-900 mb-2">DATANG KE LOKASI</h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              Tidak perlu membawa AC ke tempat service. Teknisi kami datang langsung membawa peralatan lengkap & seragam rapi.
+            </p>
+          </div>
+        </div>
+
+        <!-- 02 -->
+        <div class="bg-white p-6 sm:p-7 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
+          <div>
+            <span class="text-3xl font-black text-brand-600 block mb-3">02</span>
+            <h3 class="text-lg font-bold text-navy-900 mb-2">JADWAL JELAS</h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              Pilih waktu kunjungan sesuai slot yang tersedia. Tanpa menunggu seharian tanpa kepastian jam kedatangan.
+            </p>
+          </div>
+        </div>
+
+        <!-- 03 -->
+        <div class="bg-white p-6 sm:p-7 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
+          <div>
+            <span class="text-3xl font-black text-brand-600 block mb-3">03</span>
+            <h3 class="text-lg font-bold text-navy-900 mb-2">HARGA TRANSPARAN</h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              Informasi biaya ditampilkan sebelum konfirmasi. Tidak ada biaya tersembunyi atau 'nembak harga' di lokasi.
+            </p>
+          </div>
+        </div>
+
+        <!-- 04 -->
+        <div class="bg-white p-6 sm:p-7 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
+          <div>
+            <span class="text-3xl font-black text-brand-600 block mb-3">04</span>
+            <h3 class="text-lg font-bold text-navy-900 mb-2">TEKNISI TERPANTAU</h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              Status booking dapat dipantau langsung secara live. Ketahui kapan teknisi ditugaskan hingga dalam perjalanan.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. SECTION — LIVE BOOKING STATUS -->
+  <section class="py-16 bg-white border-b border-slate-100" id="cek-status">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-white border-2 border-slate-200 rounded-3xl p-6 sm:p-10 shadow-sm">
+        
+        <div class="text-center max-w-lg mx-auto mb-8">
+          <div class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-brand-50 text-brand-700 text-xs font-bold mb-2">
+            <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></span>
+            PELACAKAN REAL-TIME
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-navy-900 tracking-tight">
+            SUDAH BOOKING? CEK STATUSNYA.
+          </h2>
+          <p class="text-slate-500 text-xs sm:text-sm mt-1">
+            Masukkan kode booking untuk mengetahui posisi dan jadwal penanganan teknisi Anda.
+          </p>
+        </div>
+
+        <!-- Input Box -->
+        <div class="flex flex-col sm:flex-row gap-2 max-w-xl mx-auto mb-4">
+          <div class="relative flex-1">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-400">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            </span>
+            <input 
+              type="text" 
+              id="status-input-code" 
+              placeholder="Contoh: SG-28491" 
+              value="SG-28491" 
+              class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:border-brand-600 focus:ring-2 focus:ring-brand-100 font-bold uppercase text-navy-900 tracking-wider text-sm transition-all"
+            />
+          </div>
+          <button 
+            onclick="checkBookingStatus()" 
+            class="px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm tracking-wide shadow-sm active:scale-95 transition-all shrink-0">
+            CEK STATUS
+          </button>
+        </div>
+
+        <div class="text-center text-xs text-slate-400 mb-8 flex items-center justify-center gap-2">
+          <span>Kode demo tersedia: <code class="bg-slate-100 text-slate-700 px-1 py-0.5 rounded font-mono font-bold">SG-28491</code></span>
+          <span>•</span>
+          <button onclick="openAdminModal('tab-bookings')" class="text-brand-600 hover:underline font-bold">
+            Kelola Status di Admin Panel →
+          </button>
+        </div>
+
+        <!-- Status Result Display Panel -->
+        <div id="status-result-card" class="bg-slate-50 border border-slate-200 rounded-2xl p-5 sm:p-7">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-5 border-b border-slate-200/80 gap-3">
+            <div>
+              <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">KODE BOOKING</span>
+              <div class="flex items-center gap-2">
+                <h4 id="res-booking-id" class="text-xl font-black text-brand-600 font-mono">SG-28491</h4>
+                <span id="res-badge-status" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-300">
+                  BOOKING DITERIMA ✓
+                </span>
+              </div>
+            </div>
+            <div class="sm:text-right">
+              <div class="text-xs text-slate-500 font-medium">Teknisi: <strong id="res-tech-name" class="text-navy-900 font-bold">Budi Santoso</strong></div>
+              <div class="text-xs text-slate-500 font-medium">Estimasi datang: <strong id="res-eta" class="text-brand-600 font-bold">13.30 WIB</strong></div>
+            </div>
+          </div>
+
+          <!-- Status Timeline (6 Stages) -->
+          <div class="pt-6">
+            <div class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">STATUS TIMELINE:</div>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 text-center text-xs" id="timeline-container">
+              <!-- Rendered via JS -->
+            </div>
+            
+            <p id="res-detail-notes" class="mt-4 text-xs text-slate-500 bg-white p-3 rounded-lg border border-slate-200">
+              Layanan: <strong>Cuci AC & Cek Freon (2 Unit)</strong> • Alamat: Jl. Flamboyan No. 14, Jakarta Selatan.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. SECTION — OUR TECHNICIANS -->
+  <section class="py-16 bg-white border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 pb-3">
+        <div>
+          <span class="text-xs font-extrabold uppercase tracking-widest text-brand-600">TIM LAPANGAN</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-navy-900 tracking-tight mt-1">
+            TEKNISI PROFESIONAL KAMI
+          </h2>
+        </div>
+        <p class="text-xs text-slate-500 mt-1 sm:mt-0 font-medium">Teknisi tersertifikasi, latar belakang terverifikasi & ber-SOP higienis.</p>
+      </div>
+
+      <!-- Horizontal Technician Roster with Robust Image Loader -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="technicians-grid">
+        <!-- Tech 1 -->
+        <div class="border border-slate-200 rounded-2xl p-5 bg-white flex items-center gap-4 hover:border-brand-400 transition-all shadow-sm">
+          <div class="relative shrink-0">
+            <img 
+              id="tech-img-1"
+              src="https://images.unsplash.com/photo-1540569014015-19a7be504e3a?auto=format&fit=crop&w=300&q=80" 
+              data-fallback-step="0"
+              alt="Teknisi Budi" 
+              class="w-20 h-20 rounded-xl object-cover border border-slate-200"
+              onerror="handleRobustImgError(this)"
+            />
+            <span class="absolute -bottom-1.5 -right-1.5 px-2 py-0.5 rounded-full bg-emerald-500 text-white text-[9px] font-extrabold tracking-wide uppercase shadow-sm">
+              ● AVAILABLE
+            </span>
+          </div>
+          <div class="min-w-0">
+            <h3 class="text-lg font-bold text-navy-900 leading-tight" id="tech-name-1">BUDI SANTOSO</h3>
+            <p class="text-xs font-semibold text-brand-600 mb-1.5">AC Technician</p>
+            <div class="flex items-center gap-2 text-xs">
+              <span class="text-amber-500 font-black">★★★★★ 4.9</span>
+              <span class="text-slate-300">•</span>
+              <span class="text-slate-500 font-medium">342 service</span>
+            </div>
+            <div class="mt-2 text-[11px] text-slate-500 bg-slate-50 px-2 py-1 rounded">
+              Spesialis: Inverter & Cuci Bersih
+            </div>
+          </div>
+        </div>
+
+        <!-- Tech 2 -->
+        <div class="border border-slate-200 rounded-2xl p-5 bg-white flex items-center gap-4 hover:border-brand-400 transition-all shadow-sm">
+          <div class="relative shrink-0">
+            <img 
+              id="tech-img-2"
+              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" 
+              data-fallback-step="0"
+              alt="Teknisi Rizky" 
+              class="w-20 h-20 rounded-xl object-cover border border-slate-200"
+              onerror="handleRobustImgError(this)"
+            />
+            <span class="absolute -bottom-1.5 -right-1.5 px-2 py-0.5 rounded-full bg-emerald-500 text-white text-[9px] font-extrabold tracking-wide uppercase shadow-sm">
+              ● AVAILABLE
+            </span>
+          </div>
+          <div class="min-w-0">
+            <h3 class="text-lg font-bold text-navy-900 leading-tight" id="tech-name-2">RIZKY PRATAMA</h3>
+            <p class="text-xs font-semibold text-brand-600 mb-1.5">Senior Technician</p>
+            <div class="flex items-center gap-2 text-xs">
+              <span class="text-amber-500 font-black">★★★★★ 4.8</span>
+              <span class="text-slate-300">•</span>
+              <span class="text-slate-500 font-medium">287 service</span>
+            </div>
+            <div class="mt-2 text-[11px] text-slate-500 bg-slate-50 px-2 py-1 rounded">
+              Spesialis: Kebocoran & Pengisian Freon
+            </div>
+          </div>
+        </div>
+
+        <!-- Tech 3 -->
+        <div class="border border-slate-200 rounded-2xl p-5 bg-white flex items-center gap-4 hover:border-brand-400 transition-all shadow-sm">
+          <div class="relative shrink-0">
+            <img 
+              id="tech-img-3"
+              src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80" 
+              data-fallback-step="0"
+              alt="Teknisi Andi" 
+              class="w-20 h-20 rounded-xl object-cover border border-slate-200"
+              onerror="handleRobustImgError(this)"
+            />
+            <span class="absolute -bottom-1.5 -right-1.5 px-2 py-0.5 rounded-full bg-emerald-500 text-white text-[9px] font-extrabold tracking-wide uppercase shadow-sm">
+              ● AVAILABLE
+            </span>
+          </div>
+          <div class="min-w-0">
+            <h3 class="text-lg font-bold text-navy-900 leading-tight" id="tech-name-3">ANDI WIJAYA</h3>
+            <p class="text-xs font-semibold text-brand-600 mb-1.5">AC Technician</p>
+            <div class="flex items-center gap-2 text-xs">
+              <span class="text-amber-500 font-black">★★★★★ 4.9</span>
+              <span class="text-slate-300">•</span>
+              <span class="text-slate-500 font-medium">421 service</span>
+            </div>
+            <div class="mt-2 text-[11px] text-slate-500 bg-slate-50 px-2 py-1 rounded">
+              Spesialis: Bongkar Pasang & Troubleshooting
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. SECTION — HARGA SEBELUM BOOKING -->
+  <section class="py-16 bg-brand-50/50 border-b border-brand-100" id="harga">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-lg mx-auto mb-10">
+        <span class="text-xs font-extrabold uppercase tracking-widest text-brand-600">KALKULATOR BIAYA</span>
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-navy-900 tracking-tight mt-1">
+          TAHU HARGANYA DULU? BISA.
+        </h2>
+        <p class="text-slate-600 text-xs sm:text-sm mt-1">
+          Pilih kebutuhan Anda dan dapatkan estimasi tarif jujur dan transparan secara langsung.
+        </p>
+      </div>
+
+      <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+          
+          <!-- Dropdown 1: Jenis Layanan (Synced with catalog) -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+              1. Jenis Layanan
+            </label>
+            <select id="est-service" onchange="calculateEstimate()" class="w-full py-3 px-3.5 rounded-xl border border-slate-300 bg-white font-semibold text-sm text-navy-900 focus:outline-none focus:border-brand-600 focus:ring-1 focus:ring-brand-600">
+              <!-- Populated dynamically based on catalog -->
+            </select>
+          </div>
+
+          <!-- Input 2: Jumlah Unit -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+              2. Jumlah Unit AC
+            </label>
+            <div class="flex items-center border border-slate-300 rounded-xl overflow-hidden bg-white">
+              <button onclick="adjustUnit(-1)" class="w-12 h-11 bg-slate-50 hover:bg-slate-100 font-bold text-lg text-slate-700 active:scale-95 transition-all">-</button>
+              <input type="number" id="est-unit" value="1" min="1" max="20" onchange="calculateEstimate()" class="w-full text-center font-extrabold text-navy-900 text-sm focus:outline-none" readonly />
+              <button onclick="adjustUnit(1)" class="w-12 h-11 bg-slate-50 hover:bg-slate-100 font-bold text-lg text-slate-700 active:scale-95 transition-all">+</button>
+            </div>
+          </div>
+
+          <!-- Dropdown 3: Area -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+              3. Area Kota
+            </label>
+            <select id="est-area" onchange="calculateEstimate()" class="w-full py-3 px-3.5 rounded-xl border border-slate-300 bg-white font-semibold text-sm text-navy-900 focus:outline-none focus:border-brand-600 focus:ring-1 focus:ring-brand-600">
+              <option value="Jabodetabek">Jabodetabek</option>
+              <option value="Bandung">Bandung</option>
+              <option value="Surabaya">Surabaya & Malang</option>
+              <option value="Semarang">Semarang & Solo</option>
+              <option value="Yogyakarta">Yogyakarta</option>
+              <option value="Luar Jawa">Luar Jawa (Medan, Lampung, Bali, Makassar)</option>
+            </select>
+          </div>
+
+        </div>
+
+        <!-- Output Box -->
+        <div class="bg-brand-50 border border-brand-200 rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-widest text-brand-700">ESTIMASI BIAYA</span>
+            <div id="est-output-price" class="text-3xl sm:text-4xl font-black text-brand-700 tracking-tight mt-0.5">
+              Rp 65.000 – Rp 85.000
+            </div>
+            <p class="text-[11px] sm:text-xs text-slate-500 mt-1 max-w-md leading-normal">
+              *Catatan: Harga akhir dapat menyesuaikan kondisi unit dan kebutuhan service di lokasi setelah dicek teknisi.
+            </p>
+          </div>
+
+          <button onclick="proceedFromEstimate()" id="btn-est-booking" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-extrabold text-sm tracking-wide shadow-sm active:scale-95 transition-all shrink-0">
+            LANJUT BOOKING →
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. SECTION — SERVICE CHECKLIST -->
+  <section class="py-16 bg-white border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        
+        <!-- Checklist Left (7 Cols) -->
+        <div class="lg:col-span-7">
+          <span class="text-xs font-extrabold uppercase tracking-widest text-brand-600">STANDAR OPERASIONAL PROSEDUR</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-navy-900 tracking-tight mt-1 mb-3">
+            APA YANG TEKNISI CEK?
+          </h2>
+          <p class="text-slate-600 text-sm mb-6 leading-relaxed">
+            Setiap kunjungan teknisi SEJUKGO selalu dilengkapi lembar inspeksi komprehensif untuk memastikan AC bekerja optimal, higienis, dan hemat listrik.
+          </p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5" id="checklist-container">
+            <div class="flex items-center gap-3 p-3 rounded-xl border border-slate-200/90 bg-white">
+              <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold shrink-0">✓</span>
+              <span class="text-sm font-semibold text-navy-900">Kondisi indoor unit & casing</span>
+            </div>
+            <div class="flex items-center gap-3 p-3 rounded-xl border border-slate-200/90 bg-white">
+              <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold shrink-0">✓</span>
+              <span class="text-sm font-semibold text-navy-900">Filter udara & kesterilan</span>
+            </div>
+            <div class="flex items-center gap-3 p-3 rounded-xl border border-slate-200/90 bg-white">
+              <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold shrink-0">✓</span>
+              <span class="text-sm font-semibold text-navy-900">Evaporator & sirip pendingin</span>
+            </div>
+            <div class="flex items-center gap-3 p-3 rounded-xl border border-slate-200/90 bg-white">
+              <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold shrink-0">✓</span>
+              <span class="text-sm font-semibold text-navy-900">Drain system (kelancaran pipa air)</span>
+            </div>
+            <div class="flex items-center gap-3 p-3 rounded-xl border border-slate-200/90 bg-white">
+              <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold shrink-0">✓</span>
+              <span class="text-sm font-semibold text-navy-900">Airflow & hembusan blower</span>
+            </div>
+            <div class="flex items-center gap-3 p-3 rounded-xl border border-slate-200/90 bg-white">
+              <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold shrink-0">✓</span>
+              <span class="text-sm font-semibold text-navy-900">Suhu keluaran udara (termometer)</span>
+            </div>
+            <div class="flex items-center gap-3 p-3 rounded-xl border border-slate-200/90 bg-white">
+              <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold shrink-0">✓</span>
+              <span class="text-sm font-semibold text-navy-900">Outdoor unit & kipas kompresor</span>
+            </div>
+            <div class="flex items-center gap-3 p-3 rounded-xl border border-slate-200/90 bg-white">
+              <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold shrink-0">✓</span>
+              <span class="text-sm font-semibold text-navy-900">Kondisi refrigerant / tekanan freon</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Realistic Close-up Inspection Photo with Robust Image Loader -->
+        <div class="lg:col-span-5">
+          <div class="relative rounded-2xl overflow-hidden border border-slate-200 shadow-sm aspect-[4/4.5] bg-slate-100">
+            <img 
+              id="checklist-img-element"
+              src="https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=800&q=80" 
+              data-fallback-step="0"
+              alt="Close-up teknisi melakukan inspeksi evaporator AC" 
+              class="w-full h-full object-cover"
+              loading="lazy"
+              onerror="handleRobustImgError(this)"
+            />
+            <div class="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-white/95 backdrop-blur-sm border border-slate-200 shadow-md">
+              <div class="text-xs font-bold text-navy-900 flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                Peralatan Digital Manifold & Termo-gun
+              </div>
+              <p class="text-[11px] text-slate-500 mt-0.5">
+                Pengukuran akurat tanpa perkiraan manual yang keliru.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 12. SECTION — HOME / BUSINESS -->
+  <section class="py-16 bg-slate-50 border-b border-slate-200/80">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-navy-900 tracking-tight uppercase">
+          SAYA BUTUH SERVICE UNTUK:
+        </h2>
+        <p class="text-slate-500 text-xs sm:text-sm mt-1">Pilih tipe properti untuk rekomendasi kapasitas teknisi yang tepat</p>
+      </div>
+
+      <div class="grid grid-cols-2 p-1.5 bg-slate-200/80 rounded-2xl max-w-md mx-auto mb-8">
+        <button id="tab-btn-rumah" onclick="togglePropertyType('rumah')" class="py-2.5 px-4 rounded-xl font-bold text-sm text-navy-900 bg-white shadow-sm transition-all text-center">
+          RUMAH
+        </button>
+        <button id="tab-btn-bisnis" onclick="togglePropertyType('bisnis')" class="py-2.5 px-4 rounded-xl font-bold text-sm text-slate-600 hover:text-navy-900 transition-all text-center">
+          BISNIS
+        </button>
+      </div>
+
+      <div id="property-card" class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm transition-all">
+        <!-- Rumah Info -->
+        <div id="content-rumah">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="p-2 rounded-lg bg-brand-50 text-brand-600">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+            </span>
+            <div>
+              <h3 class="text-lg font-bold text-navy-900">AC Rumah & Residensial</h3>
+              <p class="text-xs text-slate-500">AC rumah tapak, apartemen, kos, villa, townhouse.</p>
+            </div>
+          </div>
+          <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-6">
+            Prioritas kerapihan maksimal: teknisi menggunakan alas lantai pelindung, kantong plastik cuci kedap air agar dinding tidak basah, serta pembersihan rapi tanpa meninggalkan bercak.
+          </p>
+          <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-slate-100">
+            <div class="text-xs text-slate-500">
+              Umum: <strong>1 - 4 unit</strong> • Waktu pengerjaan: <strong>30-45 mnt / unit</strong>
+            </div>
+            <button onclick="handleQuickSelect('Service Rumah', 'Cuci & Service Residensial')" class="px-5 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs sm:text-sm transition-all">
+              Pesan untuk Rumah →
+            </button>
+          </div>
+        </div>
+
+        <!-- Bisnis Info -->
+        <div id="content-bisnis" class="hidden">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="p-2 rounded-lg bg-brand-50 text-brand-600">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+            </span>
+            <div>
+              <h3 class="text-lg font-bold text-navy-900">AC Bisnis & Komersial</h3>
+              <p class="text-xs text-slate-500">Kantor, toko, restoran, ruko, klinik, coworking space.</p>
+            </div>
+          </div>
+          <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-6">
+            Layanan kapasitas besar dengan tim teknisi ganda. Tersedia faktur pajak / invoice resmi, opsi pengerjaan di luar jam kerja kantor/weekend, serta kontrak maintenance bulanan.
+          </p>
+          <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-slate-100">
+            <div class="text-xs text-slate-500">
+              Umum: <strong>5 - 30+ unit (Split, Cassette, Standing)</strong> • Invoice resmi tersedia
+            </div>
+            <button onclick="handleQuickSelect('Service Bisnis/Kantor', 'Maintenance Komersial')" class="px-5 py-2.5 rounded-xl bg-navy-900 hover:bg-slate-800 text-white font-bold text-xs sm:text-sm transition-all">
+              Pesan untuk Bisnis →
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 13. SECTION — TESTIMONIAL WALL -->
+  <section class="py-16 bg-white border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-lg mx-auto mb-10">
+        <span class="text-xs font-extrabold uppercase tracking-widest text-brand-600">ULASAN TERVERIFIKASI</span>
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-navy-900 tracking-tight mt-1">
+          CUSTOMER SUDAH MERASAKANNYA
+        </h2>
+        <p class="text-slate-500 text-xs sm:text-sm mt-1">Kesan asli pelanggan setelah menggunakan layanan SEJUKGO</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="testimonials-grid">
+        <!-- Testimonials -->
+        <div class="border border-slate-200 rounded-2xl p-6 bg-white shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="text-amber-400 text-sm tracking-widest mb-3">★★★★★</div>
+            <p class="text-navy-900 font-semibold text-sm sm:text-base leading-relaxed mb-4">
+              “Booking cepat dan teknisinya datang sesuai jadwal. Dinding kamar tetap bersih tanpa cipratan air kotor sama sekali.”
+            </p>
+          </div>
+          <div class="border-t border-slate-100 pt-3 flex items-center justify-between">
+            <div>
+              <div class="font-bold text-sm text-navy-900">Hendro Wicaksono</div>
+              <div class="text-[11px] text-slate-500">Kemang, Jakarta Selatan</div>
+            </div>
+            <span class="text-[11px] font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Verified Book</span>
+          </div>
+        </div>
+
+        <div class="border border-slate-200 rounded-2xl p-6 bg-white shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="text-amber-400 text-sm tracking-widest mb-3">★★★★★</div>
+            <p class="text-navy-900 font-semibold text-sm sm:text-base leading-relaxed mb-4">
+              “Penjelasan teknisinya jelas, tidak langsung asal ganti sparepart. Ternyata cuma kotor di filter luar & sensor aman.”
+            </p>
+          </div>
+          <div class="border-t border-slate-100 pt-3 flex items-center justify-between">
+            <div>
+              <div class="font-bold text-sm text-navy-900">Nadia Safitri</div>
+              <div class="text-[11px] text-slate-500">BSD City, Tangerang</div>
+            </div>
+            <span class="text-[11px] font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Verified Book</span>
+          </div>
+        </div>
+
+        <div class="border border-slate-200 rounded-2xl p-6 bg-white shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="text-amber-400 text-sm tracking-widest mb-3">★★★★★</div>
+            <p class="text-navy-900 font-semibold text-sm sm:text-base leading-relaxed mb-4">
+              “AC kembali dingin setelah service. Udara kamar jadi seger lagi, suara kompresor yang tadinya berisik langsung senyap.”
+            </p>
+          </div>
+          <div class="border-t border-slate-100 pt-3 flex items-center justify-between">
+            <div>
+              <div class="font-bold text-sm text-navy-900">Bambang Irawan</div>
+              <div class="text-[11px] text-slate-500">Margonda, Depok</div>
+            </div>
+            <span class="text-[11px] font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Verified Book</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 14. SECTION — SERVICE AREA -->
+  <section class="py-16 bg-brand-50/40 border-b border-brand-100" id="area">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-lg mx-auto mb-8">
+        <span class="text-xs font-extrabold uppercase tracking-widest text-brand-600">JANGKAUAN TEKNISI</span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-navy-900 tracking-tight mt-1">
+          ADA TEKNISI DI KOTA ANDA?
+        </h2>
+        <p class="text-slate-600 text-xs sm:text-sm mt-1">Ketik nama kota untuk mengecek kesiapan slot teknisi hari ini.</p>
+      </div>
+
+      <div class="max-w-md mx-auto mb-8">
+        <div class="relative">
+          <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400 pointer-events-none">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          </span>
+          <input 
+            type="text" 
+            id="city-search-input" 
+            placeholder="Masukkan kota... (contoh: Jakarta, Bandung, Bandar Lampung)" 
+            onkeyup="filterCityList()"
+            class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 bg-white font-medium text-sm text-navy-900 focus:outline-none focus:border-brand-600 focus:ring-2 focus:ring-brand-100 shadow-sm"
+          />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3" id="city-list-container">
+        <!-- Rendered via JS -->
+      </div>
+
+      <div id="city-not-found-msg" class="hidden mt-6 text-center bg-white border border-slate-200 rounded-xl p-5 max-w-md mx-auto">
+        <p class="text-xs text-slate-600 font-semibold mb-2">Kota Anda belum terdaftar aktif dalam jadwal reguler hari ini.</p>
+        <button onclick="requestNewCity()" class="text-xs font-bold text-brand-600 hover:text-brand-700 underline">
+          Minta kami hadir di kota Anda →
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 15. SECTION — FAQ -->
+  <section class="py-16 bg-white border-b border-slate-100">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-10">
+        <span class="text-xs font-extrabold uppercase tracking-widest text-brand-600">PUSAT BANTUAN</span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-navy-900 tracking-tight mt-1">
+          MASIH MAU TANYA?
+        </h2>
+        <p class="text-slate-500 text-xs sm:text-sm mt-1">Jawaban cepat seputar pemesanan dan garansi servis SEJUKGO</p>
+      </div>
+
+      <div class="divide-y divide-slate-200 border-y border-slate-200" id="faq-accordion">
+        <div class="py-4">
+          <button onclick="toggleFaq(1)" class="w-full flex items-center justify-between text-left font-bold text-sm sm:text-base text-navy-900 hover:text-brand-600 transition-colors">
+            <span>Berapa lama teknisi datang?</span>
+            <span id="faq-icon-1" class="text-slate-400 font-mono text-lg">+</span>
+          </button>
+          <div id="faq-ans-1" class="hidden mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+            Untuk pemesanan reguler, teknisi tiba sesuai slot jam yang Anda pilih saat booking. Untuk kebutuhan darurat (urgent fix), teknisi terdekat rata-rata tiba dalam waktu 30-45 menit setelah konfirmasi.
+          </div>
+        </div>
+
+        <div class="py-4">
+          <button onclick="toggleFaq(2)" class="w-full flex items-center justify-between text-left font-bold text-sm sm:text-base text-navy-900 hover:text-brand-600 transition-colors">
+            <span>Bisa booking untuk hari tertentu?</span>
+            <span id="faq-icon-2" class="text-slate-400 font-mono text-lg">+</span>
+          </button>
+          <div id="faq-ans-2" class="hidden mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+            Bisa sekali. Anda dapat memilih tanggal booking hingga 14 hari ke depan dengan slot waktu pagi (08.00-11.00), siang (11.00-14.00), atau sore (14.00-17.00).
+          </div>
+        </div>
+
+        <div class="py-4">
+          <button onclick="toggleFaq(3)" class="w-full flex items-center justify-between text-left font-bold text-sm sm:text-base text-navy-900 hover:text-brand-600 transition-colors">
+            <span>Bisa service lebih dari satu AC?</span>
+            <span id="faq-icon-3" class="text-slate-400 font-mono text-lg">+</span>
+          </button>
+          <div id="faq-ans-3" class="hidden mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+            Tentu saja. Anda cukup mengisi jumlah unit AC pada form booking. Jika lebih dari 3 unit, kami dapat menugaskan 2 teknisi sekaligus agar pengerjaan selesai lebih cepat.
+          </div>
+        </div>
+
+        <div class="py-4">
+          <button onclick="toggleFaq(4)" class="w-full flex items-center justify-between text-left font-bold text-sm sm:text-base text-navy-900 hover:text-brand-600 transition-colors">
+            <span>Apakah tersedia service kantor?</span>
+            <span id="faq-icon-4" class="text-slate-400 font-mono text-lg">+</span>
+          </button>
+          <div id="faq-ans-4" class="hidden mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+            Ya, SEJUKGO melayani perkantoran, ruko, restoran, dan ritel. Kami juga menyediakan faktur/invoice resmi untuk kebutuhan reimbursement perusahaan.
+          </div>
+        </div>
+
+        <div class="py-4">
+          <button onclick="toggleFaq(5)" class="w-full flex items-center justify-between text-left font-bold text-sm sm:text-base text-navy-900 hover:text-brand-600 transition-colors">
+            <span>Apakah ada garansi?</span>
+            <span id="faq-icon-5" class="text-slate-400 font-mono text-lg">+</span>
+          </button>
+          <div id="faq-ans-5" class="hidden mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+            Semua pekerjaan SEJUKGO dilindungi Garansi Servis 30 Hari. Jika ada kebocoran atau masalah yang sama terulang pasca servis, teknisi akan datang kembali gratis tanpa biaya tambahan.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 16. FINAL CTA -->
+  <section class="bg-brand-600 text-white py-16 sm:py-20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-white mb-3" id="footer-cta-title">
+        AC BERES, HARI TENANG.
+      </h2>
+      <p class="text-sky-100 text-sm sm:text-base font-medium max-w-xl mx-auto mb-8" id="footer-cta-subtitle">
+        Pilih layanan. Pilih waktu. Kami datang. Nikmati kenyamanan udara dingin tanpa repot.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <button onclick="openBookingModal()" id="btn-final-cta" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-white hover:bg-sky-50 text-brand-700 font-black text-sm sm:text-base shadow-lg active:scale-95 transition-all">
+          PESAN TEKNISI SEKARANG →
+        </button>
+      </div>
+
+      <div class="mt-6">
+        <a id="wa-cta-link" href="https://wa.me/6281234567890?text=Halo%20SEJUKGO,%20saya%20mau%20booking%20service%20AC" target="_blank" rel="noopener noreferrer" class="text-xs sm:text-sm text-sky-100 hover:text-white underline font-medium inline-flex items-center gap-1.5">
+          <span>atau booking melalui WhatsApp</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-white border-t border-slate-200 py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex flex-col items-center sm:items-start">
+        <span class="text-lg font-black tracking-tight text-brand-600">SEJUKGO</span>
+        <span class="text-[11px] text-slate-500 font-medium">Platform Home Service & Maintenance AC Indonesia</span>
+      </div>
+      <div class="flex items-center gap-4 text-xs text-slate-400">
+        <span>© 2026 SEJUKGO. All rights reserved.</span>
+        <span>•</span>
+        <button onclick="handleAdminTrigger()" class="text-brand-600 font-bold hover:underline">
+          🔐 Kelola Web (Admin)
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 17. MOBILE BOOKING BOTTOM BAR -->
+  <div class="fixed bottom-0 inset-x-0 bg-white/95 backdrop-blur-md border-t border-slate-200 z-40 lg:hidden px-3 py-2 flex items-center justify-between shadow-lg">
+    <a href="#" class="flex flex-col items-center justify-center w-12 py-1 text-slate-500 hover:text-brand-600">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+      <span class="text-[9px] font-bold mt-0.5">Home</span>
+    </a>
+    <a href="#layanan" class="flex flex-col items-center justify-center w-12 py-1 text-slate-500 hover:text-brand-600">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <span class="text-[9px] font-bold mt-0.5">Layanan</span>
+    </a>
+    
+    <button onclick="openBookingModal()" class="flex-1 mx-2 py-2.5 px-4 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-black text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md active:scale-95 transition-all">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+      <span>BOOKING TEKNISI</span>
+    </button>
+
+    <a href="#cek-status" class="flex flex-col items-center justify-center w-12 py-1 text-slate-500 hover:text-brand-600">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      <span class="text-[9px] font-bold mt-0.5">Status</span>
+    </a>
+    <a href="#harga" class="flex flex-col items-center justify-center w-12 py-1 text-slate-500 hover:text-brand-600">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      <span class="text-[9px] font-bold mt-0.5">Harga</span>
+    </a>
+  </div>
+
+  <!-- 24. BOOKING UX MODAL -->
+  <div id="booking-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-4 modal-backdrop">
+    <div class="bg-white w-full max-w-xl rounded-3xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col max-h-[92vh]">
+      
+      <div class="px-5 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/70">
+        <div>
+          <span class="text-[10px] font-extrabold uppercase tracking-widest text-brand-600">FORM CEPAT</span>
+          <h3 class="text-base sm:text-lg font-bold text-navy-900">PESAN TEKNISI SEJUKGO</h3>
+        </div>
+        <button onclick="closeBookingModal()" class="w-8 h-8 rounded-full bg-slate-200/60 hover:bg-slate-200 flex items-center justify-center text-slate-600 text-sm font-bold">
+          ✕
+        </button>
+      </div>
+
+      <div class="p-5 sm:p-6 overflow-y-auto space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+            1. Masalah / Keluhan AC
+          </label>
+          <input 
+            type="text" 
+            id="book-problem" 
+            placeholder="Contoh: AC bocor air menetes, AC tidak dingin..." 
+            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm font-semibold text-navy-900 focus:outline-none focus:border-brand-600 focus:ring-1 focus:ring-brand-600"
+          />
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+            2. Pilihan Layanan
+          </label>
+          <select id="book-service" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm font-semibold text-navy-900 focus:outline-none focus:border-brand-600 focus:ring-1 focus:ring-brand-600 bg-white">
+            <!-- Dynamic options will be synced with catalog -->
+          </select>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+              3. Jumlah Unit
+            </label>
+            <select id="book-unit-count" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm font-semibold text-navy-900 focus:outline-none focus:border-brand-600 focus:ring-1 focus:ring-brand-600 bg-white">
+              <option value="1">1 Unit</option>
+              <option value="2">2 Unit</option>
+              <option value="3">3 Unit</option>
+              <option value="4">4 Unit</option>
+              <option value="5+">5+ Unit</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+              Tipe Properti
+            </label>
+            <select id="book-property-type" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm font-semibold text-navy-900 focus:outline-none focus:border-brand-600 focus:ring-1 focus:ring-brand-600 bg-white">
+              <option value="Rumah">Rumah Tinggal</option>
+              <option value="Apartemen">Apartemen / Studio</option>
+              <option value="Kantor">Kantor / Ruko</option>
+              <option value="Toko / Resto">Toko / Kafe / Resto</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+              4. Tanggal
+            </label>
+            <input 
+              type="date" 
+              id="book-date" 
+              class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm font-semibold text-navy-900 focus:outline-none focus:border-brand-600 bg-white"
+            />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+              Slot Waktu
+            </label>
+            <select id="book-time" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm font-semibold text-navy-900 focus:outline-none focus:border-brand-600 bg-white">
+              <option value="Pagi (08.00 - 11.00)">Pagi (08.00 - 11.00)</option>
+              <option value="Siang (11.00 - 14.00)">Siang (11.00 - 14.00)</option>
+              <option value="Sore (14.00 - 17.00)">Sore (14.00 - 17.00)</option>
+              <option value="Malam / Urgent (By Request)">Malam / Urgent</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+              5. Nama Lengkap
+            </label>
+            <input 
+              type="text" 
+              id="book-name" 
+              placeholder="Nama Anda" 
+              class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm font-medium text-navy-900 focus:outline-none focus:border-brand-600"
+            />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+              No. WhatsApp Aktif
+            </label>
+            <input 
+              type="tel" 
+              id="book-wa" 
+              placeholder="0812xxxxxxx" 
+              class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm font-medium text-navy-900 focus:outline-none focus:border-brand-600"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+            Alamat Lengkap & Patokan
+          </label>
+          <textarea 
+            id="book-address" 
+            rows="2" 
+            placeholder="Nama jalan, nomor rumah/unit, RT/RW, kelurahan, patokan..." 
+            class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm font-medium text-navy-900 focus:outline-none focus:border-brand-600"
+          ></textarea>
+        </div>
+
+        <div id="booking-error-msg" class="hidden text-xs text-rose-600 font-bold bg-rose-50 p-2.5 rounded-lg border border-rose-200"></div>
+      </div>
+
+      <div class="px-5 py-4 border-t border-slate-100 bg-slate-50 flex items-center justify-between gap-3">
+        <div class="text-[11px] text-slate-500 font-medium hidden sm:block">
+          🔒 Bebas biaya pembatalan & bergaransi 30 hari.
+        </div>
+        <button 
+          id="btn-submit-booking"
+          onclick="submitBookingForm()" 
+          class="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-extrabold text-xs sm:text-sm shadow-sm active:scale-95 transition-all">
+          KONFIRMASI BOOKING →
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BOOKING SUCCESS MODAL -->
+  <div id="booking-success-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 modal-backdrop">
+    <div class="bg-white w-full max-w-md rounded-3xl shadow-2xl border border-slate-200 p-6 text-center">
+      <div class="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto mb-4 text-2xl font-black">
+        ✓
+      </div>
+      <h3 class="text-xl font-black text-navy-900 mb-1">BOOKING BERHASIL!</h3>
+      <p class="text-xs text-slate-500 mb-4">Teknisi kami telah menerima pesanan dan akan segera konfirmasi via WhatsApp.</p>
+      
+      <div class="bg-brand-50 border border-brand-200 rounded-2xl p-4 mb-5">
+        <div class="text-[11px] font-bold text-brand-700 uppercase tracking-wider">KODE BOOKING ANDA</div>
+        <div id="succ-booking-code" class="text-2xl font-black text-brand-700 font-mono tracking-wider my-1">
+          SG-XXXXX
+        </div>
+        <div class="text-[11px] text-slate-500">Simpan kode ini untuk mengecek status live di website.</div>
+      </div>
+
+      <div class="flex gap-2">
+        <button onclick="copyBookingCode()" class="flex-1 py-2.5 px-4 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-xs font-bold text-slate-700 transition-colors">
+          Salin Kode
+        </button>
+        <button onclick="viewSuccessStatus()" class="flex-1 py-2.5 px-4 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold transition-colors">
+          Cek Status Sekarang
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADMIN LOGIN MODAL -->
+  <div id="admin-login-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 modal-backdrop">
+    <div class="bg-white w-full max-w-md rounded-3xl shadow-2xl border border-slate-200 p-6">
+      <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-100">
+        <div class="flex items-center gap-2">
+          <span class="w-8 h-8 rounded-lg bg-brand-50 text-brand-600 flex items-center justify-center font-bold">🔐</span>
+          <div>
+            <h3 class="text-base font-black text-navy-900">LOGIN ADMIN SEJUKGO</h3>
+            <p class="text-[11px] text-slate-500">Kelola konten, katalog & tracking</p>
+          </div>
+        </div>
+        <button onclick="closeAdminLoginModal()" class="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-600">✕</button>
+      </div>
+
+      <div class="space-y-3.5">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Username</label>
+          <input type="text" id="admin-user-input" placeholder="Masukkan username" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm font-semibold focus:outline-none focus:border-brand-600" />
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Password</label>
+          <input type="password" id="admin-pass-input" placeholder="Masukkan password" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm font-semibold focus:outline-none focus:border-brand-600" />
+        </div>
+        
+        <div id="admin-login-err" class="hidden text-xs text-rose-600 font-bold bg-rose-50 p-2 rounded-lg border border-rose-200">
+          Username atau password salah!
+        </div>
+
+        <button onclick="processAdminLogin()" class="w-full py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm tracking-wide shadow-sm active:scale-95 transition-all mt-2">
+          MASUK KE PANEL KELOLA →
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN ADMIN CONTROL PANEL (FULL CAPABILITY) -->
+  <div id="admin-panel-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-5 modal-backdrop">
+    <div class="bg-white w-full max-w-5xl rounded-3xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col h-[94vh]">
+      
+      <!-- Panel Header -->
+      <div class="px-6 py-4 border-b border-slate-200 bg-slate-50 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <span class="px-2.5 py-1 rounded bg-brand-600 text-white text-xs font-black">ADMIN PANEL</span>
+          <div>
+            <h2 class="text-base sm:text-lg font-black text-navy-900">Kelola Website & Layanan SEJUKGO</h2>
+            <div class="flex items-center gap-2 text-xs text-slate-500">
+              <span class="inline-block w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span>Perubahan tersimpan otomatis secara real-time</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="flex items-center gap-2">
+          <button onclick="confirmResetDefaults()" class="px-3 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 border border-rose-200 text-rose-700 text-xs font-bold transition-all">
+            ↺ Reset Data Default
+          </button>
+          <button onclick="adminLogout()" class="px-3 py-1.5 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-bold">
+            Keluar
+          </button>
+          <button onclick="closeAdminPanelModal()" class="w-8 h-8 rounded-full bg-slate-200 hover:bg-slate-300 flex items-center justify-center text-slate-700 text-sm font-bold">
+            ✕
+          </button>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <div class="flex items-center border-b border-slate-200 bg-white px-6 gap-6 text-sm font-bold text-slate-500 overflow-x-auto no-scrollbar">
+        <button onclick="switchAdminTab('tab-catalog')" id="tab-btn-catalog" class="py-3 tab-active transition-all whitespace-nowrap">
+          📦 Katalog & Layanan (Produk)
+        </button>
+        <button onclick="switchAdminTab('tab-content')" id="tab-btn-content" class="py-3 hover:text-brand-600 transition-all whitespace-nowrap">
+          ✍️ Teks & Tombol Halaman
+        </button>
+        <button onclick="switchAdminTab('tab-media')" id="tab-btn-media" class="py-3 hover:text-brand-600 transition-all whitespace-nowrap">
+          🖼️ Gambar & Google Drive
+        </button>
+        <button onclick="switchAdminTab('tab-bookings')" id="tab-btn-bookings" class="py-3 hover:text-brand-600 transition-all whitespace-nowrap">
+          🎯 Pelacakan & Pesanan Live
+        </button>
+      </div>
+
+      <!-- Panel Body Content Area (Scrollable) -->
+      <div class="p-6 overflow-y-auto flex-1 bg-slate-50/50 space-y-6">
+        
+        <!-- ================= TAB 1: KATALOG & PRODUK LAYANAN ================= -->
+        <div id="admin-sec-catalog" class="space-y-6">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-white p-4 rounded-2xl border border-slate-200">
+            <div>
+              <h3 class="text-sm sm:text-base font-black text-navy-900">Kelola Katalog Menu Layanan</h3>
+              <p class="text-xs text-slate-500">Edit daftar service, ubah gambar, harga min-max, atau tambahkan jenis layanan baru.</p>
+            </div>
+            <button onclick="openAddServiceForm()" class="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs shadow-sm">
+              + Tambah Layanan Baru
+            </button>
+          </div>
+
+          <!-- Add / Edit Service Form (Hidden by default) -->
+          <div id="service-form-card" class="hidden bg-white p-5 rounded-2xl border-2 border-brand-200 space-y-4">
+            <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+              <h4 id="service-form-title" class="text-sm font-black text-brand-700">TAMBAH LAYANAN BARU</h4>
+              <button onclick="closeServiceForm()" class="text-xs font-bold text-slate-400 hover:text-slate-600">Batal</button>
+            </div>
+            
+            <input type="hidden" id="srv-edit-id" value="" />
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Nama Layanan</label>
+                <input type="text" id="srv-title" placeholder="Contoh: CUCI BESAR / OVERHAUL" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs font-semibold" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Nomor / Urutan Kode</label>
+                <input type="text" id="srv-code" placeholder="Contoh: 08" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs font-semibold" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Deskripsi Singkat</label>
+              <input type="text" id="srv-desc" placeholder="Penjelasan singkat layanan yang tampil di list" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs" />
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Harga Min (Rp)</label>
+                <input type="number" id="srv-price-min" placeholder="75000" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs font-semibold" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Harga Max (Rp)</label>
+                <input type="number" id="srv-price-max" placeholder="150000" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs font-semibold" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">URL / ID Gambar</label>
+                <input type="text" id="srv-img" placeholder="Google Drive ID / URL Foto" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs" />
+              </div>
+            </div>
+
+            <div class="flex justify-end gap-2 pt-2">
+              <button onclick="closeServiceForm()" class="px-4 py-2 rounded-lg bg-slate-100 text-slate-600 font-bold text-xs">Batal</button>
+              <button onclick="saveServiceItem()" class="px-5 py-2 rounded-lg bg-brand-600 text-white font-bold text-xs hover:bg-brand-700">Simpan Layanan</button>
+            </div>
+          </div>
+
+          <!-- Services Table / Card List -->
+          <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+            <div id="admin-services-table" class="divide-y divide-slate-200">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= TAB 2: TEKS & TOMBOL HALAMAN ================= -->
+        <div id="admin-sec-content" class="hidden space-y-5">
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 space-y-4">
+            <h3 class="text-sm font-black text-navy-900 uppercase tracking-wider">Teks Utama & Header</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Nama Brand</label>
+                <input type="text" id="cfg-brand-name" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs font-bold" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Sub-Tagline Header</label>
+                <input type="text" id="cfg-brand-tagline" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Hero Subheadline</label>
+              <textarea id="cfg-hero-sub" rows="2" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs"></textarea>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Teks Tombol Header</label>
+                <input type="text" id="cfg-btn-header" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs font-bold" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Teks Tombol Smart Bar</label>
+                <input type="text" id="cfg-btn-bar" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs font-bold" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Teks Tombol Estimasi</label>
+                <input type="text" id="cfg-btn-est" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs font-bold" />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Metric 1 (Kiri)</label>
+                <input type="text" id="cfg-metric-1" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Metric 2 (Kanan)</label>
+                <input type="text" id="cfg-metric-2" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs" />
+              </div>
+            </div>
+
+            <div class="flex justify-end pt-3">
+              <button onclick="saveGeneralTexts()" class="px-6 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs shadow-sm">
+                Simpan Teks & Tombol
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= TAB 3: GAMBAR & GOOGLE DRIVE LOADER ================= -->
+        <div id="admin-sec-media" class="hidden space-y-5">
+          <div class="bg-blue-50 border border-blue-200 rounded-2xl p-4 text-xs text-blue-900 space-y-1">
+            <div class="font-bold flex items-center gap-1.5">
+              <span>🚀 Fitur Google Drive Super Cepat Terintegrasi:</span>
+            </div>
+            <p>Anda dapat memasukkan <strong>ID Google Drive</strong> langsung atau full link sharing. Sistem otomatis memproses dengan urutan:</p>
+            <p class="font-mono text-[11px] text-blue-800">
+              1. Format Utama: <code>lh3.googleusercontent.com/d/{id}</code><br/>
+              2. Backup Cadangan: <code>thumbnail?id={id}</code><br/>
+              3. Fallback Sistem: Unsplash High-res jika Drive tidak dapat diakses
+            </p>
+          </div>
+
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 space-y-4">
+            <h3 class="text-sm font-black text-navy-900 uppercase tracking-wider">Foto Hero & SOP Inspeksi</h3>
+            
+            <div class="space-y-3">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Foto Hero Teknisi (ID Drive atau URL)</label>
+                <input type="text" id="cfg-img-hero" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs" placeholder="Masukkan ID Drive atau URL" />
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Foto SOP Checklist Inspeksi</label>
+                <input type="text" id="cfg-img-checklist" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs" placeholder="Masukkan ID Drive atau URL" />
+              </div>
+            </div>
+
+            <h4 class="text-xs font-black text-navy-900 uppercase tracking-wider pt-3 border-t border-slate-100">Foto Tim Teknisi</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 mb-1">Teknisi 1 (Budi)</label>
+                <input type="text" id="cfg-img-tech1" class="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 text-xs" />
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 mb-1">Teknisi 2 (Rizky)</label>
+                <input type="text" id="cfg-img-tech2" class="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 text-xs" />
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 mb-1">Teknisi 3 (Andi)</label>
+                <input type="text" id="cfg-img-tech3" class="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 text-xs" />
+              </div>
+            </div>
+
+            <div class="flex justify-end pt-3">
+              <button onclick="saveMediaImages()" class="px-6 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs shadow-sm">
+                Simpan & Muat Ulang Gambar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= TAB 4: KELOLA TRACKING & PESANAN LIVE ================= -->
+        <div id="admin-sec-bookings" class="hidden space-y-5">
+          <div class="bg-white p-4 rounded-2xl border border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+            <div>
+              <h3 class="text-sm font-black text-navy-900">Kelola Status Pelacakan Real-time</h3>
+              <p class="text-xs text-slate-500">Ubah tahapan status dari 'BOOKING' hingga 'COMPLETED' langsung di sini.</p>
+            </div>
+            <div class="relative w-full sm:w-64">
+              <input type="text" id="search-booking-input" onkeyup="filterAdminBookings()" placeholder="Cari kode (misal SG-28491)..." class="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-xs font-semibold uppercase" />
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs">
+                <thead class="bg-slate-100 text-slate-700 uppercase font-black tracking-wider text-[10px] border-b border-slate-200">
+                  <tr>
+                    <th class="p-3">Kode Booking</th>
+                    <th class="p-3">Pelanggan & WA</th>
+                    <th class="p-3">Layanan</th>
+                    <th class="p-3">Teknisi</th>
+                    <th class="p-3">Tahapan Live</th>
+                    <th class="p-3 text-right">Aksi Status</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-bookings-table" class="divide-y divide-slate-100">
+                  <!-- Rendered via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Panel Footer -->
+      <div class="px-6 py-3 border-t border-slate-200 bg-slate-50 text-[11px] text-slate-500 flex items-center justify-between">
+        <span>Kredensial Akses: <code class="bg-slate-200 px-1 py-0.5 rounded font-mono font-bold">kelolaweb2026</code></span>
+        <span>SEJUKGO Web Management System</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RESET CONFIRMATION MODAL (Safe custom modal, no window.confirm) -->
+  <div id="reset-confirm-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 modal-backdrop">
+    <div class="bg-white w-full max-w-sm rounded-3xl shadow-2xl border border-slate-200 p-6 text-center">
+      <div class="w-12 h-12 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center mx-auto mb-3 text-xl font-bold">
+        ↺
+      </div>
+      <h3 class="text-base font-black text-navy-900 mb-1">Riset ke Data Awal?</h3>
+      <p class="text-xs text-slate-500 mb-5">
+        Semua nama layanan, gambar, dan teks yang diedit akan dikembalikan ke data pabrik default SEJUKGO.
+      </p>
+      <div class="flex gap-2">
+        <button onclick="closeResetModal()" class="flex-1 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-xs font-bold text-slate-700">
+          Batal
+        </button>
+        <button onclick="executeResetDefaults()" class="flex-1 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold">
+          Ya, Riset Semula
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 22. FIREBASE INTEGRATION & REACTIVE DATA STORE -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, collection, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    // Firebase Config with requested API key
+    const firebaseConfig = {
+      apiKey: "AIzaSyBZyvA6_cy2k42eU_Ktt13wFVTDYgZaXkI",
+      authDomain: "semua-web-f8628.firebaseapp.com",
+      projectId: "semua-web-f8628",
+      storageBucket: "semua-web-f8628.firebasestorage.app",
+      messagingSenderId: "220101602354",
+      appId: "1:220101602354:web:c1e942a2f1971a0bc9e02b"
+    };
+
+    let app = null;
+    let auth = null;
+    let db = null;
+    let currentUser = null;
+    const appId = typeof __app_id !== 'undefined' ? __app_id : 'sejukgo-booking-web';
+
+    // Global in-memory storage for bookings
+    window.sejukgoBookings = {
+      "SG-28491": {
+        bookingId: "SG-28491",
+        customerName: "Bpk. Anton",
+        whatsapp: "081288991234",
+        service: "CUCI AC",
+        problem: "Kurang dingin & mau cuci rutin",
+        unitCount: "2",
+        propertyType: "Rumah",
+        date: "Hari Ini",
+        time: "13.30 WIB",
+        address: "Jl. Flamboyan No. 14, Jakarta Selatan",
+        technicianName: "Budi Santoso",
+        technicianId: "TECH-01",
+        status: "Dalam Perjalanan",
+        stepIndex: 3 // ON THE WAY
+      }
+    };
+
+    // Firebase Init
+    try {
+      app = initializeApp(firebaseConfig);
+      auth = getAuth(app);
+      db = getFirestore(app);
+      await signInAnonymously(auth);
+      currentUser = auth.currentUser;
+      console.log("SEJUKGO Firebase Connected anonymously:", currentUser?.uid);
+    } catch (e) {
+      console.warn("Using offline reactive memory mode:", e);
+    }
+
+    // Expose Firebase storage helper to window
+    window.sejukgoDB = {
+      async saveBooking(data) {
+        window.sejukgoBookings[data.bookingId] = data;
+        if (db && currentUser) {
+          try {
+            const col = collection(db, 'artifacts', appId, 'public', 'data', 'bookings');
+            await setDoc(doc(col, data.bookingId), data);
+          } catch (err) {
+            console.error("Firestore booking save error:", err);
+          }
+        }
+      },
+      async getBooking(code) {
+        const clean = (code || '').trim().toUpperCase();
+        if (window.sejukgoBookings[clean]) return window.sejukgoBookings[clean];
+        if (db && currentUser) {
+          try {
+            const ref = doc(db, 'artifacts', appId, 'public', 'data', 'bookings', clean);
+            const snap = await getDoc(ref);
+            if (snap.exists()) return snap.data();
+          } catch (err) {
+            console.error("Firestore get error:", err);
+          }
+        }
+        return null;
+      },
+      async saveSiteConfig(configObj) {
+        if (db && currentUser) {
+          try {
+            const cfgRef = doc(db, 'artifacts', appId, 'public', 'data', 'site_config', 'main');
+            await setDoc(cfgRef, configObj);
+          } catch (err) {
+            console.error("Error saving site config to Firestore:", err);
+          }
+        }
+      },
+      async loadSiteConfig() {
+        if (db && currentUser) {
+          try {
+            const cfgRef = doc(db, 'artifacts', appId, 'public', 'data', 'site_config', 'main');
+            const snap = await getDoc(cfgRef);
+            if (snap.exists()) return snap.data();
+          } catch (err) {
+            console.error("Error loading site config:", err);
+          }
+        }
+        return null;
+      }
+    };
+
+    // Load remote configuration if exists
+    setTimeout(async () => {
+      if (window.sejukgoDB) {
+        const saved = await window.sejukgoDB.loadSiteConfig();
+        if (saved && saved.services) {
+          window.sejukgoContent = saved;
+          window.applyContentToDOM();
+          window.renderAdminServicesTable();
+          window.renderAdminBookingsTable();
+        }
+      }
+    }, 600);
+  </script>
+
+  <script>
+    /* =========================================================================
+       1. SMART GOOGLE DRIVE / LH3 / BACKUP / UNSPLASH IMAGE LOADER
+       ========================================================================= */
+    function resolveRobustImageUrl(input, fallbackUnsplash) {
+      if (!input) return fallbackUnsplash;
+      const str = input.trim();
+
+      // Extract Google Drive ID if present
+      let driveId = null;
+      if (str.includes("drive.google.com")) {
+        const matchId = str.match(/\/d\/([a-zA-Z0-9_-]+)/) || str.match(/id=([a-zA-Z0-9_-]+)/);
+        if (matchId && matchId[1]) {
+          driveId = matchId[1];
+        }
+      } else if (!str.startsWith("http") && str.length > 15 && !str.includes("/")) {
+        // Raw drive ID passed directly
+        driveId = str;
+      }
+
+      if (driveId) {
+        // Return object with primary lh3 and backup thumbnail
+        return {
+          primary: `https://lh3.googleusercontent.com/d/${driveId}`,
+          backup: `https://drive.google.com/thumbnail?id=${driveId}&sz=w1200`,
+          fallback: fallbackUnsplash
+        };
+      }
+
+      return {
+        primary: str,
+        backup: str,
+        fallback: fallbackUnsplash
+      };
+    }
+
+    function handleRobustImgError(imgEl) {
+      const step = parseInt(imgEl.getAttribute("data-fallback-step") || "0", 10);
+      const backup = imgEl.getAttribute("data-backup-url");
+      const unsplash = imgEl.getAttribute("data-unsplash-fallback") || "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80";
+
+      if (step === 0 && backup && backup !== imgEl.src) {
+        imgEl.setAttribute("data-fallback-step", "1");
+        imgEl.src = backup;
+      } else if (step <= 1) {
+        imgEl.setAttribute("data-fallback-step", "2");
+        imgEl.src = unsplash;
+      }
+    }
+
+    /* =========================================================================
+       2. DEFAULT WEBSITE CONTENT STORE & RESET MATRIX
+       ========================================================================= */
+    const DEFAULT_SITE_CONTENT = {
+      brandName: "SEJUKGO",
+      brandTagline: "AC SERVICE & MAINTENANCE",
+      heroHeadline: "AC BERMASALAH?<br/><span class=\"text-brand-600\">PESAN TEKNISI SEKARANG.</span>",
+      heroSubheadline: "Service AC langsung ke rumah, kantor, toko, apartemen, dan properti Anda. Teknisi profesional bersertifikat, bergaransi, dan datang tepat waktu.",
+      btnHeader: "PESAN TEKNISI",
+      btnSmartBar: "MULAI BOOKING",
+      btnEst: "LANJUT BOOKING →",
+      metric1: "30 Hari",
+      metric2: "± 45 Mnt",
+      imgHero: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=900&q=80",
+      imgChecklist: "https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=800&q=80",
+      imgTech1: "https://images.unsplash.com/photo-1540569014015-19a7be504e3a?auto=format&fit=crop&w=300&q=80",
+      imgTech2: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80",
+      imgTech3: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80",
+      services: [
+        {
+          id: "srv-1",
+          code: "01",
+          title: "CUCI AC",
+          desc: "Pembersihan menyeluruh unit indoor dan outdoor, talang air, & filter",
+          minPrice: 65000,
+          maxPrice: 85000,
+          img: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=150&q=70"
+        },
+        {
+          id: "srv-2",
+          code: "02",
+          title: "SERVICE AC",
+          desc: "Pemeriksaan komponen, kelistrikan, kapasitor, dan perbaikan mesin",
+          minPrice: 100000,
+          maxPrice: 250000,
+          img: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=150&q=70"
+        },
+        {
+          id: "srv-3",
+          code: "03",
+          title: "AC TIDAK DINGIN",
+          desc: "Diagnosis akurat penyebab masalah suhu, kompresor, & tekanan freon",
+          minPrice: 90000,
+          maxPrice: 200000,
+          img: "https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=150&q=70"
+        },
+        {
+          id: "srv-4",
+          code: "04",
+          title: "AC BOCOR",
+          desc: "Pemeriksaan saluran drain, pembersihan lumut pipa, dan perbaikan isolasi",
+          minPrice: 80000,
+          maxPrice: 150000,
+          img: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=150&q=70"
+        },
+        {
+          id: "srv-5",
+          code: "05",
+          title: "INSTALASI",
+          desc: "Pemasangan unit AC baru/bekas standar SOP, termasuk bracket & vacuum",
+          minPrice: 250000,
+          maxPrice: 400000,
+          img: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=150&q=70"
+        },
+        {
+          id: "srv-6",
+          code: "06",
+          title: "BONGKAR PASANG",
+          desc: "Pindah lokasi unit AC antar kamar atau alamat rumah baru dengan aman",
+          minPrice: 350000,
+          maxPrice: 550000,
+          img: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=150&q=70"
+        },
+        {
+          id: "srv-7",
+          code: "07",
+          title: "MAINTENANCE",
+          desc: "Perawatan berkala rutin untuk kantor, ruko, restoran, dan residensial",
+          minPrice: 150000,
+          maxPrice: 300000,
+          img: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=150&q=70"
+        }
+      ]
+    };
+
+    // Active working state
+    window.sejukgoContent = JSON.parse(JSON.stringify(DEFAULT_SITE_CONTENT));
+    let isAdminLoggedIn = false;
+
+    // Service cities list
+    const serviceCities = [
+      { name: "Jakarta", available: true },
+      { name: "Bekasi", available: true },
+      { name: "Depok", available: true },
+      { name: "Tangerang", available: true },
+      { name: "Bogor", available: true },
+      { name: "Bandung", available: true },
+      { name: "Semarang", available: true },
+      { name: "Yogyakarta", available: true },
+      { name: "Surabaya", available: true },
+      { name: "Malang", available: true },
+      { name: "Medan", available: true },
+      { name: "Palembang", available: true },
+      { name: "Bandar Lampung", available: true },
+      { name: "Makassar", available: true },
+      { name: "Denpasar", available: true },
+    ];
+
+    let lastCreatedBookingCode = "SG-28491";
+
+    /* =========================================================================
+       3. DOM RENDERING & CATALOG MANAGEMENT
+       ========================================================================= */
+    window.applyContentToDOM = function() {
+      const c = window.sejukgoContent;
+      
+      // Update Texts
+      if (document.getElementById('brand-logo-text')) {
+        document.getElementById('brand-logo-text').innerHTML = `${c.brandName} <span class="inline-block w-2 h-2 rounded-full bg-brand-500"></span>`;
+      }
+      if (document.getElementById('brand-tagline-text')) {
+        document.getElementById('brand-tagline-text').textContent = c.brandTagline;
+      }
+      if (document.getElementById('hero-subheadline')) {
+        document.getElementById('hero-subheadline').textContent = c.heroSubheadline;
+      }
+      if (document.getElementById('btn-header-cta')) {
+        document.getElementById('btn-header-cta').textContent = c.btnHeader;
+      }
+      if (document.getElementById('trust-metric-1')) {
+        document.getElementById('trust-metric-1').textContent = c.metric1;
+      }
+      if (document.getElementById('trust-metric-2')) {
+        document.getElementById('trust-metric-2').textContent = c.metric2;
+      }
+
+      // Update Images using robust resolver
+      const heroInfo = resolveRobustImageUrl(c.imgHero, DEFAULT_SITE_CONTENT.imgHero);
+      const heroEl = document.getElementById('hero-img-element');
+      if (heroEl) {
+        heroEl.src = heroInfo.primary;
+        heroEl.setAttribute('data-backup-url', heroInfo.backup);
+        heroEl.setAttribute('data-unsplash-fallback', heroInfo.fallback);
+        heroEl.setAttribute('data-fallback-step', '0');
+      }
+
+      const checkInfo = resolveRobustImageUrl(c.imgChecklist, DEFAULT_SITE_CONTENT.imgChecklist);
+      const checkEl = document.getElementById('checklist-img-element');
+      if (checkEl) {
+        checkEl.src = checkInfo.primary;
+        checkEl.setAttribute('data-backup-url', checkInfo.backup);
+        checkEl.setAttribute('data-unsplash-fallback', checkInfo.fallback);
+        checkEl.setAttribute('data-fallback-step', '0');
+      }
+
+      // Render Dynamic Service Catalog Rows
+      const serviceContainer = document.getElementById('service-list-container');
+      const estSelect = document.getElementById('est-service');
+      const bookSelect = document.getElementById('book-service');
+      
+      if (serviceContainer) {
+        serviceContainer.innerHTML = '';
+        if (estSelect) estSelect.innerHTML = '';
+        if (bookSelect) bookSelect.innerHTML = '';
+
+        c.services.forEach((s) => {
+          const sImg = resolveRobustImageUrl(s.img, DEFAULT_SITE_CONTENT.services[0].img);
+          
+          // Render website catalogue row
+          const row = document.createElement('div');
+          row.className = "group py-4 sm:py-5 flex items-center justify-between gap-4 hover:bg-brand-50/50 px-3 sm:px-4 rounded-xl transition-all cursor-pointer";
+          row.onclick = () => handleServiceClick(s.title, s.desc);
+          row.innerHTML = `
+            <div class="flex items-center gap-4 sm:gap-6 min-w-0">
+              <span class="text-sm sm:text-base font-bold text-brand-600 w-8">${s.code}</span>
+              <div class="min-w-0">
+                <h3 class="text-base sm:text-lg font-bold text-navy-900 group-hover:text-brand-600 transition-colors truncate">
+                  ${s.title}
+                </h3>
+                <p class="text-xs sm:text-sm text-slate-500 truncate">${s.desc}</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 shrink-0">
+              <img 
+                src="${sImg.primary}" 
+                data-backup-url="${sImg.backup}"
+                data-fallback-step="0"
+                onerror="handleRobustImgError(this)" 
+                class="hidden md:block w-12 h-12 rounded-lg object-cover opacity-80 group-hover:opacity-100 transition-opacity border border-slate-200" 
+                alt="${s.title}" 
+              />
+              <button class="inline-flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-lg bg-white border border-slate-200 group-hover:bg-brand-600 group-hover:border-brand-600 group-hover:text-white text-xs sm:text-sm font-bold text-navy-900 transition-all">
+                <span>BOOK</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </button>
+            </div>
+          `;
+          serviceContainer.appendChild(row);
+
+          // Populate Estimate Dropdown
+          if (estSelect) {
+            const opt = document.createElement('option');
+            opt.value = s.id;
+            opt.setAttribute('data-min', s.minPrice);
+            opt.setAttribute('data-max', s.maxPrice);
+            opt.textContent = `${s.title} (Rp ${s.minPrice.toLocaleString('id-ID')} - ${s.maxPrice.toLocaleString('id-ID')})`;
+            estSelect.appendChild(opt);
+          }
+
+          // Populate Booking Modal Dropdown
+          if (bookSelect) {
+            const optBook = document.createElement('option');
+            optBook.value = s.title;
+            optBook.textContent = `${s.title} — ${s.desc}`;
+            bookSelect.appendChild(optBook);
+          }
+        });
+      }
+
+      calculateEstimate();
+    };
+
+    /* =========================================================================
+       4. ADMIN AUTHENTICATION & PANEL LOGIC
+       ========================================================================= */
+    function handleAdminTrigger() {
+      if (isAdminLoggedIn) {
+        openAdminModal();
+      } else {
+        openAdminLoginModal();
+      }
+    }
+
+    function openAdminLoginModal() {
+      document.getElementById('admin-login-modal').classList.remove('hidden');
+      document.getElementById('admin-login-err').classList.add('hidden');
+      document.getElementById('admin-user-input').value = 'kelolaweb2026';
+      document.getElementById('admin-pass-input').value = 'kelolaweb2026';
+    }
+
+    function closeAdminLoginModal() {
+      document.getElementById('admin-login-modal').classList.add('hidden');
+    }
+
+    function processAdminLogin() {
+      const u = document.getElementById('admin-user-input').value.trim();
+      const p = document.getElementById('admin-pass-input').value.trim();
+
+      if (u === "kelolaweb2026" && p === "kelolaweb2026") {
+        isAdminLoggedIn = true;
+        closeAdminLoginModal();
+        openAdminModal();
+        showToast("Login Admin Berhasil!", "✓");
+      } else {
+        document.getElementById('admin-login-err').classList.remove('hidden');
+      }
+    }
+
+    function adminLogout() {
+      isAdminLoggedIn = false;
+      closeAdminPanelModal();
+      showToast("Anda telah keluar dari Admin Panel", "ℹ");
+    }
+
+    function openAdminModal(tabId = 'tab-catalog') {
+      populateAdminFields();
+      renderAdminServicesTable();
+      renderAdminBookingsTable();
+      switchAdminTab(tabId);
+      document.getElementById('admin-panel-modal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeAdminPanelModal() {
+      document.getElementById('admin-panel-modal').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    function switchAdminTab(tab) {
+      const tabs = ['tab-catalog', 'tab-content', 'tab-media', 'tab-bookings'];
+      tabs.forEach(t => {
+        const btn = document.getElementById(`tab-btn-${t.replace('tab-', '')}`);
+        const sec = document.getElementById(`admin-sec-${t.replace('tab-', '')}`);
+        if (t === tab) {
+          if (btn) btn.className = "py-3 tab-active transition-all whitespace-nowrap";
+          if (sec) sec.classList.remove('hidden');
+        } else {
+          if (btn) btn.className = "py-3 text-slate-500 hover:text-brand-600 transition-all whitespace-nowrap";
+          if (sec) sec.classList.add('hidden');
+        }
+      });
+    }
+
+    function populateAdminFields() {
+      const c = window.sejukgoContent;
+      document.getElementById('cfg-brand-name').value = c.brandName;
+      document.getElementById('cfg-brand-tagline').value = c.brandTagline;
+      document.getElementById('cfg-hero-sub').value = c.heroSubheadline;
+      document.getElementById('cfg-btn-header').value = c.btnHeader;
+      document.getElementById('cfg-btn-bar').value = c.btnSmartBar;
+      document.getElementById('cfg-btn-est').value = c.btnEst;
+      document.getElementById('cfg-metric-1').value = c.metric1;
+      document.getElementById('cfg-metric-2').value = c.metric2;
+
+      document.getElementById('cfg-img-hero').value = c.imgHero;
+      document.getElementById('cfg-img-checklist').value = c.imgChecklist;
+      document.getElementById('cfg-img-tech1').value = c.imgTech1;
+      document.getElementById('cfg-img-tech2').value = c.imgTech2;
+      document.getElementById('cfg-img-tech3').value = c.imgTech3;
+    }
+
+    // Save general texts
+    function saveGeneralTexts() {
+      window.sejukgoContent.brandName = document.getElementById('cfg-brand-name').value.trim() || "SEJUKGO";
+      window.sejukgoContent.brandTagline = document.getElementById('cfg-brand-tagline').value.trim();
+      window.sejukgoContent.heroSubheadline = document.getElementById('cfg-hero-sub').value.trim();
+      window.sejukgoContent.btnHeader = document.getElementById('cfg-btn-header').value.trim();
+      window.sejukgoContent.btnSmartBar = document.getElementById('cfg-btn-bar').value.trim();
+      window.sejukgoContent.btnEst = document.getElementById('cfg-btn-est').value.trim();
+      window.sejukgoContent.metric1 = document.getElementById('cfg-metric-1').value.trim();
+      window.sejukgoContent.metric2 = document.getElementById('cfg-metric-2').value.trim();
+
+      syncAndPersist();
+      showToast("Teks & Tombol berhasil diperbarui secara real-time!");
+    }
+
+    // Save images
+    function saveMediaImages() {
+      window.sejukgoContent.imgHero = document.getElementById('cfg-img-hero').value.trim();
+      window.sejukgoContent.imgChecklist = document.getElementById('cfg-img-checklist').value.trim();
+      window.sejukgoContent.imgTech1 = document.getElementById('cfg-img-tech1').value.trim();
+      window.sejukgoContent.imgTech2 = document.getElementById('cfg-img-tech2').value.trim();
+      window.sejukgoContent.imgTech3 = document.getElementById('cfg-img-tech3').value.trim();
+
+      syncAndPersist();
+      showToast("Gambar & Pengaturan Drive berhasil disimpan!");
+    }
+
+    // Services Catalog management
+    function renderAdminServicesTable() {
+      const container = document.getElementById('admin-services-table');
+      if (!container) return;
+      container.innerHTML = '';
+
+      window.sejukgoContent.services.forEach((s, idx) => {
+        const div = document.createElement('div');
+        div.className = "p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 hover:bg-slate-50 transition-colors";
+        div.innerHTML = `
+          <div class="flex items-center gap-3 min-w-0">
+            <span class="px-2 py-1 bg-brand-50 border border-brand-200 text-brand-700 font-bold text-xs rounded">${s.code}</span>
+            <div>
+              <h4 class="font-black text-sm text-navy-900">${s.title}</h4>
+              <p class="text-xs text-slate-500">${s.desc}</p>
+              <div class="text-[11px] font-semibold text-brand-600 mt-0.5">
+                Estimasi: Rp ${s.minPrice.toLocaleString('id-ID')} - Rp ${s.maxPrice.toLocaleString('id-ID')}
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 self-end sm:self-auto shrink-0">
+            <button onclick="openEditServiceForm(${idx})" class="px-3 py-1.5 rounded-lg border border-slate-300 hover:bg-slate-100 text-xs font-bold text-slate-700">
+              ✏️ Edit
+            </button>
+            <button onclick="deleteServiceItem(${idx})" class="px-3 py-1.5 rounded-lg border border-rose-200 hover:bg-rose-50 text-xs font-bold text-rose-600">
+              🗑️ Hapus
+            </button>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function openAddServiceForm() {
+      document.getElementById('service-form-card').classList.remove('hidden');
+      document.getElementById('service-form-title').textContent = "TAMBAH LAYANAN BARU";
+      document.getElementById('srv-edit-id').value = "";
+      document.getElementById('srv-title').value = "";
+      document.getElementById('srv-code').value = String(window.sejukgoContent.services.length + 1).padStart(2, '0');
+      document.getElementById('srv-desc').value = "";
+      document.getElementById('srv-price-min').value = "75000";
+      document.getElementById('srv-price-max').value = "120000";
+      document.getElementById('srv-img').value = "";
+    }
+
+    function openEditServiceForm(index) {
+      const s = window.sejukgoContent.services[index];
+      if (!s) return;
+      document.getElementById('service-form-card').classList.remove('hidden');
+      document.getElementById('service-form-title').textContent = `EDIT LAYANAN: ${s.title}`;
+      document.getElementById('srv-edit-id').value = index;
+      document.getElementById('srv-title').value = s.title;
+      document.getElementById('srv-code').value = s.code;
+      document.getElementById('srv-desc').value = s.desc;
+      document.getElementById('srv-price-min').value = s.minPrice;
+      document.getElementById('srv-price-max').value = s.maxPrice;
+      document.getElementById('srv-img').value = s.img || "";
+    }
+
+    function closeServiceForm() {
+      document.getElementById('service-form-card').classList.add('hidden');
+    }
+
+    function saveServiceItem() {
+      const editIdx = document.getElementById('srv-edit-id').value;
+      const title = document.getElementById('srv-title').value.trim().toUpperCase();
+      const code = document.getElementById('srv-code').value.trim();
+      const desc = document.getElementById('srv-desc').value.trim();
+      const minPrice = parseInt(document.getElementById('srv-price-min').value, 10) || 50000;
+      const maxPrice = parseInt(document.getElementById('srv-price-max').value, 10) || 100000;
+      const img = document.getElementById('srv-img').value.trim() || DEFAULT_SITE_CONTENT.services[0].img;
+
+      if (!title) {
+        showToast("Nama layanan tidak boleh kosong!", "⚠️");
+        return;
+      }
+
+      const itemData = {
+        id: editIdx !== "" ? window.sejukgoContent.services[editIdx].id : "srv-" + Date.now(),
+        code: code || "00",
+        title: title,
+        desc: desc,
+        minPrice: minPrice,
+        maxPrice: maxPrice,
+        img: img
+      };
+
+      if (editIdx !== "") {
+        window.sejukgoContent.services[editIdx] = itemData;
+        showToast(`Layanan "${title}" berhasil diperbarui!`);
+      } else {
+        window.sejukgoContent.services.push(itemData);
+        showToast(`Layanan baru "${title}" berhasil ditambahkan!`);
+      }
+
+      closeServiceForm();
+      syncAndPersist();
+      renderAdminServicesTable();
+    }
+
+    function deleteServiceItem(index) {
+      if (window.sejukgoContent.services.length <= 1) {
+        showToast("Minimal harus tersisa 1 layanan!", "⚠️");
+        return;
+      }
+      const removed = window.sejukgoContent.services.splice(index, 1);
+      syncAndPersist();
+      renderAdminServicesTable();
+      showToast(`Layanan "${removed[0]?.title}" telah dihapus.`);
+    }
+
+    /* =========================================================================
+       5. RESET KE DEFAULT (DATA AWAL)
+       ========================================================================= */
+    function confirmResetDefaults() {
+      document.getElementById('reset-confirm-modal').classList.remove('hidden');
+    }
+
+    function closeResetModal() {
+      document.getElementById('reset-confirm-modal').classList.add('hidden');
+    }
+
+    function executeResetDefaults() {
+      window.sejukgoContent = JSON.parse(JSON.stringify(DEFAULT_SITE_CONTENT));
+      syncAndPersist();
+      populateAdminFields();
+      renderAdminServicesTable();
+      closeResetModal();
+      showToast("Seluruh data website berhasil di-reset ke semula!", "✓");
+    }
+
+    function syncAndPersist() {
+      window.applyContentToDOM();
+      if (window.sejukgoDB) {
+        window.sejukgoDB.saveSiteConfig(window.sejukgoContent);
+      }
+    }
+
+    /* =========================================================================
+       6. ADMIN BOOKING TRACKING MANAGEMENT
+       ========================================================================= */
+    const STAGE_NAMES = ["BOOKING", "CONFIRMED", "TECHNICIAN ASSIGNED", "ON THE WAY", "IN PROGRESS", "COMPLETED", "DIBATALKAN"];
+
+    function renderAdminBookingsTable() {
+      const tbody = document.getElementById('admin-bookings-table');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      const bookings = Object.values(window.sejukgoBookings);
+      if (bookings.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-slate-400">Belum ada booking masuk</td></tr>`;
+        return;
+      }
+
+      bookings.forEach(b => {
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-slate-50 transition-colors";
+        tr.innerHTML = `
+          <td class="p-3 font-mono font-bold text-brand-700">${b.bookingId}</td>
+          <td class="p-3">
+            <div class="font-bold text-navy-900">${b.customerName}</div>
+            <div class="text-[11px] text-slate-500">${b.whatsapp}</div>
+          </td>
+          <td class="p-3 font-medium">${b.service}</td>
+          <td class="p-3">
+            <input type="text" value="${b.technicianName || 'Budi Santoso'}" onchange="updateBookingTech('${b.bookingId}', this.value)" class="px-2 py-1 rounded border border-slate-300 text-xs w-28" />
+          </td>
+          <td class="p-3">
+            <select onchange="updateBookingStatusStage('${b.bookingId}', this.value)" class="px-2 py-1 rounded border border-slate-300 text-xs font-bold ${b.stepIndex === 5 ? 'text-emerald-700 bg-emerald-50' : 'text-brand-700 bg-brand-50'}">
+              <option value="0" ${b.stepIndex === 0 ? 'selected' : ''}>0 - BOOKING</option>
+              <option value="1" ${b.stepIndex === 1 ? 'selected' : ''}>1 - CONFIRMED</option>
+              <option value="2" ${b.stepIndex === 2 ? 'selected' : ''}>2 - TECHNICIAN ASSIGNED</option>
+              <option value="3" ${b.stepIndex === 3 ? 'selected' : ''}>3 - ON THE WAY</option>
+              <option value="4" ${b.stepIndex === 4 ? 'selected' : ''}>4 - IN PROGRESS</option>
+              <option value="5" ${b.stepIndex === 5 ? 'selected' : ''}>5 - COMPLETED</option>
+              <option value="6" ${b.stepIndex === 6 ? 'selected' : ''}>X - DIBATALKAN</option>
+            </select>
+          </td>
+          <td class="p-3 text-right">
+            <button onclick="previewBookingLive('${b.bookingId}')" class="px-2.5 py-1 rounded bg-brand-50 hover:bg-brand-100 text-brand-700 font-bold text-[11px]">
+              Lihat di Web
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function updateBookingStatusStage(bookingId, stageVal) {
+      const idx = parseInt(stageVal, 10);
+      if (window.sejukgoBookings[bookingId]) {
+        window.sejukgoBookings[bookingId].stepIndex = idx;
+        window.sejukgoBookings[bookingId].status = STAGE_NAMES[idx] || "Diproses";
+        if (window.sejukgoDB) {
+          window.sejukgoDB.saveBooking(window.sejukgoBookings[bookingId]);
+        }
+        showToast(`Status booking ${bookingId} diubah ke: ${STAGE_NAMES[idx]}`);
+        
+        // If current code matches input on front page, refresh it
+        const curCode = document.getElementById('status-input-code')?.value.trim().toUpperCase();
+        if (curCode === bookingId) {
+          checkBookingStatus();
+        }
+      }
+    }
+
+    function updateBookingTech(bookingId, techName) {
+      if (window.sejukgoBookings[bookingId]) {
+        window.sejukgoBookings[bookingId].technicianName = techName;
+        if (window.sejukgoDB) {
+          window.sejukgoDB.saveBooking(window.sejukgoBookings[bookingId]);
+        }
+        showToast(`Teknisi untuk ${bookingId} diperbarui`);
+      }
+    }
+
+    function previewBookingLive(bookingId) {
+      closeAdminPanelModal();
+      document.getElementById('status-input-code').value = bookingId;
+      checkBookingStatus();
+      document.getElementById('cek-status').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function filterAdminBookings() {
+      const q = document.getElementById('search-booking-input').value.toUpperCase().trim();
+      const rows = document.querySelectorAll('#admin-bookings-table tr');
+      rows.forEach(r => {
+        r.style.display = r.textContent.toUpperCase().includes(q) ? '' : 'none';
+      });
+    }
+
+    /* =========================================================================
+       7. NOTIFICATION TOAST HELPER
+       ========================================================================= */
+    let toastTimeout = null;
+    function showToast(msg, icon = "✓") {
+      const box = document.getElementById('toast-box');
+      const msgEl = document.getElementById('toast-msg');
+      const iconEl = document.getElementById('toast-icon');
+      
+      if (!box) return;
+      msgEl.textContent = msg;
+      iconEl.textContent = icon;
+
+      box.classList.remove('opacity-0', '-translate-y-4');
+      box.classList.add('opacity-100', 'translate-y-0');
+
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        box.classList.remove('opacity-100', 'translate-y-0');
+        box.classList.add('opacity-0', '-translate-y-4');
+      }, 3000);
+    }
+
+    /* =========================================================================
+       8. INITIALIZATION & STANDARD INTERACTIVITY
+       ========================================================================= */
+    window.addEventListener('DOMContentLoaded', () => {
+      window.applyContentToDOM();
+      renderCityList(serviceCities);
+      renderTimeline(3); // default SG-28491
+
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      const dateInput = document.getElementById('book-date');
+      if (dateInput) {
+        dateInput.value = tomorrow.toISOString().split('T')[0];
+        dateInput.min = new Date().toISOString().split('T')[0];
+      }
+    });
+
+    // Pricing calculation
+    function calculateEstimate() {
+      const serviceSelect = document.getElementById('est-service');
+      const unitInput = document.getElementById('est-unit');
+      if (!serviceSelect || !unitInput || serviceSelect.selectedIndex < 0) return;
+
+      const selectedOption = serviceSelect.options[serviceSelect.selectedIndex];
+      const minBase = parseInt(selectedOption.getAttribute('data-min'), 10) || 65000;
+      const maxBase = parseInt(selectedOption.getAttribute('data-max'), 10) || 85000;
+      const units = Math.max(1, parseInt(unitInput.value, 10) || 1);
+
+      const totalMin = minBase * units;
+      const totalMax = maxBase * units;
+
+      const formatRupiah = (num) => "Rp " + num.toLocaleString('id-ID');
+      document.getElementById('est-output-price').textContent = `${formatRupiah(totalMin)} – ${formatRupiah(totalMax)}`;
+    }
+
+    function adjustUnit(delta) {
+      const unitInput = document.getElementById('est-unit');
+      let val = (parseInt(unitInput.value, 10) || 1) + delta;
+      if (val < 1) val = 1;
+      if (val > 20) val = 20;
+      unitInput.value = val;
+      calculateEstimate();
+    }
+
+    function proceedFromEstimate() {
+      const serviceSelect = document.getElementById('est-service');
+      const unitInput = document.getElementById('est-unit');
+      const selectedOptionText = serviceSelect.options[serviceSelect.selectedIndex].text;
+      
+      openBookingModal({
+        problem: `Perlu ${selectedOptionText.split('(')[0].trim()}`,
+        service: selectedOptionText.split('(')[0].trim(),
+        units: unitInput.value
+      });
+    }
+
+    // Modal Control
+    function openBookingModal(prefill = {}) {
+      const modal = document.getElementById('booking-modal');
+      const errorMsg = document.getElementById('booking-error-msg');
+      if (errorMsg) errorMsg.classList.add('hidden');
+
+      if (prefill.problem) {
+        document.getElementById('book-problem').value = prefill.problem;
+      }
+      if (prefill.service) {
+        const select = document.getElementById('book-service');
+        for (let i = 0; i < select.options.length; i++) {
+          if (select.options[i].value.toLowerCase().includes(prefill.service.toLowerCase()) || 
+              prefill.service.toLowerCase().includes(select.options[i].value.toLowerCase())) {
+            select.selectedIndex = i;
+            break;
+          }
+        }
+      }
+      if (prefill.units) {
+        document.getElementById('book-unit-count').value = prefill.units;
+      }
+
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeBookingModal() {
+      const modal = document.getElementById('booking-modal');
+      modal.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    function handleQuickSelect(problemTitle, serviceDefault) {
+      openBookingModal({
+        problem: problemTitle,
+        service: serviceDefault
+      });
+    }
+
+    function handleCategorySelect(catName, serviceDefault) {
+      openBookingModal({
+        problem: `Kategori: ${catName}`,
+        service: serviceDefault
+      });
+    }
+
+    function handleServiceClick(serviceName, desc) {
+      openBookingModal({
+        problem: `Pemesanan: ${serviceName}`,
+        service: serviceName
+      });
+    }
+
+    // Form submission
+    async function submitBookingForm() {
+      const problem = document.getElementById('book-problem').value.trim();
+      const service = document.getElementById('book-service').value;
+      const unitCount = document.getElementById('book-unit-count').value;
+      const propertyType = document.getElementById('book-property-type').value;
+      const date = document.getElementById('book-date').value;
+      const time = document.getElementById('book-time').value;
+      const name = document.getElementById('book-name').value.trim();
+      const wa = document.getElementById('book-wa').value.trim();
+      const address = document.getElementById('book-address').value.trim();
+      const errorMsg = document.getElementById('booking-error-msg');
+      const btnSubmit = document.getElementById('btn-submit-booking');
+
+      if (!problem) {
+        showFormError("Harap tuliskan ringkasan masalah / keluhan AC Anda.");
+        return;
+      }
+      if (!name) {
+        showFormError("Harap masukkan nama lengkap Anda.");
+        return;
+      }
+      if (!wa || wa.length < 8) {
+        showFormError("Harap masukkan nomor WhatsApp yang aktif.");
+        return;
+      }
+      if (!address) {
+        showFormError("Harap masukkan alamat kedatangan teknisi.");
+        return;
+      }
+
+      errorMsg.classList.add('hidden');
+      btnSubmit.disabled = true;
+      btnSubmit.textContent = "MEMPROSES BOOKING...";
+
+      const randomCode = "SG-" + Math.floor(10000 + Math.random() * 90000);
+      lastCreatedBookingCode = randomCode;
+
+      const newBooking = {
+        bookingId: randomCode,
+        customerName: name,
+        whatsapp: wa,
+        service: service,
+        problem: problem,
+        unitCount: unitCount,
+        propertyType: propertyType,
+        date: date,
+        time: time,
+        address: address,
+        technicianName: "Rizky Pratama",
+        technicianId: "TECH-02",
+        status: "Dikonfirmasi",
+        stepIndex: 1, // CONFIRMED
+        createdAt: new Date().toISOString()
+      };
+
+      if (window.sejukgoDB) {
+        await window.sejukgoDB.saveBooking(newBooking);
+      } else {
+        window.sejukgoBookings[randomCode] = newBooking;
+      }
+
+      renderAdminBookingsTable();
+
+      btnSubmit.disabled = false;
+      btnSubmit.textContent = "KONFIRMASI BOOKING →";
+      closeBookingModal();
+
+      document.getElementById('succ-booking-code').textContent = randomCode;
+      document.getElementById('booking-success-modal').classList.remove('hidden');
+    }
+
+    function showFormError(msg) {
+      const err = document.getElementById('booking-error-msg');
+      err.textContent = msg;
+      err.classList.remove('hidden');
+    }
+
+    function copyBookingCode() {
+      const code = document.getElementById('succ-booking-code').textContent.trim();
+      const tempInput = document.createElement("input");
+      tempInput.value = code;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempInput);
+      showToast("Kode booking tersalin ke clipboard!");
+    }
+
+    function viewSuccessStatus() {
+      document.getElementById('booking-success-modal').classList.add('hidden');
+      document.getElementById('status-input-code').value = lastCreatedBookingCode;
+      checkBookingStatus();
+      document.getElementById('cek-status').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Live status checker
+    async function checkBookingStatus() {
+      const input = document.getElementById('status-input-code');
+      const code = input.value.trim().toUpperCase();
+      if (!code) return;
+
+      const resBadge = document.getElementById('res-badge-status');
+      const resId = document.getElementById('res-booking-id');
+      const resTech = document.getElementById('res-tech-name');
+      const resEta = document.getElementById('res-eta');
+      const resNotes = document.getElementById('res-detail-notes');
+
+      resBadge.textContent = "Mencari status...";
+      resBadge.className = "px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-700";
+
+      let data = null;
+      if (window.sejukgoDB) {
+        data = await window.sejukgoDB.getBooking(code);
+      } else {
+        data = window.sejukgoBookings[code];
+      }
+
+      if (data) {
+        resId.textContent = data.bookingId;
+        const isCancelled = data.stepIndex === 6;
+        resBadge.textContent = isCancelled ? "BOOKING DIBATALKAN" : "BOOKING DITERIMA ✓";
+        resBadge.className = isCancelled ? 
+          "px-2.5 py-0.5 rounded-full text-xs font-bold bg-rose-100 text-rose-800 border border-rose-300" :
+          "px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-300";
+        resTech.textContent = data.technicianName || "Budi Santoso";
+        resEta.textContent = data.time || "13.30 WIB";
+        resNotes.innerHTML = `Layanan: <strong>${data.service} (${data.unitCount} Unit)</strong> • Tipe: ${data.propertyType} • Alamat: ${data.address}`;
+        
+        renderTimeline(data.stepIndex !== undefined ? data.stepIndex : 3);
+      } else {
+        resId.textContent = code;
+        resBadge.textContent = "KODE TIDAK DITEMUKAN";
+        resBadge.className = "px-2.5 py-0.5 rounded-full text-xs font-bold bg-rose-100 text-rose-800 border border-rose-200";
+        resTech.textContent = "-";
+        resEta.textContent = "-";
+        resNotes.innerHTML = "Kode booking tidak ditemukan. Pastikan Anda mengetik kode sesuai format (contoh: <code>SG-28491</code>).";
+      }
+    }
+
+    function renderTimeline(activeIndex = 3) {
+      const steps = ["BOOKING", "CONFIRMED", "TECHNICIAN ASSIGNED", "ON THE WAY", "IN PROGRESS", "COMPLETED"];
+      const container = document.getElementById('timeline-container');
+      if (!container) return;
+      container.innerHTML = '';
+
+      if (activeIndex === 6) {
+        container.innerHTML = `<div class="col-span-6 p-3 rounded-xl bg-rose-50 text-rose-700 font-bold border border-rose-200">Pesanan ini telah dibatalkan. Hubungi Customer Service jika ada pertanyaan.</div>`;
+        return;
+      }
+
+      steps.forEach((step, idx) => {
+        const item = document.createElement('div');
+        if (idx < activeIndex) {
+          item.className = "p-2.5 rounded-lg border border-brand-200 bg-brand-50 text-brand-700 font-bold flex flex-col items-center";
+          item.innerHTML = `<span class="w-5 h-5 rounded-full bg-brand-600 text-white flex items-center justify-center text-[10px] mb-1">✓</span><span>${step}</span>`;
+        } else if (idx === activeIndex) {
+          item.className = "p-2.5 rounded-lg border-2 border-brand-500 bg-white text-brand-600 font-black flex flex-col items-center shadow-sm";
+          item.innerHTML = `<span class="w-5 h-5 rounded-full bg-brand-500 text-white flex items-center justify-center text-[10px] mb-1 animate-ping">●</span><span>${step}</span>`;
+        } else {
+          item.className = "p-2.5 rounded-lg border border-slate-200 bg-white text-slate-400 font-medium flex flex-col items-center";
+          item.innerHTML = `<span class="w-5 h-5 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-[10px] mb-1">${idx + 1}</span><span>${step}</span>`;
+        }
+        container.appendChild(item);
+      });
+    }
+
+    function togglePropertyType(type) {
+      const btnRumah = document.getElementById('tab-btn-rumah');
+      const btnBisnis = document.getElementById('tab-btn-bisnis');
+      const contentRumah = document.getElementById('content-rumah');
+      const contentBisnis = document.getElementById('content-bisnis');
+
+      if (type === 'rumah') {
+        btnRumah.className = "py-2.5 px-4 rounded-xl font-bold text-sm text-navy-900 bg-white shadow-sm transition-all text-center";
+        btnBisnis.className = "py-2.5 px-4 rounded-xl font-bold text-sm text-slate-600 hover:text-navy-900 transition-all text-center";
+        contentRumah.classList.remove('hidden');
+        contentBisnis.classList.add('hidden');
+      } else {
+        btnBisnis.className = "py-2.5 px-4 rounded-xl font-bold text-sm text-navy-900 bg-white shadow-sm transition-all text-center";
+        btnRumah.className = "py-2.5 px-4 rounded-xl font-bold text-sm text-slate-600 hover:text-navy-900 transition-all text-center";
+        contentBisnis.classList.remove('hidden');
+        contentRumah.classList.add('hidden');
+      }
+    }
+
+    function renderCityList(cities) {
+      const container = document.getElementById('city-list-container');
+      if (!container) return;
+      container.innerHTML = '';
+      cities.forEach(c => {
+        const div = document.createElement('div');
+        div.className = "p-3 rounded-xl border border-slate-200 bg-white hover:border-brand-400 flex flex-col items-center justify-center text-center transition-all";
+        div.innerHTML = `
+          <span class="text-xs sm:text-sm font-bold text-navy-900">${c.name}</span>
+          <span class="text-[10px] font-semibold text-emerald-600 mt-1 flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+            ✓ Layanan tersedia
+          </span>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function filterCityList() {
+      const query = document.getElementById('city-search-input').value.toLowerCase().trim();
+      const filtered = serviceCities.filter(c => c.name.toLowerCase().includes(query));
+      const notFoundMsg = document.getElementById('city-not-found-msg');
+
+      if (filtered.length > 0) {
+        renderCityList(filtered);
+        notFoundMsg.classList.add('hidden');
+      } else {
+        document.getElementById('city-list-container').innerHTML = '';
+        notFoundMsg.classList.remove('hidden');
+      }
+    }
+
+    function requestNewCity() {
+      const query = document.getElementById('city-search-input').value.trim();
+      const message = encodeURIComponent(`Halo SEJUKGO, tolong buka layanan teknisi AC di kota ${query || 'saya'}!`);
+      window.open(`https://wa.me/6281234567890?text=${message}`, '_blank');
+    }
+
+    function toggleFaq(id) {
+      const ans = document.getElementById(`faq-ans-${id}`);
+      const icon = document.getElementById(`faq-icon-${id}`);
+      if (ans.classList.contains('hidden')) {
+        ans.classList.remove('hidden');
+        icon.textContent = "−";
+        icon.classList.add('text-brand-600');
+      } else {
+        ans.classList.add('hidden');
+        icon.textContent = "+";
+        icon.classList.remove('text-brand-600');
+      }
+    }
+  </script>
+</body>
+</html>

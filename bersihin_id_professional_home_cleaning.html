@@ -1,0 +1,3152 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>BERSIHIN.ID — Professional Home Cleaning Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f0f6ff',
+              100: '#e0edff',
+              200: '#bae0fd',
+              500: '#0066FF',   /* Vivid Royal Blue */
+              600: '#0052E0',   /* Deep Brand Blue */
+              700: '#0043B8',
+              800: '#00338F',
+              900: '#0B1B3D',   /* Dark Navy */
+              navy: '#0B192C'
+            }
+          },
+          boxShadow: {
+            'card': '0 8px 30px rgba(0, 102, 255, 0.08)',
+            'command': '0 20px 40px -15px rgba(0, 82, 224, 0.25)',
+            'subtle': '0 2px 10px rgba(11, 27, 61, 0.04)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* Custom scrollbar and aesthetics */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f0f6ff;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #0066FF;
+      border-radius: 9999px;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    /* Slider styling for Before/After */
+    .slider-handle {
+      box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.9), 0 4px 14px rgba(0,0,0,0.25);
+    }
+
+    /* Subtle ripple & active state */
+    .btn-press:active {
+      transform: scale(0.98);
+    }
+  </style>
+</head>
+<body class="font-sans text-brand-navy bg-white antialiased selection:bg-brand-500 selection:text-white pb-20 md:pb-0">
+
+  <!-- 3. HEADER — "SERVICE CONTROL HEADER" -->
+  <header id="main-header" class="fixed top-0 left-0 right-0 z-50 bg-brand-500 transition-all duration-300 py-4 px-4 sm:px-6 lg:px-10 text-white shadow-md">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      
+      <!-- Brand Logo Left -->
+      <a href="#home" class="flex flex-col group">
+        <span class="text-xl sm:text-2xl font-black tracking-tight flex items-center gap-1.5">
+          BERSIHIN.ID
+          <span class="inline-block w-2 h-2 rounded-full bg-white animate-pulse"></span>
+        </span>
+        <span class="text-[10px] tracking-widest font-semibold uppercase text-blue-100 opacity-90 -mt-0.5">
+          Professional Cleaning
+        </span>
+      </a>
+
+      <!-- Navigation Center -->
+      <nav class="hidden lg:flex items-center space-x-7 text-xs font-bold tracking-wider uppercase text-blue-100">
+        <a href="#home" class="hover:text-white transition-colors duration-200">HOME</a>
+        <a href="#services" class="hover:text-white transition-colors duration-200">SERVICES</a>
+        <a href="#pricing" class="hover:text-white transition-colors duration-200">PRICING</a>
+        <a href="#how-it-works" class="hover:text-white transition-colors duration-200">HOW IT WORKS</a>
+        <a href="#reviews" class="hover:text-white transition-colors duration-200">REVIEWS</a>
+        <a href="#tracking" class="hover:text-white transition-colors duration-200">TRACKING</a>
+      </nav>
+
+      <!-- Right Action & Status -->
+      <div class="flex items-center space-x-3 sm:space-x-4">
+        <!-- Live System Status Badge -->
+        <div class="hidden sm:flex items-center gap-2 px-2.5 py-1 rounded-full bg-blue-700/60 border border-blue-400/40 text-[11px] font-semibold text-white">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+          <span class="text-emerald-300 font-bold">●</span> AVAILABLE TODAY
+        </div>
+
+        <!-- Book Cleaning Primary Button -->
+        <button onclick="openBookingWizard('Full Clean')" class="btn-press bg-white text-brand-600 hover:bg-blue-50 px-4 sm:px-5 py-2.5 rounded-full font-bold text-xs sm:text-sm tracking-wide shadow-md hover:shadow-lg transition-all flex items-center gap-2">
+          <span>BOOK CLEANING</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 4. HERO — "THE CLEANING REQUEST" -->
+  <section id="home" class="pt-28 sm:pt-36 pb-16 sm:pb-24 bg-brand-500 text-white relative overflow-hidden">
+    <!-- Subtle Background Accent Line -->
+    <div class="absolute inset-0 pointer-events-none opacity-10">
+      <div class="absolute -top-32 -right-32 w-96 h-96 rounded-full border-[40px] border-white"></div>
+      <div class="absolute -bottom-24 -left-20 w-80 h-80 rounded-full border-[30px] border-white"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+        
+        <!-- Left Hero Content -->
+        <div class="lg:col-span-7 space-y-6 text-left">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-blue-600/70 border border-blue-400/30 text-xs font-bold tracking-widest text-blue-100 uppercase">
+            <i data-lucide="shield-check" class="w-3.5 h-3.5 text-blue-200"></i>
+            <span id="hero-badge-text">HOME CLEANING SERVICE</span>
+          </div>
+          
+          <h1 id="hero-title" class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1]">
+            RUMAH KOTOR?<br>
+            <span class="text-blue-100 underline decoration-white/40 underline-offset-8">BIAR KAMI YANG URUS.</span>
+          </h1>
+
+          <p id="hero-subtitle" class="text-base sm:text-lg text-blue-100 font-normal max-w-xl leading-relaxed">
+            Pesan cleaner profesional untuk membantu membersihkan rumah sesuai kebutuhan dan jadwal Anda. Cepat, berstandar hotel, dan tanpa ribet.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-4 pt-2">
+            <button onclick="openBookingWizard('Full Clean')" class="btn-press bg-white text-brand-600 hover:bg-blue-50 px-7 py-3.5 rounded-xl font-bold text-sm sm:text-base shadow-command hover:shadow-xl transition-all flex items-center gap-2.5">
+              <span id="hero-cta-text">BOOK CLEANING</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+            <a href="#services" class="btn-press px-6 py-3.5 rounded-xl border border-white/40 hover:bg-white/10 text-white font-bold text-sm sm:text-base transition-all flex items-center gap-2">
+              LIHAT LAYANAN
+            </a>
+          </div>
+
+          <!-- Micro Stats under CTA -->
+          <div class="pt-4 flex items-center gap-6 text-xs text-blue-100 font-medium">
+            <div class="flex items-center gap-1.5">
+              <i data-lucide="sparkles" class="w-4 h-4 text-amber-300"></i>
+              <span>Peralatan & Cairan Lengkap</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <i data-lucide="badge-check" class="w-4 h-4 text-emerald-300"></i>
+              <span>Cleaner Terverifikasi</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: "WHAT NEEDS CLEANING?" Interactive Shortcut Card -->
+        <div class="lg:col-span-5">
+          <div class="bg-white rounded-3xl p-6 sm:p-7 shadow-command text-brand-navy border border-white/20 relative">
+            <div class="flex items-center justify-between mb-4 pb-3 border-b border-blue-50">
+              <div>
+                <span class="text-[11px] font-bold text-brand-500 uppercase tracking-wider block">QUICK DISPATCH</span>
+                <h3 class="text-lg font-extrabold text-brand-navy">WHAT NEEDS CLEANING?</h3>
+              </div>
+              <span class="p-2 bg-blue-50 text-brand-500 rounded-xl">
+                <i data-lucide="layout-grid" class="w-5 h-5"></i>
+              </span>
+            </div>
+
+            <!-- Modern Line Icon Area Grid -->
+            <div class="grid grid-cols-2 gap-3" id="hero-area-options">
+              <button onclick="selectHeroArea('Entire Home', this)" class="hero-area-card group text-left p-3.5 rounded-2xl border-2 border-brand-500 bg-blue-50/50 hover:bg-blue-50 transition-all flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-brand-500 text-white flex items-center justify-center shrink-0">
+                  <i data-lucide="home" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-extrabold text-brand-navy group-hover:text-brand-600">Entire Home</div>
+                  <div class="text-[10px] text-gray-500">Semua ruangan</div>
+                </div>
+              </button>
+
+              <button onclick="selectHeroArea('Living Room', this)" class="hero-area-card group text-left p-3.5 rounded-2xl border-2 border-transparent bg-gray-50 hover:bg-blue-50/60 hover:border-blue-200 transition-all flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-blue-100 text-brand-600 flex items-center justify-center shrink-0">
+                  <i data-lucide="sofa" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-extrabold text-brand-navy group-hover:text-brand-600">Living Room</div>
+                  <div class="text-[10px] text-gray-500">Ruang tengah</div>
+                </div>
+              </button>
+
+              <button onclick="selectHeroArea('Bedroom', this)" class="hero-area-card group text-left p-3.5 rounded-2xl border-2 border-transparent bg-gray-50 hover:bg-blue-50/60 hover:border-blue-200 transition-all flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-blue-100 text-brand-600 flex items-center justify-center shrink-0">
+                  <i data-lucide="bed" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-extrabold text-brand-navy group-hover:text-brand-600">Bedroom</div>
+                  <div class="text-[10px] text-gray-500">Kamar tidur</div>
+                </div>
+              </button>
+
+              <button onclick="selectHeroArea('Kitchen', this)" class="hero-area-card group text-left p-3.5 rounded-2xl border-2 border-transparent bg-gray-50 hover:bg-blue-50/60 hover:border-blue-200 transition-all flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-blue-100 text-brand-600 flex items-center justify-center shrink-0">
+                  <i data-lucide="utensils" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-extrabold text-brand-navy group-hover:text-brand-600">Kitchen</div>
+                  <div class="text-[10px] text-gray-500">Dapur bersih</div>
+                </div>
+              </button>
+
+              <button onclick="selectHeroArea('Bathroom', this)" class="hero-area-card group text-left p-3.5 rounded-2xl border-2 border-transparent bg-gray-50 hover:bg-blue-50/60 hover:border-blue-200 transition-all flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-blue-100 text-brand-600 flex items-center justify-center shrink-0">
+                  <i data-lucide="bath" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-extrabold text-brand-navy group-hover:text-brand-600">Bathroom</div>
+                  <div class="text-[10px] text-gray-500">Kamar mandi</div>
+                </div>
+              </button>
+
+              <button onclick="selectHeroArea('Special Area', this)" class="hero-area-card group text-left p-3.5 rounded-2xl border-2 border-transparent bg-gray-50 hover:bg-blue-50/60 hover:border-blue-200 transition-all flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-blue-100 text-brand-600 flex items-center justify-center shrink-0">
+                  <i data-lucide="sparkles" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-extrabold text-brand-navy group-hover:text-brand-600">Special Area</div>
+                  <div class="text-[10px] text-gray-500">Balkon & Kaca</div>
+                </div>
+              </button>
+            </div>
+
+            <!-- Submit Shortcut -->
+            <div class="mt-5 pt-3">
+              <button id="hero-continue-btn" onclick="submitHeroShortcut()" class="btn-press w-full py-3.5 px-4 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-extrabold text-sm tracking-wide transition-all shadow-md flex items-center justify-center gap-2">
+                <span>CONTINUE</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. TRUST STRIP -->
+  <section class="bg-white border-b border-blue-100 py-7">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 text-center lg:text-left divide-y sm:divide-y-0 divide-blue-50">
+        
+        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-3">
+          <span class="text-3xl sm:text-4xl font-black text-brand-500 tracking-tight" id="stat-rating">4.9/5</span>
+          <div>
+            <div class="text-xs font-bold uppercase tracking-wider text-brand-navy">Customer Rating</div>
+            <div class="text-xs text-gray-500">Dari 1,850+ ulasan asli</div>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-3 pt-4 sm:pt-0">
+          <span class="text-3xl sm:text-4xl font-black text-brand-500 tracking-tight" id="stat-homes">2,000+</span>
+          <div>
+            <div class="text-xs font-bold uppercase tracking-wider text-brand-navy">Homes Cleaned</div>
+            <div class="text-xs text-gray-500">Rumah & apartemen</div>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-3 pt-4 sm:pt-0">
+          <span class="text-3xl sm:text-4xl font-black text-brand-500 tracking-tight">100%</span>
+          <div>
+            <div class="text-xs font-bold uppercase tracking-wider text-brand-navy">Verified Cleaners</div>
+            <div class="text-xs text-gray-500">SKCK & Lolos Tes Higienis</div>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-3 pt-4 sm:pt-0">
+          <span class="text-3xl sm:text-4xl font-black text-brand-500 tracking-tight">24/7</span>
+          <div>
+            <div class="text-xs font-bold uppercase tracking-wider text-brand-navy">Flexible Scheduling</div>
+            <div class="text-xs text-gray-500">Pesan instan atau terjadwal</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. SECTION — "WHAT WE CLEAN" -->
+  <section id="services" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left: Realistic High-Resolution Image of Pristine Clean House -->
+        <div class="lg:col-span-6 relative">
+          <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-blue-50 relative group">
+            <img 
+              id="clean-house-img"
+              src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80" 
+              alt="Rumah Bersih Rapi Bersihin.id" 
+              class="w-full h-[460px] object-cover transition-transform duration-700 group-hover:scale-105"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-navy/60 via-transparent to-transparent"></div>
+            
+            <!-- Floating Clean Badge Overlay -->
+            <div class="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-white/95 backdrop-blur-md shadow-lg flex items-center justify-between border border-blue-100">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-brand-500 text-white flex items-center justify-center">
+                  <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-extrabold text-brand-navy">Standar Inspeksi 32 Titik</div>
+                  <div class="text-[11px] text-gray-500">Tidak ada sudut yang terlewat</div>
+                </div>
+              </div>
+              <span class="text-xs font-bold text-brand-500 bg-blue-50 px-3 py-1.5 rounded-lg">100% GARANSI</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Structured Scope List -->
+        <div class="lg:col-span-6 space-y-6">
+          <div class="space-y-2">
+            <span class="text-xs font-bold uppercase tracking-widest text-brand-500">KOMPREHENSIF & TELITI</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-navy tracking-tight leading-tight">
+              ONE SERVICE.<br>
+              <span class="text-brand-500">EVERY CORNER.</span>
+            </h2>
+            <p class="text-gray-500 text-sm sm:text-base">
+              Setiap sudut hunian Anda dibersihkan dengan checklist sistematis, desinfektan ramah lingkungan, dan peralatan standar profesional.
+            </p>
+          </div>
+
+          <!-- Structured Room List with Quick Book -->
+          <div class="space-y-3 pt-2">
+            
+            <!-- Living Room -->
+            <div class="p-4 rounded-2xl border border-blue-100 bg-brand-50/40 hover:bg-brand-50 transition-all flex items-center justify-between">
+              <div>
+                <h4 class="text-sm font-extrabold text-brand-navy">LIVING ROOM</h4>
+                <p class="text-xs text-gray-500 font-medium">Dusting • Floor Mopping • Surface Sanitizing</p>
+              </div>
+              <button onclick="openBookingWizard('Living Room')" class="btn-press px-4 py-1.5 rounded-lg bg-white border border-brand-500 text-brand-500 hover:bg-brand-500 hover:text-white text-xs font-bold transition-all">
+                BOOK
+              </button>
+            </div>
+
+            <!-- Bedroom -->
+            <div class="p-4 rounded-2xl border border-blue-100 bg-brand-50/40 hover:bg-brand-50 transition-all flex items-center justify-between">
+              <div>
+                <h4 class="text-sm font-extrabold text-brand-navy">BEDROOM</h4>
+                <p class="text-xs text-gray-500 font-medium">Floor Sweeping • Furniture Wiping • Dust Removal</p>
+              </div>
+              <button onclick="openBookingWizard('Bedroom')" class="btn-press px-4 py-1.5 rounded-lg bg-white border border-brand-500 text-brand-500 hover:bg-brand-500 hover:text-white text-xs font-bold transition-all">
+                BOOK
+              </button>
+            </div>
+
+            <!-- Kitchen -->
+            <div class="p-4 rounded-2xl border border-blue-100 bg-brand-50/40 hover:bg-brand-50 transition-all flex items-center justify-between">
+              <div>
+                <h4 class="text-sm font-extrabold text-brand-navy">KITCHEN</h4>
+                <p class="text-xs text-gray-500 font-medium">Countertops • Sink Scrubbing • Stovetop Degrease</p>
+              </div>
+              <button onclick="openBookingWizard('Kitchen')" class="btn-press px-4 py-1.5 rounded-lg bg-white border border-brand-500 text-brand-500 hover:bg-brand-500 hover:text-white text-xs font-bold transition-all">
+                BOOK
+              </button>
+            </div>
+
+            <!-- Bathroom -->
+            <div class="p-4 rounded-2xl border border-blue-100 bg-brand-50/40 hover:bg-brand-50 transition-all flex items-center justify-between">
+              <div>
+                <h4 class="text-sm font-extrabold text-brand-navy">BATHROOM</h4>
+                <p class="text-xs text-gray-500 font-medium">Toilet Bowl • Shower Tile • Mirror & Chrome Faucet</p>
+              </div>
+              <button onclick="openBookingWizard('Bathroom')" class="btn-press px-4 py-1.5 rounded-lg bg-white border border-brand-500 text-brand-500 hover:bg-brand-500 hover:text-white text-xs font-bold transition-all">
+                BOOK
+              </button>
+            </div>
+
+            <!-- Common Area -->
+            <div class="p-4 rounded-2xl border border-blue-100 bg-brand-50/40 hover:bg-brand-50 transition-all flex items-center justify-between">
+              <div>
+                <h4 class="text-sm font-extrabold text-brand-navy">COMMON AREA</h4>
+                <p class="text-xs text-gray-500 font-medium">Balcony • Hallway • Trash Can Disposal</p>
+              </div>
+              <button onclick="openBookingWizard('Common Area')" class="btn-press px-4 py-1.5 rounded-lg bg-white border border-brand-500 text-brand-500 hover:bg-brand-500 hover:text-white text-xs font-bold transition-all">
+                BOOK
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. SECTION — CLEANING TYPES -->
+  <section class="py-20 bg-brand-50/60 border-y border-blue-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+      
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="text-xs font-bold uppercase tracking-widest text-brand-500">TRANSPARAN & PRAKTIS</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-navy tracking-tight mt-1">CHOOSE YOUR CLEAN</h2>
+        <p class="text-gray-600 text-sm mt-2">Pilih paket yang sesuai dengan tingkat kebutuhan kebersihan ruangan Anda hari ini.</p>
+      </div>
+
+      <!-- Dynamic Product Catalog Container -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch" id="packages-catalog-grid">
+        <!-- Rendered dynamically from state & Firebase -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. SECTION — "BOOKING WITHOUT THE BACK & FORTH" -->
+  <section id="how-it-works" class="py-20 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="text-xs font-bold uppercase tracking-widest text-brand-500">EFISIENSI MAKSIMAL</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-navy tracking-tight mt-1">NO RIBET. NO BACK & FORTH.</h2>
+        <p class="text-gray-500 text-sm mt-2">Bukan chat manual berjam-jam tanya harga. Booking instan selesai dalam hitungan 45 detik.</p>
+      </div>
+
+      <!-- Modern Conversation / Command Stream UI -->
+      <div class="bg-brand-50/50 rounded-3xl p-6 sm:p-10 border border-blue-100 max-w-2xl mx-auto shadow-subtle space-y-4">
+        
+        <!-- Step 1: User -->
+        <div class="flex items-start justify-end gap-3">
+          <div class="bg-brand-500 text-white p-4 rounded-2xl rounded-tr-sm text-xs sm:text-sm font-semibold shadow-sm max-w-xs">
+            “Need cleaning tomorrow.”
+          </div>
+          <div class="w-8 h-8 rounded-full bg-blue-100 text-brand-600 flex items-center justify-center text-xs font-bold shrink-0">YOU</div>
+        </div>
+
+        <div class="flex justify-center my-1"><i data-lucide="arrow-down" class="w-4 h-4 text-brand-200"></i></div>
+
+        <!-- Step 2: Bersihin.id -->
+        <div class="flex items-start gap-3">
+          <div class="w-8 h-8 rounded-full bg-brand-500 text-white flex items-center justify-center text-[10px] font-bold shrink-0">B.ID</div>
+          <div class="bg-white text-brand-navy border border-blue-100 p-4 rounded-2xl rounded-tl-sm text-xs sm:text-sm font-medium shadow-sm max-w-xs">
+            “Choose your service & schedule slot.”
+          </div>
+        </div>
+
+        <div class="flex justify-center my-1"><i data-lucide="arrow-down" class="w-4 h-4 text-brand-200"></i></div>
+
+        <!-- Step 3: User -->
+        <div class="flex items-start justify-end gap-3">
+          <div class="bg-brand-500 text-white p-4 rounded-2xl rounded-tr-sm text-xs sm:text-sm font-semibold shadow-sm max-w-xs">
+            “Full clean, 2 bedroom.”
+          </div>
+          <div class="w-8 h-8 rounded-full bg-blue-100 text-brand-600 flex items-center justify-center text-xs font-bold shrink-0">YOU</div>
+        </div>
+
+        <div class="flex justify-center my-1"><i data-lucide="arrow-down" class="w-4 h-4 text-brand-200"></i></div>
+
+        <!-- Step 4: Bersihin.id -->
+        <div class="flex items-start gap-3">
+          <div class="w-8 h-8 rounded-full bg-brand-500 text-white flex items-center justify-center text-[10px] font-bold shrink-0">B.ID</div>
+          <div class="bg-white text-brand-navy border border-blue-100 p-4 rounded-2xl rounded-tl-sm text-xs sm:text-sm font-medium shadow-sm max-w-xs flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span>“10:00 AM available. Cleaner Sari on standby.”</span>
+          </div>
+        </div>
+
+        <div class="flex justify-center my-1"><i data-lucide="arrow-down" class="w-4 h-4 text-brand-200"></i></div>
+
+        <!-- Step 5: User -->
+        <div class="flex items-start justify-end gap-3">
+          <div class="bg-brand-500 text-white p-4 rounded-2xl rounded-tr-sm text-xs sm:text-sm font-semibold shadow-sm max-w-xs">
+            “Book it.”
+          </div>
+          <div class="w-8 h-8 rounded-full bg-blue-100 text-brand-600 flex items-center justify-center text-xs font-bold shrink-0">YOU</div>
+        </div>
+
+        <!-- Step 6: Confirmed Banner -->
+        <div class="pt-4 text-center">
+          <div class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 font-extrabold text-xs sm:text-sm">
+            <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i>
+            CONFIRMED ✓ TIKET BR-10293 TERCATAT
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 9. SECTION — PRICE SNAPSHOT -->
+  <section id="pricing" class="py-16 bg-brand-50 border-y border-blue-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-brand-500">TARIF TRANSPARAN</span>
+          <h2 class="text-3xl font-extrabold text-brand-navy tracking-tight mt-1">KNOW THE PRICE BEFORE YOU BOOK</h2>
+          <p class="text-gray-500 text-sm mt-1">Tanpa biaya tersembunyi. Sudah termasuk tenaga cleaner, chemical, dan alat standar.</p>
+        </div>
+        <button onclick="scrollToEstimator()" class="mt-4 md:mt-0 btn-press px-5 py-2.5 rounded-xl bg-brand-500 hover:bg-brand-600 text-white text-xs font-extrabold tracking-wide transition-all shadow-sm">
+          GET MY ESTIMATE
+        </button>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        
+        <div class="bg-white p-5 rounded-2xl border border-blue-100 shadow-subtle">
+          <div class="text-xs font-extrabold text-brand-navy uppercase">QUICK CLEAN</div>
+          <div class="text-[11px] text-gray-400 mt-0.5">from</div>
+          <div class="text-2xl font-black text-brand-500 mt-1">Rp 99.000</div>
+          <div class="text-[10px] text-gray-500 mt-1">Per 90 menit</div>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border-2 border-brand-500 shadow-sm relative">
+          <div class="text-xs font-extrabold text-brand-navy uppercase">FULL CLEAN</div>
+          <div class="text-[11px] text-gray-400 mt-0.5">from</div>
+          <div class="text-2xl font-black text-brand-500 mt-1">Rp 179.000</div>
+          <div class="text-[10px] text-brand-600 font-semibold mt-1">Paling direkomendasikan</div>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-blue-100 shadow-subtle">
+          <div class="text-xs font-extrabold text-brand-navy uppercase">DEEP CLEAN</div>
+          <div class="text-[11px] text-gray-400 mt-0.5">from</div>
+          <div class="text-2xl font-black text-brand-500 mt-1">Rp 299.000</div>
+          <div class="text-[10px] text-gray-500 mt-1">Intensive detailing</div>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-blue-100 shadow-subtle">
+          <div class="text-xs font-extrabold text-brand-navy uppercase">SPECIAL CLEAN</div>
+          <div class="text-[11px] text-gray-400 mt-0.5">from</div>
+          <div class="text-2xl font-black text-brand-500 mt-1">Rp 150.000</div>
+          <div class="text-[10px] text-gray-500 mt-1">Sofa / Kasur / Kaca</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. SECTION — SMART ESTIMATOR -->
+  <section id="estimator-section" class="py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-10">
+        <span class="text-xs font-bold uppercase tracking-widest text-brand-500">INSTANT CALCULATOR</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-navy tracking-tight mt-1">HOW BIG IS YOUR CLEANING JOB?</h2>
+        <p class="text-gray-500 text-sm mt-1">Hitung estimasi tarif transparan sebelum konfirmasi pemesanan.</p>
+      </div>
+
+      <div class="bg-brand-50/60 rounded-3xl p-6 sm:p-9 border border-blue-100 shadow-subtle">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          <!-- Estimator Inputs -->
+          <div class="space-y-5">
+            
+            <!-- Property Type -->
+            <div>
+              <label class="block text-xs font-extrabold text-brand-navy uppercase tracking-wider mb-2">Property Type</label>
+              <div class="grid grid-cols-3 gap-2" id="estimator-property-buttons">
+                <button type="button" onclick="setEstimatorProperty('Apartment', this)" class="est-prop-btn py-2.5 px-3 rounded-xl border-2 border-brand-500 bg-white text-brand-navy font-bold text-xs">Apartment</button>
+                <button type="button" onclick="setEstimatorProperty('House', this)" class="est-prop-btn py-2.5 px-3 rounded-xl border-2 border-transparent bg-white/70 hover:bg-white text-gray-600 font-bold text-xs">House</button>
+                <button type="button" onclick="setEstimatorProperty('Villa', this)" class="est-prop-btn py-2.5 px-3 rounded-xl border-2 border-transparent bg-white/70 hover:bg-white text-gray-600 font-bold text-xs">Villa</button>
+              </div>
+            </div>
+
+            <!-- Bedrooms Counter -->
+            <div class="flex items-center justify-between p-3.5 bg-white rounded-2xl border border-blue-100">
+              <div>
+                <div class="text-xs font-extrabold text-brand-navy">Bedrooms</div>
+                <div class="text-[10px] text-gray-500">Jumlah kamar tidur</div>
+              </div>
+              <div class="flex items-center gap-3">
+                <button type="button" onclick="adjustEstimatorBedroom(-1)" class="w-8 h-8 rounded-lg bg-blue-50 hover:bg-blue-100 text-brand-600 font-black flex items-center justify-center">−</button>
+                <span id="est-bedrooms" class="w-6 text-center font-black text-sm text-brand-navy">1</span>
+                <button type="button" onclick="adjustEstimatorBedroom(1)" class="w-8 h-8 rounded-lg bg-blue-50 hover:bg-blue-100 text-brand-600 font-black flex items-center justify-center">+</button>
+              </div>
+            </div>
+
+            <!-- Bathrooms Counter -->
+            <div class="flex items-center justify-between p-3.5 bg-white rounded-2xl border border-blue-100">
+              <div>
+                <div class="text-xs font-extrabold text-brand-navy">Bathrooms</div>
+                <div class="text-[10px] text-gray-500">Jumlah kamar mandi</div>
+              </div>
+              <div class="flex items-center gap-3">
+                <button type="button" onclick="adjustEstimatorBathroom(-1)" class="w-8 h-8 rounded-lg bg-blue-50 hover:bg-blue-100 text-brand-600 font-black flex items-center justify-center">−</button>
+                <span id="est-bathrooms" class="w-6 text-center font-black text-sm text-brand-navy">1</span>
+                <button type="button" onclick="adjustEstimatorBathroom(1)" class="w-8 h-8 rounded-lg bg-blue-50 hover:bg-blue-100 text-brand-600 font-black flex items-center justify-center">+</button>
+              </div>
+            </div>
+
+            <!-- Cleaning Type -->
+            <div>
+              <label class="block text-xs font-extrabold text-brand-navy uppercase tracking-wider mb-2">Cleaning Type</label>
+              <div class="grid grid-cols-3 gap-2" id="estimator-type-buttons">
+                <button type="button" onclick="setEstimatorType('Quick', this)" class="est-type-btn py-2 px-3 rounded-xl border border-gray-200 bg-white text-gray-600 text-xs font-bold">Quick</button>
+                <button type="button" onclick="setEstimatorType('Full', this)" class="est-type-btn py-2 px-3 rounded-xl border-2 border-brand-500 bg-white text-brand-navy text-xs font-bold">Full</button>
+                <button type="button" onclick="setEstimatorType('Deep', this)" class="est-type-btn py-2 px-3 rounded-xl border border-gray-200 bg-white text-gray-600 text-xs font-bold">Deep</button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Estimator Output Card -->
+          <div class="bg-white rounded-2xl p-6 border border-blue-100 shadow-sm flex flex-col justify-between text-center md:text-left">
+            <div>
+              <div class="text-xs font-bold uppercase tracking-wider text-gray-400">ESTIMATED PRICE</div>
+              <div id="estimator-total" class="text-4xl sm:text-5xl font-black text-brand-500 my-2 tracking-tight">
+                Rp 179.000
+              </div>
+              <p id="estimator-summary" class="text-xs text-gray-500 mt-2 leading-relaxed">
+                Paket Full Clean untuk Apartment (1 Kamar Tidur, 1 Kamar Mandi). Estimasi durasi 2.5 - 3 jam pengerjaan.
+              </p>
+
+              <div class="mt-4 pt-4 border-t border-blue-50 text-[11px] text-gray-400 space-y-1">
+                <div>✓ Termasuk desinfektan standar medis</div>
+                <div>✓ Peralatan microfiber & vacuum disediakan</div>
+              </div>
+            </div>
+
+            <div class="pt-6">
+              <button onclick="bookEstimatorResult()" class="btn-press w-full py-3.5 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-extrabold text-xs sm:text-sm tracking-wide shadow-md transition-all flex items-center justify-center gap-2">
+                <span>BOOK THIS SERVICE</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 11. SECTION — CLEANER QUALITY -->
+  <section class="py-20 bg-white border-t border-blue-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        
+        <!-- Left: Real photo of Indonesian cleaner in uniform -->
+        <div class="lg:col-span-6 order-2 lg:order-1">
+          <div class="relative max-w-md mx-auto lg:max-w-none">
+            <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-blue-100">
+              <img 
+                id="cleaner-quality-img"
+                src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1000&q=80" 
+                alt="Cleaner Profesional Bersihin.id Berpengalaman" 
+                class="w-full h-[450px] object-cover object-center"
+                loading="lazy"
+              />
+            </div>
+            
+            <!-- Rating Badge -->
+            <div class="absolute -bottom-5 -right-3 sm:right-6 bg-brand-navy text-white px-5 py-3.5 rounded-2xl shadow-xl flex items-center gap-3">
+              <div class="text-amber-400 text-xl font-black">★★★★★</div>
+              <div class="text-xs">
+                <div class="font-extrabold">4.9 average rating</div>
+                <div class="text-[10px] text-gray-400">Review cleaner aktif</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Badges and Copy -->
+        <div class="lg:col-span-6 space-y-6 order-1 lg:order-2">
+          <span class="text-xs font-bold uppercase tracking-widest text-brand-500">SDM BERSTANDAR TINGGI</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-navy tracking-tight leading-tight">
+            NOT JUST A CLEANER.<br>
+            <span class="text-brand-500">A TRAINED PROFESSIONAL.</span>
+          </h2>
+          <p class="text-gray-500 text-sm sm:text-base leading-relaxed">
+            Setiap mitra cleaner kami melalui seleksi ketat pemeriksaan identitas, uji kompetensi perhotelan, serta pelatihan sanitasi berkelanjutan untuk menjamin keamanan rumah dan kenyamanan keluarga Anda.
+          </p>
+
+          <!-- 4 Pillars Grid -->
+          <div class="grid grid-cols-2 gap-4 pt-2">
+            <div class="p-4 rounded-2xl bg-brand-50/50 border border-blue-100">
+              <div class="w-8 h-8 rounded-lg bg-brand-500 text-white flex items-center justify-center mb-2">
+                <i data-lucide="shield-check" class="w-4 h-4"></i>
+              </div>
+              <h4 class="text-xs font-extrabold text-brand-navy uppercase tracking-wider">VERIFIED</h4>
+              <p class="text-[11px] text-gray-500 mt-1">Latar belakang, identitas KTP & SKCK terverifikasi resmi.</p>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-brand-50/50 border border-blue-100">
+              <div class="w-8 h-8 rounded-lg bg-brand-500 text-white flex items-center justify-center mb-2">
+                <i data-lucide="graduation-cap" class="w-4 h-4"></i>
+              </div>
+              <h4 class="text-xs font-extrabold text-brand-navy uppercase tracking-wider">TRAINED</h4>
+              <p class="text-[11px] text-gray-500 mt-1">Sertifikasi SOP hotel 5-bintang & teknik chemical safety.</p>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-brand-50/50 border border-blue-100">
+              <div class="w-8 h-8 rounded-lg bg-brand-500 text-white flex items-center justify-center mb-2">
+                <i data-lucide="star" class="w-4 h-4"></i>
+              </div>
+              <h4 class="text-xs font-extrabold text-brand-navy uppercase tracking-wider">RATED</h4>
+              <p class="text-[11px] text-gray-500 mt-1">Sistem rating real-time setelah setiap pesanan selesai.</p>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-brand-50/50 border border-blue-100">
+              <div class="w-8 h-8 rounded-lg bg-brand-500 text-white flex items-center justify-center mb-2">
+                <i data-lucide="message-square-check" class="w-4 h-4"></i>
+              </div>
+              <h4 class="text-xs font-extrabold text-brand-navy uppercase tracking-wider">REVIEWED</h4>
+              <p class="text-[11px] text-gray-500 mt-1">Evaluasi performa rutin untuk mempertahankan standar tertinggi.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 12. SECTION — CLEANING CHECKLIST -->
+  <section class="py-20 bg-brand-50/70 border-y border-blue-100">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="text-xs font-bold uppercase tracking-widest text-brand-500">STANDAR PENGERJAAN</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-navy tracking-tight mt-1">WHAT YOU CAN EXPECT</h2>
+        <p class="text-gray-500 text-sm mt-1">Proses kerja yang konsisten, transparan, dan terukur setiap kali cleaner bertugas.</p>
+      </div>
+
+      <!-- Step Progress Bar -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-blue-100 shadow-subtle mb-10">
+        <div class="grid grid-cols-5 text-center gap-2 relative">
+          
+          <div class="space-y-1">
+            <div class="w-9 h-9 mx-auto rounded-full bg-brand-500 text-white font-black text-xs flex items-center justify-center">1</div>
+            <div class="text-[11px] font-extrabold text-brand-navy">BOOK</div>
+          </div>
+
+          <div class="space-y-1">
+            <div class="w-9 h-9 mx-auto rounded-full bg-blue-100 text-brand-600 font-black text-xs flex items-center justify-center">2</div>
+            <div class="text-[11px] font-extrabold text-brand-navy">ARRIVE</div>
+          </div>
+
+          <div class="space-y-1">
+            <div class="w-9 h-9 mx-auto rounded-full bg-blue-100 text-brand-600 font-black text-xs flex items-center justify-center">3</div>
+            <div class="text-[11px] font-extrabold text-brand-navy">CLEAN</div>
+          </div>
+
+          <div class="space-y-1">
+            <div class="w-9 h-9 mx-auto rounded-full bg-blue-100 text-brand-600 font-black text-xs flex items-center justify-center">4</div>
+            <div class="text-[11px] font-extrabold text-brand-navy">CHECK</div>
+          </div>
+
+          <div class="space-y-1">
+            <div class="w-9 h-9 mx-auto rounded-full bg-emerald-500 text-white font-black text-xs flex items-center justify-center">✓</div>
+            <div class="text-[11px] font-extrabold text-brand-navy">DONE</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Checklist Points -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        
+        <div class="p-4 rounded-2xl bg-white border border-blue-100 flex items-start gap-3 shadow-sm">
+          <div class="w-7 h-7 rounded-full bg-brand-50 text-brand-500 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">✓</div>
+          <div>
+            <div class="text-xs font-extrabold text-brand-navy">Cleaner datang sesuai jadwal</div>
+            <p class="text-[11px] text-gray-500">Ketepatan waktu dengan toleransi maksimal 10 menit dengan notifikasi.</p>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white border border-blue-100 flex items-start gap-3 shadow-sm">
+          <div class="w-7 h-7 rounded-full bg-brand-50 text-brand-500 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">✓</div>
+          <div>
+            <div class="text-xs font-extrabold text-brand-navy">Area kerja diperiksa awal</div>
+            <p class="text-[11px] text-gray-500">Pengecekan kondisi awal ruangan sebelum pembersihan dimulai.</p>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white border border-blue-100 flex items-start gap-3 shadow-sm">
+          <div class="w-7 h-7 rounded-full bg-brand-50 text-brand-500 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">✓</div>
+          <div>
+            <div class="text-xs font-extrabold text-brand-navy">Cleaning mengikuti checklist digital</div>
+            <p class="text-[11px] text-gray-500">Mengerjakan butir demi butir daftar pembersihan standar perhotelan.</p>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white border border-blue-100 flex items-start gap-3 shadow-sm">
+          <div class="w-7 h-7 rounded-full bg-brand-50 text-brand-500 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">✓</div>
+          <div>
+            <div class="text-xs font-extrabold text-brand-navy">Peralatan sesuai kebutuhan permukaan</div>
+            <p class="text-[11px] text-gray-500">Chemical tepat agar marmer, kayu, dan kaca tidak rusak atau kusam.</p>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white border border-blue-100 flex items-start gap-3 shadow-sm">
+          <div class="w-7 h-7 rounded-full bg-brand-50 text-brand-500 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">✓</div>
+          <div>
+            <div class="text-xs font-extrabold text-brand-navy">Hasil diperiksa bersama Anda</div>
+            <p class="text-[11px] text-gray-500">Inspeksi singkat untuk memastikan semua area bersih memuaskan.</p>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white border border-blue-100 flex items-start gap-3 shadow-sm">
+          <div class="w-7 h-7 rounded-full bg-brand-50 text-brand-500 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">✓</div>
+          <div>
+            <div class="text-xs font-extrabold text-brand-navy">Booking ditutup otomatis</div>
+            <p class="text-[11px] text-gray-500">Pemberian rating digital cepat tanpa tekanan.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 13. SECTION — BEFORE / AFTER -->
+  <section class="py-20 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-xs font-bold uppercase tracking-widest text-brand-500">HASIL NYATA</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-navy tracking-tight mt-1">THE DIFFERENCE IS OBVIOUS.</h2>
+        <p class="text-gray-500 text-sm mt-1">Geser tuas di tengah untuk melihat transformasi kebersihan ruangan Anda.</p>
+      </div>
+
+      <!-- Before / After Interactive Slider Container -->
+      <div class="relative w-full h-[360px] sm:h-[480px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white select-none" id="ba-container">
+        
+        <!-- After Image (Base) -->
+        <img 
+          id="ba-after-img"
+          src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80" 
+          alt="Dapur Bersih Rapi After Bersihin.id" 
+          class="absolute inset-0 w-full h-full object-cover pointer-events-none"
+        />
+        <div class="absolute bottom-6 right-6 bg-brand-500 text-white font-extrabold text-xs uppercase tracking-widest px-3.5 py-1.5 rounded-lg shadow-md z-10">
+          AFTER (BERSIHIN.ID)
+        </div>
+
+        <!-- Before Image (Clipped) -->
+        <div id="ba-clip" class="absolute inset-0 overflow-hidden pointer-events-none" style="width: 50%;">
+          <img 
+            id="ba-before-img"
+            src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80" 
+            alt="Dapur Berantakan Kotor Before" 
+            class="absolute top-0 left-0 max-w-none h-full object-cover" 
+          />
+          <div class="absolute bottom-6 left-6 bg-brand-navy/90 text-white font-extrabold text-xs uppercase tracking-widest px-3.5 py-1.5 rounded-lg shadow-md z-10">
+            BEFORE
+          </div>
+        </div>
+
+        <!-- Draggable Handle Bar -->
+        <div id="ba-divider" class="absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize z-20 flex items-center justify-center" style="left: 50%;">
+          <div class="slider-handle w-10 h-10 rounded-full bg-brand-500 text-white flex items-center justify-center shadow-lg -ml-4.5">
+            <i data-lucide="move-horizontal" class="w-4 h-4"></i>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="text-center mt-4">
+        <span class="text-xs text-gray-400 font-medium">← Geser kursor atau sentuh layar ke kiri/kanan →</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 14. SECTION — RECURRING CLEANING -->
+  <section class="py-20 bg-brand-50/60 border-t border-blue-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+      
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-500 text-white text-xs font-bold uppercase tracking-wider mb-2">
+          <i data-lucide="clock" class="w-3.5 h-3.5"></i>
+          SAVE TIME
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-navy tracking-tight">KEEP IT CLEAN. AUTOMATICALLY.</h2>
+        <p class="text-gray-500 text-sm mt-1">Jadwalkan pembersihan rutin otomatis tanpa perlu booking berulang kali setiap pekan.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Weekly -->
+        <div class="bg-white p-7 rounded-3xl border-2 border-brand-500 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between">
+              <h3 class="text-xl font-black text-brand-navy">WEEKLY</h3>
+              <span class="px-2.5 py-0.5 rounded-md bg-blue-100 text-brand-600 font-extrabold text-[11px]">HEMAT 20%</span>
+            </div>
+            <p class="text-gray-500 text-xs mt-2">Cleaner datang setiap minggu di hari & jam pilihan Anda. Rumah selalu dalam kondisi siap terima tamu.</p>
+            
+            <div class="mt-6 mb-4 text-brand-500 font-black text-2xl">
+              Rp 143.000 <span class="text-xs font-semibold text-gray-400">/ kunjungan</span>
+            </div>
+          </div>
+          <button onclick="openBookingWizard('Weekly Routine')" class="btn-press w-full py-3 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-extrabold text-xs tracking-wider uppercase transition-all">
+            SET MY SCHEDULE
+          </button>
+        </div>
+
+        <!-- Biweekly -->
+        <div class="bg-white p-7 rounded-3xl border border-blue-100 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between">
+              <h3 class="text-xl font-black text-brand-navy">BIWEEKLY</h3>
+              <span class="px-2.5 py-0.5 rounded-md bg-blue-50 text-brand-600 font-extrabold text-[11px]">HEMAT 15%</span>
+            </div>
+            <p class="text-gray-500 text-xs mt-2">Setiap dua minggu sekali. Pas untuk apartemen atau pasangan muda yang aktif bekerja.</p>
+            
+            <div class="mt-6 mb-4 text-brand-500 font-black text-2xl">
+              Rp 152.000 <span class="text-xs font-semibold text-gray-400">/ kunjungan</span>
+            </div>
+          </div>
+          <button onclick="openBookingWizard('Biweekly Routine')" class="btn-press w-full py-3 rounded-xl bg-blue-50 hover:bg-brand-500 text-brand-600 hover:text-white font-extrabold text-xs tracking-wider uppercase transition-all">
+            SET MY SCHEDULE
+          </button>
+        </div>
+
+        <!-- Monthly -->
+        <div class="bg-white p-7 rounded-3xl border border-blue-100 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between">
+              <h3 class="text-xl font-black text-brand-navy">MONTHLY</h3>
+              <span class="px-2.5 py-0.5 rounded-md bg-blue-50 text-brand-600 font-extrabold text-[11px]">HEMAT 10%</span>
+            </div>
+            <p class="text-gray-500 text-xs mt-2">Satu kali setiap bulan untuk refresh ruangan dan pembersihan mendalam berkala.</p>
+            
+            <div class="mt-6 mb-4 text-brand-500 font-black text-2xl">
+              Rp 161.000 <span class="text-xs font-semibold text-gray-400">/ kunjungan</span>
+            </div>
+          </div>
+          <button onclick="openBookingWizard('Monthly Routine')" class="btn-press w-full py-3 rounded-xl bg-blue-50 hover:bg-brand-500 text-brand-600 hover:text-white font-extrabold text-xs tracking-wider uppercase transition-all">
+            SET MY SCHEDULE
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 15. SECTION — ADD-ON SERVICE -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+      
+      <div class="flex items-end justify-between mb-8">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-brand-500">CUSTOM TREATMENT</span>
+          <h2 class="text-3xl font-extrabold text-brand-navy tracking-tight mt-1">NEED A LITTLE EXTRA?</h2>
+          <p class="text-gray-500 text-sm mt-1">Tambahkan layanan spesifik ke jadwal cleaning Anda dengan 1 klik.</p>
+        </div>
+        <div class="hidden sm:flex gap-2">
+          <button onclick="scrollAddons('left')" class="p-2.5 rounded-full border border-blue-200 hover:bg-blue-50 text-brand-600">
+            <i data-lucide="chevron-left" class="w-5 h-5"></i>
+          </button>
+          <button onclick="scrollAddons('right')" class="p-2.5 rounded-full border border-blue-200 hover:bg-blue-50 text-brand-600">
+            <i data-lucide="chevron-right" class="w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Addons Horizontal Scrolling Row -->
+      <div id="addons-carousel" class="flex gap-4 overflow-x-auto pb-4 custom-scroll snap-x">
+        <!-- Rendered dynamically from state & Firebase -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 16. SECTION — SERVICE TRACKING -->
+  <section id="tracking" class="py-20 bg-brand-50/80 border-y border-blue-100">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-10">
+        <span class="text-xs font-bold uppercase tracking-widest text-brand-500">LIVE STATUS</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-navy tracking-tight mt-1">KNOW WHAT'S HAPPENING</h2>
+        <p class="text-gray-500 text-sm mt-1">Lacak status cleaner dan estimasi kedatangan langsung secara real-time.</p>
+      </div>
+
+      <!-- Tracker Search & Interface -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-blue-100 shadow-command">
+        
+        <!-- Search Form -->
+        <div class="flex flex-col sm:flex-row gap-3 pb-6 border-b border-blue-100">
+          <div class="relative flex-1">
+            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+              <i data-lucide="search" class="w-4 h-4"></i>
+            </span>
+            <input 
+              type="text" 
+              id="tracker-input" 
+              value="BR-10293" 
+              placeholder="Masukkan Booking ID (contoh: BR-10293)" 
+              class="w-full pl-10 pr-4 py-3 rounded-xl border border-blue-200 text-sm focus:outline-none focus:border-brand-500 font-medium"
+            />
+          </div>
+          <button onclick="trackBooking()" class="btn-press px-6 py-3 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-bold text-xs uppercase tracking-wider transition-all">
+            TRACK
+          </button>
+        </div>
+
+        <!-- Live Tracker Display Result -->
+        <div id="tracker-result" class="pt-6">
+          
+          <!-- Summary Header -->
+          <div class="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl bg-brand-50/60 border border-blue-100">
+            <div>
+              <div class="text-xs font-bold text-gray-400">BOOKING ID</div>
+              <div class="text-lg font-black text-brand-navy" id="tracker-display-id">BR-10293</div>
+            </div>
+            <div>
+              <div class="text-xs font-bold text-gray-400">CLEANER</div>
+              <div class="text-sm font-extrabold text-brand-navy flex items-center gap-1.5" id="tracker-cleaner">
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                SARI (Rating 4.9)
+              </div>
+            </div>
+            <div>
+              <div class="text-xs font-bold text-gray-400">EST. ARRIVAL</div>
+              <div class="text-sm font-extrabold text-brand-500" id="tracker-arrival">10:00 AM Hari Ini</div>
+            </div>
+            <div>
+              <div class="text-xs font-bold text-gray-400">STATUS</div>
+              <div class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-extrabold" id="tracker-status-badge">
+                BOOKING CONFIRMED ✓
+              </div>
+            </div>
+          </div>
+
+          <!-- Timeline Steps -->
+          <div class="mt-8">
+            <div class="grid grid-cols-6 text-center gap-1 text-[10px] sm:text-xs font-bold">
+              
+              <!-- 1. Booked -->
+              <div class="timeline-step active space-y-2">
+                <div class="w-7 h-7 mx-auto rounded-full bg-brand-500 text-white flex items-center justify-center text-[10px]">✓</div>
+                <div class="text-brand-500">BOOKED</div>
+              </div>
+
+              <!-- 2. Confirmed -->
+              <div class="timeline-step active space-y-2">
+                <div class="w-7 h-7 mx-auto rounded-full bg-brand-500 text-white flex items-center justify-center text-[10px]">✓</div>
+                <div class="text-brand-500">CONFIRMED</div>
+              </div>
+
+              <!-- 3. Cleaner Assigned -->
+              <div class="timeline-step active space-y-2">
+                <div class="w-7 h-7 mx-auto rounded-full bg-brand-500 text-white flex items-center justify-center text-[10px]">✓</div>
+                <div class="text-brand-500">CLEANER ASSIGNED</div>
+              </div>
+
+              <!-- 4. On The Way -->
+              <div class="timeline-step current space-y-2">
+                <div class="w-7 h-7 mx-auto rounded-full bg-blue-100 border-2 border-brand-500 text-brand-500 flex items-center justify-center text-[10px] animate-pulse">●</div>
+                <div class="text-brand-navy">ON THE WAY</div>
+              </div>
+
+              <!-- 5. Cleaning -->
+              <div class="timeline-step space-y-2 text-gray-400">
+                <div class="w-7 h-7 mx-auto rounded-full bg-gray-100 text-gray-400 flex items-center justify-center text-[10px]">5</div>
+                <div>CLEANING</div>
+              </div>
+
+              <!-- 6. Completed -->
+              <div class="timeline-step space-y-2 text-gray-400">
+                <div class="w-7 h-7 mx-auto rounded-full bg-gray-100 text-gray-400 flex items-center justify-center text-[10px]">6</div>
+                <div>COMPLETED</div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 17. SECTION — CUSTOMER REVIEWS -->
+  <section id="reviews" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        
+        <!-- Large Review Score Left -->
+        <div class="lg:col-span-4 bg-brand-50 rounded-3xl p-8 border border-blue-100 text-center">
+          <span class="text-xs font-bold uppercase tracking-widest text-brand-500 block mb-2">KEPUASAN PELANGGAN</span>
+          <div class="text-6xl font-black text-brand-navy tracking-tight">4.9<span class="text-2xl text-gray-400 font-semibold"> / 5</span></div>
+          <div class="text-amber-400 text-2xl my-2">★★★★★</div>
+          <p class="text-xs text-gray-500 font-medium">Based on customer reviews dari 2.000+ hunian di seluruh kota layanan.</p>
+          
+          <div class="mt-6 pt-6 border-t border-blue-200/50 flex justify-center gap-4 text-xs font-bold text-brand-600">
+            <span>✓ 98% On-Time</span>
+            <span>•</span>
+            <span>✓ 99% Re-Book Rate</span>
+          </div>
+        </div>
+
+        <!-- 3 Distinct Quotes Right -->
+        <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+          
+          <!-- Review 1 -->
+          <div class="bg-white p-6 rounded-2xl border border-blue-100 shadow-subtle flex flex-col justify-between">
+            <div>
+              <div class="text-amber-400 text-sm mb-2">★★★★★</div>
+              <p class="text-xs font-bold text-brand-navy text-sm leading-snug">“Booking sangat gampang.”</p>
+              <p class="text-xs text-gray-500 mt-2">Tidak perlu negosiasi via chat berulang-ulang. 1 menit langsung terkonfirmasi.</p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-blue-50 text-[11px] font-extrabold text-brand-navy">
+              Devi Amanda <span class="text-gray-400 font-normal">• Jakarta Selatan</span>
+            </div>
+          </div>
+
+          <!-- Review 2 -->
+          <div class="bg-white p-6 rounded-2xl border border-blue-100 shadow-subtle flex flex-col justify-between">
+            <div>
+              <div class="text-amber-400 text-sm mb-2">★★★★★</div>
+              <p class="text-xs font-bold text-brand-navy text-sm leading-snug">“Cleaner datang tepat waktu.”</p>
+              <p class="text-xs text-gray-500 mt-2">Membawa perlengkapan lengkap, seragam rapi, dan bekerja sangat sopan.</p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-blue-50 text-[11px] font-extrabold text-brand-navy">
+              Rian Pratama <span class="text-gray-400 font-normal">• Tangerang</span>
+            </div>
+          </div>
+
+          <!-- Review 3 -->
+          <div class="bg-white p-6 rounded-2xl border border-blue-100 shadow-subtle flex flex-col justify-between">
+            <div>
+              <div class="text-amber-400 text-sm mb-2">★★★★★</div>
+              <p class="text-xs font-bold text-brand-navy text-sm leading-snug">“Hasil cleaning sangat rapi.”</p>
+              <p class="text-xs text-gray-500 mt-2">Kamar mandi dan dapur yang biasanya sulit dibersihkan jadi kinclong seperti baru.</p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-blue-50 text-[11px] font-extrabold text-brand-navy">
+              Siti Nurhaliza <span class="text-gray-400 font-normal">• Bandung</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 18. SECTION — WHERE WE CLEAN -->
+  <section class="py-20 bg-brand-50/70 border-y border-blue-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+      
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-xs font-bold uppercase tracking-widest text-brand-500">JANGKAUAN LAYANAN</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-navy tracking-tight mt-1">WE COME TO YOU</h2>
+        <p class="text-gray-500 text-sm mt-1">Cakupan armada cleaner di kota-kota besar di Indonesia.</p>
+      </div>
+
+      <!-- City Search Form -->
+      <div class="max-w-md mx-auto mb-10">
+        <div class="flex gap-2">
+          <input 
+            type="text" 
+            id="city-search-input" 
+            placeholder="Ketik nama kota Anda..." 
+            class="flex-1 px-4 py-3 rounded-xl border border-blue-200 text-xs sm:text-sm focus:outline-none focus:border-brand-500 bg-white"
+            oninput="handleCitySearch(this.value)"
+          />
+          <button onclick="handleCityCheckBtn()" class="btn-press px-5 py-3 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-bold text-xs uppercase tracking-wider">
+            CEK
+          </button>
+        </div>
+        <div id="city-search-feedback" class="mt-2 text-xs font-semibold text-center transition-all min-h-[20px]"></div>
+      </div>
+
+      <!-- Dynamic City Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3" id="cities-grid">
+        <!-- City tags injected via JS / static initial -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 19. SECTION — FAQ -->
+  <section class="py-20 bg-white">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-12">
+        <span class="text-xs font-bold uppercase tracking-widest text-brand-500">BANTUAN & JAWABAN</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-navy tracking-tight mt-1">QUESTIONS?</h2>
+        <p class="text-gray-500 text-sm mt-1">Pertanyaan yang sering diajukan seputar layanan Bersihin.id</p>
+      </div>
+
+      <div class="space-y-3" id="faq-accordion">
+        
+        <div class="faq-item rounded-2xl border border-blue-100 bg-brand-50/30 overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full p-4 text-left font-extrabold text-xs sm:text-sm text-brand-navy flex items-center justify-between">
+            <span>Apa saja yang termasuk regular cleaning?</span>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-brand-500 transition-transform duration-200"></i>
+          </button>
+          <div class="faq-content hidden px-4 pb-4 text-xs text-gray-600 leading-relaxed">
+            Regular cleaning mencakup sapu dan pel lantai, pengelapan debu pada furnitur dan meja, perapihan tempat tidur, pembersihan wastafel, sanitasi kamar mandi standar, dan pembuangan kantong sampah.
+          </div>
+        </div>
+
+        <div class="faq-item rounded-2xl border border-blue-100 bg-brand-50/30 overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full p-4 text-left font-extrabold text-xs sm:text-sm text-brand-navy flex items-center justify-between">
+            <span>Apakah cleaner membawa peralatan dan chemical sendiri?</span>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-brand-500 transition-transform duration-200"></i>
+          </button>
+          <div class="faq-content hidden px-4 pb-4 text-xs text-gray-600 leading-relaxed">
+            Ya! Seluruh cleaner Bersihin.id dilengkapi seragam resmi, kain microfiber color-coded (agar higienis dan tidak campur aduk), cairan pembersih standar ramah lingkungan, sikat khusus, dan alat pel.
+          </div>
+        </div>
+
+        <div class="faq-item rounded-2xl border border-blue-100 bg-brand-50/30 overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full p-4 text-left font-extrabold text-xs sm:text-sm text-brand-navy flex items-center justify-between">
+            <span>Berapa lama proses cleaning?</span>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-brand-500 transition-transform duration-200"></i>
+          </button>
+          <div class="faq-content hidden px-4 pb-4 text-xs text-gray-600 leading-relaxed">
+            Durasi rata-rata berkisar antara 1.5 jam untuk Quick Clean, hingga 3 - 4 jam untuk Full Clean tergantung luas hunian dan tingkat kekotoran.
+          </div>
+        </div>
+
+        <div class="faq-item rounded-2xl border border-blue-100 bg-brand-50/30 overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full p-4 text-left font-extrabold text-xs sm:text-sm text-brand-navy flex items-center justify-between">
+            <span>Bisa booking untuk besok atau hari ini?</span>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-brand-500 transition-transform duration-200"></i>
+          </button>
+          <div class="faq-content hidden px-4 pb-4 text-xs text-gray-600 leading-relaxed">
+            Tentu bisa! Anda bisa melakukan pemesanan instan (minimal 2 jam sebelum jam yang diinginkan) jika slot cleaner di area Anda masih berstatus AVAILABLE.
+          </div>
+        </div>
+
+        <div class="faq-item rounded-2xl border border-blue-100 bg-brand-50/30 overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full p-4 text-left font-extrabold text-xs sm:text-sm text-brand-navy flex items-center justify-between">
+            <span>Bisa meminta cleaner yang sama untuk kunjungan berikutnya?</span>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-brand-500 transition-transform duration-200"></i>
+          </button>
+          <div class="faq-content hidden px-4 pb-4 text-xs text-gray-600 leading-relaxed">
+            Bisa. Jika Anda puas dengan kinerja cleaner tertentu, Anda dapat menyimpan Preferred Cleaner pada booking berikutnya (khususnya untuk paket rutin mingguan).
+          </div>
+        </div>
+
+        <div class="faq-item rounded-2xl border border-blue-100 bg-brand-50/30 overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full p-4 text-left font-extrabold text-xs sm:text-sm text-brand-navy flex items-center justify-between">
+            <span>Bagaimana jika ingin menambah area cleaning saat cleaner tiba?</span>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-brand-500 transition-transform duration-200"></i>
+          </button>
+          <div class="faq-content hidden px-4 pb-4 text-xs text-gray-600 leading-relaxed">
+            Anda dapat langsung mengonfirmasi penambahan add-on melalui WhatsApp layanan kami atau cleaner akan membantu mengupdate tiket booking Anda secara transparan.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 20. FINAL CTA -->
+  <section class="py-20 bg-brand-500 text-white relative overflow-hidden">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-6">
+      <h2 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight">
+        YOUR HOME.<br>
+        <span class="text-blue-100">OUR JOB.</span>
+      </h2>
+      
+      <p class="text-base sm:text-lg text-blue-100 font-normal max-w-xl mx-auto leading-relaxed">
+        Pilih layanan, tentukan jadwal, dan biarkan tim profesional kami mengurus sisanya. Nikmati waktu berkualitas bersama keluarga di rumah yang bersih.
+      </p>
+
+      <div class="pt-4">
+        <button onclick="openBookingWizard('Full Clean')" class="btn-press bg-white text-brand-600 hover:bg-blue-50 px-8 py-4 rounded-2xl font-black text-sm sm:text-base tracking-wide shadow-command hover:shadow-2xl transition-all inline-flex items-center gap-3">
+          <span>BOOK CLEANING NOW</span>
+          <i data-lucide="arrow-right" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="text-xs text-blue-200 font-semibold tracking-wide">
+        Available for home & business cleaning
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-white border-t border-blue-100 py-12 text-brand-navy">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div>
+          <span class="text-xl font-black text-brand-500 tracking-tight">BERSIHIN.ID</span>
+          <p class="text-xs text-gray-500 mt-1">Platform Pemesanan Jasa Kebersihan Rumah & Kantor Terpercaya di Indonesia.</p>
+        </div>
+        
+        <div class="flex flex-col sm:flex-row items-center gap-4 text-xs">
+          <span class="text-gray-400 font-medium">
+            &copy; 2026 BERSIHIN.ID • “Kami Bersihkan. Anda Nikmati.”
+          </span>
+          <!-- Discreet Admin Panel Access in Footer -->
+          <button onclick="openAdminLoginModal()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-50 hover:bg-brand-500 text-brand-600 hover:text-white font-bold transition-all border border-blue-200">
+            <i data-lucide="lock" class="w-3 h-3"></i>
+            <span>Kelola Web (Admin)</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 24. ADMIN LOGIN MODAL -->
+  <div id="admin-login-modal" class="fixed inset-0 z-50 bg-brand-navy/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-sm rounded-3xl p-6 shadow-2xl border border-blue-100 relative animate-in fade-in zoom-in duration-150">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-2 text-brand-500 font-black">
+          <i data-lucide="shield" class="w-5 h-5"></i>
+          <span>ADMIN LOGIN</span>
+        </div>
+        <button onclick="closeAdminLoginModal()" class="text-gray-400 hover:text-gray-700">✕</button>
+      </div>
+
+      <p class="text-xs text-gray-500 mb-4">Masuk untuk mengelola katalog produk, teks, foto, tracking, dan pengaturan website.</p>
+
+      <form id="admin-login-form" onsubmit="handleAdminLogin(event)" class="space-y-3">
+        <div>
+          <label class="block text-[11px] font-bold text-gray-600 mb-1">Username</label>
+          <input type="text" id="admin-username" required placeholder="kelolaweb2026" class="w-full px-3.5 py-2.5 rounded-xl border border-blue-200 text-xs focus:outline-none focus:border-brand-500" />
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold text-gray-600 mb-1">Password</label>
+          <input type="password" id="admin-password" required placeholder="••••••••••••" class="w-full px-3.5 py-2.5 rounded-xl border border-blue-200 text-xs focus:outline-none focus:border-brand-500" />
+        </div>
+
+        <div id="login-error-msg" class="hidden text-xs text-rose-600 font-semibold text-center"></div>
+
+        <button type="submit" class="btn-press w-full py-2.5 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-extrabold text-xs uppercase tracking-wide transition-all shadow-md mt-2">
+          MASUK KE PANEL
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 25. COMPREHENSIVE ADMIN CONTROL PANEL MODAL -->
+  <div id="admin-panel-modal" class="fixed inset-0 z-50 bg-brand-navy/80 backdrop-blur-md hidden flex items-center justify-center p-2 sm:p-4 overflow-y-auto">
+    <div class="bg-white w-full max-w-5xl rounded-3xl shadow-2xl border border-blue-100 overflow-hidden flex flex-col max-h-[92vh]">
+      
+      <!-- Admin Header -->
+      <div class="bg-brand-500 text-white px-6 py-4 flex items-center justify-between shrink-0">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center">
+            <i data-lucide="sliders" class="w-4 h-4 text-white"></i>
+          </div>
+          <div>
+            <h3 class="text-sm font-black tracking-wide">BERSIHIN.ID — LIVE COMMAND CENTER</h3>
+            <span class="text-[10px] text-blue-200 uppercase font-semibold">Mode Kelola Web & Katalog Realtime</span>
+          </div>
+        </div>
+        
+        <div class="flex items-center gap-3">
+          <span class="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-200 border border-emerald-400/30 text-[10px] font-bold flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            CLOUD SYNC AKTIF
+          </span>
+          <button onclick="closeAdminPanel()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-sm">
+            ✕
+          </button>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <div class="bg-blue-50/70 border-b border-blue-100 px-6 flex space-x-2 overflow-x-auto shrink-0">
+        <button onclick="switchAdminTab('catalog')" id="tab-btn-catalog" class="admin-tab-btn py-3 px-4 border-b-2 border-brand-500 text-brand-600 font-extrabold text-xs whitespace-nowrap flex items-center gap-2">
+          <i data-lucide="box" class="w-4 h-4"></i>
+          Katalog Produk & Paket
+        </button>
+        <button onclick="switchAdminTab('addons')" id="tab-btn-addons" class="admin-tab-btn py-3 px-4 border-b-2 border-transparent text-gray-500 hover:text-brand-600 font-bold text-xs whitespace-nowrap flex items-center gap-2">
+          <i data-lucide="layers" class="w-4 h-4"></i>
+          Add-on Layanan
+        </button>
+        <button onclick="switchAdminTab('hero-content')" id="tab-btn-hero-content" class="admin-tab-btn py-3 px-4 border-b-2 border-transparent text-gray-500 hover:text-brand-600 font-bold text-xs whitespace-nowrap flex items-center gap-2">
+          <i data-lucide="type" class="w-4 h-4"></i>
+          Teks & Foto (Drive/URL)
+        </button>
+        <button onclick="switchAdminTab('bookings')" id="tab-btn-bookings" class="admin-tab-btn py-3 px-4 border-b-2 border-transparent text-gray-500 hover:text-brand-600 font-bold text-xs whitespace-nowrap flex items-center gap-2">
+          <i data-lucide="clipboard-list" class="w-4 h-4"></i>
+          Lacak & Kelola Booking
+        </button>
+        <button onclick="switchAdminTab('reset')" id="tab-btn-reset" class="admin-tab-btn py-3 px-4 border-b-2 border-transparent text-rose-500 hover:text-rose-700 font-bold text-xs whitespace-nowrap flex items-center gap-2">
+          <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+          Riset ke Default
+        </button>
+      </div>
+
+      <!-- Tab Content Panels -->
+      <div class="p-6 overflow-y-auto flex-1 space-y-6">
+
+        <!-- TAB 1: PRODUCT CATALOG (TAMBAH & EDIT PRODUK) -->
+        <div id="admin-tab-catalog" class="admin-panel-view space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-gray-100">
+            <div>
+              <h4 class="text-base font-extrabold text-brand-navy">Katalog Paket Pembersihan Rumah</h4>
+              <p class="text-xs text-gray-500">Edit paket yang ada atau tambahkan produk cleaning baru ke halaman utama secara instan.</p>
+            </div>
+            <button onclick="toggleAddProductForm()" class="btn-press px-4 py-2 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-bold text-xs flex items-center gap-1.5 shadow-sm">
+              <i data-lucide="plus" class="w-4 h-4"></i>
+              <span>+ Tambah Paket Baru</span>
+            </button>
+          </div>
+
+          <!-- Add / Edit Package Inline Form -->
+          <div id="package-form-container" class="hidden bg-blue-50/50 p-5 rounded-2xl border border-blue-200 space-y-4">
+            <h5 id="package-form-title" class="text-xs font-black text-brand-navy uppercase tracking-wider">Tambah Paket Layanan Baru</h5>
+            <input type="hidden" id="pkg-form-id" value="">
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div>
+                <label class="block text-[11px] font-bold text-gray-600 mb-1">Nama Paket</label>
+                <input type="text" id="pkg-name" placeholder="Contoh: PREMIUM SANITIZE" class="w-full px-3 py-2 rounded-lg border border-blue-200 text-xs" />
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-gray-600 mb-1">Badge Tag</label>
+                <input type="text" id="pkg-badge" placeholder="Contoh: Comprehensive / Best Seller" class="w-full px-3 py-2 rounded-lg border border-blue-200 text-xs" />
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-gray-600 mb-1">Harga (Angka saja)</label>
+                <input type="number" id="pkg-price" placeholder="179000" class="w-full px-3 py-2 rounded-lg border border-blue-200 text-xs" />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[11px] font-bold text-gray-600 mb-1">Durasi / Satuan</label>
+                <input type="text" id="pkg-duration" placeholder="/ sesi (3 jam)" class="w-full px-3 py-2 rounded-lg border border-blue-200 text-xs" />
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-gray-600 mb-1">Deskripsi Singkat</label>
+                <input type="text" id="pkg-desc" placeholder="Pembersihan rumah secara menyeluruh..." class="w-full px-3 py-2 rounded-lg border border-blue-200 text-xs" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-bold text-gray-600 mb-1">Daftar Fitur (Pisahkan dengan koma)</label>
+              <textarea id="pkg-features" rows="2" placeholder="Dusting & sapu pel, Pembersihan kamar mandi, Desinfeksi titik sentuh" class="w-full px-3 py-2 rounded-lg border border-blue-200 text-xs"></textarea>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <input type="checkbox" id="pkg-is-popular" class="accent-brand-500 rounded">
+              <label for="pkg-is-popular" class="text-xs font-bold text-brand-navy">Jadikan Paket Terpopuler (Card Menonjol / Most Chosen)</label>
+            </div>
+
+            <div class="flex justify-end gap-2 pt-2">
+              <button onclick="toggleAddProductForm(false)" type="button" class="px-3 py-1.5 rounded-lg border border-gray-300 text-gray-600 font-bold text-xs">Batal</button>
+              <button onclick="savePackageFromForm()" type="button" class="px-5 py-1.5 rounded-lg bg-brand-500 hover:bg-brand-600 text-white font-bold text-xs shadow-sm">Simpan Paket</button>
+            </div>
+          </div>
+
+          <!-- Existing Catalog Table List -->
+          <div class="overflow-x-auto border border-blue-100 rounded-2xl">
+            <table class="w-full text-left border-collapse text-xs">
+              <thead class="bg-blue-50/70 border-b border-blue-100 text-brand-navy uppercase text-[10px]">
+                <tr>
+                  <th class="p-3">Nama Paket</th>
+                  <th class="p-3">Harga</th>
+                  <th class="p-3">Badge</th>
+                  <th class="p-3">Status Desain</th>
+                  <th class="p-3 text-right">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="admin-packages-table-body" class="divide-y divide-gray-100">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TAB 2: ADD-ONS (TAMBAH & EDIT ADD-ON) -->
+        <div id="admin-tab-addons" class="admin-panel-view hidden space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-gray-100">
+            <div>
+              <h4 class="text-base font-extrabold text-brand-navy">Katalog Layanan Ekstra (Add-ons)</h4>
+              <p class="text-xs text-gray-500">Kelola item add-on (Sofa, Kasur, Kulkas, dsb.) dengan harga fleksibel.</p>
+            </div>
+            <button onclick="toggleAddonForm()" class="btn-press px-4 py-2 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-bold text-xs flex items-center gap-1.5 shadow-sm">
+              <i data-lucide="plus" class="w-4 h-4"></i>
+              <span>+ Tambah Add-on Baru</span>
+            </button>
+          </div>
+
+          <!-- Add / Edit Addon Inline Form -->
+          <div id="addon-form-container" class="hidden bg-blue-50/50 p-5 rounded-2xl border border-blue-200 space-y-4">
+            <h5 id="addon-form-title" class="text-xs font-black text-brand-navy uppercase tracking-wider">Tambah Add-on Baru</h5>
+            <input type="hidden" id="addon-form-id" value="">
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div>
+                <label class="block text-[11px] font-bold text-gray-600 mb-1">Nama Layanan</label>
+                <input type="text" id="addon-name" placeholder="Contoh: AC Cleaning" class="w-full px-3 py-2 rounded-lg border border-blue-200 text-xs" />
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-gray-600 mb-1">Tarif Tambahan (Rp)</label>
+                <input type="number" id="addon-price" placeholder="65000" class="w-full px-3 py-2 rounded-lg border border-blue-200 text-xs" />
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-gray-600 mb-1">Deskripsi Singkat</label>
+                <input type="text" id="addon-desc" placeholder="Cuci filter & blower AC..." class="w-full px-3 py-2 rounded-lg border border-blue-200 text-xs" />
+              </div>
+            </div>
+
+            <div class="flex justify-end gap-2 pt-2">
+              <button onclick="toggleAddonForm(false)" type="button" class="px-3 py-1.5 rounded-lg border border-gray-300 text-gray-600 font-bold text-xs">Batal</button>
+              <button onclick="saveAddonFromForm()" type="button" class="px-5 py-1.5 rounded-lg bg-brand-500 hover:bg-brand-600 text-white font-bold text-xs shadow-sm">Simpan Add-on</button>
+            </div>
+          </div>
+
+          <!-- Addons Table List -->
+          <div class="overflow-x-auto border border-blue-100 rounded-2xl">
+            <table class="w-full text-left border-collapse text-xs">
+              <thead class="bg-blue-50/70 border-b border-blue-100 text-brand-navy uppercase text-[10px]">
+                <tr>
+                  <th class="p-3">Nama Add-on</th>
+                  <th class="p-3">Tarif</th>
+                  <th class="p-3">Deskripsi</th>
+                  <th class="p-3 text-right">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="admin-addons-table-body" class="divide-y divide-gray-100">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TAB 3: TEKS & FOTO GOOGLE DRIVE / URL -->
+        <div id="admin-tab-hero-content" class="admin-panel-view hidden space-y-6">
+          <div class="pb-4 border-b border-gray-100">
+            <h4 class="text-base font-extrabold text-brand-navy">Konten Teks & Gambar Website</h4>
+            <p class="text-xs text-gray-500">Ubah judul, subjudul, dan tautan gambar. Didukung integrasi Google Drive (lh3 + thumbnail fallback) serta URL biasa.</p>
+          </div>
+
+          <!-- Text Editor -->
+          <div class="space-y-4 bg-white p-5 rounded-2xl border border-blue-100 shadow-subtle">
+            <h5 class="text-xs font-black text-brand-navy uppercase tracking-wider">Teks Hero Utama</h5>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-[11px] font-bold text-gray-600 mb-1">Small Label</label>
+                <input type="text" id="edit-hero-badge" class="w-full px-3 py-2 rounded-lg border border-blue-200 text-xs font-medium" />
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-gray-600 mb-1">Teks Tombol CTA</label>
+                <input type="text" id="edit-hero-cta" class="w-full px-3 py-2 rounded-lg border border-blue-200 text-xs font-medium" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-bold text-gray-600 mb-1">Headline (Bisa gunakan tag &lt;br&gt;)</label>
+              <textarea id="edit-hero-title" rows="2" class="w-full px-3 py-2 rounded-lg border border-blue-200 text-xs font-medium"></textarea>
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-bold text-gray-600 mb-1">Subheadline</label>
+              <textarea id="edit-hero-subtitle" rows="2" class="w-full px-3 py-2 rounded-lg border border-blue-200 text-xs font-medium"></textarea>
+            </div>
+          </div>
+
+          <!-- Image Links Editor (with Drive Support) -->
+          <div class="space-y-4 bg-white p-5 rounded-2xl border border-blue-100 shadow-subtle">
+            <div class="flex items-center justify-between">
+              <h5 class="text-xs font-black text-brand-navy uppercase tracking-wider">Tautan Gambar (Mendukung ID / Share Link Google Drive)</h5>
+              <span class="text-[10px] text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">Format lh3.googleusercontent + thumbnail fallback</span>
+            </div>
+
+            <div class="space-y-3">
+              <div>
+                <label class="block text-[11px] font-bold text-gray-600 mb-1">Foto Section "What We Clean" (Rumah Bersih)</label>
+                <input type="text" id="edit-img-clean-house" placeholder="https://lh3.googleusercontent.com/d/... atau https://images.unsplash.com/..." class="w-full px-3 py-2 rounded-lg border border-blue-200 text-xs" />
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold text-gray-600 mb-1">Foto Section "Cleaner Quality" (Cleaner Profesional)</label>
+                <input type="text" id="edit-img-cleaner" placeholder="https://lh3.googleusercontent.com/d/... atau URL gambar langsung" class="w-full px-3 py-2 rounded-lg border border-blue-200 text-xs" />
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-[11px] font-bold text-gray-600 mb-1">Slider "Before" (Ruangan Kotor)</label>
+                  <input type="text" id="edit-img-ba-before" placeholder="URL gambar before" class="w-full px-3 py-2 rounded-lg border border-blue-200 text-xs" />
+                </div>
+                <div>
+                  <label class="block text-[11px] font-bold text-gray-600 mb-1">Slider "After" (Ruangan Bersih)</label>
+                  <input type="text" id="edit-img-ba-after" placeholder="URL gambar after" class="w-full px-3 py-2 rounded-lg border border-blue-200 text-xs" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex justify-end">
+            <button onclick="saveHeroAndImages()" class="btn-press px-6 py-2.5 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-bold text-xs uppercase tracking-wider shadow-md">
+              Simpan Perubahan Teks & Foto
+            </button>
+          </div>
+        </div>
+
+        <!-- TAB 4: BOOKING TRACKER MANAGEMENT -->
+        <div id="admin-tab-bookings" class="admin-panel-view hidden space-y-6">
+          <div class="flex items-center justify-between pb-4 border-b border-gray-100">
+            <div>
+              <h4 class="text-base font-extrabold text-brand-navy">Manajemen & Lacak Pemesanan Realtime</h4>
+              <p class="text-xs text-gray-500">Perbarui status booking pelanggan yang masuk, ganti cleaner, dan sesuaikan estimasi kedatangan.</p>
+            </div>
+            <button onclick="refreshBookingsList()" class="px-3 py-1.5 rounded-lg border border-blue-200 text-brand-600 text-xs font-bold hover:bg-blue-50 flex items-center gap-1">
+              <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> Refresh
+            </button>
+          </div>
+
+          <div class="overflow-x-auto border border-blue-100 rounded-2xl">
+            <table class="w-full text-left border-collapse text-xs">
+              <thead class="bg-blue-50/70 border-b border-blue-100 text-brand-navy uppercase text-[10px]">
+                <tr>
+                  <th class="p-3">Booking ID</th>
+                  <th class="p-3">Pelanggan</th>
+                  <th class="p-3">Layanan & Jadwal</th>
+                  <th class="p-3">Status Saat Ini</th>
+                  <th class="p-3">Cleaner Ditugaskan</th>
+                  <th class="p-3 text-right">Aksi Status</th>
+                </tr>
+              </thead>
+              <tbody id="admin-bookings-table-body" class="divide-y divide-gray-100">
+                <!-- Dynamically populated from Firestore -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TAB 5: RESET DATA KE DEFAULT -->
+        <div id="admin-tab-reset" class="admin-panel-view hidden space-y-6">
+          <div class="p-6 bg-rose-50/60 rounded-2xl border border-rose-200 space-y-4 text-center max-w-xl mx-auto">
+            <div class="w-12 h-12 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center mx-auto">
+              <i data-lucide="alert-triangle" class="w-6 h-6"></i>
+            </div>
+            <div>
+              <h4 class="text-base font-black text-rose-800">Riset Semua Data Halaman Utama ke Default</h4>
+              <p class="text-xs text-rose-600 mt-1 leading-relaxed">
+                Fitur ini akan mengembalikan seluruh teks headline hero, katalog produk paket, add-on, dan tautan gambar ke data bawaan awal seperti sedia kala.
+              </p>
+            </div>
+            
+            <div class="pt-2">
+              <button onclick="promptResetDefaults()" class="btn-press px-6 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs uppercase tracking-wider shadow-md">
+                Ya, Riset ke Data Semula Sekarang
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Confirmation Modal (No browser alert) -->
+  <div id="admin-confirm-modal" class="fixed inset-0 z-50 bg-brand-navy/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white max-w-sm w-full rounded-2xl p-5 border border-blue-100 shadow-xl text-center space-y-3">
+      <h5 id="confirm-modal-title" class="text-sm font-extrabold text-brand-navy">Konfirmasi Tindakan</h5>
+      <p id="confirm-modal-msg" class="text-xs text-gray-600"></p>
+      <div class="flex justify-center gap-2 pt-2">
+        <button id="confirm-modal-cancel" class="px-4 py-2 rounded-lg border border-gray-200 text-gray-600 text-xs font-bold">Batal</button>
+        <button id="confirm-modal-ok" class="px-5 py-2 rounded-lg bg-brand-500 text-white text-xs font-bold">Lanjutkan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 26. 6-STEP BOOKING WIZARD MODAL -->
+  <div id="booking-modal" class="fixed inset-0 z-50 bg-brand-navy/80 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <div class="bg-white w-full max-w-xl rounded-3xl shadow-2xl border border-blue-100 overflow-hidden flex flex-col relative animate-in fade-in zoom-in-95 duration-200">
+      
+      <!-- Wizard Header -->
+      <div class="bg-brand-500 text-white px-6 py-4 flex items-center justify-between">
+        <div>
+          <span id="wizard-step-label" class="text-[10px] font-black uppercase tracking-widest text-blue-200 block">LANGKAH 01 / 06</span>
+          <h3 class="text-base font-extrabold text-white">BOOKING CLEANING SERVICE</h3>
+        </div>
+        
+        <!-- Steps Progress Indicator -->
+        <div id="wizard-step-dots" class="flex items-center gap-1.5">
+          <span class="w-4 h-1.5 rounded-full bg-white transition-all"></span>
+          <span class="w-2 h-1.5 rounded-full bg-blue-200 transition-all"></span>
+          <span class="w-2 h-1.5 rounded-full bg-blue-200 transition-all"></span>
+          <span class="w-2 h-1.5 rounded-full bg-blue-200 transition-all"></span>
+          <span class="w-2 h-1.5 rounded-full bg-blue-200 transition-all"></span>
+          <span class="w-2 h-1.5 rounded-full bg-blue-200 transition-all"></span>
+        </div>
+
+        <button onclick="closeBookingWizard()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-sm ml-3">
+          ✕
+        </button>
+      </div>
+
+      <!-- Wizard Content Body -->
+      <div class="p-6 overflow-y-auto max-h-[75vh]">
+        
+        <!-- STEP 1: WHAT DO YOU NEED? -->
+        <div id="step-1" class="wizard-step space-y-4">
+          <div>
+            <h4 class="text-sm font-extrabold text-brand-navy uppercase tracking-wider">01. WHAT DO YOU NEED?</h4>
+            <p class="text-xs text-gray-500 mt-0.5">Pilih tipe pembersihan yang paling sesuai dengan kebutuhan hunian Anda.</p>
+          </div>
+
+          <div class="space-y-2.5">
+            <label class="flex items-center justify-between p-4 rounded-2xl border-2 border-brand-500 bg-blue-50/40 cursor-pointer hover:bg-blue-50 transition-all">
+              <div class="flex items-center gap-3">
+                <input type="radio" name="wiz-service" value="Full Clean" checked class="w-4 h-4 accent-brand-500">
+                <div>
+                  <div class="text-xs font-black text-brand-navy">FULL CLEAN (Paling Populer)</div>
+                  <div class="text-[11px] text-gray-500">Pembersihan menyeluruh seluruh ruangan + desinfeksi</div>
+                </div>
+              </div>
+              <span class="text-xs font-black text-brand-500">Rp 179.000</span>
+            </label>
+
+            <label class="flex items-center justify-between p-4 rounded-2xl border border-blue-100 hover:border-brand-500 bg-white cursor-pointer hover:bg-blue-50/30 transition-all">
+              <div class="flex items-center gap-3">
+                <input type="radio" name="wiz-service" value="Quick Clean" class="w-4 h-4 accent-brand-500">
+                <div>
+                  <div class="text-xs font-black text-brand-navy">QUICK CLEAN</div>
+                  <div class="text-[11px] text-gray-500">Pembersihan standar ringan (90 menit)</div>
+                </div>
+              </div>
+              <span class="text-xs font-black text-brand-500">Rp 99.000</span>
+            </label>
+
+            <label class="flex items-center justify-between p-4 rounded-2xl border border-blue-100 hover:border-brand-500 bg-white cursor-pointer hover:bg-blue-50/30 transition-all">
+              <div class="flex items-center gap-3">
+                <input type="radio" name="wiz-service" value="Deep Clean" class="w-4 h-4 accent-brand-500">
+                <div>
+                  <div class="text-xs font-black text-brand-navy">DEEP CLEAN</div>
+                  <div class="text-[11px] text-gray-500">Intensive detailing pasca renovasi atau kerak membandel</div>
+                </div>
+              </div>
+              <span class="text-xs font-black text-brand-500">Rp 299.000</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- STEP 2: YOUR HOME -->
+        <div id="step-2" class="wizard-step hidden space-y-4">
+          <div>
+            <h4 class="text-sm font-extrabold text-brand-navy uppercase tracking-wider">02. YOUR HOME</h4>
+            <p class="text-xs text-gray-500 mt-0.5">Beri tahu kami spesifikasi hunian Anda untuk alokasi perlengkapan tepat.</p>
+          </div>
+
+          <div class="space-y-3">
+            <div>
+              <label class="block text-xs font-bold text-gray-700 mb-1">Tipe Properti</label>
+              <select id="wiz-prop-type" class="w-full px-4 py-2.5 rounded-xl border border-blue-200 text-xs font-semibold focus:outline-none focus:border-brand-500 bg-white">
+                <option value="Apartment">Apartment</option>
+                <option value="House">House (Rumah Tapak)</option>
+                <option value="Villa">Villa / Townhouse</option>
+                <option value="Office">Small Office / Ruko</option>
+              </select>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">Kamar Tidur</label>
+                <select id="wiz-bedrooms" class="w-full px-4 py-2.5 rounded-xl border border-blue-200 text-xs font-semibold focus:outline-none focus:border-brand-500 bg-white">
+                  <option value="Studio / 1">1 Kamar / Studio</option>
+                  <option value="2">2 Kamar</option>
+                  <option value="3">3 Kamar</option>
+                  <option value="4+">4+ Kamar</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">Kamar Mandi</label>
+                <select id="wiz-bathrooms" class="w-full px-4 py-2.5 rounded-xl border border-blue-200 text-xs font-semibold focus:outline-none focus:border-brand-500 bg-white">
+                  <option value="1">1 Kamar Mandi</option>
+                  <option value="2">2 Kamar Mandi</option>
+                  <option value="3">3 Kamar Mandi</option>
+                  <option value="4+">4+ Kamar Mandi</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 3: WHEN? -->
+        <div id="step-3" class="wizard-step hidden space-y-4">
+          <div>
+            <h4 class="text-sm font-extrabold text-brand-navy uppercase tracking-wider">03. WHEN?</h4>
+            <p class="text-xs text-gray-500 mt-0.5">Tentukan tanggal dan jam kedatangan cleaner ke lokasi Anda.</p>
+          </div>
+
+          <div class="space-y-4">
+            <div>
+              <label class="block text-xs font-bold text-gray-700 mb-1">Tanggal Layanan</label>
+              <input type="date" id="wiz-date" class="w-full px-4 py-2.5 rounded-xl border border-blue-200 text-xs font-semibold focus:outline-none focus:border-brand-500 bg-white">
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-gray-700 mb-2">Slot Jam Kedatangan Tersedia</label>
+              <div class="grid grid-cols-3 gap-2">
+                <button type="button" onclick="selectTimeSlot('08:00', this)" class="slot-btn p-2.5 rounded-xl border border-blue-200 text-xs font-bold hover:border-brand-500 text-brand-navy">08:00 WIB</button>
+                <button type="button" onclick="selectTimeSlot('10:00', this)" class="slot-btn p-2.5 rounded-xl border-2 border-brand-500 bg-blue-50 text-brand-600 text-xs font-bold">10:00 WIB</button>
+                <button type="button" onclick="selectTimeSlot('13:00', this)" class="slot-btn p-2.5 rounded-xl border border-blue-200 text-xs font-bold hover:border-brand-500 text-brand-navy">13:00 WIB</button>
+                <button type="button" onclick="selectTimeSlot('15:00', this)" class="slot-btn p-2.5 rounded-xl border border-blue-200 text-xs font-bold hover:border-brand-500 text-brand-navy">15:00 WIB</button>
+                <button type="button" onclick="selectTimeSlot('17:00', this)" class="slot-btn p-2.5 rounded-xl border border-blue-200 text-xs font-bold hover:border-brand-500 text-brand-navy">17:00 WIB</button>
+                <button type="button" onclick="selectTimeSlot('19:00', this)" class="slot-btn p-2.5 rounded-xl border border-blue-200 text-xs font-bold hover:border-brand-500 text-brand-navy">19:00 WIB</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 4: WHERE? -->
+        <div id="step-4" class="wizard-step hidden space-y-4">
+          <div>
+            <h4 class="text-sm font-extrabold text-brand-navy uppercase tracking-wider">04. WHERE?</h4>
+            <p class="text-xs text-gray-500 mt-0.5">Alamat lengkap pengiriman cleaner terdekat ke hunian Anda.</p>
+          </div>
+
+          <div class="space-y-3">
+            <div>
+              <label class="block text-xs font-bold text-gray-700 mb-1">Kota Layanan</label>
+              <select id="wiz-city" class="w-full px-4 py-2.5 rounded-xl border border-blue-200 text-xs font-semibold focus:outline-none focus:border-brand-500 bg-white">
+                <option value="Jakarta">Jakarta</option>
+                <option value="Bekasi">Bekasi</option>
+                <option value="Depok">Depok</option>
+                <option value="Tangerang">Tangerang</option>
+                <option value="Bogor">Bogor</option>
+                <option value="Bandung">Bandung</option>
+                <option value="Surabaya">Surabaya</option>
+                <option value="Semarang">Semarang</option>
+                <option value="Yogyakarta">Yogyakarta</option>
+                <option value="Malang">Malang</option>
+                <option value="Medan">Medan</option>
+                <option value="Palembang">Palembang</option>
+                <option value="Bandar Lampung">Bandar Lampung</option>
+                <option value="Makassar">Makassar</option>
+                <option value="Denpasar">Denpasar</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-gray-700 mb-1">Alamat Lengkap & Patokan Lokasi</label>
+              <textarea id="wiz-address" rows="3" placeholder="Contoh: Apartemen Bassura City Tower Cattleya Lt 12 No 05, Jl Basuki Rahmat, Jatinegara." class="w-full px-4 py-2.5 rounded-xl border border-blue-200 text-xs font-medium focus:outline-none focus:border-brand-500 bg-white"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 5: CONTACT -->
+        <div id="step-5" class="wizard-step hidden space-y-4">
+          <div>
+            <h4 class="text-sm font-extrabold text-brand-navy uppercase tracking-wider">05. CONTACT</h4>
+            <p class="text-xs text-gray-500 mt-0.5">Nomor WhatsApp untuk konfirmasi dispatch cleaner dan invoice.</p>
+          </div>
+
+          <div class="space-y-3">
+            <div>
+              <label class="block text-xs font-bold text-gray-700 mb-1">Nama Lengkap</label>
+              <input type="text" id="wiz-name" placeholder="Contoh: Budi Santoso" class="w-full px-4 py-2.5 rounded-xl border border-blue-200 text-xs font-medium focus:outline-none focus:border-brand-500 bg-white" required>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-gray-700 mb-1">Nomor WhatsApp Aktif</label>
+              <input type="tel" id="wiz-phone" placeholder="Contoh: 081234567890" class="w-full px-4 py-2.5 rounded-xl border border-blue-200 text-xs font-medium focus:outline-none focus:border-brand-500 bg-white" required>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 6: CONFIRM -->
+        <div id="step-6" class="wizard-step hidden space-y-4">
+          <div>
+            <h4 class="text-sm font-extrabold text-brand-navy uppercase tracking-wider">06. CONFIRM BOOKING</h4>
+            <p class="text-xs text-gray-500 mt-0.5">Periksa ringkasan pesanan Anda sebelum dikonfirmasi.</p>
+          </div>
+
+          <div class="bg-brand-50/60 p-4 rounded-2xl border border-blue-100 space-y-2 text-xs">
+            <div class="flex justify-between">
+              <span class="text-gray-500">Layanan:</span>
+              <span id="summary-service" class="font-extrabold text-brand-navy">Full Clean</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-500">Hunian:</span>
+              <span id="summary-prop" class="font-bold text-brand-navy">Apartment (1 Kamar)</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-500">Jadwal:</span>
+              <span id="summary-schedule" class="font-bold text-brand-navy">Besok, 10:00 WIB</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-500">Kota:</span>
+              <span id="summary-city" class="font-bold text-brand-navy">Jakarta</span>
+            </div>
+            <div class="pt-2 border-t border-blue-100 flex justify-between items-baseline">
+              <span class="text-xs font-black text-brand-navy uppercase">Total Estimasi:</span>
+              <span id="summary-price" class="text-xl font-black text-brand-500">Rp 179.000</span>
+            </div>
+          </div>
+
+          <div class="text-[11px] text-gray-500 flex items-center gap-2">
+            <i data-lucide="shield-check" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+            <span>Tanpa pembayaran dimuka. Bayar saat cleaner selesai bertugas.</span>
+          </div>
+        </div>
+
+        <!-- SUCCESS SCREEN -->
+        <div id="step-success" class="hidden text-center space-y-5 py-4">
+          <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
+            <i data-lucide="check" class="w-8 h-8"></i>
+          </div>
+
+          <div>
+            <span class="text-[11px] font-black uppercase tracking-widest text-emerald-600">BOOKING CONFIRMED ✓</span>
+            <h3 class="text-2xl font-black text-brand-navy mt-1">YOU'RE BOOKED!</h3>
+            <p class="text-xs text-gray-500 mt-1">Pesanan Anda telah tercatat dan cleaner standby untuk jadwal Anda.</p>
+          </div>
+
+          <div class="bg-blue-50/70 p-4 rounded-2xl border border-blue-100 max-w-sm mx-auto text-left text-xs space-y-1.5">
+            <div class="flex justify-between">
+              <span class="text-gray-400 font-medium">Booking ID:</span>
+              <span id="success-id" class="font-black text-brand-500">BR-82914</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-400 font-medium">Layanan:</span>
+              <span id="success-service" class="font-extrabold text-brand-navy">Full Cleaning</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-400 font-medium">Jadwal:</span>
+              <span id="success-schedule" class="font-extrabold text-brand-navy">Besok, 10:00 WIB</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-400 font-medium">Mitra Cleaner:</span>
+              <span class="font-extrabold text-emerald-600">Cleaner Sari (Standby)</span>
+            </div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-2.5 max-w-sm mx-auto pt-2">
+            <button onclick="goToTrackingFromSuccess()" class="btn-press flex-1 py-3 px-4 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-black text-xs uppercase tracking-wide shadow-md">
+              TRACK MY CLEANING
+            </button>
+            <button onclick="openWhatsAppChat()" class="btn-press flex-1 py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs uppercase tracking-wide shadow-md flex items-center justify-center gap-1.5">
+              <i data-lucide="message-circle" class="w-4 h-4"></i>
+              <span>CHAT VIA WHATSAPP</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Wizard Navigation Controls -->
+      <div id="wizard-footer" class="bg-gray-50 border-t border-gray-100 px-6 py-3.5 flex items-center justify-between">
+        <button id="wiz-prev-btn" onclick="wizardBack()" disabled class="px-4 py-2 rounded-xl text-xs font-bold text-gray-500 hover:text-brand-navy disabled:opacity-30 disabled:pointer-events-none">
+          ← KEMBALI
+        </button>
+
+        <button id="wiz-next-btn" onclick="wizardNext()" class="btn-press px-6 py-2.5 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-extrabold text-xs uppercase tracking-wide transition-all shadow-md">
+          LANJUT →
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 27. MOBILE BOTTOM NAVIGATION (Section 23 requirement) -->
+  <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-blue-100 py-2 px-3 flex items-center justify-around shadow-lg">
+    <a href="#home" class="flex flex-col items-center text-[10px] font-bold text-gray-500 hover:text-brand-500">
+      <i data-lucide="home" class="w-4 h-4"></i>
+      <span class="mt-0.5">HOME</span>
+    </a>
+    <a href="#services" class="flex flex-col items-center text-[10px] font-bold text-gray-500 hover:text-brand-500">
+      <i data-lucide="sparkles" class="w-4 h-4"></i>
+      <span class="mt-0.5">SERVICES</span>
+    </a>
+    <button onclick="openBookingWizard('Full Clean')" class="flex flex-col items-center justify-center -mt-4 bg-brand-500 text-white w-12 h-12 rounded-full shadow-command border-2 border-white btn-press">
+      <i data-lucide="calendar" class="w-5 h-5"></i>
+    </button>
+    <a href="#tracking" class="flex flex-col items-center text-[10px] font-bold text-gray-500 hover:text-brand-500">
+      <i data-lucide="map-pin" class="w-4 h-4"></i>
+      <span class="mt-0.5">TRACK</span>
+    </a>
+    <button onclick="openAdminLoginModal()" class="flex flex-col items-center text-[10px] font-bold text-gray-500 hover:text-brand-500">
+      <i data-lucide="settings" class="w-4 h-4"></i>
+      <span class="mt-0.5">ADMIN</span>
+    </button>
+  </nav>
+
+  <!-- Firebase Scripts (Modular) -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, collection, addDoc, doc, setDoc, getDoc, getDocs, onSnapshot, updateDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    // Provided Firebase credentials
+    const firebaseConfig = {
+      apiKey: "AIzaSyBZyvA6_cy2k42eU_Ktt13wFVTDYgZaXkI",
+      authDomain: "semua-web-f8628.firebaseapp.com",
+      projectId: "semua-web-f8628",
+      storageBucket: "semua-web-f8628.firebasestorage.app",
+      messagingSenderId: "220101602354",
+      appId: "1:220101602354:web:c1e942a2f1971a0bc9e02b"
+    };
+
+    let app, auth, db;
+    const appId = typeof __app_id !== 'undefined' ? __app_id : 'bersihin-id-app';
+
+    try {
+      app = initializeApp(firebaseConfig);
+      auth = getAuth(app);
+      db = getFirestore(app);
+
+      signInAnonymously(auth).then(() => {
+        initCloudSync();
+      }).catch(err => {
+        console.warn("Auth notice:", err.message);
+      });
+    } catch (e) {
+      console.warn("Firebase Init Notice:", e.message);
+    }
+
+    // Expose helpers to window
+    window.db = db;
+    window.auth = auth;
+    window.appId = appId;
+    window.setDoc = setDoc;
+    window.doc = doc;
+    window.collection = collection;
+    window.addDoc = addDoc;
+    window.updateDoc = updateDoc;
+    window.getDocs = getDocs;
+
+    // Realtime listener for Site Configuration
+    function initCloudSync() {
+      if (!db || !auth) return;
+      const configDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'site_config', 'main_config');
+      
+      onSnapshot(configDocRef, (snap) => {
+        if (snap.exists()) {
+          const remoteData = snap.data();
+          window.applySiteData(remoteData);
+        } else {
+          setDoc(configDocRef, window.DEFAULT_SITE_DATA).catch(console.warn);
+        }
+      }, (error) => {
+        console.warn("Realtime sync notice:", error);
+      });
+
+      listenToLiveBookings();
+    }
+
+    function listenToLiveBookings() {
+      if (!db) return;
+      const bookingsCol = collection(db, 'artifacts', appId, 'public', 'data', 'bookings');
+      onSnapshot(bookingsCol, (snap) => {
+        const list = [];
+        snap.forEach(d => {
+          list.push({ id: d.id, ...d.data() });
+        });
+        window.activeBookingsList = list;
+        window.renderAdminBookingsTable();
+      }, (err) => {
+        console.warn("Bookings listener notice:", err);
+      });
+    }
+
+    window.saveSiteConfigToCloud = async function(updatedData) {
+      if (!db || !auth) return false;
+      try {
+        const configDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'site_config', 'main_config');
+        await setDoc(configDocRef, updatedData);
+        return true;
+      } catch (e) {
+        console.warn("Error saving config to cloud:", e);
+        return false;
+      }
+    };
+
+    window.saveBookingToFirebase = async function(bookingData) {
+      if (!db || !auth) return false;
+      try {
+        const bookingsCol = collection(db, 'artifacts', appId, 'public', 'data', 'bookings');
+        await addDoc(bookingsCol, {
+          ...bookingData,
+          createdAt: new Date().toISOString()
+        });
+        return true;
+      } catch (err) {
+        console.warn("Notice saving booking:", err);
+        return false;
+      }
+    };
+
+    window.updateBookingStatusInCloud = async function(docId, newStatus, cleanerName, arrival) {
+      if (!db) return false;
+      try {
+        const bRef = doc(db, 'artifacts', appId, 'public', 'data', 'bookings', docId);
+        const patch = { status: newStatus };
+        if (cleanerName) patch.cleanerId = cleanerName;
+        if (arrival) patch.time = arrival;
+        await updateDoc(bRef, patch);
+        return true;
+      } catch (e) {
+        console.warn("Error updating booking status:", e);
+        return false;
+      }
+    };
+  </script>
+
+  <!-- Unified Global Application Engine & State -->
+  <script>
+    // --- GOOGLE DRIVE & MULTI-TIER IMAGE RESOLUTION ENGINE ---
+    function extractGoogleDriveId(urlOrId) {
+      if (!urlOrId) return null;
+      if (/^[a-zA-Z0-9_-]{25,}$/.test(urlOrId.trim())) {
+        return urlOrId.trim();
+      }
+      const match = urlOrId.match(/\/d\/([a-zA-Z0-9_-]+)/) || urlOrId.match(/id=([a-zA-Z0-9_-]+)/);
+      return match ? match[1] : null;
+    }
+
+    function resolveImageUrl(inputUrl, defaultFallback) {
+      if (!inputUrl) return defaultFallback;
+      const trimmed = inputUrl.trim();
+      const driveId = extractGoogleDriveId(trimmed);
+      if (driveId) {
+        return `https://lh3.googleusercontent.com/d/${driveId}`;
+      }
+      return trimmed;
+    }
+
+    function setupImageElement(imgEl, primaryUrl, fallbackUrl) {
+      if (!imgEl) return;
+      const driveId = extractGoogleDriveId(primaryUrl);
+      const finalPrimary = driveId ? `https://lh3.googleusercontent.com/d/${driveId}` : primaryUrl;
+      const backupUrl = driveId ? `https://drive.google.com/thumbnail?id=${driveId}&sz=w1200` : fallbackUrl;
+
+      imgEl.onerror = function() {
+        if (this.src !== backupUrl) {
+          this.src = backupUrl;
+        } else {
+          this.src = fallbackUrl;
+          this.onerror = null;
+        }
+      };
+      imgEl.src = finalPrimary;
+    }
+
+    // --- DEFAULT SITE DATA ---
+    const DEFAULT_SITE_DATA = {
+      hero: {
+        badge: "HOME CLEANING SERVICE",
+        title: "RUMAH KOTOR?<br><span class=\"text-blue-100 underline decoration-white/40 underline-offset-8\">BIAR KAMI YANG URUS.</span>",
+        subtitle: "Pesan cleaner profesional untuk membantu membersihkan rumah sesuai kebutuhan dan jadwal Anda. Cepat, berstandar hotel, dan tanpa ribet.",
+        ctaText: "BOOK CLEANING"
+      },
+      images: {
+        cleanHouse: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+        cleanerQuality: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1000&q=80",
+        baBefore: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
+        baAfter: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80"
+      },
+      packages: [
+        {
+          id: "pkg-1",
+          name: "QUICK CLEAN",
+          badge: "Regular Upkeep",
+          price: 99000,
+          duration: "/ sesi (1.5 jam)",
+          description: "Untuk kebutuhan ringan dan cepat. Ideal for regular upkeep mingguan agar rumah selalu segar.",
+          features: ["Dusting & penataan ringan", "Sapu & pel lantai", "Pembuangan sampah"],
+          isPopular: false
+        },
+        {
+          id: "pkg-2",
+          name: "FULL CLEAN",
+          badge: "Comprehensive",
+          price: 179000,
+          duration: "/ sesi (3 jam)",
+          description: "Pembersihan rumah secara menyeluruh mencakup semua ruangan utama dengan sanitasi lengkap.",
+          features: ["Semua fitur Quick Clean", "Pembersihan kamar mandi mendalam", "Detail dapur, kompor & sink", "Desinfeksi titik sentuh utama"],
+          isPopular: true
+        },
+        {
+          id: "pkg-3",
+          name: "DEEP CLEAN",
+          badge: "Intensive Detailing",
+          price: 299000,
+          duration: "/ sesi (4+ jam)",
+          description: "Pembersihan detail untuk area yang membutuhkan perhatian ekstra, pasca renovasi, atau pindahan.",
+          features: ["Pembersihan kerak ubin & nat", "Degrease kitchen hood & oven", "Kaca jendela dalam & luar", "Treatment vacuum debu tungau"],
+          isPopular: false
+        }
+      ],
+      addons: [
+        { id: "addon-1", name: "Sofa Cleaning", price: 65000, desc: "Hydro-vacuum & cuci noda", icon: "sofa" },
+        { id: "addon-2", name: "Mattress Cleaning", price: 75000, desc: "Ekstraksi tungau kasur UV", icon: "bed-double" },
+        { id: "addon-3", name: "Window Cleaning", price: 45000, desc: "Pembersihan kaca luar & kusen", icon: "app-window" },
+        { id: "addon-4", name: "Kitchen Detail", price: 50000, desc: "Detail kerak minyak berat", icon: "cooking-pot" },
+        { id: "addon-5", name: "Bathroom Deep Clean", price: 55000, desc: "Pembersihan kerak nat ubin", icon: "bath" },
+        { id: "addon-6", name: "Fridge Cleaning", price: 40000, desc: "Sanitasi interior & rak kulkas", icon: "refrigerator" }
+      ]
+    };
+
+    window.DEFAULT_SITE_DATA = DEFAULT_SITE_DATA;
+    let siteData = JSON.parse(JSON.stringify(DEFAULT_SITE_DATA));
+    let isAdminLoggedIn = false;
+    let activeBookingsList = [];
+
+    // --- APPLICATION RUNTIME STATE ---
+    let currentStep = 1;
+    let selectedService = "Full Clean";
+    let selectedHeroArea = "Entire Home";
+    let selectedTime = "10:00";
+    let activeAddons = [];
+    let lastGeneratedBookingId = "BR-82914";
+
+    const serviceCities = [
+      "Jakarta", "Bekasi", "Depok", "Tangerang", "Bogor", 
+      "Bandung", "Semarang", "Yogyakarta", "Surabaya", "Malang", 
+      "Medan", "Palembang", "Bandar Lampung", "Makassar", "Denpasar"
+    ];
+
+    let estimator = {
+      property: 'Apartment',
+      bedrooms: 1,
+      bathrooms: 1,
+      type: 'Full'
+    };
+
+    // --- APPLY SITE DATA & RENDER COMPONENTS ---
+    window.applySiteData = function(data) {
+      if (!data) return;
+      siteData = data;
+
+      if (siteData.hero) {
+        const badgeEl = document.getElementById('hero-badge-text');
+        const titleEl = document.getElementById('hero-title');
+        const subEl = document.getElementById('hero-subtitle');
+        const ctaEl = document.getElementById('hero-cta-text');
+        if (badgeEl) badgeEl.innerText = siteData.hero.badge || "HOME CLEANING SERVICE";
+        if (titleEl) titleEl.innerHTML = siteData.hero.title || "";
+        if (subEl) subEl.innerText = siteData.hero.subtitle || "";
+        if (ctaEl) ctaEl.innerText = siteData.hero.ctaText || "BOOK CLEANING";
+      }
+
+      if (siteData.images) {
+        setupImageElement(document.getElementById('clean-house-img'), siteData.images.cleanHouse, DEFAULT_SITE_DATA.images.cleanHouse);
+        setupImageElement(document.getElementById('cleaner-quality-img'), siteData.images.cleanerQuality, DEFAULT_SITE_DATA.images.cleanerQuality);
+        setupImageElement(document.getElementById('ba-before-img'), siteData.images.baBefore, DEFAULT_SITE_DATA.images.baBefore);
+        setupImageElement(document.getElementById('ba-after-img'), siteData.images.baAfter, DEFAULT_SITE_DATA.images.baAfter);
+      }
+
+      renderPackagesCatalog();
+      renderAddonsCatalog();
+      syncAdminInputs();
+      lucide.createIcons();
+    };
+
+    function renderPackagesCatalog() {
+      const container = document.getElementById('packages-catalog-grid');
+      if (!container) return;
+      container.innerHTML = '';
+
+      siteData.packages.forEach(pkg => {
+        const isPop = pkg.isPopular;
+        const card = document.createElement('div');
+        
+        if (isPop) {
+          card.className = "bg-white rounded-3xl p-8 border-2 border-brand-500 shadow-command relative flex flex-col justify-between transform lg:-translate-y-2";
+          card.innerHTML = `
+            <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-brand-500 text-white text-[11px] font-black uppercase tracking-widest py-1 px-4 rounded-full shadow-md">
+              MOST CHOSEN
+            </div>
+            <div>
+              <div class="inline-block px-3 py-1 rounded-full bg-brand-500/10 text-brand-500 text-xs font-bold uppercase tracking-wider mb-4">
+                ${pkg.badge || 'Comprehensive'}
+              </div>
+              <h3 class="text-2xl font-black text-brand-navy">${pkg.name}</h3>
+              <p class="text-gray-600 text-sm mt-2">${pkg.description}</p>
+              
+              <div class="my-6 py-4 border-y border-blue-50">
+                <span class="text-xs text-gray-400 block font-semibold uppercase">Mulai Dari</span>
+                <div class="flex items-baseline gap-1 mt-1">
+                  <span class="text-3xl font-black text-brand-500">Rp ${Number(pkg.price).toLocaleString('id-ID')}</span>
+                  <span class="text-xs text-gray-500">${pkg.duration || '/ sesi'}</span>
+                </div>
+              </div>
+
+              <ul class="space-y-3 text-xs text-gray-600 mb-6">
+                ${pkg.features.map(f => `<li class="flex items-center gap-2 font-semibold text-brand-navy"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> ${f}</li>`).join('')}
+              </ul>
+            </div>
+
+            <button onclick="openBookingWizard('${pkg.name}')" class="btn-press w-full py-3.5 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-black text-xs tracking-wider uppercase shadow-md transition-all">
+              BOOK ${pkg.name}
+            </button>
+          `;
+        } else {
+          card.className = "bg-white rounded-3xl p-7 border border-blue-100 shadow-sm hover:shadow-card transition-all flex flex-col justify-between";
+          card.innerHTML = `
+            <div>
+              <div class="inline-block px-3 py-1 rounded-full bg-blue-50 text-brand-500 text-xs font-bold uppercase tracking-wider mb-4">
+                ${pkg.badge || 'Service'}
+              </div>
+              <h3 class="text-2xl font-black text-brand-navy">${pkg.name}</h3>
+              <p class="text-gray-600 text-sm mt-2">${pkg.description}</p>
+              
+              <div class="my-6 py-4 border-y border-blue-50">
+                <span class="text-xs text-gray-400 block font-semibold uppercase">Mulai Dari</span>
+                <div class="flex items-baseline gap-1 mt-1">
+                  <span class="text-3xl font-black text-brand-navy">Rp ${Number(pkg.price).toLocaleString('id-ID')}</span>
+                  <span class="text-xs text-gray-500">${pkg.duration || '/ sesi'}</span>
+                </div>
+              </div>
+
+              <ul class="space-y-3 text-xs text-gray-600 mb-6">
+                ${pkg.features.map(f => `<li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> ${f}</li>`).join('')}
+              </ul>
+            </div>
+
+            <button onclick="openBookingWizard('${pkg.name}')" class="btn-press w-full py-3 rounded-xl bg-blue-50 text-brand-600 hover:bg-brand-500 hover:text-white font-bold text-xs tracking-wider uppercase transition-all">
+              BOOK ${pkg.name}
+            </button>
+          `;
+        }
+
+        container.appendChild(card);
+      });
+    }
+
+    function renderAddonsCatalog() {
+      const carousel = document.getElementById('addons-carousel');
+      if (!carousel) return;
+      carousel.innerHTML = '';
+
+      siteData.addons.forEach(addon => {
+        const isAdded = activeAddons.some(a => a.name === addon.name);
+        const item = document.createElement('div');
+        item.className = "min-w-[220px] bg-brand-50/50 p-5 rounded-2xl border border-blue-100 flex flex-col justify-between shrink-0 snap-start";
+        item.innerHTML = `
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-blue-100 text-brand-500 flex items-center justify-center mb-3">
+              <i data-lucide="${addon.icon || 'sparkles'}" class="w-5 h-5"></i>
+            </div>
+            <h4 class="text-sm font-extrabold text-brand-navy uppercase">${addon.name}</h4>
+            <p class="text-xs text-gray-500">${addon.desc}</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-blue-100 flex items-center justify-between">
+            <span class="text-xs font-black text-brand-500">+ Rp ${Number(addon.price).toLocaleString('id-ID')}</span>
+            <button onclick="toggleAddon('${addon.name}', ${addon.price}, this)" class="addon-toggle-btn px-3 py-1 rounded-lg ${isAdded ? 'bg-brand-500 text-white' : 'bg-white text-brand-500'} border border-brand-500 font-bold text-xs hover:bg-brand-500 hover:text-white transition-all">
+              ${isAdded ? 'ADDED ✓' : '+ ADD'}
+            </button>
+          </div>
+        `;
+        carousel.appendChild(item);
+      });
+    }
+
+    function renderCitiesGrid(cities) {
+      const grid = document.getElementById('cities-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+      cities.forEach(city => {
+        const item = document.createElement('div');
+        item.className = 'p-3.5 rounded-2xl bg-white border border-blue-100 shadow-sm flex items-center justify-between hover:border-brand-500 transition-all';
+        item.innerHTML = `
+          <span class="text-xs font-extrabold text-brand-navy">${city}</span>
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+        `;
+        grid.appendChild(item);
+      });
+    }
+
+    function handleCitySearch(val) {
+      const feedback = document.getElementById('city-search-feedback');
+      if (!feedback) return;
+      if (!val.trim()) {
+        feedback.innerText = '';
+        return;
+      }
+      const matched = serviceCities.find(c => c.toLowerCase().includes(val.toLowerCase()));
+      if (matched) {
+        feedback.innerHTML = `<span class="text-emerald-600 font-bold">✓ Layanan Bersihin.id Tersedia di ${matched}</span>`;
+      } else {
+        feedback.innerHTML = `<span class="text-amber-600 font-bold">Area belum terjangkau. Klik "Notify Me" saat hadir di kota Anda.</span>`;
+      }
+    }
+
+    function handleCityCheckBtn() {
+      const val = document.getElementById('city-search-input').value;
+      handleCitySearch(val);
+    }
+
+    function setDefaultBookingDate() {
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      const dateStr = tomorrow.toISOString().split('T')[0];
+      const dateInput = document.getElementById('wiz-date');
+      if (dateInput) {
+        dateInput.value = dateStr;
+        dateInput.min = new Date().toISOString().split('T')[0];
+      }
+    }
+
+    function selectHeroArea(areaName, btnElement) {
+      selectedHeroArea = areaName;
+      document.querySelectorAll('#hero-area-options button').forEach(b => {
+        b.classList.remove('border-brand-500', 'bg-blue-50/50');
+        b.classList.add('border-transparent', 'bg-gray-50');
+      });
+      btnElement.classList.remove('border-transparent', 'bg-gray-50');
+      btnElement.classList.add('border-brand-500', 'bg-blue-50/50');
+    }
+
+    function submitHeroShortcut() {
+      openBookingWizard(selectedHeroArea === 'Entire Home' ? 'Full Clean' : 'Quick Clean');
+    }
+
+    function setEstimatorProperty(prop, btn) {
+      estimator.property = prop;
+      document.querySelectorAll('.est-prop-btn').forEach(b => {
+        b.classList.remove('border-brand-500', 'text-brand-navy');
+        b.classList.add('border-transparent', 'text-gray-600');
+      });
+      btn.classList.add('border-brand-500', 'text-brand-navy');
+      btn.classList.remove('border-transparent', 'text-gray-600');
+      calculateEstimator();
+    }
+
+    function adjustEstimatorBedroom(delta) {
+      estimator.bedrooms = Math.max(1, Math.min(8, estimator.bedrooms + delta));
+      document.getElementById('est-bedrooms').innerText = estimator.bedrooms;
+      calculateEstimator();
+    }
+
+    function adjustEstimatorBathroom(delta) {
+      estimator.bathrooms = Math.max(1, Math.min(6, estimator.bathrooms + delta));
+      document.getElementById('est-bathrooms').innerText = estimator.bathrooms;
+      calculateEstimator();
+    }
+
+    function setEstimatorType(type, btn) {
+      estimator.type = type;
+      document.querySelectorAll('.est-type-btn').forEach(b => {
+        b.classList.remove('border-2', 'border-brand-500', 'text-brand-navy');
+        b.classList.add('border-gray-200', 'text-gray-600');
+      });
+      btn.classList.add('border-2', 'border-brand-500', 'text-brand-navy');
+      btn.classList.remove('border-gray-200', 'text-gray-600');
+      calculateEstimator();
+    }
+
+    function calculateEstimator() {
+      let base = 99000;
+      if (estimator.type === 'Full') base = 179000;
+      if (estimator.type === 'Deep') base = 299000;
+
+      const extraBed = (estimator.bedrooms - 1) * 35000;
+      const extraBath = (estimator.bathrooms - 1) * 40000;
+      let propFactor = 1.0;
+      if (estimator.property === 'House') propFactor = 1.15;
+      if (estimator.property === 'Villa') propFactor = 1.35;
+
+      const total = Math.round((base + extraBed + extraBath) * propFactor / 1000) * 1000;
+      const totalFormatted = "Rp " + total.toLocaleString('id-ID');
+      document.getElementById('estimator-total').innerText = totalFormatted;
+      document.getElementById('estimator-summary').innerText = 
+        `Paket ${estimator.type} Clean untuk ${estimator.property} (${estimator.bedrooms} Kamar Tidur, ${estimator.bathrooms} Kamar Mandi). Estimasi durasi ${estimator.type === 'Quick' ? '1.5 - 2' : estimator.type === 'Full' ? '2.5 - 3.5' : '4+'} jam.`;
+    }
+
+    function bookEstimatorResult() {
+      openBookingWizard(estimator.type + ' Clean');
+    }
+
+    function scrollToEstimator() {
+      document.getElementById('estimator-section').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function initBeforeAfterSlider() {
+      const container = document.getElementById('ba-container');
+      const clip = document.getElementById('ba-clip');
+      const divider = document.getElementById('ba-divider');
+      const beforeImg = document.getElementById('ba-before-img');
+      if (!container || !clip || !divider || !beforeImg) return;
+      let isDragging = false;
+
+      function updateSliderPosition(x) {
+        const rect = container.getBoundingClientRect();
+        let offsetX = x - rect.left;
+        if (offsetX < 0) offsetX = 0;
+        if (offsetX > rect.width) offsetX = rect.width;
+        const percentage = (offsetX / rect.width) * 100;
+
+        clip.style.width = percentage + '%';
+        divider.style.left = percentage + '%';
+        beforeImg.style.width = rect.width + 'px';
+      }
+
+      window.addEventListener('resize', () => {
+        if (container && beforeImg) {
+          beforeImg.style.width = container.getBoundingClientRect().width + 'px';
+        }
+      });
+
+      divider.addEventListener('mousedown', () => isDragging = true);
+      container.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        updateSliderPosition(e.clientX);
+      });
+      window.addEventListener('mouseup', () => isDragging = false);
+      window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        updateSliderPosition(e.clientX);
+      });
+
+      container.addEventListener('touchstart', (e) => {
+        isDragging = true;
+        updateSliderPosition(e.touches[0].clientX);
+      }, { passive: true });
+      window.addEventListener('touchend', () => isDragging = false);
+      window.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        updateSliderPosition(e.touches[0].clientX);
+      }, { passive: true });
+
+      if (container && beforeImg) {
+        beforeImg.style.width = container.getBoundingClientRect().width + 'px';
+      }
+    }
+
+    function scrollAddons(direction) {
+      const carousel = document.getElementById('addons-carousel');
+      const scrollAmt = 260;
+      if (direction === 'left') {
+        carousel.scrollBy({ left: -scrollAmt, behavior: 'smooth' });
+      } else {
+        carousel.scrollBy({ left: scrollAmt, behavior: 'smooth' });
+      }
+    }
+
+    function toggleAddon(name, price, btn) {
+      const index = activeAddons.findIndex(a => a.name === name);
+      if (index > -1) {
+        activeAddons.splice(index, 1);
+        btn.innerText = "+ ADD";
+        btn.classList.remove('bg-brand-500', 'text-white');
+        btn.classList.add('bg-white', 'text-brand-500');
+      } else {
+        activeAddons.push({ name, price });
+        btn.innerText = "ADDED ✓";
+        btn.classList.remove('bg-white', 'text-brand-500');
+        btn.classList.add('bg-brand-500', 'text-white');
+      }
+    }
+
+    function toggleFaq(btn) {
+      const content = btn.nextElementSibling;
+      const icon = btn.querySelector('i');
+      const isHidden = content.classList.contains('hidden');
+      
+      document.querySelectorAll('.faq-content').forEach(c => c.classList.add('hidden'));
+      document.querySelectorAll('.faq-item i').forEach(i => i.style.transform = 'rotate(0deg)');
+
+      if (isHidden) {
+        content.classList.remove('hidden');
+        icon.style.transform = 'rotate(180deg)';
+      }
+    }
+
+    function trackBooking() {
+      const id = document.getElementById('tracker-input').value.trim() || 'BR-10293';
+      document.getElementById('tracker-display-id').innerText = id;
+      
+      const badge = document.getElementById('tracker-status-badge');
+      badge.innerHTML = `<span class="animate-spin inline-block mr-1">⌛</span> MEMPERBARUI...`;
+      
+      setTimeout(() => {
+        badge.innerHTML = `BOOKING CONFIRMED ✓`;
+        document.getElementById('tracker-cleaner').innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-500"></span> SARI (Rating 4.9)`;
+        document.getElementById('tracker-arrival').innerText = '10:00 AM Hari Ini';
+      }, 400);
+    }
+
+    function openBookingWizard(presetService = 'Full Clean') {
+      currentStep = 1;
+      selectedService = presetService;
+      
+      const radios = document.querySelectorAll('input[name="wiz-service"]');
+      radios.forEach(r => {
+        if (r.value.toLowerCase().includes(presetService.toLowerCase().split(' ')[0])) {
+          r.checked = true;
+        }
+      });
+
+      const modal = document.getElementById('booking-modal');
+      if (modal) modal.classList.remove('hidden');
+      renderWizardStep();
+    }
+
+    function closeBookingWizard() {
+      const modal = document.getElementById('booking-modal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function selectTimeSlot(time, btn) {
+      selectedTime = time;
+      document.querySelectorAll('.slot-btn').forEach(b => {
+        b.classList.remove('border-2', 'border-brand-500', 'bg-blue-50', 'text-brand-600');
+        b.classList.add('border-blue-200');
+      });
+      btn.classList.add('border-2', 'border-brand-500', 'bg-blue-50', 'text-brand-600');
+      btn.classList.remove('border-blue-200');
+    }
+
+    function wizardNext() {
+      if (currentStep === 1) {
+        const checked = document.querySelector('input[name="wiz-service"]:checked');
+        if (checked) selectedService = checked.value;
+      }
+
+      if (currentStep === 5) {
+        const name = document.getElementById('wiz-name').value.trim();
+        const phone = document.getElementById('wiz-phone').value.trim();
+        if (!name || !phone) {
+          document.getElementById('wiz-name').focus();
+          return;
+        }
+        updateSummaryView();
+      }
+
+      if (currentStep === 6) {
+        submitFinalBooking();
+        return;
+      }
+
+      currentStep++;
+      renderWizardStep();
+    }
+
+    function wizardBack() {
+      if (currentStep > 1) {
+        currentStep--;
+        renderWizardStep();
+      }
+    }
+
+    function renderWizardStep() {
+      document.querySelectorAll('.wizard-step').forEach(step => step.classList.add('hidden'));
+      const activeStepEl = document.getElementById(`step-${currentStep}`);
+      if (activeStepEl) activeStepEl.classList.remove('hidden');
+
+      const label = document.getElementById('wizard-step-label');
+      if (label) label.innerText = `LANGKAH 0${currentStep} / 06`;
+      
+      const dots = document.querySelectorAll('#wizard-step-dots span');
+      dots.forEach((dot, idx) => {
+        if (idx + 1 === currentStep) {
+          dot.className = "w-4 h-1.5 rounded-full bg-white transition-all";
+        } else if (idx + 1 < currentStep) {
+          dot.className = "w-2 h-1.5 rounded-full bg-emerald-300 transition-all";
+        } else {
+          dot.className = "w-2 h-1.5 rounded-full bg-blue-200 transition-all";
+        }
+      });
+
+      const prevBtn = document.getElementById('wiz-prev-btn');
+      const nextBtn = document.getElementById('wiz-next-btn');
+
+      if (prevBtn) prevBtn.disabled = currentStep === 1;
+      if (nextBtn) {
+        if (currentStep === 6) {
+          nextBtn.innerHTML = `CONFIRM BOOKING ✓`;
+          nextBtn.className = "btn-press px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs uppercase tracking-wide transition-all shadow-md";
+        } else {
+          nextBtn.innerHTML = `LANJUT →`;
+          nextBtn.className = "btn-press px-6 py-2.5 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-extrabold text-xs uppercase tracking-wide transition-all shadow-md";
+        }
+      }
+    }
+
+    function updateSummaryView() {
+      const propType = document.getElementById('wiz-prop-type').value;
+      const bedrooms = document.getElementById('wiz-bedrooms').value;
+      const date = document.getElementById('wiz-date').value || 'Besok';
+      const city = document.getElementById('wiz-city').value;
+
+      document.getElementById('summary-service').innerText = selectedService;
+      document.getElementById('summary-prop').innerText = `${propType} (${bedrooms} Kamar)`;
+      document.getElementById('summary-schedule').innerText = `${date}, ${selectedTime} WIB`;
+      document.getElementById('summary-city').innerText = city;
+
+      let base = selectedService === 'Quick Clean' ? 99000 : selectedService === 'Deep Clean' ? 299000 : 179000;
+      let addonSum = activeAddons.reduce((acc, curr) => acc + curr.price, 0);
+      let total = base + addonSum;
+
+      document.getElementById('summary-price').innerText = "Rp " + total.toLocaleString('id-ID');
+    }
+
+    async function submitFinalBooking() {
+      const randomNum = Math.floor(10000 + Math.random() * 90000);
+      lastGeneratedBookingId = `BR-${randomNum}`;
+
+      const bookingRecord = {
+        bookingId: lastGeneratedBookingId,
+        customerName: document.getElementById('wiz-name').value.trim() || 'Pelanggan',
+        whatsapp: document.getElementById('wiz-phone').value.trim() || '-',
+        serviceType: selectedService,
+        propertyType: document.getElementById('wiz-prop-type').value,
+        bedrooms: document.getElementById('wiz-bedrooms').value,
+        bathrooms: document.getElementById('wiz-bathrooms').value,
+        addons: activeAddons.map(a => a.name),
+        date: document.getElementById('wiz-date').value || 'Tomorrow',
+        time: selectedTime,
+        city: document.getElementById('wiz-city').value,
+        address: document.getElementById('wiz-address').value.trim(),
+        cleanerId: "Cleaner Sari (Auto-Assigned)",
+        estimatedPrice: document.getElementById('summary-price').innerText,
+        status: "Confirmed"
+      };
+
+      if (window.saveBookingToFirebase) {
+        window.saveBookingToFirebase(bookingRecord);
+      }
+
+      document.getElementById('wizard-footer').classList.add('hidden');
+      document.querySelectorAll('.wizard-step').forEach(step => step.classList.add('hidden'));
+      
+      document.getElementById('success-id').innerText = lastGeneratedBookingId;
+      document.getElementById('success-service').innerText = selectedService;
+      document.getElementById('success-schedule').innerText = `${bookingRecord.date}, ${bookingRecord.time} WIB`;
+      
+      document.getElementById('step-success').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function goToTrackingFromSuccess() {
+      closeBookingWizard();
+      document.getElementById('tracker-input').value = lastGeneratedBookingId;
+      document.getElementById('tracking').scrollIntoView({ behavior: 'smooth' });
+      trackBooking();
+    }
+
+    function openWhatsAppChat() {
+      const name = document.getElementById('wiz-name').value.trim() || 'Pelanggan';
+      const msg = `Halo Bersihin.id, saya ingin konfirmasi pesanan saya dengan Booking ID: ${lastGeneratedBookingId} atas nama ${name} untuk layanan ${selectedService}.`;
+      const waUrl = `https://wa.me/6281234567890?text=${encodeURIComponent(msg)}`;
+      window.open(waUrl, '_blank');
+    }
+
+    // --- ADMIN PANEL FUNCTIONS ---
+    function openAdminLoginModal() {
+      if (isAdminLoggedIn) {
+        openAdminPanel();
+      } else {
+        document.getElementById('admin-login-modal').classList.remove('hidden');
+        document.getElementById('login-error-msg').classList.add('hidden');
+        document.getElementById('admin-username').focus();
+      }
+    }
+
+    function closeAdminLoginModal() {
+      document.getElementById('admin-login-modal').classList.add('hidden');
+    }
+
+    function handleAdminLogin(e) {
+      e.preventDefault();
+      const u = document.getElementById('admin-username').value.trim();
+      const p = document.getElementById('admin-password').value.trim();
+      const errorMsg = document.getElementById('login-error-msg');
+
+      if (u === "kelolaweb2026" && p === "kelolaweb2026") {
+        isAdminLoggedIn = true;
+        closeAdminLoginModal();
+        openAdminPanel();
+      } else {
+        errorMsg.innerText = "Username atau password kelola web salah!";
+        errorMsg.classList.remove('hidden');
+      }
+    }
+
+    function openAdminPanel() {
+      document.getElementById('admin-panel-modal').classList.remove('hidden');
+      switchAdminTab('catalog');
+      syncAdminInputs();
+      renderAdminPackagesTable();
+      renderAdminAddonsTable();
+      renderAdminBookingsTable();
+      lucide.createIcons();
+    }
+
+    function closeAdminPanel() {
+      document.getElementById('admin-panel-modal').classList.add('hidden');
+    }
+
+    function switchAdminTab(tabName) {
+      document.querySelectorAll('.admin-panel-view').forEach(v => v.classList.add('hidden'));
+      document.querySelectorAll('.admin-tab-btn').forEach(b => {
+        b.classList.remove('border-brand-500', 'text-brand-600');
+        b.classList.add('border-transparent', 'text-gray-500');
+      });
+
+      const activeView = document.getElementById(`admin-tab-${tabName}`);
+      const activeBtn = document.getElementById(`tab-btn-${tabName}`);
+      if (activeView) activeView.classList.remove('hidden');
+      if (activeBtn) {
+        activeBtn.classList.add('border-brand-500', 'text-brand-600');
+        activeBtn.classList.remove('border-transparent', 'text-gray-500');
+      }
+      lucide.createIcons();
+    }
+
+    function syncAdminInputs() {
+      if (siteData.hero) {
+        document.getElementById('edit-hero-badge').value = siteData.hero.badge || "";
+        document.getElementById('edit-hero-cta').value = siteData.hero.ctaText || "";
+        document.getElementById('edit-hero-title').value = siteData.hero.title || "";
+        document.getElementById('edit-hero-subtitle').value = siteData.hero.subtitle || "";
+      }
+      if (siteData.images) {
+        document.getElementById('edit-img-clean-house').value = siteData.images.cleanHouse || "";
+        document.getElementById('edit-img-cleaner').value = siteData.images.cleanerQuality || "";
+        document.getElementById('edit-img-ba-before').value = siteData.images.baBefore || "";
+        document.getElementById('edit-img-ba-after').value = siteData.images.baAfter || "";
+      }
+    }
+
+    function renderAdminPackagesTable() {
+      const tbody = document.getElementById('admin-packages-table-body');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      siteData.packages.forEach((pkg, index) => {
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-blue-50/40 transition-colors";
+        tr.innerHTML = `
+          <td class="p-3 font-extrabold text-brand-navy">${pkg.name}</td>
+          <td class="p-3 font-bold text-brand-500">Rp ${Number(pkg.price).toLocaleString('id-ID')}</td>
+          <td class="p-3"><span class="px-2 py-0.5 rounded bg-blue-50 text-brand-600 text-[10px] font-bold">${pkg.badge}</span></td>
+          <td class="p-3">${pkg.isPopular ? '<span class="text-amber-600 font-black">★ Most Popular</span>' : 'Standar'}</td>
+          <td class="p-3 text-right space-x-2">
+            <button onclick="editPackage(${index})" class="px-2.5 py-1 rounded bg-blue-100 hover:bg-blue-200 text-brand-700 font-bold text-[11px]">Edit</button>
+            <button onclick="deletePackage(${index})" class="px-2.5 py-1 rounded bg-rose-50 hover:bg-rose-100 text-rose-600 font-bold text-[11px]">Hapus</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function toggleAddProductForm(show = true) {
+      const form = document.getElementById('package-form-container');
+      if (show) {
+        form.classList.remove('hidden');
+        document.getElementById('package-form-title').innerText = "Tambah Paket Layanan Baru";
+        document.getElementById('pkg-form-id').value = "";
+        document.getElementById('pkg-name').value = "";
+        document.getElementById('pkg-badge').value = "Reguler";
+        document.getElementById('pkg-price').value = "";
+        document.getElementById('pkg-duration').value = "/ sesi (2 jam)";
+        document.getElementById('pkg-desc').value = "";
+        document.getElementById('pkg-features').value = "";
+        document.getElementById('pkg-is-popular').checked = false;
+      } else {
+        form.classList.add('hidden');
+      }
+    }
+
+    function editPackage(index) {
+      const pkg = siteData.packages[index];
+      if (!pkg) return;
+      toggleAddProductForm(true);
+      document.getElementById('package-form-title').innerText = `Edit Paket: ${pkg.name}`;
+      document.getElementById('pkg-form-id').value = index;
+      document.getElementById('pkg-name').value = pkg.name;
+      document.getElementById('pkg-badge').value = pkg.badge;
+      document.getElementById('pkg-price').value = pkg.price;
+      document.getElementById('pkg-duration').value = pkg.duration;
+      document.getElementById('pkg-desc').value = pkg.description;
+      document.getElementById('pkg-features').value = pkg.features ? pkg.features.join(', ') : '';
+      document.getElementById('pkg-is-popular').checked = !!pkg.isPopular;
+      document.getElementById('package-form-container').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function savePackageFromForm() {
+      const name = document.getElementById('pkg-name').value.trim();
+      const price = parseInt(document.getElementById('pkg-price').value, 10);
+      if (!name || isNaN(price)) {
+        showCustomConfirm("Form Tidak Lengkap", "Harap isi nama paket dan nominal harga dengan benar.", null);
+        return;
+      }
+
+      const formId = document.getElementById('pkg-form-id').value;
+      const featuresRaw = document.getElementById('pkg-features').value;
+      const featuresArr = featuresRaw.split(',').map(f => f.trim()).filter(f => f.length > 0);
+
+      const pkgData = {
+        id: formId !== "" ? siteData.packages[formId].id : `pkg-${Date.now()}`,
+        name: name,
+        badge: document.getElementById('pkg-badge').value.trim() || 'Reguler',
+        price: price,
+        duration: document.getElementById('pkg-duration').value.trim() || '/ sesi',
+        description: document.getElementById('pkg-desc').value.trim() || 'Layanan pembersihan profesional.',
+        features: featuresArr.length > 0 ? featuresArr : ['Pembersihan standar profesional', 'Alat & chemical lengkap'],
+        isPopular: document.getElementById('pkg-is-popular').checked
+      };
+
+      if (pkgData.isPopular) {
+        siteData.packages.forEach(p => p.isPopular = false);
+      }
+
+      if (formId !== "") {
+        siteData.packages[formId] = pkgData;
+      } else {
+        siteData.packages.push(pkgData);
+      }
+
+      toggleAddProductForm(false);
+      persistAndApplySiteData();
+    }
+
+    function deletePackage(index) {
+      showCustomConfirm("Hapus Paket", `Yakin ingin menghapus paket "${siteData.packages[index].name}" dari katalog?`, () => {
+        siteData.packages.splice(index, 1);
+        persistAndApplySiteData();
+      });
+    }
+
+    function renderAdminAddonsTable() {
+      const tbody = document.getElementById('admin-addons-table-body');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      siteData.addons.forEach((addon, index) => {
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-blue-50/40 transition-colors";
+        tr.innerHTML = `
+          <td class="p-3 font-extrabold text-brand-navy">${addon.name}</td>
+          <td class="p-3 font-bold text-brand-500">Rp ${Number(addon.price).toLocaleString('id-ID')}</td>
+          <td class="p-3 text-gray-500">${addon.desc}</td>
+          <td class="p-3 text-right space-x-2">
+            <button onclick="editAddon(${index})" class="px-2.5 py-1 rounded bg-blue-100 hover:bg-blue-200 text-brand-700 font-bold text-[11px]">Edit</button>
+            <button onclick="deleteAddon(${index})" class="px-2.5 py-1 rounded bg-rose-50 hover:bg-rose-100 text-rose-600 font-bold text-[11px]">Hapus</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function toggleAddonForm(show = true) {
+      const form = document.getElementById('addon-form-container');
+      if (show) {
+        form.classList.remove('hidden');
+        document.getElementById('addon-form-title').innerText = "Tambah Add-on Baru";
+        document.getElementById('addon-form-id').value = "";
+        document.getElementById('addon-name').value = "";
+        document.getElementById('addon-price').value = "";
+        document.getElementById('addon-desc').value = "";
+      } else {
+        form.classList.add('hidden');
+      }
+    }
+
+    function editAddon(index) {
+      const addon = siteData.addons[index];
+      if (!addon) return;
+      toggleAddonForm(true);
+      document.getElementById('addon-form-title').innerText = `Edit Add-on: ${addon.name}`;
+      document.getElementById('addon-form-id').value = index;
+      document.getElementById('addon-name').value = addon.name;
+      document.getElementById('addon-price').value = addon.price;
+      document.getElementById('addon-desc').value = addon.desc;
+    }
+
+    function saveAddonFromForm() {
+      const name = document.getElementById('addon-name').value.trim();
+      const price = parseInt(document.getElementById('addon-price').value, 10);
+      if (!name || isNaN(price)) {
+        showCustomConfirm("Form Tidak Lengkap", "Harap isi nama add-on dan nominal harga.", null);
+        return;
+      }
+
+      const formId = document.getElementById('addon-form-id').value;
+      const addonData = {
+        id: formId !== "" ? siteData.addons[formId].id : `addon-${Date.now()}`,
+        name: name,
+        price: price,
+        desc: document.getElementById('addon-desc').value.trim() || 'Layanan treatment khusus.',
+        icon: formId !== "" ? (siteData.addons[formId].icon || 'sparkles') : 'sparkles'
+      };
+
+      if (formId !== "") {
+        siteData.addons[formId] = addonData;
+      } else {
+        siteData.addons.push(addonData);
+      }
+
+      toggleAddonForm(false);
+      persistAndApplySiteData();
+    }
+
+    function deleteAddon(index) {
+      showCustomConfirm("Hapus Add-on", `Yakin ingin menghapus add-on "${siteData.addons[index].name}"?`, () => {
+        siteData.addons.splice(index, 1);
+        persistAndApplySiteData();
+      });
+    }
+
+    function saveHeroAndImages() {
+      siteData.hero = {
+        badge: document.getElementById('edit-hero-badge').value.trim(),
+        ctaText: document.getElementById('edit-hero-cta').value.trim(),
+        title: document.getElementById('edit-hero-title').value.trim(),
+        subtitle: document.getElementById('edit-hero-subtitle').value.trim()
+      };
+
+      siteData.images = {
+        cleanHouse: resolveImageUrl(document.getElementById('edit-img-clean-house').value, DEFAULT_SITE_DATA.images.cleanHouse),
+        cleanerQuality: resolveImageUrl(document.getElementById('edit-img-cleaner').value, DEFAULT_SITE_DATA.images.cleanerQuality),
+        baBefore: resolveImageUrl(document.getElementById('edit-img-ba-before').value, DEFAULT_SITE_DATA.images.baBefore),
+        baAfter: resolveImageUrl(document.getElementById('edit-img-ba-after').value, DEFAULT_SITE_DATA.images.baAfter)
+      };
+
+      persistAndApplySiteData();
+      showCustomConfirm("Berhasil Disimpan", "Teks & Foto telah diperbarui secara realtime di seluruh halaman!", null);
+    }
+
+    window.renderAdminBookingsTable = function() {
+      const tbody = document.getElementById('admin-bookings-table-body');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      const list = (window.activeBookingsList && window.activeBookingsList.length > 0) 
+        ? window.activeBookingsList 
+        : [{
+            id: 'mock-1',
+            bookingId: 'BR-10293',
+            customerName: 'Budi Santoso',
+            whatsapp: '081298765432',
+            serviceType: 'Full Clean',
+            time: '10:00 AM Hari Ini',
+            cleanerId: 'SARI',
+            status: 'Confirmed'
+          }];
+
+      list.forEach(b => {
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-blue-50/40 transition-colors";
+        tr.innerHTML = `
+          <td class="p-3 font-black text-brand-500">${b.bookingId || b.id}</td>
+          <td class="p-3">
+            <div class="font-extrabold text-brand-navy">${b.customerName || '-'}</div>
+            <div class="text-[10px] text-gray-400">${b.whatsapp || '-'}</div>
+          </td>
+          <td class="p-3">
+            <div class="font-bold">${b.serviceType || 'Standard'}</div>
+            <div class="text-[10px] text-gray-500">${b.time || '-'}</div>
+          </td>
+          <td class="p-3">
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold ${b.status === 'Completed' ? 'bg-emerald-100 text-emerald-800' : 'bg-blue-100 text-brand-700'}">
+              ${b.status || 'Confirmed'}
+            </span>
+          </td>
+          <td class="p-3 font-medium text-gray-700">${b.cleanerId || 'Auto-Assigned'}</td>
+          <td class="p-3 text-right">
+            <select onchange="updateBookingStatus('${b.id}', this.value, '${b.bookingId}')" class="px-2 py-1 rounded border border-blue-200 text-[11px] font-bold bg-white">
+              <option value="Confirmed" ${b.status === 'Confirmed' ? 'selected' : ''}>Confirmed</option>
+              <option value="Cleaner Assigned" ${b.status === 'Cleaner Assigned' ? 'selected' : ''}>Cleaner Assigned</option>
+              <option value="On The Way" ${b.status === 'On The Way' ? 'selected' : ''}>On The Way</option>
+              <option value="Cleaning" ${b.status === 'Cleaning' ? 'selected' : ''}>Cleaning</option>
+              <option value="Completed" ${b.status === 'Completed' ? 'selected' : ''}>Completed</option>
+              <option value="Cancelled" ${b.status === 'Cancelled' ? 'selected' : ''}>Cancelled</option>
+            </select>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    };
+
+    function updateBookingStatus(docId, newStatus, bookingCode) {
+      if (window.updateBookingStatusInCloud) {
+        window.updateBookingStatusInCloud(docId, newStatus);
+      }
+      const currentTrackId = document.getElementById('tracker-display-id').innerText;
+      if (currentTrackId === bookingCode || currentTrackId === docId) {
+        document.getElementById('tracker-status-badge').innerText = `${newStatus.toUpperCase()} ✓`;
+      }
+    }
+
+    function refreshBookingsList() {
+      renderAdminBookingsTable();
+    }
+
+    function promptResetDefaults() {
+      showCustomConfirm("Riset ke Default?", "Apakah Anda yakin ingin menghapus perubahan dan mengembalikan semua data ke konfigurasi awal bawaan web?", () => {
+        siteData = JSON.parse(JSON.stringify(DEFAULT_SITE_DATA));
+        persistAndApplySiteData();
+        showCustomConfirm("Riset Selesai", "Semua teks, foto, dan paket berhasil dikembalikan ke tampilan awal bawaan.", null);
+      });
+    }
+
+    function persistAndApplySiteData() {
+      applySiteData(siteData);
+      renderAdminPackagesTable();
+      renderAdminAddonsTable();
+      if (window.saveSiteConfigToCloud) {
+        window.saveSiteConfigToCloud(siteData);
+      }
+    }
+
+    function showCustomConfirm(title, message, onConfirmCallback) {
+      const modal = document.getElementById('admin-confirm-modal');
+      document.getElementById('confirm-modal-title').innerText = title;
+      document.getElementById('confirm-modal-msg').innerText = message;
+      const cancelBtn = document.getElementById('confirm-modal-cancel');
+      const okBtn = document.getElementById('confirm-modal-ok');
+
+      if (!onConfirmCallback) {
+        cancelBtn.classList.add('hidden');
+        okBtn.innerText = "Tutup";
+        okBtn.onclick = () => modal.classList.add('hidden');
+      } else {
+        cancelBtn.classList.remove('hidden');
+        okBtn.innerText = "Lanjutkan";
+        cancelBtn.onclick = () => modal.classList.add('hidden');
+        okBtn.onclick = () => {
+          modal.classList.add('hidden');
+          onConfirmCallback();
+        };
+      }
+      modal.classList.remove('hidden');
+    }
+
+    // --- MAIN INITIALIZATION ON DOM READY ---
+    document.addEventListener('DOMContentLoaded', () => {
+      applySiteData(siteData);
+      lucide.createIcons();
+      renderCitiesGrid(serviceCities);
+      initBeforeAfterSlider();
+      setDefaultBookingDate();
+
+      window.addEventListener('scroll', () => {
+        const header = document.getElementById('main-header');
+        if (window.scrollY > 40) {
+          header.classList.add('py-2.5', 'shadow-lg');
+          header.classList.remove('py-4');
+        } else {
+          header.classList.add('py-4');
+          header.classList.remove('py-2.5', 'shadow-lg');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,3084 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SEJUKIN — Home AC Service & Maintenance | AC Adem, Rumah Nyaman</title>
+  
+  <!-- Inter Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  
+  <!-- Image Preloads for optimal performance -->
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1200&q=80">
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],
+            display: ['Space Grotesk', 'Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#F0F7FF',
+              100: '#E0F0FE',
+              200: '#BAE0FD',
+              300: '#7CC4FA',
+              400: '#38A3F6',
+              500: '#0E83E4',
+              600: '#0267C1',
+              700: '#02529E',
+              800: '#064682',
+              900: '#0B3B6D',
+              950: '#072547',
+            },
+            navy: {
+              900: '#0A1424',
+              850: '#0F1E36',
+              800: '#142747',
+            },
+            surface: {
+              50: '#F8FAFC',
+              100: '#F1F5F9',
+              200: '#E2E8F0',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Premium smooth rendering */
+    * {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    /* Before/After slider handle customization */
+    .slider-handle {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background-color: #FFFFFF;
+      box-shadow: 0 0 10px rgba(0,0,0,0.25);
+      cursor: ew-resize;
+    }
+
+    /* Custom subtle scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #FAFAFA;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #D4D4D8;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #A1A1AA;
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+
+<body class="bg-white text-slate-900 font-sans antialiased selection:bg-brand-100 selection:text-brand-900 pb-20 md:pb-0">
+
+  <!-- TOP MICRO-INFORMATION BAR -->
+  <div class="bg-slate-950 text-slate-300 text-[11px] font-medium tracking-wider uppercase border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex flex-col sm:flex-row items-center justify-between gap-2">
+      <div class="flex items-center space-x-3">
+        <span class="inline-flex items-center text-emerald-400 font-semibold gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          TEKNISI SIAP
+        </span>
+        <span class="text-slate-600">|</span>
+        <span>SENIN – MINGGU</span>
+        <span class="text-slate-600">|</span>
+        <span>08.00 – 22.00 WIB</span>
+      </div>
+      <div class="flex items-center space-x-4 text-xs">
+        <span class="text-slate-400">Garansi Pengerjaan 30 Hari</span>
+        <span class="text-slate-600 hidden sm:inline">|</span>
+        <a href="tel:081289001200" class="text-slate-300 hover:text-white transition flex items-center gap-1">
+          <svg class="w-3 h-3 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+          Emergency Call: 0812-8900-1200
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLEAN SERVICE HEADER -->
+  <header id="main-header" class="sticky top-0 z-40 bg-white/95 backdrop-blur-sm border-b border-slate-200/80 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20 transition-all duration-300" id="navbar-container">
+        
+        <!-- BRAND WORDMARK -->
+        <a href="#" class="flex flex-col group focus:outline-none">
+          <div class="flex items-center gap-1.5">
+            <span class="text-2xl sm:text-[26px] font-extrabold tracking-tight text-slate-950 font-display transition-colors">
+              SEJUKIN
+            </span>
+            <span class="w-2 h-2 rounded-full bg-brand-600 group-hover:scale-125 transition-transform"></span>
+          </div>
+          <span class="text-[9.5px] font-bold tracking-[0.24em] text-slate-500 uppercase -mt-1 group-hover:text-brand-700 transition-colors">
+            HOME AC SERVICE
+          </span>
+        </a>
+
+        <!-- DESKTOP NAVIGATION -->
+        <nav class="hidden lg:flex items-center space-x-8 text-[13px] font-semibold tracking-wide text-slate-700">
+          <a href="#hero" class="hover:text-brand-600 transition-colors py-1">HOME</a>
+          <a href="#layanan" class="hover:text-brand-600 transition-colors py-1">LAYANAN</a>
+          <a href="#kebutuhan" class="hover:text-brand-600 transition-colors py-1">SOLUSI</a>
+          <a href="#harga" class="hover:text-brand-600 transition-colors py-1">HARGA</a>
+          <a href="#teknisi" class="hover:text-brand-600 transition-colors py-1">TEKNISI</a>
+          <a href="#area" class="hover:text-brand-600 transition-colors py-1">AREA</a>
+          <a href="#faq" class="hover:text-brand-600 transition-colors py-1">FAQ</a>
+        </nav>
+
+        <!-- HEADER CTA BUTTON -->
+        <div class="hidden sm:flex items-center space-x-3">
+          <button onclick="openBookingModal()" class="inline-flex items-center justify-center px-5 py-2.5 rounded-lg text-xs font-bold tracking-wider uppercase bg-brand-600 hover:bg-brand-700 text-white shadow-sm hover:shadow transition-all active:scale-95">
+            <span id="nav-cta-text">Booking Service</span>
+            <svg class="w-3.5 h-3.5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </button>
+        </div>
+
+        <!-- MOBILE MENU TRIGGER -->
+        <div class="lg:hidden flex items-center">
+          <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="p-2 rounded-md text-slate-600 hover:text-slate-900 focus:outline-none" aria-label="Toggle Menu">
+            <svg id="hamburger-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- MOBILE DROPDOWN MENU -->
+    <div id="mobile-dropdown" class="lg:hidden hidden border-t border-slate-100 bg-white px-4 pt-3 pb-6 space-y-3 shadow-lg">
+      <a href="#hero" onclick="closeMobileMenu()" class="block py-2 text-sm font-semibold text-slate-800 hover:text-brand-600">HOME</a>
+      <a href="#layanan" onclick="closeMobileMenu()" class="block py-2 text-sm font-semibold text-slate-800 hover:text-brand-600">LAYANAN</a>
+      <a href="#kebutuhan" onclick="closeMobileMenu()" class="block py-2 text-sm font-semibold text-slate-800 hover:text-brand-600">SOLUSI PROPERTI</a>
+      <a href="#harga" onclick="closeMobileMenu()" class="block py-2 text-sm font-semibold text-slate-800 hover:text-brand-600">HARGA TRANSPARAN</a>
+      <a href="#teknisi" onclick="closeMobileMenu()" class="block py-2 text-sm font-semibold text-slate-800 hover:text-brand-600">TEKNISI KAMI</a>
+      <a href="#area" onclick="closeMobileMenu()" class="block py-2 text-sm font-semibold text-slate-800 hover:text-brand-600">AREA LAYANAN</a>
+      <a href="#faq" onclick="closeMobileMenu()" class="block py-2 text-sm font-semibold text-slate-800 hover:text-brand-600">FAQ</a>
+      <button onclick="closeMobileMenu(); openBookingModal();" class="w-full mt-2 py-3 rounded-lg text-center text-xs font-bold tracking-wider uppercase bg-brand-600 text-white shadow">
+        Booking Service Sekarang
+      </button>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section id="hero" class="relative bg-white pt-10 sm:pt-16 pb-16 lg:pb-24 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        
+        <!-- LEFT COLUMN: Headline, subtext, actions -->
+        <div class="lg:col-span-7 space-y-8">
+          
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-50 border border-slate-200 text-xs font-semibold text-slate-700">
+            <span class="w-2 h-2 rounded-full bg-brand-600"></span>
+            Layanan Servis & Maintenance AC Terstandarisasi di Indonesia
+          </div>
+
+          <div class="space-y-4">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-950 font-display tracking-tight leading-[1.08]" id="hero-title">
+              AC BERMASALAH?<br>
+              <span class="text-brand-600">KAMI DATANG.</span>
+            </h1>
+            <p class="text-base sm:text-lg text-slate-600 font-normal leading-relaxed max-w-xl" id="hero-subtitle">
+              Layanan service, cuci, instalasi, dan maintenance AC langsung ke rumah, kantor, toko, dan properti Anda dengan teknisi bersertifikat, alat presisi, dan garansi resmi.
+            </p>
+          </div>
+
+          <!-- CTAs -->
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2">
+            <button onclick="openBookingModal()" class="px-7 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm tracking-wide transition shadow-sm hover:shadow-md flex items-center justify-center gap-2 group">
+              <span id="hero-cta-label">Booking Service</span>
+              <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </button>
+            <a href="#layanan" class="px-7 py-3.5 rounded-xl bg-white hover:bg-slate-50 text-slate-800 border border-slate-300 font-semibold text-sm tracking-wide transition flex items-center justify-center">
+              Lihat Layanan
+            </a>
+          </div>
+
+          <!-- TRUST INFORMATION PILLS -->
+          <div class="pt-4 border-t border-slate-100">
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-semibold text-slate-700">
+              <div class="flex items-center space-x-2">
+                <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span>Teknisi Berpengalaman</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span>Datang ke Lokasi</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span>Harga Transparan</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span>Garansi Service 30 Hari</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN: Realistic Visual & Floating status badge -->
+        <div class="lg:col-span-5 relative">
+          <div class="relative rounded-2xl overflow-hidden border border-slate-200 bg-slate-100 shadow-sm aspect-[4/3] sm:aspect-[4/3.5] lg:aspect-[4/4.5]">
+            <!-- Clean realistic technician image with fallback handler -->
+            <img 
+              id="hero-img-display"
+              src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1200&q=80" 
+              alt="Teknisi SEJUKIN melakukan inspeksi unit AC indoor" 
+              class="w-full h-full object-cover object-center"
+              loading="eager"
+            />
+            
+            <!-- Real-time operational overlay indicator -->
+            <div class="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md rounded-xl p-3.5 border border-slate-200 shadow-sm flex items-center justify-between">
+              <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-lg bg-brand-50 border border-brand-100 flex items-center justify-center text-brand-700">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-slate-900">SOP Kerja Higienis & Rapih</div>
+                  <div class="text-[11px] text-slate-500">Menggunakan plastik pelindung & karpet kerja</div>
+                </div>
+              </div>
+              <div class="hidden sm:block text-right">
+                <span class="inline-block px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">TERVERIFIKASI</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Micro badge accent -->
+          <div class="absolute -top-3 -right-3 hidden sm:flex items-center gap-2 bg-slate-950 text-white text-xs font-medium px-3.5 py-1.5 rounded-lg shadow-sm">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            Protokol Standar Dingin Optimal
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- QUICK SERVICE SELECTOR BAR -->
+  <section class="border-y border-slate-200 bg-surface-50 py-7">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex items-center justify-between mb-4">
+        <span class="text-xs font-extrabold uppercase tracking-widest text-slate-500 flex items-center gap-2">
+          <svg class="w-3.5 h-3.5 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          MASALAH AC ANDA?
+        </span>
+        <span class="text-xs text-slate-500 hidden sm:inline">Pilih gejala atau kebutuhan Anda untuk solusi cepat</span>
+      </div>
+
+      <!-- Horizontal Service Grid / Scroll on mobile -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2.5">
+        
+        <!-- Option 1 -->
+        <button onclick="quickSelectProblem('AC Tidak Dingin')" class="flex flex-col items-center text-center p-3 rounded-xl bg-white border border-slate-200 hover:border-brand-500 hover:bg-brand-50/50 transition-all text-slate-800 hover:text-brand-700 group">
+          <svg class="w-5 h-5 text-slate-500 group-hover:text-brand-600 mb-2 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+          <span class="text-xs font-semibold leading-snug">AC Tidak Dingin</span>
+        </button>
+
+        <!-- Option 2 -->
+        <button onclick="quickSelectProblem('AC Bocor')" class="flex flex-col items-center text-center p-3 rounded-xl bg-white border border-slate-200 hover:border-brand-500 hover:bg-brand-50/50 transition-all text-slate-800 hover:text-brand-700 group">
+          <svg class="w-5 h-5 text-slate-500 group-hover:text-brand-600 mb-2 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+          <span class="text-xs font-semibold leading-snug">AC Bocor</span>
+        </button>
+
+        <!-- Option 3 -->
+        <button onclick="quickSelectProblem('AC Berisik')" class="flex flex-col items-center text-center p-3 rounded-xl bg-white border border-slate-200 hover:border-brand-500 hover:bg-brand-50/50 transition-all text-slate-800 hover:text-brand-700 group">
+          <svg class="w-5 h-5 text-slate-500 group-hover:text-brand-600 mb-2 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/></svg>
+          <span class="text-xs font-semibold leading-snug">AC Berisik</span>
+        </button>
+
+        <!-- Option 4 -->
+        <button onclick="quickSelectProblem('AC Bau')" class="flex flex-col items-center text-center p-3 rounded-xl bg-white border border-slate-200 hover:border-brand-500 hover:bg-brand-50/50 transition-all text-slate-800 hover:text-brand-700 group">
+          <svg class="w-5 h-5 text-slate-500 group-hover:text-brand-600 mb-2 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21a9 9 0 110-18 9 9 0 010 18z"/></svg>
+          <span class="text-xs font-semibold leading-snug">AC Bau</span>
+        </button>
+
+        <!-- Option 5 -->
+        <button onclick="quickSelectProblem('AC Mati Total')" class="flex flex-col items-center text-center p-3 rounded-xl bg-white border border-slate-200 hover:border-brand-500 hover:bg-brand-50/50 transition-all text-slate-800 hover:text-brand-700 group">
+          <svg class="w-5 h-5 text-slate-500 group-hover:text-brand-600 mb-2 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M18.364 5.636a9 9 0 010 12.728m0 0l-2.829-2.829m2.829 2.829L21 21M15.536 8.464a5 5 0 010 7.072m0 0l-2.829-2.829m-4.243 4.243a9 9 0 01-2.828-6.364m2.828 6.364L3 21m0-18l18 18"/></svg>
+          <span class="text-xs font-semibold leading-snug">AC Mati</span>
+        </button>
+
+        <!-- Option 6 -->
+        <button onclick="quickSelectProblem('Cuci AC Rutin')" class="flex flex-col items-center text-center p-3 rounded-xl bg-white border border-slate-200 hover:border-brand-500 hover:bg-brand-50/50 transition-all text-slate-800 hover:text-brand-700 group">
+          <svg class="w-5 h-5 text-slate-500 group-hover:text-brand-600 mb-2 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+          <span class="text-xs font-semibold leading-snug">Cuci AC</span>
+        </button>
+
+        <!-- Option 7 -->
+        <button onclick="quickSelectProblem('Cek & Isi Refrigerant')" class="flex flex-col items-center text-center p-3 rounded-xl bg-white border border-slate-200 hover:border-brand-500 hover:bg-brand-50/50 transition-all text-slate-800 hover:text-brand-700 group">
+          <svg class="w-5 h-5 text-slate-500 group-hover:text-brand-600 mb-2 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          <span class="text-xs font-semibold leading-snug">Isi Freon</span>
+        </button>
+
+        <!-- Option 8 -->
+        <button onclick="quickSelectProblem('Instalasi Unit AC Baru')" class="flex flex-col items-center text-center p-3 rounded-xl bg-white border border-slate-200 hover:border-brand-500 hover:bg-brand-50/50 transition-all text-slate-800 hover:text-brand-700 group">
+          <svg class="w-5 h-5 text-slate-500 group-hover:text-brand-600 mb-2 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          <span class="text-xs font-semibold leading-snug">Instalasi AC</span>
+        </button>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION — LAYANAN KAMI -->
+  <section id="layanan" class="py-20 lg:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header with Catalog Admin Button -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-4">
+        <div class="max-w-3xl">
+          <span class="text-xs font-bold uppercase tracking-widest text-brand-600 block mb-2" id="catalog-badge">KATALOG & LAYANAN PROFESIONAL</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 font-display tracking-tight leading-tight" id="catalog-title">
+            Layanan AC Lengkap, Datang ke Lokasi
+          </h2>
+          <p class="mt-3 text-base sm:text-lg text-slate-600" id="catalog-subtitle">
+            Dari perawatan rutin sampai perbaikan AC bermasalah, kami menangani kebutuhan AC rumah dan bisnis Anda secara menyeluruh dengan standar kerja presisi.
+          </p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-100 text-slate-700 text-xs font-semibold">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            Garansi Pengerjaan 30 Hari
+          </span>
+        </div>
+      </div>
+
+      <!-- Dynamic Catalog Container -->
+      <div id="catalog-dynamic-container">
+        <!-- Rendered automatically from state / Firebase -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION — PILIH SESUAI KEBUTUHAN -->
+  <section id="kebutuhan" class="py-20 bg-surface-50 border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <span class="text-xs font-bold uppercase tracking-widest text-brand-600 block mb-2">SOLUSI TEPAT SASARAN</span>
+        <h2 class="text-3xl font-extrabold text-slate-950 font-display tracking-tight">Pilih Sesuai Kebutuhan Anda</h2>
+        <p class="mt-2 text-sm sm:text-base text-slate-600">Setiap tipe properti memiliki tantangan ventilasi dan sirkulasi berbeda. Kami sediakan paket yang disesuaikan.</p>
+      </div>
+
+      <!-- Horizontal Property Selector Tabs -->
+      <div class="flex items-center justify-center mb-10">
+        <div class="inline-flex p-1 rounded-xl bg-white border border-slate-200 max-w-full overflow-x-auto no-scrollbar shadow-sm">
+          <button onclick="selectProperty('rumah')" id="tab-rumah" class="property-tab px-5 py-2.5 rounded-lg text-xs font-bold transition-all bg-brand-600 text-white">
+            Rumah
+          </button>
+          <button onclick="selectProperty('apartemen')" id="tab-apartemen" class="property-tab px-5 py-2.5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900">
+            Apartemen
+          </button>
+          <button onclick="selectProperty('kantor')" id="tab-kantor" class="property-tab px-5 py-2.5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900">
+            Kantor
+          </button>
+          <button onclick="selectProperty('toko')" id="tab-toko" class="property-tab px-5 py-2.5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900">
+            Toko
+          </button>
+          <button onclick="selectProperty('ruko')" id="tab-ruko" class="property-tab px-5 py-2.5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900">
+            Ruko
+          </button>
+        </div>
+      </div>
+
+      <!-- Dynamic Property Details Card -->
+      <div id="property-content-box" class="max-w-4xl mx-auto bg-white rounded-2xl border border-slate-200 p-8 sm:p-10 shadow-sm transition-all">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+          
+          <div class="md:col-span-7 space-y-4">
+            <div class="inline-block px-3 py-1 rounded bg-brand-50 text-brand-700 text-xs font-bold uppercase tracking-wider" id="prop-badge">
+              SOLUSI HUNIAN KELUARGA
+            </div>
+            <h3 class="text-2xl sm:text-3xl font-bold text-slate-950 font-display" id="prop-title">
+              Perawatan AC Rumah
+            </h3>
+            <p class="text-sm text-slate-600 leading-relaxed" id="prop-desc">
+              Menjaga udara kamar tidur, ruang keluarga, dan ruang anak tetap sejuk, bersih, dan bebas bakteri. Pengerjaan rapi tanpa cipratan air ke dinding wallpaper atau perabot lantai Anda.
+            </p>
+
+            <ul class="space-y-2.5 text-xs sm:text-sm font-semibold text-slate-800 pt-2" id="prop-features">
+              <li class="flex items-center gap-2"><span class="text-brand-600">✓</span> Cuci AC indoor & outdoor berkala</li>
+              <li class="flex items-center gap-2"><span class="text-brand-600">✓</span> Service kebocoran talang & flashing pipa</li>
+              <li class="flex items-center gap-2"><span class="text-brand-600">✓</span> Cek tekanan refrigerant dan ampere kompresor</li>
+              <li class="flex items-center gap-2"><span class="text-brand-600">✓</span> Pemasangan unit baru & penataan pipa estetis</li>
+              <li class="flex items-center gap-2"><span class="text-brand-600">✓</span> Maintenance berkala 3 bulan sekali otomatis</li>
+            </ul>
+
+            <div class="pt-4">
+              <button onclick="openBookingWithProperty()" class="px-6 py-3 rounded-xl bg-slate-950 hover:bg-slate-800 text-white font-bold text-xs tracking-wider uppercase transition shadow">
+                Atur Jadwal Teknisi
+              </button>
+            </div>
+          </div>
+
+          <div class="md:col-span-5">
+            <div class="rounded-xl overflow-hidden border border-slate-200 bg-slate-100 aspect-square">
+              <img 
+                id="prop-image" 
+                src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" 
+                alt="Perawatan AC Rumah tinggal modern" 
+                class="w-full h-full object-cover"
+                onerror="this.onerror=null; this.src='https://placehold.co/600x600/f8fafc/0f172a?text=AC+Rumah+Modern';"
+              >
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION — CARA KERJA -->
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="max-w-2xl mb-16">
+        <span class="text-xs font-bold uppercase tracking-widest text-brand-600 block mb-2">ALUR SEDERHANA</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 font-display tracking-tight">Semudah 4 Langkah</h2>
+        <p class="mt-2 text-slate-600 text-sm sm:text-base">Layanan panggilan terstruktur tanpa antre, tanpa birokrasi, langsung dikerjakan oleh teknisi ahli.</p>
+      </div>
+
+      <!-- 4 Horizontal Steps -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+        
+        <!-- Step 1 -->
+        <div class="relative group">
+          <div class="text-5xl font-black text-slate-200 font-display group-hover:text-brand-600 transition-colors duration-300">01</div>
+          <div class="mt-4">
+            <h3 class="text-lg font-bold text-slate-950 font-display">Booking</h3>
+            <p class="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">
+              Pilih jenis layanan, masukkan jumlah unit, dan tentukan tanggal serta jam kedatangan yang paling nyaman untuk Anda.
+            </p>
+          </div>
+          <div class="hidden lg:block absolute top-7 -right-4 w-8 h-[1px] bg-slate-200"></div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="relative group">
+          <div class="text-5xl font-black text-slate-200 font-display group-hover:text-brand-600 transition-colors duration-300">02</div>
+          <div class="mt-4">
+            <h3 class="text-lg font-bold text-slate-950 font-display">Teknisi Datang</h3>
+            <p class="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">
+              Teknisi berseragam resmi dan toolbox lengkap menuju lokasi Anda tepat waktu sesuai konfirmasi WhatsApp.
+            </p>
+          </div>
+          <div class="hidden lg:block absolute top-7 -right-4 w-8 h-[1px] bg-slate-200"></div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="relative group">
+          <div class="text-5xl font-black text-slate-200 font-display group-hover:text-brand-600 transition-colors duration-300">03</div>
+          <div class="mt-4">
+            <h3 class="text-lg font-bold text-slate-950 font-display">Diagnosis</h3>
+            <p class="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">
+              Pengecekan suhu tiup evaporator, tekanan freon, dan arus listrik dilakukan sebelum tindakan fisik dimulai.
+            </p>
+          </div>
+          <div class="hidden lg:block absolute top-7 -right-4 w-8 h-[1px] bg-slate-200"></div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="relative group">
+          <div class="text-5xl font-black text-slate-200 font-display group-hover:text-brand-600 transition-colors duration-300">04</div>
+          <div class="mt-4">
+            <h3 class="text-lg font-bold text-slate-950 font-display">Service Selesai</h3>
+            <p class="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">
+              Unit diuji kembali hingga hembusan kembali dingin dan wangi. Anda menerima invoice resmi dan kartu garansi 30 hari.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION — HARGA TRANSPARAN & PRICE ESTIMATOR -->
+  <section id="harga" class="py-20 lg:py-28 bg-surface-50 border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="text-xs font-bold uppercase tracking-widest text-brand-600 block mb-2">BIAYA JELAS DI AWAL</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 font-display tracking-tight">Harga Service AC</h2>
+        <p class="mt-2 text-sm sm:text-base text-slate-600">Standar tarif terstruktur tanpa biaya tersembunyi. Setiap estimasi transparan sebelum teknisi melakukan tindakan.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Professional Price Table -->
+        <div class="lg:col-span-7 bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+          <div class="px-6 py-4 border-b border-slate-100 bg-white flex items-center justify-between">
+            <h3 class="font-bold text-slate-900 text-sm tracking-wide">Daftar Biaya Layanan Dasar</h3>
+            <span class="text-[11px] text-brand-700 bg-brand-50 px-2.5 py-1 rounded font-medium">Garansi 30 Hari</span>
+          </div>
+
+          <div class="divide-y divide-slate-100 text-sm">
+            <div class="p-4 sm:px-6 flex items-center justify-between hover:bg-slate-50/70 transition-colors">
+              <div>
+                <div class="font-semibold text-slate-900">Cuci AC Split (0.5 – 1 PK)</div>
+                <div class="text-xs text-slate-500">Pembersihan unit indoor + outdoor + drainase</div>
+              </div>
+              <div class="text-right">
+                <div class="font-bold text-slate-950 font-display">Rp75.000</div>
+                <div class="text-[11px] text-slate-500">per unit</div>
+              </div>
+            </div>
+
+            <div class="p-4 sm:px-6 flex items-center justify-between hover:bg-slate-50/70 transition-colors">
+              <div>
+                <div class="font-semibold text-slate-900">Cuci AC Split (1.5 – 2 PK / Inverter)</div>
+                <div class="text-xs text-slate-500">Flashing coil khusus & proteksi modul inverter</div>
+              </div>
+              <div class="text-right">
+                <div class="font-bold text-slate-950 font-display">Rp90.000</div>
+                <div class="text-[11px] text-slate-500">per unit</div>
+              </div>
+            </div>
+
+            <div class="p-4 sm:px-6 flex items-center justify-between hover:bg-slate-50/70 transition-colors">
+              <div>
+                <div class="font-semibold text-slate-900">Service AC & Pengecekan Troubleshooting</div>
+                <div class="text-xs text-slate-500">Pemeriksaan sensor suhu, thermistor, ampere motor</div>
+              </div>
+              <div class="text-right">
+                <div class="font-bold text-slate-950 font-display">Rp85.000</div>
+                <div class="text-[11px] text-slate-500">biaya diagnosa</div>
+              </div>
+            </div>
+
+            <div class="p-4 sm:px-6 flex items-center justify-between hover:bg-slate-50/70 transition-colors">
+              <div>
+                <div class="font-semibold text-slate-900">Isi / Cek Refrigerant R32 & R410A</div>
+                <div class="text-xs text-slate-500">Penambahan tekanan freon murni sampai standar dingin</div>
+              </div>
+              <div class="text-right">
+                <div class="font-bold text-slate-950 font-display">Rp150.000</div>
+                <div class="text-[11px] text-slate-500">mulai dari</div>
+              </div>
+            </div>
+
+            <div class="p-4 sm:px-6 flex items-center justify-between hover:bg-slate-50/70 transition-colors">
+              <div>
+                <div class="font-semibold text-slate-900">Instalasi AC Split Baru</div>
+                <div class="text-xs text-slate-500">Termasuk bracket, pasang indoor, outdoor, dan proses vakum</div>
+              </div>
+              <div class="text-right">
+                <div class="font-bold text-slate-950 font-display">Rp275.000</div>
+                <div class="text-[11px] text-slate-500">per unit</div>
+              </div>
+            </div>
+
+            <div class="p-4 sm:px-6 flex items-center justify-between hover:bg-slate-50/70 transition-colors">
+              <div>
+                <div class="font-semibold text-slate-900">Bongkar Pasang AC Lengkap</div>
+                <div class="text-xs text-slate-500">Pelepasan aman (simpan freon) dan instalasi di tempat baru</div>
+              </div>
+              <div class="text-right">
+                <div class="font-bold text-slate-950 font-display">Rp380.000</div>
+                <div class="text-[11px] text-slate-500">per unit</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-4 bg-slate-50/80 border-t border-slate-100 text-xs text-slate-500">
+            * Catatan: Harga dapat menyesuaikan tipe AC, kondisi unit, jumlah unit, dan lokasi pemasangan. Pembongkaran plafon atau pengadaan sparepart elektrik memiliki penawaran terpisah yang disetujui konsumen terlebih dahulu.
+          </div>
+        </div>
+
+        <!-- PRICE ESTIMATOR WIDGET -->
+        <div class="lg:col-span-5 bg-white rounded-2xl border border-slate-200 p-6 sm:p-7 shadow-sm">
+          <div class="flex items-center space-x-2.5 mb-5 pb-4 border-b border-slate-100">
+            <div class="w-8 h-8 rounded-lg bg-brand-50 border border-brand-200 flex items-center justify-center text-brand-600">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+            </div>
+            <div>
+              <h3 class="font-bold text-slate-950 text-base">Hitung Estimasi Service</h3>
+              <p class="text-xs text-slate-500">Kalkulasi perkiraan biaya transparan seketika</p>
+            </div>
+          </div>
+
+          <form id="calculator-form" onsubmit="event.preventDefault(); calculatePrice();" class="space-y-4">
+            
+            <!-- Jenis Layanan -->
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Jenis Layanan</label>
+              <select id="calc-service" onchange="calculatePrice()" class="w-full bg-surface-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-medium text-slate-900 focus:outline-none focus:border-brand-500 focus:bg-white transition">
+                <option value="cuci">Cuci AC Rutin</option>
+                <option value="service">Service & Perbaikan Masalah</option>
+                <option value="freon">Tambah / Isi Freon</option>
+                <option value="instalasi">Instalasi Pasang Baru</option>
+                <option value="bongkarpasang">Bongkar Pasang Unit</option>
+              </select>
+            </div>
+
+            <!-- Tipe AC -->
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Tipe & Kapasitas AC</label>
+              <select id="calc-type" onchange="calculatePrice()" class="w-full bg-surface-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-medium text-slate-900 focus:outline-none focus:border-brand-500 focus:bg-white transition">
+                <option value="split-standard">Split Standard (0.5 – 1 PK)</option>
+                <option value="split-inverter">Split Inverter (1.5 – 2 PK)</option>
+                <option value="cassette">AC Cassette / Ceiling</option>
+                <option value="standing">Floor Standing</option>
+              </select>
+            </div>
+
+            <!-- Jumlah Unit Counter -->
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Jumlah Unit</label>
+              <div class="flex items-center space-x-3">
+                <button type="button" onclick="adjustUnits(-1)" class="w-10 h-10 rounded-lg border border-slate-200 bg-surface-50 hover:bg-slate-100 flex items-center justify-center font-bold text-slate-700 transition active:scale-95">−</button>
+                <input type="number" id="calc-units" value="1" min="1" max="50" readonly class="w-16 text-center font-bold text-slate-900 bg-white border border-slate-200 rounded-lg py-2 text-sm">
+                <button type="button" onclick="adjustUnits(1)" class="w-10 h-10 rounded-lg border border-slate-200 bg-surface-50 hover:bg-slate-100 flex items-center justify-center font-bold text-slate-700 transition active:scale-95">+</button>
+                <span class="text-xs text-slate-500 font-medium">Unit AC</span>
+              </div>
+            </div>
+
+            <!-- Lokasi Kota -->
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Kota / Lokasi Anda</label>
+              <select id="calc-city" onchange="calculatePrice()" class="w-full bg-surface-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-medium text-slate-900 focus:outline-none focus:border-brand-500 focus:bg-white transition">
+                <option value="jakarta">Jakarta & Sekitarnya</option>
+                <option value="bandung">Bandung</option>
+                <option value="bekasi">Bekasi</option>
+                <option value="depok">Depok</option>
+                <option value="tangerang">Tangerang & Tangsel</option>
+                <option value="bogor">Bogor</option>
+                <option value="semarang">Semarang</option>
+                <option value="yogyakarta">Yogyakarta</option>
+                <option value="surabaya">Surabaya</option>
+                <option value="malang">Malang</option>
+                <option value="medan">Medan</option>
+                <option value="palembang">Palembang</option>
+                <option value="lampung">Bandar Lampung</option>
+                <option value="makassar">Makassar</option>
+                <option value="denpasar">Denpasar Bali</option>
+              </select>
+            </div>
+
+            <!-- Output Box -->
+            <div class="mt-6 p-4 rounded-xl bg-slate-950 text-white flex flex-col justify-between">
+              <span class="text-[11px] uppercase tracking-wider text-slate-400 font-semibold">Estimasi Total Biaya:</span>
+              <div class="flex items-baseline justify-between mt-1">
+                <span id="calculated-total" class="text-2xl font-black font-display text-white">Rp75.000</span>
+                <span class="text-[11px] text-emerald-400 font-medium">Bebas Biaya Transportasi*</span>
+              </div>
+            </div>
+
+            <button type="button" onclick="bookFromEstimator()" class="w-full mt-3 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs tracking-wider uppercase transition shadow">
+              Lanjut Booking dengan Estimasi Ini
+            </button>
+
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION — TEKNISI -->
+  <section id="teknisi" class="py-20 lg:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-brand-600 block mb-2">TENAGA AHLI BERSERTIFIKASI</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 font-display tracking-tight">Ditangani Teknisi yang Mengerti AC</h2>
+          <p class="mt-2 text-slate-600 text-sm sm:text-base max-w-xl">Bukan freelance tanpa identitas. Semua teknisi SEJUKIN melewati uji kompetensi pendingin, background check, dan sertifikasi BNSP.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-bold">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+            Semua Teknisi Aktif Terverifikasi
+          </span>
+        </div>
+      </div>
+
+      <!-- Technician Cards Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <!-- Technician 1 -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 hover:shadow-md transition-shadow group">
+          <div class="relative rounded-xl overflow-hidden aspect-[4/3] bg-slate-100 mb-4">
+            <img 
+              src="https://images.unsplash.com/photo-1540569014015-19a7be504e3a?auto=format&fit=crop&w=800&q=80" 
+              alt="Foto profil Andi Pratama - Teknisi Senior SEJUKIN" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              onerror="this.onerror=null; this.src='https://placehold.co/600x450/f1f5f9/0f172a?text=Andi+Pratama';"
+            >
+            <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-[10px] font-bold text-slate-900 uppercase tracking-wider px-2.5 py-1 rounded border border-slate-200">
+              VERIFIED TECHNICIAN
+            </div>
+            <div class="absolute bottom-3 right-3 bg-slate-950/85 text-white text-[11px] font-semibold px-2 py-0.5 rounded">
+              8+ Tahun Pengalaman
+            </div>
+          </div>
+          <div class="flex items-start justify-between">
+            <div>
+              <h3 class="font-bold text-lg text-slate-950">ANDI PRATAMA</h3>
+              <p class="text-xs text-brand-700 font-semibold">Senior Inverter & VRV Specialist</p>
+            </div>
+            <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500 mt-1.5" title="Siap Penugasan"></span>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span>Rating: <strong class="text-slate-900">4.95 / 5.0</strong> (620+ Unit)</span>
+            <span class="text-emerald-600 font-semibold">Tersedia Hari Ini</span>
+          </div>
+        </div>
+
+        <!-- Technician 2 -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 hover:shadow-md transition-shadow group">
+          <div class="relative rounded-xl overflow-hidden aspect-[4/3] bg-slate-100 mb-4">
+            <img 
+              src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=800&q=80" 
+              alt="Foto profil Hendra Wijaya - Teknisi Instalasi SEJUKIN" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              onerror="this.onerror=null; this.src='https://placehold.co/600x450/f1f5f9/0f172a?text=Hendra+Wijaya';"
+            >
+            <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-[10px] font-bold text-slate-900 uppercase tracking-wider px-2.5 py-1 rounded border border-slate-200">
+              VERIFIED TECHNICIAN
+            </div>
+            <div class="absolute bottom-3 right-3 bg-slate-950/85 text-white text-[11px] font-semibold px-2 py-0.5 rounded">
+              6+ Tahun Pengalaman
+            </div>
+          </div>
+          <div class="flex items-start justify-between">
+            <div>
+              <h3 class="font-bold text-lg text-slate-950">HENDRA WIJAYA</h3>
+              <p class="text-xs text-brand-700 font-semibold">Troubleshoot Freon & Kompresor</p>
+            </div>
+            <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500 mt-1.5" title="Siap Penugasan"></span>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span>Rating: <strong class="text-slate-900">4.92 / 5.0</strong> (480+ Unit)</span>
+            <span class="text-emerald-600 font-semibold">Tersedia Hari Ini</span>
+          </div>
+        </div>
+
+        <!-- Technician 3 -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 hover:shadow-md transition-shadow group">
+          <div class="relative rounded-xl overflow-hidden aspect-[4/3] bg-slate-100 mb-4">
+            <img 
+              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80" 
+              alt="Foto profil Budi Santoso - Teknisi Perawatan SEJUKIN" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              onerror="this.onerror=null; this.src='https://placehold.co/600x450/f1f5f9/0f172a?text=Budi+Santoso';"
+            >
+            <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-[10px] font-bold text-slate-900 uppercase tracking-wider px-2.5 py-1 rounded border border-slate-200">
+              VERIFIED TECHNICIAN
+            </div>
+            <div class="absolute bottom-3 right-3 bg-slate-950/85 text-white text-[11px] font-semibold px-2 py-0.5 rounded">
+              7+ Tahun Pengalaman
+            </div>
+          </div>
+          <div class="flex items-start justify-between">
+            <div>
+              <h3 class="font-bold text-lg text-slate-950">BUDI SANTOSO</h3>
+              <p class="text-xs text-brand-700 font-semibold">Master Cuci & Overhaul Unit</p>
+            </div>
+            <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500 mt-1.5" title="Siap Penugasan"></span>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span>Rating: <strong class="text-slate-900">4.98 / 5.0</strong> (810+ Unit)</span>
+            <span class="text-emerald-600 font-semibold">Tersedia Hari Ini</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION — BEFORE / AFTER SLIDER -->
+  <section class="py-20 bg-surface-50 border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-xs font-bold uppercase tracking-widest text-brand-600 block mb-2">BUKTI NYATA PERAWATAN</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 font-display tracking-tight">Perawatan yang Terlihat Hasilnya</h2>
+        <p class="mt-2 text-slate-600 text-sm sm:text-base">Geser slider interaktif di bawah untuk melihat perbedaan kondisi kisi evaporator AC sebelum dan sesudah dibersihkan oleh teknisi SEJUKIN.</p>
+      </div>
+
+      <div class="max-w-4xl mx-auto">
+        <!-- Interactive Before/After container -->
+        <div id="before-after-box" class="relative rounded-2xl overflow-hidden border border-slate-300 bg-slate-900 shadow-md select-none touch-none aspect-[16/9] sm:aspect-[21/9]">
+          
+          <!-- Image 2: AFTER (Clean) - Underlying full width -->
+          <img 
+            src="https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=1400&q=80" 
+            alt="AFTER: AC bersih berkilau dan higienis" 
+            class="absolute inset-0 w-full h-full object-cover"
+            onerror="this.onerror=null; this.src='https://placehold.co/1200x600/0284c7/ffffff?text=SETELAH+DIBERSIHKAN+(BERSIH+TOTAL)';"
+          >
+          <div class="absolute top-4 right-4 bg-emerald-600/90 backdrop-blur-md text-white text-[11px] font-extrabold tracking-wider uppercase px-3 py-1.5 rounded-lg border border-white/20">
+            AFTER — Bersih & Higienis
+          </div>
+
+          <!-- Image 1: BEFORE (Dirty) - Clipped by width -->
+          <div id="before-image-wrap" class="absolute inset-0 overflow-hidden w-1/2 border-r border-white/80">
+            <img 
+              src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1400&q=80" 
+              alt="BEFORE: AC kotor penuh debu dan jamur" 
+              class="absolute inset-0 w-[200%] max-w-none h-full object-cover grayscale-[30%] brightness-90"
+              onerror="this.onerror=null; this.src='https://placehold.co/1200x600/334155/ffffff?text=SEBELUM+DIBERSIHKAN+(DEBU+%26+JAMUR)';"
+            >
+            <div class="absolute top-4 left-4 bg-slate-900/90 backdrop-blur-md text-white text-[11px] font-extrabold tracking-wider uppercase px-3 py-1.5 rounded-lg border border-white/20">
+              BEFORE — Berdebu & Lembab
+            </div>
+          </div>
+
+          <!-- Draggable Divider line -->
+          <div id="slider-handle" class="slider-handle left-1/2 -translate-x-1/2 flex items-center justify-center">
+            <div class="w-9 h-9 rounded-full bg-white text-slate-900 shadow-lg border border-slate-200 flex items-center justify-center text-xs font-bold pointer-events-none">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 9l4-4 4 4m0 6l-4 4-4-4"/></svg>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="flex items-center justify-between text-xs text-slate-500 mt-3 px-1">
+          <span>← Geser ke kiri untuk melihat kondisi bersih</span>
+          <span class="font-medium text-slate-700">Evaporator bebas spora jamur & debu halus</span>
+          <span>Geser ke kanan untuk kondisi awal →</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION — MAINTENANCE PLAN -->
+  <section class="py-20 lg:py-28 bg-white border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="text-xs font-bold uppercase tracking-widest text-brand-600 block mb-2">PROGRAM PERAWATAN TERJADWAL</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 font-display tracking-tight">Jangan Tunggu AC Rusak</h2>
+        <p class="mt-2 text-slate-600 text-sm sm:text-base">Perawatan berkala membantu menjaga performa AC tetap dingin maksimal, menghemat konsumsi listrik hingga 25%, dan mencegah kerusakan kompresor mendadak.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+        
+        <!-- Plan 1: BASIC -->
+        <div class="rounded-2xl border border-slate-200 p-8 flex flex-col justify-between hover:border-slate-300 transition-all bg-white">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-500">PAKET KELUARGA</span>
+            <h3 class="text-2xl font-bold text-slate-950 font-display mt-1">BASIC</h3>
+            <p class="text-xs text-slate-600 mt-2">Perawatan berkala esensial untuk rumah tinggal dengan 1 – 2 unit AC.</p>
+            
+            <div class="mt-6 mb-6">
+              <span class="text-3xl font-extrabold text-slate-950 font-display">Rp140.000</span>
+              <span class="text-xs text-slate-500 font-medium"> / visit (2 unit)</span>
+            </div>
+
+            <ul class="space-y-3 text-xs text-slate-700 font-medium">
+              <li class="flex items-center gap-2.5"><span class="text-emerald-600 font-bold">✓</span> Cuci AC indoor & outdoor lengkap</li>
+              <li class="flex items-center gap-2.5"><span class="text-emerald-600 font-bold">✓</span> Cek tekanan ampere & freon</li>
+              <li class="flex items-center gap-2.5"><span class="text-emerald-600 font-bold">✓</span> Garansi cuci 14 hari</li>
+              <li class="flex items-center gap-2.5"><span class="text-emerald-600 font-bold">✓</span> Pengingat otomatis per 3 bulan</li>
+            </ul>
+          </div>
+
+          <button onclick="bookPlan('BASIC')" class="w-full mt-8 py-3 rounded-xl border border-slate-300 hover:border-slate-400 bg-white text-slate-900 font-bold text-xs tracking-wider uppercase transition">
+            Pilih Maintenance Plan
+          </button>
+        </div>
+
+        <!-- Plan 2: STANDARD (Highlighted) -->
+        <div class="rounded-2xl border-2 border-brand-600 p-8 flex flex-col justify-between shadow-sm relative bg-brand-50/20">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-600 text-white text-[10px] font-extrabold tracking-widest uppercase px-3 py-0.5 rounded-full shadow-sm">
+            PALING POPULER
+          </div>
+
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-brand-700">HUNIAN MULTI-UNIT</span>
+            <h3 class="text-2xl font-bold text-slate-950 font-display mt-1">STANDARD</h3>
+            <p class="text-xs text-slate-600 mt-2">Untuk rumah bertingkat atau apartemen dengan 3 – 5 unit AC.</p>
+            
+            <div class="mt-6 mb-6">
+              <span class="text-3xl font-extrabold text-slate-950 font-display">Rp290.000</span>
+              <span class="text-xs text-slate-500 font-medium"> / visit (4 unit)</span>
+            </div>
+
+            <ul class="space-y-3 text-xs text-slate-700 font-medium">
+              <li class="flex items-center gap-2.5"><span class="text-emerald-600 font-bold">✓</span> Cuci menyeluruh 4 unit AC</li>
+              <li class="flex items-center gap-2.5"><span class="text-emerald-600 font-bold">✓</span> Free sterilisasi uap disinfektan</li>
+              <li class="flex items-center gap-2.5"><span class="text-emerald-600 font-bold">✓</span> Pengecekan menyeluruh sistem drainase</li>
+              <li class="flex items-center gap-2.5"><span class="text-emerald-600 font-bold">✓</span> Prioritas slot teknisi di akhir pekan</li>
+              <li class="flex items-center gap-2.5"><span class="text-emerald-600 font-bold">✓</span> Garansi pengerjaan 30 hari</li>
+            </ul>
+          </div>
+
+          <button onclick="bookPlan('STANDARD')" class="w-full mt-8 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs tracking-wider uppercase transition shadow">
+            Pilih Maintenance Plan
+          </button>
+        </div>
+
+        <!-- Plan 3: BUSINESS -->
+        <div class="rounded-2xl border border-slate-200 p-8 flex flex-col justify-between hover:border-slate-300 transition-all bg-white">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-500">KOMERSIAL & KANTOR</span>
+            <h3 class="text-2xl font-bold text-slate-950 font-display mt-1">BUSINESS</h3>
+            <p class="text-xs text-slate-600 mt-2">Untuk kantor, toko, ruko, klinik, dan operasional komersial.</p>
+            
+            <div class="mt-6 mb-6">
+              <span class="text-3xl font-extrabold text-slate-950 font-display">Custom Rate</span>
+              <span class="text-xs text-slate-500 font-medium"> (Sesuai jumlah unit)</span>
+            </div>
+
+            <ul class="space-y-3 text-xs text-slate-700 font-medium">
+              <li class="flex items-center gap-2.5"><span class="text-emerald-600 font-bold">✓</span> Split, cassette, ceiling, central mini</li>
+              <li class="flex items-center gap-2.5"><span class="text-emerald-600 font-bold">✓</span> Invoice resmi PPn & lembar inspeksi teknis</li>
+              <li class="flex items-center gap-2.5"><span class="text-emerald-600 font-bold">✓</span> Pengerjaan di luar jam kerja (after office)</li>
+              <li class="flex items-center gap-2.5"><span class="text-emerald-600 font-bold">✓</span> Dedicated Service Account Manager</li>
+            </ul>
+          </div>
+
+          <button onclick="bookPlan('BUSINESS')" class="w-full mt-8 py-3 rounded-xl border border-slate-300 hover:border-slate-400 bg-white text-slate-900 font-bold text-xs tracking-wider uppercase transition">
+            Pilih Maintenance Plan
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION — SERVICE AREA -->
+  <section id="area" class="py-20 lg:py-28 bg-surface-50 border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-xs font-bold uppercase tracking-widest text-brand-600 block mb-2">CAKUPAN OPERASIONAL</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 font-display tracking-tight">Kami Datang ke Lokasi Anda</h2>
+        <p class="mt-2 text-slate-600 text-sm sm:text-base">
+          Melayani kebutuhan service AC di berbagai kota di Indonesia dengan armada teknisi lokal yang tersebar di titik strategis.
+        </p>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-10 shadow-sm">
+        
+        <!-- Interactive Google Maps Container for SEJUKIN Service Network -->
+        <div class="relative w-full rounded-2xl overflow-hidden mb-8 border border-slate-200 bg-slate-100 shadow-inner">
+          
+          <!-- Top Floating Bar: Status & Map Reset Control -->
+          <div class="absolute top-3 left-3 right-3 z-10 flex flex-wrap items-center justify-between gap-2 pointer-events-none">
+            <div class="pointer-events-auto bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-xl border border-slate-200/80 shadow-sm flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span id="gmap-active-label" class="text-xs font-bold text-slate-900 font-display tracking-wide">
+                Seluruh Wilayah Layanan Indonesia
+              </span>
+              <span class="text-[10px] text-slate-400 hidden sm:inline">| Google Maps Live</span>
+            </div>
+
+            <div class="pointer-events-auto flex items-center gap-2">
+              <button 
+                type="button" 
+                onclick="updateGoogleMap('all')" 
+                class="px-3 py-1.5 rounded-xl bg-white/95 hover:bg-white text-slate-700 hover:text-brand-600 border border-slate-200 shadow-sm text-[11px] font-bold transition-all active:scale-95 flex items-center gap-1.5"
+                title="Tampilkan seluruh peta Indonesia"
+              >
+                <svg class="w-3.5 h-3.5 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <span>Reset Peta Nasional</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Embedded Google Maps Frame -->
+          <div class="w-full h-64 sm:h-80 md:h-96">
+            <iframe 
+              id="gmap-frame" 
+              class="w-full h-full border-0" 
+              loading="lazy" 
+              allowfullscreen 
+              referrerpolicy="no-referrer-when-downgrade" 
+              src="https://maps.google.com/maps?q=Indonesia&t=&z=5&ie=UTF8&iwloc=&output=embed" 
+              title="Peta Jaringan Service Mitra SEJUKIN Indonesia"
+            ></iframe>
+          </div>
+
+          <!-- Bottom Micro Notification Tag -->
+          <div class="absolute bottom-3 left-3 z-10 pointer-events-none hidden sm:flex items-center gap-1.5 bg-slate-950/85 backdrop-blur-sm text-white px-3 py-1 rounded-lg text-[10px] font-medium">
+            <svg class="w-3 h-3 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            <span>Klik kartu kota di bawah untuk fokus lokasi pada Google Maps</span>
+          </div>
+
+        </div>
+
+        <!-- Filter Area Input -->
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
+          <div class="relative w-full sm:w-80">
+            <input 
+              type="text" 
+              id="area-search-input" 
+              onkeyup="filterAreaList()" 
+              placeholder="Cari kota atau kabupaten Anda..." 
+              class="w-full bg-surface-50 border border-slate-200 rounded-xl pl-9 pr-4 py-2 text-xs font-medium text-slate-900 focus:outline-none focus:border-brand-500"
+            >
+            <svg class="w-4 h-4 text-slate-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          </div>
+          <span class="text-xs text-slate-500 font-medium">Klik pada nama kota untuk langsung cek ketersediaan teknisi</span>
+        </div>
+
+        <!-- Editable Cities Grid -->
+        <div id="city-list-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+          <!-- Cities will be rendered and editable via script -->
+        </div>
+
+        <!-- Fallback notice -->
+        <div class="mt-8 pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div class="text-xs text-slate-600 text-center sm:text-left">
+            <strong>Kota Anda belum tercantum di atas?</strong> Hubungi tim customer care kami untuk pengecekan rute kunjungan terdekat.
+          </div>
+          <button onclick="openWhatsAppInquiry('Halo admin SEJUKIN, apakah ada teknisi yang bisa datang ke wilayah saya?')" class="inline-flex items-center px-4 py-2 rounded-lg border border-slate-300 hover:border-slate-400 bg-white text-slate-800 text-xs font-bold transition">
+            Hubungi Customer Care
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION — TESTIMONIAL -->
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="max-w-2xl mb-14">
+        <span class="text-xs font-bold uppercase tracking-widest text-brand-600 block mb-2">REPUTASI & ULASAN NYATA</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 font-display tracking-tight">Yang Mereka Katakan</h2>
+        <p class="mt-2 text-slate-600 text-sm sm:text-base">Pengalaman nyata dari pemilik rumah, apartemen, dan pengelola kantor yang mengandalkan SEJUKIN.</p>
+      </div>
+
+      <!-- 3 Editorial Style Quotes -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Testimonial 1 -->
+        <div class="border border-slate-200 rounded-2xl p-7 flex flex-col justify-between bg-white hover:border-brand-300 transition-colors">
+          <div>
+            <div class="flex items-center space-x-1 text-amber-400 mb-5">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+            </div>
+            <p class="text-sm sm:text-base text-slate-800 leading-relaxed font-normal">
+              “Teknisinya datang sesuai jadwal dan AC langsung dicek dengan detail. Yang paling saya apresiasi adalah kebersihannya; lantai dan sofa di bawah AC ditutup plastik tebal sehingga tidak ada tetesan air kotor sama sekali.”
+            </p>
+          </div>
+          <div class="mt-6 pt-5 border-t border-slate-100 flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center font-bold text-slate-700 text-xs">
+              RA
+            </div>
+            <div>
+              <div class="text-sm font-bold text-slate-950">Rina Anggraini</div>
+              <div class="text-xs text-slate-500">Pemilik Rumah — Kebayoran Baru, Jakarta</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="border border-slate-200 rounded-2xl p-7 flex flex-col justify-between bg-white hover:border-brand-300 transition-colors">
+          <div>
+            <div class="flex items-center space-x-1 text-amber-400 mb-5">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+            </div>
+            <p class="text-sm sm:text-base text-slate-800 leading-relaxed font-normal">
+              “AC kantor kami sempat mati kompresornya di hari Senin. Teknisi SEJUKIN datang dalam waktu 90 menit setelah booking via web, penjelasannya masuk akal dan harganya pas sesuai tabel tanpa neko-neko.”
+            </p>
+          </div>
+          <div class="mt-6 pt-5 border-t border-slate-100 flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center font-bold text-slate-700 text-xs">
+              DW
+            </div>
+            <div>
+              <div class="text-sm font-bold text-slate-950">Dion Wicaksono</div>
+              <div class="text-xs text-slate-500">Operasional Kantor — Dago, Bandung</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="border border-slate-200 rounded-2xl p-7 flex flex-col justify-between bg-white hover:border-brand-300 transition-colors">
+          <div>
+            <div class="flex items-center space-x-1 text-amber-400 mb-5">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+            </div>
+            <p class="text-sm sm:text-base text-slate-800 leading-relaxed font-normal">
+              “Sudah langganan paket maintenance untuk 4 AC apartemen. Pengerjaannya konsisten rapi, teknisinya ramah dan selalu membawa meteran tekanan untuk menunjukkan bukti freon sebelum dan sesudah dicek.”
+            </p>
+          </div>
+          <div class="mt-6 pt-5 border-t border-slate-100 flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center font-bold text-slate-700 text-xs">
+              SL
+            </div>
+            <div>
+              <div class="text-sm font-bold text-slate-950">Stephanie Lim</div>
+              <div class="text-xs text-slate-500">Apartemen Waterplace — Surabaya</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION — FAQ -->
+  <section id="faq" class="py-20 lg:py-28 bg-surface-50 border-t border-slate-200">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-14">
+        <span class="text-xs font-bold uppercase tracking-widest text-brand-600 block mb-2">JAWABAN CEPAT</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 font-display tracking-tight">Pertanyaan yang Sering Ditanyakan</h2>
+        <p class="mt-2 text-slate-600 text-sm sm:text-base">Informasi penting mengenai layanan kunjungan teknisi SEJUKIN ke lokasi Anda.</p>
+      </div>
+
+      <!-- Accordion Items -->
+      <div class="space-y-3" id="faq-container">
+        
+        <!-- Item 1 -->
+        <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+          <button onclick="toggleFaq(1)" class="w-full px-6 py-4 text-left flex items-center justify-between gap-4 font-bold text-slate-900 text-sm sm:text-base hover:text-brand-600 transition">
+            <span>Berapa lama proses cuci AC?</span>
+            <svg id="faq-icon-1" class="w-5 h-5 text-slate-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div id="faq-content-1" class="hidden px-6 pb-5 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100">
+            Pengerjaan cuci 1 unit AC Split normal memerlukan waktu sekitar 40 hingga 60 menit. Durasi mencakup persiapan penutup terpal pengaman, pencucian indoor, pembersihan kondensor outdoor, serta pengujian suhu dingin tiup setelah selesai.
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+          <button onclick="toggleFaq(2)" class="w-full px-6 py-4 text-left flex items-center justify-between gap-4 font-bold text-slate-900 text-sm sm:text-base hover:text-brand-600 transition">
+            <span>Apakah teknisi datang ke rumah?</span>
+            <svg id="faq-icon-2" class="w-5 h-5 text-slate-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div id="faq-content-2" class="hidden px-6 pb-5 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100">
+            Ya, SEJUKIN sepenuhnya adalah layanan <strong>Home Service</strong>. Teknisi resmi kami akan langsung datang ke alamat rumah, unit apartemen, ruko, ataupun kantor Anda membawa peralatan lengkap dan mesin steam jet bertekanan.
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+          <button onclick="toggleFaq(3)" class="w-full px-6 py-4 text-left flex items-center justify-between gap-4 font-bold text-slate-900 text-sm sm:text-base hover:text-brand-600 transition">
+            <span>Apakah bisa service beberapa unit sekaligus?</span>
+            <svg id="faq-icon-3" class="w-5 h-5 text-slate-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div id="faq-content-3" class="hidden px-6 pb-5 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100">
+            Tentu saja. Anda dapat memesan untuk 1 hingga puluhan unit sekaligus dalam satu jadwal kedatangan. Untuk pengerjaan di atas 4 unit, kami dapat mengirimkan tim teknisi beranggotakan 2–4 orang agar selesai lebih efisien.
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+          <button onclick="toggleFaq(4)" class="w-full px-6 py-4 text-left flex items-center justify-between gap-4 font-bold text-slate-900 text-sm sm:text-base hover:text-brand-600 transition">
+            <span>Apakah tersedia service AC kantor?</span>
+            <svg id="faq-icon-4" class="w-5 h-5 text-slate-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div id="faq-content-4" class="hidden px-6 pb-5 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100">
+            Ya, kami memiliki divisi komersial khusus untuk melayani gedung perkantoran, ruko, co-working space, dan ruko perbankan. Tersedia faktur resmi penagihan (invoice / kwitansi) serta opsi pengerjaan malam hari atau saat akhir pekan.
+          </div>
+        </div>
+
+        <!-- Item 5 -->
+        <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+          <button onclick="toggleFaq(5)" class="w-full px-6 py-4 text-left flex items-center justify-between gap-4 font-bold text-slate-900 text-sm sm:text-base hover:text-brand-600 transition">
+            <span>Apakah bisa booking untuk hari tertentu?</span>
+            <svg id="faq-icon-5" class="w-5 h-5 text-slate-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div id="faq-content-5" class="hidden px-6 pb-5 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100">
+            Bisa. Anda bebas memilih tanggal hari ini (same day booking jika slot tersedia) hingga reservasi terjadwal hingga 14 hari ke depan melalui form booking online kami.
+          </div>
+        </div>
+
+        <!-- Item 6 -->
+        <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+          <button onclick="toggleFaq(6)" class="w-full px-6 py-4 text-left flex items-center justify-between gap-4 font-bold text-slate-900 text-sm sm:text-base hover:text-brand-600 transition">
+            <span>Bagaimana jika AC tidak dingin setelah service?</span>
+            <svg id="faq-icon-6" class="w-5 h-5 text-slate-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div id="faq-content-6" class="hidden px-6 pb-5 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100">
+            Setiap pengerjaan dilindungi garansi service. Jika dalam masa garansi AC tetap tidak dingin atau timbul tetesan air dari pengerjaan sebelumnya, teknisi kami akan dikirimkan kembali untuk inspeksi ulang tanpa dipungut biaya kunjungan.
+          </div>
+        </div>
+
+        <!-- Item 7 -->
+        <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+          <button onclick="toggleFaq(7)" class="w-full px-6 py-4 text-left flex items-center justify-between gap-4 font-bold text-slate-900 text-sm sm:text-base hover:text-brand-600 transition">
+            <span>Apakah tersedia garansi service?</span>
+            <svg id="faq-icon-7" class="w-5 h-5 text-slate-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div id="faq-content-7" class="hidden px-6 pb-5 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100">
+            Ya, kami memberikan jaminan garansi tertulis: 30 hari untuk perbaikan teknis / pengisian freon, dan 14 hari untuk kebersihan cuci AC. Anda akan menerima nota digital sebagai bukti garansi sah.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FINAL CTA SECTION -->
+  <section class="py-16 sm:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Deep navy panel with modern medium radius -->
+      <div class="bg-slate-950 text-white rounded-3xl p-8 sm:p-12 lg:p-16 relative overflow-hidden border border-slate-800">
+        
+        <div class="relative z-10 max-w-2xl">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs text-brand-300 font-semibold mb-6">
+            <span class="w-1.5 h-1.5 rounded-full bg-brand-400"></span>
+            Siap Melayani Hari Ini
+          </div>
+
+          <h2 class="text-3xl sm:text-5xl font-extrabold font-display tracking-tight leading-tight">
+            AC Kembali Adem.<br>
+            Tanpa Ribet.
+          </h2>
+
+          <p class="mt-4 text-sm sm:text-base text-slate-300 leading-relaxed max-w-lg">
+            Atur jadwal teknisi untuk datang ke lokasi Anda. Nikmati udara bersih, sejuk optimal, dan kenyamanan hunian tanpa repot.
+          </p>
+
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mt-8">
+            <button onclick="openBookingModal()" class="px-8 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-bold text-xs tracking-wider uppercase transition shadow-sm active:scale-95 text-center">
+              Booking Service
+            </button>
+            <button onclick="openWhatsAppInquiry('Halo admin SEJUKIN, saya ingin konsultasi dan booking service AC.')" class="px-8 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-white font-bold text-xs tracking-wider uppercase transition text-center flex items-center justify-center gap-2">
+              <svg class="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.181-.076.355.101.174.449.741.963 1.2 0.662.591 1.221.774 1.394.86.174.086.275.072.376-.043.101-.116.433-.506.549-.68.116-.173.231-.144.39-.086.159.058 1.011.477 1.184.564.173.087.289.13.332.203.043.072.043.419-.101.824z"/></svg>
+              <span>Chat WhatsApp</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Subtle technical line graph watermark background -->
+        <div class="absolute -right-16 -bottom-16 w-80 h-80 rounded-full border border-slate-800/80 pointer-events-none hidden lg:block"></div>
+        <div class="absolute -right-32 -bottom-32 w-112 h-112 rounded-full border border-slate-800/50 pointer-events-none hidden lg:block"></div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-white border-t border-slate-200 pt-16 pb-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-2 md:grid-cols-12 gap-8 lg:gap-12 pb-12 border-b border-slate-100">
+        
+        <!-- Brand Column -->
+        <div class="col-span-2 md:col-span-4 space-y-4">
+          <a href="#" class="flex flex-col group">
+            <div class="flex items-center gap-1.5">
+              <span class="text-2xl font-extrabold tracking-tight text-slate-950 font-display">
+                SEJUKIN
+              </span>
+              <span class="w-2 h-2 rounded-full bg-brand-600"></span>
+            </div>
+            <span class="text-[9px] font-bold tracking-[0.24em] text-slate-500 uppercase -mt-1">
+              HOME AC SERVICE
+            </span>
+          </a>
+          <p class="text-xs text-slate-500 leading-relaxed max-w-sm">
+            Layanan resmi bergaransi untuk perawatan, perbaikan, cuci unit, dan instalasi AC hunian serta bangunan komersial di kota-kota besar Indonesia.
+          </p>
+          <div class="text-xs font-semibold text-slate-800">
+            Slogan: <span class="italic text-slate-600 font-normal">“AC Adem, Rumah Nyaman.”</span>
+          </div>
+        </div>
+
+        <!-- Column: Layanan -->
+        <div class="col-span-1 md:col-span-2 space-y-3">
+          <div class="text-xs font-bold uppercase tracking-wider text-slate-950">LAYANAN</div>
+          <ul class="space-y-2 text-xs text-slate-600">
+            <li><a href="#layanan" class="hover:text-brand-600 transition">Cuci AC Split</a></li>
+            <li><a href="#layanan" class="hover:text-brand-600 transition">Service Perbaikan</a></li>
+            <li><a href="#layanan" class="hover:text-brand-600 transition">Instalasi Baru</a></li>
+            <li><a href="#layanan" class="hover:text-brand-600 transition">Bongkar Pasang</a></li>
+            <li><a href="#layanan" class="hover:text-brand-600 transition">Isi / Cek Freon</a></li>
+            <li><a href="#layanan" class="hover:text-brand-600 transition">Maintenance Plan</a></li>
+          </ul>
+        </div>
+
+        <!-- Column: Informasi -->
+        <div class="col-span-1 md:col-span-3 space-y-3">
+          <div class="text-xs font-bold uppercase tracking-wider text-slate-950">INFORMASI</div>
+          <ul class="space-y-2 text-xs text-slate-600">
+            <li><a href="#harga" class="hover:text-brand-600 transition">Daftar Harga Resmi</a></li>
+            <li><a href="#harga" class="hover:text-brand-600 transition">Kalkulator Estimasi Biaya</a></li>
+            <li><a href="#area" class="hover:text-brand-600 transition">Cakupan Wilayah Layanan</a></li>
+            <li><a href="#teknisi" class="hover:text-brand-600 transition">Profil Teknisi Bersertifikat</a></li>
+            <li><a href="#faq" class="hover:text-brand-600 transition">Tanya Jawab (FAQ)</a></li>
+            <li><a href="#" onclick="openTermsModal(); return false;" class="hover:text-brand-600 transition">Ketentuan Garansi 30 Hari</a></li>
+          </ul>
+        </div>
+
+        <!-- Column: Hubungi Kami & Akses Admin Footer -->
+        <div class="col-span-2 md:col-span-3 space-y-3">
+          <div class="text-xs font-bold uppercase tracking-wider text-slate-950">HUBUNGI KAMI</div>
+          <ul class="space-y-2.5 text-xs text-slate-600">
+            <li class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.181-.076.355.101.174.449.741.963 1.2 0.662.591 1.221.774 1.394.86.174.086.275.072.376-.043.101-.116.433-.506.549-.68.116-.173.231-.144.39-.086.159.058 1.011.477 1.184.564.173.087.289.13.332.203.043.072.043.419-.101.824z"/></svg>
+              <span>WhatsApp: 0812-8900-1200</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-brand-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              <span>support@sejukin.co.id</span>
+            </li>
+            <li class="flex items-center gap-2 text-slate-500">
+              <svg class="w-4 h-4 text-slate-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              <span>Senin – Minggu (08.00 – 22.00 WIB)</span>
+            </li>
+            <li class="pt-2">
+              <!-- Admin Panel Button placed neatly in footer without demo wording -->
+              <button onclick="checkAdminSessionOrOpenLogin()" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition">
+                <svg class="w-3.5 h-3.5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                <span>Admin Panel</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Copyright Bottom Bar -->
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+        <div>
+          © 2026 SEJUKIN. All rights reserved. Jasa Home Service & Maintenance AC Indonesia.
+        </div>
+        <div class="flex items-center space-x-4 text-[11px]">
+          <span>Standard Operating Procedure SNI</span>
+          <span>•</span>
+          <span>Garansi Resmi</span>
+          <span>•</span>
+          <button onclick="checkAdminSessionOrOpenLogin()" class="text-slate-400 hover:text-slate-600 transition">
+            Kelola Website
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- MOBILE BOTTOM NAVIGATION (Visible only on mobile devices) -->
+  <div class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 px-3 py-2 flex items-center justify-around shadow-lg">
+    
+    <a href="#hero" class="flex flex-col items-center justify-center text-slate-600 hover:text-brand-600 text-[10px] font-semibold py-1">
+      <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+      <span>Home</span>
+    </a>
+
+    <a href="#layanan" class="flex flex-col items-center justify-center text-slate-600 hover:text-brand-600 text-[10px] font-semibold py-1">
+      <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+      <span>Layanan</span>
+    </a>
+
+    <!-- Highlighted Center Booking Pill -->
+    <button onclick="openBookingModal()" class="flex flex-col items-center justify-center -mt-5 bg-brand-600 text-white rounded-full w-14 h-14 shadow-lg border-4 border-white active:scale-95 transition-transform">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+      <span class="text-[9px] font-extrabold uppercase">Book</span>
+    </button>
+
+    <a href="#harga" class="flex flex-col items-center justify-center text-slate-600 hover:text-brand-600 text-[10px] font-semibold py-1">
+      <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+      <span>Estimasi</span>
+    </a>
+
+    <!-- Mobile Area Access -->
+    <a href="#area" class="flex flex-col items-center justify-center text-slate-600 hover:text-brand-600 text-[10px] font-semibold py-1">
+      <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+      <span>Area</span>
+    </a>
+
+    <button onclick="toggleMobileMenu()" class="flex flex-col items-center justify-center text-slate-600 hover:text-brand-600 text-[10px] font-semibold py-1">
+      <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16m-7 6h7"/></svg>
+      <span>Menu</span>
+    </button>
+
+  </div>
+
+  <!-- MODAL 1: ADMIN LOGIN MODAL -->
+  <div id="admin-login-modal" class="fixed inset-0 z-50 hidden bg-slate-950/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-slate-200 relative">
+      <button onclick="closeAdminLoginModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+
+      <div class="flex items-center gap-2 mb-2">
+        <div class="w-8 h-8 rounded-lg bg-brand-50 border border-brand-200 flex items-center justify-center text-brand-600 font-bold">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+        </div>
+        <div>
+          <h3 class="font-bold text-slate-950 text-lg">Login Admin SEJUKIN</h3>
+          <p class="text-xs text-slate-500">Akses editor instan & manajemen produk</p>
+        </div>
+      </div>
+
+      <div class="bg-brand-50/70 border border-brand-100 rounded-xl p-3 my-4 text-xs text-brand-900 leading-relaxed">
+        <strong>Kredensial Akses Pengelola:</strong><br>
+        Username: <code class="bg-white px-1.5 py-0.5 rounded text-brand-700 font-bold">kelolaweb2026</code><br>
+        Password: <code class="bg-white px-1.5 py-0.5 rounded text-brand-700 font-bold">kelolaweb2026</code>
+      </div>
+
+      <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Username</label>
+          <input type="text" id="admin-user-input" required class="w-full bg-surface-50 border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-brand-600" placeholder="kelolaweb2026">
+        </div>
+        <div>
+          <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Password</label>
+          <input type="password" id="admin-pass-input" required class="w-full bg-surface-50 border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-brand-600" placeholder="••••••••••••">
+        </div>
+        <button type="submit" class="w-full py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs uppercase tracking-wider transition shadow">
+          Masuk ke Admin Panel
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL 2: FULL ADMIN PANEL DASHBOARD -->
+  <div id="admin-panel-modal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+    <div class="bg-white rounded-2xl max-w-5xl w-full max-h-[92vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden">
+      
+      <!-- Top Admin Bar -->
+      <div class="px-6 py-4 border-b border-slate-200 bg-slate-900 text-white flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-lg bg-brand-600 flex items-center justify-center font-bold text-white text-sm">
+            SJ
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h3 class="font-bold text-white text-base">SEJUKIN Management Console</h3>
+              <span class="text-[10px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded font-semibold flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Cloud Real-Time
+              </span>
+            </div>
+            <p class="text-xs text-slate-400">Edit semua teks, gambar, katalog produk, dan reset data</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <!-- Reset to Default Button with High Prominence -->
+          <button onclick="promptResetDefault()" class="px-3.5 py-1.5 rounded-lg bg-rose-600/90 hover:bg-rose-700 text-white text-xs font-bold transition flex items-center gap-1.5 shadow-sm" title="Kembalikan semua teks & data ke kondisi awal">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+            <span>Reset Data Default</span>
+          </button>
+          
+          <button onclick="handleAdminLogout()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition">
+            Keluar
+          </button>
+          <button onclick="closeAdminPanelModal()" class="text-slate-400 hover:text-white p-1 ml-1">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Admin Tab Navigation -->
+      <div class="px-6 border-b border-slate-200 bg-surface-50 flex items-center gap-2 overflow-x-auto no-scrollbar">
+        <button onclick="switchAdminTab('catalog')" id="atab-catalog" class="admin-tab-btn py-3 px-4 text-xs font-bold border-b-2 border-brand-600 text-brand-600 whitespace-nowrap">
+          📁 Katalog Layanan & Produk
+        </button>
+        <button onclick="switchAdminTab('hero')" id="atab-hero" class="admin-tab-btn py-3 px-4 text-xs font-bold border-b-2 border-transparent text-slate-600 hover:text-slate-900 whitespace-nowrap">
+          🏠 Hero & Teks Utama
+        </button>
+        <button onclick="switchAdminTab('technicians')" id="atab-technicians" class="admin-tab-btn py-3 px-4 text-xs font-bold border-b-2 border-transparent text-slate-600 hover:text-slate-900 whitespace-nowrap">
+          👨‍🔧 Data Teknisi
+        </button>
+        <button onclick="switchAdminTab('settings')" id="atab-settings" class="admin-tab-btn py-3 px-4 text-xs font-bold border-b-2 border-transparent text-slate-600 hover:text-slate-900 whitespace-nowrap">
+          ⚙️ Pengaturan & Reset
+        </button>
+      </div>
+
+      <!-- Tab Content Area -->
+      <div class="p-6 overflow-y-auto flex-1 space-y-6 bg-white">
+
+        <!-- TAB 1: KATALOG & PRODUK (PRIORITAS UTAMA) -->
+        <div id="admin-content-catalog" class="space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+            <div>
+              <h4 class="font-bold text-slate-950 text-sm">Daftar Produk & Layanan SEJUKIN</h4>
+              <p class="text-xs text-slate-500">Ubah harga, judul, deskripsi, gambar (Google Drive/Unsplash), atau tambah layanan baru secara realtime.</p>
+            </div>
+            <button onclick="openProductEditModal(null)" class="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+              <span>Tambah Produk/Layanan</span>
+            </button>
+          </div>
+
+          <!-- Services Table / Card in Admin -->
+          <div id="admin-catalog-list" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Populated dynamically via JS -->
+          </div>
+        </div>
+
+        <!-- TAB 2: HERO & TEKS UTAMA -->
+        <div id="admin-content-hero" class="hidden space-y-5">
+          <div class="bg-surface-50 p-4 rounded-xl border border-slate-200">
+            <h4 class="font-bold text-slate-900 text-sm mb-1">Headline & Tombol Utama</h4>
+            <p class="text-xs text-slate-500 mb-4">Pengeditan ini akan langsung memperbarui tampilan landing page secara realtime.</p>
+            
+            <div class="space-y-4">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Headline Utama (Bisa pakai &lt;br&gt;)</label>
+                <textarea id="edit-hero-title" rows="2" class="w-full bg-white border border-slate-200 rounded-lg p-2.5 text-xs text-slate-900"></textarea>
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Subheadline Hero</label>
+                <textarea id="edit-hero-subtitle" rows="3" class="w-full bg-white border border-slate-200 rounded-lg p-2.5 text-xs text-slate-900"></textarea>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">Teks Tombol CTA</label>
+                  <input type="text" id="edit-hero-cta" class="w-full bg-white border border-slate-200 rounded-lg p-2.5 text-xs text-slate-900">
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">Nomor WhatsApp Booking</label>
+                  <input type="text" id="edit-contact-phone" class="w-full bg-white border border-slate-200 rounded-lg p-2.5 text-xs text-slate-900">
+                </div>
+              </div>
+
+              <!-- Hero Image URL Field Supporting Google Drive & Unsplash -->
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">URL Foto Hero (Mendukung Google Drive link, lh3, atau Unsplash)</label>
+                <input type="text" id="edit-hero-image" class="w-full bg-white border border-slate-200 rounded-lg p-2.5 text-xs text-slate-900" placeholder="https://drive.google.com/file/d/... atau https://images.unsplash.com/...">
+                <p class="text-[11px] text-slate-500 mt-1">Sistem otomatis mengonversi ke format <code>lh3.googleusercontent.com/d/</code> + thumbnail backup jika menggunakan Google Drive.</p>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-slate-200 flex justify-end">
+              <button onclick="saveHeroChanges()" class="px-5 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold uppercase tracking-wider transition">
+                Simpan Perubahan Teks
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: TEKNISI -->
+        <div id="admin-content-technicians" class="hidden space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+            <div>
+              <h4 class="font-bold text-slate-950 text-sm">Kelola Profil Teknisi</h4>
+              <p class="text-xs text-slate-500">Perbarui data nama, keahlian, dan foto teknisi yang tampil pada website.</p>
+            </div>
+          </div>
+          <div id="admin-technicians-list" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- Populated dynamically via JS -->
+          </div>
+        </div>
+
+        <!-- TAB 4: PENGATURAN & RESET -->
+        <div id="admin-content-settings" class="hidden space-y-6">
+          <div class="bg-surface-50 rounded-xl p-5 border border-slate-200">
+            <h4 class="font-bold text-slate-950 text-sm mb-1">Status Sinkronisasi Cloud</h4>
+            <p class="text-xs text-slate-600 mb-4">
+              Website ini tersambung ke penyimpanan cloud real-time. Setiap perubahan yang disimpan akan langsung tampak secara publik.
+            </p>
+
+            <div class="space-y-2 text-xs">
+              <div class="flex items-center justify-between p-2.5 rounded bg-white border border-slate-200">
+                <span class="text-slate-600 font-medium">Koneksi Database:</span>
+                <span class="font-bold text-emerald-600 flex items-center gap-1">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Terhubung & Aktif
+                </span>
+              </div>
+              <div class="flex items-center justify-between p-2.5 rounded bg-white border border-slate-200">
+                <span class="text-slate-600 font-medium">Hak Akses:</span>
+                <span class="font-bold text-brand-700">Administrator Terbuka</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Reset Default Section -->
+          <div class="bg-rose-50/50 rounded-xl p-5 border border-rose-200">
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 rounded-lg bg-rose-100 text-rose-700 flex items-center justify-center font-bold flex-shrink-0">
+                ⚠️
+              </div>
+              <div class="space-y-2 flex-1">
+                <h4 class="font-bold text-rose-950 text-sm">Kembalikan ke Data Default (Reset)</h4>
+                <p class="text-xs text-rose-800 leading-relaxed">
+                  Jika isi katalog, teks, atau gambar telah diubah dan ingin dikembalikan seperti format awal, klik tombol ini untuk memulihkan seluruh konten kembali ke setelan bawaan.
+                </p>
+                <div class="pt-2">
+                  <button onclick="promptResetDefault()" class="px-5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs uppercase tracking-wider transition shadow flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                    <span>Pulihkan Data Asli Default</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODAL 4: CONFIRMATION RESET MODAL -->
+  <div id="reset-confirm-modal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-sm w-full p-6 text-center shadow-2xl border border-slate-200">
+      <div class="w-12 h-12 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center mx-auto mb-3">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+      </div>
+      <h3 class="font-bold text-slate-950 text-base mb-1">Reset ke Data Asli?</h3>
+      <p class="text-xs text-slate-600 mb-5 leading-relaxed">
+        Tindakan ini akan mengembalikan semua katalog produk, teks hero, dan foto ke setelan awal pabrikan.
+      </p>
+      <div class="flex items-center justify-center gap-3">
+        <button onclick="closeResetConfirmModal()" class="px-4 py-2 rounded-lg border border-slate-200 text-xs font-semibold text-slate-600 hover:bg-slate-50">
+          Batal
+        </button>
+        <button onclick="executeResetToDefault()" class="px-5 py-2 rounded-lg bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold transition">
+          Ya, Reset Sekarang
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 5: PRODUCT EDITOR MODAL -->
+  <div id="product-editor-modal" class="fixed inset-0 z-50 hidden bg-slate-950/75 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-7 shadow-2xl border border-slate-200 relative my-8">
+      <button onclick="closeProductEditModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+
+      <div class="flex items-center gap-2 mb-4">
+        <div class="w-8 h-8 rounded-lg bg-brand-50 border border-brand-200 flex items-center justify-center text-brand-600 font-bold">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+        </div>
+        <div>
+          <h3 id="product-modal-title" class="font-bold text-slate-950 text-base">Edit Layanan / Produk</h3>
+          <p class="text-xs text-slate-500">Perubahan akan langsung tersinkronisasi ke katalog publik</p>
+        </div>
+      </div>
+
+      <form onsubmit="handleSaveProduct(event)" class="space-y-3.5">
+        <input type="hidden" id="prod-edit-id">
+
+        <div>
+          <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Nama Layanan / Produk</label>
+          <input type="text" id="prod-edit-title" required class="w-full bg-surface-50 border border-slate-200 rounded-lg px-3 py-2 text-xs font-medium text-slate-900 focus:outline-none focus:border-brand-500 focus:bg-white">
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Badge Tag</label>
+            <input type="text" id="prod-edit-tag" placeholder="Contoh: Layanan Favorit" class="w-full bg-surface-50 border border-slate-200 rounded-lg px-3 py-2 text-xs font-medium text-slate-900 focus:outline-none focus:border-brand-500 focus:bg-white">
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Tarif / Harga Tampilan</label>
+            <input type="text" id="prod-edit-price" required placeholder="Contoh: Mulai Rp75.000 / unit" class="w-full bg-surface-50 border border-slate-200 rounded-lg px-3 py-2 text-xs font-medium text-slate-900 focus:outline-none focus:border-brand-500 focus:bg-white">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Estimasi Durasi</label>
+            <input type="text" id="prod-edit-duration" placeholder="Contoh: 45–60 menit" class="w-full bg-surface-50 border border-slate-200 rounded-lg px-3 py-2 text-xs font-medium text-slate-900 focus:outline-none focus:border-brand-500 focus:bg-white">
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-700 mb-1">URL Gambar (Drive / Unsplash)</label>
+            <input type="text" id="prod-edit-image" required placeholder="https://..." class="w-full bg-surface-50 border border-slate-200 rounded-lg px-3 py-2 text-xs font-medium text-slate-900 focus:outline-none focus:border-brand-500 focus:bg-white">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Deskripsi Layanan</label>
+          <textarea id="prod-edit-desc" rows="3" required class="w-full bg-surface-50 border border-slate-200 rounded-lg px-3 py-2 text-xs font-medium text-slate-900 focus:outline-none focus:border-brand-500 focus:bg-white"></textarea>
+        </div>
+
+        <div class="pt-3 border-t border-slate-100 flex items-center justify-end gap-2.5">
+          <button type="button" onclick="closeProductEditModal()" class="px-4 py-2 rounded-lg border border-slate-200 text-xs font-semibold text-slate-600 hover:bg-slate-50">
+            Batal
+          </button>
+          <button type="submit" class="px-5 py-2 rounded-lg bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold uppercase tracking-wider transition shadow">
+            Simpan Perubahan
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL 6: BOOKING SERVICE MODAL -->
+  <div id="booking-modal" class="fixed inset-0 z-50 hidden bg-slate-950/75 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 relative my-8">
+      <button onclick="closeBookingModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+
+      <div class="flex items-center gap-2.5 mb-4">
+        <div class="w-9 h-9 rounded-lg bg-brand-50 border border-brand-200 flex items-center justify-center text-brand-600">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        </div>
+        <div>
+          <h3 class="font-bold text-slate-950 text-lg">Booking Jadwal Teknisi</h3>
+          <p class="text-xs text-slate-500">Teknisi profesional SEJUKIN datang langsung ke lokasi Anda</p>
+        </div>
+      </div>
+
+      <form onsubmit="handleBookingSubmit(event)" class="space-y-3.5">
+        <div>
+          <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Nama Lengkap</label>
+          <input type="text" id="modal-name" required placeholder="Nama Anda" class="w-full bg-surface-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs font-medium text-slate-900 focus:outline-none focus:border-brand-500 focus:bg-white">
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Nomor WhatsApp</label>
+            <input type="tel" id="modal-phone" required placeholder="08xxxxxxxxxx" class="w-full bg-surface-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs font-medium text-slate-900 focus:outline-none focus:border-brand-500 focus:bg-white">
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Kota Wilayah</label>
+            <select id="modal-city" required class="w-full bg-surface-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs font-medium text-slate-900 focus:outline-none focus:border-brand-500 focus:bg-white">
+              <option value="Jakarta">Jakarta & Sekitarnya</option>
+              <option value="Bandung">Bandung</option>
+              <option value="Bekasi">Bekasi</option>
+              <option value="Depok">Depok</option>
+              <option value="Tangerang">Tangerang & Tangsel</option>
+              <option value="Bogor">Bogor</option>
+              <option value="Semarang">Semarang</option>
+              <option value="Yogyakarta">Yogyakarta</option>
+              <option value="Surabaya">Surabaya</option>
+              <option value="Malang">Malang</option>
+              <option value="Medan">Medan</option>
+              <option value="Palembang">Palembang</option>
+              <option value="Bandar Lampung">Bandar Lampung</option>
+              <option value="Makassar">Makassar</option>
+              <option value="Denpasar">Denpasar Bali</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Pilihan Layanan</label>
+            <select id="modal-service" class="w-full bg-surface-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs font-medium text-slate-900 focus:outline-none focus:border-brand-500 focus:bg-white">
+              <option value="Cuci AC Profesional">Cuci AC Profesional</option>
+              <option value="Service AC & Reparasi Modul">Service AC & Reparasi Modul</option>
+              <option value="Instalasi AC Baru & Pipa">Instalasi AC Baru & Pipa</option>
+              <option value="Bongkar Pasang AC">Bongkar Pasang AC</option>
+              <option value="Cek & Isi Refrigerant">Cek & Isi Refrigerant</option>
+              <option value="Maintenance Berkala Kontrak">Maintenance Berkala Kontrak</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Jumlah Unit</label>
+            <input type="number" id="modal-units" value="1" min="1" max="50" class="w-full bg-surface-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs font-medium text-slate-900 focus:outline-none focus:border-brand-500 focus:bg-white">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Tanggal Kunjungan</label>
+            <input type="date" id="modal-date" required class="w-full bg-surface-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs font-medium text-slate-900 focus:outline-none focus:border-brand-500 focus:bg-white">
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Pilihan Jam</label>
+            <select id="modal-time" class="w-full bg-surface-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs font-medium text-slate-900 focus:outline-none focus:border-brand-500 focus:bg-white">
+              <option value="Pagi (08.30 - 11.30 WIB)">Pagi (08.30 - 11.30 WIB)</option>
+              <option value="Siang (13.00 - 15.30 WIB)">Siang (13.00 - 15.30 WIB)</option>
+              <option value="Sore (15.30 - 18.00 WIB)">Sore (15.30 - 18.00 WIB)</option>
+              <option value="Malam (19.00 - 21.00 WIB)">Malam (19.00 - 21.00 WIB)</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Alamat Lengkap / Catatan Gejala AC</label>
+          <textarea id="modal-address" rows="2" placeholder="Nama perumahan, nomor rumah/blok, atau keluhan detail..." class="w-full bg-surface-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs font-medium text-slate-900 focus:outline-none focus:border-brand-500 focus:bg-white"></textarea>
+        </div>
+
+        <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+          <span class="text-[11px] text-slate-500">🛡️ Garansi Pengerjaan 30 Hari</span>
+          <div class="flex items-center gap-2">
+            <button type="button" onclick="closeBookingModal()" class="px-4 py-2 rounded-lg border border-slate-200 text-xs font-semibold text-slate-600 hover:bg-slate-50">
+              Batal
+            </button>
+            <button type="submit" class="px-5 py-2 rounded-lg bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold uppercase tracking-wider transition shadow">
+              Konfirmasi Booking
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL 7: TERMS & GUARANTEE MODAL -->
+  <div id="terms-modal" class="fixed inset-0 z-50 hidden bg-slate-950/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-7 shadow-2xl border border-slate-200 relative">
+      <button onclick="closeTermsModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+
+      <h3 class="text-base font-bold text-slate-950 mb-2">Ketentuan Garansi 30 Hari SEJUKIN</h3>
+      <div class="text-xs text-slate-600 space-y-2.5 max-h-80 overflow-y-auto pr-1">
+        <p>1. <strong>Cakupan Garansi Perbaikan:</strong> Berlaku selama 30 hari kalender terhitung sejak tanggal pekerjaan selesai dan nota digital diterbitkan.</p>
+        <p>2. <strong>Garansi Cuci AC:</strong> Menjamin bebas kebocoran air (water leak) dan hembusan evaporator bersih selama 14 hari kalender.</p>
+        <p>3. <strong>Klaim Tanpa Biaya:</strong> Kunjungan ulang gratis selama keluhan terkait langsung dengan komponen atau pekerjaan yang sama.</p>
+        <p>4. <strong>Pengecualian:</strong> Garansi tidak berlaku jika unit telah dimodifikasi atau dibongkar oleh pihak ketiga tanpa persetujuan SEJUKIN.</p>
+      </div>
+
+      <div class="mt-5 pt-3 border-t border-slate-100 text-right">
+        <button onclick="closeTermsModal()" class="px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold">
+          Mengerti & Tutup
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER (Replacing alert()) -->
+  <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- FIREBASE MODULE & REALTIME CMS ENGINE -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, doc, getDoc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    // Global application configuration
+    const appId = typeof __app_id !== 'undefined' ? __app_id : 'sejukin-ac-service-id';
+    
+    // User provided Firebase API key with secure configuration setup
+    const userApiKey = "AIzaSyBZyvA6_cy2k42eU_Ktt13wFVTDYgZaXkI";
+    const firebaseConfig = typeof __firebase_config !== 'undefined' 
+      ? JSON.parse(__firebase_config) 
+      : {
+          apiKey: userApiKey,
+          authDomain: "sejukin-demo.firebaseapp.com",
+          projectId: "sejukin-demo",
+          storageBucket: "sejukin-demo.appspot.com",
+          appId: "1:847192837461:web:98a72b6c5d4e3f21"
+        };
+
+    let app = null;
+    let auth = null;
+    let db = null;
+    let firestoreReady = false;
+
+    // Default Pristine Data for Demo Resets
+    const DEFAULT_CATALOG_SERVICES = [
+      {
+        id: "cuci-ac-pro",
+        title: "Cuci AC Profesional",
+        tag: "Layanan Terfavorit",
+        price: "Mulai Rp75.000 / unit",
+        rawPrice: 75000,
+        desc: "Membersihkan indoor dan outdoor unit secara higienis menggunakan terpal pelindung khusus untuk menjaga kebersihan dinding & lantai. Menghilangkan debu, jamur, serta membantu menjaga performa dan sirkulasi udara sejuk sehat di ruangan.",
+        duration: "45–60 menit",
+        isFeatured: true,
+        image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80",
+        features: ["Cuci Evaporator & Filter", "Pembersihan Blower Fan", "Flashing Saluran Drainase", "Cuci Kondensor Outdoor Unit"]
+      },
+      {
+        id: "service-modul",
+        title: "Service AC & Reparasi Modul",
+        tag: "Perbaikan Presisi",
+        price: "Mulai Rp95.000",
+        rawPrice: 95000,
+        desc: "Perbaikan sensor error, kebocoran freon, kapasitor lemah, kompresor macet, dan masalah kelistrikan unit.",
+        duration: "60–90 menit",
+        isFeatured: false,
+        image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: "instalasi-baru",
+        title: "Instalasi AC Baru & Pipa",
+        tag: "Pemasangan Standar",
+        price: "Mulai Rp250.000 / unit",
+        rawPrice: 250000,
+        desc: "Pemasangan bracket kuat, perapian pipa tembaga tebal (standar inverter), vakum kompresor, dan finishing rapi.",
+        duration: "90–120 menit",
+        isFeatured: false,
+        image: "https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: "bongkar-pasang",
+        title: "Bongkar Pasang AC",
+        tag: "Relokasi Unit",
+        price: "Mulai Rp350.000 / paket",
+        rawPrice: 350000,
+        desc: "Pemindahan unit antar ruangan atau antar rumah. Termasuk pump-down agar freon tidak terbuang sia-sia.",
+        duration: "2–3 jam",
+        isFeatured: false,
+        image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: "isi-freon",
+        title: "Cek & Isi Refrigerant (R32 / R410A / R22)",
+        tag: "Refrigerant Tekanan Standar",
+        price: "Mulai Rp150.000",
+        rawPrice: 150000,
+        desc: "Pengukuran tekanan manifold gauge dan pengisian freon murni sesuai spesifikasi pabrik AC.",
+        duration: "30–45 menit",
+        isFeatured: false,
+        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: "maintenance-kontrak",
+        title: "Maintenance Berkala Kontrak",
+        tag: "Perlindungan Berkala",
+        price: "Paket Hemat Khusus",
+        rawPrice: 140000,
+        desc: "Jadwal perawatan berkala 2-3 bulan sekali untuk hunian dan ruko dengan logbook riwayat mesin.",
+        duration: "Terjadwal",
+        isFeatured: false,
+        image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80"
+      }
+    ];
+
+    const DEFAULT_TECHNICIANS = [
+      {
+        id: "tech-1",
+        name: "ANDI PRATAMA",
+        role: "Senior Inverter & VRV Specialist",
+        exp: "8+ Tahun Pengalaman",
+        rating: "4.95 / 5.0 (620+ Unit)",
+        image: "https://images.unsplash.com/photo-1540569014015-19a7be504e3a?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: "tech-2",
+        name: "HENDRA WIJAYA",
+        role: "Troubleshoot Freon & Kompresor",
+        exp: "6+ Tahun Pengalaman",
+        rating: "4.92 / 5.0 (480+ Unit)",
+        image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: "tech-3",
+        name: "BUDI SANTOSO",
+        role: "Master Cuci & Overhaul Unit",
+        exp: "7+ Tahun Pengalaman",
+        rating: "4.98 / 5.0 (810+ Unit)",
+        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80"
+      }
+    ];
+
+    const DEFAULT_SITE_CONFIG = {
+      heroTitle: "AC BERMASALAH?<br><span class=\"text-brand-600\">KAMI DATANG.</span>",
+      heroSubtitle: "Layanan service, cuci, instalasi, dan maintenance AC langsung ke rumah, kantor, toko, dan properti Anda dengan teknisi bersertifikat, alat presisi, dan garansi resmi.",
+      heroCta: "Booking Service",
+      contactPhone: "0812-8900-1200",
+      heroImage: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1200&q=80",
+      catalog: DEFAULT_CATALOG_SERVICES,
+      technicians: DEFAULT_TECHNICIANS
+    };
+
+    // Active state container
+    window.SEJUKIN_STATE = JSON.parse(JSON.stringify(DEFAULT_SITE_CONFIG));
+
+    /**
+     * Resolves Google Drive Links to:
+     * 1. Primary: https://lh3.googleusercontent.com/d/{id} (Fastest & most stable)
+     * 2. Secondary/Backup: https://drive.google.com/thumbnail?id={id}&sz=w1000
+     * 3. Fallback: High quality Unsplash AC photo
+     */
+    window.resolveSmartImageUrl = function(rawUrl, defaultFallback) {
+      if (!rawUrl || typeof rawUrl !== 'string') return defaultFallback || 'https://placehold.co/800x600/f1f5f9/0f172a?text=Foto+AC';
+
+      const trimmed = rawUrl.trim();
+      
+      // Match Google Drive IDs
+      let fileId = null;
+      const dMatch = trimmed.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+      const idMatch = trimmed.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+      const lh3Match = trimmed.match(/googleusercontent\.com\/d\/([a-zA-Z0-9_-]+)/);
+
+      if (dMatch && dMatch[1]) fileId = dMatch[1];
+      else if (idMatch && idMatch[1]) fileId = idMatch[1];
+      else if (lh3Match && lh3Match[1]) fileId = lh3Match[1];
+
+      if (fileId) {
+        return {
+          primary: `https://lh3.googleusercontent.com/d/${fileId}`,
+          backup: `https://drive.google.com/thumbnail?id=${fileId}&sz=w1200`,
+          fallback: defaultFallback || 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1200&q=80'
+        };
+      }
+
+      // Normal URL (Unsplash or external)
+      return {
+        primary: trimmed,
+        backup: defaultFallback || 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1200&q=80',
+        fallback: defaultFallback || 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1200&q=80'
+      };
+    };
+
+    // Smart Image error fallback handler
+    window.attachSmartImgHandler = function(imgEl, rawUrl, defaultFallback) {
+      const resolved = window.resolveSmartImageUrl(rawUrl, defaultFallback);
+      imgEl.src = resolved.primary;
+      let attempt = 0;
+      imgEl.onerror = function() {
+        attempt++;
+        if (attempt === 1 && resolved.backup && resolved.backup !== imgEl.src) {
+          imgEl.src = resolved.backup;
+        } else if (attempt <= 2 && resolved.fallback) {
+          imgEl.src = resolved.fallback;
+        }
+      };
+    };
+
+    async function initFirebaseSync() {
+      try {
+        app = initializeApp(firebaseConfig);
+        auth = getAuth(app);
+        db = getFirestore(app);
+
+        // Strict Rule 3: Auth Before Queries
+        if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+          await signInWithCustomToken(auth, __initial_auth_token);
+        } else {
+          await signInAnonymously(auth);
+        }
+
+        // Strict Rule 1: Public artifact collection path
+        const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'site_config', 'main');
+
+        // Check if doc exists, otherwise create it with default data
+        const snap = await getDoc(docRef);
+        if (!snap.exists()) {
+          await setDoc(docRef, DEFAULT_SITE_CONFIG);
+        }
+
+        // Real-time snapshot listener
+        onSnapshot(docRef, (snapshot) => {
+          if (snapshot.exists()) {
+            const data = snapshot.data();
+            window.SEJUKIN_STATE = Object.assign({}, DEFAULT_SITE_CONFIG, data);
+            renderEntireSiteFromState();
+            renderAdminPanelLists();
+          }
+        }, (err) => {
+          console.warn("Firestore onSnapshot error:", err);
+        });
+
+        firestoreReady = true;
+      } catch (err) {
+        console.warn("Operating in in-memory state:", err);
+        renderEntireSiteFromState();
+        renderAdminPanelLists();
+      }
+    }
+
+    // Save active state to Firestore
+    window.saveStateToCloud = async function() {
+      if (firestoreReady && db && auth.currentUser) {
+        try {
+          const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'site_config', 'main');
+          await setDoc(docRef, window.SEJUKIN_STATE);
+          return true;
+        } catch (e) {
+          console.error("Cloud save failed, saved locally:", e);
+        }
+      }
+      // Fallback local re-render
+      renderEntireSiteFromState();
+      renderAdminPanelLists();
+      return true;
+    };
+
+    window.renderEntireSiteFromState = function() {
+      const state = window.SEJUKIN_STATE;
+
+      // 1. Hero text & image
+      const heroTitleEl = document.getElementById('hero-title');
+      if (heroTitleEl) heroTitleEl.innerHTML = state.heroTitle;
+
+      const heroSubtitleEl = document.getElementById('hero-subtitle');
+      if (heroSubtitleEl) heroSubtitleEl.innerText = state.heroSubtitle;
+
+      const heroCtaEl = document.getElementById('hero-cta-label');
+      if (heroCtaEl) heroCtaEl.innerText = state.heroCta;
+
+      const navCtaEl = document.getElementById('nav-cta-text');
+      if (navCtaEl) navCtaEl.innerText = state.heroCta;
+
+      const heroImg = document.getElementById('hero-img-display');
+      if (heroImg) {
+        window.attachSmartImgHandler(heroImg, state.heroImage, DEFAULT_SITE_CONFIG.heroImage);
+      }
+
+      // 2. Render Catalog & Services
+      renderDynamicCatalog(state.catalog || []);
+
+      // 3. Render Technicians
+      renderDynamicTechnicians(state.technicians || []);
+    };
+
+    function renderDynamicCatalog(catalog) {
+      const container = document.getElementById('catalog-dynamic-container');
+      if (!container) return;
+
+      if (!catalog || catalog.length === 0) {
+        container.innerHTML = `<div class="p-8 text-center text-slate-500 bg-slate-50 rounded-2xl border">Belum ada layanan di katalog. Klik Tambah Layanan untuk memulai.</div>`;
+        return;
+      }
+
+      // Find primary featured or first service
+      const featured = catalog.find(item => item.isFeatured) || catalog[0];
+      const others = catalog.filter(item => item.id !== featured.id);
+
+      let html = `
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
+          <!-- FEATURED SERVICE HERO -->
+          <div class="lg:col-span-7 bg-surface-50 border border-slate-200 rounded-2xl p-6 sm:p-8 flex flex-col justify-between">
+            <div class="space-y-6">
+              <div class="rounded-xl overflow-hidden border border-slate-200 bg-white aspect-[16/9] relative">
+                <img 
+                  id="featured-cat-img"
+                  src="${featured.image}" 
+                  alt="${featured.title}" 
+                  class="w-full h-full object-cover"
+                >
+                <div class="absolute top-3 right-3 bg-white/95 backdrop-blur-md px-3 py-1 rounded-lg border border-slate-200 text-xs font-bold text-brand-700 shadow-sm">
+                  ${featured.tag || 'Layanan Unggulan'}
+                </div>
+              </div>
+
+              <div>
+                <div class="flex items-center justify-between gap-4 mb-2">
+                  <span class="text-xs font-bold tracking-wider uppercase text-brand-700 bg-brand-50 px-3 py-1 rounded-md border border-brand-200">
+                    ${featured.tag || 'Terfavorit'}
+                  </span>
+                  <span class="text-sm font-bold text-slate-900">${featured.price}</span>
+                </div>
+                <h3 class="text-2xl font-bold text-slate-950 font-display">
+                  ${featured.title}
+                </h3>
+                <p class="mt-2 text-slate-600 text-sm sm:text-base leading-relaxed">
+                  ${featured.desc}
+                </p>
+              </div>
+
+              <!-- Checklist -->
+              <div class="grid grid-cols-2 gap-2 text-xs font-medium text-slate-700 pt-2 border-t border-slate-200/80">
+                ${(featured.features || ['Evaporator & Filter Bersih', 'Blower Fan Higienis', 'Flashing Saluran Drainase', 'Inspeksi Suhu Dingin']).map(f => `
+                  <div class="flex items-center gap-2">
+                    <span class="text-brand-600 font-bold">✓</span> ${f}
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+            <div class="pt-6 mt-6 border-t border-slate-200/80 flex items-center justify-between">
+              <button onclick="bookSpecificService('${featured.title}')" class="px-5 py-2.5 rounded-lg bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold tracking-wider uppercase transition">
+                Detail & Booking
+              </button>
+              <span class="text-xs text-slate-500 font-medium">Estimasi: ${featured.duration || '45–60 menit'}</span>
+            </div>
+          </div>
+
+          <!-- SIDE SERVICES LIST -->
+          <div class="lg:col-span-5 flex flex-col justify-between space-y-4">
+            ${others.map(svc => `
+              <div class="p-5 rounded-xl border border-slate-200 hover:border-brand-400 bg-white hover:bg-surface-50 transition-all flex items-start justify-between group">
+                <div class="pr-4">
+                  <div class="text-xs font-bold text-brand-600 uppercase mb-1">${svc.tag || 'Layanan Standar'}</div>
+                  <h4 class="text-base font-bold text-slate-900 group-hover:text-brand-700 transition-colors">${svc.title}</h4>
+                  <p class="text-xs text-slate-600 mt-1 leading-relaxed">${svc.desc}</p>
+                  <div class="mt-2 text-xs font-semibold text-slate-900">${svc.price}</div>
+                </div>
+                <button onclick="bookSpecificService('${svc.title}')" class="text-xs font-bold text-brand-600 hover:text-brand-800 flex-shrink-0 self-center">
+                  Pilih →
+                </button>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+
+      container.innerHTML = html;
+
+      // Attach smart Google Drive fallback to featured image
+      const fImg = document.getElementById('featured-cat-img');
+      if (fImg) {
+        window.attachSmartImgHandler(fImg, featured.image, DEFAULT_CATALOG_SERVICES[0].image);
+      }
+    }
+
+    function renderDynamicTechnicians(technicians) {
+      // Re-populate tech list if container exists
+      const techCards = document.querySelectorAll('#teknisi .grid > div');
+      if (techCards && techCards.length >= 3 && technicians.length >= 3) {
+        technicians.slice(0, 3).forEach((tech, i) => {
+          const card = techCards[i];
+          if (!card) return;
+          const img = card.querySelector('img');
+          const nameEl = card.querySelector('h3');
+          const roleEl = card.querySelector('p');
+          if (img && tech.image) window.attachSmartImgHandler(img, tech.image, DEFAULT_TECHNICIANS[i].image);
+          if (nameEl && tech.name) nameEl.innerText = tech.name;
+          if (roleEl && tech.role) roleEl.innerText = tech.role;
+        });
+      }
+    }
+
+    window.renderAdminPanelLists = function() {
+      const state = window.SEJUKIN_STATE;
+
+      // 1. Populate Catalog List in Admin
+      const catList = document.getElementById('admin-catalog-list');
+      if (catList && state.catalog) {
+        catList.innerHTML = state.catalog.map(prod => `
+          <div class="p-4 rounded-xl border border-slate-200 bg-white hover:border-slate-300 flex flex-col justify-between space-y-3">
+            <div class="flex items-start gap-3">
+              <div class="w-14 h-14 rounded-lg bg-slate-100 overflow-hidden border border-slate-200 flex-shrink-0">
+                <img src="${prod.image}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/100x100?text=Foto'">
+              </div>
+              <div class="flex-1">
+                <div class="flex items-center gap-2">
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-brand-700 bg-brand-50 px-2 py-0.5 rounded border border-brand-100">${prod.tag || 'Layanan'}</span>
+                  ${prod.isFeatured ? `<span class="text-[10px] font-bold uppercase text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">Featured</span>` : ''}
+                </div>
+                <h5 class="font-bold text-slate-900 text-sm mt-1">${prod.title}</h5>
+                <div class="text-xs font-semibold text-slate-800 mt-0.5">${prod.price}</div>
+              </div>
+            </div>
+            <p class="text-xs text-slate-500 line-clamp-2">${prod.desc}</p>
+            <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
+              <button onclick="window.toggleProductFeatured('${prod.id}')" class="text-[11px] font-semibold text-slate-600 hover:text-brand-600">
+                ${prod.isFeatured ? '★ Featured Utama' : '☆ Jadikan Featured'}
+              </button>
+              <div class="flex items-center gap-2">
+                <button onclick="window.openProductEditModal('${prod.id}')" class="text-brand-600 hover:text-brand-800 font-bold px-2 py-1 bg-brand-50 rounded">
+                  Edit
+                </button>
+                <button onclick="window.deleteCatalogProduct('${prod.id}')" class="text-rose-600 hover:text-rose-800 font-bold px-2 py-1 bg-rose-50 rounded">
+                  Hapus
+                </button>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // 2. Populate Hero inputs
+      const titleInput = document.getElementById('edit-hero-title');
+      const subInput = document.getElementById('edit-hero-subtitle');
+      const ctaInput = document.getElementById('edit-hero-cta');
+      const phoneInput = document.getElementById('edit-contact-phone');
+      const heroImgInput = document.getElementById('edit-hero-image');
+
+      if (titleInput) titleInput.value = state.heroTitle;
+      if (subInput) subInput.value = state.heroSubtitle;
+      if (ctaInput) ctaInput.value = state.heroCta;
+      if (phoneInput) phoneInput.value = state.contactPhone;
+      if (heroImgInput) heroImgInput.value = state.heroImage;
+
+      // 3. Populate Technicians list in Admin
+      const techList = document.getElementById('admin-technicians-list');
+      if (techList && state.technicians) {
+        techList.innerHTML = state.technicians.map((tech, idx) => `
+          <div class="p-4 rounded-xl border border-slate-200 bg-white space-y-3">
+            <div class="w-full aspect-[4/3] rounded-lg bg-slate-100 overflow-hidden border border-slate-200">
+              <img src="${tech.image}" class="w-full h-full object-cover">
+            </div>
+            <div>
+              <label class="block text-[10px] uppercase font-bold text-slate-500">Nama Teknisi</label>
+              <input type="text" id="tech-name-${idx}" value="${tech.name}" class="w-full text-xs font-bold text-slate-900 border border-slate-200 rounded p-1 mt-0.5">
+            </div>
+            <div>
+              <label class="block text-[10px] uppercase font-bold text-slate-500">Spesialisasi</label>
+              <input type="text" id="tech-role-${idx}" value="${tech.role}" class="w-full text-xs text-slate-700 border border-slate-200 rounded p-1 mt-0.5">
+            </div>
+            <div>
+              <label class="block text-[10px] uppercase font-bold text-slate-500">URL Foto (Drive / Unsplash)</label>
+              <input type="text" id="tech-img-${idx}" value="${tech.image}" class="w-full text-xs text-slate-700 border border-slate-200 rounded p-1 mt-0.5">
+            </div>
+            <button onclick="window.saveTechnicianSingle(${idx})" class="w-full py-1.5 rounded bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition">
+              Simpan Teknisi Ini
+            </button>
+          </div>
+        `).join('');
+      }
+    };
+
+    // Save Hero Text & Configuration Changes
+    window.saveHeroChanges = async function() {
+      const state = window.SEJUKIN_STATE;
+      state.heroTitle = document.getElementById('edit-hero-title').value;
+      state.heroSubtitle = document.getElementById('edit-hero-subtitle').value;
+      state.heroCta = document.getElementById('edit-hero-cta').value;
+      state.contactPhone = document.getElementById('edit-contact-phone').value;
+      state.heroImage = document.getElementById('edit-hero-image').value.trim();
+
+      await window.saveStateToCloud();
+      showToast('Perubahan Hero & Teks berhasil disimpan secara real-time!', 'success');
+    };
+
+    // Save Technician Single Edit
+    window.saveTechnicianSingle = async function(idx) {
+      const state = window.SEJUKIN_STATE;
+      if (!state.technicians[idx]) return;
+
+      state.technicians[idx].name = document.getElementById(`tech-name-${idx}`).value;
+      state.technicians[idx].role = document.getElementById(`tech-role-${idx}`).value;
+      state.technicians[idx].image = document.getElementById(`tech-img-${idx}`).value.trim();
+
+      await window.saveStateToCloud();
+      showToast(`Data teknisi ${state.technicians[idx].name} diperbarui!`, 'success');
+    };
+
+    // Toggle Featured Status
+    window.toggleProductFeatured = async function(prodId) {
+      const state = window.SEJUKIN_STATE;
+      state.catalog.forEach(item => {
+        item.isFeatured = (item.id === prodId);
+      });
+      await window.saveStateToCloud();
+      showToast('Status Featured diperbarui!', 'info');
+    };
+
+    // Delete Catalog Item
+    window.deleteCatalogProduct = async function(prodId) {
+      const state = window.SEJUKIN_STATE;
+      if (state.catalog.length <= 1) {
+        showToast('Minimal harus ada 1 produk dalam katalog!', 'error');
+        return;
+      }
+      state.catalog = state.catalog.filter(i => i.id !== prodId);
+      await window.saveStateToCloud();
+      showToast('Produk berhasil dihapus dari katalog.', 'success');
+    };
+
+    // Open Modal to Add or Edit Product
+    window.openProductEditModal = function(prodId) {
+      const modal = document.getElementById('product-editor-modal');
+      const titleEl = document.getElementById('product-modal-title');
+      const idInput = document.getElementById('prod-edit-id');
+      const nameInput = document.getElementById('prod-edit-title');
+      const tagInput = document.getElementById('prod-edit-tag');
+      const priceInput = document.getElementById('prod-edit-price');
+      const descInput = document.getElementById('prod-edit-desc');
+      const durInput = document.getElementById('prod-edit-duration');
+      const imgInput = document.getElementById('prod-edit-image');
+
+      if (!modal || !titleEl) {
+        console.warn("Product editor modal element not found.");
+        return;
+      }
+
+      if (prodId) {
+        const item = window.SEJUKIN_STATE.catalog.find(i => i.id === prodId);
+        if (item) {
+          titleEl.innerText = "Edit Layanan / Produk";
+          if (idInput) idInput.value = item.id;
+          if (nameInput) nameInput.value = item.title;
+          if (tagInput) tagInput.value = item.tag || "";
+          if (priceInput) priceInput.value = item.price;
+          if (descInput) descInput.value = item.desc;
+          if (durInput) durInput.value = item.duration || "45-60 menit";
+          if (imgInput) imgInput.value = item.image;
+        }
+      } else {
+        // Create new
+        titleEl.innerText = "Tambah Layanan / Produk Baru";
+        if (idInput) idInput.value = "";
+        if (nameInput) nameInput.value = "";
+        if (tagInput) tagInput.value = "Layanan Baru";
+        if (priceInput) priceInput.value = "Mulai Rp85.000";
+        if (descInput) descInput.value = "Perawatan dan pemeriksaan unit AC dengan teknisi bergaransi.";
+        if (durInput) durInput.value = "45–60 menit";
+        if (imgInput) imgInput.value = "https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=800&q=80";
+      }
+
+      modal.classList.remove('hidden');
+    };
+
+    window.closeProductEditModal = function() {
+      const modal = document.getElementById('product-editor-modal');
+      if (modal) modal.classList.add('hidden');
+    };
+
+    // Save Product Form Handler
+    window.handleSaveProduct = async function(e) {
+      e.preventDefault();
+      const idEl = document.getElementById('prod-edit-id');
+      const titleEl = document.getElementById('prod-edit-title');
+      const tagEl = document.getElementById('prod-edit-tag');
+      const priceEl = document.getElementById('prod-edit-price');
+      const descEl = document.getElementById('prod-edit-desc');
+      const durationEl = document.getElementById('prod-edit-duration');
+      const imageEl = document.getElementById('prod-edit-image');
+
+      const id = idEl ? idEl.value : '';
+      const title = titleEl ? titleEl.value.trim() : '';
+      const tag = tagEl ? tagEl.value.trim() : '';
+      const price = priceEl ? priceEl.value.trim() : '';
+      const desc = descEl ? descEl.value.trim() : '';
+      const duration = durationEl ? durationEl.value.trim() : '';
+      const image = imageEl ? imageEl.value.trim() : '';
+
+      const state = window.SEJUKIN_STATE;
+
+      if (id) {
+        // Update existing
+        const idx = state.catalog.findIndex(i => i.id === id);
+        if (idx !== -1) {
+          state.catalog[idx].title = title;
+          state.catalog[idx].tag = tag;
+          state.catalog[idx].price = price;
+          state.catalog[idx].desc = desc;
+          state.catalog[idx].duration = duration;
+          state.catalog[idx].image = image;
+        }
+      } else {
+        // Create new
+        const newProd = {
+          id: 'prod-' + Date.now(),
+          title,
+          tag,
+          price,
+          rawPrice: 85000,
+          desc,
+          duration,
+          image,
+          isFeatured: false,
+          features: ["Pengecekan Komponen", "Perbaikan Standar", "Garansi Pengerjaan"]
+        };
+        state.catalog.push(newProd);
+      }
+
+      window.closeProductEditModal();
+      await window.saveStateToCloud();
+      showToast('Katalog produk berhasil disimpan secara real-time!', 'success');
+    };
+
+    window.promptResetDefault = function() {
+      document.getElementById('reset-confirm-modal').classList.remove('hidden');
+    };
+
+    window.closeResetConfirmModal = function() {
+      document.getElementById('reset-confirm-modal').classList.add('hidden');
+    };
+
+    window.executeResetToDefault = async function() {
+      window.closeResetConfirmModal();
+      // Restore default configuration
+      window.SEJUKIN_STATE = JSON.parse(JSON.stringify(DEFAULT_SITE_CONFIG));
+      await window.saveStateToCloud();
+      showToast('Berhasil! Seluruh data website telah dikembalikan ke kondisi awal bawaan.', 'success');
+    };
+
+    // Initialize on page load
+    initFirebaseSync();
+  </script>
+
+  <!-- ADMIN AUTHENTICATION & MODAL WORKFLOW SCRIPT -->
+  <script>
+    let isAdminLoggedIn = false;
+
+    function checkAdminSessionOrOpenLogin(targetTab) {
+      if (isAdminLoggedIn) {
+        openAdminPanelModal(targetTab);
+      } else {
+        openAdminLoginModal();
+      }
+    }
+
+    function openAdminLoginModal() {
+      document.getElementById('admin-login-modal').classList.remove('hidden');
+      document.getElementById('admin-user-input').focus();
+    }
+
+    function closeAdminLoginModal() {
+      document.getElementById('admin-login-modal').classList.add('hidden');
+    }
+
+    function handleAdminLogin(e) {
+      e.preventDefault();
+      const user = document.getElementById('admin-user-input').value.trim();
+      const pass = document.getElementById('admin-pass-input').value.trim();
+
+      // Explicit Credentials
+      if (user === 'kelolaweb2026' && pass === 'kelolaweb2026') {
+        isAdminLoggedIn = true;
+        closeAdminLoginModal();
+        openAdminPanelModal('catalog');
+        showToast('Login berhasil! Selamat datang di Panel Admin SEJUKIN.', 'success');
+      } else {
+        showToast('Username atau password admin salah!', 'error');
+      }
+    }
+
+    function handleAdminLogout() {
+      isAdminLoggedIn = false;
+      closeAdminPanelModal();
+      showToast('Anda telah keluar dari mode admin.', 'info');
+    }
+
+    function openAdminPanelModal(defaultTab) {
+      document.getElementById('admin-panel-modal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      switchAdminTab(defaultTab || 'catalog');
+      if (window.renderAdminPanelLists) window.renderAdminPanelLists();
+    }
+
+    function closeAdminPanelModal() {
+      document.getElementById('admin-panel-modal').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    function switchAdminTab(tabKey) {
+      const tabs = ['catalog', 'hero', 'technicians', 'settings'];
+      tabs.forEach(t => {
+        const btn = document.getElementById(`atab-${t}`);
+        const content = document.getElementById(`admin-content-${t}`);
+        if (btn && content) {
+          if (t === tabKey) {
+            btn.classList.add('border-brand-600', 'text-brand-600');
+            btn.classList.remove('border-transparent', 'text-slate-600');
+            content.classList.remove('hidden');
+          } else {
+            btn.classList.remove('border-brand-600', 'text-brand-600');
+            btn.classList.add('border-transparent', 'text-slate-600');
+            content.classList.add('hidden');
+          }
+        }
+      });
+    }
+
+    /* FAQ Accordion */
+    function toggleFaq(index) {
+      const content = document.getElementById(`faq-content-${index}`);
+      const icon = document.getElementById(`faq-icon-${index}`);
+      if (!content) return;
+
+      const isHidden = content.classList.contains('hidden');
+
+      // Close other accordions
+      for (let i = 1; i <= 7; i++) {
+        const otherContent = document.getElementById(`faq-content-${i}`);
+        const otherIcon = document.getElementById(`faq-icon-${i}`);
+        if (otherContent && i !== index) {
+          otherContent.classList.add('hidden');
+          if (otherIcon) otherIcon.style.transform = 'rotate(0deg)';
+        }
+      }
+
+      if (isHidden) {
+        content.classList.remove('hidden');
+        if (icon) icon.style.transform = 'rotate(180deg)';
+      } else {
+        content.classList.add('hidden');
+        if (icon) icon.style.transform = 'rotate(0deg)';
+      }
+    }
+
+    /* Mobile Menu Toggle */
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-dropdown');
+      const burger = document.getElementById('hamburger-icon');
+      const close = document.getElementById('close-icon');
+      if (!menu) return;
+
+      const isClosed = menu.classList.contains('hidden');
+      if (isClosed) {
+        menu.classList.remove('hidden');
+        burger.classList.add('hidden');
+        close.classList.remove('hidden');
+      } else {
+        menu.classList.add('hidden');
+        burger.classList.remove('hidden');
+        close.classList.add('hidden');
+      }
+    }
+
+    function closeMobileMenu() {
+      const menu = document.getElementById('mobile-dropdown');
+      const burger = document.getElementById('hamburger-icon');
+      const close = document.getElementById('close-icon');
+      if (menu) menu.classList.add('hidden');
+      if (burger) burger.classList.remove('hidden');
+      if (close) close.classList.add('hidden');
+    }
+
+    /* Modal Controllers */
+    function openBookingModal() {
+      const modal = document.getElementById('booking-modal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        setDefaultBookingDate();
+      }
+    }
+
+    function closeBookingModal() {
+      const modal = document.getElementById('booking-modal');
+      if (modal) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+    }
+
+    function setDefaultBookingDate() {
+      const dateInput = document.getElementById('modal-date');
+      if (dateInput) {
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        const yyyy = tomorrow.getFullYear();
+        const mm = String(tomorrow.getMonth() + 1).padStart(2, '0');
+        const dd = String(tomorrow.getDate()).padStart(2, '0');
+        dateInput.value = `${yyyy}-${mm}-${dd}`;
+        dateInput.min = `${yyyy}-${mm}-${dd}`;
+      }
+    }
+
+    /* Property Selector Interactive State */
+    let currentSelectedProperty = 'rumah';
+    const PROPERTY_DATA = {
+      rumah: {
+        badge: 'SOLUSI HUNIAN KELUARGA',
+        title: 'Perawatan AC Rumah',
+        desc: 'Menjaga udara kamar tidur, ruang keluarga, dan ruang anak tetap sejuk, bersih, dan bebas bakteri. Pengerjaan rapi tanpa cipratan air ke dinding wallpaper atau perabot lantai Anda.',
+        features: [
+          'Cuci AC indoor & outdoor berkala',
+          'Service kebocoran talang & flashing pipa',
+          'Cek tekanan refrigerant dan ampere kompresor',
+          'Pemasangan unit baru & penataan pipa estetis',
+          'Maintenance berkala 3 bulan sekali otomatis'
+        ],
+        image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80'
+      },
+      apartemen: {
+        badge: 'SOLUSI APARTEMEN MODERN',
+        title: 'Service AC Apartemen & Kondominium',
+        desc: 'Spesialis instalasi dan pembersihan unit outdoor di balkon sempit, ducting fleksibel, dan perizinan teknisi gedung apartemen tanpa kendala.',
+        features: [
+          'Penyesuaian waktu kerja dengan aturan pengelola tower',
+          'Alat pembersih mini steam jet anti bising',
+          'Pembersihan drainase pipa tanam di balik gypsum',
+          'Pengecekan kelistrikan overload unit multi-split'
+        ],
+        image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80'
+      },
+      kantor: {
+        badge: 'SOLUSI RUANG KERJA PRODUKTIF',
+        title: 'Maintenance AC Perkantoran',
+        desc: 'Mendukung produktivitas kerja karyawan dengan udara kantor yang stabil dingin, sirkulasi segar, dan jadwal pengerjaan fleksibel di luar jam kantor.',
+        features: [
+          'Perawatan AC Split Wall & Cassette 4 arah',
+          'Pengerjaan weekend atau after office hours',
+          'Faktur penagihan resmi & lembar inspeksi teknis B2B',
+          'Diskon khusus kontrak berkala volume unit banyak'
+        ],
+        image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80'
+      },
+      toko: {
+        badge: 'SOLUSI RETAIL & RESTORAN',
+        title: 'Service AC Toko & Kafe',
+        desc: 'Kenyamanan pelanggan adalah kunci penjualan. Kami pastikan AC toko, butik, atau kedai kopi Anda dingin stabil sepanjang hari saat operasional ramai.',
+        features: [
+          'Pembersihan cepat tanpa mengganggu display etalase',
+          'Penanganan bau tidak sedap dan sirkulasi asap dapur',
+          'Penggantian kapasitor dan fan motor darurat cepat',
+          'Pembersihan kondensor outdoor dari debu jalanan'
+        ],
+        image: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=800&q=80'
+      },
+      ruko: {
+        badge: 'SOLUSI BANGUNAN MULTI-LANTAI',
+        title: 'Perawatan AC Ruko 2–4 Lantai',
+        desc: 'Pengecekan jalur pipa tembaga vertikal yang panjang, pemeliharaan outdoor unit di rooftop gedung, serta balancing dingin antar lantai.',
+        features: [
+          'Pemeriksaan tekanan freon pada instalasi pipa tinggi',
+          'Overhaul cuci besar indoor & outdoor di dak atas',
+          'Pengecekan instalasi drainase bocor antar lantai',
+          'Perapian kabel power dan MCB pengaman'
+        ],
+        image: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80'
+      }
+    };
+
+    function selectProperty(propKey) {
+      currentSelectedProperty = propKey;
+      const data = PROPERTY_DATA[propKey];
+      if (!data) return;
+
+      const tabs = ['rumah', 'apartemen', 'kantor', 'toko', 'ruko'];
+      tabs.forEach(t => {
+        const tabBtn = document.getElementById(`tab-${t}`);
+        if (tabBtn) {
+          if (t === propKey) {
+            tabBtn.className = 'property-tab px-5 py-2.5 rounded-lg text-xs font-bold transition-all bg-brand-600 text-white';
+          } else {
+            tabBtn.className = 'property-tab px-5 py-2.5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900';
+          }
+        }
+      });
+
+      const badgeEl = document.getElementById('prop-badge');
+      const titleEl = document.getElementById('prop-title');
+      const descEl = document.getElementById('prop-desc');
+      const featsEl = document.getElementById('prop-features');
+      const imgEl = document.getElementById('prop-image');
+
+      if (badgeEl) badgeEl.innerText = data.badge;
+      if (titleEl) titleEl.innerText = data.title;
+      if (descEl) descEl.innerText = data.desc;
+      if (featsEl) {
+        featsEl.innerHTML = data.features.map(f => `<li class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> ${f}</li>`).join('');
+      }
+      if (imgEl) imgEl.src = data.image;
+    }
+
+    /* Price Estimator Calculator */
+    function adjustUnits(delta) {
+      const unitsInput = document.getElementById('calc-units');
+      if (!unitsInput) return;
+      let val = parseInt(unitsInput.value) || 1;
+      val = Math.max(1, Math.min(50, val + delta));
+      unitsInput.value = val;
+      calculatePrice();
+    }
+
+    function calculatePrice() {
+      const serviceEl = document.getElementById('calc-service');
+      const typeEl = document.getElementById('calc-type');
+      const unitsEl = document.getElementById('calc-units');
+      const totalEl = document.getElementById('calculated-total');
+
+      if (!serviceEl || !typeEl || !unitsEl || !totalEl) return;
+
+      const service = serviceEl.value;
+      const type = typeEl.value;
+      const units = parseInt(unitsEl.value) || 1;
+
+      let basePrice = 75000;
+      if (service === 'cuci') {
+        basePrice = (type === 'split-inverter') ? 90000 : (type === 'cassette') ? 150000 : (type === 'standing') ? 180000 : 75000;
+      } else if (service === 'service') {
+        basePrice = 85000;
+      } else if (service === 'freon') {
+        basePrice = 150000;
+      } else if (service === 'instalasi') {
+        basePrice = (type === 'cassette' || type === 'standing') ? 450000 : 275000;
+      } else if (service === 'bongkarpasang') {
+        basePrice = 380000;
+      }
+
+      // Volume discount: 5% off for 3+ units, 10% off for 6+ units
+      let total = basePrice * units;
+      if (units >= 6) total = Math.round(total * 0.90);
+      else if (units >= 3) total = Math.round(total * 0.95);
+
+      totalEl.innerText = 'Rp' + total.toLocaleString('id-ID');
+    }
+
+    /* Service Area & Google Maps Controllers */
+    const AREA_CITIES = [
+      'Jakarta', 'Bandung', 'Bekasi', 'Depok', 'Tangerang',
+      'Bogor', 'Semarang', 'Yogyakarta', 'Surabaya', 'Malang',
+      'Medan', 'Palembang', 'Bandar Lampung', 'Makassar', 'Denpasar'
+    ];
+
+    function renderAreaCityList(filter = '') {
+      const container = document.getElementById('city-list-container');
+      if (!container) return;
+
+      const filtered = AREA_CITIES.filter(c => c.toLowerCase().includes(filter.toLowerCase()));
+      if (filtered.length === 0) {
+        container.innerHTML = `<div class="col-span-full py-6 text-center text-xs text-slate-500">Tidak ada kota yang cocok dengan "${filter}". Silakan hubungi customer care untuk cek rute kunjungan.</div>`;
+        return;
+      }
+
+      container.innerHTML = filtered.map(city => `
+        <button 
+          type="button" 
+          onclick="selectCityFromArea('${city}')" 
+          class="p-3.5 rounded-xl border border-slate-200 hover:border-brand-500 hover:bg-brand-50/50 bg-white text-left transition-all flex items-center justify-between group"
+        >
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <span class="text-xs font-bold text-slate-800 group-hover:text-brand-700">${city}</span>
+          </div>
+          <svg class="w-3.5 h-3.5 text-slate-400 group-hover:text-brand-600 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </button>
+      `).join('');
+    }
+
+    function filterAreaList() {
+      const input = document.getElementById('area-search-input');
+      const query = input ? input.value.trim() : '';
+      renderAreaCityList(query);
+    }
+
+    function updateGoogleMap(cityQuery) {
+      const frame = document.getElementById('gmap-frame');
+      const label = document.getElementById('gmap-active-label');
+      if (!frame) return;
+
+      if (!cityQuery || cityQuery === 'all') {
+        frame.src = "https://maps.google.com/maps?q=Indonesia&t=&z=5&ie=UTF8&iwloc=&output=embed";
+        if (label) label.innerText = "Seluruh Wilayah Layanan Indonesia";
+      } else {
+        frame.src = `https://maps.google.com/maps?q=${encodeURIComponent(cityQuery)}+Indonesia&t=&z=12&ie=UTF8&iwloc=&output=embed`;
+        if (label) label.innerText = `Area Service: ${cityQuery}`;
+      }
+    }
+
+    /* Before/After Interactive Slider */
+    function initBeforeAfterSlider() {
+      const box = document.getElementById('before-after-box');
+      const wrap = document.getElementById('before-image-wrap');
+      const handle = document.getElementById('slider-handle');
+      if (!box || !wrap || !handle) return;
+
+      let isDown = false;
+
+      function updateSlider(clientX) {
+        const rect = box.getBoundingClientRect();
+        let posX = clientX - rect.left;
+        posX = Math.max(0, Math.min(rect.width, posX));
+        const pct = (posX / rect.width) * 100;
+        wrap.style.width = `${pct}%`;
+        handle.style.left = `${pct}%`;
+      }
+
+      box.addEventListener('mousedown', (e) => {
+        isDown = true;
+        updateSlider(e.clientX);
+      });
+      window.addEventListener('mouseup', () => { isDown = false; });
+      window.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        updateSlider(e.clientX);
+      });
+
+      box.addEventListener('touchstart', (e) => {
+        if (e.touches && e.touches[0]) updateSlider(e.touches[0].clientX);
+      }, { passive: true });
+      box.addEventListener('touchmove', (e) => {
+        if (e.touches && e.touches[0]) updateSlider(e.touches[0].clientX);
+      }, { passive: true });
+    }
+
+    // Auto initialize on DOM ready
+    window.addEventListener('DOMContentLoaded', () => {
+      setDefaultBookingDate();
+      renderAreaCityList();
+      calculatePrice();
+      initBeforeAfterSlider();
+    });
+
+    /* Global Toast Notification Engine */
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+
+      const toast = document.createElement('div');
+      let bgColor = 'bg-slate-900 text-white';
+      if (type === 'success') bgColor = 'bg-emerald-600 text-white';
+      else if (type === 'error') bgColor = 'bg-rose-600 text-white';
+      else if (type === 'info') bgColor = 'bg-brand-600 text-white';
+
+      toast.className = `pointer-events-auto max-w-sm w-full ${bgColor} px-4 py-3 rounded-xl shadow-lg text-xs font-semibold flex items-center justify-between gap-3 transition-all duration-300 transform translate-y-0`;
+      toast.innerHTML = `
+        <div class="flex items-center gap-2">
+          <span>${message}</span>
+        </div>
+        <button onclick="this.parentElement.remove()" class="text-white/80 hover:text-white font-bold p-1">✕</button>
+      `;
+
+      container.appendChild(toast);
+
+      // Auto dismiss after 5s
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-2');
+        setTimeout(() => toast.remove(), 300);
+      }, 5000);
+    }
+
+    function showToastWhatsAppLink(waUrl) {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+
+      const toast = document.createElement('div');
+      toast.className = "pointer-events-auto max-w-sm w-full bg-white text-slate-900 p-4 rounded-xl shadow-2xl border-2 border-emerald-500 text-xs flex flex-col gap-2 transition-all duration-300";
+      
+      toast.innerHTML = `
+        <div class="font-bold text-slate-950 flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          Teruskan Rekap Pemesanan ke WhatsApp?
+        </div>
+        <p class="text-[11px] text-slate-600">Klik tombol di bawah untuk langsung membuka chat WhatsApp customer support SEJUKIN dengan rincian jadwal Anda.</p>
+        <div class="flex items-center gap-2 mt-1">
+          <a href="${waUrl}" target="_blank" class="flex-1 py-2 text-center rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-[11px] uppercase tracking-wide">
+            Buka WhatsApp
+          </a>
+          <button onclick="this.parentElement.parentElement.remove()" class="px-3 py-2 rounded-lg border border-slate-200 text-slate-600 text-[11px] font-semibold hover:bg-slate-50">
+            Tutup
+          </button>
+        </div>
+      `;
+
+      container.appendChild(toast);
+    }
+
+    /* Modal Navigation & Booking Trigger Helpers */
+    function quickSelectProblem(problemText) {
+      openBookingModal();
+      const addr = document.getElementById('modal-address');
+      if (addr) addr.value = `Keluhan Gejala: ${problemText}`;
+      showToast(`Layanan terpilih: ${problemText}`, 'info');
+    }
+
+    function bookSpecificService(serviceTitle) {
+      openBookingModal();
+      const svcSelect = document.getElementById('modal-service');
+      if (svcSelect) {
+        let matched = false;
+        for (let i = 0; i < svcSelect.options.length; i++) {
+          if (svcSelect.options[i].value.toLowerCase().includes(serviceTitle.toLowerCase()) || serviceTitle.toLowerCase().includes(svcSelect.options[i].value.toLowerCase())) {
+            svcSelect.selectedIndex = i;
+            matched = true;
+            break;
+          }
+        }
+        if (!matched) svcSelect.value = "Cuci AC Profesional";
+      }
+      showToast(`Pilihan: ${serviceTitle}`, 'info');
+    }
+
+    function openBookingWithProperty() {
+      openBookingModal();
+      const addr = document.getElementById('modal-address');
+      if (addr) addr.value = `Tipe Properti: ${currentSelectedProperty.toUpperCase()}`;
+    }
+
+    function bookFromEstimator() {
+      openBookingModal();
+      const unitsInput = document.getElementById('calc-units');
+      const serviceInput = document.getElementById('calc-service');
+      const cityInput = document.getElementById('calc-city');
+
+      if (unitsInput) {
+        const mUnits = document.getElementById('modal-units');
+        if (mUnits) mUnits.value = unitsInput.value;
+      }
+      if (serviceInput) {
+        const mService = document.getElementById('modal-service');
+        if (mService) {
+          if (serviceInput.value === 'cuci') mService.value = 'Cuci AC Profesional';
+          else if (serviceInput.value === 'service') mService.value = 'Service AC & Reparasi Modul';
+          else if (serviceInput.value === 'freon') mService.value = 'Cek & Isi Refrigerant';
+          else if (serviceInput.value === 'instalasi') mService.value = 'Instalasi AC Baru & Pipa';
+          else if (serviceInput.value === 'bongkarpasang') mService.value = 'Bongkar Pasang AC';
+        }
+      }
+      if (cityInput) {
+        const mCity = document.getElementById('modal-city');
+        if (mCity) mCity.value = cityInput.options[cityInput.selectedIndex].text;
+      }
+      showToast('Data kalkulator estimasi telah diisikan ke form booking!', 'info');
+    }
+
+    function bookPlan(planName) {
+      openBookingModal();
+      const addr = document.getElementById('modal-address');
+      if (addr) addr.value = `Paket Maintenance Terpilih: ${planName}`;
+      showToast(`Paket ${planName} dipilih! Silakan lengkapi jadwal.`, 'info');
+    }
+
+    function selectCityFromArea(cityName) {
+      updateGoogleMap(cityName);
+      const modalCity = document.getElementById('modal-city');
+      if (modalCity) modalCity.value = cityName;
+      showToast(`Peta difokuskan ke ${cityName}.`, 'info');
+    }
+
+    function openWhatsAppInquiry(defaultText) {
+      const phone = (window.SEJUKIN_STATE && window.SEJUKIN_STATE.contactPhone) ? window.SEJUKIN_STATE.contactPhone.replace(/[^0-9]/g, '') : '6281289001200';
+      const cleanPhone = phone.startsWith('0') ? '62' + phone.substring(1) : phone;
+      const text = encodeURIComponent(defaultText || 'Halo admin SEJUKIN, saya ingin konsultasi layanan AC.');
+      window.open(`https://wa.me/${cleanPhone}?text=${text}`, '_blank');
+    }
+
+    function openTermsModal() {
+      const modal = document.getElementById('terms-modal');
+      if (modal) modal.classList.remove('hidden');
+    }
+
+    function closeTermsModal() {
+      const modal = document.getElementById('terms-modal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function handleBookingSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('modal-name').value.trim();
+      const phone = document.getElementById('modal-phone').value.trim();
+      const city = document.getElementById('modal-city').value;
+      const service = document.getElementById('modal-service').value;
+      const units = document.getElementById('modal-units').value;
+      const date = document.getElementById('modal-date').value;
+      const time = document.getElementById('modal-time').value;
+      const notes = document.getElementById('modal-address').value.trim();
+
+      const message = `Halo Admin SEJUKIN, saya ingin konfirmasi booking service AC:%0A` +
+        `• Nama: ${encodeURIComponent(name)}%0A` +
+        `• WhatsApp: ${encodeURIComponent(phone)}%0A` +
+        `• Kota: ${encodeURIComponent(city)}%0A` +
+        `• Layanan: ${encodeURIComponent(service)} (${units} unit)%0A` +
+        `• Jadwal: ${encodeURIComponent(date)} (${encodeURIComponent(time)})%0A` +
+        `• Alamat/Catatan: ${encodeURIComponent(notes || '-')}`;
+
+      closeBookingModal();
+      showToast(`Pemesanan ${name} berhasil dicatat!`, 'success');
+
+      const waNumber = (window.SEJUKIN_STATE && window.SEJUKIN_STATE.contactPhone) 
+        ? window.SEJUKIN_STATE.contactPhone.replace(/[^0-9]/g, '') 
+        : '6281289001200';
+      const cleanWa = waNumber.startsWith('0') ? '62' + waNumber.substring(1) : waNumber;
+      showToastWhatsAppLink(`https://wa.me/${cleanWa}?text=${message}`);
+    }
+  </script>
+
+</body>
+</html>

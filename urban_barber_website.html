@@ -1,0 +1,2091 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BARBER. — Local Style, Modern Attitude</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              offwhite: '#FAF7F2',
+              cream: '#EFEAE1',
+              charcoal: '#111215',
+              charcoalLight: '#1C1E24',
+              cobalt: '#0C38EB',
+              cobaltDark: '#0825A3',
+              orange: '#FF4D00',
+              orangeHover: '#E54500',
+              muted: '#767982',
+              border: '#DDD8CE'
+            }
+          },
+          fontFamily: {
+            display: ['Bebas Neue', 'sans-serif'],
+            mono: ['Space Grotesk', 'monospace'],
+            sans: ['Plus Jakarta Sans', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar & Utilities */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #FAF7F2;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #111215;
+    }
+    .ticket-dashed-border {
+      background-image: repeating-linear-gradient(to bottom, #111215 0, #111215 6px, transparent 6px, transparent 12px);
+      background-size: 2px 100%;
+      background-position: left;
+      background-repeat: no-repeat;
+    }
+    .horizontal-scrollbar::-webkit-scrollbar {
+      height: 4px;
+    }
+    .horizontal-scrollbar::-webkit-scrollbar-thumb {
+      background: #0C38EB;
+    }
+    /* Comparison Slider Range Clip */
+    .clip-after {
+      clip-path: polygon(0 0, var(--pos, 50%) 0, var(--pos, 50%) 100%, 0 100%);
+    }
+  </style>
+</head>
+
+<body class="bg-brand-offwhite text-brand-charcoal font-sans antialiased selection:bg-brand-orange selection:text-white pb-20 md:pb-0 overflow-x-hidden">
+
+  <div class="bg-brand-charcoal text-white text-[11px] font-mono tracking-widest uppercase border-b border-brand-charcoalLight px-4 py-2 flex justify-between items-center overflow-hidden">
+    <div class="flex items-center gap-4 animate-pulse">
+      <span class="inline-block w-2 h-2 rounded-full bg-brand-orange"></span>
+      <span id="shopStatusTicker">SHOP STATUS: OPEN TODAY [10.00 — 22.00 WIB]</span>
+      <span class="hidden sm:inline text-neutral-500">•</span>
+      <span id="shopSubTicker" class="hidden sm:inline text-neutral-400">WALK-IN WELCOME / RESERVATION PRIORITIZED</span>
+    </div>
+    <div class="flex items-center gap-4 text-neutral-400">
+      <span class="hidden md:inline">JAKARTA SELATAN // ID</span>
+    </div>
+  </div>
+
+  <header class="sticky top-0 z-40 bg-brand-offwhite/95 backdrop-blur-md border-b-2 border-brand-charcoal transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-20">
+      
+      <!-- Brand & Ticket Micro-label (Left) -->
+      <div class="flex items-center gap-5">
+        <a href="#home" class="group flex items-baseline gap-1">
+          <span class="font-display text-4xl sm:text-5xl tracking-tight text-brand-charcoal group-hover:text-brand-cobalt transition-colors">BARBER.</span>
+          <span class="font-mono text-xs font-bold px-1.5 py-0.5 bg-brand-orange text-white rounded-none">JKT</span>
+        </a>
+        <div class="hidden lg:flex flex-col border-l border-brand-border pl-4 font-mono text-[10px] leading-tight text-brand-muted">
+          <span>TICKET NO: #BB-2026</span>
+          <span class="font-bold text-brand-charcoal">GOOD CUTS / GOOD VIBES</span>
+        </div>
+      </div>
+
+      <!-- Center Navigation (Shop Label Aesthetic) -->
+      <nav class="hidden md:flex items-center gap-1 border border-brand-charcoal p-1 bg-white shadow-[2px_2px_0px_0px_#111215]">
+        <a href="#home" class="px-3.5 py-1.5 font-mono text-xs font-bold tracking-wider hover:bg-brand-charcoal hover:text-white transition-all uppercase">HOME</a>
+        <span class="text-neutral-300">/</span>
+        <a href="#cuts" class="px-3.5 py-1.5 font-mono text-xs font-bold tracking-wider hover:bg-brand-charcoal hover:text-white transition-all uppercase">CUTS</a>
+        <span class="text-neutral-300">/</span>
+        <a href="#services" class="px-3.5 py-1.5 font-mono text-xs font-bold tracking-wider hover:bg-brand-charcoal hover:text-white transition-all uppercase">SERVICES</a>
+        <span class="text-neutral-300">/</span>
+        <a href="#crew" class="px-3.5 py-1.5 font-mono text-xs font-bold tracking-wider hover:bg-brand-charcoal hover:text-white transition-all uppercase">BARBERS</a>
+        <span class="text-neutral-300">/</span>
+        <a href="#price" class="px-3.5 py-1.5 font-mono text-xs font-bold tracking-wider hover:bg-brand-charcoal hover:text-white transition-all uppercase">PRICE</a>
+      </nav>
+
+      <!-- Right Action CTA -->
+      <div class="flex items-center gap-3">
+        <button onclick="openBookingModal()" class="relative hidden sm:flex items-center gap-3 bg-brand-cobalt hover:bg-brand-cobaltDark text-white px-6 py-3.5 border-2 border-brand-charcoal shadow-[4px_4px_0px_0px_#111215] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all group">
+          <span class="font-mono text-xs font-bold tracking-wider uppercase">BOOK A CUT</span>
+          <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+          </svg>
+        </button>
+
+        <!-- Mobile Quick Menu Trigger -->
+        <button onclick="toggleMobileNav()" class="md:hidden p-2.5 bg-white border border-brand-charcoal shadow-[2px_2px_0px_0px_#111215]" aria-label="Open Navigation">
+          <svg id="menuIcon" class="w-6 h-6 text-brand-charcoal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Slide Down Drawer -->
+    <div id="mobileDrawer" class="hidden md:hidden border-t-2 border-brand-charcoal bg-brand-cream px-6 py-6 transition-all">
+      <div class="flex flex-col gap-4 font-display text-2xl tracking-wide">
+        <a href="#home" onclick="toggleMobileNav()" class="hover:text-brand-cobalt flex items-center justify-between border-b border-brand-border pb-2">
+          <span>01 / HOME</span>
+          <span class="font-mono text-xs text-brand-muted">MAIN PAGE</span>
+        </a>
+        <a href="#cuts" onclick="toggleMobileNav()" class="hover:text-brand-cobalt flex items-center justify-between border-b border-brand-border pb-2">
+          <span>02 / CUTS CATALOG</span>
+          <span class="font-mono text-xs text-brand-muted">LOOKBOOK</span>
+        </a>
+        <a href="#services" onclick="toggleMobileNav()" class="hover:text-brand-cobalt flex items-center justify-between border-b border-brand-border pb-2">
+          <span>03 / SERVICES</span>
+          <span class="font-mono text-xs text-brand-muted">WHAT WE DO</span>
+        </a>
+        <a href="#crew" onclick="toggleMobileNav()" class="hover:text-brand-cobalt flex items-center justify-between border-b border-brand-border pb-2">
+          <span>04 / THE CREW</span>
+          <span class="font-mono text-xs text-brand-muted">OUR BARBERS</span>
+        </a>
+        <a href="#price" onclick="toggleMobileNav()" class="hover:text-brand-cobalt flex items-center justify-between border-b border-brand-border pb-2">
+          <span>05 / PRICE BOARD</span>
+          <span class="font-mono text-xs text-brand-muted">TRANSPARENT</span>
+        </a>
+      </div>
+      <div class="mt-6 pt-4 border-t border-brand-charcoal/20 flex flex-col gap-3">
+        <button onclick="toggleMobileNav(); openBookingModal();" class="w-full bg-brand-orange text-white py-3.5 font-mono text-sm font-bold border-2 border-brand-charcoal shadow-[3px_3px_0px_0px_#111215]">
+          BOOK APPOINTMENT NOW
+        </button>
+        <a href="https://wa.me/6281234567890" target="_blank" class="w-full text-center bg-white text-brand-charcoal py-3 font-mono text-sm font-bold border border-brand-charcoal">
+          WHATSAPP QUICK CHAT
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <section id="home" class="relative pt-6 sm:pt-12 pb-16 lg:pb-24 border-b-2 border-brand-charcoal overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      
+      <!-- Top Meta Tags / Asymmetric Header Line -->
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-8 pb-4 border-b border-brand-border font-mono text-xs text-brand-charcoal">
+        <div class="flex items-center gap-3">
+          <span class="w-3 h-3 bg-brand-cobalt inline-block"></span>
+          <span class="font-bold tracking-wider">01 / BARBER EXPERIENCE</span>
+          <span class="text-brand-muted">•</span>
+          <span class="text-brand-muted uppercase">CUT • STYLE • GROOM</span>
+        </div>
+        <div class="bg-brand-cream px-3 py-1 border border-brand-charcoal text-[11px] font-bold">
+          URBAN BARBER — LOCAL STYLE, MODERN ATTITUDE
+        </div>
+      </div>
+
+      <!-- Asymmetric Grid: Editorial Text on Left, Authentic Hero Photo on Right -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        
+        <!-- Left Editorial Content (7 cols) -->
+        <div class="lg:col-span-7 flex flex-col items-start z-10">
+          
+          <div id="heroBadge" class="inline-flex items-center gap-2 px-3 py-1 bg-brand-orange text-white font-mono text-xs font-bold uppercase tracking-wider mb-4 border border-brand-charcoal">
+            <span>⚡ NO COMPROMISE CUTS</span>
+          </div>
+
+          <h1 id="heroTitle" class="font-display text-6xl sm:text-7xl lg:text-8xl xl:text-9xl tracking-tight leading-[0.88] text-brand-charcoal uppercase mb-6">
+            YOUR HAIR.<br>
+            <span class="text-brand-cobalt underline decoration-brand-orange decoration-4 sm:decoration-8 underline-offset-4">YOUR RULES.</span>
+          </h1>
+
+          <p id="heroSubtitle" class="text-brand-charcoalLight/90 text-lg sm:text-xl max-w-xl font-normal leading-relaxed mb-8">
+            Potongan fresh, barber berpengalaman, dan style yang disesuaikan dengan karakter lo. Bukan salon formal, bukan potong buru-buru — ini tempat lo upgrade confident.
+          </p>
+
+          <!-- CTAs -->
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto">
+            <button id="heroPrimaryBtn" onclick="openBookingModal()" class="px-8 py-4 bg-brand-orange hover:bg-brand-orangeHover text-white font-mono text-sm font-bold uppercase tracking-wider border-2 border-brand-charcoal shadow-[4px_4px_0px_0px_#111215] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all flex items-center justify-center gap-3">
+              <span id="heroPrimaryBtnText">BOOK A CUT</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+              </svg>
+            </button>
+            <a href="#cuts" id="heroSecondaryBtn" class="px-8 py-4 bg-white hover:bg-brand-cream text-brand-charcoal font-mono text-sm font-bold uppercase tracking-wider border-2 border-brand-charcoal shadow-[4px_4px_0px_0px_#111215] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all text-center">
+              EXPLORE CUTS
+            </a>
+          </div>
+
+          <!-- Micro Details Footnote -->
+          <div class="mt-10 pt-6 border-t border-brand-border flex items-center gap-6 font-mono text-xs text-brand-muted">
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-brand-cobalt" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              <span>Free Style Consultation</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-brand-cobalt" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              <span>Complimentary Hot Towel</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Editorial Photography Visual (5 cols) -->
+        <div class="lg:col-span-5 relative mt-4 lg:mt-0">
+          <!-- Blue geometric accent frame -->
+          <div class="absolute -top-3 -right-3 w-full h-full border-2 border-brand-cobalt bg-brand-cream -z-10"></div>
+          
+          <div class="relative bg-brand-charcoal border-2 border-brand-charcoal p-2 shadow-[8px_8px_0px_0px_#111215]">
+            <!-- Authentic Indonesian Barber in Action -->
+            <img 
+              id="heroImage"
+              src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?q=80&w=900&auto=format&fit=crop" 
+              alt="Indonesian Barber precision haircutting" 
+              class="w-full h-[450px] sm:h-[520px] object-cover filter contrast-105"
+              loading="eager"
+            />
+
+            <!-- Overlapping Editorial Badge -->
+            <div class="absolute bottom-6 left-6 right-6 bg-brand-charcoal/90 backdrop-blur-sm text-white p-4 border border-white/20">
+              <div class="flex items-center justify-between border-b border-white/10 pb-2 mb-2">
+                <span id="heroSessionLabel" class="font-mono text-[11px] text-brand-orange font-bold uppercase tracking-wider">ON CHAIR: FADE & TEXTURE</span>
+                <span id="heroSessionId" class="font-mono text-[11px] text-neutral-400">SESSION #14</span>
+              </div>
+              <p id="heroSessionDesc" class="font-sans text-xs text-neutral-200">
+                “Bukan cuma potong pendek, tapi bikin siluet kepala lo tegas dan rapi berhari-hari.”
+              </p>
+            </div>
+
+            <!-- Stamp / Label -->
+            <div class="absolute -top-4 -left-4 bg-brand-orange text-white font-mono font-bold text-xs px-3 py-1.5 border-2 border-brand-charcoal rotate-[-4deg] shadow-sm">
+              JAKARTA FRESH CUT
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="py-14 sm:py-20 bg-brand-cream border-b-2 border-brand-charcoal">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
+        
+        <!-- Left Statement -->
+        <div class="lg:col-span-7">
+          <span class="font-mono text-xs font-bold uppercase tracking-widest text-brand-cobalt mb-3 block">02 / PHILOSOPHY</span>
+          <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl text-brand-charcoal tracking-tight leading-none uppercase mb-5">
+            BUKAN CUMA POTONG RAMBUT.
+          </h2>
+          <p class="text-lg sm:text-xl font-sans text-brand-charcoalLight/90 leading-relaxed font-normal">
+            "Setiap orang punya style sendiri. Tugas kami adalah membantu lo menemukan potongan yang paling cocok dengan karakter, bentuk wajah, dan lifestyle lo sehari-hari."
+          </p>
+          <div class="mt-6 flex items-center gap-3">
+            <span class="h-0.5 w-12 bg-brand-orange inline-block"></span>
+            <span class="font-mono text-xs font-bold uppercase tracking-wider text-brand-charcoal">REAL BARBERS • HONEST CONSULTATION</span>
+          </div>
+        </div>
+
+        <!-- Right Large Stat Metrics -->
+        <div class="lg:col-span-5 grid grid-cols-2 gap-4">
+          <div class="bg-white p-6 border-2 border-brand-charcoal shadow-[4px_4px_0px_0px_#111215]">
+            <div class="font-display text-6xl sm:text-7xl text-brand-cobalt leading-none mb-1">5K+</div>
+            <div class="font-mono text-xs font-bold uppercase tracking-wider text-brand-charcoal">CUTS DONE</div>
+            <div class="font-sans text-xs text-brand-muted mt-1">Kepuasan customer terjaga</div>
+          </div>
+
+          <div class="bg-white p-6 border-2 border-brand-charcoal shadow-[4px_4px_0px_0px_#111215]">
+            <div class="font-display text-6xl sm:text-7xl text-brand-orange leading-none mb-1">4.9/5</div>
+            <div class="font-mono text-xs font-bold uppercase tracking-wider text-brand-charcoal">CUSTOMER RATING</div>
+            <div class="font-sans text-xs text-brand-muted mt-1">Google & Walk-in reviews</div>
+          </div>
+
+          <div class="col-span-2 bg-brand-charcoal text-white p-5 border-2 border-brand-charcoal shadow-[4px_4px_0px_0px_#FF4D00] flex items-center justify-between">
+            <div>
+              <div class="font-mono text-xs text-brand-orange font-bold tracking-wider">OPEN DAILY SCHEDULE</div>
+              <div class="font-display text-3xl tracking-wide">10.00 — 22.00 WIB</div>
+            </div>
+            <div class="text-right font-mono text-xs text-neutral-300">
+              SENIN — MINGGU<br>
+              <span class="text-green-400">● NOW ACCEPTING</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="cuts" class="py-16 sm:py-24 border-b-2 border-brand-charcoal bg-brand-offwhite">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      
+      <!-- Catalog Header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 pb-6 border-b-2 border-brand-charcoal">
+        <div>
+          <span class="font-mono text-xs font-bold uppercase tracking-widest text-brand-orange">03 / CATALOG LOOKBOOK</span>
+          <h2 class="font-display text-5xl sm:text-6xl lg:text-7xl text-brand-charcoal tracking-tight uppercase mt-1">
+            PICK YOUR CUT
+          </h2>
+          <p class="font-sans text-brand-muted text-base sm:text-lg mt-1">
+            Find a style that feels like you. Dari fade tajam sampai classic clean cut.
+          </p>
+        </div>
+
+        <!-- Interactive Category Filter -->
+        <div class="flex flex-wrap gap-2 font-mono text-xs font-bold">
+          <button onclick="filterCuts('all')" class="cut-filter-btn active px-4 py-2 bg-brand-charcoal text-white border border-brand-charcoal uppercase hover:bg-brand-cobalt transition-colors" data-filter="all">ALL</button>
+          <button onclick="filterCuts('fade')" class="cut-filter-btn px-4 py-2 bg-white text-brand-charcoal border border-brand-charcoal uppercase hover:bg-brand-charcoal hover:text-white transition-colors" data-filter="fade">FADE</button>
+          <button onclick="filterCuts('textured')" class="cut-filter-btn px-4 py-2 bg-white text-brand-charcoal border border-brand-charcoal uppercase hover:bg-brand-charcoal hover:text-white transition-colors" data-filter="textured">TEXTURED</button>
+          <button onclick="filterCuts('modern')" class="cut-filter-btn px-4 py-2 bg-white text-brand-charcoal border border-brand-charcoal uppercase hover:bg-brand-charcoal hover:text-white transition-colors" data-filter="modern">MODERN</button>
+          <button onclick="filterCuts('classic')" class="cut-filter-btn px-4 py-2 bg-white text-brand-charcoal border border-brand-charcoal uppercase hover:bg-brand-charcoal hover:text-white transition-colors" data-filter="classic">CLASSIC</button>
+        </div>
+      </div>
+
+      <!-- Asymmetric Editorial Gallery Grid (Varied Ratios & Crops) -->
+      <div id="cutsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- Cut 1: Low Fade -->
+        <div class="cut-card group relative bg-white border-2 border-brand-charcoal p-3 shadow-[4px_4px_0px_0px_#111215] transition-transform duration-200 hover:-translate-y-1" data-category="fade">
+          <div class="overflow-hidden relative h-80 bg-neutral-200">
+            <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?q=80&w=700&auto=format&fit=crop" alt="Low Fade Haircut" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500">
+            <span class="absolute top-3 left-3 bg-brand-charcoal text-white font-mono text-[10px] font-bold px-2 py-1 uppercase">FADE SPEC</span>
+            <span class="absolute bottom-3 right-3 bg-brand-orange text-white font-mono text-xs font-bold px-2 py-0.5">MOST WANTED</span>
+          </div>
+          <div class="pt-4 pb-2 px-1 flex justify-between items-start">
+            <div>
+              <h3 class="font-display text-2xl tracking-wide text-brand-charcoal uppercase">LOW FADE</h3>
+              <p class="font-sans text-xs text-brand-muted">Gradasi halus di area bawah leher dan pelipis. Clean & natural.</p>
+            </div>
+            <button onclick="quickSelectService('Low Fade Cut')" class="font-mono text-xs font-bold text-brand-cobalt hover:underline uppercase pt-1">CHOOSE</button>
+          </div>
+        </div>
+
+        <!-- Cut 2: Textured Crop (Landscape / Wider Card on Desktop) -->
+        <div class="cut-card group relative bg-white border-2 border-brand-charcoal p-3 shadow-[4px_4px_0px_0px_#111215] transition-transform duration-200 hover:-translate-y-1" data-category="textured">
+          <div class="overflow-hidden relative h-80 bg-neutral-200">
+            <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?q=80&w=700&auto=format&fit=crop" alt="Textured Crop Haircut" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <span class="absolute top-3 left-3 bg-brand-charcoal text-white font-mono text-[10px] font-bold px-2 py-1 uppercase">TEXTURED</span>
+          </div>
+          <div class="pt-4 pb-2 px-1 flex justify-between items-start">
+            <div>
+              <h3 class="font-display text-2xl tracking-wide text-brand-charcoal uppercase">TEXTURED CROP</h3>
+              <p class="font-sans text-xs text-brand-muted">Poni pendek dengan tekstur tegas di atas. Cocok untuk daily casual streetwear.</p>
+            </div>
+            <button onclick="quickSelectService('Textured Crop')" class="font-mono text-xs font-bold text-brand-cobalt hover:underline uppercase pt-1">CHOOSE</button>
+          </div>
+        </div>
+
+        <!-- Cut 3: Two Block Cut (Modern Asian Cut) -->
+        <div class="cut-card group relative bg-white border-2 border-brand-charcoal p-3 shadow-[4px_4px_0px_0px_#111215] transition-transform duration-200 hover:-translate-y-1" data-category="modern">
+          <div class="overflow-hidden relative h-80 bg-neutral-200">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=700&auto=format&fit=crop" alt="Two Block Haircut" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <span class="absolute top-3 left-3 bg-brand-cobalt text-white font-mono text-[10px] font-bold px-2 py-1 uppercase">MODERN</span>
+            <span class="absolute bottom-3 right-3 bg-brand-charcoal text-white font-mono text-xs font-bold px-2 py-0.5">TRENDING</span>
+          </div>
+          <div class="pt-4 pb-2 px-1 flex justify-between items-start">
+            <div>
+              <h3 class="font-display text-2xl tracking-wide text-brand-charcoal uppercase">TWO BLOCK CUT</h3>
+              <p class="font-sans text-xs text-brand-muted">Under-cut tersembunyi dengan bagian atas jatuh rapi bertekstur.</p>
+            </div>
+            <button onclick="quickSelectService('Two Block Cut')" class="font-mono text-xs font-bold text-brand-cobalt hover:underline uppercase pt-1">CHOOSE</button>
+          </div>
+        </div>
+
+        <!-- Cut 4: High Fade & Pompadour -->
+        <div class="cut-card group relative bg-white border-2 border-brand-charcoal p-3 shadow-[4px_4px_0px_0px_#111215] transition-transform duration-200 hover:-translate-y-1" data-category="fade">
+          <div class="overflow-hidden relative h-80 bg-neutral-200">
+            <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?q=80&w=700&auto=format&fit=crop" alt="High Fade Precision" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <span class="absolute top-3 left-3 bg-brand-charcoal text-white font-mono text-[10px] font-bold px-2 py-1 uppercase">HIGH FADE</span>
+          </div>
+          <div class="pt-4 pb-2 px-1 flex justify-between items-start">
+            <div>
+              <h3 class="font-display text-2xl tracking-wide text-brand-charcoal uppercase">MID / HIGH FADE</h3>
+              <p class="font-sans text-xs text-brand-muted">Kontras tajam dan maskulin. Menegaskan rahang dan bentuk kepala.</p>
+            </div>
+            <button onclick="quickSelectService('Mid/High Fade')" class="font-mono text-xs font-bold text-brand-cobalt hover:underline uppercase pt-1">CHOOSE</button>
+          </div>
+        </div>
+
+        <!-- Cut 5: Comma Hair / Modern Mullet -->
+        <div class="cut-card group relative bg-white border-2 border-brand-charcoal p-3 shadow-[4px_4px_0px_0px_#111215] transition-transform duration-200 hover:-translate-y-1" data-category="modern">
+          <div class="overflow-hidden relative h-80 bg-neutral-200">
+            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=700&auto=format&fit=crop" alt="Comma Hair Cut" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <span class="absolute top-3 left-3 bg-brand-cobalt text-white font-mono text-[10px] font-bold px-2 py-1 uppercase">MODERN</span>
+          </div>
+          <div class="pt-4 pb-2 px-1 flex justify-between items-start">
+            <div>
+              <h3 class="font-display text-2xl tracking-wide text-brand-charcoal uppercase">COMMA HAIR</h3>
+              <p class="font-sans text-xs text-brand-muted">Aksen poni melengkung khas urban youth. Fleksibel untuk semi-formal & hangout.</p>
+            </div>
+            <button onclick="quickSelectService('Comma Hair')" class="font-mono text-xs font-bold text-brand-cobalt hover:underline uppercase pt-1">CHOOSE</button>
+          </div>
+        </div>
+
+        <!-- Cut 6: Side Part / Classic Taper -->
+        <div class="cut-card group relative bg-white border-2 border-brand-charcoal p-3 shadow-[4px_4px_0px_0px_#111215] transition-transform duration-200 hover:-translate-y-1" data-category="classic">
+          <div class="overflow-hidden relative h-80 bg-neutral-200">
+            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=700&auto=format&fit=crop" alt="Classic Taper Side Part" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <span class="absolute top-3 left-3 bg-brand-charcoal text-white font-mono text-[10px] font-bold px-2 py-1 uppercase">CLASSIC</span>
+            <span class="absolute bottom-3 right-3 bg-brand-cream text-brand-charcoal font-mono text-xs font-bold px-2 py-0.5 border border-brand-charcoal">TIMELORD</span>
+          </div>
+          <div class="pt-4 pb-2 px-1 flex justify-between items-start">
+            <div>
+              <h3 class="font-display text-2xl tracking-wide text-brand-charcoal uppercase">SIDE PART TAPER</h3>
+              <p class="font-sans text-xs text-brand-muted">Belahan rapi dengan tapered side. Tampilan gentlemen berkelas tanpa kaku.</p>
+            </div>
+            <button onclick="quickSelectService('Classic Taper')" class="font-mono text-xs font-bold text-brand-cobalt hover:underline uppercase pt-1">CHOOSE</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Banner Consultation -->
+      <div class="mt-12 bg-white border-2 border-brand-charcoal p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 bg-brand-orange text-white flex items-center justify-center font-display text-2xl border border-brand-charcoal">?</div>
+          <div>
+            <div class="font-mono text-xs font-bold uppercase text-brand-charcoal">BINGUNG PILIH MODEL YANG COCOK?</div>
+            <div class="font-sans text-sm text-brand-muted">Barber kami akan bantu analisa bentuk rahang, arah tumbuh rambut, dan gaya personal lo sebelum gunting jalan.</div>
+          </div>
+        </div>
+        <button onclick="openBookingModal()" class="whitespace-nowrap px-6 py-2.5 bg-brand-charcoal hover:bg-brand-cobalt text-white font-mono text-xs font-bold uppercase transition-colors">
+          KONSULTASI GRATIS
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="services" class="py-16 sm:py-24 bg-brand-cream border-b-2 border-brand-charcoal">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 pb-4 border-b border-brand-charcoal">
+        <div>
+          <span class="font-mono text-xs font-bold uppercase tracking-widest text-brand-cobalt">04 / MENU SERVICES</span>
+          <h2 class="font-display text-5xl sm:text-6xl text-brand-charcoal tracking-tight uppercase">WHAT WE DO</h2>
+        </div>
+        <div class="font-mono text-xs text-brand-muted text-right hidden md:block">
+          TRANSPARENT PRICING // NO HIDDEN FEES<br>
+          ALL SERVICES INCLUDE FINISHING STYLING
+        </div>
+      </div>
+
+      <!-- Horizontal Editorial Rows -->
+      <div class="divide-y-2 divide-brand-charcoal border-y-2 border-brand-charcoal bg-white">
+        
+        <!-- Service Item 1 -->
+        <div class="p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-brand-offwhite transition-colors group">
+          <div class="md:w-1/3">
+            <span class="font-mono text-xs text-brand-muted block">SRV / 01</span>
+            <h3 class="font-display text-3xl sm:text-4xl text-brand-charcoal group-hover:text-brand-cobalt transition-colors uppercase">HAIRCUT</h3>
+          </div>
+          <div class="md:w-1/3">
+            <p class="font-sans text-sm text-brand-charcoalLight leading-relaxed">
+              Fresh cut presisi sesuai bentuk wajah, texture tapering, razor lineup, dan cold tonic refreshment.
+            </p>
+          </div>
+          <div class="md:w-1/4 flex items-center justify-between md:justify-end gap-6">
+            <div class="font-display text-3xl text-brand-charcoal">Rp 45K</div>
+            <button onclick="openBookingModal('Haircut - Rp 45K')" class="px-4 py-2 bg-brand-charcoal text-white hover:bg-brand-orange font-mono text-xs font-bold uppercase transition-colors">
+              SELECT
+            </button>
+          </div>
+        </div>
+
+        <!-- Service Item 2 (Best Value) -->
+        <div class="p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-brand-offwhite/60 hover:bg-white transition-colors group relative border-l-4 border-l-brand-orange">
+          <div class="md:w-1/3">
+            <div class="flex items-center gap-2">
+              <span class="font-mono text-xs text-brand-muted">SRV / 02</span>
+              <span class="bg-brand-orange text-white font-mono text-[10px] font-bold px-2 py-0.2">BEST VALUE</span>
+            </div>
+            <h3 class="font-display text-3xl sm:text-4xl text-brand-charcoal group-hover:text-brand-orange transition-colors uppercase">HAIRCUT + WASH</h3>
+          </div>
+          <div class="md:w-1/3">
+            <p class="font-sans text-sm text-brand-charcoalLight leading-relaxed">
+              Haircut presisi + relaxing hair wash shampoo + scalp gentle massage + hot towel + premium styling pomade/powder.
+            </p>
+          </div>
+          <div class="md:w-1/4 flex items-center justify-between md:justify-end gap-6">
+            <div class="font-display text-3xl text-brand-orange">Rp 60K</div>
+            <button onclick="openBookingModal('Haircut + Wash - Rp 60K')" class="px-4 py-2 bg-brand-orange text-white hover:bg-brand-charcoal font-mono text-xs font-bold uppercase transition-colors">
+              SELECT
+            </button>
+          </div>
+        </div>
+
+        <!-- Service Item 3 -->
+        <div class="p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-brand-offwhite transition-colors group">
+          <div class="md:w-1/3">
+            <span class="font-mono text-xs text-brand-muted block">SRV / 03</span>
+            <h3 class="font-display text-3xl sm:text-4xl text-brand-charcoal group-hover:text-brand-cobalt transition-colors uppercase">HAIRCUT + BEARD</h3>
+          </div>
+          <div class="md:w-1/3">
+            <p class="font-sans text-sm text-brand-charcoalLight leading-relaxed">
+              Full package: haircut lengkap dipadukan dengan beard trimming, line shaping, dan nourishing beard oil.
+            </p>
+          </div>
+          <div class="md:w-1/4 flex items-center justify-between md:justify-end gap-6">
+            <div class="font-display text-3xl text-brand-charcoal">Rp 80K</div>
+            <button onclick="openBookingModal('Haircut + Beard - Rp 80K')" class="px-4 py-2 bg-brand-charcoal text-white hover:bg-brand-orange font-mono text-xs font-bold uppercase transition-colors">
+              SELECT
+            </button>
+          </div>
+        </div>
+
+        <!-- Service Item 4 -->
+        <div class="p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-brand-offwhite transition-colors group">
+          <div class="md:w-1/3">
+            <span class="font-mono text-xs text-brand-muted block">SRV / 04</span>
+            <h3 class="font-display text-3xl sm:text-4xl text-brand-charcoal group-hover:text-brand-cobalt transition-colors uppercase">BEARD TRIM</h3>
+          </div>
+          <div class="md:w-1/3">
+            <p class="font-sans text-sm text-brand-charcoalLight leading-relaxed">
+              Rapikan dan bentuk brewok atau kumis agar simetris, rapi, dan menonjolkan garis rahang yang tegas.
+            </p>
+          </div>
+          <div class="md:w-1/4 flex items-center justify-between md:justify-end gap-6">
+            <div class="font-display text-3xl text-brand-charcoal">Rp 35K</div>
+            <button onclick="openBookingModal('Beard Trim - Rp 35K')" class="px-4 py-2 bg-brand-charcoal text-white hover:bg-brand-orange font-mono text-xs font-bold uppercase transition-colors">
+              SELECT
+            </button>
+          </div>
+        </div>
+
+        <!-- Service Item 5 -->
+        <div class="p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-brand-offwhite transition-colors group">
+          <div class="md:w-1/3">
+            <span class="font-mono text-xs text-brand-muted block">SRV / 05</span>
+            <h3 class="font-display text-3xl sm:text-4xl text-brand-charcoal group-hover:text-brand-cobalt transition-colors uppercase">KIDS CUT</h3>
+          </div>
+          <div class="md:w-1/3">
+            <p class="font-sans text-sm text-brand-charcoalLight leading-relaxed">
+              Potongan ramah dan sabar untuk anak usia di bawah 10 tahun. Nyaman, tidak rewel, hasil tetap keren.
+            </p>
+          </div>
+          <div class="md:w-1/4 flex items-center justify-between md:justify-end gap-6">
+            <div class="font-display text-3xl text-brand-charcoal">Rp 40K</div>
+            <button onclick="openBookingModal('Kids Cut - Rp 40K')" class="px-4 py-2 bg-brand-charcoal text-white hover:bg-brand-orange font-mono text-xs font-bold uppercase transition-colors">
+              SELECT
+            </button>
+          </div>
+        </div>
+
+        <!-- Service Item 6 -->
+        <div class="p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-brand-offwhite transition-colors group">
+          <div class="md:w-1/3">
+            <span class="font-mono text-xs text-brand-muted block">SRV / 06</span>
+            <h3 class="font-display text-3xl sm:text-4xl text-brand-charcoal group-hover:text-brand-cobalt transition-colors uppercase">STYLING & WASH</h3>
+          </div>
+          <div class="md:w-1/3">
+            <p class="font-sans text-sm text-brand-charcoalLight leading-relaxed">
+              Khusus lo yang mau hangout atau meeting penting: hair wash + blow dry + pomade/matte paste finish.
+            </p>
+          </div>
+          <div class="md:w-1/4 flex items-center justify-between md:justify-end gap-6">
+            <div class="font-display text-3xl text-brand-charcoal">Rp 25K</div>
+            <button onclick="openBookingModal('Styling & Wash - Rp 25K')" class="px-4 py-2 bg-brand-charcoal text-white hover:bg-brand-orange font-mono text-xs font-bold uppercase transition-colors">
+              SELECT
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="crew" class="py-16 sm:py-24 bg-brand-offwhite border-b-2 border-brand-charcoal">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      
+      <div class="flex flex-wrap items-end justify-between mb-12">
+        <div>
+          <span class="font-mono text-xs font-bold uppercase tracking-widest text-brand-orange">05 / BARBER ROSTER</span>
+          <h2 class="font-display text-5xl sm:text-6xl text-brand-charcoal tracking-tight uppercase">THE CREW</h2>
+          <p class="font-sans text-brand-muted mt-1 text-base">Pilih barber favorit lo sesuai spesialisasi gaya rambut yang lo mau.</p>
+        </div>
+        <div class="font-mono text-xs bg-brand-cream border border-brand-charcoal px-3 py-1.5 mt-4 sm:mt-0">
+          HOVER OR TAP TO PREVIEW BARBER
+        </div>
+      </div>
+
+      <!-- Barber Roster Layout: Left List + Right Dynamic Editorial Image -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white border-2 border-brand-charcoal p-6 sm:p-10 shadow-[8px_8px_0px_0px_#111215]">
+        
+        <!-- Left: Interactive List -->
+        <div class="lg:col-span-6 flex flex-col divide-y divide-brand-border">
+          
+          <!-- Roster Item 01: Raka -->
+          <div onclick="selectBarber(0)" onmouseenter="selectBarber(0)" class="roster-item cursor-pointer py-6 px-4 transition-all bg-brand-offwhite border-l-4 border-l-brand-orange active">
+            <div class="flex items-baseline justify-between">
+              <span class="font-display text-3xl sm:text-4xl text-brand-charcoal">01 — RAKA</span>
+              <span class="font-mono text-xs font-bold text-brand-orange uppercase">EXPERIENCE: 7 YRS</span>
+            </div>
+            <div class="font-mono text-sm font-semibold text-brand-cobalt mt-1">Fade Specialist</div>
+            <p class="font-sans text-xs text-brand-muted mt-2">Ahli di semua jenis fade (skin fade, taper, burst). Detail razor sangat tajam dan presisi.</p>
+          </div>
+
+          <!-- Roster Item 02: Dito -->
+          <div onclick="selectBarber(1)" onmouseenter="selectBarber(1)" class="roster-item cursor-pointer py-6 px-4 transition-all hover:bg-brand-offwhite border-l-4 border-l-transparent">
+            <div class="flex items-baseline justify-between">
+              <span class="font-display text-3xl sm:text-4xl text-brand-charcoal">02 — DITO</span>
+              <span class="font-mono text-xs font-bold text-brand-muted uppercase">EXPERIENCE: 5 YRS</span>
+            </div>
+            <div class="font-mono text-sm font-semibold text-brand-charcoal mt-1">Classic & Styling</div>
+            <p class="font-sans text-xs text-brand-muted mt-2">Jagoan gaya gentlemen, side-part pomade look, dan scissor work untuk rambut medium length.</p>
+          </div>
+
+          <!-- Roster Item 03: Bagas -->
+          <div onclick="selectBarber(2)" onmouseenter="selectBarber(2)" class="roster-item cursor-pointer py-6 px-4 transition-all hover:bg-brand-offwhite border-l-4 border-l-transparent">
+            <div class="flex items-baseline justify-between">
+              <span class="font-display text-3xl sm:text-4xl text-brand-charcoal">03 — BAGAS</span>
+              <span class="font-mono text-xs font-bold text-brand-muted uppercase">EXPERIENCE: 4 YRS</span>
+            </div>
+            <div class="font-mono text-sm font-semibold text-brand-charcoal mt-1">Modern Asian Cut</div>
+            <p class="font-sans text-xs text-brand-muted mt-2">Spesialis two-block, comma hair, modern mullet, dan texture layering untuk gaya anak muda.</p>
+          </div>
+
+          <!-- Roster Item 04: Ilham -->
+          <div onclick="selectBarber(3)" onmouseenter="selectBarber(3)" class="roster-item cursor-pointer py-6 px-4 transition-all hover:bg-brand-offwhite border-l-4 border-l-transparent">
+            <div class="flex items-baseline justify-between">
+              <span class="font-display text-3xl sm:text-4xl text-brand-charcoal">04 — ILHAM</span>
+              <span class="font-mono text-xs font-bold text-brand-muted uppercase">EXPERIENCE: 6 YRS</span>
+            </div>
+            <div class="font-mono text-sm font-semibold text-brand-charcoal mt-1">Texture & Crop Master</div>
+            <p class="font-sans text-xs text-brand-muted mt-2">Kuasai teknik texturizing scissors, French crop, serta styling praktis tanpa ribet.</p>
+          </div>
+
+        </div>
+
+        <!-- Right: Dynamic Big Image & Barber Card Details -->
+        <div class="lg:col-span-6 relative">
+          <div class="relative bg-brand-charcoal border-2 border-brand-charcoal overflow-hidden aspect-[4/5] sm:aspect-square">
+            <img id="rosterImage" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop" alt="Barber Raka portrait" class="w-full h-full object-cover transition-opacity duration-300">
+            
+            <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-brand-charcoal via-brand-charcoal/80 to-transparent p-6 text-white">
+              <div class="flex items-center justify-between mb-2">
+                <span id="rosterBadge" class="bg-brand-orange text-white font-mono text-[11px] font-bold px-2.5 py-1">ON DUTY TODAY</span>
+                <span id="rosterExp" class="font-mono text-xs text-neutral-300">CHAIR #01</span>
+              </div>
+              <h4 id="rosterName" class="font-display text-4xl uppercase">RAKA ARDIAN</h4>
+              <p id="rosterDesc" class="font-sans text-xs text-neutral-300 mt-1">
+                "Bikin customer keluar dari kursi dengan senyum pede adalah standar mutlak gue."
+              </p>
+              <button id="rosterBookBtn" onclick="openBookingWithBarber('Raka')" class="mt-4 w-full bg-white text-brand-charcoal hover:bg-brand-cobalt hover:text-white py-2.5 font-mono text-xs font-bold uppercase transition-colors border border-white">
+                BOOK WITH THIS BARBER
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-24 bg-brand-cream border-b-2 border-brand-charcoal">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="font-mono text-xs font-bold uppercase tracking-widest text-brand-cobalt">06 / THE TRANSFORMATION</span>
+        <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl text-brand-charcoal tracking-tight uppercase mt-1">
+          THE DIFFERENCE IS IN THE DETAIL.
+        </h2>
+        <p class="font-sans text-brand-muted text-sm sm:text-base mt-2">
+          Geser garis tengah untuk melihat transformasi sebelum & sesudah sentuhan tangan barber kami.
+        </p>
+      </div>
+
+      <!-- Before/After Interactive Component -->
+      <div class="relative max-w-3xl mx-auto border-2 border-brand-charcoal bg-brand-charcoal select-none shadow-[8px_8px_0px_0px_#111215] overflow-hidden" id="comparisonContainer">
+        
+        <!-- After Image (Base Full Layer) -->
+        <div class="w-full aspect-[4/3] sm:aspect-[16/10] relative">
+          <img 
+            src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1200&auto=format&fit=crop" 
+            alt="After Haircut Result" 
+            class="w-full h-full object-cover pointer-events-none"
+          >
+          <div class="absolute top-4 right-4 bg-brand-orange text-white font-mono text-xs font-bold px-3 py-1 uppercase tracking-wider border border-brand-charcoal shadow-sm">
+            AFTER — FRESH TAPER & CLEAN FADE
+          </div>
+        </div>
+
+        <!-- Before Image (Clipped Layer Overlay) -->
+        <div id="beforeOverlay" class="absolute inset-0 w-full h-full pointer-events-none overflow-hidden" style="width: 50%;">
+          <img 
+            src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1200&auto=format&fit=crop" 
+            alt="Before Haircut" 
+            class="absolute top-0 left-0 w-full h-full object-cover max-w-none pointer-events-none filter contrast-90 brightness-95"
+            id="beforeImg"
+          >
+          <div class="absolute top-4 left-4 bg-brand-charcoal text-white font-mono text-xs font-bold px-3 py-1 uppercase tracking-wider border border-white/20">
+            BEFORE — OVERGROWN & UNSTRUCTURED
+          </div>
+        </div>
+
+        <!-- Draggable Handle Divider -->
+        <div id="sliderHandle" class="absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize z-20 flex items-center justify-center pointer-events-none" style="left: 50%;">
+          <div class="w-9 h-9 -ml-4 bg-brand-orange text-white border-2 border-brand-charcoal flex items-center justify-center font-mono text-xs font-bold shadow-md">
+            ⇄
+          </div>
+        </div>
+
+        <!-- Transparent Range Input for Touch/Mouse Interaction -->
+        <input 
+          type="range" 
+          min="0" 
+          max="100" 
+          value="50" 
+          id="sliderRange" 
+          class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-30 m-0"
+          aria-label="Before and After Haircut Slider"
+        >
+      </div>
+
+      <div class="text-center mt-4 font-mono text-xs text-brand-muted">
+        DRAG SLIDER HORIZONTALLY • REAL CLIENT CUTS NO FILTER
+      </div>
+
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-24 bg-brand-offwhite border-b-2 border-brand-charcoal">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-12">
+        <div class="lg:col-span-8">
+          <span class="font-mono text-xs font-bold uppercase tracking-widest text-brand-orange">07 / THE CULTURE</span>
+          <h2 class="font-display text-5xl sm:text-6xl lg:text-7xl text-brand-charcoal tracking-tight uppercase mt-1">
+            MORE THAN A BARBERSHOP.
+          </h2>
+          <p class="font-sans text-brand-charcoalLight text-lg sm:text-xl mt-3 max-w-2xl font-normal leading-relaxed">
+            "Tempat ngobrol, ketemu teman, update style, dan menikmati waktu sebelum lanjut aktivitas. Kopi lokal dingin selalu siap di counter."
+          </p>
+        </div>
+        <div class="lg:col-span-4 flex lg:justify-end">
+          <div class="border border-brand-charcoal bg-white p-4 font-mono text-xs space-y-1">
+            <div class="text-brand-cobalt font-bold">☕ FREE ARTISAN COLD BREW</div>
+            <div class="text-neutral-600">HIGH-SPEED WIFI // CHILL PLAYLIST</div>
+            <div class="text-brand-orange font-bold">SNEAKERS & STREETWEAR TALK</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Asymmetric Culture Collage Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <!-- Collage Item 1 -->
+        <div class="relative bg-white border-2 border-brand-charcoal p-2 shadow-[4px_4px_0px_0px_#111215]">
+          <div class="h-64 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?q=80&w=600&auto=format&fit=crop" alt="Barbershop Chairs & Interior" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+          </div>
+          <div class="p-3 font-mono text-xs">
+            <div class="font-bold text-brand-charcoal">01. THE SHOP FLOOR</div>
+            <div class="text-brand-muted text-[11px]">Heavy-duty Belmont chairs & clean lighting</div>
+          </div>
+        </div>
+
+        <!-- Collage Item 2 -->
+        <div class="relative bg-white border-2 border-brand-charcoal p-2 shadow-[4px_4px_0px_0px_#111215] sm:translate-y-4">
+          <div class="h-64 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1593702295094-aea22597af65?q=80&w=600&auto=format&fit=crop" alt="Barber Tools in line" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+          </div>
+          <div class="p-3 font-mono text-xs">
+            <div class="font-bold text-brand-charcoal">02. PRECISION BLADES</div>
+            <div class="text-brand-muted text-[11px]">Sanitized clippers, Japanese steel shears</div>
+          </div>
+        </div>
+
+        <!-- Collage Item 3 -->
+        <div class="relative bg-white border-2 border-brand-charcoal p-2 shadow-[4px_4px_0px_0px_#111215]">
+          <div class="h-64 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?q=80&w=600&auto=format&fit=crop" alt="Chilling & Conversation" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+          </div>
+          <div class="p-3 font-mono text-xs">
+            <div class="font-bold text-brand-charcoal">03. LOUNGE & COMMUNITY</div>
+            <div class="text-brand-muted text-[11px]">Tempat santai tanpa rasa canggung</div>
+          </div>
+        </div>
+
+        <!-- Collage Item 4 -->
+        <div class="relative bg-white border-2 border-brand-charcoal p-2 shadow-[4px_4px_0px_0px_#111215] sm:translate-y-4">
+          <div class="h-64 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=600&auto=format&fit=crop" alt="Customer smile after cut" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+          </div>
+          <div class="p-3 font-mono text-xs">
+            <div class="font-bold text-brand-charcoal">04. LOCAL ATTITUDE</div>
+            <div class="text-brand-muted text-[11px]">Kultur ramah khas tongkrongan Indonesia</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-24 bg-brand-cream border-b-2 border-brand-charcoal">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-12 pb-4 border-b border-brand-charcoal gap-4">
+        <div>
+          <span class="font-mono text-xs font-bold uppercase tracking-widest text-brand-cobalt">08 / SHELF ESSENTIALS</span>
+          <h2 class="font-display text-5xl sm:text-6xl text-brand-charcoal tracking-tight uppercase mt-1">
+            GROOMING CORNER
+          </h2>
+          <p class="font-sans text-brand-muted text-sm sm:text-base mt-1">Produk pilihan yang dipakai barber kami sehari-hari untuk styling maksimal.</p>
+        </div>
+        <div class="font-mono text-xs font-bold bg-white border border-brand-charcoal px-3 py-2">
+          READY IN SHOP & ONLINE ORDER
+        </div>
+      </div>
+
+      <!-- Mini Product Shelf Grid (Streetwear Merch Feel) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+        
+        <!-- Product 1: Pomade -->
+        <div class="bg-white border-2 border-brand-charcoal p-4 flex flex-col justify-between shadow-[4px_4px_0px_0px_#111215]">
+          <div>
+            <div class="bg-brand-offwhite p-4 mb-4 border border-brand-border flex items-center justify-center h-44">
+              <div class="w-24 h-24 rounded-full bg-brand-charcoal text-white font-mono text-[11px] flex flex-col items-center justify-center p-2 text-center border-2 border-brand-orange">
+                <span class="text-brand-orange font-bold">WATER</span>
+                <span>BASED</span>
+                <span class="text-[9px]">HEAVY</span>
+              </div>
+            </div>
+            <div class="font-mono text-[10px] text-brand-muted uppercase">HOLD: 5/5 • SHINE: 4/5</div>
+            <h3 class="font-display text-2xl text-brand-charcoal uppercase mt-1">CLASSIC POMADE</h3>
+            <p class="font-sans text-xs text-brand-charcoalLight/80 mt-1">Slick back & side-part rapi tanpa rontok dan gampang dibilas.</p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-brand-border flex items-center justify-between">
+            <span class="font-mono text-sm font-bold text-brand-charcoal">Rp 85K</span>
+            <button onclick="showProductDetail('Classic Pomade', 'Rp 85K', 'Water-based heavy hold pomade dengan aroma citrus sandalwood segar. Diformulasikan khusus untuk iklim tropis Indonesia agar rambut tahan seharian tanpa lepek.')" class="px-3 py-1 bg-brand-charcoal hover:bg-brand-cobalt text-white font-mono text-[11px] font-bold uppercase transition-colors">
+              DETAIL
+            </button>
+          </div>
+        </div>
+
+        <!-- Product 2: Hair Clay -->
+        <div class="bg-white border-2 border-brand-charcoal p-4 flex flex-col justify-between shadow-[4px_4px_0px_0px_#111215]">
+          <div>
+            <div class="bg-brand-offwhite p-4 mb-4 border border-brand-border flex items-center justify-center h-44">
+              <div class="w-24 h-24 rounded-none bg-brand-cream border-2 border-brand-charcoal flex flex-col items-center justify-center p-2 text-center">
+                <span class="font-mono font-bold text-brand-charcoal text-xs">MATTE</span>
+                <span class="font-mono text-[10px] text-brand-orange font-bold">CLAY 80G</span>
+              </div>
+            </div>
+            <div class="font-mono text-[10px] text-brand-muted uppercase">HOLD: 4/5 • SHINE: 0/5</div>
+            <h3 class="font-display text-2xl text-brand-charcoal uppercase mt-1">MATTE HAIR CLAY</h3>
+            <p class="font-sans text-xs text-brand-charcoalLight/80 mt-1">Hasil natural tanpa kilap untuk messy top & textured crop.</p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-brand-border flex items-center justify-between">
+            <span class="font-mono text-sm font-bold text-brand-charcoal">Rp 95K</span>
+            <button onclick="showProductDetail('Matte Hair Clay', 'Rp 95K', 'Bentonite clay alami yang memberikan daya rekat fleksibel, volume tinggi, dan finish matte natural seakan tidak pakai produk.')" class="px-3 py-1 bg-brand-charcoal hover:bg-brand-cobalt text-white font-mono text-[11px] font-bold uppercase transition-colors">
+              DETAIL
+            </button>
+          </div>
+        </div>
+
+        <!-- Product 3: Sea Salt Spray -->
+        <div class="bg-white border-2 border-brand-charcoal p-4 flex flex-col justify-between shadow-[4px_4px_0px_0px_#111215]">
+          <div>
+            <div class="bg-brand-offwhite p-4 mb-4 border border-brand-border flex items-center justify-center h-44">
+              <div class="w-16 h-28 bg-brand-cobalt text-white border-2 border-brand-charcoal flex flex-col items-center justify-center p-2 text-center">
+                <span class="font-mono font-bold text-[10px]">SEA SALT</span>
+                <span class="font-mono text-[9px] text-neutral-300">150ML</span>
+              </div>
+            </div>
+            <div class="font-mono text-[10px] text-brand-muted uppercase">PRE-STYLER • VOLUME</div>
+            <h3 class="font-display text-2xl text-brand-charcoal uppercase mt-1">SEA SALT SPRAY</h3>
+            <p class="font-sans text-xs text-brand-charcoalLight/80 mt-1">Tambahkan tekstur beachy waves & volume instan sebelum blow dry.</p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-brand-border flex items-center justify-between">
+            <span class="font-mono text-sm font-bold text-brand-charcoal">Rp 75K</span>
+            <button onclick="showProductDetail('Sea Salt Spray', 'Rp 75K', 'Mineral laut alami dengan ekstrak lidah buaya untuk mengunci volume rambut tipis menjadi lebih tebal dan bertekstur bebas lengket.')" class="px-3 py-1 bg-brand-charcoal hover:bg-brand-cobalt text-white font-mono text-[11px] font-bold uppercase transition-colors">
+              DETAIL
+            </button>
+          </div>
+        </div>
+
+        <!-- Product 4: Hair Styling Powder -->
+        <div class="bg-white border-2 border-brand-charcoal p-4 flex flex-col justify-between shadow-[4px_4px_0px_0px_#111215]">
+          <div>
+            <div class="bg-brand-offwhite p-4 mb-4 border border-brand-border flex items-center justify-center h-44">
+              <div class="w-14 h-24 bg-brand-orange text-white border-2 border-brand-charcoal flex flex-col items-center justify-center p-1 text-center">
+                <span class="font-mono font-bold text-[10px]">POWDER</span>
+                <span class="font-mono text-[8px]">DUST 10G</span>
+              </div>
+            </div>
+            <div class="font-mono text-[10px] text-brand-muted uppercase">INSTANT GRIP • DRY</div>
+            <h3 class="font-display text-2xl text-brand-charcoal uppercase mt-1">HAIR POWDER</h3>
+            <p class="font-sans text-xs text-brand-charcoalLight/80 mt-1">Solusi cepat rambut lepek, angkat akar rambut dalam 5 detik.</p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-brand-border flex items-center justify-between">
+            <span class="font-mono text-sm font-bold text-brand-charcoal">Rp 65K</span>
+            <button onclick="showProductDetail('Hair Powder', 'Rp 65K', 'Micro powder berbobot ringan yang menyerap minyak berlebih di kulit kepala seketika sekaligus memberikan tekstur kasar modern pada gaya rambut crop.')" class="px-3 py-1 bg-brand-charcoal hover:bg-brand-cobalt text-white font-mono text-[11px] font-bold uppercase transition-colors">
+              DETAIL
+            </button>
+          </div>
+        </div>
+
+        <!-- Product 5: Beard & Scap Oil -->
+        <div class="bg-white border-2 border-brand-charcoal p-4 flex flex-col justify-between shadow-[4px_4px_0px_0px_#111215]">
+          <div>
+            <div class="bg-brand-offwhite p-4 mb-4 border border-brand-border flex items-center justify-center h-44">
+              <div class="w-14 h-24 bg-brand-charcoalLight text-white border-2 border-brand-charcoal flex flex-col items-center justify-center p-1 text-center">
+                <span class="font-mono font-bold text-[10px] text-brand-orange">BEARD</span>
+                <span class="font-mono text-[9px]">SERUM</span>
+              </div>
+            </div>
+            <div class="font-mono text-[10px] text-brand-muted uppercase">NOURISH • SOFTEN</div>
+            <h3 class="font-display text-2xl text-brand-charcoal uppercase mt-1">BEARD SERUM OIL</h3>
+            <p class="font-sans text-xs text-brand-charcoalLight/80 mt-1">Bikin brewok lembut, tidak gatal, dan merangsang pertumbuhan rapi.</p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-brand-border flex items-center justify-between">
+            <span class="font-mono text-sm font-bold text-brand-charcoal">Rp 70K</span>
+            <button onclick="showProductDetail('Beard Serum Oil', 'Rp 70K', 'Mengandung Argan Oil dan Jojoba Oil murni untuk merawat kulit di balik brewok agar bebas ketombe brewok dan wangi maskulin seharian.')" class="px-3 py-1 bg-brand-charcoal hover:bg-brand-cobalt text-white font-mono text-[11px] font-bold uppercase transition-colors">
+              DETAIL
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section id="price" class="py-16 sm:py-24 bg-brand-offwhite border-b-2 border-brand-charcoal">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      
+      <div class="bg-brand-charcoal text-white p-8 sm:p-12 border-2 border-brand-charcoal shadow-[10px_10px_0px_0px_#FF4D00]">
+        
+        <!-- Board Header -->
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between pb-8 border-b-2 border-white/20 gap-4">
+          <div>
+            <span class="font-mono text-xs text-brand-orange font-bold uppercase tracking-widest">09 / TRANSPARENT RATE</span>
+            <h2 class="font-display text-5xl sm:text-6xl tracking-tight uppercase mt-1">KEEP IT SIMPLE.</h2>
+          </div>
+          <div class="font-mono text-xs text-neutral-400">
+            PRICE BOARD VERSION 2.6<br>
+            NETTO / NO TAX SURCHARGE
+          </div>
+        </div>
+
+        <!-- Board Rows -->
+        <div class="divide-y divide-white/10 font-mono text-sm sm:text-base">
+          
+          <div class="py-5 flex items-center justify-between group">
+            <span class="text-neutral-200 group-hover:text-brand-orange transition-colors">HAIRCUT</span>
+            <span class="text-neutral-500 flex-1 border-b border-dotted border-neutral-700 mx-4 hidden sm:block"></span>
+            <span class="font-bold text-white text-lg">Rp 45.000</span>
+          </div>
+
+          <div class="py-5 flex items-center justify-between group bg-white/5 px-3 -mx-3 border-l-4 border-l-brand-orange">
+            <div class="flex items-center gap-3">
+              <span class="text-white font-bold group-hover:text-brand-orange transition-colors">HAIRCUT + WASH</span>
+              <span class="bg-brand-orange text-white text-[10px] font-bold px-2 py-0.5">BEST VALUE</span>
+            </div>
+            <span class="text-neutral-500 flex-1 border-b border-dotted border-neutral-700 mx-4 hidden sm:block"></span>
+            <span class="font-bold text-brand-orange text-xl">Rp 60.000</span>
+          </div>
+
+          <div class="py-5 flex items-center justify-between group">
+            <span class="text-neutral-200 group-hover:text-brand-orange transition-colors">HAIRCUT + BEARD</span>
+            <span class="text-neutral-500 flex-1 border-b border-dotted border-neutral-700 mx-4 hidden sm:block"></span>
+            <span class="font-bold text-white text-lg">Rp 80.000</span>
+          </div>
+
+          <div class="py-5 flex items-center justify-between group">
+            <span class="text-neutral-200 group-hover:text-brand-orange transition-colors">BEARD TRIM ONLY</span>
+            <span class="text-neutral-500 flex-1 border-b border-dotted border-neutral-700 mx-4 hidden sm:block"></span>
+            <span class="font-bold text-white text-lg">Rp 35.000</span>
+          </div>
+
+          <div class="py-5 flex items-center justify-between group">
+            <span class="text-neutral-200 group-hover:text-brand-orange transition-colors">KIDS CUT (UNDER 10 YRS)</span>
+            <span class="text-neutral-500 flex-1 border-b border-dotted border-neutral-700 mx-4 hidden sm:block"></span>
+            <span class="font-bold text-white text-lg">Rp 40.000</span>
+          </div>
+
+          <div class="py-5 flex items-center justify-between group">
+            <span class="text-neutral-200 group-hover:text-brand-orange transition-colors">QUICK STYLING & FINISH</span>
+            <span class="text-neutral-500 flex-1 border-b border-dotted border-neutral-700 mx-4 hidden sm:block"></span>
+            <span class="font-bold text-white text-lg">Rp 25.000</span>
+          </div>
+
+        </div>
+
+        <!-- Board Footer Action -->
+        <div class="mt-8 pt-6 border-t border-white/20 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <span class="font-sans text-xs text-neutral-400 text-center sm:text-left">
+            Pembayaran fleksibel: QRIS, GoPay, OVO, ShopeePay, Debit & Cash.
+          </span>
+          <button onclick="openBookingModal()" class="w-full sm:w-auto px-6 py-3 bg-brand-orange hover:bg-brand-orangeHover text-white font-mono text-xs font-bold uppercase tracking-wider transition-all">
+            BOOK THIS PRICE
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-24 bg-brand-cream border-b-2 border-brand-charcoal">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      
+      <!-- Big Typography Quote Headline -->
+      <div class="border-b-2 border-brand-charcoal pb-8 mb-12">
+        <div class="flex items-center gap-2 font-mono text-xs font-bold text-brand-cobalt mb-2">
+          <span>★★★★★ 4.9 VERIFIED RATING</span>
+          <span>• 840+ GOOGLE REVIEWS</span>
+        </div>
+        <h2 class="font-display text-5xl sm:text-7xl lg:text-8xl text-brand-charcoal uppercase leading-[0.9]">
+          "FRESH CUT.<br>
+          <span class="text-brand-cobalt">GOOD VIBES."</span>
+        </h2>
+      </div>
+
+      <!-- Editorial Review Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Review 1 -->
+        <div class="bg-white border-2 border-brand-charcoal p-6 sm:p-8 flex flex-col justify-between shadow-[4px_4px_0px_0px_#111215]">
+          <div>
+            <div class="font-mono text-xs text-brand-orange mb-3">01 / SOUTH JKT RESIDENT</div>
+            <p class="font-sans text-base sm:text-lg text-brand-charcoal font-medium leading-snug">
+              "Fade-nya clean banget. Barbernya beneran ngerti request, bukan asal babat abis. Detail rapi sampai brewok."
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-brand-border flex items-center justify-between">
+            <span class="font-display text-xl tracking-wide text-brand-charcoal">— ADIT, 26 (CREATIVE DESIGNER)</span>
+            <span class="font-mono text-xs text-brand-muted">REGULAR</span>
+          </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="bg-white border-2 border-brand-charcoal p-6 sm:p-8 flex flex-col justify-between shadow-[4px_4px_0px_0px_#111215]">
+          <div>
+            <div class="font-mono text-xs text-brand-cobalt mb-3">02 / CAMPUS STUDENT</div>
+            <p class="font-sans text-base sm:text-lg text-brand-charcoal font-medium leading-snug">
+              "Tempat nyaman, playlist musiknya asik, dan hasilnya persis foto referensi Two-Block yang gue kasih. Mantap!"
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-brand-border flex items-center justify-between">
+            <span class="font-display text-xl tracking-wide text-brand-charcoal">— RIZAL, 21 (MAHASISWA)</span>
+            <span class="font-mono text-xs text-brand-muted">FIRST VISIT</span>
+          </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="bg-white border-2 border-brand-charcoal p-6 sm:p-8 flex flex-col justify-between shadow-[4px_4px_0px_0px_#111215]">
+          <div>
+            <div class="font-mono text-xs text-brand-orange mb-3">03 / TECH WORKER</div>
+            <p class="font-sans text-base sm:text-lg text-brand-charcoal font-medium leading-snug">
+              "Sudah jadi langganan tiap bulan sama mas Raka. Booking-nya gampang, gak perlu buang waktu antre berjam-jam."
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-brand-border flex items-center justify-between">
+            <span class="font-display text-xl tracking-wide text-brand-charcoal">— FIKRI, 29 (SOFTWARE ENGINEER)</span>
+            <span class="font-mono text-xs text-brand-muted">MEMBER #042</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-24 bg-brand-offwhite border-b-2 border-brand-charcoal overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-10 pb-4 border-b border-brand-charcoal gap-4">
+        <div>
+          <span class="font-mono text-xs font-bold uppercase tracking-widest text-brand-orange">10 / SOCIAL FEED</span>
+          <h2 class="font-display text-5xl sm:text-6xl text-brand-charcoal tracking-tight uppercase mt-1">
+            FOLLOW THE CUT
+          </h2>
+          <p class="font-sans text-brand-muted text-sm sm:text-base">Dokumentasi harian potong rambut, behind the scenes, dan street culture.</p>
+        </div>
+        <a href="https://instagram.com" target="_blank" class="inline-flex items-center gap-2 font-mono text-xs font-bold bg-white hover:bg-brand-charcoal hover:text-white text-brand-charcoal px-4 py-2 border border-brand-charcoal shadow-[2px_2px_0px_0px_#111215] transition-all">
+          <span>@BARBERHOUSE</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+        </a>
+      </div>
+
+      <!-- Custom Lookbook Masonry / Grid -->
+      <div class="grid grid-cols-2 md:grid-cols-4 sm:grid-rows-2 gap-4">
+        
+        <div class="relative group overflow-hidden border-2 border-brand-charcoal h-60 sm:h-72">
+          <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?q=80&w=600&auto=format&fit=crop" alt="Lookbook 1" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+          <div class="absolute inset-0 bg-brand-charcoal/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-mono text-xs font-bold">
+            VIEW ON INSTAGRAM
+          </div>
+        </div>
+
+        <div class="relative group overflow-hidden border-2 border-brand-charcoal h-60 sm:h-72 md:row-span-2 md:h-full">
+          <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?q=80&w=600&auto=format&fit=crop" alt="Lookbook 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+          <div class="absolute inset-0 bg-brand-charcoal/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-mono text-xs font-bold">
+            #DAILYFADE
+          </div>
+        </div>
+
+        <div class="relative group overflow-hidden border-2 border-brand-charcoal h-60 sm:h-72">
+          <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?q=80&w=600&auto=format&fit=crop" alt="Lookbook 3" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+          <div class="absolute inset-0 bg-brand-charcoal/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-mono text-xs font-bold">
+            #BEARDSHAPE
+          </div>
+        </div>
+
+        <div class="relative group overflow-hidden border-2 border-brand-charcoal h-60 sm:h-72">
+          <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?q=80&w=600&auto=format&fit=crop" alt="Lookbook 4" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+          <div class="absolute inset-0 bg-brand-charcoal/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-mono text-xs font-bold">
+            #SHOPINTERIOR
+          </div>
+        </div>
+
+        <div class="relative group overflow-hidden border-2 border-brand-charcoal h-60 sm:h-72">
+          <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?q=80&w=600&auto=format&fit=crop" alt="Lookbook 5" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+          <div class="absolute inset-0 bg-brand-charcoal/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-mono text-xs font-bold">
+            #TEXTUREDCROP
+          </div>
+        </div>
+
+        <div class="relative group overflow-hidden border-2 border-brand-charcoal h-60 sm:h-72">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop" alt="Lookbook 6" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+          <div class="absolute inset-0 bg-brand-charcoal/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-mono text-xs font-bold">
+            #CLIENTSMILE
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section id="booking" class="py-16 sm:py-24 bg-brand-orange text-white border-b-2 border-brand-charcoal relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-8">
+          <div class="inline-block bg-brand-charcoal text-white font-mono text-xs font-bold px-3 py-1 uppercase tracking-wider mb-4 border border-white/20">
+            FAST PASS / SKIP THE QUEUE
+          </div>
+          <h2 class="font-display text-5xl sm:text-7xl lg:text-8xl tracking-tight uppercase leading-[0.9]">
+            READY FOR A<br>FRESH CUT?
+          </h2>
+          <p class="font-sans text-white/90 text-lg sm:text-xl max-w-xl mt-4 font-normal">
+            "Pick your barber. Pick your time. Sit back." Jangan biarkan rambut berantakan merusak impresi lo hari ini.
+          </p>
+        </div>
+
+        <div class="lg:col-span-4 flex flex-col gap-4">
+          <button onclick="openBookingModal()" class="w-full py-5 bg-brand-charcoal hover:bg-brand-charcoalLight text-white font-mono text-base font-bold uppercase tracking-wider border-2 border-white shadow-[6px_6px_0px_0px_#FFFFFF] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all text-center">
+            BOOK MY CUT NOW
+          </button>
+          <a href="https://wa.me/6281234567890?text=Halo%20Barberhouse,%20saya%20mau%20tanya%20jadwal%20potong%20rambut" target="_blank" class="w-full py-4 bg-white hover:bg-brand-offwhite text-brand-charcoal font-mono text-sm font-bold uppercase tracking-wider border-2 border-brand-charcoal shadow-[4px_4px_0px_0px_#111215] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all text-center flex items-center justify-center gap-2">
+            <span>CHAT ON WHATSAPP</span>
+            <svg class="w-4 h-4 text-brand-orange" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-24 bg-brand-cream border-b-2 border-brand-charcoal">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+        
+        <!-- Left Location Info -->
+        <div class="lg:col-span-5 bg-white border-2 border-brand-charcoal p-8 flex flex-col justify-between shadow-[8px_8px_0px_0px_#111215]">
+          <div>
+            <span class="font-mono text-xs font-bold uppercase tracking-widest text-brand-cobalt">11 / HEADQUARTERS</span>
+            <h2 class="font-display text-5xl text-brand-charcoal tracking-tight uppercase mt-1">
+              FIND THE SHOP
+            </h2>
+            
+            <div class="mt-6 space-y-4 font-sans text-sm">
+              <div class="border-b border-brand-border pb-3">
+                <div class="font-mono text-xs font-bold text-brand-muted uppercase">ADDRESS</div>
+                <div class="text-brand-charcoal font-bold text-base mt-0.5">BARBERHOUSE FLAGSHIP</div>
+                <div class="text-brand-charcoalLight">Jl. Contoh Raya No. 88, Senopati, Kebayoran Baru, Jakarta Selatan, 12190</div>
+              </div>
+
+              <div class="border-b border-brand-border pb-3">
+                <div class="font-mono text-xs font-bold text-brand-muted uppercase">OPERATIONAL HOURS</div>
+                <div class="text-brand-charcoal font-bold text-base mt-0.5">OPEN DAILY (SENIN — MINGGU)</div>
+                <div class="text-brand-orange font-mono text-xs font-bold">10.00 — 22.00 WIB</div>
+                <div class="text-xs text-brand-muted mt-0.5">Last slot booking: 21.15 WIB</div>
+              </div>
+
+              <div>
+                <div class="font-mono text-xs font-bold text-brand-muted uppercase">PARKING & FACILITY</div>
+                <div class="text-xs text-brand-charcoalLight mt-0.5">Free Motor & Car Parking Valet • Free Coffee • AC Clean Lounge • High-speed Wi-Fi</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 pt-4 border-t border-brand-border flex items-center justify-between font-mono text-xs">
+            <a href="https://maps.google.com" target="_blank" class="text-brand-cobalt font-bold hover:underline flex items-center gap-1">
+              <span>OPEN GOOGLE MAPS</span>
+              <span>↗</span>
+            </a>
+            <span class="text-brand-muted">NEAR SENOPATI JUNCTION</span>
+          </div>
+        </div>
+
+        <!-- Right Custom Visual Map Block -->
+        <div class="lg:col-span-7 bg-brand-charcoal border-2 border-brand-charcoal relative min-h-[360px] overflow-hidden p-6 flex flex-col justify-between shadow-[8px_8px_0px_0px_#111215]">
+          <!-- Stylized Map Background Pattern -->
+          <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#FAF7F2_1px,transparent_1px)] [background-size:16px_16px]"></div>
+          
+          <div class="relative z-10 flex justify-between items-start">
+            <span class="font-mono text-xs text-brand-orange font-bold bg-white/10 px-3 py-1">GPS: -6.2297° S, 106.8074° E</span>
+            <span class="font-mono text-xs text-white bg-brand-cobalt px-2.5 py-1">LIVE TRAFFIC: NORMAL</span>
+          </div>
+
+          <!-- Stylized Map Graphic Point -->
+          <div class="relative z-10 text-center my-auto py-8">
+            <div class="inline-flex flex-col items-center animate-bounce">
+              <div class="w-14 h-14 bg-brand-orange text-white border-2 border-white flex items-center justify-center font-display text-2xl shadow-xl">
+                ★
+              </div>
+              <div class="w-2 h-4 bg-white"></div>
+            </div>
+            <div class="font-display text-3xl text-white tracking-wide uppercase mt-2">BARBERHOUSE JAKARTA</div>
+            <div class="font-mono text-xs text-neutral-300">JL. CONTOH RAYA NO. 88 (DEPAN COFFEE SHOP)</div>
+          </div>
+
+          <div class="relative z-10 flex items-center justify-between border-t border-white/20 pt-4 font-mono text-xs text-neutral-300">
+            <span>2 MIN FROM MRT BLOK M</span>
+            <span>EASY ACCESS VIA SENOPATI</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="bg-brand-charcoal text-white pt-16 pb-24 md:pb-12 border-t-2 border-brand-charcoal">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      
+      <!-- Top Footer Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-12 border-b border-white/15">
+        
+        <div class="md:col-span-5">
+          <a href="#home" class="font-display text-5xl tracking-tight text-white inline-block hover:text-brand-orange transition-colors">
+            BARBER.
+          </a>
+          <p class="font-mono text-xs text-brand-orange mt-1 font-bold">GOOD CUTS. GOOD VIBES.</p>
+          <p class="font-sans text-xs text-neutral-400 mt-3 max-w-sm leading-relaxed">
+            Local style, modern attitude. Barbershop urban Indonesia dengan potongan presisi, attitude humble, dan standar kualitas tinggi.
+          </p>
+        </div>
+
+        <div class="md:col-span-3">
+          <div class="font-mono text-xs font-bold text-neutral-400 uppercase tracking-wider mb-3">NAVIGATION</div>
+          <ul class="space-y-2 font-mono text-xs">
+            <li><a href="#home" class="hover:text-brand-orange transition-colors">HOME</a></li>
+            <li><a href="#cuts" class="hover:text-brand-orange transition-colors">CUTS CATALOG</a></li>
+            <li><a href="#services" class="hover:text-brand-orange transition-colors">SERVICES</a></li>
+            <li><a href="#crew" class="hover:text-brand-orange transition-colors">BARBERS</a></li>
+            <li><a href="#price" class="hover:text-brand-orange transition-colors">PRICE BOARD</a></li>
+            <li><button onclick="openBookingModal()" class="hover:text-brand-orange transition-colors text-left uppercase">BOOKING</button></li>
+          </ul>
+        </div>
+
+        <div class="md:col-span-4">
+          <div class="font-mono text-xs font-bold text-neutral-400 uppercase tracking-wider mb-3">CONNECT WITH THE SHOP</div>
+          <div class="flex flex-wrap gap-2 font-mono text-xs mb-4">
+            <a href="https://instagram.com" target="_blank" class="px-3 py-1.5 bg-white/10 hover:bg-brand-orange transition-colors">INSTAGRAM</a>
+            <a href="https://tiktok.com" target="_blank" class="px-3 py-1.5 bg-white/10 hover:bg-brand-orange transition-colors">TIKTOK</a>
+            <a href="https://wa.me/6281234567890" target="_blank" class="px-3 py-1.5 bg-white/10 hover:bg-brand-orange transition-colors">WHATSAPP</a>
+          </div>
+          <p class="font-sans text-[11px] text-neutral-400">
+            Jl. Contoh Raya No. 88, Indonesia • Open Daily 10.00 — 22.00
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Bottom Copyright & Micro Details -->
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-neutral-500">
+        <div>© 2026 BARBERHOUSE INDONESIA. ALL RIGHTS RESERVED.</div>
+        <div class="flex flex-wrap items-center gap-4">
+          <span>NO APPOINTMENT PENALTY</span>
+          <span>•</span>
+          <span>INDONESIAN PRIDE</span>
+          <span>•</span>
+          <button onclick="openAdminLoginModal()" class="flex items-center gap-1.5 px-3 py-1 bg-white/10 hover:bg-brand-orange text-white text-[11px] font-mono font-bold tracking-wider uppercase border border-neutral-700 hover:border-brand-orange transition-all">
+            <svg class="w-3.5 h-3.5 text-brand-orange group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+            <span id="quickAdminLabel">KELOLA WEB</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <nav class="md:hidden fixed bottom-0 inset-x-0 bg-brand-charcoal text-white border-t-2 border-brand-charcoal z-40 px-2 py-2 shadow-2xl flex items-center justify-around font-mono text-[11px]">
+    <a href="#home" class="flex flex-col items-center py-1 px-2 text-neutral-300 hover:text-white">
+      <svg class="w-4 h-4 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+      <span>HOME</span>
+    </a>
+    <a href="#cuts" class="flex flex-col items-center py-1 px-2 text-neutral-300 hover:text-white">
+      <svg class="w-4 h-4 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 5.758a3 3 0 10-4.243 4.243 3 3 0 004.243-4.243zm0-5.758a3 3 0 10-4.243-4.243 3 3 0 004.243 4.243z"/></svg>
+      <span>CUTS</span>
+    </a>
+    
+    <!-- Prominent Booking Button in Center -->
+    <button onclick="openBookingModal()" class="flex flex-col items-center justify-center bg-brand-orange text-white px-5 py-2 -mt-4 border-2 border-brand-charcoal shadow-[0_4px_12px_rgba(255,77,0,0.5)] active:scale-95 transition-transform">
+      <span class="font-display text-lg leading-none">BOOK</span>
+      <span class="text-[9px] font-bold">SLOT</span>
+    </button>
+
+    <a href="#crew" class="flex flex-col items-center py-1 px-2 text-neutral-300 hover:text-white">
+      <svg class="w-4 h-4 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+      <span>CREW</span>
+    </a>
+    <button onclick="toggleMobileNav()" class="flex flex-col items-center py-1 px-2 text-neutral-300 hover:text-white">
+      <svg class="w-4 h-4 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
+      <span>MENU</span>
+    </button>
+  </nav>
+
+  <div id="bookingModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
+    <div class="relative w-full max-w-xl bg-brand-offwhite border-2 border-brand-charcoal shadow-[10px_10px_0px_0px_#111215] my-8 transition-all">
+      
+      <!-- Ticket Header of Modal -->
+      <div class="bg-brand-charcoal text-white p-5 flex items-center justify-between border-b-2 border-brand-charcoal">
+        <div class="flex items-center gap-3">
+          <span class="w-3 h-3 bg-brand-orange inline-block"></span>
+          <span class="font-mono text-xs font-bold uppercase tracking-wider">TICKET RESERVATION / APPOINTMENT</span>
+        </div>
+        <button onclick="closeBookingModal()" class="text-neutral-400 hover:text-white font-mono text-lg font-bold p-1">✕</button>
+      </div>
+
+      <!-- Ticket Body Form -->
+      <form id="appointmentForm" onsubmit="handleBookingSubmit(event)" class="p-6 sm:p-8 space-y-5">
+        
+        <div>
+          <label class="block font-mono text-xs font-bold uppercase text-brand-charcoal mb-1.5">1. SELECT SERVICE</label>
+          <select id="bookService" required class="w-full bg-white border-2 border-brand-charcoal p-3 font-sans text-sm focus:outline-none focus:border-brand-cobalt">
+            <option value="Haircut - Rp 45K">HAIRCUT — Rp 45K</option>
+            <option value="Haircut + Wash - Rp 60K" selected>HAIRCUT + WASH (RECOMMENDED) — Rp 60K</option>
+            <option value="Haircut + Beard - Rp 80K">HAIRCUT + BEARD — Rp 80K</option>
+            <option value="Beard Trim - Rp 35K">BEARD TRIM — Rp 35K</option>
+            <option value="Kids Cut - Rp 40K">KIDS CUT — Rp 40K</option>
+            <option value="Styling & Wash - Rp 25K">STYLING & WASH — Rp 25K</option>
+          </select>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block font-mono text-xs font-bold uppercase text-brand-charcoal mb-1.5">2. CHOOSE BARBER</label>
+            <select id="bookBarber" required class="w-full bg-white border-2 border-brand-charcoal p-3 font-sans text-sm focus:outline-none focus:border-brand-cobalt">
+              <option value="Siapa Saja (First Available)">SIAPA SAJA (FIRST AVAILABLE)</option>
+              <option value="Raka (Fade Specialist)">RAKA (FADE SPECIALIST)</option>
+              <option value="Dito (Classic & Styling)">DITO (CLASSIC & STYLING)</option>
+              <option value="Bagas (Modern Asian Cut)">BAGAS (MODERN ASIAN CUT)</option>
+              <option value="Ilham (Texture Master)">ILHAM (TEXTURE MASTER)</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block font-mono text-xs font-bold uppercase text-brand-charcoal mb-1.5">3. SELECT DATE</label>
+            <input type="date" id="bookDate" required class="w-full bg-white border-2 border-brand-charcoal p-3 font-sans text-sm focus:outline-none focus:border-brand-cobalt">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block font-mono text-xs font-bold uppercase text-brand-charcoal mb-1.5">4. TIME SLOT</label>
+            <select id="bookTime" required class="w-full bg-white border-2 border-brand-charcoal p-3 font-sans text-sm focus:outline-none focus:border-brand-cobalt">
+              <option value="10:30 WIB">10:30 WIB</option>
+              <option value="11:30 WIB">11:30 WIB</option>
+              <option value="13:00 WIB">13:00 WIB</option>
+              <option value="14:30 WIB">14:30 WIB</option>
+              <option value="16:00 WIB">16:00 WIB</option>
+              <option value="17:30 WIB">17:30 WIB</option>
+              <option value="19:00 WIB">19:00 WIB</option>
+              <option value="20:30 WIB">20:30 WIB</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block font-mono text-xs font-bold uppercase text-brand-charcoal mb-1.5">5. YOUR FULL NAME</label>
+            <input type="text" id="bookName" placeholder="Contoh: Budi Santoso" required class="w-full bg-white border-2 border-brand-charcoal p-3 font-sans text-sm focus:outline-none focus:border-brand-cobalt">
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-mono text-xs font-bold uppercase text-brand-charcoal mb-1.5">6. WHATSAPP NUMBER</label>
+          <input type="tel" id="bookWa" placeholder="08xxxxxxxxxx" required class="w-full bg-white border-2 border-brand-charcoal p-3 font-sans text-sm focus:outline-none focus:border-brand-cobalt">
+          <p class="font-mono text-[10px] text-brand-muted mt-1">Konfirmasi tiket & pengingat jadwal akan dikirimkan otomatis ke WhatsApp lo.</p>
+        </div>
+
+        <!-- Buttons -->
+        <div class="pt-4 flex flex-col sm:flex-row items-center gap-3">
+          <button type="submit" class="w-full py-3.5 bg-brand-orange hover:bg-brand-orangeHover text-white font-mono text-sm font-bold uppercase border-2 border-brand-charcoal shadow-[3px_3px_0px_0px_#111215]">
+            CONFIRM & SEND RESERVATION
+          </button>
+          <button type="button" onclick="closeBookingModal()" class="w-full sm:w-auto px-6 py-3.5 bg-white hover:bg-brand-cream text-brand-charcoal font-mono text-sm font-bold uppercase border border-brand-charcoal">
+            CANCEL
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <div id="productModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="relative w-full max-w-md bg-white border-2 border-brand-charcoal shadow-[8px_8px_0px_0px_#111215] p-6">
+      <div class="flex items-center justify-between border-b border-brand-border pb-3 mb-4">
+        <span class="font-mono text-xs font-bold text-brand-cobalt uppercase">PRODUCT DETAIL</span>
+        <button onclick="closeProductModal()" class="font-mono text-lg font-bold">✕</button>
+      </div>
+      <h3 id="productModalTitle" class="font-display text-3xl uppercase text-brand-charcoal">PRODUCT NAME</h3>
+      <div id="productModalPrice" class="font-mono text-lg font-bold text-brand-orange my-2">Rp 0</div>
+      <p id="productModalDesc" class="font-sans text-sm text-brand-charcoalLight/90 leading-relaxed mt-2">
+        Product description will appear here.
+      </p>
+      <div class="mt-6 pt-4 border-t border-brand-border flex items-center gap-3">
+        <a id="productWaBtn" href="#" target="_blank" class="w-full py-3 bg-brand-charcoal text-white text-center font-mono text-xs font-bold uppercase hover:bg-brand-orange transition-colors">
+          ORDER VIA WHATSAPP
+        </a>
+        <button onclick="closeProductModal()" class="px-4 py-3 bg-brand-cream font-mono text-xs font-bold">
+          CLOSE
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toastNotification" class="fixed top-6 right-6 z-50 bg-brand-charcoal text-white border-2 border-brand-orange p-4 shadow-[6px_6px_0px_0px_#FF4D00] transform translate-y-[-150%] transition-transform duration-300 max-w-sm">
+    <div class="flex items-start gap-3">
+      <div class="w-6 h-6 bg-brand-orange text-white flex items-center justify-center font-bold text-xs">✓</div>
+      <div>
+        <h4 id="toastTitle" class="font-mono text-xs font-bold uppercase tracking-wider text-brand-orange">RESERVATION CONFIRMED</h4>
+        <p id="toastMessage" class="font-sans text-xs text-neutral-200 mt-1">Tiket berhasil dibuat. Mengarahkan ke WhatsApp konfirmasi...</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="adminLoginModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="relative w-full max-w-md bg-brand-offwhite border-2 border-brand-charcoal shadow-[8px_8px_0px_0px_#FF4D00] p-6 sm:p-8">
+      
+      <div class="flex items-center justify-between border-b-2 border-brand-charcoal pb-4 mb-6">
+        <div>
+          <span class="font-mono text-[10px] font-bold text-brand-orange uppercase tracking-widest">AUTHENTICATION</span>
+          <h3 class="font-display text-3xl uppercase text-brand-charcoal">ADMIN PORTAL</h3>
+        </div>
+        <button onclick="closeAdminLoginModal()" class="font-mono text-xl font-bold text-brand-muted hover:text-brand-charcoal">✕</button>
+      </div>
+
+      <form id="adminAuthForm" onsubmit="handleAdminLogin(event)" class="space-y-4">
+        <div>
+          <label class="block font-mono text-xs font-bold uppercase text-brand-charcoal mb-1">USERNAME</label>
+          <input type="text" id="adminUserField" required placeholder="kelolaweb2026" class="w-full bg-white border-2 border-brand-charcoal p-3 font-mono text-sm focus:outline-none focus:border-brand-cobalt">
+        </div>
+        <div>
+          <label class="block font-mono text-xs font-bold uppercase text-brand-charcoal mb-1">PASSWORD</label>
+          <input type="password" id="adminPassField" required placeholder="••••••••" class="w-full bg-white border-2 border-brand-charcoal p-3 font-mono text-sm focus:outline-none focus:border-brand-cobalt">
+        </div>
+        <div id="loginErrorMessage" class="hidden font-mono text-xs text-red-600 font-bold p-2 bg-red-50 border border-red-200">
+          Username atau Password salah!
+        </div>
+        <button type="submit" class="w-full py-3.5 bg-brand-orange hover:bg-brand-orangeHover text-white font-mono text-xs font-bold uppercase tracking-wider border-2 border-brand-charcoal shadow-[3px_3px_0px_0px_#111215] transition-all">
+          MASUK KE PANEL ADMIN
+        </button>
+      </form>
+      
+      <div class="mt-4 pt-3 border-t border-brand-border text-center">
+        <span class="font-mono text-[10px] text-brand-muted">Sistem Pengelolaan Terintegrasi Real-time</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="adminPanelDrawer" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex justify-end">
+    <div class="w-full max-w-3xl bg-brand-offwhite h-full overflow-y-auto border-l-4 border-brand-charcoal shadow-2xl flex flex-col">
+      
+      <!-- Admin Drawer Header -->
+      <div class="sticky top-0 z-20 bg-brand-charcoal text-white p-5 border-b-2 border-brand-orange flex items-center justify-between">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-green-400 animate-ping"></span>
+            <span class="font-mono text-xs text-brand-orange font-bold uppercase tracking-wider">LIVE REALTIME CMS</span>
+          </div>
+          <h2 class="font-display text-3xl uppercase tracking-wide">PANEL KELOLA WEB</h2>
+        </div>
+        <div class="flex items-center gap-3">
+          <button onclick="handleAdminLogout()" class="px-3 py-1.5 bg-neutral-800 hover:bg-red-600 text-white font-mono text-xs font-bold uppercase border border-neutral-600 transition-colors">
+            LOGOUT
+          </button>
+          <button onclick="closeAdminPanel()" class="text-white hover:text-brand-orange font-mono text-2xl font-bold p-1">
+            ✕
+          </button>
+        </div>
+      </div>
+
+      <!-- Realtime Status Banner -->
+      <div class="bg-brand-cream border-b border-brand-charcoal px-6 py-2.5 flex items-center justify-between text-[11px] font-mono">
+        <span class="text-brand-charcoal font-bold">⚡ STATUS: TERHUBUNG REAL-TIME</span>
+        <span class="text-brand-muted">Perubahan langsung tayang otomatis</span>
+      </div>
+
+      <!-- Admin Tab Navigation -->
+      <div class="flex flex-wrap border-b-2 border-brand-charcoal bg-white font-mono text-xs font-bold">
+        <button onclick="switchAdminTab('hero')" class="admin-tab-btn active flex-1 py-3 px-3 text-center border-r border-brand-border bg-brand-charcoal text-white uppercase" data-tab="hero">HERO & TEKS</button>
+        <button onclick="switchAdminTab('services')" class="admin-tab-btn flex-1 py-3 px-3 text-center border-r border-brand-border bg-white text-brand-charcoal uppercase hover:bg-brand-cream" data-tab="services">LAYANAN & HARGA</button>
+        <button onclick="switchAdminTab('crew')" class="admin-tab-btn flex-1 py-3 px-3 text-center border-r border-brand-border bg-white text-brand-charcoal uppercase hover:bg-brand-cream" data-tab="crew">BARBER & TIM</button>
+        <button onclick="switchAdminTab('contact')" class="admin-tab-btn flex-1 py-3 px-3 text-center bg-white text-brand-charcoal uppercase hover:bg-brand-cream" data-tab="contact">LOKASI & KONTAK</button>
+      </div>
+
+      <!-- Admin Content Sections -->
+      <div class="p-6 sm:p-8 flex-1 space-y-8">
+        
+        <!-- Tab 1: Hero & Teks Utama -->
+        <div id="adminTab-hero" class="admin-tab-content space-y-6">
+          <div class="border-b border-brand-charcoal/20 pb-2">
+            <h4 class="font-display text-2xl uppercase text-brand-charcoal">PENGATURAN HERO & BANNER</h4>
+            <p class="font-sans text-xs text-brand-muted">Ubah tulisan besar, subheadline, dan foto utama di halaman depan.</p>
+          </div>
+
+          <div>
+            <label class="block font-mono text-xs font-bold uppercase text-brand-charcoal mb-1">PENGUMUMAN STATUS TOKO (RUNNING TEXT)</label>
+            <input type="text" id="admShopStatus" class="w-full bg-white border-2 border-brand-charcoal p-2.5 font-mono text-xs focus:border-brand-cobalt">
+          </div>
+
+          <div>
+            <label class="block font-mono text-xs font-bold uppercase text-brand-charcoal mb-1">BADGE KECIL HERO (MISAL: ⚡ NO COMPROMISE CUTS)</label>
+            <input type="text" id="admHeroBadge" class="w-full bg-white border-2 border-brand-charcoal p-2.5 font-mono text-xs focus:border-brand-cobalt">
+          </div>
+
+          <div>
+            <label class="block font-mono text-xs font-bold uppercase text-brand-charcoal mb-1">HEADLINE UTAMA (Mendukung tag &lt;br&gt; atau span)</label>
+            <textarea id="admHeroTitle" rows="3" class="w-full bg-white border-2 border-brand-charcoal p-2.5 font-mono text-xs focus:border-brand-cobalt"></textarea>
+          </div>
+
+          <div>
+            <label class="block font-mono text-xs font-bold uppercase text-brand-charcoal mb-1">SUBTITLE HERO</label>
+            <textarea id="admHeroSubtitle" rows="3" class="w-full bg-white border-2 border-brand-charcoal p-2.5 font-sans text-xs focus:border-brand-cobalt"></textarea>
+          </div>
+
+          <div>
+            <label class="block font-mono text-xs font-bold uppercase text-brand-charcoal mb-1">TEKS TOMBOL UTAMA HERO</label>
+            <input type="text" id="admHeroBtnText" class="w-full bg-white border-2 border-brand-charcoal p-2.5 font-mono text-xs focus:border-brand-cobalt">
+          </div>
+
+          <div>
+            <label class="block font-mono text-xs font-bold uppercase text-brand-charcoal mb-1">URL FOTO HERO (PASTE LINK GAMBAR/UNSPLASH)</label>
+            <input type="url" id="admHeroImgUrl" onchange="previewAdminHeroImg(this.value)" class="w-full bg-white border-2 border-brand-charcoal p-2.5 font-mono text-xs focus:border-brand-cobalt">
+            <div class="mt-2 h-36 w-full border border-brand-charcoal bg-neutral-200 overflow-hidden relative">
+              <img id="admHeroImgPreview" src="" alt="Hero Preview" class="w-full h-full object-cover">
+              <span class="absolute bottom-1 right-1 bg-black/70 text-white font-mono text-[9px] px-1.5 py-0.5">PREVIEW FOTO</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: Layanan & Harga -->
+        <div id="adminTab-services" class="admin-tab-content hidden space-y-6">
+          <div class="border-b border-brand-charcoal/20 pb-2">
+            <h4 class="font-display text-2xl uppercase text-brand-charcoal">DAFTAR LAYANAN & TARIF</h4>
+            <p class="font-sans text-xs text-brand-muted">Kelola nama servis dan tarif harga yang tampil di website dan papan harga.</p>
+          </div>
+
+          <div class="space-y-4">
+            <div class="bg-white p-4 border-2 border-brand-charcoal">
+              <div class="font-mono text-xs font-bold text-brand-orange mb-2">LAYANAN 01: HAIRCUT BIASA</div>
+              <div class="grid grid-cols-2 gap-3">
+                <input type="text" id="admSrvName1" placeholder="Nama Layanan" class="bg-brand-offwhite border border-brand-charcoal p-2 font-mono text-xs">
+                <input type="text" id="admSrvPrice1" placeholder="Harga (Contoh: Rp 45K)" class="bg-brand-offwhite border border-brand-charcoal p-2 font-mono text-xs">
+              </div>
+            </div>
+
+            <div class="bg-white p-4 border-2 border-brand-charcoal">
+              <div class="font-mono text-xs font-bold text-brand-orange mb-2">LAYANAN 02: HAIRCUT + WASH (BEST VALUE)</div>
+              <div class="grid grid-cols-2 gap-3">
+                <input type="text" id="admSrvName2" placeholder="Nama Layanan" class="bg-brand-offwhite border border-brand-charcoal p-2 font-mono text-xs">
+                <input type="text" id="admSrvPrice2" placeholder="Harga (Contoh: Rp 60K)" class="bg-brand-offwhite border border-brand-charcoal p-2 font-mono text-xs">
+              </div>
+            </div>
+
+            <div class="bg-white p-4 border-2 border-brand-charcoal">
+              <div class="font-mono text-xs font-bold text-brand-orange mb-2">LAYANAN 03: HAIRCUT + BEARD</div>
+              <div class="grid grid-cols-2 gap-3">
+                <input type="text" id="admSrvName3" placeholder="Nama Layanan" class="bg-brand-offwhite border border-brand-charcoal p-2 font-mono text-xs">
+                <input type="text" id="admSrvPrice3" placeholder="Harga (Contoh: Rp 80K)" class="bg-brand-offwhite border border-brand-charcoal p-2 font-mono text-xs">
+              </div>
+            </div>
+
+            <div class="bg-white p-4 border-2 border-brand-charcoal">
+              <div class="font-mono text-xs font-bold text-brand-orange mb-2">LAYANAN 04: BEARD TRIM</div>
+              <div class="grid grid-cols-2 gap-3">
+                <input type="text" id="admSrvName4" placeholder="Nama Layanan" class="bg-brand-offwhite border border-brand-charcoal p-2 font-mono text-xs">
+                <input type="text" id="admSrvPrice4" placeholder="Harga (Contoh: Rp 35K)" class="bg-brand-offwhite border border-brand-charcoal p-2 font-mono text-xs">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Barber & Tim -->
+        <div id="adminTab-crew" class="admin-tab-content hidden space-y-6">
+          <div class="border-b border-brand-charcoal/20 pb-2">
+            <h4 class="font-display text-2xl uppercase text-brand-charcoal">TIM BARBER</h4>
+            <p class="font-sans text-xs text-brand-muted">Perbarui nama barber, keahlian, dan URL foto profil barber.</p>
+          </div>
+
+          <div class="space-y-4">
+            <!-- Barber 1 -->
+            <div class="bg-white p-4 border-2 border-brand-charcoal space-y-2">
+              <div class="font-mono text-xs font-bold text-brand-cobalt">BARBER 01 (RAKA)</div>
+              <input type="text" id="admBarberName1" placeholder="Nama Lengkap" class="w-full bg-brand-offwhite border border-brand-charcoal p-2 font-mono text-xs">
+              <input type="text" id="admBarberSpec1" placeholder="Spesialisasi" class="w-full bg-brand-offwhite border border-brand-charcoal p-2 font-mono text-xs">
+              <input type="url" id="admBarberImg1" placeholder="URL Foto Barber" class="w-full bg-brand-offwhite border border-brand-charcoal p-2 font-mono text-xs">
+            </div>
+
+            <!-- Barber 2 -->
+            <div class="bg-white p-4 border-2 border-brand-charcoal space-y-2">
+              <div class="font-mono text-xs font-bold text-brand-cobalt">BARBER 02 (DITO)</div>
+              <input type="text" id="admBarberName2" placeholder="Nama Lengkap" class="w-full bg-brand-offwhite border border-brand-charcoal p-2 font-mono text-xs">
+              <input type="text" id="admBarberSpec2" placeholder="Spesialisasi" class="w-full bg-brand-offwhite border border-brand-charcoal p-2 font-mono text-xs">
+              <input type="url" id="admBarberImg2" placeholder="URL Foto Barber" class="w-full bg-brand-offwhite border border-brand-charcoal p-2 font-mono text-xs">
+            </div>
+
+            <!-- Barber 3 -->
+            <div class="bg-white p-4 border-2 border-brand-charcoal space-y-2">
+              <div class="font-mono text-xs font-bold text-brand-cobalt">BARBER 03 (BAGAS)</div>
+              <input type="text" id="admBarberName3" placeholder="Nama Lengkap" class="w-full bg-brand-offwhite border border-brand-charcoal p-2 font-mono text-xs">
+              <input type="text" id="admBarberSpec3" placeholder="Spesialisasi" class="w-full bg-brand-offwhite border border-brand-charcoal p-2 font-mono text-xs">
+              <input type="url" id="admBarberImg3" placeholder="URL Foto Barber" class="w-full bg-brand-offwhite border border-brand-charcoal p-2 font-mono text-xs">
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 4: Lokasi & Kontak -->
+        <div id="adminTab-contact" class="admin-tab-content hidden space-y-6">
+          <div class="border-b border-brand-charcoal/20 pb-2">
+            <h4 class="font-display text-2xl uppercase text-brand-charcoal">KONTAK & INFORMASI TOKO</h4>
+            <p class="font-sans text-xs text-brand-muted">Pengaturan nomor WhatsApp pesanan, alamat lengkap, dan jam operasional.</p>
+          </div>
+
+          <div>
+            <label class="block font-mono text-xs font-bold uppercase text-brand-charcoal mb-1">NOMOR WHATSAPP BOOKING (Format: 628xxxxxxxxxx)</label>
+            <input type="text" id="admWaNumber" class="w-full bg-white border-2 border-brand-charcoal p-2.5 font-mono text-xs focus:border-brand-cobalt">
+          </div>
+
+          <div>
+            <label class="block font-mono text-xs font-bold uppercase text-brand-charcoal mb-1">ALAMAT LENGKAP</label>
+            <textarea id="admAddress" rows="2" class="w-full bg-white border-2 border-brand-charcoal p-2.5 font-sans text-xs focus:border-brand-cobalt"></textarea>
+          </div>
+
+          <div>
+            <label class="block font-mono text-xs font-bold uppercase text-brand-charcoal mb-1">JAM OPERASIONAL</label>
+            <input type="text" id="admHours" class="w-full bg-white border-2 border-brand-charcoal p-2.5 font-mono text-xs focus:border-brand-cobalt">
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Admin Drawer Footer / Save Action -->
+      <div class="sticky bottom-0 bg-white border-t-2 border-brand-charcoal p-4 sm:p-6 flex items-center justify-between gap-4 shadow-lg">
+        <button onclick="closeAdminPanel()" class="px-5 py-3 bg-brand-cream hover:bg-neutral-200 text-brand-charcoal font-mono text-xs font-bold uppercase border border-brand-charcoal">
+          BATAL
+        </button>
+        <button onclick="saveAllContentToFirebase()" class="flex-1 py-3.5 bg-brand-orange hover:bg-brand-orangeHover text-white font-mono text-xs font-bold uppercase tracking-wider border-2 border-brand-charcoal shadow-[4px_4px_0px_0px_#111215] flex items-center justify-center gap-2">
+          <span>SIMPAN PERUBAHAN SECARA REAL-TIME</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, doc, getDoc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    const appId = typeof __app_id !== 'undefined' ? __app_id : 'urban-barber-2026';
+    const defaultFirebaseConfig = {
+      apiKey: "AIzaSyBZyvA6_cy2k42eU_Ktt13wFVTDYgZaXkI",
+      authDomain: "urbanbarber-id.firebaseapp.com",
+      projectId: "urbanbarber-id",
+      storageBucket: "urbanbarber-id.appspot.com",
+      messagingSenderId: "109823487123",
+      appId: "1:109823487123:web:987f827361523"
+    };
+
+    const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : defaultFirebaseConfig;
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // Initial Default Content State
+    let currentSiteData = {
+      shopStatus: "SHOP STATUS: OPEN TODAY [10.00 — 22.00 WIB]",
+      heroBadge: "⚡ NO COMPROMISE CUTS",
+      heroTitle: "YOUR HAIR.<br><span class=\"text-brand-cobalt underline decoration-brand-orange decoration-4 sm:decoration-8 underline-offset-4\">YOUR RULES.</span>",
+      heroSubtitle: "Potongan fresh, barber berpengalaman, dan style yang disesuaikan dengan karakter lo. Bukan salon formal, bukan potong buru-buru — ini tempat lo upgrade confident.",
+      heroBtnText: "BOOK A CUT",
+      heroImgUrl: "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?q=80&w=900&auto=format&fit=crop",
+      srvName1: "HAIRCUT",
+      srvPrice1: "Rp 45K",
+      srvName2: "HAIRCUT + WASH",
+      srvPrice2: "Rp 60K",
+      srvName3: "HAIRCUT + BEARD",
+      srvPrice3: "Rp 80K",
+      srvName4: "BEARD TRIM",
+      srvPrice4: "Rp 35K",
+      barberName1: "RAKA ARDIAN",
+      barberSpec1: "Fade Specialist",
+      barberImg1: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop",
+      barberName2: "DITO PRATAMA",
+      barberSpec2: "Classic & Styling",
+      barberImg2: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=800&auto=format&fit=crop",
+      barberName3: "BAGAS SATRIA",
+      barberSpec3: "Modern Asian Cut",
+      barberImg3: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop",
+      waNumber: "6281234567890",
+      address: "Jl. Contoh Raya No. 88, Senopati, Kebayoran Baru, Jakarta Selatan, 12190",
+      hours: "10.00 — 22.00 WIB"
+    };
+
+    async function startAppSync() {
+      try {
+        if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+          await signInWithCustomToken(auth, __initial_auth_token);
+        } else {
+          await signInAnonymously(auth);
+        }
+      } catch (authErr) {
+        console.warn("Auth initializing fallback:", authErr);
+      }
+
+      // STRICT RULE 1: /artifacts/{appId}/public/data/{collectionName}
+      const siteConfigDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'siteContent', 'mainConfig');
+
+      // Subscribe to real-time changes
+      onSnapshot(siteConfigDocRef, (snapshot) => {
+        if (snapshot.exists()) {
+          const cloudData = snapshot.data();
+          currentSiteData = { ...currentSiteData, ...cloudData };
+          renderSiteContent(currentSiteData);
+        } else {
+          // Document does not exist yet, push initial default
+          setDoc(siteConfigDocRef, currentSiteData).catch(e => console.warn("Init doc error", e));
+          renderSiteContent(currentSiteData);
+        }
+      }, (error) => {
+        console.warn("Firestore onSnapshot error:", error);
+        renderSiteContent(currentSiteData);
+      });
+    }
+
+    function renderSiteContent(data) {
+      if (!data) return;
+
+      // Top Status
+      const ticker = document.getElementById('shopStatusTicker');
+      if (ticker && data.shopStatus) ticker.textContent = data.shopStatus;
+
+      // Hero Elements
+      const badge = document.getElementById('heroBadge');
+      if (badge && data.heroBadge) badge.innerHTML = `<span>${data.heroBadge}</span>`;
+
+      const title = document.getElementById('heroTitle');
+      if (title && data.heroTitle) title.innerHTML = data.heroTitle;
+
+      const sub = document.getElementById('heroSubtitle');
+      if (sub && data.heroSubtitle) sub.textContent = data.heroSubtitle;
+
+      const btnText = document.getElementById('heroPrimaryBtnText');
+      if (btnText && data.heroBtnText) btnText.textContent = data.heroBtnText;
+
+      const heroImg = document.getElementById('heroImage');
+      if (heroImg && data.heroImgUrl) heroImg.src = data.heroImgUrl;
+
+      // Populate Admin Form Fields if open
+      populateAdminFields(data);
+    }
+
+    function populateAdminFields(data) {
+      const setVal = (id, val) => {
+        const el = document.getElementById(id);
+        if (el && val !== undefined) el.value = val;
+      };
+
+      setVal('admShopStatus', data.shopStatus);
+      setVal('admHeroBadge', data.heroBadge);
+      setVal('admHeroTitle', data.heroTitle);
+      setVal('admHeroSubtitle', data.heroSubtitle);
+      setVal('admHeroBtnText', data.heroBtnText);
+      setVal('admHeroImgUrl', data.heroImgUrl);
+
+      const preview = document.getElementById('admHeroImgPreview');
+      if (preview && data.heroImgUrl) preview.src = data.heroImgUrl;
+
+      setVal('admSrvName1', data.srvName1);
+      setVal('admSrvPrice1', data.srvPrice1);
+      setVal('admSrvName2', data.srvName2);
+      setVal('admSrvPrice2', data.srvPrice2);
+      setVal('admSrvName3', data.srvName3);
+      setVal('admSrvPrice3', data.srvPrice3);
+      setVal('admSrvName4', data.srvName4);
+      setVal('admSrvPrice4', data.srvPrice4);
+
+      setVal('admBarberName1', data.barberName1);
+      setVal('admBarberSpec1', data.barberSpec1);
+      setVal('admBarberImg1', data.barberImg1);
+
+      setVal('admBarberName2', data.barberName2);
+      setVal('admBarberSpec2', data.barberSpec2);
+      setVal('admBarberImg2', data.barberImg2);
+
+      setVal('admBarberName3', data.barberName3);
+      setVal('admBarberSpec3', data.barberSpec3);
+      setVal('admBarberImg3', data.barberImg3);
+
+      setVal('admWaNumber', data.waNumber);
+      setVal('admAddress', data.address);
+      setVal('admHours', data.hours);
+    }
+
+    window.saveAllContentToFirebase = async function() {
+      const updatedData = {
+        shopStatus: document.getElementById('admShopStatus')?.value || currentSiteData.shopStatus,
+        heroBadge: document.getElementById('admHeroBadge')?.value || currentSiteData.heroBadge,
+        heroTitle: document.getElementById('admHeroTitle')?.value || currentSiteData.heroTitle,
+        heroSubtitle: document.getElementById('admHeroSubtitle')?.value || currentSiteData.heroSubtitle,
+        heroBtnText: document.getElementById('admHeroBtnText')?.value || currentSiteData.heroBtnText,
+        heroImgUrl: document.getElementById('admHeroImgUrl')?.value || currentSiteData.heroImgUrl,
+
+        srvName1: document.getElementById('admSrvName1')?.value || currentSiteData.srvName1,
+        srvPrice1: document.getElementById('admSrvPrice1')?.value || currentSiteData.srvPrice1,
+        srvName2: document.getElementById('admSrvName2')?.value || currentSiteData.srvName2,
+        srvPrice2: document.getElementById('admSrvPrice2')?.value || currentSiteData.srvPrice2,
+        srvName3: document.getElementById('admSrvName3')?.value || currentSiteData.srvName3,
+        srvPrice3: document.getElementById('admSrvPrice3')?.value || currentSiteData.srvPrice3,
+        srvName4: document.getElementById('admSrvName4')?.value || currentSiteData.srvName4,
+        srvPrice4: document.getElementById('admSrvPrice4')?.value || currentSiteData.srvPrice4,
+
+        barberName1: document.getElementById('admBarberName1')?.value || currentSiteData.barberName1,
+        barberSpec1: document.getElementById('admBarberSpec1')?.value || currentSiteData.barberSpec1,
+        barberImg1: document.getElementById('admBarberImg1')?.value || currentSiteData.barberImg1,
+
+        barberName2: document.getElementById('admBarberName2')?.value || currentSiteData.barberName2,
+        barberSpec2: document.getElementById('admBarberSpec2')?.value || currentSiteData.barberSpec2,
+        barberImg2: document.getElementById('admBarberImg2')?.value || currentSiteData.barberImg2,
+
+        barberName3: document.getElementById('admBarberName3')?.value || currentSiteData.barberName3,
+        barberSpec3: document.getElementById('admBarberSpec3')?.value || currentSiteData.barberSpec3,
+        barberImg3: document.getElementById('admBarberImg3')?.value || currentSiteData.barberImg3,
+
+        waNumber: document.getElementById('admWaNumber')?.value || currentSiteData.waNumber,
+        address: document.getElementById('admAddress')?.value || currentSiteData.address,
+        hours: document.getElementById('admHours')?.value || currentSiteData.hours,
+        lastUpdated: new Date().toISOString()
+      };
+
+      try {
+        const siteConfigDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'siteContent', 'mainConfig');
+        await setDoc(siteConfigDocRef, updatedData, { merge: true });
+        
+        // Local state update immediately
+        currentSiteData = { ...currentSiteData, ...updatedData };
+        renderSiteContent(currentSiteData);
+
+        // Update active roster if needed
+        if (typeof barbers !== 'undefined' && barbers.length >= 3) {
+          barbers[0].name = updatedData.barberName1;
+          barbers[0].spec = updatedData.barberSpec1;
+          barbers[0].img = updatedData.barberImg1;
+
+          barbers[1].name = updatedData.barberName2;
+          barbers[1].spec = updatedData.barberSpec2;
+          barbers[1].img = updatedData.barberImg2;
+
+          barbers[2].name = updatedData.barberName3;
+          barbers[2].spec = updatedData.barberSpec3;
+          barbers[2].img = updatedData.barberImg3;
+        }
+
+        window.closeAdminPanel();
+        window.showToast('BERHASIL TERSIMPAN', 'Data website telah diperbarui secara langsung ke server.');
+      } catch (err) {
+        console.error("Save error:", err);
+        window.showToast('GAGAL MENYIMPAN', 'Terjadi kendala saat menyimpan. Coba periksa koneksi.');
+      }
+    };
+
+    // Auto-boot synchronization
+    startAppSync();
+  </script>
+
+  <script>
+    let isAdminLoggedIn = false;
+
+    function openAdminLoginModal() {
+      if (isAdminLoggedIn) {
+        openAdminPanel();
+        return;
+      }
+      const modal = document.getElementById('adminLoginModal');
+      document.getElementById('loginErrorMessage').classList.add('hidden');
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeAdminLoginModal() {
+      const modal = document.getElementById('adminLoginModal');
+      modal.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    }
+
+    function handleAdminLogin(event) {
+      event.preventDefault();
+      const user = document.getElementById('adminUserField').value.trim();
+      const pass = document.getElementById('adminPassField').value.trim();
+
+      // Credential verification
+      if (user === 'kelolaweb2026' && pass === 'kelolaweb2026') {
+        isAdminLoggedIn = true;
+        closeAdminLoginModal();
+        updateAdminVisualBadge();
+        openAdminPanel();
+        showToast('LOGIN BERHASIL', 'Selamat datang di Panel Admin Kelola Web.');
+      } else {
+        document.getElementById('loginErrorMessage').classList.remove('hidden');
+      }
+    }
+
+    function updateAdminVisualBadge() {
+      const topBtn = document.getElementById('adminTopBtnText');
+      if (topBtn) topBtn.textContent = 'PANEL AKTIF';
+      const quickBtn = document.getElementById('quickAdminLabel');
+      if (quickBtn) quickBtn.textContent = 'ADMIN AKTIF';
+    }
+
+    function openAdminPanel() {
+      const drawer = document.getElementById('adminPanelDrawer');
+      drawer.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeAdminPanel() {
+      const drawer = document.getElementById('adminPanelDrawer');
+      drawer.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    }
+
+    function handleAdminLogout() {
+      isAdminLoggedIn = false;
+      const topBtn = document.getElementById('adminTopBtnText');
+      if (topBtn) topBtn.textContent = 'ADMIN LOGIN';
+      const quickBtn = document.getElementById('quickAdminLabel');
+      if (quickBtn) quickBtn.textContent = 'KELOLA WEB';
+      closeAdminPanel();
+      showToast('LOGGED OUT', 'Anda telah keluar dari mode admin.');
+    }
+
+    function switchAdminTab(tabName) {
+      const tabs = document.querySelectorAll('.admin-tab-btn');
+      tabs.forEach(t => {
+        if (t.getAttribute('data-tab') === tabName) {
+          t.classList.add('bg-brand-charcoal', 'text-white');
+          t.classList.remove('bg-white', 'text-brand-charcoal');
+        } else {
+          t.classList.remove('bg-brand-charcoal', 'text-white');
+          t.classList.add('bg-white', 'text-brand-charcoal');
+        }
+      });
+
+      const contents = document.querySelectorAll('.admin-tab-content');
+      contents.forEach(c => {
+        if (c.id === `adminTab-${tabName}`) {
+          c.classList.remove('hidden');
+        } else {
+          c.classList.add('hidden');
+        }
+      });
+    }
+
+    function previewAdminHeroImg(url) {
+      const preview = document.getElementById('admHeroImgPreview');
+      if (preview && url) {
+        preview.src = url;
+      }
+    }
+
+    function openBookingWithBarber(barberName) {
+      openBookingModal();
+      const barberSelect = document.getElementById('bookBarber');
+      for (let i = 0; i < barberSelect.options.length; i++) {
+        if (barberSelect.options[i].value.includes(barberName)) {
+          barberSelect.selectedIndex = i;
+          break;
+        }
+      }
+    }
+
+    function quickSelectService(serviceName) {
+      openBookingModal(serviceName);
+    }
+
+    function closeBookingModal() {
+      const modal = document.getElementById('bookingModal');
+      modal.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Form Submission & WhatsApp Forwarding
+    function handleBookingSubmit(event) {
+      event.preventDefault();
+      const service = document.getElementById('bookService').value;
+      const barber = document.getElementById('bookBarber').value;
+      const date = document.getElementById('bookDate').value;
+      const time = document.getElementById('bookTime').value;
+      const name = document.getElementById('bookName').value;
+      const wa = document.getElementById('bookWa').value;
+
+      closeBookingModal();
+      showToast('RESERVATION SENT!', `Terima kasih ${name}, booking ${service} pada ${date} (${time}) sedang dikonfirmasi.`);
+
+      const message = `Halo Barberhouse, saya mau konfirmasi booking:%0A` +
+        `• Nama: ${encodeURIComponent(name)}%0A` +
+        `• Layanan: ${encodeURIComponent(service)}%0A` +
+        `• Barber: ${encodeURIComponent(barber)}%0A` +
+        `• Tanggal: ${encodeURIComponent(date)}%0A` +
+        `• Jam: ${encodeURIComponent(time)}%0A` +
+        `• WhatsApp: ${encodeURIComponent(wa)}`;
+
+      setTimeout(() => {
+        window.open(`https://wa.me/6281234567890?text=${message}`, '_blank');
+      }, 1200);
+    }
+
+    // Product Detail Popup
+    function showProductDetail(name, price, desc) {
+      document.getElementById('productModalTitle').textContent = name;
+      document.getElementById('productModalPrice').textContent = price;
+      document.getElementById('productModalDesc').textContent = desc;
+      const waLink = `https://wa.me/6281234567890?text=Halo%20Barberhouse,%20saya%20tertarik%20beli%20produk%20${encodeURIComponent(name)}%20(${encodeURIComponent(price)})`;
+      document.getElementById('productWaBtn').setAttribute('href', waLink);
+      document.getElementById('productModal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeProductModal() {
+      document.getElementById('productModal').classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Custom Toast Alert
+    function showToast(title, message) {
+      const toast = document.getElementById('toastNotification');
+      document.getElementById('toastTitle').textContent = title;
+      document.getElementById('toastMessage').textContent = message;
+      toast.classList.remove('translate-y-[-150%]');
+      toast.classList.add('translate-y-0');
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0');
+        toast.classList.add('translate-y-[-150%]');
+      }, 4000);
+    }
+  </script>
+</body>
+</html>

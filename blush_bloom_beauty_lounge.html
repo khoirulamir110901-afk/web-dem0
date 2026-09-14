@@ -1,0 +1,2787 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BLUSH & BLOOM — Everyday Beauty Lounge</title>
+
+  <!-- Google Fonts: DM Serif Display & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    const providedApiKey = "AIzaSyBZyvA6_cy2k42eU_Ktt13wFVTDYgZaXkI";
+    const appId = typeof __app_id !== 'undefined' ? __app_id : 'blush-bloom-lounge-app';
+    
+    let firebaseConfig;
+    if (typeof __firebase_config !== 'undefined') {
+      try {
+        firebaseConfig = JSON.parse(__firebase_config);
+      } catch (e) {
+        firebaseConfig = { apiKey: providedApiKey, projectId: "blush-bloom-salon" };
+      }
+    } else {
+      firebaseConfig = {
+        apiKey: providedApiKey,
+        authDomain: "blush-bloom-salon.firebaseapp.com",
+        projectId: "blush-bloom-salon",
+        storageBucket: "blush-bloom-salon.appspot.com",
+        messagingSenderId: "1098273645",
+        appId: "1:1098273645:web:5d2b781a8c9b"
+      };
+    }
+
+    let app, db, auth;
+    try {
+      app = initializeApp(firebaseConfig);
+      db = getFirestore(app);
+      auth = getAuth(app);
+      
+      if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+        await signInWithCustomToken(auth, __initial_auth_token).catch(() => signInAnonymously(auth));
+      } else {
+        await signInAnonymously(auth).catch((err) => console.warn("Anonymous sign-in:", err));
+      }
+      window.bbFirestore = { db, appId, setDoc, doc, onSnapshot, isReady: true };
+    } catch (err) {
+      console.warn("Firestore fallback active:", err);
+      window.bbFirestore = { db: null, appId, setDoc: null, doc: null, onSnapshot: null, isReady: false };
+    }
+
+    window.dispatchEvent(new CustomEvent('firebase-initialized'));
+  </script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bloom: {
+              cream: '#FAF6F0',       /* Warm cream */
+              creamborder: '#EADCCE', /* Subtle border */
+              peach: '#FCEEE9',       /* Soft peach */
+              peachsoft: '#FFF3EE',
+              coral: '#E26D5C',       /* Core warm coral */
+              coralhover: '#CF5948',
+              terracotta: '#C85A48',
+              brown: '#2D1B14',       /* Deep dark brown */
+              brownsoft: '#5E3E33',
+              brownlight: '#8C685B',
+              white: '#FFFFFF'
+            }
+          },
+          fontFamily: {
+            display: ['"DM Serif Display"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    ::selection { background-color: #FCEEE9; color: #2D1B14; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #FAF6F0; }
+    ::-webkit-scrollbar-thumb { background: #DEC8B5; border-radius: 9999px; }
+
+    .editorial-border-b { border-bottom: 1px solid #EADCCE; }
+    .editorial-border-t { border-top: 1px solid #EADCCE; }
+
+    /* Interactive Before-After Range Reset */
+    .ba-range {
+      appearance: none;
+      -webkit-appearance: none;
+      background: transparent;
+      cursor: ew-resize;
+    }
+    .ba-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #E26D5C;
+      border: 3px solid #FAF6F0;
+      box-shadow: 0 4px 14px rgba(45, 27, 20, 0.25);
+      cursor: ew-resize;
+    }
+    .ba-range::-moz-range-thumb {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #E26D5C;
+      border: 3px solid #FAF6F0;
+      box-shadow: 0 4px 14px rgba(45, 27, 20, 0.25);
+      cursor: ew-resize;
+    }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+
+<body class="bg-bloom-cream text-bloom-brown font-sans antialiased overflow-x-hidden selection:bg-bloom-peach">
+
+  <!-- TOP EDITORIAL BAR -->
+  <div class="bg-bloom-peach text-bloom-brown text-[11px] tracking-[0.2em] font-medium py-2 px-4 text-center border-b border-bloom-creamborder uppercase flex justify-between items-center">
+    <span class="hidden sm:inline-block">Jakarta Selatan &middot; Everyday Self-Care</span>
+    <span class="mx-auto sm:mx-0 font-semibold tracking-[0.25em]">BLUSH & BLOOM BEAUTY LOUNGE</span>
+    <span class="hidden sm:inline-block" id="site-top-hours">Open Daily 09.00 — 21.00 WIB</span>
+  </div>
+
+  <!-- 3. EDITORIAL TAB HEADER -->
+  <header id="main-header" class="sticky top-0 z-40 bg-bloom-cream/95 backdrop-blur-sm border-b border-bloom-creamborder transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
+      
+      <!-- Primary Brand Bar -->
+      <div id="header-brand-row" class="py-4 md:py-6 flex items-center justify-between transition-all duration-300">
+        <!-- Left Side: Menu Trigger & Hours -->
+        <div class="flex items-center gap-4">
+          <button onclick="toggleMobileDrawer()" class="md:hidden text-bloom-brown hover:text-bloom-coral transition p-1" aria-label="Open Menu">
+            <i class="ph ph-list text-2xl"></i>
+          </button>
+          <div class="hidden md:flex flex-col">
+            <span class="text-[10px] uppercase tracking-widest text-bloom-brownlight font-semibold">Self-Care Hours</span>
+            <span class="text-xs font-medium text-bloom-brown" id="site-header-hours">OPEN 09.00 — 21.00</span>
+          </div>
+        </div>
+
+        <!-- Center: Editorial Wordmark Logo -->
+        <div class="text-center">
+          <a href="#hero" class="group inline-block">
+            <h1 class="font-display text-2xl sm:text-3xl md:text-4xl tracking-tight text-bloom-brown group-hover:text-bloom-coral transition-colors">
+              BLUSH &amp; BLOOM
+            </h1>
+            <p class="text-[9px] sm:text-[10px] tracking-[0.35em] text-bloom-brownlight uppercase mt-0.5">
+              BEAUTY LOUNGE
+            </p>
+          </a>
+        </div>
+
+        <!-- Right Side: Action CTA & Admin Trigger -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          <a id="header-chat-btn" href="https://wa.me/6281234567890?text=Halo%20Blush%20%26%20Bloom%2C%20saya%20mau%20reservasi%20treatment" target="_blank" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold text-bloom-brown hover:text-bloom-coral transition px-3 py-2">
+            <i class="ph ph-whatsapp-logo text-base text-emerald-600"></i> Chat Kami
+          </a>
+          <button onclick="openBookingModal()" class="bg-bloom-brown hover:bg-bloom-coral text-bloom-cream text-xs font-semibold uppercase tracking-wider px-4 py-2.5 rounded-full transition-all duration-200 shadow-sm hover:shadow">
+            Book Now
+          </button>
+          <button onclick="handleAdminTrigger()" id="header-admin-btn" title="Kelola Web / Admin" class="w-9 h-9 rounded-full bg-bloom-peach border border-bloom-creamborder text-bloom-brown hover:text-bloom-coral hover:border-bloom-coral flex items-center justify-center transition">
+            <i class="ph ph-sliders-horizontal text-base"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Horizontal Editorial Magazine Tabs (Desktop) -->
+      <nav class="hidden md:flex items-center justify-center gap-8 border-t border-bloom-creamborder/60 pt-2.5 pb-2 text-xs uppercase tracking-widest font-semibold text-bloom-brownsoft">
+        <a href="#hero" class="py-1 hover:text-bloom-coral border-b-2 border-bloom-coral text-bloom-brown transition">Home</a>
+        <a href="#services" class="py-1 hover:text-bloom-coral border-b-2 border-transparent hover:border-bloom-coral transition">Services</a>
+        <a href="#services" onclick="filterMenu('hair')" class="py-1 hover:text-bloom-coral border-b-2 border-transparent hover:border-bloom-coral transition">Hair</a>
+        <a href="#services" onclick="filterMenu('skin')" class="py-1 hover:text-bloom-coral border-b-2 border-transparent hover:border-bloom-coral transition">Skin</a>
+        <a href="#services" onclick="filterMenu('nails')" class="py-1 hover:text-bloom-coral border-b-2 border-transparent hover:border-bloom-coral transition">Nails</a>
+        <a href="#products-section" class="py-1 hover:text-bloom-coral border-b-2 border-transparent hover:border-bloom-coral transition">Products</a>
+        <a href="#about" class="py-1 hover:text-bloom-coral border-b-2 border-transparent hover:border-bloom-coral transition">About</a>
+        <a href="#location" class="py-1 hover:text-bloom-coral border-b-2 border-transparent hover:border-bloom-coral transition">Visit</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- 4 & 5. HERO — "FEEL GOOD. LOOK GOOD." -->
+  <section id="hero" class="relative py-12 md:py-20 border-b border-bloom-creamborder overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        
+        <!-- Left: Editorial Headline & Actions -->
+        <div class="lg:col-span-6 space-y-6 z-10">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-bloom-peach text-bloom-brown text-[10px] tracking-[0.2em] uppercase font-bold border border-bloom-creamborder">
+            <span class="w-2 h-2 rounded-full bg-bloom-coral animate-pulse"></span>
+            <span id="hero-tag-label">HAIR / SKIN / NAILS / BEAUTY</span>
+          </div>
+
+          <h2 class="font-display text-4xl sm:text-6xl lg:text-7xl leading-[1.05] tracking-tight text-bloom-brown" id="hero-main-heading">
+            FEEL GOOD.<br>
+            <span class="italic font-normal text-bloom-coral">LOOK GOOD.</span>
+          </h2>
+
+          <p class="text-sm sm:text-base text-bloom-brownsoft leading-relaxed max-w-lg" id="hero-main-subtext">
+            Your everyday beauty space for hair, skin, nails and everything in between. Tempat di mana perawatan diri terasa santai, ramah, dan bikin kamu makin percaya diri.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-4 pt-2">
+            <button onclick="openBookingModal()" id="hero-primary-cta" class="bg-bloom-coral hover:bg-bloom-coralhover text-bloom-cream px-7 py-4 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-200 shadow-sm hover:shadow">
+              BOOK YOUR TREATMENT
+            </button>
+            <a href="#services" class="border border-bloom-brown/30 hover:border-bloom-brown text-bloom-brown px-6 py-4 rounded-full text-xs font-bold uppercase tracking-widest transition">
+              SEE SERVICES
+            </a>
+          </div>
+
+          <!-- Bottom Micro Details -->
+          <div class="pt-4 border-t border-bloom-creamborder/60 flex items-center gap-6 text-xs text-bloom-brownlight">
+            <div class="flex items-center gap-1.5">
+              <i class="ph ph-sparkle text-bloom-coral"></i>
+              <span>Cruelty-Free Salon</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <i class="ph ph-cup text-bloom-coral"></i>
+              <span>Complimentary Coffee &amp; Tea</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Composition with Large Realistic Portrait + Floating Detail -->
+        <div class="lg:col-span-6 relative">
+          <!-- Background Subtle Decorative Circle -->
+          <div class="absolute -right-10 -top-10 w-72 h-72 rounded-full bg-bloom-peach/70 blur-2xl -z-10"></div>
+          
+          <div class="relative max-w-md mx-auto lg:max-w-none">
+            <!-- Main Lifestyle Portrait -->
+            <div class="aspect-[4/5] rounded-3xl overflow-hidden border border-bloom-creamborder bg-bloom-peach shadow-lg">
+              <img 
+                id="hero-img-main"
+                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=80" 
+                alt="Blush and Bloom Natural Beauty" 
+                class="w-full h-full object-cover"
+                onerror="handleImgFallback(this, 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1000&q=80')"
+              >
+            </div>
+
+            <!-- Floating Small Detail Card -->
+            <div class="absolute -bottom-6 -left-4 sm:-left-8 w-44 sm:w-52 aspect-square rounded-2xl overflow-hidden border-2 border-bloom-cream shadow-xl bg-bloom-peach group">
+              <img 
+                id="hero-img-detail"
+                src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=600&q=80" 
+                alt="Salon Interior Detail" 
+                class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                onerror="handleImgFallback(this, 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=600&q=80')"
+              >
+              <div class="absolute bottom-2 left-2 right-2 bg-bloom-cream/90 backdrop-blur-xs px-2.5 py-1 rounded-lg text-[10px] font-bold text-bloom-brown uppercase tracking-wider text-center">
+                Senopati Lounge
+              </div>
+            </div>
+
+            <!-- Floating Editorial Tag -->
+            <div class="absolute top-6 -right-3 sm:-right-6 bg-bloom-brown text-bloom-cream px-4 py-2.5 rounded-full shadow-lg text-[10px] uppercase font-bold tracking-widest flex items-center gap-1.5">
+              <i class="ph ph-heart text-bloom-coral"></i> Everyday Self-Care
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. QUICK CATEGORY NAVIGATION -->
+  <section class="py-10 border-b border-bloom-creamborder bg-bloom-peach/30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
+      
+      <div class="text-center mb-6">
+        <p class="text-[10px] uppercase tracking-[0.25em] text-bloom-coral font-bold">
+          WHAT ARE YOU IN THE MOOD FOR?
+        </p>
+      </div>
+
+      <!-- Horizontal Visual Scrollable Strip -->
+      <div class="flex items-center gap-4 overflow-x-auto no-scrollbar pb-2 sm:justify-center">
+        
+        <!-- HAIR -->
+        <a href="#services" onclick="filterMenu('hair')" class="shrink-0 flex items-center gap-3 bg-bloom-cream px-4 py-2.5 rounded-2xl border border-bloom-creamborder hover:border-bloom-coral hover:shadow-sm transition group">
+          <div class="w-11 h-11 rounded-xl overflow-hidden bg-bloom-peach shrink-0">
+            <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=150&q=80" alt="Hair Category" class="w-full h-full object-cover group-hover:scale-110 transition">
+          </div>
+          <div>
+            <h4 class="text-xs font-bold text-bloom-brown group-hover:text-bloom-coral transition">HAIR</h4>
+            <p class="text-[10px] text-bloom-brownlight">Cut &middot; Color &middot; Treatment</p>
+          </div>
+        </a>
+
+        <!-- SKIN -->
+        <a href="#services" onclick="filterMenu('skin')" class="shrink-0 flex items-center gap-3 bg-bloom-cream px-4 py-2.5 rounded-2xl border border-bloom-creamborder hover:border-bloom-coral hover:shadow-sm transition group">
+          <div class="w-11 h-11 rounded-xl overflow-hidden bg-bloom-peach shrink-0">
+            <img src="https://images.unsplash.com/photo-1512290900672-1f55b9a89668?auto=format&fit=crop&w=150&q=80" alt="Skin Category" class="w-full h-full object-cover group-hover:scale-110 transition">
+          </div>
+          <div>
+            <h4 class="text-xs font-bold text-bloom-brown group-hover:text-bloom-coral transition">SKIN</h4>
+            <p class="text-[10px] text-bloom-brownlight">Facial &middot; Glow &middot; Care</p>
+          </div>
+        </a>
+
+        <!-- NAILS -->
+        <a href="#services" onclick="filterMenu('nails')" class="shrink-0 flex items-center gap-3 bg-bloom-cream px-4 py-2.5 rounded-2xl border border-bloom-creamborder hover:border-bloom-coral hover:shadow-sm transition group">
+          <div class="w-11 h-11 rounded-xl overflow-hidden bg-bloom-peach shrink-0">
+            <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=150&q=80" alt="Nails Category" class="w-full h-full object-cover group-hover:scale-110 transition">
+          </div>
+          <div>
+            <h4 class="text-xs font-bold text-bloom-brown group-hover:text-bloom-coral transition">NAILS</h4>
+            <p class="text-[10px] text-bloom-brownlight">Manicure &middot; Pedicure</p>
+          </div>
+        </a>
+
+        <!-- LASH & BROW -->
+        <a href="#services" onclick="filterMenu('lash')" class="shrink-0 flex items-center gap-3 bg-bloom-cream px-4 py-2.5 rounded-2xl border border-bloom-creamborder hover:border-bloom-coral hover:shadow-sm transition group">
+          <div class="w-11 h-11 rounded-xl overflow-hidden bg-bloom-peach shrink-0">
+            <img src="https://images.unsplash.com/photo-1583001809873-a128495da465?auto=format&fit=crop&w=150&q=80" alt="Lash and Brow" class="w-full h-full object-cover group-hover:scale-110 transition">
+          </div>
+          <div>
+            <h4 class="text-xs font-bold text-bloom-brown group-hover:text-bloom-coral transition">LASH &amp; BROW</h4>
+            <p class="text-[10px] text-bloom-brownlight">Lash &middot; Brow &middot; Shape</p>
+          </div>
+        </a>
+
+        <!-- BODY -->
+        <a href="#services" onclick="filterMenu('body')" class="shrink-0 flex items-center gap-3 bg-bloom-cream px-4 py-2.5 rounded-2xl border border-bloom-creamborder hover:border-bloom-coral hover:shadow-sm transition group">
+          <div class="w-11 h-11 rounded-xl overflow-hidden bg-bloom-peach shrink-0">
+            <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=150&q=80" alt="Body Category" class="w-full h-full object-cover group-hover:scale-110 transition">
+          </div>
+          <div>
+            <h4 class="text-xs font-bold text-bloom-brown group-hover:text-bloom-coral transition">BODY</h4>
+            <p class="text-[10px] text-bloom-brownlight">Relax &middot; Care &middot; Spa</p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. INTRODUCTION -->
+  <section id="about" class="py-16 md:py-24 border-b border-bloom-creamborder">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Asymmetric Lifestyle Image -->
+        <div class="lg:col-span-5 order-2 lg:order-1">
+          <div class="relative">
+            <div class="aspect-[3/4] rounded-3xl overflow-hidden border border-bloom-creamborder bg-bloom-peach shadow-md">
+              <img 
+                src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=900&q=80" 
+                alt="Relaxing Beauty Space" 
+                class="w-full h-full object-cover"
+                onerror="handleImgFallback(this, 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=900&q=80')"
+              >
+            </div>
+            <div class="absolute -bottom-4 -right-4 bg-bloom-peach text-bloom-brown border border-bloom-creamborder p-4 rounded-2xl shadow-md max-w-[200px]">
+              <p class="font-display text-sm text-bloom-brown">"No rushed appointments, just you and good energy."</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Typography Statement -->
+        <div class="lg:col-span-7 order-1 lg:order-2 space-y-6">
+          <span class="text-xs uppercase tracking-[0.25em] text-bloom-coral font-bold">
+            PHILOSOPHY &middot; WELCOME TO BLUSH &amp; BLOOM
+          </span>
+
+          <h2 class="font-display text-3xl sm:text-4xl md:text-5xl leading-tight text-bloom-brown">
+            A LITTLE TIME FOR YOU.
+          </h2>
+
+          <blockquote class="text-base sm:text-xl text-bloom-brown font-light leading-relaxed border-l-2 border-bloom-coral pl-5" id="site-intro-quote">
+            "Karena merawat diri bukan soal terlihat sempurna. Ini tentang merasa lebih fresh, lebih percaya diri, dan lebih nyaman dengan diri sendiri."
+          </blockquote>
+
+          <p class="text-xs sm:text-sm text-bloom-brownsoft leading-relaxed">
+            Kami menciptakan Blush &amp; Bloom sebagai everyday beauty lounge di Jakarta untuk wanita aktif yang mendambakan self-care tanpa atmosfer kaku atau bau kimia menyengat. Tempat hangat yang nyaman untuk singgah sebelum kuliah, sehabis jam kantor, ataupun akhir pekan santai.
+          </p>
+
+          <div class="pt-2">
+            <button onclick="openBookingModal()" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-bloom-coral hover:text-bloom-brown transition">
+              <span>ABOUT BLUSH &amp; BLOOM &rarr;</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. SERVICES — "BEAUTY MENU" -->
+  <section id="services" class="py-16 md:py-24 border-b border-bloom-creamborder bg-bloom-peach/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+        <div>
+          <span class="text-xs uppercase tracking-[0.25em] text-bloom-coral font-bold block mb-2">
+            OUR COMPLETE SERVICES
+          </span>
+          <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-bloom-brown">
+            THE BEAUTY MENU
+          </h2>
+        </div>
+        
+        <!-- Filter Tabs -->
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pt-4 md:pt-0">
+          <button onclick="filterMenu('all')" id="tab-btn-all" class="px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-bloom-brown text-bloom-cream transition">All</button>
+          <button onclick="filterMenu('hair')" id="tab-btn-hair" class="px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-bloom-peach text-bloom-brown hover:bg-bloom-creamborder transition">Hair</button>
+          <button onclick="filterMenu('skin')" id="tab-btn-skin" class="px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-bloom-peach text-bloom-brown hover:bg-bloom-creamborder transition">Skin</button>
+          <button onclick="filterMenu('nails')" id="tab-btn-nails" class="px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-bloom-peach text-bloom-brown hover:bg-bloom-creamborder transition">Nails</button>
+          <button onclick="filterMenu('lash')" id="tab-btn-lash" class="px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-bloom-peach text-bloom-brown hover:bg-bloom-creamborder transition">Lash &amp; Brow</button>
+        </div>
+      </div>
+
+      <!-- Editorial Menu Layout (List Style instead of Card Grid) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12" id="services-menu-container">
+        
+        <!-- COLUMN 1: HAIR CARE -->
+        <div class="menu-category-block space-y-6" data-category="hair">
+          <div class="border-b-2 border-bloom-brown pb-2 flex items-center justify-between">
+            <h3 class="font-display text-xl sm:text-2xl text-bloom-brown">01. HAIR CARE</h3>
+            <span class="text-[10px] uppercase font-bold tracking-widest text-bloom-coral">Cut &middot; Spa &middot; Color</span>
+          </div>
+
+          <div class="space-y-4">
+            <div class="flex items-baseline justify-between border-b border-bloom-creamborder/80 pb-3 group">
+              <div>
+                <h4 class="text-sm font-bold text-bloom-brown group-hover:text-bloom-coral transition">WOMEN'S CUT</h4>
+                <p class="text-xs text-bloom-brownlight mt-0.5">Konsultasi bentuk wajah, cuci rambut, blow dry &amp; finishing</p>
+              </div>
+              <div class="text-right shrink-0 ml-4">
+                <span class="font-display text-base text-bloom-brown">Mulai Rp 75K</span>
+                <button onclick="bookSpecificService('Women\'s Cut', 'Mulai Rp 75K')" class="block text-[10px] text-bloom-coral uppercase font-bold tracking-wider hover:underline mt-0.5">Book</button>
+              </div>
+            </div>
+
+            <div class="flex items-baseline justify-between border-b border-bloom-creamborder/80 pb-3 group">
+              <div>
+                <h4 class="text-sm font-bold text-bloom-brown group-hover:text-bloom-coral transition">SIGNATURE HAIR SPA</h4>
+                <p class="text-xs text-bloom-brownlight mt-0.5">Deep conditioning mask dengan relaxing acupressure head massage 25 menit</p>
+              </div>
+              <div class="text-right shrink-0 ml-4">
+                <span class="font-display text-base text-bloom-brown">Rp 100K</span>
+                <button onclick="bookSpecificService('Signature Hair Spa', 'Rp 100K')" class="block text-[10px] text-bloom-coral uppercase font-bold tracking-wider hover:underline mt-0.5">Book</button>
+              </div>
+            </div>
+
+            <div class="flex items-baseline justify-between border-b border-bloom-creamborder/80 pb-3 group">
+              <div>
+                <h4 class="text-sm font-bold text-bloom-brown group-hover:text-bloom-coral transition">HAIR COLOR &amp; GLOSS</h4>
+                <p class="text-xs text-bloom-brownlight mt-0.5">Ammonia-free organic dye, toning berkilau, dan proteksi helai rambut</p>
+              </div>
+              <div class="text-right shrink-0 ml-4">
+                <span class="font-display text-base text-bloom-brown">Mulai Rp 250K</span>
+                <button onclick="bookSpecificService('Hair Color & Gloss', 'Mulai Rp 250K')" class="block text-[10px] text-bloom-coral uppercase font-bold tracking-wider hover:underline mt-0.5">Book</button>
+              </div>
+            </div>
+
+            <div class="flex items-baseline justify-between border-b border-bloom-creamborder/80 pb-3 group">
+              <div>
+                <h4 class="text-sm font-bold text-bloom-brown group-hover:text-bloom-coral transition">HAIR KERATIN TREATMENT</h4>
+                <p class="text-xs text-bloom-brownlight mt-0.5">Menjinakkan rambut frizzy mekar agar halus lembut tahan berbulan-bulan</p>
+              </div>
+              <div class="text-right shrink-0 ml-4">
+                <span class="font-display text-base text-bloom-brown">Mulai Rp 150K</span>
+                <button onclick="bookSpecificService('Hair Keratin Treatment', 'Mulai Rp 150K')" class="block text-[10px] text-bloom-coral uppercase font-bold tracking-wider hover:underline mt-0.5">Book</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- COLUMN 2: SKIN & FACIAL -->
+        <div class="menu-category-block space-y-6" data-category="skin">
+          <div class="border-b-2 border-bloom-brown pb-2 flex items-center justify-between">
+            <h3 class="font-display text-xl sm:text-2xl text-bloom-brown">02. SKIN &amp; FACIAL</h3>
+            <span class="text-[10px] uppercase font-bold tracking-widest text-bloom-coral">Gentle &middot; Clean &middot; Glow</span>
+          </div>
+
+          <div class="space-y-4">
+            <div class="flex items-baseline justify-between border-b border-bloom-creamborder/80 pb-3 group">
+              <div>
+                <h4 class="text-sm font-bold text-bloom-brown group-hover:text-bloom-coral transition">SIGNATURE FACIAL</h4>
+                <p class="text-xs text-bloom-brownlight mt-0.5">Double cleanse, steam pori halus, gentle extraction, dan soothing mask</p>
+              </div>
+              <div class="text-right shrink-0 ml-4">
+                <span class="font-display text-base text-bloom-brown">Rp 150K</span>
+                <button onclick="bookSpecificService('Signature Facial', 'Rp 150K')" class="block text-[10px] text-bloom-coral uppercase font-bold tracking-wider hover:underline mt-0.5">Book</button>
+              </div>
+            </div>
+
+            <div class="flex items-baseline justify-between border-b border-bloom-creamborder/80 pb-3 group">
+              <div>
+                <h4 class="text-sm font-bold text-bloom-brown group-hover:text-bloom-coral transition">GLOW FACIAL</h4>
+                <p class="text-xs text-bloom-brownlight mt-0.5">Oxygen infusion, Vitamin C serum concentrate, and dewy cooling jade roller</p>
+              </div>
+              <div class="text-right shrink-0 ml-4">
+                <span class="font-display text-base text-bloom-brown">Rp 175K</span>
+                <button onclick="bookSpecificService('Glow Facial', 'Rp 175K')" class="block text-[10px] text-bloom-coral uppercase font-bold tracking-wider hover:underline mt-0.5">Book</button>
+              </div>
+            </div>
+
+            <div class="flex items-baseline justify-between border-b border-bloom-creamborder/80 pb-3 group">
+              <div>
+                <h4 class="text-sm font-bold text-bloom-brown group-hover:text-bloom-coral transition">HYDRATION FACIAL</h4>
+                <p class="text-xs text-bloom-brownlight mt-0.5">Hyaluronic barrier repair untuk kulit sensitif dan kering dehidrasi</p>
+              </div>
+              <div class="text-right shrink-0 ml-4">
+                <span class="font-display text-base text-bloom-brown">Rp 175K</span>
+                <button onclick="bookSpecificService('Hydration Facial', 'Rp 175K')" class="block text-[10px] text-bloom-coral uppercase font-bold tracking-wider hover:underline mt-0.5">Book</button>
+              </div>
+            </div>
+
+            <div class="flex items-baseline justify-between border-b border-bloom-creamborder/80 pb-3 group">
+              <div>
+                <h4 class="text-sm font-bold text-bloom-brown group-hover:text-bloom-coral transition">ACNE CALMING CARE</h4>
+                <p class="text-xs text-bloom-brownlight mt-0.5">Blue light therapy anti-bakteri, calming cica, dan peredam kemerahan</p>
+              </div>
+              <div class="text-right shrink-0 ml-4">
+                <span class="font-display text-base text-bloom-brown">Rp 180K</span>
+                <button onclick="bookSpecificService('Acne Calming Care', 'Rp 180K')" class="block text-[10px] text-bloom-coral uppercase font-bold tracking-wider hover:underline mt-0.5">Book</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- COLUMN 3: NAILS CARE -->
+        <div class="menu-category-block space-y-6" data-category="nails">
+          <div class="border-b-2 border-bloom-brown pb-2 flex items-center justify-between">
+            <h3 class="font-display text-xl sm:text-2xl text-bloom-brown">03. NAILS STUDIO</h3>
+            <span class="text-[10px] uppercase font-bold tracking-widest text-bloom-coral">Manicure &middot; Gel Polish</span>
+          </div>
+
+          <div class="space-y-4">
+            <div class="flex items-baseline justify-between border-b border-bloom-creamborder/80 pb-3 group">
+              <div>
+                <h4 class="text-sm font-bold text-bloom-brown group-hover:text-bloom-coral transition">CLASSIC MANICURE</h4>
+                <p class="text-xs text-bloom-brownlight mt-0.5">Nail shaping, cuticle trimming, scrub lembut, dan vitamin polish bening</p>
+              </div>
+              <div class="text-right shrink-0 ml-4">
+                <span class="font-display text-base text-bloom-brown">Rp 75K</span>
+                <button onclick="bookSpecificService('Classic Manicure', 'Rp 75K')" class="block text-[10px] text-bloom-coral uppercase font-bold tracking-wider hover:underline mt-0.5">Book</button>
+              </div>
+            </div>
+
+            <div class="flex items-baseline justify-between border-b border-bloom-creamborder/80 pb-3 group">
+              <div>
+                <h4 class="text-sm font-bold text-bloom-brown group-hover:text-bloom-coral transition">PEDICURE SPA</h4>
+                <p class="text-xs text-bloom-brownlight mt-0.5">Rendaman garam floral, scrub tumit lembut, massage kaki, dan cuticle care</p>
+              </div>
+              <div class="text-right shrink-0 ml-4">
+                <span class="font-display text-base text-bloom-brown">Rp 85K</span>
+                <button onclick="bookSpecificService('Pedicure Spa', 'Rp 85K')" class="block text-[10px] text-bloom-coral uppercase font-bold tracking-wider hover:underline mt-0.5">Book</button>
+              </div>
+            </div>
+
+            <div class="flex items-baseline justify-between border-b border-bloom-creamborder/80 pb-3 group">
+              <div>
+                <h4 class="text-sm font-bold text-bloom-brown group-hover:text-bloom-coral transition">GEL POLISH FINISH</h4>
+                <p class="text-xs text-bloom-brownlight mt-0.5">Pilihan 60+ warna trendy (korea blush, jelly nude, glazed donut)</p>
+              </div>
+              <div class="text-right shrink-0 ml-4">
+                <span class="font-display text-base text-bloom-brown">Rp 125K</span>
+                <button onclick="bookSpecificService('Gel Polish Finish', 'Rp 125K')" class="block text-[10px] text-bloom-coral uppercase font-bold tracking-wider hover:underline mt-0.5">Book</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- COLUMN 4: LASH & BROW -->
+        <div class="menu-category-block space-y-6" data-category="lash">
+          <div class="border-b-2 border-bloom-brown pb-2 flex items-center justify-between">
+            <h3 class="font-display text-xl sm:text-2xl text-bloom-brown">04. LASH &amp; BROW</h3>
+            <span class="text-[10px] uppercase font-bold tracking-widest text-bloom-coral">Lift &middot; Tint &middot; Shape</span>
+          </div>
+
+          <div class="space-y-4">
+            <div class="flex items-baseline justify-between border-b border-bloom-creamborder/80 pb-3 group">
+              <div>
+                <h4 class="text-sm font-bold text-bloom-brown group-hover:text-bloom-coral transition">KERATIN LASH LIFT</h4>
+                <p class="text-xs text-bloom-brownlight mt-0.5">Lentik alami dari akar dengan nutrisi keratin, tahan hingga 6–8 minggu</p>
+              </div>
+              <div class="text-right shrink-0 ml-4">
+                <span class="font-display text-base text-bloom-brown">Rp 150K</span>
+                <button onclick="bookSpecificService('Keratin Lash Lift', 'Rp 150K')" class="block text-[10px] text-bloom-coral uppercase font-bold tracking-wider hover:underline mt-0.5">Book</button>
+              </div>
+            </div>
+
+            <div class="flex items-baseline justify-between border-b border-bloom-creamborder/80 pb-3 group">
+              <div>
+                <h4 class="text-sm font-bold text-bloom-brown group-hover:text-bloom-coral transition">BROW SHAPING &amp; TINT</h4>
+                <p class="text-xs text-bloom-brownlight mt-0.5">Membentuk garis alis rapi sesuai proporsi tulang wajah dengan tint alami</p>
+              </div>
+              <div class="text-right shrink-0 ml-4">
+                <span class="font-display text-base text-bloom-brown">Rp 75K</span>
+                <button onclick="bookSpecificService('Brow Shaping & Tint', 'Rp 75K')" class="block text-[10px] text-bloom-coral uppercase font-bold tracking-wider hover:underline mt-0.5">Book</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 9. "MOST LOVED" SECTION -->
+  <section class="py-16 md:py-24 border-b border-bloom-creamborder">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+        <div>
+          <span class="text-xs uppercase tracking-[0.25em] text-bloom-coral font-bold block mb-2">
+            CUSTOMER FAVORITE
+          </span>
+          <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-bloom-brown">
+            MOST LOVED
+          </h2>
+        </div>
+        <p class="text-xs sm:text-sm text-bloom-brownlight max-w-sm mt-2 md:mt-0">
+          Tiga perawatan yang paling sering dipesan oleh customer Blush &amp; Bloom untuk self-care mingguan.
+        </p>
+      </div>
+
+      <!-- Asymmetrical 1 Large + 2 Small Layout -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+        
+        <!-- Large Visual Card: 01 Signature Hair Spa -->
+        <div class="lg:col-span-7 bg-bloom-peach/40 rounded-3xl p-6 sm:p-8 border border-bloom-creamborder flex flex-col justify-between group relative overflow-hidden">
+          <div class="flex items-center justify-between mb-4">
+            <span class="font-display text-3xl sm:text-4xl text-bloom-brown">01</span>
+            <span class="px-3 py-1 rounded-full bg-bloom-coral text-bloom-cream text-[10px] font-bold uppercase tracking-widest">
+              CUSTOMER FAVORITE #1
+            </span>
+          </div>
+
+          <div class="aspect-[16/10] rounded-2xl overflow-hidden mb-6 bg-bloom-peach">
+            <img 
+              src="https://images.unsplash.com/photo-1560869713-7d0a29430803?auto=format&fit=crop&w=1000&q=80" 
+              alt="Signature Hair Spa" 
+              class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+              onerror="handleImgFallback(this, 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1000&q=80')"
+            >
+          </div>
+
+          <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div>
+              <h3 class="font-display text-2xl text-bloom-brown">SIGNATURE HAIR SPA</h3>
+              <p class="text-xs text-bloom-brownsoft mt-1 max-w-md">
+                Kombinasi masker batang rambut bernutrisi tinggi dan pijatan relaksasi leher pundak. Menghilangkan penat seharian.
+              </p>
+            </div>
+            <div class="shrink-0 text-left sm:text-right">
+              <span class="font-display text-xl text-bloom-brown block">Rp 100K</span>
+              <button onclick="bookSpecificService('Signature Hair Spa', 'Rp 100K')" class="mt-2 px-5 py-2.5 rounded-full bg-bloom-brown hover:bg-bloom-coral text-bloom-cream text-xs font-semibold uppercase tracking-wider transition">
+                Book This
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2 Small Cards: 02 Glow Facial & 03 Gel Manicure -->
+        <div class="lg:col-span-5 flex flex-col gap-6">
+          
+          <!-- 02 Glow Facial -->
+          <div class="bg-bloom-cream rounded-3xl p-6 border border-bloom-creamborder flex flex-col justify-between group flex-1">
+            <div class="flex items-center justify-between mb-3">
+              <span class="font-display text-2xl text-bloom-brown">02</span>
+              <span class="text-[10px] uppercase font-bold tracking-wider text-bloom-coral">INSTANT REFRESH</span>
+            </div>
+            <div class="flex gap-4 items-center">
+              <div class="w-24 h-24 rounded-xl overflow-hidden bg-bloom-peach shrink-0">
+                <img src="https://images.unsplash.com/photo-1512290900672-1f55b9a89668?auto=format&fit=crop&w=300&q=80" alt="Glow Facial" class="w-full h-full object-cover group-hover:scale-105 transition">
+              </div>
+              <div>
+                <h4 class="font-display text-lg text-bloom-brown">GLOW FACIAL</h4>
+                <p class="text-xs text-bloom-brownlight mt-0.5">Hydra-infusion &amp; vitamin boost untuk kulit kenyal glowing.</p>
+                <div class="flex items-center gap-3 mt-2">
+                  <span class="font-display text-sm text-bloom-brown">Rp 175K</span>
+                  <button onclick="bookSpecificService('Glow Facial', 'Rp 175K')" class="text-xs font-bold text-bloom-coral hover:underline uppercase">Book &rarr;</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 03 Gel Manicure -->
+          <div class="bg-bloom-cream rounded-3xl p-6 border border-bloom-creamborder flex flex-col justify-between group flex-1">
+            <div class="flex items-center justify-between mb-3">
+              <span class="font-display text-2xl text-bloom-brown">03</span>
+              <span class="text-[10px] uppercase font-bold tracking-wider text-bloom-coral">WEEKLY CARE</span>
+            </div>
+            <div class="flex gap-4 items-center">
+              <div class="w-24 h-24 rounded-xl overflow-hidden bg-bloom-peach shrink-0">
+                <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=300&q=80" alt="Gel Manicure" class="w-full h-full object-cover group-hover:scale-105 transition">
+              </div>
+              <div>
+                <h4 class="font-display text-lg text-bloom-brown">GEL MANICURE</h4>
+                <p class="text-xs text-bloom-brownlight mt-0.5">Cuticle clean &amp; premium Korean blush gel polish tahan 4 minggu.</p>
+                <div class="flex items-center gap-3 mt-2">
+                  <span class="font-display text-sm text-bloom-brown">Rp 125K</span>
+                  <button onclick="bookSpecificService('Gel Manicure', 'Rp 125K')" class="text-xs font-bold text-bloom-coral hover:underline uppercase">Book &rarr;</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 10. TRANSFORMATION — "A LITTLE TRANSFORMATION" -->
+  <section class="py-16 md:py-24 border-b border-bloom-creamborder bg-bloom-peach/30">
+    <div class="max-w-5xl mx-auto px-4 sm:px-8 text-center">
+      
+      <span class="text-xs uppercase tracking-[0.25em] text-bloom-coral font-bold block mb-2">
+        REAL RESULTS &middot; NO PLASTIC RETOUCH
+      </span>
+      <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-bloom-brown mb-3">
+        A LITTLE TRANSFORMATION
+      </h2>
+      <p class="text-xs sm:text-sm text-bloom-brownlight max-w-md mx-auto mb-8">
+        Hasil nyata perawatan rambut, kulit wajah, dan kuku yang terawat rapi natural.
+      </p>
+
+      <!-- Transformation Category Toggle -->
+      <div class="flex items-center justify-center gap-2 mb-8">
+        <button onclick="switchTransformation('hair')" id="ba-btn-hair" class="ba-tab px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-bloom-brown text-bloom-cream transition">
+          Hair
+        </button>
+        <button onclick="switchTransformation('skin')" id="ba-btn-skin" class="ba-tab px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-bloom-peach text-bloom-brown hover:bg-bloom-creamborder transition">
+          Skin
+        </button>
+        <button onclick="switchTransformation('nails')" id="ba-btn-nails" class="ba-tab px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-bloom-peach text-bloom-brown hover:bg-bloom-creamborder transition">
+          Nails
+        </button>
+      </div>
+
+      <!-- Interactive Before-After Slider Box -->
+      <div class="relative w-full max-w-2xl mx-auto aspect-[4/3] rounded-3xl overflow-hidden border border-bloom-creamborder shadow-lg select-none bg-bloom-cream">
+        
+        <!-- After Image (Base) -->
+        <img 
+          id="ba-after-img" 
+          src="https://images.unsplash.com/photo-1560869713-7d0a29430803?auto=format&fit=crop&w=1200&q=80" 
+          alt="After Transformation" 
+          class="absolute inset-0 w-full h-full object-cover"
+        >
+        <span class="absolute top-4 right-4 bg-bloom-brown/80 text-bloom-cream px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest z-10">
+          AFTER
+        </span>
+
+        <!-- Before Image (Clipped Overlay) -->
+        <div id="ba-clip-wrapper" class="absolute inset-0 w-1/2 overflow-hidden border-r-2 border-bloom-cream">
+          <img 
+            id="ba-before-img" 
+            src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1200&q=80" 
+            alt="Before Transformation" 
+            class="absolute top-0 left-0 max-w-none h-full object-cover"
+            style="width: 672px;"
+          >
+          <span class="absolute top-4 left-4 bg-bloom-brown/80 text-bloom-cream px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest z-10">
+            BEFORE
+          </span>
+        </div>
+
+        <!-- Slider Divider Line -->
+        <div id="ba-divider" class="absolute top-0 bottom-0 left-1/2 -ml-[1px] w-[2px] bg-bloom-cream pointer-events-none z-20">
+          <div class="absolute top-1/2 -translate-y-1/2 -left-4 w-8 h-8 rounded-full bg-bloom-coral text-bloom-cream border-2 border-bloom-cream shadow-md flex items-center justify-center text-xs">
+            <i class="ph ph-arrows-left-right font-bold"></i>
+          </div>
+        </div>
+
+        <!-- Hidden Range Controller -->
+        <input 
+          type="range" 
+          id="ba-slider-input" 
+          min="0" 
+          max="100" 
+          value="50" 
+          class="ba-range absolute inset-0 w-full h-full opacity-0 z-30 cursor-ew-resize"
+          oninput="handleSlider(this.value)"
+        >
+      </div>
+
+      <p class="text-xs text-bloom-brownlight mt-4 italic" id="ba-caption">
+        "Layer cut &amp; gloss treatment untuk rambut mekar kering. Hasil lebih ringan dan berkilau alami."
+      </p>
+
+    </div>
+  </section>
+
+  <!-- 11. BEAUTY TEAM — "THE GIRLS BEHIND THE GLOW" -->
+  <section class="py-16 md:py-24 border-b border-bloom-creamborder">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
+      
+      <div class="text-center max-w-lg mx-auto mb-12">
+        <span class="text-xs uppercase tracking-[0.25em] text-bloom-coral font-bold block mb-2">
+          MEET YOUR THERAPISTS
+        </span>
+        <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-bloom-brown">
+          THE GIRLS BEHIND THE GLOW
+        </h2>
+        <p class="text-xs sm:text-sm text-bloom-brownlight mt-2">
+          Terapis bersertifikat yang ramah, komunikatif, dan mendengarkan apa yang sebenarnya kamu butuhkan.
+        </p>
+      </div>
+
+      <!-- Natural Portrait Grid -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        
+        <!-- SASKIA -->
+        <div class="space-y-3 group cursor-pointer" onclick="preselectSpecialist('Saskia (Hair Stylist)')">
+          <div class="aspect-[3/4] rounded-2xl overflow-hidden bg-bloom-peach border border-bloom-creamborder relative">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80" alt="Saskia Hair Stylist" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <div class="absolute inset-0 bg-bloom-brown/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-bloom-cream text-xs font-bold uppercase tracking-wider p-2 text-center">
+              Book with Saskia
+            </div>
+          </div>
+          <div>
+            <h4 class="font-display text-lg text-bloom-brown group-hover:text-bloom-coral transition">SASKIA</h4>
+            <p class="text-xs text-bloom-brownlight">Hair Stylist &middot; 6+ Years Exp</p>
+          </div>
+        </div>
+
+        <!-- NAYA -->
+        <div class="space-y-3 group cursor-pointer" onclick="preselectSpecialist('Naya (Beauty Therapist)')">
+          <div class="aspect-[3/4] rounded-2xl overflow-hidden bg-bloom-peach border border-bloom-creamborder relative">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80" alt="Naya Beauty Therapist" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <div class="absolute inset-0 bg-bloom-brown/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-bloom-cream text-xs font-bold uppercase tracking-wider p-2 text-center">
+              Book with Naya
+            </div>
+          </div>
+          <div>
+            <h4 class="font-display text-lg text-bloom-brown group-hover:text-bloom-coral transition">NAYA</h4>
+            <p class="text-xs text-bloom-brownlight">Beauty &amp; Facial Therapist</p>
+          </div>
+        </div>
+
+        <!-- PUTRI -->
+        <div class="space-y-3 group cursor-pointer" onclick="preselectSpecialist('Putri (Nail Artist)')">
+          <div class="aspect-[3/4] rounded-2xl overflow-hidden bg-bloom-peach border border-bloom-creamborder relative">
+            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80" alt="Putri Nail Artist" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <div class="absolute inset-0 bg-bloom-brown/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-bloom-cream text-xs font-bold uppercase tracking-wider p-2 text-center">
+              Book with Putri
+            </div>
+          </div>
+          <div>
+            <h4 class="font-display text-lg text-bloom-brown group-hover:text-bloom-coral transition">PUTRI</h4>
+            <p class="text-xs text-bloom-brownlight">Nail Artist &middot; Gel Expert</p>
+          </div>
+        </div>
+
+        <!-- ALYA -->
+        <div class="space-y-3 group cursor-pointer" onclick="preselectSpecialist('Alya (Lash & Brow Artist)')">
+          <div class="aspect-[3/4] rounded-2xl overflow-hidden bg-bloom-peach border border-bloom-creamborder relative">
+            <img src="https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?auto=format&fit=crop&w=600&q=80" alt="Alya Lash & Brow" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <div class="absolute inset-0 bg-bloom-brown/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-bloom-cream text-xs font-bold uppercase tracking-wider p-2 text-center">
+              Book with Alya
+            </div>
+          </div>
+          <div>
+            <h4 class="font-display text-lg text-bloom-brown group-hover:text-bloom-coral transition">ALYA</h4>
+            <p class="text-xs text-bloom-brownlight">Lash &amp; Brow Specialist</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 12. THE BEAUTY LOUNGE — "COME HANG OUT WITH US" -->
+  <section id="lounge-section" class="py-16 md:py-24 border-b border-bloom-creamborder bg-bloom-peach/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        
+        <div class="lg:col-span-5 space-y-6">
+          <span class="text-xs uppercase tracking-[0.25em] text-bloom-coral font-bold">
+            SPACE &amp; ATMOSPHERE
+          </span>
+          <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-bloom-brown">
+            COME HANG OUT WITH US.
+          </h2>
+          <p class="text-xs sm:text-sm text-bloom-brownsoft leading-relaxed">
+            Sentuhan kayu hangat, warna cream-peach yang lembut, pencahayaan alami, dan aroma aromaterapi chamomile yang menenangkan. Kami mendesain salon ini agar kamu merasa seperti bersantai di ruang tamu sahabat terdekat.
+          </p>
+
+          <div class="grid grid-cols-2 gap-4 pt-2">
+            <div class="p-3 bg-bloom-cream rounded-xl border border-bloom-creamborder">
+              <h5 class="text-xs font-bold text-bloom-brown">Private Wash Sinks</h5>
+              <p class="text-[10px] text-bloom-brownlight mt-0.5">Ruang cuci tenang dengan pencahayaan redup relaksasi.</p>
+            </div>
+            <div class="p-3 bg-bloom-cream rounded-xl border border-bloom-creamborder">
+              <h5 class="text-xs font-bold text-bloom-brown">Barista Coffee Bar</h5>
+              <p class="text-[10px] text-bloom-brownlight mt-0.5">Pilihan iced matcha latte &amp; tea hangat gratis untukmu.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 grid grid-cols-2 gap-4">
+          <div class="aspect-[4/5] rounded-2xl overflow-hidden bg-bloom-peach border border-bloom-creamborder shadow-sm">
+            <img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=800&q=80" alt="Salon Styling Station" class="w-full h-full object-cover">
+          </div>
+          <div class="aspect-[4/5] rounded-2xl overflow-hidden bg-bloom-peach border border-bloom-creamborder shadow-sm mt-6">
+            <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=800&q=80" alt="Salon Cozy Seating" class="w-full h-full object-cover">
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 13. BEAUTY ROUTINE — "BUILD YOUR BEAUTY ROUTINE" -->
+  <section id="routine" class="py-16 md:py-24 border-b border-bloom-creamborder">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
+      
+      <div class="text-center max-w-lg mx-auto mb-12">
+        <span class="text-xs uppercase tracking-[0.25em] text-bloom-coral font-bold block mb-2">
+          CURATED SELF-CARE PACKAGES
+        </span>
+        <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-bloom-brown">
+          BUILD YOUR BEAUTY ROUTINE
+        </h2>
+        <p class="text-xs sm:text-sm text-bloom-brownlight mt-2">
+          Pilih ritme perawatan yang paling cocok dengan jadwal kesibukan harianmu.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Package 1 -->
+        <div class="bg-bloom-cream rounded-3xl p-6 sm:p-8 border border-bloom-creamborder flex flex-col justify-between group hover:border-bloom-coral transition">
+          <div>
+            <span class="text-[10px] uppercase font-bold tracking-widest text-bloom-coral">30–45 MIN &middot; EXPRESS</span>
+            <h3 class="font-display text-2xl text-bloom-brown mt-1">QUICK REFRESH</h3>
+            <p class="text-xs text-bloom-brownlight mt-2 leading-relaxed">
+              Solusi cepat sebelum meeting penting atau hangout malam. Meliputi blow-dry styling, touch-up kuku kilat, atau brow tidy.
+            </p>
+            <ul class="mt-4 space-y-2 text-xs text-bloom-brownsoft">
+              <li class="flex items-center gap-2"><i class="ph ph-check text-bloom-coral"></i> Express Hair Blowout</li>
+              <li class="flex items-center gap-2"><i class="ph ph-check text-bloom-coral"></i> Brow Neat Clean-up</li>
+              <li class="flex items-center gap-2"><i class="ph ph-check text-bloom-coral"></i> Hand Cuticle Moisture</li>
+            </ul>
+          </div>
+          <div class="pt-6 border-t border-bloom-creamborder/60 mt-6 flex items-center justify-between">
+            <span class="font-display text-lg text-bloom-brown">Mulai Rp 120K</span>
+            <button onclick="bookRoutine('Quick Refresh (30-45 min)')" class="px-4 py-2 rounded-full bg-bloom-peach hover:bg-bloom-coral hover:text-bloom-cream text-xs font-semibold uppercase tracking-wider text-bloom-brown transition">
+              Select
+            </button>
+          </div>
+        </div>
+
+        <!-- Package 2: Most Popular Glow Day -->
+        <div class="bg-bloom-peach/60 rounded-3xl p-6 sm:p-8 border-2 border-bloom-coral flex flex-col justify-between group shadow-sm relative">
+          <span class="absolute -top-3 left-8 px-3 py-1 rounded-full bg-bloom-coral text-bloom-cream text-[9px] font-bold uppercase tracking-widest shadow-xs">
+            POPULAR ROUTINE
+          </span>
+          <div>
+            <span class="text-[10px] uppercase font-bold tracking-widest text-bloom-coral">60–90 MIN &middot; BALANCED</span>
+            <h3 class="font-display text-2xl text-bloom-brown mt-1">GLOW DAY</h3>
+            <p class="text-xs text-bloom-brownlight mt-2 leading-relaxed">
+              Kombinasi paling seimbang untuk me-refresh kulit wajah kusam sekaligus meremajakan batang rambut yang lelah.
+            </p>
+            <ul class="mt-4 space-y-2 text-xs text-bloom-brownsoft">
+              <li class="flex items-center gap-2"><i class="ph ph-check text-bloom-coral"></i> Signature Hair Spa &amp; Massage</li>
+              <li class="flex items-center gap-2"><i class="ph ph-check text-bloom-coral"></i> Glow Oxygen Facial</li>
+              <li class="flex items-center gap-2"><i class="ph ph-check text-bloom-coral"></i> Herbal Tea &amp; Snack Bar</li>
+            </ul>
+          </div>
+          <div class="pt-6 border-t border-bloom-creamborder/60 mt-6 flex items-center justify-between">
+            <span class="font-display text-lg text-bloom-brown">Mulai Rp 245K</span>
+            <button onclick="bookRoutine('Glow Day (60-90 min)')" class="px-5 py-2.5 rounded-full bg-bloom-coral hover:bg-bloom-coralhover text-bloom-cream text-xs font-semibold uppercase tracking-wider transition shadow-sm">
+              Select
+            </button>
+          </div>
+        </div>
+
+        <!-- Package 3 -->
+        <div class="bg-bloom-cream rounded-3xl p-6 sm:p-8 border border-bloom-creamborder flex flex-col justify-between group hover:border-bloom-coral transition">
+          <div>
+            <span class="text-[10px] uppercase font-bold tracking-widest text-bloom-coral">2–3 HOURS &middot; TOTAL CARE</span>
+            <h3 class="font-display text-2xl text-bloom-brown mt-1">FULL BEAUTY DAY</h3>
+            <p class="text-xs text-bloom-brownlight mt-2 leading-relaxed">
+              Hari memanjakan diri seutuhnya dari ujung rambut sampai kaki. Sempurna untuk self-reward gajian atau hari spesialmu.
+            </p>
+            <ul class="mt-4 space-y-2 text-xs text-bloom-brownsoft">
+              <li class="flex items-center gap-2"><i class="ph ph-check text-bloom-coral"></i> Hair Cut + Spa Keratin Mask</li>
+              <li class="flex items-center gap-2"><i class="ph ph-check text-bloom-coral"></i> Hydra-Glow Facial Complete</li>
+              <li class="flex items-center gap-2"><i class="ph ph-check text-bloom-coral"></i> Gel Manicure &amp; Pedicure Spa</li>
+            </ul>
+          </div>
+          <div class="pt-6 border-t border-bloom-creamborder/60 mt-6 flex items-center justify-between">
+            <span class="font-display text-lg text-bloom-brown">Mulai Rp 380K</span>
+            <button onclick="bookRoutine('Full Beauty Day (2-3 hrs)')" class="px-4 py-2 rounded-full bg-bloom-peach hover:bg-bloom-coral hover:text-bloom-cream text-xs font-semibold uppercase tracking-wider text-bloom-brown transition">
+              Select
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 14. PRODUCT CORNER — "OUR BEAUTY EDIT" -->
+  <section id="products-section" class="py-16 md:py-24 bg-bloom-peach/20 border-b border-bloom-creamborder">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+        <div>
+          <span class="text-xs uppercase tracking-[0.25em] text-bloom-coral font-bold block mb-2">
+            BOUTIQUE BEAUTY SHELF
+          </span>
+          <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-bloom-brown">
+            OUR BEAUTY EDIT
+          </h2>
+        </div>
+        <div class="flex items-center gap-3 mt-3 md:mt-0">
+          <p class="text-xs sm:text-sm text-bloom-brownsoft max-w-sm">
+            Produk kurasi terapis kami yang aman digunakan sehari-hari di rumah untuk mempertahankan kilau salonmu.
+          </p>
+          <button onclick="openAdminProductModal()" id="admin-add-product-quick" class="hidden px-3.5 py-1.5 rounded-full bg-bloom-coral text-bloom-cream text-xs font-semibold uppercase tracking-wider hover:bg-bloom-coralhover transition flex items-center gap-1.5 shrink-0">
+            <i class="ph ph-plus-circle text-base"></i> Tambah Produk
+          </button>
+        </div>
+      </div>
+
+      <!-- Boutique Products Dynamic Grid -->
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6" id="products-container">
+        <!-- Rendered dynamically via JavaScript & Firestore -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 15. PROMO SECTION — "TODAY IS A GOOD DAY FOR A LITTLE SELF-CARE" -->
+  <section class="py-16 md:py-20 border-b border-bloom-creamborder bg-bloom-peach/40">
+    <div class="max-w-4xl mx-auto px-4 sm:px-8 text-center space-y-5">
+      
+      <span class="text-xs uppercase tracking-[0.25em] text-bloom-coral font-bold block">
+        SPECIAL INVITATION
+      </span>
+      <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-bloom-brown leading-tight">
+        TODAY IS A GOOD DAY FOR A LITTLE SELF-CARE.
+      </h2>
+      <p class="text-xs sm:text-sm text-bloom-brownsoft max-w-md mx-auto" id="site-promo-desc-text">
+        Diskon 15% untuk kunjungan pertamamu di Blush &amp; Bloom. Cukup tunjukkan kode voucher di bawah saat kedatangan.
+      </p>
+
+      <div class="inline-flex items-center gap-3 bg-bloom-cream px-5 py-3 rounded-full border border-bloom-creamborder shadow-xs">
+        <span class="text-xs uppercase font-bold text-bloom-brownlight tracking-wider">Voucher:</span>
+        <span class="font-mono text-sm font-bold text-bloom-coral tracking-widest" id="site-promo-code-display">FIRSTBLOOM</span>
+      </div>
+
+      <div class="pt-3">
+        <button onclick="openBookingModal('Voucher Promo: FIRSTBLOOM')" class="bg-bloom-coral hover:bg-bloom-coralhover text-bloom-cream px-8 py-3.5 rounded-full text-xs font-bold uppercase tracking-widest transition shadow-sm">
+          SEE THE OFFER &amp; BOOK NOW
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 16. MEMBERSHIP — "BLOOM CLUB" -->
+  <section class="py-16 md:py-24 border-b border-bloom-creamborder">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
+      <div class="bg-bloom-peach/50 rounded-3xl p-8 sm:p-12 border border-bloom-creamborder grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        
+        <div class="lg:col-span-6 space-y-4">
+          <span class="text-xs uppercase tracking-[0.25em] text-bloom-coral font-bold">
+            COMMUNITY &amp; PERKS
+          </span>
+          <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-bloom-brown">
+            BLOOM CLUB
+          </h2>
+          <p class="text-xs sm:text-sm text-bloom-brownsoft">
+            Little perks for your regular beauty days. Bergabung gratis dan nikmati benefit eksklusif setiap bulan.
+          </p>
+
+          <div class="pt-2">
+            <button onclick="openBookingModal('Join Bloom Club Membership')" class="bg-bloom-brown hover:bg-bloom-coral text-bloom-cream px-6 py-3 rounded-full text-xs font-semibold uppercase tracking-wider transition">
+              JOIN BLOOM CLUB
+            </button>
+          </div>
+        </div>
+
+        <div class="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="bg-bloom-cream p-4 rounded-2xl border border-bloom-creamborder space-y-1">
+            <i class="ph ph-tag text-bloom-coral text-lg"></i>
+            <h5 class="text-xs font-bold text-bloom-brown">Member-Only Pricing</h5>
+            <p class="text-[11px] text-bloom-brownlight">Potongan harga tetap 10% untuk seluruh hair &amp; nail services.</p>
+          </div>
+          <div class="bg-bloom-cream p-4 rounded-2xl border border-bloom-creamborder space-y-1">
+            <i class="ph ph-cake text-bloom-coral text-lg"></i>
+            <h5 class="text-xs font-bold text-bloom-brown">Birthday Treat</h5>
+            <p class="text-[11px] text-bloom-brownlight">Complimentary hair spa treatment di bulan ulang tahunmu.</p>
+          </div>
+          <div class="bg-bloom-cream p-4 rounded-2xl border border-bloom-creamborder space-y-1">
+            <i class="ph ph-clock text-bloom-coral text-lg"></i>
+            <h5 class="text-xs font-bold text-bloom-brown">Priority Booking</h5>
+            <p class="text-[11px] text-bloom-brownlight">Kemudahan reserve slot weekend favorit tanpa antre panjang.</p>
+          </div>
+          <div class="bg-bloom-cream p-4 rounded-2xl border border-bloom-creamborder space-y-1">
+            <i class="ph ph-gift text-bloom-coral text-lg"></i>
+            <h5 class="text-xs font-bold text-bloom-brown">Monthly Reward</h5>
+            <p class="text-[11px] text-bloom-brownlight">Kupon produk boutique &amp; sample tester gratis setiap kedatangan.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 17. TESTIMONIAL — "THEY LEFT GLOWING" -->
+  <section class="py-16 md:py-24 border-b border-bloom-creamborder bg-bloom-peach/20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-8 text-center">
+      
+      <span class="text-xs uppercase tracking-[0.25em] text-bloom-coral font-bold block mb-2">
+        LOVE LETTERS FROM GUESTS
+      </span>
+      <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-bloom-brown mb-2">
+        THEY LEFT GLOWING.
+      </h2>
+      <div class="flex items-center justify-center gap-1.5 text-bloom-coral mb-8 text-sm">
+        <i class="ph ph-star-fill"></i>
+        <i class="ph ph-star-fill"></i>
+        <i class="ph ph-star-fill"></i>
+        <i class="ph ph-star-fill"></i>
+        <i class="ph ph-star-fill"></i>
+        <span class="text-xs font-bold text-bloom-brown ml-1">4.9 / 5.0 (500+ Happy Guests)</span>
+      </div>
+
+      <!-- Testimonial Carousel -->
+      <div class="bg-bloom-cream rounded-3xl p-8 sm:p-12 border border-bloom-creamborder shadow-xs relative">
+        <p id="testi-text" class="font-display text-lg sm:text-2xl text-bloom-brown leading-relaxed transition-opacity duration-300">
+          "Tempatnya cozy banget, staff ramah dan hasil treatment sesuai yang saya mau. Gak ada bau kimia yang menyengat sama sekali."
+        </p>
+        <p id="testi-author" class="text-xs uppercase font-bold tracking-widest text-bloom-coral mt-4 transition-opacity duration-300">
+          — CINDY, SENOPATI
+        </p>
+
+        <!-- Navigation buttons -->
+        <div class="flex items-center justify-center gap-3 mt-8">
+          <button onclick="prevTesti()" class="w-9 h-9 rounded-full bg-bloom-peach border border-bloom-creamborder text-bloom-brown hover:bg-bloom-coral hover:text-bloom-cream transition flex items-center justify-center">
+            <i class="ph ph-caret-left font-bold"></i>
+          </button>
+          <div class="flex items-center gap-1.5" id="testi-indicators">
+            <span class="w-2 h-2 rounded-full bg-bloom-coral"></span>
+            <span class="w-2 h-2 rounded-full bg-bloom-creamborder"></span>
+            <span class="w-2 h-2 rounded-full bg-bloom-creamborder"></span>
+          </div>
+          <button onclick="nextTesti()" class="w-9 h-9 rounded-full bg-bloom-peach border border-bloom-creamborder text-bloom-brown hover:bg-bloom-coral hover:text-bloom-cream transition flex items-center justify-center">
+            <i class="ph ph-caret-right font-bold"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 18. BEAUTY JOURNAL — "THE BLOOM EDIT" -->
+  <section class="py-16 md:py-24 border-b border-bloom-creamborder">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+        <div>
+          <span class="text-xs uppercase tracking-[0.25em] text-bloom-coral font-bold block mb-2">
+            BEAUTY NOTES &amp; SELF-CARE TIPS
+          </span>
+          <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-bloom-brown">
+            THE BLOOM EDIT
+          </h2>
+        </div>
+        <a href="#services" class="text-xs font-bold uppercase tracking-wider text-bloom-coral hover:text-bloom-brown transition flex items-center gap-1 mt-3 md:mt-0">
+          READ ALL STORIES &rarr;
+        </a>
+      </div>
+
+      <!-- Magazine Articles Layout -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Article 1 -->
+        <article class="bg-bloom-cream rounded-2xl overflow-hidden border border-bloom-creamborder group hover:shadow-sm transition">
+          <div class="aspect-[16/10] overflow-hidden bg-bloom-peach">
+            <img src="https://images.unsplash.com/photo-1512290900672-1f55b9a89668?auto=format&fit=crop&w=600&q=80" alt="Facial Routine" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          </div>
+          <div class="p-5 space-y-2">
+            <span class="text-[10px] uppercase tracking-widest text-bloom-coral font-bold">Skin Wisdom</span>
+            <h4 class="font-display text-lg text-bloom-brown group-hover:text-bloom-coral transition leading-snug">
+              How often should you actually get a facial?
+            </h4>
+            <p class="text-xs text-bloom-brownlight leading-relaxed">
+              Panduan siklus regenerasi sel kulit 28 hari dan cara menentukan jadwal facial yang tepat untuk jenis kulitmu.
+            </p>
+          </div>
+        </article>
+
+        <!-- Article 2 -->
+        <article class="bg-bloom-cream rounded-2xl overflow-hidden border border-bloom-creamborder group hover:shadow-sm transition">
+          <div class="aspect-[16/10] overflow-hidden bg-bloom-peach">
+            <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=600&q=80" alt="Healthy Hair" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          </div>
+          <div class="p-5 space-y-2">
+            <span class="text-[10px] uppercase tracking-widest text-bloom-coral font-bold">Hair Guide</span>
+            <h4 class="font-display text-lg text-bloom-brown group-hover:text-bloom-coral transition leading-snug">
+              5 easy ways to keep your hair healthy in Jakarta humidity
+            </h4>
+            <p class="text-xs text-bloom-brownlight leading-relaxed">
+              Trik sederhana melindungi rambut dari lepek akibat cuaca tropis dan polusi harian kota.
+            </p>
+          </div>
+        </article>
+
+        <!-- Article 3 -->
+        <article class="bg-bloom-cream rounded-2xl overflow-hidden border border-bloom-creamborder group hover:shadow-sm transition">
+          <div class="aspect-[16/10] overflow-hidden bg-bloom-peach">
+            <img src="https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&w=600&q=80" alt="Nail Care" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          </div>
+          <div class="p-5 space-y-2">
+            <span class="text-[10px] uppercase tracking-widest text-bloom-coral font-bold">Nails 101</span>
+            <h4 class="font-display text-lg text-bloom-brown group-hover:text-bloom-coral transition leading-snug">
+              Nail care tips between your salon appointments
+            </h4>
+            <p class="text-xs text-bloom-brownlight leading-relaxed">
+              Cara menjaga kilau kutikula dan kuku tetap sehat tanpa merusak lapisan gel polish.
+            </p>
+          </div>
+        </article>
+
+        <!-- Article 4 -->
+        <article class="bg-bloom-cream rounded-2xl overflow-hidden border border-bloom-creamborder group hover:shadow-sm transition">
+          <div class="aspect-[16/10] overflow-hidden bg-bloom-peach">
+            <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=600&q=80" alt="Beauty Rituals" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          </div>
+          <div class="p-5 space-y-2">
+            <span class="text-[10px] uppercase tracking-widest text-bloom-coral font-bold">Daily Self-Care</span>
+            <h4 class="font-display text-lg text-bloom-brown group-hover:text-bloom-coral transition leading-snug">
+              Your simple everyday morning beauty routine
+            </h4>
+            <p class="text-xs text-bloom-brownlight leading-relaxed">
+              Langkah 10 menit untuk tampil segar natural tanpa harus menghabiskan waktu berdandan berjam-jam.
+            </p>
+          </div>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 19. SOCIAL LOOKBOOK — "SEE YOU ON THE GRAM" -->
+  <section class="py-16 md:py-24 bg-bloom-peach/30 border-b border-bloom-creamborder">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
+      
+      <div class="text-center max-w-lg mx-auto mb-10">
+        <span class="text-xs uppercase tracking-[0.25em] text-bloom-coral font-bold block mb-2">
+          JOIN OUR COMMUNITY
+        </span>
+        <h2 class="font-display text-3xl sm:text-4xl text-bloom-brown">
+          SEE YOU ON THE GRAM
+        </h2>
+        <a href="https://instagram.com" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-semibold text-bloom-brown hover:text-bloom-coral mt-2 tracking-wider">
+          <i class="ph ph-instagram-logo text-base"></i> @BLUSHANDBLOOM
+        </a>
+      </div>
+
+      <!-- Asymmetrical Masonry-style Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+        
+        <div class="aspect-square rounded-xl overflow-hidden bg-bloom-peach group relative">
+          <img src="https://images.unsplash.com/photo-1560869713-7d0a29430803?auto=format&fit=crop&w=400&q=80" alt="Hairstyle photo" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+          <div class="absolute inset-0 bg-bloom-brown/30 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-bloom-cream text-lg">
+            <i class="ph ph-instagram-logo"></i>
+          </div>
+        </div>
+
+        <div class="aspect-square rounded-xl overflow-hidden bg-bloom-peach group relative">
+          <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=400&q=80" alt="Nails photo" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+          <div class="absolute inset-0 bg-bloom-brown/30 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-bloom-cream text-lg">
+            <i class="ph ph-instagram-logo"></i>
+          </div>
+        </div>
+
+        <div class="aspect-square rounded-xl overflow-hidden bg-bloom-peach group relative">
+          <img src="https://images.unsplash.com/photo-1512290900672-1f55b9a89668?auto=format&fit=crop&w=400&q=80" alt="Facial glow" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+          <div class="absolute inset-0 bg-bloom-brown/30 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-bloom-cream text-lg">
+            <i class="ph ph-instagram-logo"></i>
+          </div>
+        </div>
+
+        <div class="aspect-square rounded-xl overflow-hidden bg-bloom-peach group relative">
+          <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=400&q=80" alt="Salon interior" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+          <div class="absolute inset-0 bg-bloom-brown/30 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-bloom-cream text-lg">
+            <i class="ph ph-instagram-logo"></i>
+          </div>
+        </div>
+
+        <div class="aspect-square rounded-xl overflow-hidden bg-bloom-peach group relative">
+          <img src="https://images.unsplash.com/photo-1608248597359-007d4b4b2149?auto=format&fit=crop&w=400&q=80" alt="Products on shelf" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+          <div class="absolute inset-0 bg-bloom-brown/30 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-bloom-cream text-lg">
+            <i class="ph ph-instagram-logo"></i>
+          </div>
+        </div>
+
+        <div class="aspect-square rounded-xl overflow-hidden bg-bloom-peach group relative">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Customer moments" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+          <div class="absolute inset-0 bg-bloom-brown/30 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-bloom-cream text-lg">
+            <i class="ph ph-instagram-logo"></i>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 20. BOOKING: "READY FOR YOUR BEAUTY DAY?" -->
+  <section id="booking-section" class="py-16 md:py-24 border-b border-bloom-creamborder">
+    <div class="max-w-4xl mx-auto px-4 sm:px-8">
+      
+      <div class="text-center max-w-md mx-auto mb-12">
+        <span class="text-xs uppercase tracking-[0.25em] text-bloom-coral font-bold block mb-2">
+          EASY APPOINTMENT
+        </span>
+        <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-bloom-brown">
+          READY FOR YOUR BEAUTY DAY?
+        </h2>
+        <p class="text-xs sm:text-sm text-bloom-brownsoft mt-2">
+          Pilih layanan dan waktu yang paling pas. Tim reservasi kami akan langsung mengonfirmasi jadwalmu via WhatsApp.
+        </p>
+      </div>
+
+      <!-- Clean Editorial Booking Card -->
+      <div class="bg-bloom-cream rounded-3xl p-6 sm:p-10 border border-bloom-creamborder shadow-sm">
+        <form id="booking-form" onsubmit="handleFormSubmit(event)" class="space-y-6">
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Service Selector -->
+            <div>
+              <label class="block text-xs uppercase tracking-wider font-bold text-bloom-brown mb-2">
+                WHAT DO YOU WANT? *
+              </label>
+              <select id="book-service" required class="w-full bg-bloom-peach/50 border border-bloom-creamborder rounded-xl px-4 py-3.5 text-xs text-bloom-brown focus:outline-none focus:border-bloom-coral">
+                <option value="">Select treatment service</option>
+                <optgroup label="Hair Care">
+                  <option value="Women's Cut (Mulai Rp 75K)">Women's Cut &mdash; Mulai Rp 75K</option>
+                  <option value="Signature Hair Spa (Rp 100K)">Signature Hair Spa &mdash; Rp 100K</option>
+                  <option value="Hair Color & Gloss (Mulai Rp 250K)">Hair Color &amp; Gloss &mdash; Mulai Rp 250K</option>
+                  <option value="Hair Keratin Treatment (Mulai Rp 150K)">Hair Keratin Treatment &mdash; Mulai Rp 150K</option>
+                </optgroup>
+                <optgroup label="Skin Care">
+                  <option value="Glow Facial (Rp 175K)">Glow Facial &mdash; Rp 175K</option>
+                  <option value="Signature Facial (Rp 150K)">Signature Facial &mdash; Rp 150K</option>
+                  <option value="Hydration Facial (Rp 175K)">Hydration Facial &mdash; Rp 175K</option>
+                  <option value="Acne Calming Care (Rp 180K)">Acne Calming Care &mdash; Rp 180K</option>
+                </optgroup>
+                <optgroup label="Nails & Lash">
+                  <option value="Gel Polish Finish (Rp 125K)">Gel Polish Finish &mdash; Rp 125K</option>
+                  <option value="Classic Manicure (Rp 75K)">Classic Manicure &mdash; Rp 75K</option>
+                  <option value="Pedicure Spa (Rp 85K)">Pedicure Spa &mdash; Rp 85K</option>
+                  <option value="Keratin Lash Lift (Rp 150K)">Keratin Lash Lift &mdash; Rp 150K</option>
+                  <option value="Brow Shaping & Tint (Rp 75K)">Brow Shaping &amp; Tint &mdash; Rp 75K</option>
+                </optgroup>
+                <optgroup label="Curated Routines">
+                  <option value="Quick Refresh (30-45 min)">Quick Refresh (30-45 min)</option>
+                  <option value="Glow Day (60-90 min)">Glow Day (60-90 min)</option>
+                  <option value="Full Beauty Day (2-3 hrs)">Full Beauty Day (2-3 hrs)</option>
+                </optgroup>
+              </select>
+            </div>
+
+            <!-- Specialist Selector -->
+            <div>
+              <label class="block text-xs uppercase tracking-wider font-bold text-bloom-brown mb-2">
+                PREFERRED SPECIALIST
+              </label>
+              <select id="book-specialist" class="w-full bg-bloom-peach/50 border border-bloom-creamborder rounded-xl px-4 py-3.5 text-xs text-bloom-brown focus:outline-none focus:border-bloom-coral">
+                <option value="Siapa saja yang available (First Available)">Siapa saja yang available</option>
+                <option value="Saskia (Hair Stylist)">Saskia &mdash; Hair Stylist</option>
+                <option value="Naya (Beauty Therapist)">Naya &mdash; Beauty Therapist</option>
+                <option value="Putri (Nail Artist)">Putri &mdash; Nail Artist</option>
+                <option value="Alya (Lash & Brow Artist)">Alya &mdash; Lash &amp; Brow Artist</option>
+              </select>
+            </div>
+
+            <!-- Date Picker -->
+            <div>
+              <label class="block text-xs uppercase tracking-wider font-bold text-bloom-brown mb-2">
+                WHEN? (SELECT DATE) *
+              </label>
+              <input type="date" id="book-date" required class="w-full bg-bloom-peach/50 border border-bloom-creamborder rounded-xl px-4 py-3.5 text-xs text-bloom-brown focus:outline-none focus:border-bloom-coral" />
+            </div>
+
+            <!-- Time Slot Picker -->
+            <div>
+              <label class="block text-xs uppercase tracking-wider font-bold text-bloom-brown mb-2">
+                TIME (SELECT TIME) *
+              </label>
+              <select id="book-time" required class="w-full bg-bloom-peach/50 border border-bloom-creamborder rounded-xl px-4 py-3.5 text-xs text-bloom-brown focus:outline-none focus:border-bloom-coral">
+                <option value="">Pilih jam kedatangan</option>
+                <option value="09:00 WIB">09:00 WIB (Morning slot)</option>
+                <option value="10:30 WIB">10:30 WIB</option>
+                <option value="12:00 WIB">12:00 WIB</option>
+                <option value="13:30 WIB">13:30 WIB</option>
+                <option value="15:00 WIB">15:00 WIB (Afternoon)</option>
+                <option value="16:30 WIB">16:30 WIB</option>
+                <option value="18:00 WIB">18:00 WIB (After office)</option>
+                <option value="19:30 WIB">19:30 WIB (Last call)</option>
+              </select>
+            </div>
+
+            <!-- Full Name -->
+            <div>
+              <label class="block text-xs uppercase tracking-wider font-bold text-bloom-brown mb-2">
+                YOUR NAME *
+              </label>
+              <input type="text" id="book-name" required placeholder="Nama lengkap Anda" class="w-full bg-bloom-peach/50 border border-bloom-creamborder rounded-xl px-4 py-3.5 text-xs text-bloom-brown focus:outline-none focus:border-bloom-coral" />
+            </div>
+
+            <!-- WhatsApp Number -->
+            <div>
+              <label class="block text-xs uppercase tracking-wider font-bold text-bloom-brown mb-2">
+                WHATSAPP NUMBER *
+              </label>
+              <input type="tel" id="book-wa" required placeholder="Contoh: 081234567890" class="w-full bg-bloom-peach/50 border border-bloom-creamborder rounded-xl px-4 py-3.5 text-xs text-bloom-brown focus:outline-none focus:border-bloom-coral" />
+            </div>
+          </div>
+
+          <!-- Notes -->
+          <div>
+            <label class="block text-xs uppercase tracking-wider font-bold text-bloom-brown mb-2">
+              CATATAN KHUSUS (OPTIONAL)
+            </label>
+            <textarea id="book-notes" rows="2" placeholder="Contoh: Kulit sensitif, ingin pewarna cokelat dingin, atau permintaan lainnya" class="w-full bg-bloom-peach/50 border border-bloom-creamborder rounded-xl px-4 py-3 text-xs text-bloom-brown focus:outline-none focus:border-bloom-coral"></textarea>
+          </div>
+
+          <!-- Submission CTAs -->
+          <div class="pt-4 flex flex-col sm:flex-row items-center gap-4">
+            <button type="submit" class="w-full sm:w-auto grow bg-bloom-coral hover:bg-bloom-coralhover text-bloom-cream py-4 px-8 rounded-full font-semibold text-xs uppercase tracking-widest transition-all shadow-sm">
+              BOOK MY APPOINTMENT
+            </button>
+            <a id="booking-direct-wa" href="https://wa.me/6281234567890?text=Halo%20Blush%20%26%20Bloom%2C%20mau%20tanya-tanya%20slot%20treatment" target="_blank" class="w-full sm:w-auto inline-flex justify-center items-center gap-2 border border-bloom-brown/30 hover:border-bloom-brown text-bloom-brown py-4 px-6 rounded-full font-semibold text-xs uppercase tracking-widest transition">
+              <i class="ph ph-whatsapp-logo text-base text-emerald-600"></i>
+              CHAT VIA WHATSAPP
+            </a>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 21. LOCATION: "COME FIND US" -->
+  <section id="location" class="py-16 md:py-24 border-b border-bloom-creamborder">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        
+        <!-- Details & Operating Hours -->
+        <div class="lg:col-span-5 space-y-6">
+          <span class="text-xs uppercase tracking-[0.25em] text-bloom-coral font-bold">
+            VISIT OUR LOUNGE
+          </span>
+          <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-bloom-brown">
+            COME FIND US
+          </h2>
+
+          <div class="space-y-4 pt-2">
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 rounded-full bg-bloom-peach flex items-center justify-center text-bloom-coral shrink-0 mt-0.5">
+                <i class="ph ph-map-pin text-base"></i>
+              </div>
+              <div>
+                <p class="text-xs uppercase tracking-wider font-bold text-bloom-brown">BLUSH &amp; BLOOM BEAUTY LOUNGE</p>
+                <p class="text-xs sm:text-sm text-bloom-brownsoft mt-0.5">
+                  Jl. Senopati No. 88, Kebayoran Baru, Jakarta Selatan, 12190
+                </p>
+                <p class="text-[11px] text-bloom-brownlight mt-0.5">(Tersedia valet parking &amp; area parkir khusus guest)</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 rounded-full bg-bloom-peach flex items-center justify-center text-bloom-coral shrink-0 mt-0.5">
+                <i class="ph ph-clock text-base"></i>
+              </div>
+              <div>
+                <p class="text-xs uppercase tracking-wider font-bold text-bloom-brown">OPEN DAILY</p>
+                <p class="text-xs sm:text-sm text-bloom-brownsoft mt-0.5" id="site-loc-hours">Senin &mdash; Minggu: 09.00 &mdash; 21.00 WIB</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 rounded-full bg-bloom-peach flex items-center justify-center text-bloom-coral shrink-0 mt-0.5">
+                <i class="ph ph-phone-call text-base"></i>
+              </div>
+              <div>
+                <p class="text-xs uppercase tracking-wider font-bold text-bloom-brown">DIRECT CONTACT</p>
+                <p class="text-xs sm:text-sm text-bloom-brownsoft mt-0.5" id="site-loc-phone">+62 812-3456-7890 (WhatsApp Direct)</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Social & Map Links -->
+          <div class="pt-4 flex items-center gap-3">
+            <a href="https://maps.google.com" target="_blank" class="px-4 py-2 rounded-full bg-bloom-brown text-bloom-cream text-xs font-semibold uppercase tracking-wider hover:bg-bloom-coral transition inline-flex items-center gap-1.5">
+              <i class="ph ph-compass"></i> Open Google Maps
+            </a>
+            <a href="https://instagram.com" target="_blank" class="w-9 h-9 rounded-full bg-bloom-peach border border-bloom-creamborder flex items-center justify-center text-bloom-brown hover:text-bloom-coral transition" aria-label="Instagram">
+              <i class="ph ph-instagram-logo"></i>
+            </a>
+            <a href="https://tiktok.com" target="_blank" class="w-9 h-9 rounded-full bg-bloom-peach border border-bloom-creamborder flex items-center justify-center text-bloom-brown hover:text-bloom-coral transition" aria-label="TikTok">
+              <i class="ph ph-tiktok-logo"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Minimalist Stylized Map Card -->
+        <div class="lg:col-span-7">
+          <div class="w-full aspect-[16/10] rounded-3xl overflow-hidden border border-bloom-creamborder bg-bloom-peach/80 relative flex items-center justify-center shadow-xs">
+            <div class="absolute inset-0 opacity-40 mix-blend-multiply bg-[radial-gradient(#DEC8B5_1px,transparent_1px)] [background-size:16px_16px]"></div>
+            
+            <div class="relative text-center p-6 space-y-3 z-10 max-w-sm">
+              <div class="w-12 h-12 rounded-full bg-bloom-coral text-bloom-cream flex items-center justify-center mx-auto shadow-md">
+                <i class="ph ph-map-pin text-xl"></i>
+              </div>
+              <h4 class="font-display text-2xl text-bloom-brown">SENOPATI &middot; JAKARTA SELATAN</h4>
+              <p class="text-xs text-bloom-brownsoft">
+                Terletak di kawasan Senopati yang asri, dekat dengan deretan coffee shop favoritmu. Sempurna untuk weekend self-care.
+              </p>
+              <a href="https://maps.google.com" target="_blank" class="inline-block text-xs font-bold text-bloom-coral hover:underline uppercase tracking-wider pt-2">
+                Klik untuk Petunjuk Arah &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 22. FOOTER (DARK BROWN BACKGROUND) -->
+  <footer class="bg-bloom-brown text-bloom-cream pt-16 pb-28 md:pb-16 border-t border-bloom-brownsoft">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
+      
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-bloom-brownsoft/60">
+        
+        <!-- Left: Wordmark & Tagline -->
+        <div class="md:col-span-5 space-y-4">
+          <h2 class="font-display text-3xl sm:text-4xl text-bloom-cream tracking-tight">
+            BLUSH &amp; BLOOM
+          </h2>
+          <p class="text-[10px] tracking-[0.35em] text-bloom-peach/70 uppercase">
+            BEAUTY LOUNGE
+          </p>
+          <p class="font-display text-lg italic text-bloom-coral mt-4">
+            "Feel good in your everyday beauty."
+          </p>
+          <p class="text-xs text-bloom-peach/80 max-w-sm leading-relaxed">
+            Everyday beauty lounge di Jakarta untuk perawatan rambut, kulit, dan kuku dengan suasana santai, hangat, dan menyenangkan.
+          </p>
+        </div>
+
+        <!-- Center: Editorial Navigation -->
+        <div class="md:col-span-4 grid grid-cols-2 gap-4">
+          <div>
+            <h4 class="text-xs uppercase tracking-widest text-bloom-coral font-bold mb-4">EXPLORE</h4>
+            <ul class="space-y-2.5 text-xs text-bloom-cream/80">
+              <li><a href="#hero" class="hover:text-bloom-coral transition">Home</a></li>
+              <li><a href="#services" class="hover:text-bloom-coral transition">Beauty Menu</a></li>
+              <li><a href="#routine" class="hover:text-bloom-coral transition">Routine Builder</a></li>
+              <li><a href="#products-section" class="hover:text-bloom-coral transition">Boutique Products</a></li>
+              <li><a href="#booking-section" class="hover:text-bloom-coral transition">Reservation</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-xs uppercase tracking-widest text-bloom-coral font-bold mb-4">ABOUT</h4>
+            <ul class="space-y-2.5 text-xs text-bloom-cream/80">
+              <li><a href="#about" class="hover:text-bloom-coral transition">Our Story</a></li>
+              <li><a href="#lounge-section" class="hover:text-bloom-coral transition">The Lounge</a></li>
+              <li><a href="#location" class="hover:text-bloom-coral transition">Find Us</a></li>
+              <li><a href="#booking-section" class="hover:text-bloom-coral transition">Book Appointment</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Right: Social & Open Hours -->
+        <div class="md:col-span-3 space-y-4">
+          <h4 class="text-xs uppercase tracking-widest text-bloom-coral font-bold mb-2">LOUNGE HOURS</h4>
+          <p class="text-xs text-bloom-cream/90" id="site-footer-hours">OPEN DAILY<br>09.00 — 21.00 WIB</p>
+          
+          <h4 class="text-xs uppercase tracking-widest text-bloom-coral font-bold pt-2">CONNECT</h4>
+          <div class="flex items-center gap-3">
+            <a href="https://instagram.com" target="_blank" class="w-8 h-8 rounded-full bg-bloom-brownsoft text-bloom-cream hover:bg-bloom-coral flex items-center justify-center transition text-sm" aria-label="Instagram">
+              <i class="ph ph-instagram-logo"></i>
+            </a>
+            <a href="https://tiktok.com" target="_blank" class="w-8 h-8 rounded-full bg-bloom-brownsoft text-bloom-cream hover:bg-bloom-coral flex items-center justify-center transition text-sm" aria-label="TikTok">
+              <i class="ph ph-tiktok-logo"></i>
+            </a>
+            <a id="footer-wa-link" href="https://wa.me/6281234567890" target="_blank" class="w-8 h-8 rounded-full bg-bloom-brownsoft text-bloom-cream hover:bg-bloom-coral flex items-center justify-center transition text-sm" aria-label="WhatsApp">
+              <i class="ph ph-whatsapp-logo"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-bloom-peach/60">
+        <p>&copy; 2026 BLUSH &amp; BLOOM BEAUTY LOUNGE. ALL RIGHTS RESERVED.</p>
+        <div class="flex items-center gap-4">
+          <button onclick="handleAdminTrigger()" class="hover:text-bloom-coral transition underline underline-offset-4 flex items-center gap-1">
+            <i class="ph ph-lock-key"></i> Kelola Web / Admin Login
+          </button>
+          <span class="tracking-wider">SENOPATI &middot; JAKARTA SELATAN &middot; INDONESIA</span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- 23. MOBILE DOCKED NAVIGATION BAR (HOME | SERVICES | BOOK | ROUTINE | MENU) -->
+  <div class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-bloom-cream/95 backdrop-blur-md border-t border-bloom-creamborder py-2 px-3 shadow-lg">
+    <div class="flex items-center justify-around text-center">
+      
+      <a href="#hero" class="flex flex-col items-center py-1 text-bloom-brown hover:text-bloom-coral">
+        <i class="ph ph-house text-lg"></i>
+        <span class="text-[9px] uppercase tracking-wider font-semibold mt-0.5">Home</span>
+      </a>
+
+      <a href="#services" class="flex flex-col items-center py-1 text-bloom-brown hover:text-bloom-coral">
+        <i class="ph ph-sparkle text-lg"></i>
+        <span class="text-[9px] uppercase tracking-wider font-semibold mt-0.5">Services</span>
+      </a>
+
+      <!-- Main Prominent Center Button -->
+      <button onclick="openBookingModal()" class="flex flex-col items-center justify-center -mt-5 bg-bloom-coral hover:bg-bloom-coralhover text-bloom-cream w-12 h-12 rounded-full shadow-md transition transform active:scale-95 border-2 border-bloom-cream" aria-label="Book Now">
+        <i class="ph ph-calendar-plus text-xl"></i>
+      </button>
+
+      <a href="#routine" class="flex flex-col items-center py-1 text-bloom-brown hover:text-bloom-coral">
+        <i class="ph ph-book-open text-lg"></i>
+        <span class="text-[9px] uppercase tracking-wider font-semibold mt-0.5">Routine</span>
+      </a>
+
+      <button onclick="toggleMobileDrawer()" class="flex flex-col items-center py-1 text-bloom-brown hover:text-bloom-coral" aria-label="Menu Drawer">
+        <i class="ph ph-dots-nine text-lg"></i>
+        <span class="text-[9px] uppercase tracking-wider font-semibold mt-0.5">Menu</span>
+      </button>
+
+    </div>
+  </div>
+
+  <!-- BOOKING MODAL -->
+  <div id="booking-modal" class="fixed inset-0 z-50 bg-bloom-brown/60 backdrop-blur-xs hidden flex items-center justify-center p-4">
+    <div class="bg-bloom-cream rounded-3xl max-w-lg w-full max-h-[90vh] overflow-y-auto border border-bloom-creamborder shadow-2xl p-6 sm:p-8 relative">
+      
+      <button onclick="closeBookingModal()" class="absolute top-5 right-5 text-bloom-brown hover:text-bloom-coral p-1" aria-label="Close Booking">
+        <i class="ph ph-x text-2xl font-bold"></i>
+      </button>
+
+      <div class="text-center mb-6">
+        <span class="text-[10px] uppercase tracking-[0.25em] text-bloom-coral font-bold">RESERVATION DESK</span>
+        <h3 class="font-display text-2xl sm:text-3xl text-bloom-brown mt-1">Book Your Beauty Session</h3>
+        <p class="text-xs text-bloom-brownlight mt-1">Kami akan mengonfirmasi slot reservasi via WhatsApp</p>
+      </div>
+
+      <form onsubmit="handleModalSubmit(event)" class="space-y-4 text-left">
+        <div>
+          <label class="block text-[11px] font-bold uppercase tracking-wider text-bloom-brown mb-1">Service *</label>
+          <input type="text" id="modal-service" required placeholder="Contoh: Signature Hair Spa" class="w-full bg-bloom-peach/50 border border-bloom-creamborder rounded-xl px-3.5 py-2.5 text-xs text-bloom-brown focus:outline-none focus:border-bloom-coral" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-[11px] font-bold uppercase tracking-wider text-bloom-brown mb-1">Date *</label>
+            <input type="date" id="modal-date" required class="w-full bg-bloom-peach/50 border border-bloom-creamborder rounded-xl px-3 py-2.5 text-xs text-bloom-brown focus:outline-none focus:border-bloom-coral" />
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold uppercase tracking-wider text-bloom-brown mb-1">Time Slot *</label>
+            <select id="modal-time" required class="w-full bg-bloom-peach/50 border border-bloom-creamborder rounded-xl px-3 py-2.5 text-xs text-bloom-brown focus:outline-none focus:border-bloom-coral">
+              <option value="10:00 WIB">10:00 WIB</option>
+              <option value="12:00 WIB">12:00 WIB</option>
+              <option value="14:00 WIB">14:00 WIB</option>
+              <option value="16:00 WIB">16:00 WIB</option>
+              <option value="18:00 WIB">18:00 WIB</option>
+              <option value="19:30 WIB">19:30 WIB</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-bold uppercase tracking-wider text-bloom-brown mb-1">Your Full Name *</label>
+          <input type="text" id="modal-name" required placeholder="Nama Anda" class="w-full bg-bloom-peach/50 border border-bloom-creamborder rounded-xl px-3.5 py-2.5 text-xs text-bloom-brown focus:outline-none focus:border-bloom-coral" />
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-bold uppercase tracking-wider text-bloom-brown mb-1">WhatsApp Number *</label>
+          <input type="tel" id="modal-wa" required placeholder="0812xxxxxxx" class="w-full bg-bloom-peach/50 border border-bloom-creamborder rounded-xl px-3.5 py-2.5 text-xs text-bloom-brown focus:outline-none focus:border-bloom-coral" />
+        </div>
+
+        <button type="submit" class="w-full bg-bloom-coral hover:bg-bloom-coralhover text-bloom-cream py-3.5 rounded-full font-semibold text-xs uppercase tracking-widest transition shadow-sm mt-2">
+          Confirm &amp; Send to WhatsApp &rarr;
+        </button>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- Mobile Drawer Menu Modal -->
+  <div id="mobile-drawer" class="fixed inset-0 z-50 bg-bloom-brown/50 backdrop-blur-xs hidden">
+    <div class="bg-bloom-cream w-4/5 max-w-xs h-full p-6 flex flex-col justify-between border-r border-bloom-creamborder shadow-xl">
+      <div class="space-y-6">
+        <div class="flex items-center justify-between border-b border-bloom-creamborder pb-4">
+          <div>
+            <h3 class="font-display text-xl text-bloom-brown">BLUSH &amp; BLOOM</h3>
+            <p class="text-[9px] uppercase tracking-widest text-bloom-brownlight">BEAUTY LOUNGE</p>
+          </div>
+          <button onclick="toggleMobileDrawer()" class="text-bloom-brown p-1" aria-label="Close Drawer">
+            <i class="ph ph-x text-2xl"></i>
+          </button>
+        </div>
+
+        <nav class="space-y-4 text-xs font-bold uppercase tracking-widest text-bloom-brown">
+          <a href="#hero" onclick="toggleMobileDrawer()" class="block py-1 hover:text-bloom-coral">Home</a>
+          <a href="#services" onclick="toggleMobileDrawer()" class="block py-1 hover:text-bloom-coral">Beauty Menu</a>
+          <a href="#routine" onclick="toggleMobileDrawer()" class="block py-1 hover:text-bloom-coral">Routine Planner</a>
+          <a href="#products-section" onclick="toggleMobileDrawer()" class="block py-1 hover:text-bloom-coral">Product Shelf</a>
+          <a href="#about" onclick="toggleMobileDrawer()" class="block py-1 hover:text-bloom-coral">About Lounge</a>
+          <a href="#location" onclick="toggleMobileDrawer()" class="block py-1 hover:text-bloom-coral">Visit Us</a>
+        </nav>
+      </div>
+
+      <div class="pt-6 border-t border-bloom-creamborder space-y-3">
+        <p class="text-[10px] text-bloom-brownlight uppercase tracking-wider">Open Daily 09.00 — 21.00</p>
+        <button onclick="toggleMobileDrawer(); openBookingModal();" class="w-full bg-bloom-coral text-bloom-cream py-3 rounded-full text-xs font-bold uppercase tracking-wider">
+          Book Appointment
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- In-App Notification Toast -->
+  <div id="bloom-toast" class="fixed top-5 right-5 z-50 bg-bloom-brown text-bloom-cream text-xs px-5 py-3.5 rounded-2xl shadow-xl border border-bloom-coral/40 transform translate-y-[-150%] transition-transform duration-300 flex items-center gap-3">
+    <i class="ph ph-check-circle text-bloom-coral text-lg"></i>
+    <span id="toast-message">Reservasi berhasil disiapkan!</span>
+  </div>
+
+  <!-- FLOATING ADMIN STATUS BADGE -->
+  <div id="admin-floating-bar" class="fixed bottom-16 md:bottom-6 right-6 z-40 hidden flex items-center gap-2 bg-bloom-brown/95 text-bloom-cream px-4 py-2.5 rounded-full shadow-2xl border border-bloom-coral/50 backdrop-blur-md">
+    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+    <span class="text-xs font-semibold tracking-wider">Mode Admin: <span class="text-bloom-peach font-mono">kelolaweb2026</span></span>
+    <button onclick="openAdminPanel()" class="ml-2 bg-bloom-coral hover:bg-bloom-coralhover text-bloom-cream px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider transition">
+      Dashboard
+    </button>
+    <button onclick="logoutAdmin()" title="Logout" class="text-bloom-peach hover:text-bloom-coral p-1 transition" aria-label="Logout Admin">
+      <i class="ph ph-sign-out text-base"></i>
+    </button>
+  </div>
+
+  <!-- ADMIN LOGIN MODAL -->
+  <div id="admin-login-modal" class="fixed inset-0 z-50 bg-bloom-brown/70 backdrop-blur-xs hidden flex items-center justify-center p-4">
+    <div class="bg-bloom-cream rounded-3xl max-w-md w-full border border-bloom-creamborder shadow-2xl p-6 sm:p-8 relative">
+      <button onclick="closeAdminLoginModal()" class="absolute top-5 right-5 text-bloom-brown hover:text-bloom-coral p-1" aria-label="Close Login">
+        <i class="ph ph-x text-2xl font-bold"></i>
+      </button>
+
+      <div class="text-center mb-6">
+        <div class="w-12 h-12 rounded-full bg-bloom-peach border border-bloom-creamborder flex items-center justify-center mx-auto text-bloom-coral mb-3">
+          <i class="ph ph-shield-check text-2xl"></i>
+        </div>
+        <span class="text-[10px] uppercase tracking-[0.25em] text-bloom-coral font-bold">SISTEM KELOLA WEB</span>
+        <h3 class="font-display text-2xl text-bloom-brown mt-1">Admin Panel Login</h3>
+        <p class="text-xs text-bloom-brownlight mt-1">Masuk untuk mengedit katalog produk, gambar banner, harga, tombol, dan konten situs.</p>
+      </div>
+
+      <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+        <div>
+          <label class="block text-[11px] font-bold uppercase tracking-wider text-bloom-brown mb-1.5">Username</label>
+          <div class="relative">
+            <input type="text" id="admin-user-input" required placeholder="kelolaweb2026" class="w-full bg-bloom-peach/50 border border-bloom-creamborder rounded-xl px-4 py-3 text-xs text-bloom-brown focus:outline-none focus:border-bloom-coral" />
+            <i class="ph ph-user absolute right-3.5 top-1/2 -translate-y-1/2 text-bloom-brownlight text-base"></i>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-bold uppercase tracking-wider text-bloom-brown mb-1.5">Password</label>
+          <div class="relative">
+            <input type="password" id="admin-pass-input" required placeholder="••••••••••••" class="w-full bg-bloom-peach/50 border border-bloom-creamborder rounded-xl px-4 py-3 text-xs text-bloom-brown focus:outline-none focus:border-bloom-coral" />
+            <i class="ph ph-lock-key absolute right-3.5 top-1/2 -translate-y-1/2 text-bloom-brownlight text-base"></i>
+          </div>
+        </div>
+
+        <div id="login-error-msg" class="hidden text-xs text-red-600 bg-red-50 p-2.5 rounded-lg border border-red-200">
+          Username atau password salah. Silakan periksa kembali.
+        </div>
+
+        <button type="submit" class="w-full bg-bloom-coral hover:bg-bloom-coralhover text-bloom-cream py-3.5 rounded-full font-semibold text-xs uppercase tracking-widest transition shadow-sm mt-2 flex items-center justify-center gap-2">
+          <span>Masuk ke Dashboard</span>
+          <i class="ph ph-arrow-right font-bold"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ADMIN COMPREHENSIVE DASHBOARD MODAL -->
+  <div id="admin-dashboard-modal" class="fixed inset-0 z-50 bg-bloom-brown/70 backdrop-blur-xs hidden flex items-center justify-center p-3 sm:p-6">
+    <div class="bg-bloom-cream rounded-3xl max-w-4xl w-full h-[90vh] max-h-[850px] border border-bloom-creamborder shadow-2xl flex flex-col overflow-hidden relative">
+      
+      <!-- Top Header -->
+      <div class="p-5 sm:p-6 border-b border-bloom-creamborder flex items-center justify-between bg-bloom-peach/60">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-bloom-coral text-bloom-cream flex items-center justify-center">
+            <i class="ph ph-sparkle text-xl"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h3 class="font-display text-xl sm:text-2xl text-bloom-brown">Blush &amp; Bloom Control Center</h3>
+              <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold uppercase tracking-wider">Realtime Synced</span>
+            </div>
+            <p class="text-xs text-bloom-brownlight">Edit produk, promo, gambar banner, harga &amp; teks web secara langsung.</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="closeAdminDashboard()" class="w-9 h-9 rounded-full bg-bloom-cream border border-bloom-creamborder hover:bg-bloom-peach text-bloom-brown flex items-center justify-center transition" aria-label="Close Dashboard">
+            <i class="ph ph-x text-lg"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs inside Dashboard -->
+      <div class="flex border-b border-bloom-creamborder px-6 bg-bloom-cream gap-2 overflow-x-auto no-scrollbar pt-2">
+        <button onclick="switchAdminTab('products')" id="admin-tab-products" class="admin-tab-item pb-3 px-3 text-xs font-bold uppercase tracking-wider text-bloom-coral border-b-2 border-bloom-coral transition flex items-center gap-1.5 whitespace-nowrap">
+          <i class="ph ph-bag text-base"></i> Katalog Produk (<span id="admin-product-count">6</span>)
+        </button>
+        <button onclick="switchAdminTab('content')" id="admin-tab-content" class="admin-tab-item pb-3 px-3 text-xs font-semibold uppercase tracking-wider text-bloom-brownlight hover:text-bloom-coral transition flex items-center gap-1.5 whitespace-nowrap">
+          <i class="ph ph-textbox text-base"></i> Teks &amp; Headline Web
+        </button>
+        <button onclick="switchAdminTab('images')" id="admin-tab-images" class="admin-tab-item pb-3 px-3 text-xs font-semibold uppercase tracking-wider text-bloom-brownlight hover:text-bloom-coral transition flex items-center gap-1.5 whitespace-nowrap">
+          <i class="ph ph-image text-base"></i> Banner &amp; Foto
+        </button>
+        <button onclick="switchAdminTab('buttons')" id="admin-tab-buttons" class="admin-tab-item pb-3 px-3 text-xs font-semibold uppercase tracking-wider text-bloom-brownlight hover:text-bloom-coral transition flex items-center gap-1.5 whitespace-nowrap">
+          <i class="ph ph-cursor-click text-base"></i> Tombol &amp; Kontak WhatsApp
+        </button>
+      </div>
+
+      <!-- Main Body Container -->
+      <div class="grow overflow-y-auto p-5 sm:p-8 space-y-6">
+
+        <!-- TAB 1: PRODUCT CATALOG MANAGEMENT (PRIORITY) -->
+        <div id="admin-section-products" class="space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-bloom-peach/50 p-4 rounded-2xl border border-bloom-creamborder">
+            <div>
+              <h4 class="font-display text-lg text-bloom-brown">Daftar Produk Boutique Shelf</h4>
+              <p class="text-xs text-bloom-brownlight">Tambah item baru, update harga, kategori, foto, atau hapus produk.</p>
+            </div>
+            <button onclick="openAdminProductModal()" class="inline-flex items-center gap-2 bg-bloom-coral hover:bg-bloom-coralhover text-bloom-cream px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition">
+              <i class="ph ph-plus-circle text-base"></i>
+              <span>Tambah Produk Baru</span>
+            </button>
+          </div>
+
+          <!-- Product Table / Cards List -->
+          <div id="admin-products-list" class="space-y-3">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- TAB 2: TEXT & HEADLINE CONTENT -->
+        <div id="admin-section-content" class="space-y-6 hidden">
+          <div class="bg-bloom-peach/30 p-5 rounded-2xl border border-bloom-creamborder space-y-4">
+            <h4 class="font-display text-lg text-bloom-brown">Headline &amp; Filosofi Hero</h4>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-[11px] font-bold uppercase text-bloom-brown mb-1">Headline Utama (Baris 1)</label>
+                <input type="text" id="cfg-hero-title1" class="w-full bg-bloom-cream border border-bloom-creamborder rounded-xl px-3.5 py-2.5 text-xs text-bloom-brown" value="FEEL GOOD." />
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold uppercase text-bloom-brown mb-1">Headline Utama (Baris 2 - Italic)</label>
+                <input type="text" id="cfg-hero-title2" class="w-full bg-bloom-cream border border-bloom-creamborder rounded-xl px-3.5 py-2.5 text-xs text-bloom-brown" value="LOOK GOOD." />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-bold uppercase text-bloom-brown mb-1">Subheadline / Deskripsi Hero</label>
+              <textarea id="cfg-hero-subtitle" rows="2" class="w-full bg-bloom-cream border border-bloom-creamborder rounded-xl px-3.5 py-2.5 text-xs text-bloom-brown">Your everyday beauty space for hair, skin, nails and everything in between. Tempat di mana perawatan diri terasa santai, ramah, dan bikin kamu makin percaya diri.</textarea>
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-bold uppercase text-bloom-brown mb-1">Kutipan Section Introduction</label>
+              <textarea id="cfg-intro-quote" rows="2" class="w-full bg-bloom-cream border border-bloom-creamborder rounded-xl px-3.5 py-2.5 text-xs text-bloom-brown">"Karena merawat diri bukan soal terlihat sempurna. Ini tentang merasa lebih fresh, lebih percaya diri, dan lebih nyaman dengan diri sendiri."</textarea>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-[11px] font-bold uppercase text-bloom-brown mb-1">Kode Promo Voucher</label>
+                <input type="text" id="cfg-promo-code" class="w-full bg-bloom-cream border border-bloom-creamborder rounded-xl px-3.5 py-2.5 text-xs text-bloom-brown" value="FIRSTBLOOM" />
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold uppercase text-bloom-brown mb-1">Deskripsi Diskon Promo</label>
+                <input type="text" id="cfg-promo-desc" class="w-full bg-bloom-cream border border-bloom-creamborder rounded-xl px-3.5 py-2.5 text-xs text-bloom-brown" value="Diskon 15% untuk kunjungan pertamamu di Blush & Bloom." />
+              </div>
+            </div>
+
+            <button onclick="saveSiteContent()" class="bg-bloom-brown hover:bg-bloom-coral text-bloom-cream px-6 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition">
+              Simpan Perubahan Teks
+            </button>
+          </div>
+        </div>
+
+        <!-- TAB 3: BANNER & IMAGES -->
+        <div id="admin-section-images" class="space-y-6 hidden">
+          <div class="bg-bloom-peach/30 p-5 rounded-2xl border border-bloom-creamborder space-y-4">
+            <h4 class="font-display text-lg text-bloom-brown">URL Foto &amp; Banner Utama</h4>
+            <p class="text-xs text-bloom-brownlight">Mendukung link Google Drive (format lh3/thumbnail) dan gambar Unsplash.</p>
+
+            <div>
+              <label class="block text-[11px] font-bold uppercase text-bloom-brown mb-1">Foto Hero Utama (Besar)</label>
+              <input type="url" id="cfg-hero-image" class="w-full bg-bloom-cream border border-bloom-creamborder rounded-xl px-3.5 py-2.5 text-xs text-bloom-brown" placeholder="https://images.unsplash.com/..." />
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-bold uppercase text-bloom-brown mb-1">Foto Hero Detail (Kecil Melayang)</label>
+              <input type="url" id="cfg-hero-detail-image" class="w-full bg-bloom-cream border border-bloom-creamborder rounded-xl px-3.5 py-2.5 text-xs text-bloom-brown" placeholder="https://images.unsplash.com/..." />
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-[11px] font-bold uppercase text-bloom-brown mb-1">Before Image (Transformation Hair)</label>
+                <input type="url" id="cfg-ba-before" class="w-full bg-bloom-cream border border-bloom-creamborder rounded-xl px-3.5 py-2.5 text-xs text-bloom-brown" placeholder="URL Foto Sebelum" />
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold uppercase text-bloom-brown mb-1">After Image (Transformation Hair)</label>
+                <input type="url" id="cfg-ba-after" class="w-full bg-bloom-cream border border-bloom-creamborder rounded-xl px-3.5 py-2.5 text-xs text-bloom-brown" placeholder="URL Foto Sesudah" />
+              </div>
+            </div>
+
+            <button onclick="saveSiteImages()" class="bg-bloom-brown hover:bg-bloom-coral text-bloom-cream px-6 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition">
+              Update Foto &amp; Banner
+            </button>
+          </div>
+        </div>
+
+        <!-- TAB 4: BUTTONS & WHATSAPP CONFIG -->
+        <div id="admin-section-buttons" class="space-y-6 hidden">
+          <div class="bg-bloom-peach/30 p-5 rounded-2xl border border-bloom-creamborder space-y-4">
+            <h4 class="font-display text-lg text-bloom-brown">Kontak &amp; Teks Tombol Aksi</h4>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-[11px] font-bold uppercase text-bloom-brown mb-1">Nomor WhatsApp Salon</label>
+                <input type="text" id="cfg-wa-number" class="w-full bg-bloom-cream border border-bloom-creamborder rounded-xl px-3.5 py-2.5 text-xs text-bloom-brown" value="6281234567890" />
+                <span class="text-[10px] text-bloom-brownlight mt-0.5 block">Format: 6281234567890 (tanpa spasi atau +)</span>
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold uppercase text-bloom-brown mb-1">Teks Tombol Hero CTA Utama</label>
+                <input type="text" id="cfg-hero-cta-btn" class="w-full bg-bloom-cream border border-bloom-creamborder rounded-xl px-3.5 py-2.5 text-xs text-bloom-brown" value="BOOK YOUR TREATMENT" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-bold uppercase text-bloom-brown mb-1">Jam Buka Salon (Teks Header &amp; Footer)</label>
+              <input type="text" id="cfg-hours-text" class="w-full bg-bloom-cream border border-bloom-creamborder rounded-xl px-3.5 py-2.5 text-xs text-bloom-brown" value="OPEN 09.00 — 21.00 WIB" />
+            </div>
+
+            <button onclick="saveSiteButtons()" class="bg-bloom-brown hover:bg-bloom-coral text-bloom-cream px-6 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition">
+              Simpan Pengaturan Tombol
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Status Bar -->
+      <div class="p-4 border-t border-bloom-creamborder bg-bloom-cream flex items-center justify-between text-xs text-bloom-brownlight">
+        <div class="flex items-center gap-2">
+          <i class="ph ph-database text-bloom-coral"></i>
+          <span>Database cloud terhubung secara aman. Perubahan otomatis disinkronkan ke semua pengunjung.</span>
+        </div>
+        <button onclick="logoutAdmin()" class="text-bloom-coral hover:underline text-xs font-semibold">
+          Keluar (Logout)
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ADD / EDIT PRODUCT MODAL -->
+  <div id="admin-product-edit-modal" class="fixed inset-0 z-50 bg-bloom-brown/80 backdrop-blur-xs hidden flex items-center justify-center p-4">
+    <div class="bg-bloom-cream rounded-3xl max-w-lg w-full border border-bloom-creamborder shadow-2xl p-6 sm:p-8 relative">
+      <button onclick="closeAdminProductModal()" class="absolute top-5 right-5 text-bloom-brown hover:text-bloom-coral p-1" aria-label="Close Modal">
+        <i class="ph ph-x text-2xl font-bold"></i>
+      </button>
+
+      <div class="mb-5">
+        <span class="text-[10px] uppercase tracking-[0.25em] text-bloom-coral font-bold">KATALOG PRODUK</span>
+        <h3 class="font-display text-2xl text-bloom-brown mt-1" id="product-modal-title">Tambah Produk Baru</h3>
+        <p class="text-xs text-bloom-brownlight mt-0.5">Produk ini akan langsung tampil di bagian 'OUR BEAUTY EDIT'.</p>
+      </div>
+
+      <form onsubmit="handleProductFormSubmit(event)" class="space-y-4 text-left">
+        <input type="hidden" id="prod-id" value="" />
+
+        <div>
+          <label class="block text-[11px] font-bold uppercase tracking-wider text-bloom-brown mb-1">Nama Produk *</label>
+          <input type="text" id="prod-name" required placeholder="Contoh: Dewy Glow Face Oil" class="w-full bg-bloom-peach/50 border border-bloom-creamborder rounded-xl px-3.5 py-2.5 text-xs text-bloom-brown focus:outline-none focus:border-bloom-coral" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-[11px] font-bold uppercase tracking-wider text-bloom-brown mb-1">Kategori *</label>
+            <select id="prod-category" required class="w-full bg-bloom-peach/50 border border-bloom-creamborder rounded-xl px-3 py-2.5 text-xs text-bloom-brown focus:outline-none focus:border-bloom-coral">
+              <option value="Hair Care">Hair Care</option>
+              <option value="Treatment">Treatment</option>
+              <option value="Skin">Skin</option>
+              <option value="Protection">Protection</option>
+              <option value="Nails">Nails</option>
+              <option value="Body">Body</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold uppercase tracking-wider text-bloom-brown mb-1">Harga *</label>
+            <input type="text" id="prod-price" required placeholder="Contoh: Rp 125K" class="w-full bg-bloom-peach/50 border border-bloom-creamborder rounded-xl px-3.5 py-2.5 text-xs text-bloom-brown focus:outline-none focus:border-bloom-coral" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-bold uppercase tracking-wider text-bloom-brown mb-1">URL Gambar Produk *</label>
+          <input type="url" id="prod-image" required placeholder="https://images.unsplash.com/... atau URL Google Drive" class="w-full bg-bloom-peach/50 border border-bloom-creamborder rounded-xl px-3.5 py-2.5 text-xs text-bloom-brown focus:outline-none focus:border-bloom-coral" oninput="previewProductImage(this.value)" />
+          <span class="text-[10px] text-bloom-brownlight mt-1 block">Mendukung format gambar web, Unsplash, dan Google Drive lh3.</span>
+        </div>
+
+        <!-- Image Preview Box -->
+        <div class="flex items-center gap-3 p-3 bg-bloom-peach/30 rounded-xl border border-bloom-creamborder">
+          <div class="w-14 h-14 rounded-lg bg-bloom-peach overflow-hidden border border-bloom-creamborder shrink-0">
+            <img id="prod-preview-img" src="https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?auto=format&fit=crop&w=200&q=80" alt="Preview" class="w-full h-full object-cover" />
+          </div>
+          <p class="text-[11px] text-bloom-brownlight leading-relaxed">
+            Preview tampilan thumbnail produk di rak boutique.
+          </p>
+        </div>
+
+        <div class="pt-2 flex items-center justify-end gap-3">
+          <button type="button" onclick="closeAdminProductModal()" class="px-5 py-2.5 rounded-full border border-bloom-creamborder text-xs font-semibold text-bloom-brown hover:bg-bloom-peach transition">
+            Batal
+          </button>
+          <button type="submit" class="px-6 py-2.5 rounded-full bg-bloom-coral hover:bg-bloom-coralhover text-bloom-cream text-xs font-semibold uppercase tracking-wider transition shadow-sm">
+            Simpan Produk
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    /* Initial Default State for Products */
+    let siteProducts = [
+      {
+        id: 'prod-1',
+        name: 'Gentle Scalp Shampoo',
+        category: 'Hair Care',
+        price: 'Rp 120K',
+        image: 'https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?auto=format&fit=crop&w=300&q=80'
+      },
+      {
+        id: 'prod-2',
+        name: 'Silk Moisture Hair Mask',
+        category: 'Treatment',
+        price: 'Rp 145K',
+        image: 'https://images.unsplash.com/photo-1608248597359-007d4b4b2149?auto=format&fit=crop&w=300&q=80'
+      },
+      {
+        id: 'prod-3',
+        name: 'Radiance Glow Serum',
+        category: 'Skin',
+        price: 'Rp 165K',
+        image: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=300&q=80'
+      },
+      {
+        id: 'prod-4',
+        name: 'Barrier Calming Cream',
+        category: 'Skin',
+        price: 'Rp 135K',
+        image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=300&q=80'
+      },
+      {
+        id: 'prod-5',
+        name: 'Dewy Invisible Sunscreen',
+        category: 'Protection',
+        price: 'Rp 110K',
+        image: 'https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=300&q=80'
+      },
+      {
+        id: 'prod-6',
+        name: 'Cuticle Elixir Oil',
+        category: 'Nails',
+        price: 'Rp 85K',
+        image: 'https://images.unsplash.com/photo-1607602132700-068258431c6c?auto=format&fit=crop&w=300&q=80'
+      }
+    ];
+
+    /* Default Site Configuration */
+    let siteConfig = {
+      heroTitle1: 'FEEL GOOD.',
+      heroTitle2: 'LOOK GOOD.',
+      heroSubtitle: 'Your everyday beauty space for hair, skin, nails and everything in between. Tempat di mana perawatan diri terasa santai, ramah, dan bikin kamu makin percaya diri.',
+      introQuote: '"Karena merawat diri bukan soal terlihat sempurna. Ini tentang merasa lebih fresh, lebih percaya diri, dan lebih nyaman dengan diri sendiri."',
+      promoCode: 'FIRSTBLOOM',
+      promoDesc: 'Diskon 15% untuk kunjungan pertamamu di Blush & Bloom.',
+      heroImage: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=80',
+      heroDetailImage: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=600&q=80',
+      waNumber: '6281234567890',
+      heroCtaBtn: 'BOOK YOUR TREATMENT',
+      hoursText: 'OPEN 09.00 — 21.00 WIB'
+    };
+
+    let isAdminLoggedIn = false;
+
+    // Render Products to Web
+    function renderProducts() {
+      const container = document.getElementById('products-container');
+      if (!container) return;
+
+      container.innerHTML = siteProducts.map(prod => `
+        <div class="bg-bloom-cream p-4 rounded-xl border border-bloom-creamborder flex flex-col justify-between group relative transition-all duration-300 hover:shadow-md">
+          ${isAdminLoggedIn ? `
+            <div class="absolute top-2 right-2 flex gap-1 z-10 bg-bloom-cream/95 p-1 rounded-lg border border-bloom-creamborder shadow-xs">
+              <button onclick="editProduct('${prod.id}')" title="Edit Produk" class="w-6 h-6 rounded bg-bloom-peach text-bloom-brown hover:text-bloom-coral flex items-center justify-center text-xs">
+                <i class="ph ph-pencil-simple"></i>
+              </button>
+              <button onclick="deleteProduct('${prod.id}')" title="Hapus Produk" class="w-6 h-6 rounded bg-red-50 text-red-600 hover:bg-red-100 flex items-center justify-center text-xs">
+                <i class="ph ph-trash"></i>
+              </button>
+            </div>
+          ` : ''}
+          <div class="aspect-square rounded-lg overflow-hidden mb-3 bg-bloom-peach">
+            <img 
+              src="${prod.image}" 
+              alt="${prod.name}" 
+              class="w-full h-full object-cover group-hover:scale-105 transition"
+              onerror="handleImgFallback(this, 'https://placehold.co/300x300/FCEEE9/2D1B14?text=Beauty+Product')"
+              loading="lazy"
+            >
+          </div>
+          <div>
+            <span class="text-[9px] uppercase tracking-wider text-bloom-brownlight font-semibold">${prod.category}</span>
+            <h4 class="text-xs font-bold text-bloom-brown mt-0.5">${prod.name}</h4>
+            <p class="font-display text-sm text-bloom-brown mt-1">${prod.price}</p>
+          </div>
+        </div>
+      `).join('');
+
+      const countBadge = document.getElementById('admin-product-count');
+      if (countBadge) countBadge.textContent = siteProducts.length;
+
+      renderAdminProductsList();
+    }
+
+    // Render Admin Products Management List
+    function renderAdminProductsList() {
+      const listEl = document.getElementById('admin-products-list');
+      if (!listEl) return;
+
+      listEl.innerHTML = siteProducts.map(prod => `
+        <div class="flex items-center justify-between p-3.5 bg-bloom-cream rounded-xl border border-bloom-creamborder hover:border-bloom-coral transition gap-4">
+          <div class="flex items-center gap-3">
+            <img src="${prod.image}" class="w-12 h-12 rounded-lg object-cover bg-bloom-peach shrink-0 border border-bloom-creamborder" onerror="handleImgFallback(this, 'https://placehold.co/100x100/FCEEE9/2D1B14?text=Item')">
+            <div>
+              <span class="text-[9px] uppercase tracking-wider text-bloom-coral font-bold">${prod.category}</span>
+              <h5 class="text-xs font-bold text-bloom-brown">${prod.name}</h5>
+              <p class="font-display text-xs text-bloom-brownlight">${prod.price}</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="editProduct('${prod.id}')" class="px-3 py-1.5 rounded-full bg-bloom-peach text-bloom-brown hover:bg-bloom-coral hover:text-bloom-cream text-[11px] font-semibold transition flex items-center gap-1">
+              <i class="ph ph-pencil-simple"></i> Edit
+            </button>
+            <button onclick="deleteProduct('${prod.id}')" class="px-3 py-1.5 rounded-full bg-red-50 text-red-600 hover:bg-red-600 hover:text-white text-[11px] font-semibold transition flex items-center gap-1">
+              <i class="ph ph-trash"></i> Hapus
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Apply Site Config to DOM
+    function applySiteConfig(cfg) {
+      siteConfig = { ...siteConfig, ...cfg };
+
+      const heroH2 = document.getElementById('hero-main-heading');
+      if (heroH2 && siteConfig.heroTitle1 && siteConfig.heroTitle2) {
+        heroH2.innerHTML = `${siteConfig.heroTitle1}<br><span class="italic font-normal text-bloom-coral">${siteConfig.heroTitle2}</span>`;
+      }
+      const heroP = document.getElementById('hero-main-subtext');
+      if (heroP && siteConfig.heroSubtitle) heroP.textContent = siteConfig.heroSubtitle;
+
+      const introQuote = document.getElementById('site-intro-quote');
+      if (introQuote && siteConfig.introQuote) introQuote.textContent = siteConfig.introQuote;
+
+      const promoCodeEl = document.getElementById('site-promo-code-display');
+      if (promoCodeEl && siteConfig.promoCode) promoCodeEl.textContent = siteConfig.promoCode;
+
+      const promoDescEl = document.getElementById('site-promo-desc-text');
+      if (promoDescEl && siteConfig.promoDesc) promoDescEl.textContent = siteConfig.promoDesc;
+
+      if (siteConfig.heroImage) {
+        const heroImg = document.getElementById('hero-img-main');
+        if (heroImg) heroImg.src = siteConfig.heroImage;
+      }
+      if (siteConfig.heroDetailImage) {
+        const detailImg = document.getElementById('hero-img-detail');
+        if (detailImg) detailImg.src = siteConfig.heroDetailImage;
+      }
+
+      if (siteConfig.heroCtaBtn) {
+        const ctaBtn = document.getElementById('hero-primary-cta');
+        if (ctaBtn) ctaBtn.textContent = siteConfig.heroCtaBtn;
+      }
+
+      // Update hours
+      if (siteConfig.hoursText) {
+        const h1 = document.getElementById('site-top-hours');
+        const h2 = document.getElementById('site-header-hours');
+        const h3 = document.getElementById('site-footer-hours');
+        const h4 = document.getElementById('site-loc-hours');
+        if (h1) h1.textContent = siteConfig.hoursText;
+        if (h2) h2.textContent = siteConfig.hoursText;
+        if (h3) h3.innerHTML = `OPEN DAILY<br>${siteConfig.hoursText}`;
+        if (h4) h4.textContent = `Senin — Minggu: ${siteConfig.hoursText}`;
+      }
+
+      // Update WhatsApp links
+      if (siteConfig.waNumber) {
+        const chatHeader = document.getElementById('header-chat-btn');
+        const directWa = document.getElementById('booking-direct-wa');
+        const footerWa = document.getElementById('footer-wa-link');
+        const locPhone = document.getElementById('site-loc-phone');
+        if (chatHeader) chatHeader.href = `https://wa.me/${siteConfig.waNumber}?text=Halo%20Blush%20%26%20Bloom%2C%20mau%20tanya%20jadwal%20treatment`;
+        if (directWa) directWa.href = `https://wa.me/${siteConfig.waNumber}?text=Halo%20Blush%20%26%20Bloom%2C%20mau%20tanya%20jadwal%20treatment`;
+        if (footerWa) footerWa.href = `https://wa.me/${siteConfig.waNumber}`;
+        if (locPhone) locPhone.textContent = `+${siteConfig.waNumber} (WhatsApp Direct)`;
+      }
+
+      // Populate Admin form fields if available
+      const fTitle1 = document.getElementById('cfg-hero-title1');
+      if (fTitle1) fTitle1.value = siteConfig.heroTitle1 || '';
+      const fTitle2 = document.getElementById('cfg-hero-title2');
+      if (fTitle2) fTitle2.value = siteConfig.heroTitle2 || '';
+      const fSub = document.getElementById('cfg-hero-subtitle');
+      if (fSub) fSub.value = siteConfig.heroSubtitle || '';
+      const fQuote = document.getElementById('cfg-intro-quote');
+      if (fQuote) fQuote.value = siteConfig.introQuote || '';
+      const fCode = document.getElementById('cfg-promo-code');
+      if (fCode) fCode.value = siteConfig.promoCode || '';
+      const fDesc = document.getElementById('cfg-promo-desc');
+      if (fDesc) fDesc.value = siteConfig.promoDesc || '';
+      const fHeroImg = document.getElementById('cfg-hero-image');
+      if (fHeroImg) fHeroImg.value = siteConfig.heroImage || '';
+      const fDetailImg = document.getElementById('cfg-hero-detail-image');
+      if (fDetailImg) fDetailImg.value = siteConfig.heroDetailImage || '';
+      const fWa = document.getElementById('cfg-wa-number');
+      if (fWa) fWa.value = siteConfig.waNumber || '6281234567890';
+      const fHours = document.getElementById('cfg-hours-text');
+      if (fHours) fHours.value = siteConfig.hoursText || 'OPEN 09.00 — 21.00 WIB';
+      const fCta = document.getElementById('cfg-hero-cta-btn');
+      if (fCta) fCta.value = siteConfig.heroCtaBtn || 'BOOK YOUR TREATMENT';
+    }
+
+    // Initialize Firebase Listeners
+    window.addEventListener('firebase-initialized', () => {
+      if (window.bbFirestore && window.bbFirestore.isReady) {
+        const { db, appId, doc, onSnapshot } = window.bbFirestore;
+        
+        // Strict path rule: /artifacts/{appId}/public/data/{collectionName}
+        const productsDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'products', 'shelf');
+        onSnapshot(productsDocRef, (snap) => {
+          if (snap.exists()) {
+            const data = snap.data();
+            if (data && Array.isArray(data.items)) {
+              siteProducts = data.items;
+              renderProducts();
+            }
+          } else {
+            syncProductsToFirestore();
+          }
+        }, (err) => {
+          console.warn("Products sync notice (fallback active):", err);
+        });
+
+        const configDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'settings', 'siteConfig');
+        onSnapshot(configDocRef, (snap) => {
+          if (snap.exists()) {
+            const data = snap.data();
+            applySiteConfig(data);
+          }
+        }, (err) => {
+          console.warn("Config sync notice:", err);
+        });
+      }
+    });
+
+    async function syncProductsToFirestore() {
+      if (window.bbFirestore && window.bbFirestore.isReady) {
+        const { db, appId, doc, setDoc } = window.bbFirestore;
+        try {
+          const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'products', 'shelf');
+          await setDoc(docRef, { items: siteProducts, updatedAt: new Date().toISOString() });
+        } catch (err) {
+          console.warn("Firestore save fallback:", err);
+        }
+      }
+    }
+
+    async function syncConfigToFirestore() {
+      if (window.bbFirestore && window.bbFirestore.isReady) {
+        const { db, appId, doc, setDoc } = window.bbFirestore;
+        try {
+          const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'settings', 'siteConfig');
+          await setDoc(docRef, { ...siteConfig, updatedAt: new Date().toISOString() });
+        } catch (err) {
+          console.warn("Firestore config save fallback:", err);
+        }
+      }
+    }
+
+    function handleAdminTrigger() {
+      if (isAdminLoggedIn) {
+        openAdminPanel();
+      } else {
+        openAdminLoginModal();
+      }
+    }
+
+    function openAdminLoginModal() {
+      document.getElementById('admin-login-modal').classList.remove('hidden');
+      document.getElementById('login-error-msg').classList.add('hidden');
+    }
+
+    function closeAdminLoginModal() {
+      document.getElementById('admin-login-modal').classList.add('hidden');
+    }
+
+    function handleAdminLogin(e) {
+      e.preventDefault();
+      const user = document.getElementById('admin-user-input').value.trim();
+      const pass = document.getElementById('admin-pass-input').value.trim();
+
+      if (user === 'kelolaweb2026' && pass === 'kelolaweb2026') {
+        isAdminLoggedIn = true;
+        closeAdminLoginModal();
+        document.getElementById('admin-floating-bar').classList.remove('hidden');
+        document.getElementById('admin-add-product-quick').classList.remove('hidden');
+        showToast("Login Admin Berhasil! Selamat datang.");
+        renderProducts();
+        openAdminPanel();
+      } else {
+        document.getElementById('login-error-msg').classList.remove('hidden');
+      }
+    }
+
+    function logoutAdmin() {
+      isAdminLoggedIn = false;
+      document.getElementById('admin-floating-bar').classList.add('hidden');
+      document.getElementById('admin-add-product-quick').classList.add('hidden');
+      closeAdminDashboard();
+      renderProducts();
+      showToast("Anda telah keluar dari Mode Admin.");
+    }
+
+    function openAdminPanel() {
+      document.getElementById('admin-dashboard-modal').classList.remove('hidden');
+      renderAdminProductsList();
+    }
+
+    function closeAdminDashboard() {
+      document.getElementById('admin-dashboard-modal').classList.add('hidden');
+    }
+
+    function switchAdminTab(tabName) {
+      const tabs = ['products', 'content', 'images', 'buttons'];
+      tabs.forEach(t => {
+        const btn = document.getElementById(`admin-tab-${t}`);
+        const sec = document.getElementById(`admin-section-${t}`);
+        if (t === tabName) {
+          btn.className = "admin-tab-item pb-3 px-3 text-xs font-bold uppercase tracking-wider text-bloom-coral border-b-2 border-bloom-coral transition flex items-center gap-1.5 whitespace-nowrap";
+          sec.classList.remove('hidden');
+        } else {
+          btn.className = "admin-tab-item pb-3 px-3 text-xs font-semibold uppercase tracking-wider text-bloom-brownlight hover:text-bloom-coral transition flex items-center gap-1.5 whitespace-nowrap";
+          sec.classList.add('hidden');
+        }
+      });
+    }
+
+    function openAdminProductModal(editId = null) {
+      const modal = document.getElementById('admin-product-edit-modal');
+      const titleEl = document.getElementById('product-modal-title');
+      const idInput = document.getElementById('prod-id');
+      const nameInput = document.getElementById('prod-name');
+      const catInput = document.getElementById('prod-category');
+      const priceInput = document.getElementById('prod-price');
+      const imgInput = document.getElementById('prod-image');
+      const previewImg = document.getElementById('prod-preview-img');
+
+      if (editId) {
+        const item = siteProducts.find(p => p.id === editId);
+        if (item) {
+          titleEl.textContent = "Edit Produk";
+          idInput.value = item.id;
+          nameInput.value = item.name;
+          catInput.value = item.category;
+          priceInput.value = item.price;
+          imgInput.value = item.image;
+          previewImg.src = item.image;
+        }
+      } else {
+        titleEl.textContent = "Tambah Produk Baru";
+        idInput.value = "";
+        nameInput.value = "";
+        catInput.value = "Skin";
+        priceInput.value = "Rp 150K";
+        imgInput.value = "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=300&q=80";
+        previewImg.src = imgInput.value;
+      }
+
+      modal.classList.remove('hidden');
+    }
+
+    function closeAdminProductModal() {
+      document.getElementById('admin-product-edit-modal').classList.add('hidden');
+    }
+
+    function previewProductImage(url) {
+      const preview = document.getElementById('prod-preview-img');
+      if (url && preview) {
+        preview.src = url;
+      }
+    }
+
+    function handleProductFormSubmit(e) {
+      e.preventDefault();
+      const id = document.getElementById('prod-id').value;
+      const name = document.getElementById('prod-name').value.trim();
+      const category = document.getElementById('prod-category').value;
+      const price = document.getElementById('prod-price').value.trim();
+      const image = document.getElementById('prod-image').value.trim();
+
+      if (id) {
+        const index = siteProducts.findIndex(p => p.id === id);
+        if (index !== -1) {
+          siteProducts[index] = { id, name, category, price, image };
+          showToast(`Produk '${name}' berhasil diperbarui.`);
+        }
+      } else {
+        const newProduct = {
+          id: 'prod-' + Date.now(),
+          name,
+          category,
+          price,
+          image
+        };
+        siteProducts.push(newProduct);
+        showToast(`Produk baru '${name}' berhasil ditambahkan.`);
+      }
+
+      renderProducts();
+      syncProductsToFirestore();
+      closeAdminProductModal();
+    }
+
+    function editProduct(id) {
+      openAdminProductModal(id);
+    }
+
+    function deleteProduct(id) {
+      const target = siteProducts.find(p => p.id === id);
+      if (!target) return;
+      
+      siteProducts = siteProducts.filter(p => p.id !== id);
+      renderProducts();
+      syncProductsToFirestore();
+      showToast(`Produk '${target.name}' telah dihapus.`);
+    }
+
+    function saveSiteContent() {
+      siteConfig.heroTitle1 = document.getElementById('cfg-hero-title1').value;
+      siteConfig.heroTitle2 = document.getElementById('cfg-hero-title2').value;
+      siteConfig.heroSubtitle = document.getElementById('cfg-hero-subtitle').value;
+      siteConfig.introQuote = document.getElementById('cfg-intro-quote').value;
+      siteConfig.promoCode = document.getElementById('cfg-promo-code').value;
+      siteConfig.promoDesc = document.getElementById('cfg-promo-desc').value;
+
+      applySiteConfig(siteConfig);
+      syncConfigToFirestore();
+      showToast("Teks & Headline website berhasil disimpan realtime!");
+    }
+
+    function saveSiteImages() {
+      const heroUrl = document.getElementById('cfg-hero-image').value.trim();
+      const detailUrl = document.getElementById('cfg-hero-detail-image').value.trim();
+      const baBefore = document.getElementById('cfg-ba-before').value.trim();
+      const baAfter = document.getElementById('cfg-ba-after').value.trim();
+
+      if (heroUrl) siteConfig.heroImage = heroUrl;
+      if (detailUrl) siteConfig.heroDetailImage = detailUrl;
+
+      if (baBefore && baAfter) {
+        transformationCases.hair.before = baBefore;
+        transformationCases.hair.after = baAfter;
+        switchTransformation('hair');
+      }
+
+      applySiteConfig(siteConfig);
+      syncConfigToFirestore();
+      showToast("Foto banner website berhasil diperbarui!");
+    }
+
+    function saveSiteButtons() {
+      const wa = document.getElementById('cfg-wa-number').value.trim();
+      const cta = document.getElementById('cfg-hero-cta-btn').value.trim();
+      const hours = document.getElementById('cfg-hours-text').value.trim();
+      if (wa) siteConfig.waNumber = wa;
+      if (cta) siteConfig.heroCtaBtn = cta;
+      if (hours) siteConfig.hoursText = hours;
+
+      applySiteConfig(siteConfig);
+      syncConfigToFirestore();
+      showToast("Pengaturan tombol & kontak berhasil diperbarui!");
+    }
+
+    // Header Compact Transformation on Scroll
+    window.addEventListener('scroll', () => {
+      const headerBrand = document.getElementById('header-brand-row');
+      if (window.scrollY > 50) {
+        headerBrand.classList.remove('py-4', 'md:py-6');
+        headerBrand.classList.add('py-2', 'md:py-3');
+      } else {
+        headerBrand.classList.add('py-4', 'md:py-6');
+        headerBrand.classList.remove('py-2', 'md:py-3');
+      }
+    });
+
+    // Before-After Slider Handler
+    function handleSlider(val) {
+      const clipWrapper = document.getElementById('ba-clip-wrapper');
+      const divider = document.getElementById('ba-divider');
+      if (clipWrapper && divider) {
+        clipWrapper.style.width = val + '%';
+        divider.style.left = val + '%';
+      }
+    }
+
+    const transformationCases = {
+      hair: {
+        before: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1200&q=80',
+        after: 'https://images.unsplash.com/photo-1560869713-7d0a29430803?auto=format&fit=crop&w=1200&q=80',
+        caption: '"Layer cut & gloss treatment untuk rambut mengembang & kering. Hasil lebih ringan dan berkilau alami."'
+      },
+      skin: {
+        before: 'https://images.unsplash.com/photo-1512290900672-1f55b9a89668?auto=format&fit=crop&w=1200&q=80',
+        after: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=80',
+        caption: '"Glow facial hydra-infusion. Kulit kusam dehidrasi kembali kenyal, cerah, dan tampak natural plumpy."'
+      },
+      nails: {
+        before: 'https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=1200&q=80',
+        after: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=1200&q=80',
+        caption: '"Manicure cuticle clean-up & soft blush gel polish. Kuku rapi, bersih, dan tampak sangat terawat."'
+      }
+    };
+
+    function switchTransformation(type) {
+      const data = transformationCases[type];
+      if (!data) return;
+
+      document.getElementById('ba-before-img').src = data.before;
+      document.getElementById('ba-after-img').src = data.after;
+      document.getElementById('ba-caption').textContent = data.caption;
+
+      document.getElementById('ba-slider-input').value = 50;
+      handleSlider(50);
+
+      ['hair', 'skin', 'nails'].forEach(key => {
+        const btn = document.getElementById(`ba-btn-${key}`);
+        if (key === type) {
+          btn.className = "ba-tab px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-bloom-brown text-bloom-cream transition";
+        } else {
+          btn.className = "ba-tab px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-bloom-peach text-bloom-brown hover:bg-bloom-creamborder transition";
+        }
+      });
+    }
+
+    // Services Menu Filter
+    function filterMenu(category) {
+      const blocks = document.querySelectorAll('.menu-category-block');
+      blocks.forEach(block => {
+        if (category === 'all' || block.getAttribute('data-category') === category) {
+          block.style.display = 'block';
+        } else {
+          block.style.display = 'none';
+        }
+      });
+
+      const categories = ['all', 'hair', 'skin', 'nails', 'lash'];
+      categories.forEach(cat => {
+        const btn = document.getElementById(`tab-btn-${cat}`);
+        if (!btn) return;
+        if (cat === category) {
+          btn.className = "px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-bloom-brown text-bloom-cream transition";
+        } else {
+          btn.className = "px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-bloom-peach text-bloom-brown hover:bg-bloom-creamborder transition";
+        }
+      });
+    }
+
+    // Testimonials Carousel
+    const testimonials = [
+      {
+        quote: '"Tempatnya cozy banget, staff ramah dan hasil treatment sesuai yang saya mau. Gak ada bau kimia yang menyengat sama sekali."',
+        author: '— CINDY, SENOPATI'
+      },
+      {
+        quote: '"Sudah jadi tempat langganan kalau mau hair treatment dan manicure. Pijatan kepala pas hair spa beneran bikin relax habis ngantor."',
+        author: '— MELANI, KEBAYORAN'
+      },
+      {
+        quote: '"Glow facial di sini penyelamat kulit sebelum wisuda! Hasilnya glowing natural tanpa merah-merah atau iritasi sama sekali."',
+        author: '— TANYA, JAKARTA SELATAN'
+      }
+    ];
+    let currentTesti = 0;
+
+    function renderTesti() {
+      const txt = document.getElementById('testi-text');
+      const author = document.getElementById('testi-author');
+      txt.style.opacity = '0';
+      author.style.opacity = '0';
+
+      setTimeout(() => {
+        txt.textContent = testimonials[currentTesti].quote;
+        author.textContent = testimonials[currentTesti].author;
+        txt.style.opacity = '1';
+        author.style.opacity = '1';
+
+        const indicators = document.getElementById('testi-indicators').children;
+        for (let i = 0; i < indicators.length; i++) {
+          indicators[i].className = i === currentTesti ? "w-2 h-2 rounded-full bg-bloom-coral" : "w-2 h-2 rounded-full bg-bloom-creamborder";
+        }
+      }, 150);
+    }
+
+    function nextTesti() {
+      currentTesti = (currentTesti + 1) % testimonials.length;
+      renderTesti();
+    }
+    function prevTesti() {
+      currentTesti = (currentTesti - 1 + testimonials.length) % testimonials.length;
+      renderTesti();
+    }
+
+    // Modal & WhatsApp Automation
+    function openBookingModal(defaultService = '') {
+      const modal = document.getElementById('booking-modal');
+      const input = document.getElementById('modal-service');
+      if (defaultService) {
+        input.value = defaultService;
+      }
+      modal.classList.remove('hidden');
+    }
+
+    function closeBookingModal() {
+      document.getElementById('booking-modal').classList.add('hidden');
+    }
+
+    function toggleMobileDrawer() {
+      const drawer = document.getElementById('mobile-drawer');
+      drawer.classList.toggle('hidden');
+    }
+
+    function bookSpecificService(name, price) {
+      openBookingModal(`${name} (${price})`);
+    }
+
+    function preselectSpecialist(specialist) {
+      openBookingModal(`Appointment with ${specialist}`);
+      const select = document.getElementById('book-specialist');
+      if (select) select.value = specialist;
+    }
+
+    function bookRoutine(routineTitle) {
+      openBookingModal(`Routine Package: ${routineTitle}`);
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('bloom-toast');
+      const toastMsg = document.getElementById('toast-message');
+      toastMsg.textContent = message;
+      toast.classList.remove('translate-y-[-150%]');
+      toast.classList.add('translate-y-0');
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0');
+        toast.classList.add('translate-y-[-150%]');
+      }, 4000);
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const service = document.getElementById('book-service').value;
+      const specialist = document.getElementById('book-specialist').value;
+      const date = document.getElementById('book-date').value;
+      const time = document.getElementById('book-time').value;
+      const name = document.getElementById('book-name').value;
+      const wa = document.getElementById('book-wa').value;
+      const notes = document.getElementById('book-notes').value || '-';
+
+      const waDest = siteConfig.waNumber || '6281234567890';
+      const message = `Halo Blush & Bloom! Saya mau reservasi:%0A%0A*Nama:* ${encodeURIComponent(name)}%0A*WhatsApp:* ${encodeURIComponent(wa)}%0A*Layanan:* ${encodeURIComponent(service)}%0A*Specialist:* ${encodeURIComponent(specialist)}%0A*Tanggal:* ${encodeURIComponent(date)}%0A*Waktu:* ${encodeURIComponent(time)}%0A*Catatan:* ${encodeURIComponent(notes)}%0A%0AMohon konfirmasi slotnya ya. Terima kasih!`;
+
+      showToast("Membuka WhatsApp untuk konfirmasi reservasi...");
+      setTimeout(() => {
+        window.open(`https://wa.me/${waDest}?text=${message}`, '_blank');
+      }, 700);
+    }
+
+    function handleModalSubmit(e) {
+      e.preventDefault();
+      const service = document.getElementById('modal-service').value;
+      const date = document.getElementById('modal-date').value;
+      const time = document.getElementById('modal-time').value;
+      const name = document.getElementById('modal-name').value;
+      const wa = document.getElementById('modal-wa').value;
+
+      const waDest = siteConfig.waNumber || '6281234567890';
+      const message = `Halo Blush & Bloom! Saya mau reservasi via Quick Modal:%0A%0A*Nama:* ${encodeURIComponent(name)}%0A*WhatsApp:* ${encodeURIComponent(wa)}%0A*Layanan:* ${encodeURIComponent(service)}%0A*Tanggal:* ${encodeURIComponent(date)}%0A*Waktu:* ${encodeURIComponent(time)}%0A%0AMohon konfirmasi ketersediaan slotnya ya!`;
+
+      closeBookingModal();
+      showToast("Membuka WhatsApp untuk reservasi...");
+      setTimeout(() => {
+        window.open(`https://wa.me/${waDest}?text=${message}`, '_blank');
+      }, 700);
+    }
+
+    function handleImgFallback(imgElement, backupUrl) {
+      if (imgElement.src !== backupUrl) {
+        imgElement.src = backupUrl;
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      const yyyy = tomorrow.getFullYear();
+      const mm = String(tomorrow.getMonth() + 1).padStart(2, '0');
+      const dd = String(tomorrow.getDate()).padStart(2, '0');
+      const formatted = `${yyyy}-${mm}-${dd}`;
+      const dateInput = document.getElementById('book-date');
+      const modalDateInput = document.getElementById('modal-date');
+      if (dateInput) dateInput.value = formatted;
+      if (modalDateInput) modalDateInput.value = formatted;
+
+      renderProducts();
+      applySiteConfig(siteConfig);
+    });
+  </script>
+
+</body>
+</html>

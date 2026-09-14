@@ -1,0 +1,2779 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LUMÉA • Beauty & Aesthetic Studio</title>
+  
+  <!-- Google Fonts: Cormorant Garamond (Editorial Display) & Plus Jakarta Sans (Clean Modern Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Preload Critical Above-The-Fold Assets for Maximum Speed -->
+  <link rel="preload" as="image" href="https://lh3.googleusercontent.com/d/1_HERO_IMAGE_ID_LUMEA" fetchpriority="high">
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1288&auto=format&fit=crop">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ivory: {
+              DEFAULT: '#FAF7F2',
+              light: '#FDFCFA',
+              warm: '#F4EFE6',
+              muted: '#ECE5DB'
+            },
+            blush: {
+              DEFAULT: '#EEDFD8',
+              soft: '#F8F1ED',
+              rose: '#CFAEA3',
+              clay: '#B78C7F'
+            },
+            plum: {
+              DEFAULT: '#26151E',
+              deep: '#1C0E16',
+              muted: '#3B2330',
+              soft: '#553949'
+            },
+            taupe: {
+              DEFAULT: '#88796F',
+              light: '#A6988E',
+              dark: '#5C5047'
+            },
+            charcoal: '#222020'
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif']
+          },
+          letterSpacing: {
+            widest2: '0.22em',
+            ribbon: '0.18em'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #FAF7F2;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #D9C8BE;
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #B78C7F;
+    }
+
+    /* Before-After Slider Handle */
+    .ba-slider-container {
+      position: relative;
+      overflow: hidden;
+      user-select: none;
+    }
+    .ba-slider-before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 10;
+    }
+    .ba-handle {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 2px;
+      background-color: #FAF7F2;
+      z-index: 20;
+      cursor: ew-resize;
+      transform: translateX(-50%);
+    }
+    .ba-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #FAF7F2;
+      border: 1px solid #D9C8BE;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(38, 21, 30, 0.12);
+    }
+
+    /* Subtle hairline border utility */
+    .border-hairline {
+      border-color: rgba(136, 121, 111, 0.2);
+    }
+    .divide-hairline > * + * {
+      border-color: rgba(136, 121, 111, 0.2);
+    }
+
+    /* Smooth transitions */
+    .editorial-hover {
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    /* Admin CMS Styling */
+    .admin-edit-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 10px;
+      background: #26151E;
+      color: #FAF7F2;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+  </style>
+
+  <!-- Multi-Tier Image Fallback & Drive Loader System -->
+  <script>
+    /**
+     * Tiered Image Loading Architecture:
+     * Tier 1: lh3.googleusercontent.com/d/{id} (Fastest & most stable)
+     * Tier 2: drive.google.com/thumbnail?id={id}&sz=w1200 (Google Drive high-res thumbnail backup)
+     * Tier 3: Unsplash curated beauty photography fallback (Guaranteed uptime & zero broken icons)
+     */
+    function handleDriveImageFallback(img) {
+      const step = parseInt(img.getAttribute('data-fallback-step') || '1', 10);
+      const driveId = img.getAttribute('data-drive-id');
+      const unsplashUrl = img.getAttribute('data-unsplash');
+
+      if (step === 1 && driveId && !driveId.includes('HERO_IMAGE_ID')) {
+        // Switch to Tier 2: Google Drive Thumbnail API
+        img.setAttribute('data-fallback-step', '2');
+        img.src = `https://drive.google.com/thumbnail?id=${driveId}&sz=w1200`;
+      } else if (unsplashUrl && img.src !== unsplashUrl) {
+        // Switch to Tier 3: High quality curated Unsplash backup
+        img.setAttribute('data-fallback-step', '3');
+        img.src = unsplashUrl;
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-ivory text-charcoal font-sans antialiased selection:bg-blush selection:text-plum pb-16 md:pb-0">
+
+  <!-- Announcement Bar with Discrete Admin Access -->
+  <div class="bg-plum text-ivory py-2 px-4 border-b border-plum-muted text-center tracking-widest2 text-[10px] md:text-[11px] font-medium uppercase transition-all duration-300 relative">
+    <div class="container mx-auto flex items-center justify-between">
+      <div class="hidden sm:flex items-center space-x-2 opacity-0 pointer-events-none">
+        <span>ADMIN</span>
+      </div>
+      <div class="flex items-center justify-center space-x-3 mx-auto">
+        <span class="inline-block w-1.5 h-1.5 rounded-full bg-blush-rose"></span>
+        <p id="dynAnnouncement" class="truncate">WELCOME TO LUMÉA • BEAUTY, SKIN &amp; SELF-CARE STUDIO</p>
+        <span class="inline-block w-1.5 h-1.5 rounded-full bg-blush-rose"></span>
+      </div>
+      <!-- Discrete Admin Login Trigger -->
+      <button onclick="toggleAdminLoginModal()" class="text-[9px] tracking-widest text-ivory/60 hover:text-ivory uppercase flex items-center space-x-1 transition-colors px-2 py-0.5 rounded border border-transparent hover:border-ivory/20">
+        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+        </svg>
+        <span class="hidden sm:inline">Admin</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Sticky Admin Status Bar (Visible only when logged in) -->
+  <div id="adminStatusBar" class="hidden bg-emerald-900 text-emerald-100 px-4 py-2 border-b border-emerald-800 text-xs flex items-center justify-between sticky top-0 z-50">
+    <div class="flex items-center space-x-3">
+      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+      <span class="font-medium">Mode Pengelola Web Aktif (Realtime Cloud Terhubung)</span>
+    </div>
+    <div class="flex items-center space-x-3">
+      <button onclick="openAdminPanel()" class="bg-emerald-800 hover:bg-emerald-700 text-white px-3 py-1 rounded text-[11px] uppercase tracking-wider font-semibold border border-emerald-600 transition">
+        Buka Panel Kelola
+      </button>
+      <button onclick="handleAdminLogout()" class="text-emerald-300 hover:text-white text-[11px] underline">
+        Keluar
+      </button>
+    </div>
+  </div>
+
+  <header id="mainHeader" class="sticky top-0 z-40 bg-ivory/95 backdrop-blur-sm border-b border-hairline transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-5 lg:px-12 flex items-center justify-between h-20 md:h-24">
+      
+      <!-- Brand Wordmark -->
+      <div class="flex items-center space-x-6">
+        <a href="#hero" class="group flex flex-col">
+          <span class="font-serif text-2xl md:text-3xl tracking-[0.25em] text-plum font-normal group-hover:opacity-85 transition-opacity">LUMÉA</span>
+          <span class="text-[8px] md:text-[9px] tracking-[0.3em] text-taupe font-medium uppercase mt-0.5">Beauty &amp; Aesthetic Studio</span>
+        </a>
+      </div>
+
+      <!-- Desktop Ribbon Menu -->
+      <nav class="hidden lg:flex items-center space-x-8 text-[12px] tracking-ribbon uppercase font-medium text-taupe-dark">
+        <a href="#treatments" class="hover:text-plum transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-plum hover:after:w-full after:transition-all">Treatments</a>
+        <a href="#signature" class="hover:text-plum transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-plum hover:after:w-full after:transition-all">Signature</a>
+        <a href="#results" class="hover:text-plum transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-plum hover:after:w-full after:transition-all">Results</a>
+        <a href="#specialists" class="hover:text-plum transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-plum hover:after:w-full after:transition-all">Specialists</a>
+        <a href="#studio" class="hover:text-plum transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-plum hover:after:w-full after:transition-all">The Studio</a>
+        <a href="#journal" class="hover:text-plum transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-plum hover:after:w-full after:transition-all">Journal</a>
+      </nav>
+
+      <!-- Action & Operational Hours -->
+      <div class="hidden sm:flex items-center space-x-6">
+        <div class="text-right hidden xl:block">
+          <p class="text-[9px] tracking-widest text-taupe uppercase">Open Daily</p>
+          <p id="dynHeaderHours" class="text-[11px] font-medium text-plum">09.00 — 21.00 WIB</p>
+        </div>
+        <button id="dynHeaderBookBtn" onclick="openBookingModal('General Appointment')" class="bg-plum hover:bg-plum-muted text-ivory text-[11px] tracking-widest uppercase font-medium px-6 py-3 rounded-full border border-plum transition-all duration-300 shadow-sm hover:shadow">
+          Book Appointment
+        </button>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <div class="lg:hidden flex items-center space-x-3">
+        <button onclick="openBookingModal('Quick Booking')" class="sm:hidden bg-plum text-ivory text-[10px] tracking-widest uppercase px-3.5 py-2 rounded-full font-medium">
+          Book
+        </button>
+        <button id="mobileMenuToggle" aria-label="Toggle menu" class="p-2 text-plum focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobile Slide-down Drawer -->
+    <div id="mobileDrawer" class="hidden lg:hidden bg-ivory border-b border-hairline px-6 py-6 transition-all duration-300">
+      <div class="flex flex-col space-y-4 text-xs tracking-ribbon uppercase font-medium text-taupe-dark">
+        <a href="#treatments" onclick="toggleMobileMenu()" class="py-2 border-b border-hairline/50 hover:text-plum">Treatments</a>
+        <a href="#signature" onclick="toggleMobileMenu()" class="py-2 border-b border-hairline/50 hover:text-plum">Signature Glow</a>
+        <a href="#results" onclick="toggleMobileMenu()" class="py-2 border-b border-hairline/50 hover:text-plum">Real Results (Before/After)</a>
+        <a href="#specialists" onclick="toggleMobileMenu()" class="py-2 border-b border-hairline/50 hover:text-plum">Specialists</a>
+        <a href="#studio" onclick="toggleMobileMenu()" class="py-2 border-b border-hairline/50 hover:text-plum">The Studio</a>
+        <a href="#membership" onclick="toggleMobileMenu()" class="py-2 border-b border-hairline/50 hover:text-plum">Beauty Plan</a>
+        <a href="#journal" onclick="toggleMobileMenu()" class="py-2 border-b border-hairline/50 hover:text-plum">Journal</a>
+        <a href="#location" onclick="toggleMobileMenu()" class="py-2 hover:text-plum">Location &amp; Contact</a>
+      </div>
+      <div class="pt-5 mt-2 border-t border-hairline flex items-center justify-between">
+        <div>
+          <p class="text-[9px] tracking-widest text-taupe uppercase">Open Daily</p>
+          <p class="text-[11px] font-medium text-plum">09.00 — 21.00 WIB</p>
+        </div>
+        <button onclick="toggleMobileMenu(); openBookingModal('Mobile Menu')" class="bg-plum text-ivory text-[11px] tracking-widest uppercase font-medium px-5 py-2.5 rounded-full">
+          Book Appointment
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section id="hero" class="relative overflow-hidden pt-8 pb-16 md:pt-16 md:pb-24 lg:py-24 bg-ivory">
+    <!-- Subtle organic background curves -->
+    <div class="absolute inset-0 pointer-events-none opacity-40">
+      <svg class="w-full h-full" viewBox="0 0 1440 800" fill="none">
+        <path d="M-100 400C250 200 650 600 1200 300C1400 200 1550 250 1600 280" stroke="#E5DACB" stroke-width="1.2" stroke-dasharray="4 6" />
+      </svg>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-5 lg:px-12 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+        
+        <!-- Left Editorial Typography -->
+        <div class="lg:col-span-6 space-y-6 md:space-y-8">
+          <div class="inline-flex items-center space-x-3">
+            <span class="w-6 h-[1px] bg-taupe"></span>
+            <span id="dynHeroEyebrow" class="text-[11px] tracking-widest2 uppercase font-medium text-taupe">SKIN • HAIR • BEAUTY CARE</span>
+          </div>
+
+          <h1 id="dynHeroHeadline" class="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal tracking-tight text-plum leading-[1.08]">
+            YOUR BEAUTY,<br>
+            <span class="italic font-light">REFINED.</span>
+          </h1>
+
+          <p id="dynHeroSubheadline" class="text-taupe-dark text-sm sm:text-base md:text-lg max-w-xl font-light leading-relaxed">
+            Personalized beauty treatments designed around you. Menghadirkan perawatan kecantikan yang tenang, higienis, dan terarah untuk memancarkan pesona alami Anda.
+          </p>
+
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center space-y-3 sm:space-y-0 sm:space-x-4 pt-2">
+            <button id="dynHeroCtaBtn" onclick="openBookingModal('Hero Section')" class="bg-plum hover:bg-plum-muted text-ivory text-xs tracking-ribbon uppercase font-medium px-8 py-4 rounded-full border border-plum transition-all duration-300 text-center shadow-sm hover:shadow-md">
+              Book an Appointment
+            </button>
+            <a id="dynHeroExploreBtn" href="#treatments" class="inline-flex items-center justify-center space-x-2 bg-transparent hover:bg-blush-soft text-plum text-xs tracking-ribbon uppercase font-medium px-7 py-4 rounded-full border border-hairline transition-all duration-300 text-center">
+              <span>Explore Treatments</span>
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </div>
+
+          <!-- Editorial Small Footnote -->
+          <div class="pt-4 border-t border-hairline/60 flex items-center space-x-8 text-taupe text-[11px] tracking-wide">
+            <div>
+              <span class="font-serif text-lg text-plum block">100%</span>
+              <span>Personalized Care</span>
+            </div>
+            <div class="w-[1px] h-6 bg-hairline"></div>
+            <div>
+              <span class="font-serif text-lg text-plum block">Dermatology</span>
+              <span>Tested Formulations</span>
+            </div>
+            <div class="w-[1px] h-6 bg-hairline"></div>
+            <div>
+              <span class="font-serif text-lg text-plum block">Private</span>
+              <span>Treatment Rooms</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Layered Editorial Visual -->
+        <div class="lg:col-span-6 relative">
+          <div class="relative mx-auto max-w-lg lg:max-w-none">
+            
+            <!-- Main Hero Image: Tiered Loading (lh3 -> Drive thumbnail -> Unsplash fallback) -->
+            <div class="relative rounded-2xl overflow-hidden shadow-2xl bg-ivory-warm border border-hairline aspect-[4/5] max-h-[580px]">
+              <img 
+                id="dynHeroImage"
+                src="https://lh3.googleusercontent.com/d/1_HERO_IMAGE_ID_LUMEA"
+                data-drive-id="1_HERO_IMAGE_ID_LUMEA"
+                data-unsplash="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1288&auto=format&fit=crop"
+                onerror="handleDriveImageFallback(this)"
+                alt="Indonesian woman with natural glowing skin at Luméa Beauty Studio"
+                class="w-full h-full object-cover object-center transform hover:scale-[1.02] transition-transform duration-700"
+                loading="eager"
+                fetchpriority="high"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-plum-deep/30 via-transparent to-transparent"></div>
+            </div>
+
+            <!-- Floating Sub-card: Studio Detail Still with Fallback -->
+            <div class="hidden sm:block absolute -bottom-8 -left-8 w-44 rounded-xl overflow-hidden shadow-xl border-2 border-ivory bg-ivory">
+              <img 
+                src="https://lh3.googleusercontent.com/d/1_HYDRATION_THUMB_LUMEA"
+                data-drive-id="1_HYDRATION_THUMB_LUMEA"
+                data-unsplash="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=600&auto=format&fit=crop"
+                onerror="handleDriveImageFallback(this)"
+                alt="Facial treatment detail with botanical serum"
+                class="w-full h-28 object-cover"
+                loading="lazy"
+              />
+              <div class="p-2.5 bg-ivory text-center">
+                <p class="text-[9px] tracking-widest uppercase font-medium text-taupe">Hydration Focus</p>
+                <p class="font-serif text-xs text-plum font-semibold">Botanical Infusion</p>
+              </div>
+            </div>
+
+            <!-- Floating Pill Tag -->
+            <div class="absolute top-6 right-6 bg-ivory/90 backdrop-blur-md px-4 py-2 rounded-full border border-hairline shadow-sm">
+              <div class="flex items-center space-x-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+                <span class="text-[10px] tracking-wider uppercase font-semibold text-plum">Now Welcoming Appointments</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-hairline bg-blush-soft/50 py-5">
+    <div class="max-w-7xl mx-auto px-5 lg:px-12">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-hairline">
+        
+        <div class="py-2 px-2 flex flex-col items-center justify-center">
+          <p class="text-[10px] md:text-[11px] font-medium tracking-widest2 uppercase text-taupe-dark">
+            Professional Beauty Therapist
+          </p>
+        </div>
+
+        <div class="py-2 px-2 flex flex-col items-center justify-center">
+          <p class="text-[10px] md:text-[11px] font-medium tracking-widest2 uppercase text-taupe-dark">
+            Personalized Treatment
+          </p>
+        </div>
+
+        <div class="py-2 px-2 flex flex-col items-center justify-center">
+          <p class="text-[10px] md:text-[11px] font-medium tracking-widest2 uppercase text-taupe-dark">
+            Premium Tested Products
+          </p>
+        </div>
+
+        <div class="py-2 px-2 flex flex-col items-center justify-center">
+          <p class="text-[10px] md:text-[11px] font-medium tracking-widest2 uppercase text-taupe-dark">
+            Hygienic &amp; Private Space
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24 bg-ivory">
+    <div class="max-w-7xl mx-auto px-5 lg:px-12">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        
+        <!-- Left Statement -->
+        <div class="lg:col-span-5 space-y-6">
+          <span class="text-[11px] tracking-widest2 uppercase font-medium text-taupe block">The Luméa Philosophy</span>
+          <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-normal text-plum leading-tight">
+            BEAUTY IS<br><span class="italic font-light">PERSONAL.</span>
+          </h2>
+          <div class="w-12 h-[1px] bg-taupe/60"></div>
+          <p class="text-taupe-dark text-sm sm:text-base font-light leading-relaxed">
+            Setiap kulit, rambut, dan kebutuhan kecantikan memiliki karakter yang berbeda. Kami menghadirkan treatment yang dirancang untuk memberikan pengalaman beauty care yang lebih personal, tanpa teknik terburu-buru ataupun formula seragam.
+          </p>
+          <p class="text-taupe-dark text-sm sm:text-base font-light leading-relaxed">
+            Di Luméa, perawatan bukan sekadar mengubah tampilan luar, melainkan memberi ruang jeda bagi diri Anda untuk memulihkan kesegaran, rasa percaya diri, dan kenyamanan.
+          </p>
+          <div class="pt-2">
+            <a href="#specialists" class="inline-flex items-center text-xs tracking-ribbon uppercase font-medium text-plum hover:text-blush-clay transition-colors group">
+              <span>Meet Our Specialists</span>
+              <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Treatment Details Grid -->
+        <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div class="space-y-4">
+            <div class="rounded-xl overflow-hidden aspect-[4/5] bg-ivory-warm border border-hairline">
+              <img 
+                src="https://lh3.googleusercontent.com/d/1_PHILOSOPHY_1_LUMEA" 
+                data-drive-id="1_PHILOSOPHY_1_LUMEA"
+                data-unsplash="https://images.unsplash.com/photo-1512290900672-1f4864389053?q=80&w=800&auto=format&fit=crop"
+                onerror="handleDriveImageFallback(this)"
+                alt="Gentle cleansing and warm towel treatment" 
+                class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                loading="lazy"
+              />
+            </div>
+            <div class="px-2">
+              <span class="text-[9px] tracking-widest text-taupe uppercase">Therapeutic Touch</span>
+              <p class="font-serif text-base text-plum">Gentle Cleansing &amp; Warm Compresses</p>
+            </div>
+          </div>
+
+          <div class="space-y-4 sm:pt-10">
+            <div class="rounded-xl overflow-hidden aspect-[4/5] bg-ivory-warm border border-hairline">
+              <img 
+                src="https://lh3.googleusercontent.com/d/1_PHILOSOPHY_2_LUMEA" 
+                data-drive-id="1_PHILOSOPHY_2_LUMEA"
+                data-unsplash="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=800&auto=format&fit=crop"
+                onerror="handleDriveImageFallback(this)"
+                alt="Skincare application with specialist hands" 
+                class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                loading="lazy"
+              />
+            </div>
+            <div class="px-2">
+              <span class="text-[9px] tracking-widest text-taupe uppercase">Active Nutrients</span>
+              <p class="font-serif text-base text-plum">Customized Botanical Infusions</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="treatments" class="py-16 md:py-24 bg-ivory-warm/40 border-t border-hairline">
+    <div class="max-w-7xl mx-auto px-5 lg:px-12">
+      
+      <!-- Section Header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-16">
+        <div>
+          <span class="text-[11px] tracking-widest2 uppercase font-medium text-taupe block mb-2">Curated Care</span>
+          <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-normal text-plum">
+            EXPLORE OUR <span class="italic font-light">TREATMENTS</span>
+          </h2>
+        </div>
+        <p class="text-taupe-dark text-xs md:text-sm font-light max-w-sm mt-3 md:mt-0 leading-relaxed">
+          Dari perawatan kulit wajah intensif hingga penataan helai rambut dan kuku yang presisi, dirancang dengan sentuhan higienis.
+        </p>
+      </div>
+
+      <!-- Categories Layout: Asymmetric Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+        
+        <!-- Category 1: SKIN (Large Card) -->
+        <div class="md:col-span-7 bg-ivory rounded-2xl border border-hairline p-6 sm:p-8 flex flex-col justify-between group hover:border-taupe/40 transition-all duration-300">
+          <div class="flex items-start justify-between">
+            <div>
+              <span class="text-[10px] tracking-widest uppercase font-medium text-taupe">Category 01</span>
+              <h3 class="font-serif text-2xl sm:text-3xl text-plum mt-1">Skin &amp; Facial Therapy</h3>
+            </div>
+            <span class="text-xs font-mono text-taupe">04 Treatments</span>
+          </div>
+          
+          <div class="my-6 rounded-xl overflow-hidden aspect-[16/9] bg-ivory-warm border border-hairline">
+            <img 
+              src="https://lh3.googleusercontent.com/d/1_CAT_SKIN_LUMEA" 
+              data-drive-id="1_CAT_SKIN_LUMEA"
+              data-unsplash="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=1200&auto=format&fit=crop"
+              onerror="handleDriveImageFallback(this)"
+              alt="Facial skincare and hydration care" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              loading="lazy"
+            />
+          </div>
+
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between pt-4 border-t border-hairline gap-4">
+            <p class="text-xs text-taupe-dark font-light">
+              Deep cleansing, brightening, acne control, and deep dermal hydration.
+            </p>
+            <button onclick="openBookingModal('Skin & Facial')" class="text-xs tracking-ribbon uppercase font-medium text-plum hover:text-blush-clay whitespace-nowrap inline-flex items-center">
+              <span>View Menu</span>
+              <svg class="w-3.5 h-3.5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Category 2: HAIR (Tall Card) -->
+        <div class="md:col-span-5 bg-ivory rounded-2xl border border-hairline p-6 sm:p-8 flex flex-col justify-between group hover:border-taupe/40 transition-all duration-300">
+          <div class="flex items-start justify-between">
+            <div>
+              <span class="text-[10px] tracking-widest uppercase font-medium text-taupe">Category 02</span>
+              <h3 class="font-serif text-2xl sm:text-3xl text-plum mt-1">Hair &amp; Scalp Ritual</h3>
+            </div>
+            <span class="text-xs font-mono text-taupe">03 Treatments</span>
+          </div>
+
+          <div class="my-6 rounded-xl overflow-hidden aspect-[4/3] bg-ivory-warm border border-hairline">
+            <img 
+              src="https://lh3.googleusercontent.com/d/1_CAT_HAIR_LUMEA" 
+              data-drive-id="1_CAT_HAIR_LUMEA"
+              data-unsplash="https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=800&auto=format&fit=crop"
+              onerror="handleDriveImageFallback(this)"
+              alt="Hair spa and nourishing wash basin" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              loading="lazy"
+            />
+          </div>
+
+          <div class="pt-4 border-t border-hairline flex items-center justify-between">
+            <p class="text-xs text-taupe-dark font-light">Hair spa, scalp detox, keratin repair.</p>
+            <button onclick="openBookingModal('Hair & Scalp')" class="text-xs tracking-ribbon uppercase font-medium text-plum hover:text-blush-clay whitespace-nowrap">
+              Explore &rarr;
+            </button>
+          </div>
+        </div>
+
+        <!-- Category 3: BEAUTY (LASH & BROW) -->
+        <div class="md:col-span-4 bg-ivory rounded-2xl border border-hairline p-6 flex flex-col justify-between group hover:border-taupe/40 transition-all duration-300">
+          <div>
+            <span class="text-[10px] tracking-widest uppercase font-medium text-taupe">Category 03</span>
+            <h3 class="font-serif text-xl sm:text-2xl text-plum mt-1">Lash &amp; Brow</h3>
+            <p class="text-xs text-taupe-dark font-light mt-2">Lash lift, brow shaping, and gentle tinting.</p>
+          </div>
+          <div class="my-5 rounded-xl overflow-hidden aspect-[3/2] bg-ivory-warm border border-hairline">
+            <img 
+              src="https://images.unsplash.com/photo-1583001931096-959e9a1a6223?q=80&w=800&auto=format&fit=crop" 
+              alt="Eyelash lift and brow styling" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            />
+          </div>
+          <button onclick="openBookingModal('Lash & Brow')" class="text-xs tracking-ribbon uppercase font-medium text-plum hover:text-blush-clay">
+            Book Lash &rarr;
+          </button>
+        </div>
+
+        <!-- Category 4: NAILS STUDIO -->
+        <div class="md:col-span-4 bg-ivory rounded-2xl border border-hairline p-6 flex flex-col justify-between group hover:border-taupe/40 transition-all duration-300">
+          <div>
+            <span class="text-[10px] tracking-widest uppercase font-medium text-taupe">Category 04</span>
+            <h3 class="font-serif text-xl sm:text-2xl text-plum mt-1">Nail Studio</h3>
+            <p class="text-xs text-taupe-dark font-light mt-2">Russian manicure, spa pedicure, clean cuticle care.</p>
+          </div>
+          <div class="my-5 rounded-xl overflow-hidden aspect-[3/2] bg-ivory-warm border border-hairline">
+            <img 
+              src="https://images.unsplash.com/photo-1632345031435-8727f6897d53?q=80&w=800&auto=format&fit=crop" 
+              alt="Nail care and clean manicure" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            />
+          </div>
+          <button onclick="openBookingModal('Nail Studio')" class="text-xs tracking-ribbon uppercase font-medium text-plum hover:text-blush-clay">
+            Book Nails &rarr;
+          </button>
+        </div>
+
+        <!-- Category 5: BODY & RELAXATION -->
+        <div class="md:col-span-4 bg-ivory rounded-2xl border border-hairline p-6 flex flex-col justify-between group hover:border-taupe/40 transition-all duration-300">
+          <div>
+            <span class="text-[10px] tracking-widest uppercase font-medium text-taupe">Category 05</span>
+            <h3 class="font-serif text-xl sm:text-2xl text-plum mt-1">Body Scrub &amp; Spa</h3>
+            <p class="text-xs text-taupe-dark font-light mt-2">Aromatic salt polish &amp; soothing neck massage.</p>
+          </div>
+          <div class="my-5 rounded-xl overflow-hidden aspect-[3/2] bg-ivory-warm border border-hairline">
+            <img 
+              src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=800&auto=format&fit=crop" 
+              alt="Soothing body relaxation treatment" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            />
+          </div>
+          <button onclick="openBookingModal('Body Relaxation')" class="text-xs tracking-ribbon uppercase font-medium text-plum hover:text-blush-clay">
+            Book Body &rarr;
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section id="signature" class="py-16 md:py-24 bg-blush-soft/60">
+    <div class="max-w-7xl mx-auto px-5 lg:px-12">
+      <div class="bg-ivory rounded-3xl border border-hairline overflow-hidden shadow-sm">
+        <div class="grid grid-cols-1 lg:grid-cols-12 items-stretch">
+          
+          <!-- Image Column with Multi-Tier Fallback -->
+          <div class="lg:col-span-6 relative min-h-[340px] lg:min-h-full">
+            <img 
+              src="https://lh3.googleusercontent.com/d/1_SIGNATURE_FACIAL_LUMEA" 
+              data-drive-id="1_SIGNATURE_FACIAL_LUMEA"
+              data-unsplash="https://images.unsplash.com/photo-1519699047748-de8e457a634e?q=80&w=1200&auto=format&fit=crop"
+              onerror="handleDriveImageFallback(this)"
+              alt="Indonesian woman receiving signature glow facial" 
+              class="absolute inset-0 w-full h-full object-cover"
+              loading="lazy"
+            />
+            <div class="absolute top-5 left-5 bg-plum text-ivory text-[10px] tracking-widest uppercase px-4 py-1.5 rounded-full font-medium">
+              Featured Signature
+            </div>
+          </div>
+
+          <!-- Content Column -->
+          <div class="lg:col-span-6 p-8 sm:p-12 lg:p-16 flex flex-col justify-between space-y-8">
+            <div class="space-y-4">
+              <div class="flex items-center space-x-3 text-taupe text-[11px] tracking-widest uppercase font-medium">
+                <span>The Most Requested Treatment</span>
+                <span class="w-1.5 h-1.5 rounded-full bg-blush-clay"></span>
+                <span>All Skin Types</span>
+              </div>
+
+              <h3 id="dynSignatureTitle" class="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-plum leading-tight">
+                SIGNATURE GLOW<br><span class="italic font-light">FACIAL</span>
+              </h3>
+
+              <p id="dynSignatureDesc" class="text-taupe-dark text-sm sm:text-base font-light leading-relaxed">
+                Deep cleansing, hydration, and skin revitalization treatment designed to leave your skin fresh, smooth, and naturally radiant without aggressive redness or downtime.
+              </p>
+
+              <!-- Treatment Steps Breakdown -->
+              <div class="grid grid-cols-2 gap-4 pt-3 text-xs text-taupe-dark">
+                <div class="flex items-center space-x-2">
+                  <span class="w-1 h-1 rounded-full bg-plum"></span>
+                  <span id="dynStep1">Ultrasonic Skin Cleansing</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <span class="w-1 h-1 rounded-full bg-plum"></span>
+                  <span id="dynStep2">Hydro-Oxygen Infusion</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <span class="w-1 h-1 rounded-full bg-plum"></span>
+                  <span id="dynStep3">Cold Cryo Firming</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <span class="w-1 h-1 rounded-full bg-plum"></span>
+                  <span id="dynStep4">Botanical Peptide Mask</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pricing & Booking Row -->
+            <div class="pt-6 border-t border-hairline flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+              <div>
+                <p class="text-[10px] tracking-widest uppercase text-taupe">Duration &amp; Investment</p>
+                <div class="flex items-baseline space-x-3 mt-1">
+                  <span id="dynSignaturePrice" class="font-serif text-2xl text-plum font-semibold">Rp 150.000</span>
+                  <span id="dynSignatureDuration" class="text-xs text-taupe font-medium">/ 60 MIN</span>
+                </div>
+              </div>
+
+              <button id="dynSignatureBookBtn" onclick="openBookingModal('Signature Glow Facial (Rp 150K)')" class="bg-plum hover:bg-plum-muted text-ivory text-xs tracking-ribbon uppercase font-medium px-8 py-4 rounded-full border border-plum transition-all duration-300 shadow-sm text-center">
+                Book This Treatment
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="results" class="py-16 md:py-24 bg-ivory">
+    <div class="max-w-7xl mx-auto px-5 lg:px-12">
+      
+      <div class="text-center max-w-2xl mx-auto mb-10 md:mb-14">
+        <span class="text-[11px] tracking-widest2 uppercase font-medium text-taupe block mb-2">Authentic Progress</span>
+        <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-normal text-plum">
+          REAL RESULTS.
+        </h2>
+        <p class="text-taupe-dark text-xs sm:text-sm font-light mt-3">
+          See the difference in every detail. Kami mengedepankan hasil nyata yang dapat dicapai secara sehat, tanpa manipulasi berlebih atau ekspektasi yang tidak realistis.
+        </p>
+
+        <!-- Category Filter Tabs -->
+        <div class="inline-flex items-center p-1 bg-ivory-warm rounded-full border border-hairline mt-6 text-xs font-medium text-taupe">
+          <button onclick="switchBaCategory('skin')" id="tab-skin" class="px-5 py-2 rounded-full bg-plum text-ivory transition-all duration-200">
+            Skin Care
+          </button>
+          <button onclick="switchBaCategory('hair')" id="tab-hair" class="px-5 py-2 rounded-full hover:text-plum transition-all duration-200">
+            Hair &amp; Scalp
+          </button>
+          <button onclick="switchBaCategory('lash')" id="tab-lash" class="px-5 py-2 rounded-full hover:text-plum transition-all duration-200">
+            Lash Lift
+          </button>
+        </div>
+      </div>
+
+      <!-- Before-After Slider Container -->
+      <div class="max-w-3xl mx-auto">
+        <div class="ba-slider-container rounded-2xl overflow-hidden aspect-[4/3] sm:aspect-[16/10] bg-ivory-warm border border-hairline shadow-md" id="baContainer">
+          
+          <!-- AFTER Image (Base Layer) -->
+          <img 
+            id="baAfterImg" 
+            src="https://lh3.googleusercontent.com/d/1_BA_SKIN_AFTER_LUMEA" 
+            data-drive-id="1_BA_SKIN_AFTER_LUMEA"
+            data-unsplash="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1200&auto=format&fit=crop"
+            onerror="handleDriveImageFallback(this)"
+            alt="Skin after treatment - Luméa Beauty" 
+            class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
+          />
+          
+          <div class="absolute bottom-5 right-5 bg-plum/80 text-ivory text-[10px] tracking-widest uppercase font-semibold px-3 py-1 rounded-full z-10 backdrop-blur-sm">
+            After Treatment
+          </div>
+
+          <!-- BEFORE Image (Clipped Layer) -->
+          <div class="ba-slider-before" id="baBeforeWrapper">
+            <img 
+              id="baBeforeImg" 
+              src="https://lh3.googleusercontent.com/d/1_BA_SKIN_BEFORE_LUMEA" 
+              data-drive-id="1_BA_SKIN_BEFORE_LUMEA"
+              data-unsplash="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1200&auto=format&fit=crop"
+              onerror="handleDriveImageFallback(this)"
+              alt="Skin before treatment" 
+              class="absolute top-0 left-0 max-w-none w-full h-full object-cover pointer-events-none select-none"
+              style="width: 100%; height: 100%;"
+            />
+            <div class="absolute bottom-5 left-5 bg-charcoal/80 text-ivory text-[10px] tracking-widest uppercase font-semibold px-3 py-1 rounded-full z-10 backdrop-blur-sm">
+              Before
+            </div>
+          </div>
+
+          <!-- Draggable Divider -->
+          <div class="ba-handle" id="baHandle">
+            <div class="ba-button" aria-label="Drag slider">
+              <svg class="w-4 h-4 text-plum" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4" transform="rotate(90 12 12)" />
+              </svg>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Slider Usage Note -->
+        <div class="flex items-center justify-center space-x-2 text-taupe text-[11px] mt-4 font-light">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
+          </svg>
+          <span id="baCaption">Geser pemisah ke kiri &amp; kanan untuk melihat perbandingan tekstur &amp; hidrasi.</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24 bg-ivory-warm/30 border-t border-hairline">
+    <div class="max-w-7xl mx-auto px-5 lg:px-12">
+      
+      <div class="text-center max-w-xl mx-auto mb-14 md:mb-20">
+        <span class="text-[11px] tracking-widest2 uppercase font-medium text-taupe block mb-2">Transparent Menu</span>
+        <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-normal text-plum">
+          TREATMENT MENU
+        </h2>
+        <div class="w-10 h-[1px] bg-taupe/60 mx-auto mt-4"></div>
+      </div>
+
+      <!-- Editorial Menu Grid: 3 Pillars -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-12">
+        
+        <!-- Pillar 1: SKIN -->
+        <div class="space-y-6">
+          <div class="pb-3 border-b border-plum flex items-baseline justify-between">
+            <h3 class="font-serif text-2xl text-plum font-normal tracking-wide">SKIN THERAPY</h3>
+            <span class="text-[10px] tracking-widest text-taupe uppercase">Facial &amp; Derm</span>
+          </div>
+
+          <div class="space-y-5 divide-y divide-hairline" id="menuListSkin">
+            <!-- Dynamic treatments for Skin rendered here -->
+          </div>
+        </div>
+
+        <!-- Pillar 2: HAIR & SCALP -->
+        <div class="space-y-6">
+          <div class="pb-3 border-b border-plum flex items-baseline justify-between">
+            <h3 class="font-serif text-2xl text-plum font-normal tracking-wide">HAIR &amp; SCALP</h3>
+            <span class="text-[10px] tracking-widest text-taupe uppercase">Ritual Spa</span>
+          </div>
+
+          <div class="space-y-5 divide-y divide-hairline" id="menuListHair">
+            <!-- Dynamic treatments for Hair rendered here -->
+          </div>
+        </div>
+
+        <!-- Pillar 3: BEAUTY & LASH -->
+        <div class="space-y-6">
+          <div class="pb-3 border-b border-plum flex items-baseline justify-between">
+            <h3 class="font-serif text-2xl text-plum font-normal tracking-wide">LASH, BROW &amp; NAIL</h3>
+            <span class="text-[10px] tracking-widest text-taupe uppercase">Fine Detail</span>
+          </div>
+
+          <div class="space-y-5 divide-y divide-hairline" id="menuListBeauty">
+            <!-- Dynamic treatments for Beauty rendered here -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Quick Admin Add Service Trigger (Visible in Admin Mode) -->
+      <div id="adminQuickAddMenuBtn" class="hidden mt-8 text-center">
+        <button onclick="openAdminPanelToMenu()" class="inline-flex items-center space-x-2 bg-emerald-800 text-white text-xs tracking-wider uppercase px-5 py-2.5 rounded-full shadow hover:bg-emerald-700 transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+          </svg>
+          <span>+ Tambah Layanan Baru di Sini</span>
+        </button>
+      </div>
+
+      <!-- Menu CTA -->
+      <div class="mt-14 text-center">
+        <p class="text-xs text-taupe mb-4">Ingin konsultasi jenis kulit sebelum memilih perawatan?</p>
+        <button onclick="openBookingModal('General Consultation')" class="inline-flex items-center space-x-2 bg-plum text-ivory text-xs tracking-ribbon uppercase font-medium px-8 py-3.5 rounded-full hover:bg-plum-muted transition-all">
+          <span>Book Consultation Session</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="specialists" class="py-16 md:py-24 bg-ivory">
+    <div class="max-w-7xl mx-auto px-5 lg:px-12">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-16">
+        <div>
+          <span class="text-[11px] tracking-widest2 uppercase font-medium text-taupe block mb-2">Dedicated Practitioners</span>
+          <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-normal text-plum">
+            MEET YOUR <span class="italic font-light">BEAUTY SPECIALIST</span>
+          </h2>
+        </div>
+        <p class="text-taupe-dark text-xs sm:text-sm font-light max-w-sm mt-3 md:mt-0 leading-relaxed">
+          Terapis bersertifikasi dengan pemahaman anatomi kulit dan komitmen tinggi terhadap higienitas.
+        </p>
+      </div>
+
+      <!-- Specialist Profiles Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Specialist 1: NADIA -->
+        <div class="group">
+          <div class="rounded-2xl overflow-hidden aspect-[3/4] bg-ivory-warm border border-hairline mb-5 relative">
+            <img 
+              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800&auto=format&fit=crop" 
+              alt="Nadia - Senior Beauty Therapist" 
+              class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
+            />
+            <div class="absolute bottom-3 left-3 bg-ivory/90 backdrop-blur-sm text-plum text-[10px] tracking-widest uppercase px-3 py-1 rounded-full font-medium">
+              8+ Years Exp.
+            </div>
+          </div>
+          <h3 class="font-serif text-2xl text-plum font-normal">NADIA PRATIWI</h3>
+          <p class="text-xs text-taupe font-medium uppercase tracking-wider mt-0.5">Senior Beauty Therapist</p>
+          <p class="text-xs text-taupe-dark font-light mt-2 leading-relaxed">
+            Spesialisasi dalam teknik facial revitalisasi, akupresur wajah lembut, dan perawatan relaksasi mendalam.
+          </p>
+          <button onclick="openBookingModal('With Nadia Pratiwi')" class="mt-4 text-[11px] tracking-ribbon uppercase font-medium text-plum hover:text-blush-clay inline-flex items-center">
+            <span>Request Nadia</span> &rarr;
+          </button>
+        </div>
+
+        <!-- Specialist 2: MELISSA -->
+        <div class="group">
+          <div class="rounded-2xl overflow-hidden aspect-[3/4] bg-ivory-warm border border-hairline mb-5 relative">
+            <img 
+              src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=800&auto=format&fit=crop" 
+              alt="Melissa - Skin Specialist" 
+              class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
+            />
+            <div class="absolute bottom-3 left-3 bg-ivory/90 backdrop-blur-sm text-plum text-[10px] tracking-widest uppercase px-3 py-1 rounded-full font-medium">
+              6+ Years Exp.
+            </div>
+          </div>
+          <h3 class="font-serif text-2xl text-plum font-normal">MELISSA KUSUMA</h3>
+          <p class="text-xs text-taupe font-medium uppercase tracking-wider mt-0.5">Dermal &amp; Skin Specialist</p>
+          <p class="text-xs text-taupe-dark font-light mt-2 leading-relaxed">
+            Fokus pada penanganan kulit berjerawat, skin barrier restoration, dan terapi hidrasi intensif.
+          </p>
+          <button onclick="openBookingModal('With Melissa Kusuma')" class="mt-4 text-[11px] tracking-ribbon uppercase font-medium text-plum hover:text-blush-clay inline-flex items-center">
+            <span>Request Melissa</span> &rarr;
+          </button>
+        </div>
+
+        <!-- Specialist 3: TIARA -->
+        <div class="group">
+          <div class="rounded-2xl overflow-hidden aspect-[3/4] bg-ivory-warm border border-hairline mb-5 relative">
+            <img 
+              src="https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?q=80&w=800&auto=format&fit=crop" 
+              alt="Tiara - Hair & Lash Specialist" 
+              class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
+            />
+            <div class="absolute bottom-3 left-3 bg-ivory/90 backdrop-blur-sm text-plum text-[10px] tracking-widest uppercase px-3 py-1 rounded-full font-medium">
+              5+ Years Exp.
+            </div>
+          </div>
+          <h3 class="font-serif text-2xl text-plum font-normal">TIARA ANINDITA</h3>
+          <p class="text-xs text-taupe font-medium uppercase tracking-wider mt-0.5">Hair &amp; Lash Specialist</p>
+          <p class="text-xs text-taupe-dark font-light mt-2 leading-relaxed">
+            Ahli dalam keratin lash lift presisi, perawatan kulit kepala botanical spa, serta styling rambut bertekstur.
+          </p>
+          <button onclick="openBookingModal('With Tiara Anindita')" class="mt-4 text-[11px] tracking-ribbon uppercase font-medium text-plum hover:text-blush-clay inline-flex items-center">
+            <span>Request Tiara</span> &rarr;
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section id="studio" class="py-16 md:py-24 bg-ivory-warm/50 border-t border-hairline">
+    <div class="max-w-7xl mx-auto px-5 lg:px-12">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-12">
+        <div class="lg:col-span-6">
+          <span class="text-[11px] tracking-widest2 uppercase font-medium text-taupe block mb-2">Sanctuary of Calm</span>
+          <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-normal text-plum leading-tight">
+            STEP INTO YOUR<br><span class="italic font-light">BEAUTY SPACE.</span>
+          </h2>
+        </div>
+        <div class="lg:col-span-6">
+          <p class="text-taupe-dark text-xs sm:text-sm font-light leading-relaxed">
+            Didesain dengan dominasi kayu bernuansa hangat, linen lembut, pencahayaan alami yang teduh, dan privasi penuh. Bukan klinik yang kaku atau riuh, melainkan ruang tenang di mana Anda dapat beristirahat dan memanjakan diri seutuhnya.
+          </p>
+        </div>
+      </div>
+
+      <!-- Studio Interior Mosaic Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        
+        <div class="rounded-2xl overflow-hidden aspect-[4/3] bg-ivory border border-hairline group">
+          <img 
+            src="https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?q=80&w=800&auto=format&fit=crop" 
+            alt="Warm architectural interior of Luméa studio" 
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+          />
+        </div>
+
+        <div class="rounded-2xl overflow-hidden aspect-[4/3] bg-ivory border border-hairline group">
+          <img 
+            src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=800&auto=format&fit=crop" 
+            alt="Private treatment room with clean linens" 
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+          />
+        </div>
+
+        <div class="rounded-2xl overflow-hidden aspect-[4/3] bg-ivory border border-hairline group sm:col-span-2 lg:col-span-1">
+          <img 
+            src="https://images.unsplash.com/photo-1560750588-73207b1ef5b8?q=80&w=800&auto=format&fit=crop" 
+            alt="Minimalist wash basins and soft lighting" 
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+          />
+        </div>
+
+      </div>
+
+      <!-- Studio Highlights Ribbon -->
+      <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 text-center pt-8 border-t border-hairline">
+        <div>
+          <p class="font-serif text-lg text-plum">Private Suite</p>
+          <p class="text-[10px] text-taupe uppercase tracking-wider">Ruang Perawatan Privat</p>
+        </div>
+        <div>
+          <p class="font-serif text-lg text-plum">HEPA Clean Air</p>
+          <p class="text-[10px] text-taupe uppercase tracking-wider">Sirkulasi Steril &amp; Bersih</p>
+        </div>
+        <div>
+          <p class="font-serif text-lg text-plum">Organic Linen</p>
+          <p class="text-[10px] text-taupe uppercase tracking-wider">Handuk Lembut Sekali Pakai</p>
+        </div>
+        <div>
+          <p class="font-serif text-lg text-plum">Aromatherapy</p>
+          <p class="text-[10px] text-taupe uppercase tracking-wider">Minyak Esensial Alami</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24 bg-ivory">
+    <div class="max-w-7xl mx-auto px-5 lg:px-12">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <div class="lg:col-span-6 order-2 lg:order-1">
+          <div class="rounded-2xl overflow-hidden aspect-[4/3] bg-ivory-warm border border-hairline shadow-sm">
+            <img 
+              src="https://images.unsplash.com/photo-1608248597359-00913988f5cf?q=80&w=1200&auto=format&fit=crop" 
+              alt="Clean skincare serums and minimalist glass bottles" 
+              class="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+
+        <div class="lg:col-span-6 order-1 lg:order-2 space-y-6">
+          <span class="text-[11px] tracking-widest2 uppercase font-medium text-taupe block">Safe &amp; Clean Formulations</span>
+          <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-normal text-plum leading-tight">
+            WHAT TOUCHES YOUR SKIN<br><span class="italic font-light">MATTERS.</span>
+          </h2>
+          <p class="text-taupe-dark text-sm sm:text-base font-light leading-relaxed">
+            Kami memilih produk dengan mempertimbangkan kualitas, keamanan, dan kebutuhan biologis jaringan kulit Anda. Setiap serum, minyak esensial, dan masker botani telah terdaftar resmi di BPOM, bebas dari paraben berbahaya, dan tidak diuji coba pada hewan.
+          </p>
+          
+          <div class="space-y-3 pt-2">
+            <div class="flex items-start space-x-3">
+              <span class="w-5 h-5 rounded-full bg-blush flex items-center justify-center text-plum text-xs mt-0.5">&check;</span>
+              <p class="text-xs text-taupe-dark font-light"><strong class="text-plum font-medium">Clinically Proven Botanicals:</strong> Ekstrak centella asiatica, ceramide kompleks, dan peptida aktif.</p>
+            </div>
+            <div class="flex items-start space-x-3">
+              <span class="w-5 h-5 rounded-full bg-blush flex items-center justify-center text-plum text-xs mt-0.5">&check;</span>
+              <p class="text-xs text-taupe-dark font-light"><strong class="text-plum font-medium">pH-Balanced for Asian Skin:</strong> Diformulasikan khusus untuk menjaga acid mantle pada iklim tropis.</p>
+            </div>
+            <div class="flex items-start space-x-3">
+              <span class="w-5 h-5 rounded-full bg-blush flex items-center justify-center text-plum text-xs mt-0.5">&check;</span>
+              <p class="text-xs text-taupe-dark font-light"><strong class="text-plum font-medium">Hygienic Single-Dose Dispensers:</strong> Menghindari kontaminasi silang produk antarsesi.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="membership" class="py-16 md:py-24 bg-blush-soft/50 border-t border-hairline">
+    <div class="max-w-7xl mx-auto px-5 lg:px-12">
+      
+      <div class="text-center max-w-xl mx-auto mb-12 md:mb-16">
+        <span class="text-[11px] tracking-widest2 uppercase font-medium text-taupe block mb-2">Sustainable Self-Care</span>
+        <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-normal text-plum">
+          YOUR BEAUTY ROUTINE
+        </h2>
+        <p class="text-taupe-dark text-xs sm:text-sm font-light mt-3">
+          Paket perawatan berkala yang fleksibel untuk menjaga kilau kulit dan kesehatan rambut sepanjang bulan.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Plan 1: ESSENTIAL -->
+        <div class="bg-ivory rounded-3xl p-8 border border-hairline flex flex-col justify-between hover:shadow-md transition-all duration-300">
+          <div>
+            <span class="text-[10px] tracking-widest uppercase font-semibold text-taupe">Monthly Ritual</span>
+            <h3 class="font-serif text-3xl text-plum mt-1">ESSENTIAL</h3>
+            <p class="text-xs text-taupe-dark font-light mt-2">Untuk perawatan kebersihan kulit wajah mendasar setiap bulan.</p>
+            
+            <div class="my-6 pt-6 border-t border-hairline">
+              <span class="font-serif text-3xl text-plum font-semibold">Rp 350K</span>
+              <span class="text-xs text-taupe block mt-0.5">/ bulan (Hemat 20%)</span>
+            </div>
+
+            <ul class="space-y-3 text-xs text-taupe-dark font-light">
+              <li class="flex items-center space-x-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-blush-clay"></span>
+                <span>1x Deep Clean Facial (60 min)</span>
+              </li>
+              <li class="flex items-center space-x-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-blush-clay"></span>
+                <span>1x Express Brow Shaping</span>
+              </li>
+              <li class="flex items-center space-x-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-blush-clay"></span>
+                <span>10% Diskon untuk Add-on Treatment</span>
+              </li>
+              <li class="flex items-center space-x-2 text-taupe/60 line-through">
+                <span>Free Scalp Massage</span>
+              </li>
+            </ul>
+          </div>
+
+          <button onclick="openBookingModal('Membership: Essential Plan')" class="mt-8 w-full py-3.5 rounded-full border border-plum text-plum text-xs tracking-ribbon uppercase font-medium hover:bg-plum hover:text-ivory transition-all">
+            Discover Essential
+          </button>
+        </div>
+
+        <!-- Plan 2: GLOW (Highlighted) -->
+        <div class="bg-ivory rounded-3xl p-8 border-2 border-blush-clay/60 shadow-lg relative flex flex-col justify-between">
+          <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-plum text-ivory text-[9px] tracking-widest uppercase font-semibold px-4 py-1 rounded-full">
+            Recommended
+          </div>
+
+          <div>
+            <span class="text-[10px] tracking-widest uppercase font-semibold text-blush-clay">Skin &amp; Hair Harmony</span>
+            <h3 class="font-serif text-3xl text-plum mt-1">GLOW ROUTINE</h3>
+            <p class="text-xs text-taupe-dark font-light mt-2">Kombinasi optimal untuk wajah berseri dan helai rambut sehat.</p>
+            
+            <div class="my-6 pt-6 border-t border-hairline">
+              <span class="font-serif text-3xl text-plum font-semibold">Rp 550K</span>
+              <span class="text-xs text-taupe block mt-0.5">/ bulan (Hemat 30%)</span>
+            </div>
+
+            <ul class="space-y-3 text-xs text-taupe-dark font-light">
+              <li class="flex items-center space-x-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-plum"></span>
+                <span>1x Signature Glow Facial (75 min)</span>
+              </li>
+              <li class="flex items-center space-x-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-plum"></span>
+                <span>1x Botanical Hair Spa &amp; Blow</span>
+              </li>
+              <li class="flex items-center space-x-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-plum"></span>
+                <span>Priority Slot Booking Weekend</span>
+              </li>
+              <li class="flex items-center space-x-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-plum"></span>
+                <span>15% Diskon Produk Skincare Retail</span>
+              </li>
+            </ul>
+          </div>
+
+          <button onclick="openBookingModal('Membership: Glow Plan')" class="mt-8 w-full py-3.5 rounded-full bg-plum text-ivory text-xs tracking-ribbon uppercase font-medium hover:bg-plum-muted transition-all shadow">
+            Discover Glow Plan
+          </button>
+        </div>
+
+        <!-- Plan 3: SIGNATURE -->
+        <div class="bg-ivory rounded-3xl p-8 border border-hairline flex flex-col justify-between hover:shadow-md transition-all duration-300">
+          <div>
+            <span class="text-[10px] tracking-widest uppercase font-semibold text-taupe">Total Self-Care</span>
+            <h3 class="font-serif text-3xl text-plum mt-1">SIGNATURE VIP</h3>
+            <p class="text-xs text-taupe-dark font-light mt-2">Pengalaman kecantikan lengkap untuk relaksasi menyeluruh.</p>
+            
+            <div class="my-6 pt-6 border-t border-hairline">
+              <span class="font-serif text-3xl text-plum font-semibold">Rp 890K</span>
+              <span class="text-xs text-taupe block mt-0.5">/ bulan (Full Privilege)</span>
+            </div>
+
+            <ul class="space-y-3 text-xs text-taupe-dark font-light">
+              <li class="flex items-center space-x-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-blush-clay"></span>
+                <span>2x Custom Facials (Bebas Pilih)</span>
+              </li>
+              <li class="flex items-center space-x-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-blush-clay"></span>
+                <span>1x Keratin Lash Lift atau Spa Manicure</span>
+              </li>
+              <li class="flex items-center space-x-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-blush-clay"></span>
+                <span>1x Scalp Detoxing Treatment</span>
+              </li>
+              <li class="flex items-center space-x-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-blush-clay"></span>
+                <span>Private VIP Room Guaranteed</span>
+              </li>
+            </ul>
+          </div>
+
+          <button onclick="openBookingModal('Membership: Signature VIP')" class="mt-8 w-full py-3.5 rounded-full border border-plum text-plum text-xs tracking-ribbon uppercase font-medium hover:bg-plum hover:text-ivory transition-all">
+            Discover Signature
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section class="py-20 md:py-28 bg-ivory text-plum border-t border-hairline">
+    <div class="max-w-4xl mx-auto px-5 text-center">
+      
+      <span class="text-[11px] tracking-widest2 uppercase font-medium text-taupe block mb-4">Loved By Our Clients</span>
+
+      <!-- Rating Stars -->
+      <div class="flex items-center justify-center space-x-1.5 text-taupe mb-8">
+        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+      </div>
+
+      <!-- Main Quote -->
+      <blockquote id="quoteText" class="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal leading-snug tracking-tight text-plum italic transition-opacity duration-300">
+        “The treatment feels personal, relaxing, and the result is exactly what I wanted. Kulit terasa sangat ringan, bersih, dan segar tanpa rasa perih.”
+      </blockquote>
+
+      <!-- Author -->
+      <div class="mt-8 space-y-1">
+        <p id="quoteAuthor" class="text-xs tracking-widest uppercase font-semibold text-plum">— NADIA PARAMITA</p>
+        <p id="quoteRole" class="text-[11px] text-taupe font-light">Client since 2024 • Signature Glow Facial</p>
+      </div>
+
+      <!-- Pagination Indicator & Switchers -->
+      <div class="mt-10 flex items-center justify-center space-x-6">
+        <button onclick="prevTestimonial()" aria-label="Previous review" class="p-2 text-taupe hover:text-plum transition-colors">
+          &larr;
+        </button>
+        <span id="quoteCounter" class="text-xs font-mono text-taupe tracking-wider">01 / 04</span>
+        <button onclick="nextTestimonial()" aria-label="Next review" class="p-2 text-taupe hover:text-plum transition-colors">
+          &rarr;
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="journal" class="py-16 md:py-24 bg-ivory-warm/40 border-t border-hairline">
+    <div class="max-w-7xl mx-auto px-5 lg:px-12">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+        <div>
+          <span class="text-[11px] tracking-widest2 uppercase font-medium text-taupe block mb-2">Refined Notes</span>
+          <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-normal text-plum">
+            THE BEAUTY EDIT
+          </h2>
+        </div>
+        <a href="#booking" class="text-xs tracking-ribbon uppercase font-medium text-taupe hover:text-plum transition-colors mt-3 md:mt-0 inline-flex items-center">
+          <span>Read All Articles</span> &rarr;
+        </a>
+      </div>
+
+      <!-- 4 Editorial Articles -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Article 1 -->
+        <article class="group cursor-pointer">
+          <div class="rounded-xl overflow-hidden aspect-[4/3] bg-ivory border border-hairline mb-4">
+            <img 
+              src="https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=800&auto=format&fit=crop" 
+              alt="Skincare routine and morning light" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+          </div>
+          <span class="text-[9px] tracking-widest uppercase font-medium text-taupe">01 • Skincare Fundamentals</span>
+          <h3 class="font-serif text-lg text-plum group-hover:text-blush-clay transition-colors mt-1 leading-snug">
+            How to Build a Simple, Effective Routine
+          </h3>
+          <p class="text-xs text-taupe-dark font-light mt-2 line-clamp-2">
+            Mengapa lebih sedikit langkah justru sering kali memberi hasil terbaik bagi ketahanan skin barrier.
+          </p>
+          <span class="inline-block mt-3 text-[11px] font-medium text-plum group-hover:underline">Read Article</span>
+        </article>
+
+        <!-- Article 2 -->
+        <article class="group cursor-pointer">
+          <div class="rounded-xl overflow-hidden aspect-[4/3] bg-ivory border border-hairline mb-4">
+            <img 
+              src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?q=80&w=800&auto=format&fit=crop" 
+              alt="Hydration droplet on skin" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+          </div>
+          <span class="text-[9px] tracking-widest uppercase font-medium text-taupe">02 • Dermal Health</span>
+          <h3 class="font-serif text-lg text-plum group-hover:text-blush-clay transition-colors mt-1 leading-snug">
+            What Your Skin Really Needs in Tropical Weather
+          </h3>
+          <p class="text-xs text-taupe-dark font-light mt-2 line-clamp-2">
+            Membedakan dehidrasi dengan sebum berlebih untuk pemilihan pelembap yang tepat.
+          </p>
+          <span class="inline-block mt-3 text-[11px] font-medium text-plum group-hover:underline">Read Article</span>
+        </article>
+
+        <!-- Article 3 -->
+        <article class="group cursor-pointer">
+          <div class="rounded-xl overflow-hidden aspect-[4/3] bg-ivory border border-hairline mb-4">
+            <img 
+              src="https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?q=80&w=800&auto=format&fit=crop" 
+              alt="Healthy hair strand texture" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+          </div>
+          <span class="text-[9px] tracking-widest uppercase font-medium text-taupe">03 • Hair Care</span>
+          <h3 class="font-serif text-lg text-plum group-hover:text-blush-clay transition-colors mt-1 leading-snug">
+            How to Keep Your Hair Healthy &amp; Voluminous
+          </h3>
+          <p class="text-xs text-taupe-dark font-light mt-2 line-clamp-2">
+            Pentingnya eksfoliasi kulit kepala secara rutin agar akar rambut kuat dan bebas lepek.
+          </p>
+          <span class="inline-block mt-3 text-[11px] font-medium text-plum group-hover:underline">Read Article</span>
+        </article>
+
+        <!-- Article 4 -->
+        <article class="group cursor-pointer">
+          <div class="rounded-xl overflow-hidden aspect-[4/3] bg-ivory border border-hairline mb-4">
+            <img 
+              src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=800&auto=format&fit=crop" 
+              alt="Relaxation and tea cup" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+          </div>
+          <span class="text-[9px] tracking-widest uppercase font-medium text-taupe">04 • Mind &amp; Wellness</span>
+          <h3 class="font-serif text-lg text-plum group-hover:text-blush-clay transition-colors mt-1 leading-snug">
+            Self-Care Without Overdoing It
+          </h3>
+          <p class="text-xs text-taupe-dark font-light mt-2 line-clamp-2">
+            Menjadikan perawatan diri sebagai momen mindful daripada daftar kewajiban yang melelahkan.
+          </p>
+          <span class="inline-block mt-3 text-[11px] font-medium text-plum group-hover:underline">Read Article</span>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section class="py-16 md:py-20 bg-blush-soft border-y border-hairline">
+    <div class="max-w-4xl mx-auto px-5 text-center space-y-5">
+      <span class="text-[10px] tracking-widest2 uppercase font-medium text-blush-clay block">Privilege For New Guests</span>
+      <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-normal text-plum">
+        A LITTLE SOMETHING FOR YOU.
+      </h2>
+      <p class="text-taupe-dark text-xs sm:text-sm font-light max-w-lg mx-auto leading-relaxed">
+        Sebagai sambutan hangat pada kunjungan pertama Anda, nikmati complementary botanical scalp massage pada setiap reservasi facial treatment.
+      </p>
+      <div class="pt-2">
+        <button onclick="openBookingModal('New Client Privilege')" class="bg-plum hover:bg-plum-muted text-ivory text-xs tracking-ribbon uppercase font-medium px-8 py-3.5 rounded-full border border-plum transition-all duration-300 shadow-sm">
+          Claim Your Treatment
+        </button>
+      </div>
+      <p class="text-[10px] text-taupe font-light tracking-wide">Berlaku untuk reservasi online pertama kali • Berlaku hingga akhir bulan ini</p>
+    </div>
+  </section>
+
+  <section id="booking" class="py-16 md:py-24 bg-ivory">
+    <div class="max-w-4xl mx-auto px-5 lg:px-8">
+      
+      <div class="text-center mb-12">
+        <span class="text-[11px] tracking-widest2 uppercase font-medium text-taupe block mb-2">Effortless Reservation</span>
+        <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-normal text-plum">
+          BOOK YOUR MOMENT
+        </h2>
+        <p class="text-taupe-dark text-xs sm:text-sm font-light mt-2 max-w-md mx-auto">
+          Pilih perawatan dan jadwal yang paling nyaman untuk Anda. Tim kami akan segera mengonfirmasi ketersediaan slot.
+        </p>
+      </div>
+
+      <!-- Booking Card -->
+      <div class="bg-ivory-warm/60 rounded-3xl p-6 sm:p-10 border border-hairline shadow-sm">
+        <form id="mainBookingForm" onsubmit="handleBookingSubmit(event)" class="space-y-6">
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            
+            <!-- Treatment Selection -->
+            <div>
+              <label for="bTreatment" class="block text-[10px] tracking-widest uppercase font-semibold text-taupe mb-2">TREATMENT</label>
+              <select id="bTreatment" required class="w-full bg-ivory border border-hairline rounded-xl px-4 py-3 text-xs text-charcoal focus:outline-none focus:border-plum transition-colors">
+                <option value="" disabled selected>Pilih Treatment...</option>
+                <option value="Signature Glow Facial (Rp 150K)">Signature Glow Facial — 60 min (Rp 150K)</option>
+                <option value="Deep Clean Facial (Rp 150K)">Deep Clean Facial — 60 min (Rp 150K)</option>
+                <option value="Hydration Facial (Rp 175K)">Hydration Facial — 60 min (Rp 175K)</option>
+                <option value="Brightening Facial (Rp 200K)">Brightening Facial — 75 min (Rp 200K)</option>
+                <option value="Acne Care Facial (Rp 180K)">Acne Care Facial — 60 min (Rp 180K)</option>
+                <option value="Botanical Hair Spa (Rp 100K)">Botanical Hair Spa — 60 min (Rp 100K)</option>
+                <option value="Scalp Purifying (Rp 125K)">Scalp Purifying — 60 min (Rp 125K)</option>
+                <option value="Keratin Lash Lift (Rp 150K)">Keratin Lash Lift — 60 min (Rp 150K)</option>
+                <option value="Spa Manicure (Rp 110K)">Spa Manicure — 45 min (Rp 110K)</option>
+                <option value="General Consultation">Konsultasi Kulit Dahulu</option>
+              </select>
+            </div>
+
+            <!-- Specialist Selection -->
+            <div>
+              <label for="bSpecialist" class="block text-[10px] tracking-widest uppercase font-semibold text-taupe mb-2">SPECIALIST</label>
+              <select id="bSpecialist" required class="w-full bg-ivory border border-hairline rounded-xl px-4 py-3 text-xs text-charcoal focus:outline-none focus:border-plum transition-colors">
+                <option value="Any Available Specialist">Terapis yang Tersedia (Rekomendasi Terbaik)</option>
+                <option value="Nadia Pratiwi (Senior Beauty Therapist)">Nadia Pratiwi (Senior Beauty Therapist)</option>
+                <option value="Melissa Kusuma (Skin Specialist)">Melissa Kusuma (Skin Specialist)</option>
+                <option value="Tiara Anindita (Hair & Lash Specialist)">Tiara Anindita (Hair & Lash Specialist)</option>
+              </select>
+            </div>
+
+            <!-- Date -->
+            <div>
+              <label for="bDate" class="block text-[10px] tracking-widest uppercase font-semibold text-taupe mb-2">DATE</label>
+              <input type="date" id="bDate" required class="w-full bg-ivory border border-hairline rounded-xl px-4 py-3 text-xs text-charcoal focus:outline-none focus:border-plum transition-colors">
+            </div>
+
+            <!-- Time -->
+            <div>
+              <label for="bTime" class="block text-[10px] tracking-widest uppercase font-semibold text-taupe mb-2">TIME SLOT</label>
+              <select id="bTime" required class="w-full bg-ivory border border-hairline rounded-xl px-4 py-3 text-xs text-charcoal focus:outline-none focus:border-plum transition-colors">
+                <option value="" disabled selected>Pilih Jam Kunjungan...</option>
+                <option value="09:30 WIB">09:30 WIB (Pagi Nyaman)</option>
+                <option value="11:00 WIB">11:00 WIB</option>
+                <option value="13:30 WIB">13:30 WIB (Siang Santai)</option>
+                <option value="15:00 WIB">15:00 WIB</option>
+                <option value="16:30 WIB">16:30 WIB</option>
+                <option value="18:30 WIB">18:30 WIB (Malam Relaksasi)</option>
+                <option value="19:30 WIB">19:30 WIB</option>
+              </select>
+            </div>
+
+            <!-- Client Name -->
+            <div>
+              <label for="bName" class="block text-[10px] tracking-widest uppercase font-semibold text-taupe mb-2">YOUR FULL NAME</label>
+              <input type="text" id="bName" placeholder="Contoh: Saraswati Putri" required class="w-full bg-ivory border border-hairline rounded-xl px-4 py-3 text-xs text-charcoal placeholder:text-taupe/50 focus:outline-none focus:border-plum transition-colors">
+            </div>
+
+            <!-- Client WhatsApp -->
+            <div>
+              <label for="bPhone" class="block text-[10px] tracking-widest uppercase font-semibold text-taupe mb-2">WHATSAPP NUMBER</label>
+              <input type="tel" id="bPhone" placeholder="0812xxxxxxxx" required class="w-full bg-ivory border border-hairline rounded-xl px-4 py-3 text-xs text-charcoal placeholder:text-taupe/50 focus:outline-none focus:border-plum transition-colors">
+            </div>
+
+          </div>
+
+          <!-- Notes -->
+          <div>
+            <label for="bNotes" class="block text-[10px] tracking-widest uppercase font-semibold text-taupe mb-2">SPECIAL REQUEST / KELUHAN KULIT (OPTIONAL)</label>
+            <textarea id="bNotes" rows="2" placeholder="Contoh: Kulit sensitif terhadap fragrance, ingin ruang yang tenang..." class="w-full bg-ivory border border-hairline rounded-xl px-4 py-3 text-xs text-charcoal placeholder:text-taupe/50 focus:outline-none focus:border-plum transition-colors"></textarea>
+          </div>
+
+          <!-- Actions -->
+          <div class="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <button type="submit" class="w-full sm:w-auto bg-plum hover:bg-plum-muted text-ivory text-xs tracking-ribbon uppercase font-medium px-10 py-4 rounded-full border border-plum transition-all shadow-sm">
+              Confirm Appointment
+            </button>
+
+            <a id="waDirectBtn" href="https://wa.me/6281234567890?text=Halo%20LUM%C3%89A,%20saya%20ingin%20reservasi%20treatment%20kecantikan." target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto inline-flex items-center justify-center space-x-2 text-xs tracking-ribbon uppercase font-medium text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 px-6 py-4 rounded-full transition-all">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.976.533 2.026.815 3.149.815 3.182 0 5.767-2.587 5.768-5.766 0-3.18-2.586-5.767-5.768-5.767zm3.385 8.163c-.145.409-.838.774-1.155.823-.317.048-.718.067-2.316-.576-1.921-.772-3.147-2.73-3.243-2.857-.096-.127-.777-1.033-.777-1.97 0-.938.489-1.398.663-1.589.174-.191.381-.239.508-.239.127 0 .254.002.365.008.117.006.273-.044.427.327.16.386.549 1.341.597 1.439.048.098.08.212.016.34-.064.127-.096.206-.191.317-.096.111-.202.248-.288.333-.096.096-.196.2-.084.392.112.192.498.822 1.069 1.332.736.657 1.357.861 1.549.957.192.096.304.08.417-.048.112-.128.477-.557.604-.748.127-.191.255-.16.429-.096.175.064 1.111.524 1.302.62.191.096.318.143.365.223.048.079.048.461-.097.87z" />
+              </svg>
+              <span>Book via WhatsApp</span>
+            </a>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="location" class="py-16 md:py-24 bg-ivory-warm/30 border-t border-hairline">
+    <div class="max-w-7xl mx-auto px-5 lg:px-12">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+        
+        <!-- Left Details -->
+        <div class="lg:col-span-5 space-y-6">
+          <span class="text-[11px] tracking-widest2 uppercase font-medium text-taupe block">Warmly Welcoming You</span>
+          <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-normal text-plum">
+            VISIT LUMÉA
+          </h2>
+          <div class="w-10 h-[1px] bg-taupe/60"></div>
+          
+          <div class="space-y-4 text-xs sm:text-sm text-taupe-dark font-light">
+            <div>
+              <strong class="text-plum font-medium block uppercase tracking-wider text-[11px]">STUDIO ADDRESS</strong>
+              <p id="dynStudioAddress" class="mt-1 leading-relaxed">LUMÉA BEAUTY &amp; AESTHETIC STUDIO<br>Jl. Senopati Raya No. 88, Kebayoran Baru<br>Jakarta Selatan, Indonesia</p>
+            </div>
+
+            <div>
+              <strong class="text-plum font-medium block uppercase tracking-wider text-[11px]">OPERATIONAL HOURS</strong>
+              <p id="dynStudioHours" class="mt-1">Senin — Minggu: 09.00 — 21.00 WIB</p>
+              <p class="text-[11px] text-taupe">Valet parking &amp; reserved guest bays available.</p>
+            </div>
+
+            <div>
+              <strong class="text-plum font-medium block uppercase tracking-wider text-[11px]">CONTACT DIRECT</strong>
+              <p id="dynStudioPhone" class="mt-1">WhatsApp: +62 812-3456-7890</p>
+              <p id="dynStudioEmail">Email: concierge@lumeastudio.id</p>
+            </div>
+          </div>
+
+          <div class="pt-2 flex items-center space-x-4">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="text-xs tracking-ribbon uppercase font-medium text-plum hover:text-blush-clay">
+              Instagram &rarr;
+            </a>
+            <span class="text-hairline">•</span>
+            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="text-xs tracking-ribbon uppercase font-medium text-plum hover:text-blush-clay">
+              TikTok &rarr;
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Minimalist Map Visual Representation -->
+        <div class="lg:col-span-7">
+          <div class="rounded-3xl overflow-hidden border border-hairline bg-ivory shadow-sm relative aspect-[16/10]">
+            <!-- Minimal Map Canvas / Stylized vector graphic placeholder -->
+            <div class="w-full h-full bg-[#EFECE6] relative p-8 flex flex-col justify-between">
+              <!-- Decorative Street Layout Lines -->
+              <svg class="absolute inset-0 w-full h-full opacity-60 pointer-events-none" viewBox="0 0 600 400" fill="none">
+                <path d="M0 80 L600 120" stroke="#DFD9CF" stroke-width="6" />
+                <path d="M120 0 L160 400" stroke="#DFD9CF" stroke-width="8" />
+                <path d="M420 0 L390 400" stroke="#DFD9CF" stroke-width="6" />
+                <path d="M0 260 L600 240" stroke="#DFD9CF" stroke-width="10" />
+                <circle cx="280" cy="200" r="40" fill="#E8E2D8" />
+              </svg>
+
+              <div class="relative z-10 flex justify-between items-start">
+                <span class="text-[10px] tracking-widest uppercase font-semibold text-taupe bg-ivory px-3 py-1 rounded-full border border-hairline">
+                  Senopati Beauty District
+                </span>
+                <span class="text-[10px] tracking-wider text-taupe">Private Parking</span>
+              </div>
+
+              <!-- Pin Landmark -->
+              <div class="relative z-10 self-center text-center">
+                <div class="w-10 h-10 rounded-full bg-plum text-ivory flex items-center justify-center mx-auto shadow-xl ring-8 ring-blush/60 animate-pulse">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                </div>
+                <div class="mt-2 bg-ivory/95 backdrop-blur-sm border border-hairline px-3 py-1 rounded-lg shadow-sm">
+                  <p class="font-serif text-xs font-semibold text-plum">LUMÉA STUDIO</p>
+                  <p class="text-[9px] text-taupe">Jl. Senopati No. 88</p>
+                </div>
+              </div>
+
+              <div class="relative z-10 flex justify-between items-end text-[10px] text-taupe">
+                <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="bg-ivory px-3 py-1.5 rounded-full border border-hairline hover:text-plum font-medium">
+                  Open in Google Maps &nearr;
+                </a>
+                <span>Quiet sanctuary amidst the city</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24 bg-ivory">
+    <div class="max-w-7xl mx-auto px-5 lg:px-12">
+      
+      <div class="text-center max-w-xl mx-auto mb-12">
+        <span class="text-[11px] tracking-widest2 uppercase font-medium text-taupe block mb-2">Moments &amp; Details</span>
+        <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-normal text-plum">
+          BEAUTY IN REAL LIFE
+        </h2>
+        <p class="text-taupe-dark text-xs sm:text-sm font-light mt-2">
+          Ikuti keseharian kami di <a href="https://instagram.com" class="text-plum underline underline-offset-4">@lumeabeautystudio</a>
+        </p>
+      </div>
+
+      <!-- Asymmetric 5-Photo Gallery -->
+      <div class="grid grid-cols-2 md:grid-cols-12 gap-4">
+        
+        <div class="md:col-span-3 rounded-2xl overflow-hidden aspect-[4/5] bg-ivory-warm border border-hairline group">
+          <img 
+            src="https://images.unsplash.com/photo-1512290900672-1f4864389053?q=80&w=600&auto=format&fit=crop" 
+            alt="Warm facial towel service" 
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+        </div>
+
+        <div class="md:col-span-3 rounded-2xl overflow-hidden aspect-[4/5] bg-ivory-warm border border-hairline group">
+          <img 
+            src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=600&auto=format&fit=crop" 
+            alt="Guest smiling with natural bare skin" 
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+        </div>
+
+        <div class="col-span-2 md:col-span-3 rounded-2xl overflow-hidden aspect-square md:aspect-[4/5] bg-ivory-warm border border-hairline group">
+          <img 
+            src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=600&auto=format&fit=crop" 
+            alt="Therapist preparing serum" 
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+        </div>
+
+        <div class="col-span-2 md:col-span-3 rounded-2xl overflow-hidden aspect-square md:aspect-[4/5] bg-ivory-warm border border-hairline group">
+          <img 
+            src="https://images.unsplash.com/photo-1632345031435-8727f6897d53?q=80&w=600&auto=format&fit=crop" 
+            alt="Clean nude manicure detail" 
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="bg-plum text-ivory pt-16 pb-20 md:pb-16 border-t border-plum-muted">
+    <div class="max-w-7xl mx-auto px-5 lg:px-12">
+      
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-12 pb-14 border-b border-plum-muted">
+        
+        <!-- Col 1: Brand & Tagline -->
+        <div class="md:col-span-5 space-y-4">
+          <a href="#hero" class="inline-block font-serif text-3xl md:text-4xl tracking-[0.25em] text-ivory font-normal">
+            LUMÉA
+          </a>
+          <p class="text-[10px] tracking-[0.3em] uppercase text-blush-rose font-medium">Beauty &amp; Aesthetic Studio</p>
+          <p class="font-serif text-lg text-ivory-muted italic max-w-sm pt-2">
+            “Feel good in your own skin.”
+          </p>
+          <p class="text-xs text-taupe-light font-light max-w-sm leading-relaxed">
+            Menghadirkan perawatan kecantikan yang tenang, higienis, dan terarah untuk memancarkan pesona alami wanita Indonesia.
+          </p>
+        </div>
+
+        <!-- Col 2: Navigation Links -->
+        <div class="md:col-span-3 space-y-3">
+          <p class="text-[10px] tracking-widest uppercase font-semibold text-blush-rose mb-2">QUICK NAVIGATION</p>
+          <ul class="space-y-2 text-xs tracking-wider uppercase text-ivory-muted font-light">
+            <li><a href="#treatments" class="hover:text-blush transition-colors">Treatments</a></li>
+            <li><a href="#signature" class="hover:text-blush transition-colors">Signature Facial</a></li>
+            <li><a href="#results" class="hover:text-blush transition-colors">Before &amp; After</a></li>
+            <li><a href="#specialists" class="hover:text-blush transition-colors">Specialists</a></li>
+            <li><a href="#studio" class="hover:text-blush transition-colors">The Studio</a></li>
+            <li><a href="#journal" class="hover:text-blush transition-colors">Journal</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Hours & Booking Contact -->
+        <div class="md:col-span-4 space-y-3">
+          <p class="text-[10px] tracking-widest uppercase font-semibold text-blush-rose mb-2">STUDIO HOURS &amp; CARE</p>
+          <p class="text-xs text-ivory-muted font-light">Senin — Minggu: 09.00 — 21.00 WIB</p>
+          <p class="text-xs text-ivory-muted font-light">Jl. Senopati Raya No. 88, Kebayoran Baru, Jakarta Selatan</p>
+          <div class="pt-3">
+            <button onclick="openBookingModal('Footer CTA')" class="bg-ivory hover:bg-ivory-muted text-plum text-xs tracking-ribbon uppercase font-medium px-6 py-3 rounded-full transition-all">
+              Book Appointment
+            </button>
+          </div>
+          <div class="pt-3 flex space-x-6 text-xs text-taupe-light uppercase tracking-wider">
+            <a href="https://instagram.com" class="hover:text-ivory transition-colors">Instagram</a>
+            <a href="https://tiktok.com" class="hover:text-ivory transition-colors">TikTok</a>
+            <a href="https://wa.me/6281234567890" class="hover:text-ivory transition-colors">WhatsApp</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Copyright & Bottom Bar -->
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-taupe-light text-[11px] font-light gap-4">
+        <p>&copy; 2026 LUMÉA BEAUTY &amp; AESTHETIC STUDIO. ALL RIGHTS RESERVED.</p>
+        <div class="flex items-center space-x-3">
+          <p class="text-taupe">Designed for Modern Indonesian Beauty Care</p>
+          <span class="text-taupe/40">•</span>
+          <button onclick="toggleAdminLoginModal()" class="text-taupe hover:text-ivory underline transition">
+            Kelola Website
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <div class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-ivory/95 backdrop-blur-md border-t border-hairline py-2 px-3 flex items-center justify-around text-center">
+    <a href="#hero" class="flex flex-col items-center text-taupe hover:text-plum py-1">
+      <svg class="w-4 h-4 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+      </svg>
+      <span class="text-[9px] tracking-wider uppercase font-medium">Home</span>
+    </a>
+
+    <a href="#treatments" class="flex flex-col items-center text-taupe hover:text-plum py-1">
+      <svg class="w-4 h-4 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+      </svg>
+      <span class="text-[9px] tracking-wider uppercase font-medium">Treatments</span>
+    </a>
+
+    <!-- Primary Action: Book -->
+    <button onclick="openBookingModal('Mobile Sticky Nav')" class="bg-plum text-ivory px-5 py-2 rounded-full flex items-center space-x-1 shadow-md">
+      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+      </svg>
+      <span class="text-[10px] tracking-widest uppercase font-semibold">Book</span>
+    </button>
+
+    <a href="#journal" class="flex flex-col items-center text-taupe hover:text-plum py-1">
+      <svg class="w-4 h-4 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+      </svg>
+      <span class="text-[9px] tracking-wider uppercase font-medium">Journal</span>
+    </a>
+
+    <button onclick="toggleMobileMenu()" class="flex flex-col items-center text-taupe hover:text-plum py-1">
+      <svg class="w-4 h-4 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+      <span class="text-[9px] tracking-wider uppercase font-medium">Menu</span>
+    </button>
+  </div>
+
+  <div id="bookingModal" class="fixed inset-0 z-50 bg-plum-deep/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-ivory rounded-3xl max-w-lg w-full p-6 sm:p-8 border border-hairline shadow-2xl relative">
+      
+      <!-- Close Button -->
+      <button onclick="closeBookingModal()" class="absolute top-5 right-5 text-taupe hover:text-plum p-1.5 rounded-full hover:bg-blush transition-colors" aria-label="Close modal">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <div class="text-center mb-6">
+        <span class="text-[10px] tracking-widest uppercase font-semibold text-taupe">LUMÉA RESERVATION</span>
+        <h3 id="modalTitle" class="font-serif text-2xl sm:text-3xl text-plum mt-1">Book Your Treatment</h3>
+        <p class="text-xs text-taupe-dark font-light mt-1">Isi formulir singkat di bawah untuk mengamankan slot waktu Anda.</p>
+      </div>
+
+      <form id="modalForm" onsubmit="handleModalSubmit(event)" class="space-y-4">
+        <div>
+          <label class="block text-[10px] tracking-widest uppercase font-semibold text-taupe mb-1">SELECTED TREATMENT</label>
+          <input type="text" id="modalTreatmentInput" required class="w-full bg-ivory-warm border border-hairline rounded-xl px-4 py-2.5 text-xs text-charcoal font-medium">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-[10px] tracking-widest uppercase font-semibold text-taupe mb-1">DATE</label>
+            <input type="date" id="modalDate" required class="w-full bg-ivory border border-hairline rounded-xl px-3 py-2 text-xs text-charcoal">
+          </div>
+          <div>
+            <label class="block text-[10px] tracking-widest uppercase font-semibold text-taupe mb-1">TIME</label>
+            <select id="modalTime" required class="w-full bg-ivory border border-hairline rounded-xl px-3 py-2 text-xs text-charcoal">
+              <option value="10:00 WIB">10:00 WIB</option>
+              <option value="11:30 WIB">11:30 WIB</option>
+              <option value="13:30 WIB">13:30 WIB</option>
+              <option value="15:30 WIB">15:30 WIB</option>
+              <option value="17:00 WIB">17:00 WIB</option>
+              <option value="19:00 WIB">19:00 WIB</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-[10px] tracking-widest uppercase font-semibold text-taupe mb-1">YOUR NAME</label>
+          <input type="text" id="modalName" placeholder="Nama lengkap Anda" required class="w-full bg-ivory border border-hairline rounded-xl px-4 py-2.5 text-xs text-charcoal">
+        </div>
+
+        <div>
+          <label class="block text-[10px] tracking-widest uppercase font-semibold text-taupe mb-1">WHATSAPP NUMBER</label>
+          <input type="tel" id="modalPhone" placeholder="0812xxxxxxxx" required class="w-full bg-ivory border border-hairline rounded-xl px-4 py-2.5 text-xs text-charcoal">
+        </div>
+
+        <div class="pt-2">
+          <button type="submit" class="w-full bg-plum hover:bg-plum-muted text-ivory text-xs tracking-ribbon uppercase font-medium py-3.5 rounded-full transition-all">
+            Confirm &amp; Send to WhatsApp
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- Success Notification Box (Non-Alert) -->
+  <div id="successNotice" class="fixed bottom-20 right-5 md:bottom-8 md:right-8 z-50 bg-ivory border border-hairline shadow-2xl rounded-2xl p-5 max-w-sm hidden transform transition-all duration-300">
+    <div class="flex items-start space-x-3">
+      <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0 text-sm font-bold">
+        ✓
+      </div>
+      <div>
+        <h4 id="successNoticeTitle" class="font-serif text-base text-plum font-semibold">Appointment Received!</h4>
+        <p id="successNoticeText" class="text-xs text-taupe-dark mt-1 font-light leading-relaxed">
+          Terima kasih. Permintaan reservasi Anda telah tercatat. Tim Luméa akan menghubungi nomor WhatsApp Anda dalam 15 menit.
+        </p>
+        <button onclick="document.getElementById('successNotice').classList.add('hidden')" class="mt-2 text-[10px] tracking-wider uppercase font-semibold text-plum hover:underline">
+          Tutup
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- ADMIN PANEL & AUTHENTICATION OVERLAYS          -->
+  <!-- ============================================== -->
+
+  <!-- Admin Login Modal -->
+  <div id="adminLoginModal" class="fixed inset-0 z-50 bg-plum-deep/75 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="bg-ivory rounded-3xl max-w-sm w-full p-6 sm:p-8 border border-hairline shadow-2xl relative">
+      <button onclick="toggleAdminLoginModal()" class="absolute top-5 right-5 text-taupe hover:text-plum p-1.5 rounded-full hover:bg-blush transition-colors" aria-label="Close">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+
+      <div class="text-center mb-6">
+        <div class="w-12 h-12 rounded-full bg-plum text-ivory flex items-center justify-center mx-auto mb-3 shadow">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+          </svg>
+        </div>
+        <h3 class="font-serif text-2xl text-plum">Akses Pengelola Web</h3>
+        <p class="text-xs text-taupe-dark mt-1">Masuk untuk mengubah konten, gambar, dan tombol secara langsung.</p>
+      </div>
+
+      <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+        <div>
+          <label class="block text-[10px] tracking-widest uppercase font-semibold text-taupe mb-1">Username</label>
+          <input type="text" id="adminUserInput" placeholder="kelolaweb2026" required class="w-full bg-ivory-warm border border-hairline rounded-xl px-4 py-2.5 text-xs text-charcoal focus:border-plum outline-none">
+        </div>
+        <div>
+          <label class="block text-[10px] tracking-widest uppercase font-semibold text-taupe mb-1">Password</label>
+          <input type="password" id="adminPassInput" placeholder="••••••••" required class="w-full bg-ivory-warm border border-hairline rounded-xl px-4 py-2.5 text-xs text-charcoal focus:border-plum outline-none">
+        </div>
+        <p id="adminLoginError" class="text-xs text-red-600 hidden text-center font-medium">Username atau password keliru.</p>
+        <button type="submit" class="w-full bg-plum hover:bg-plum-muted text-ivory text-xs tracking-ribbon uppercase font-medium py-3.5 rounded-full transition-all shadow">
+          Masuk ke Dashboard
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Comprehensive Admin CMS Drawer -->
+  <div id="adminDrawer" class="fixed inset-y-0 right-0 z-50 w-full max-w-xl bg-ivory shadow-2xl border-l border-hairline hidden flex flex-col transform transition-transform duration-300">
+    <!-- Drawer Header -->
+    <div class="p-5 border-b border-hairline bg-ivory-warm flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+        <h3 class="font-serif text-lg text-plum font-semibold">Panel Kelola Web LUMÉA</h3>
+      </div>
+      <div class="flex items-center space-x-2">
+        <button onclick="saveAllContentToFirebase()" id="saveBtnTop" class="bg-emerald-700 hover:bg-emerald-800 text-white text-[11px] font-medium tracking-wider uppercase px-4 py-1.5 rounded-full shadow transition">
+          Simpan Cloud
+        </button>
+        <button onclick="closeAdminPanel()" class="text-taupe hover:text-plum p-1.5 rounded-full">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Drawer Navigation Tabs -->
+    <div class="flex border-b border-hairline text-xs font-medium bg-ivory text-taupe overflow-x-auto whitespace-nowrap">
+      <button onclick="setAdminTab('tab-hero')" class="admin-tab-btn px-4 py-3 border-b-2 border-plum text-plum font-semibold" data-target="tab-hero">Hero &amp; Header</button>
+      <button onclick="setAdminTab('tab-signature')" class="admin-tab-btn px-4 py-3 border-b-2 border-transparent hover:text-plum" data-target="tab-signature">Signature Glow</button>
+      <button onclick="setAdminTab('tab-menu')" class="admin-tab-btn px-4 py-3 border-b-2 border-transparent hover:text-plum" data-target="tab-menu">Daftar Harga</button>
+      <button onclick="setAdminTab('tab-contact')" class="admin-tab-btn px-4 py-3 border-b-2 border-transparent hover:text-plum" data-target="tab-contact">Kontak &amp; WA</button>
+    </div>
+
+    <!-- Tab Contents Scroll Area -->
+    <div class="flex-1 overflow-y-auto p-6 space-y-6">
+      
+      <!-- Tab 1: Hero & Header -->
+      <div id="tab-hero" class="admin-tab-content space-y-4">
+        <h4 class="text-xs font-semibold uppercase tracking-wider text-plum border-b border-hairline pb-2">Header &amp; Pengumuman</h4>
+        <div>
+          <label class="block text-[10px] uppercase tracking-wider font-semibold text-taupe mb-1">Teks Pengumuman Atas (Announcement)</label>
+          <input type="text" id="admAnnouncement" class="w-full bg-ivory-warm border border-hairline rounded-lg p-2.5 text-xs text-charcoal outline-none focus:border-plum">
+        </div>
+        <div>
+          <label class="block text-[10px] uppercase tracking-wider font-semibold text-taupe mb-1">Jam Buka Header</label>
+          <input type="text" id="admHeaderHours" class="w-full bg-ivory-warm border border-hairline rounded-lg p-2.5 text-xs text-charcoal outline-none focus:border-plum">
+        </div>
+
+        <h4 class="text-xs font-semibold uppercase tracking-wider text-plum border-b border-hairline pb-2 pt-4">Hero Section</h4>
+        <div>
+          <label class="block text-[10px] uppercase tracking-wider font-semibold text-taupe mb-1">Eyebrow (Teks Kecil Atas Headline)</label>
+          <input type="text" id="admHeroEyebrow" class="w-full bg-ivory-warm border border-hairline rounded-lg p-2.5 text-xs text-charcoal outline-none focus:border-plum">
+        </div>
+        <div>
+          <label class="block text-[10px] uppercase tracking-wider font-semibold text-taupe mb-1">Headline Utama (Bisa pakai &lt;br&gt; atau baris baru)</label>
+          <textarea id="admHeroHeadline" rows="2" class="w-full bg-ivory-warm border border-hairline rounded-lg p-2.5 text-xs text-charcoal outline-none focus:border-plum"></textarea>
+        </div>
+        <div>
+          <label class="block text-[10px] uppercase tracking-wider font-semibold text-taupe mb-1">Subheadline / Deskripsi Hero</label>
+          <textarea id="admHeroSubheadline" rows="3" class="w-full bg-ivory-warm border border-hairline rounded-lg p-2.5 text-xs text-charcoal outline-none focus:border-plum"></textarea>
+        </div>
+        <div>
+          <label class="block text-[10px] uppercase tracking-wider font-semibold text-taupe mb-1">Teks Tombol CTA Utama</label>
+          <input type="text" id="admHeroCta" class="w-full bg-ivory-warm border border-hairline rounded-lg p-2.5 text-xs text-charcoal outline-none focus:border-plum">
+        </div>
+        <div>
+          <label class="block text-[10px] uppercase tracking-wider font-semibold text-taupe mb-1">URL / Drive ID Gambar Hero</label>
+          <input type="text" id="admHeroImg" placeholder="https://... atau ID Google Drive" class="w-full bg-ivory-warm border border-hairline rounded-lg p-2.5 text-xs text-charcoal outline-none focus:border-plum">
+          <p class="text-[10px] text-taupe mt-1">Dapat diisi Google Drive ID (misal: 1_HERO_IMAGE_ID) atau tautan gambar langsung.</p>
+        </div>
+      </div>
+
+      <!-- Tab 2: Signature Glow Facial -->
+      <div id="tab-signature" class="admin-tab-content hidden space-y-4">
+        <h4 class="text-xs font-semibold uppercase tracking-wider text-plum border-b border-hairline pb-2">Treatment Unggulan</h4>
+        <div>
+          <label class="block text-[10px] uppercase tracking-wider font-semibold text-taupe mb-1">Judul Signature</label>
+          <input type="text" id="admSignatureTitle" class="w-full bg-ivory-warm border border-hairline rounded-lg p-2.5 text-xs text-charcoal outline-none focus:border-plum">
+        </div>
+        <div>
+          <label class="block text-[10px] uppercase tracking-wider font-semibold text-taupe mb-1">Deskripsi Signature</label>
+          <textarea id="admSignatureDesc" rows="3" class="w-full bg-ivory-warm border border-hairline rounded-lg p-2.5 text-xs text-charcoal outline-none focus:border-plum"></textarea>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-[10px] uppercase tracking-wider font-semibold text-taupe mb-1">Harga (cth: Rp 150.000)</label>
+            <input type="text" id="admSignaturePrice" class="w-full bg-ivory-warm border border-hairline rounded-lg p-2.5 text-xs text-charcoal outline-none focus:border-plum">
+          </div>
+          <div>
+            <label class="block text-[10px] uppercase tracking-wider font-semibold text-taupe mb-1">Durasi (cth: / 60 MIN)</label>
+            <input type="text" id="admSignatureDuration" class="w-full bg-ivory-warm border border-hairline rounded-lg p-2.5 text-xs text-charcoal outline-none focus:border-plum">
+          </div>
+        </div>
+        <div>
+          <label class="block text-[10px] uppercase tracking-wider font-semibold text-taupe mb-1">Langkah 1</label>
+          <input type="text" id="admStep1" class="w-full bg-ivory-warm border border-hairline rounded-lg p-2 text-xs text-charcoal outline-none">
+        </div>
+        <div>
+          <label class="block text-[10px] uppercase tracking-wider font-semibold text-taupe mb-1">Langkah 2</label>
+          <input type="text" id="admStep2" class="w-full bg-ivory-warm border border-hairline rounded-lg p-2 text-xs text-charcoal outline-none">
+        </div>
+        <div>
+          <label class="block text-[10px] uppercase tracking-wider font-semibold text-taupe mb-1">Langkah 3</label>
+          <input type="text" id="admStep3" class="w-full bg-ivory-warm border border-hairline rounded-lg p-2 text-xs text-charcoal outline-none">
+        </div>
+        <div>
+          <label class="block text-[10px] uppercase tracking-wider font-semibold text-taupe mb-1">Langkah 4</label>
+          <input type="text" id="admStep4" class="w-full bg-ivory-warm border border-hairline rounded-lg p-2 text-xs text-charcoal outline-none">
+        </div>
+      </div>
+
+      <!-- Tab 3: Menu & Pricing -->
+      <div id="tab-menu" class="admin-tab-content hidden space-y-5">
+        <!-- Add Service Form -->
+        <div class="bg-ivory border border-hairline p-4 rounded-xl shadow-sm space-y-3">
+          <div class="flex items-center justify-between border-b border-hairline pb-2">
+            <h4 class="text-xs font-semibold uppercase tracking-wider text-plum flex items-center space-x-1.5">
+              <span class="w-2 h-2 rounded-full bg-plum"></span>
+              <span>Tambah Layanan Baru</span>
+            </h4>
+            <span class="text-[10px] text-taupe uppercase">Realtime Live</span>
+          </div>
+
+          <form onsubmit="handleAddNewTreatment(event)" class="space-y-3">
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[10px] uppercase tracking-wider font-semibold text-taupe mb-1">Kategori Pillar</label>
+                <select id="newServiceCategory" required class="w-full bg-ivory-warm border border-hairline rounded-lg p-2 text-xs text-charcoal outline-none focus:border-plum">
+                  <option value="skin">Skin Therapy</option>
+                  <option value="hair">Hair &amp; Scalp</option>
+                  <option value="beauty">Lash, Brow &amp; Nail</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-[10px] uppercase tracking-wider font-semibold text-taupe mb-1">Durasi (cth: 60 min)</label>
+                <input type="text" id="newServiceDuration" placeholder="60 min" required class="w-full bg-ivory-warm border border-hairline rounded-lg p-2 text-xs text-charcoal outline-none focus:border-plum">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[10px] uppercase tracking-wider font-semibold text-taupe mb-1">Nama Layanan</label>
+              <input type="text" id="newServiceName" placeholder="Contoh: Barrier Repair Glow Facial" required class="w-full bg-ivory-warm border border-hairline rounded-lg p-2 text-xs text-charcoal outline-none focus:border-plum">
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[10px] uppercase tracking-wider font-semibold text-taupe mb-1">Harga (cth: Rp 165K)</label>
+                <input type="text" id="newServicePrice" placeholder="Rp 165K" required class="w-full bg-ivory-warm border border-hairline rounded-lg p-2 text-xs text-charcoal outline-none focus:border-plum">
+              </div>
+              <div>
+                <label class="block text-[10px] uppercase tracking-wider font-semibold text-taupe mb-1">Keterangan Singkat</label>
+                <input type="text" id="newServiceDesc" placeholder="Hyaluronic ampoule & soothing mask" required class="w-full bg-ivory-warm border border-hairline rounded-lg p-2 text-xs text-charcoal outline-none focus:border-plum">
+              </div>
+            </div>
+
+            <div class="pt-1">
+              <button type="submit" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-semibold uppercase tracking-wider py-2.5 rounded-lg transition shadow flex items-center justify-center space-x-1.5">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                </svg>
+                <span>Tambahkan Layanan ke Menu</span>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Current Services Management List -->
+        <div>
+          <div class="flex items-center justify-between border-b border-hairline pb-2 mb-3">
+            <h4 class="text-xs font-semibold uppercase tracking-wider text-plum">Kelola Daftar Layanan Aktif</h4>
+            <span id="serviceCountBadge" class="text-[10px] bg-plum/10 text-plum font-semibold px-2 py-0.5 rounded-full">12 Layanan</span>
+          </div>
+          
+          <div id="adminTreatmentItemsContainer" class="space-y-2 max-h-72 overflow-y-auto pr-1">
+            <!-- Rendered list of items with delete buttons -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 4: Contact & Studio -->
+      <div id="tab-contact" class="admin-tab-content hidden space-y-4">
+        <h4 class="text-xs font-semibold uppercase tracking-wider text-plum border-b border-hairline pb-2">Kontak &amp; Alamat</h4>
+        <div>
+          <label class="block text-[10px] uppercase tracking-wider font-semibold text-taupe mb-1">Nomor WhatsApp Reservasi</label>
+          <input type="text" id="admStudioPhone" placeholder="081234567890" class="w-full bg-ivory-warm border border-hairline rounded-lg p-2.5 text-xs text-charcoal outline-none focus:border-plum">
+        </div>
+        <div>
+          <label class="block text-[10px] uppercase tracking-wider font-semibold text-taupe mb-1">Alamat Lengkap Studio</label>
+          <textarea id="admStudioAddress" rows="3" class="w-full bg-ivory-warm border border-hairline rounded-lg p-2.5 text-xs text-charcoal outline-none focus:border-plum"></textarea>
+        </div>
+        <div>
+          <label class="block text-[10px] uppercase tracking-wider font-semibold text-taupe mb-1">Jam Operasional</label>
+          <input type="text" id="admStudioHours" class="w-full bg-ivory-warm border border-hairline rounded-lg p-2.5 text-xs text-charcoal outline-none focus:border-plum">
+        </div>
+        <div>
+          <label class="block text-[10px] uppercase tracking-wider font-semibold text-taupe mb-1">Email Studio</label>
+          <input type="text" id="admStudioEmail" class="w-full bg-ivory-warm border border-hairline rounded-lg p-2.5 text-xs text-charcoal outline-none focus:border-plum">
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Drawer Footer Actions -->
+    <div class="p-5 border-t border-hairline bg-ivory-warm flex items-center justify-between">
+      <button onclick="closeAdminPanel()" class="text-xs uppercase tracking-wider text-taupe font-semibold hover:text-plum">
+        Tutup
+      </button>
+      <button onclick="saveAllContentToFirebase()" id="saveBtnBottom" class="bg-plum hover:bg-plum-muted text-ivory text-xs tracking-ribbon uppercase font-medium px-6 py-3 rounded-full transition shadow">
+        Simpan Perubahan
+      </button>
+    </div>
+  </div>
+
+  <!-- Firebase Script Integration (Strict Rule 1, 2, 3 Compliant) -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    // Standard API key provided by user (Hidden from admin panel UI as requested)
+    const apiKey = "AIzaSyBZyvA6_cy2k42eU_Ktt13wFVTDYgZaXkI";
+    
+    // Environment configurations with safe fallback
+    const appId = typeof __app_id !== 'undefined' ? __app_id : 'lumea-beauty-studio';
+    let firebaseConfig = {
+      apiKey: apiKey,
+      authDomain: "lumea-studio.firebaseapp.com",
+      projectId: "lumea-studio",
+      storageBucket: "lumea-studio.appspot.com"
+    };
+
+    if (typeof __firebase_config !== 'undefined') {
+      try {
+        const parsed = JSON.parse(__firebase_config);
+        firebaseConfig = { ...parsed, apiKey: apiKey };
+      } catch (e) {
+        console.warn("Using default config", e);
+      }
+    }
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // Initial default treatments list
+    const defaultTreatments = [
+      // SKIN
+      { id: 'skin-1', category: 'skin', name: 'DEEP CLEAN FACIAL', price: 'Rp 150K', duration: '60 min', desc: 'Ekstraksi komedo steril, soothing pack' },
+      { id: 'skin-2', category: 'skin', name: 'HYDRATION FACIAL', price: 'Rp 175K', duration: '60 min', desc: 'Hyaluronic infusion, barrier restoration' },
+      { id: 'skin-3', category: 'skin', name: 'BRIGHTENING FACIAL', price: 'Rp 200K', duration: '75 min', desc: 'Vitamin C booster & cryo revitalization' },
+      { id: 'skin-4', category: 'skin', name: 'ACNE CARE RITUAL', price: 'Rp 180K', duration: '60 min', desc: 'Blue light therapy, tea tree purification' },
+      // HAIR
+      { id: 'hair-1', category: 'hair', name: 'BOTANICAL HAIR SPA', price: 'Rp 100K', duration: '60 min', desc: 'Deep conditioning mask & shoulder relief' },
+      { id: 'hair-2', category: 'hair', name: 'SCALP PURIFYING', price: 'Rp 125K', duration: '60 min', desc: 'Exfoliating scrub, anti-dandruff balance' },
+      { id: 'hair-3', category: 'hair', name: 'INTENSIVE HAIR REPAIR', price: 'Rp 175K', duration: '90 min', desc: 'Hydro-keratin reconstruction treatment' },
+      { id: 'hair-4', category: 'hair', name: 'SIGNATURE BLOWOUT', price: 'Rp 85K', duration: '45 min', desc: 'Wash, volume conditioning, natural finish' },
+      // BEAUTY / LASH & NAIL
+      { id: 'beauty-1', category: 'beauty', name: 'KERATIN LASH LIFT', price: 'Rp 150K', duration: '60 min', desc: 'Lentik natural tahan hingga 6–8 pekan' },
+      { id: 'beauty-2', category: 'beauty', name: 'BROW SHAPING & TINT', price: 'Rp 75K', duration: '30 min', desc: 'Mapping presisi proporsional wajah' },
+      { id: 'beauty-3', category: 'beauty', name: 'SPA MANICURE', price: 'Rp 110K', duration: '45 min', desc: 'Cuticle trimming, organic olive soak' },
+      { id: 'beauty-4', category: 'beauty', name: 'NOURISHING PEDICURE', price: 'Rp 135K', duration: '50 min', desc: 'Callus soft peeling & massage lembut' }
+    ];
+
+    // Global in-memory site state
+    window.siteContent = {
+      announcement: "WELCOME TO LUMÉA • BEAUTY, SKIN & SELF-CARE STUDIO",
+      headerHours: "09.00 — 21.00 WIB",
+      heroEyebrow: "SKIN • HAIR • BEAUTY CARE",
+      heroHeadline: "YOUR BEAUTY,<br><span class=\"italic font-light\">REFINED.</span>",
+      heroSubheadline: "Personalized beauty treatments designed around you. Menghadirkan perawatan kecantikan yang tenang, higienis, dan terarah untuk memancarkan pesona alami Anda.",
+      heroCta: "Book an Appointment",
+      heroImg: "https://lh3.googleusercontent.com/d/1_HERO_IMAGE_ID_LUMEA",
+      signatureTitle: "SIGNATURE GLOW<br><span class=\"italic font-light\">FACIAL</span>",
+      signatureDesc: "Deep cleansing, hydration, and skin revitalization treatment designed to leave your skin fresh, smooth, and naturally radiant without aggressive redness or downtime.",
+      signaturePrice: "Rp 150.000",
+      signatureDuration: "/ 60 MIN",
+      step1: "Ultrasonic Skin Cleansing",
+      step2: "Hydro-Oxygen Infusion",
+      step3: "Cold Cryo Firming",
+      step4: "Botanical Peptide Mask",
+      studioPhone: "081234567890",
+      studioAddress: "LUMÉA BEAUTY & AESTHETIC STUDIO\nJl. Senopati Raya No. 88, Kebayoran Baru\nJakarta Selatan, Indonesia",
+      studioHours: "Senin — Minggu: 09.00 — 21.00 WIB",
+      studioEmail: "concierge@lumeastudio.id",
+      treatments: defaultTreatments
+    };
+
+    window.renderTreatmentsToUI = function(treatments) {
+      if (!Array.isArray(treatments)) treatments = defaultTreatments;
+
+      const skinContainer = document.getElementById('menuListSkin');
+      const hairContainer = document.getElementById('menuListHair');
+      const beautyContainer = document.getElementById('menuListBeauty');
+
+      if (!skinContainer || !hairContainer || !beautyContainer) return;
+
+      skinContainer.innerHTML = '';
+      hairContainer.innerHTML = '';
+      beautyContainer.innerHTML = '';
+
+      const makeCardHtml = (t) => `
+        <div class="pt-3 group cursor-pointer" onclick="openBookingModal('${t.name} (${t.price})')">
+          <div class="flex items-baseline justify-between">
+            <h4 class="text-sm font-medium text-plum group-hover:text-blush-clay transition-colors">${t.name}</h4>
+            <span class="text-xs font-serif font-semibold text-plum">${t.price}</span>
+          </div>
+          <div class="flex items-center justify-between text-xs text-taupe font-light mt-1">
+            <span class="truncate pr-2">${t.desc || ''}</span>
+            <span class="shrink-0">${t.duration || '60 min'}</span>
+          </div>
+        </div>
+      `;
+
+      treatments.forEach(t => {
+        if (t.category === 'skin') skinContainer.innerHTML += makeCardHtml(t);
+        else if (t.category === 'hair') hairContainer.innerHTML += makeCardHtml(t);
+        else beautyContainer.innerHTML += makeCardHtml(t);
+      });
+
+      // Update Booking Form Select Dropdown
+      const selectEl = document.getElementById('bTreatment');
+      if (selectEl) {
+        selectEl.innerHTML = `<option value="" disabled selected>Pilih Treatment...</option>`;
+        treatments.forEach(t => {
+          const opt = document.createElement('option');
+          opt.value = `${t.name} (${t.price})`;
+          opt.textContent = `${t.name} — ${t.duration} (${t.price})`;
+          selectEl.appendChild(opt);
+        });
+        const consultOpt = document.createElement('option');
+        consultOpt.value = "General Consultation";
+        consultOpt.textContent = "Konsultasi Kulit Dahulu (Free Brief Check)";
+        selectEl.appendChild(consultOpt);
+      }
+
+      // Update Admin Management List in Tab 3
+      const adminListContainer = document.getElementById('adminTreatmentItemsContainer');
+      const badge = document.getElementById('serviceCountBadge');
+      if (badge) badge.textContent = `${treatments.length} Layanan`;
+
+      if (adminListContainer) {
+        adminListContainer.innerHTML = '';
+        treatments.forEach(t => {
+          const catLabel = t.category === 'skin' ? 'SKIN' : (t.category === 'hair' ? 'HAIR' : 'BEAUTY');
+          const row = document.createElement('div');
+          row.className = "flex items-center justify-between p-2.5 bg-ivory-warm rounded-lg border border-hairline text-xs";
+          row.innerHTML = `
+            <div class="truncate mr-2">
+              <div class="flex items-center space-x-2">
+                <span class="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-plum text-ivory">${catLabel}</span>
+                <span class="font-medium text-plum truncate">${t.name}</span>
+              </div>
+              <div class="text-[11px] text-taupe mt-0.5">${t.duration} • <span class="font-semibold text-plum">${t.price}</span> — ${t.desc}</div>
+            </div>
+            <button onclick="deleteTreatmentById('${t.id}')" class="text-red-500 hover:text-red-700 p-1 rounded hover:bg-red-50 transition shrink-0" title="Hapus Layanan">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+            </button>
+          `;
+          adminListContainer.appendChild(row);
+        });
+      }
+    };
+
+    // DOM Updater Function
+    window.applyContentToDOM = function(data) {
+      if (!data) return;
+      if (data.announcement) document.getElementById('dynAnnouncement').textContent = data.announcement;
+      if (data.headerHours) document.getElementById('dynHeaderHours').textContent = data.headerHours;
+      if (data.heroEyebrow) document.getElementById('dynHeroEyebrow').textContent = data.heroEyebrow;
+      if (data.heroHeadline) document.getElementById('dynHeroHeadline').innerHTML = data.heroHeadline;
+      if (data.heroSubheadline) document.getElementById('dynHeroSubheadline').textContent = data.heroSubheadline;
+      if (data.heroCta) document.getElementById('dynHeroCtaBtn').textContent = data.heroCta;
+      
+      if (data.heroImg) {
+        const heroEl = document.getElementById('dynHeroImage');
+        if (heroEl) {
+          if (data.heroImg.startsWith('http')) {
+            heroEl.src = data.heroImg;
+          } else {
+            heroEl.src = `https://lh3.googleusercontent.com/d/${data.heroImg}`;
+            heroEl.setAttribute('data-drive-id', data.heroImg);
+          }
+        }
+      }
+
+      if (data.signatureTitle) document.getElementById('dynSignatureTitle').innerHTML = data.signatureTitle;
+      if (data.signatureDesc) document.getElementById('dynSignatureDesc').textContent = data.signatureDesc;
+      if (data.signaturePrice) document.getElementById('dynSignaturePrice').textContent = data.signaturePrice;
+      if (data.signatureDuration) document.getElementById('dynSignatureDuration').textContent = data.signatureDuration;
+      
+      if (data.step1) document.getElementById('dynStep1').textContent = data.step1;
+      if (data.step2) document.getElementById('dynStep2').textContent = data.step2;
+      if (data.step3) document.getElementById('dynStep3').textContent = data.step3;
+      if (data.step4) document.getElementById('dynStep4').textContent = data.step4;
+
+      if (data.studioPhone) {
+        const phoneFormatted = data.studioPhone.startsWith('0') ? '62' + data.studioPhone.substring(1) : data.studioPhone;
+        document.getElementById('dynStudioPhone').textContent = "WhatsApp: +" + phoneFormatted;
+        const waBtn = document.getElementById('waDirectBtn');
+        if (waBtn) waBtn.href = `https://wa.me/${phoneFormatted}?text=Halo%20LUM%C3%89A,%20saya%20ingin%20reservasi%20treatment.`;
+      }
+      if (data.studioAddress) {
+        document.getElementById('dynStudioAddress').innerHTML = data.studioAddress.replace(/\n/g, '<br>');
+      }
+      if (data.studioHours) document.getElementById('dynStudioHours').textContent = data.studioHours;
+      if (data.studioEmail) document.getElementById('dynStudioEmail').textContent = "Email: " + data.studioEmail;
+
+      // Render Dynamic Treatments
+      if (data.treatments && Array.isArray(data.treatments)) {
+        window.renderTreatmentsToUI(data.treatments);
+      } else {
+        window.renderTreatmentsToUI(defaultTreatments);
+      }
+    };
+
+    window.handleAddNewTreatment = async function(e) {
+      e.preventDefault();
+      const category = document.getElementById('newServiceCategory').value;
+      const duration = document.getElementById('newServiceDuration').value.trim();
+      const name = document.getElementById('newServiceName').value.trim().toUpperCase();
+      const price = document.getElementById('newServicePrice').value.trim();
+      const desc = document.getElementById('newServiceDesc').value.trim();
+
+      if (!name || !price) return;
+
+      const newTreatment = {
+        id: 'treat-' + Date.now(),
+        category,
+        duration: duration || '60 min',
+        name,
+        price,
+        desc: desc || ''
+      };
+
+      if (!Array.isArray(window.siteContent.treatments)) {
+        window.siteContent.treatments = [...defaultTreatments];
+      }
+
+      window.siteContent.treatments.push(newTreatment);
+      window.renderTreatmentsToUI(window.siteContent.treatments);
+
+      // Reset form
+      document.getElementById('newServiceName').value = '';
+      document.getElementById('newServicePrice').value = '';
+      document.getElementById('newServiceDesc').value = '';
+
+      showToastNotice("Layanan Ditambahkan", `Layanan "${name}" berhasil ditambahkan ke daftar harga.`);
+
+      // Persist to Firebase
+      await window.saveAllContentToFirebase();
+    };
+
+    window.deleteTreatmentById = async function(treatmentId) {
+      if (!Array.isArray(window.siteContent.treatments)) return;
+      const itemToDelete = window.siteContent.treatments.find(t => t.id === treatmentId);
+      window.siteContent.treatments = window.siteContent.treatments.filter(t => t.id !== treatmentId);
+      window.renderTreatmentsToUI(window.siteContent.treatments);
+
+      showToastNotice("Layanan Dihapus", `Layanan "${itemToDelete ? itemToDelete.name : ''}" telah dihapus.`);
+
+      // Persist to Firebase
+      await window.saveAllContentToFirebase();
+    };
+
+    // Authenticate First (Rule 3) then setup Firestore listener
+    async function initFirestoreSync() {
+      try {
+        if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+          await signInWithCustomToken(auth, __initial_auth_token);
+        } else {
+          await signInAnonymously(auth);
+        }
+      } catch (err) {
+        console.debug("Auth fallback:", err);
+      }
+
+      // Ensure user exists before Firestore operations (Rule 3)
+      onAuthStateChanged(auth, (user) => {
+        if (!user) return;
+
+        // Strict Path Rule 1: /artifacts/{appId}/public/data/{collectionName}
+        const contentDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'content_bundle', 'homepage');
+
+        // Real-time listener with error callback
+        onSnapshot(contentDocRef, (snap) => {
+          if (snap.exists()) {
+            const remoteData = snap.data();
+            window.siteContent = { ...window.siteContent, ...remoteData };
+            window.applyContentToDOM(window.siteContent);
+          } else {
+            // Initial render with default values
+            window.applyContentToDOM(window.siteContent);
+          }
+        }, (error) => {
+          console.debug("Snapshot sync info:", error.message);
+        });
+      });
+    }
+
+    // Save Content to Firebase (Rule 1 & Rule 3)
+    window.saveAllContentToFirebase = async function() {
+      const user = auth.currentUser;
+      if (!user) {
+        showToastNotice("Otentikasi", "Silakan tunggu koneksi cloud stabil.");
+        return;
+      }
+
+      // Collect values from admin drawer inputs
+      const updated = {
+        announcement: document.getElementById('admAnnouncement').value,
+        headerHours: document.getElementById('admHeaderHours').value,
+        heroEyebrow: document.getElementById('admHeroEyebrow').value,
+        heroHeadline: document.getElementById('admHeroHeadline').value,
+        heroSubheadline: document.getElementById('admHeroSubheadline').value,
+        heroCta: document.getElementById('admHeroCta').value,
+        heroImg: document.getElementById('admHeroImg').value,
+        signatureTitle: document.getElementById('admSignatureTitle').value,
+        signatureDesc: document.getElementById('admSignatureDesc').value,
+        signaturePrice: document.getElementById('admSignaturePrice').value,
+        signatureDuration: document.getElementById('admSignatureDuration').value,
+        step1: document.getElementById('admStep1').value,
+        step2: document.getElementById('admStep2').value,
+        step3: document.getElementById('admStep3').value,
+        step4: document.getElementById('admStep4').value,
+        studioPhone: document.getElementById('admStudioPhone').value,
+        studioAddress: document.getElementById('admStudioAddress').value,
+        studioHours: document.getElementById('admStudioHours').value,
+        studioEmail: document.getElementById('admStudioEmail').value,
+        treatments: window.siteContent.treatments || defaultTreatments,
+        updatedAt: new Date().toISOString()
+      };
+
+      try {
+        const contentDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'content_bundle', 'homepage');
+        await setDoc(contentDocRef, updated, { merge: true });
+        
+        window.siteContent = { ...window.siteContent, ...updated };
+        window.applyContentToDOM(window.siteContent);
+        showToastNotice("Berhasil Disimpan", "Semua perubahan teks, foto, dan daftar layanan telah diperbarui di Cloud secara realtime.");
+      } catch (err) {
+        showToastNotice("Status Simpan", "Perubahan diterapkan lokal. Detail: " + err.message);
+        window.applyContentToDOM(updated);
+      }
+    };
+
+    // Initialize on load
+    initFirestoreSync();
+    window.renderTreatmentsToUI(defaultTreatments);
+  </script>
+
+  <script>
+    // Admin Auth State (Session Memory)
+    let isAdminLoggedIn = false;
+
+    function showToastNotice(title, message) {
+      const notice = document.getElementById('successNotice');
+      const titleEl = document.getElementById('successNoticeTitle');
+      const msgEl = document.getElementById('successNoticeText');
+      if (titleEl) titleEl.textContent = title;
+      if (msgEl) msgEl.textContent = message;
+      notice.classList.remove('hidden');
+      setTimeout(() => {
+        notice.classList.add('hidden');
+      }, 5000);
+    }
+
+    function toggleAdminLoginModal() {
+      const modal = document.getElementById('adminLoginModal');
+      const errorMsg = document.getElementById('adminLoginError');
+      errorMsg.classList.add('hidden');
+      if (modal.classList.contains('hidden')) {
+        modal.classList.remove('hidden');
+      } else {
+        modal.classList.add('hidden');
+      }
+    }
+
+    function handleAdminLogin(e) {
+      e.preventDefault();
+      const user = document.getElementById('adminUserInput').value.trim();
+      const pass = document.getElementById('adminPassInput').value.trim();
+      const errorMsg = document.getElementById('adminLoginError');
+
+      // Credentials check as requested
+      if (user === "kelolaweb2026" && pass === "kelolaweb2026") {
+        isAdminLoggedIn = true;
+        toggleAdminLoginModal();
+        document.getElementById('adminStatusBar').classList.remove('hidden');
+        const quickAdd = document.getElementById('adminQuickAddMenuBtn');
+        if (quickAdd) quickAdd.classList.remove('hidden');
+        populateAdminFields();
+        openAdminPanel();
+        showToastNotice("Login Berhasil", "Selamat datang di Panel Pengelola LUMÉA. Anda dapat menambah atau mengedit layanan sekarang.");
+      } else {
+        errorMsg.classList.remove('hidden');
+      }
+    }
+
+    function handleAdminLogout() {
+      isAdminLoggedIn = false;
+      document.getElementById('adminStatusBar').classList.add('hidden');
+      const quickAdd = document.getElementById('adminQuickAddMenuBtn');
+      if (quickAdd) quickAdd.classList.add('hidden');
+      closeAdminPanel();
+      showToastNotice("Logout Berhasil", "Anda telah keluar dari mode pengelola.");
+    }
+
+    function openAdminPanel() {
+      populateAdminFields();
+      document.getElementById('adminDrawer').classList.remove('hidden');
+    }
+
+    function openAdminPanelToMenu() {
+      openAdminPanel();
+      setAdminTab('tab-menu');
+    }
+
+    function closeAdminPanel() {
+      document.getElementById('adminDrawer').classList.add('hidden');
+    }
+
+    function setAdminTab(tabId) {
+      document.querySelectorAll('.admin-tab-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+        btn.classList.remove('border-plum', 'text-plum', 'font-semibold');
+        btn.classList.add('border-transparent');
+      });
+
+      const activeContent = document.getElementById(tabId);
+      if (activeContent) activeContent.classList.remove('hidden');
+
+      const activeBtn = document.querySelector(`[data-target="${tabId}"]`);
+      if (activeBtn) {
+        activeBtn.classList.add('border-plum', 'text-plum', 'font-semibold');
+        activeBtn.classList.remove('border-transparent');
+      }
+    }
+
+    function populateAdminFields() {
+      const c = window.siteContent || {};
+      const setVal = (id, val) => {
+        const el = document.getElementById(id);
+        if (el && val !== undefined) el.value = val;
+      };
+
+      setVal('admAnnouncement', c.announcement || "WELCOME TO LUMÉA • BEAUTY, SKIN & SELF-CARE STUDIO");
+      setVal('admHeaderHours', c.headerHours || "09.00 — 21.00 WIB");
+      setVal('admHeroEyebrow', c.heroEyebrow || "SKIN • HAIR • BEAUTY CARE");
+      setVal('admHeroHeadline', c.heroHeadline || "YOUR BEAUTY,<br><span class=\"italic font-light\">REFINED.</span>");
+      setVal('admHeroSubheadline', c.heroSubheadline || "Personalized beauty treatments designed around you.");
+      setVal('admHeroCta', c.heroCta || "Book an Appointment");
+      setVal('admHeroImg', c.heroImg || "1_HERO_IMAGE_ID_LUMEA");
+
+      setVal('admSignatureTitle', c.signatureTitle || "SIGNATURE GLOW<br><span class=\"italic font-light\">FACIAL</span>");
+      setVal('admSignatureDesc', c.signatureDesc || "");
+      setVal('admSignaturePrice', c.signaturePrice || "Rp 150.000");
+      setVal('admSignatureDuration', c.signatureDuration || "/ 60 MIN");
+      setVal('admStep1', c.step1 || "Ultrasonic Skin Cleansing");
+      setVal('admStep2', c.step2 || "Hydro-Oxygen Infusion");
+      setVal('admStep3', c.step3 || "Cold Cryo Firming");
+      setVal('admStep4', c.step4 || "Botanical Peptide Mask");
+
+      setVal('admStudioPhone', c.studioPhone || "081234567890");
+      setVal('admStudioAddress', c.studioAddress || "LUMÉA BEAUTY & AESTHETIC STUDIO\nJl. Senopati Raya No. 88");
+      setVal('admStudioHours', c.studioHours || "Senin — Minggu: 09.00 — 21.00 WIB");
+      setVal('admStudioEmail', c.studioEmail || "concierge@lumeastudio.id");
+
+      // Re-render admin services list
+      if (window.renderTreatmentsToUI && window.siteContent && window.siteContent.treatments) {
+        window.renderTreatmentsToUI(window.siteContent.treatments);
+      }
+    }
+
+    // 1. Mobile Drawer Navigation Toggle
+    function toggleMobileMenu() {
+      const drawer = document.getElementById('mobileDrawer');
+      if (drawer.classList.contains('hidden')) {
+        drawer.classList.remove('hidden');
+      } else {
+        drawer.classList.add('hidden');
+      }
+    }
+
+    document.getElementById('mobileMenuToggle').addEventListener('click', toggleMobileMenu);
+
+    // 2. Compact Sticky Header on Scroll
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('mainHeader');
+      if (window.scrollY > 50) {
+        header.classList.add('shadow-sm', 'bg-ivory');
+        header.classList.remove('h-20', 'md:h-24');
+        header.classList.add('h-16', 'md:h-20');
+      } else {
+        header.classList.remove('shadow-sm');
+        header.classList.remove('h-16', 'md:h-20');
+        header.classList.add('h-20', 'md:h-24');
+      }
+    });
+
+    // 3. Before & After Slider Logic
+    const baContainer = document.getElementById('baContainer');
+    const baBeforeWrapper = document.getElementById('baBeforeWrapper');
+    const baHandle = document.getElementById('baHandle');
+    let isSliding = false;
+
+    function setSliderPosition(x) {
+      const rect = baContainer.getBoundingClientRect();
+      let offsetX = x - rect.left;
+      if (offsetX < 0) offsetX = 0;
+      if (offsetX > rect.width) offsetX = rect.width;
+      
+      const percentage = (offsetX / rect.width) * 100;
+      baBeforeWrapper.style.width = percentage + '%';
+      baHandle.style.left = percentage + '%';
+    }
+
+    // Mouse Events
+    baHandle.addEventListener('mousedown', () => { isSliding = true; });
+    window.addEventListener('mouseup', () => { isSliding = false; });
+    window.addEventListener('mousemove', (e) => {
+      if (!isSliding) return;
+      setSliderPosition(e.clientX);
+    });
+
+    // Touch Events for Mobile Devices
+    baHandle.addEventListener('touchstart', () => { isSliding = true; });
+    window.addEventListener('touchend', () => { isSliding = false; });
+    window.addEventListener('touchmove', (e) => {
+      if (!isSliding) return;
+      if (e.touches && e.touches[0]) {
+        setSliderPosition(e.touches[0].clientX);
+      }
+    });
+
+    // Tap/Click Anywhere on Container
+    baContainer.addEventListener('click', (e) => {
+      setSliderPosition(e.clientX);
+    });
+
+    // 4. Before/After Category Switching with Multi-Tier Fallback
+    const baDatasets = {
+      skin: {
+        beforeDriveId: "1_BA_SKIN_BEFORE_LUMEA",
+        afterDriveId: "1_BA_SKIN_AFTER_LUMEA",
+        before: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1200&auto=format&fit=crop",
+        after: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1200&auto=format&fit=crop",
+        caption: "Hasil 3 sesi Signature Glow Facial: Pori-pori bersih, hidrasi meningkat, skin barrier sehat."
+      },
+      hair: {
+        beforeDriveId: "1_BA_HAIR_BEFORE_LUMEA",
+        afterDriveId: "1_BA_HAIR_AFTER_LUMEA",
+        before: "https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=1200&auto=format&fit=crop",
+        after: "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?q=80&w=1200&auto=format&fit=crop",
+        caption: "Hasil Scalp Purifying Ritual: Akar rambut kembali bervolume dan bebas minyak berlebih."
+      },
+      lash: {
+        beforeDriveId: "1_BA_LASH_BEFORE_LUMEA",
+        afterDriveId: "1_BA_LASH_AFTER_LUMEA",
+        before: "https://images.unsplash.com/photo-1583001931096-959e9a1a6223?q=80&w=1200&auto=format&fit=crop",
+        after: "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?q=80&w=1200&auto=format&fit=crop",
+        caption: "Hasil Keratin Lash Lift: Lentik terdefinisi natural tanpa mascara ataupun eyelash extension."
+      }
+    };
+
+    function switchBaCategory(cat) {
+      // Update Tab Styles
+      ['skin', 'hair', 'lash'].forEach(item => {
+        const btn = document.getElementById('tab-' + item);
+        if (item === cat) {
+          btn.className = "px-5 py-2 rounded-full bg-plum text-ivory transition-all duration-200";
+        } else {
+          btn.className = "px-5 py-2 rounded-full hover:text-plum transition-all duration-200 text-taupe";
+        }
+      });
+
+      // Update Images with Drive Priority + Fallback
+      const data = baDatasets[cat];
+      const beforeImg = document.getElementById('baBeforeImg');
+      const afterImg = document.getElementById('baAfterImg');
+
+      beforeImg.setAttribute('data-drive-id', data.beforeDriveId);
+      beforeImg.setAttribute('data-unsplash', data.before);
+      beforeImg.setAttribute('data-fallback-step', '1');
+      beforeImg.src = `https://lh3.googleusercontent.com/d/${data.beforeDriveId}`;
+
+      afterImg.setAttribute('data-drive-id', data.afterDriveId);
+      afterImg.setAttribute('data-unsplash', data.after);
+      afterImg.setAttribute('data-fallback-step', '1');
+      afterImg.src = `https://lh3.googleusercontent.com/d/${data.afterDriveId}`;
+
+      document.getElementById('baCaption').textContent = data.caption;
+      
+      // Reset position to middle
+      baBeforeWrapper.style.width = '50%';
+      baHandle.style.left = '50%';
+    }
+
+    // 5. Testimonial Rotator
+    const testimonials = [
+      {
+        quote: "“The treatment feels personal, relaxing, and the result is exactly what I wanted. Kulit terasa sangat ringan, bersih, dan segar tanpa rasa perih.”",
+        author: "— NADIA PARAMITA",
+        role: "Client since 2024 • Signature Glow Facial",
+        counter: "01 / 04"
+      },
+      {
+        quote: "“Suasana kliniknya sangat menenangkan, tidak bising sama sekali. Terapis Nadia sangat teliti waktu ekstraksi, sama sekali tidak meninggalkan bekas kemerahan.”",
+        author: "— CLARISSA WIJAYA",
+        role: "Client since 2025 • Deep Clean Facial & Spa",
+        counter: "02 / 04"
+      },
+      {
+        quote: "“Keratin Lash Lift terbaik yang pernah saya coba di Jakarta Selatan. Lentiknya rapi dan bertahan lebih dari 7 minggu tanpa rontok.”",
+        author: "— AMANDA SURYA",
+        role: "Client since 2024 • Keratin Lash Lift",
+        counter: "03 / 04"
+      },
+      {
+        quote: "“Scalp purifying treatment-nya luar biasa menyegarkan. Bebas gatal dan rambut terasa jauh lebih ringan. Pelayanan ramah bintang lima.”",
+        author: "— DIAN LESTARI",
+        role: "Client since 2025 • Scalp Purifying",
+        counter: "04 / 04"
+      }
+    ];
+
+    let currentTestimonialIdx = 0;
+
+    function renderTestimonial(idx) {
+      const q = testimonials[idx];
+      const textEl = document.getElementById('quoteText');
+      textEl.style.opacity = '0';
+      
+      setTimeout(() => {
+        textEl.textContent = q.quote;
+        document.getElementById('quoteAuthor').textContent = q.author;
+        document.getElementById('quoteRole').textContent = q.role;
+        document.getElementById('quoteCounter').textContent = q.counter;
+        textEl.style.opacity = '1';
+      }, 200);
+    }
+
+    function nextTestimonial() {
+      currentTestimonialIdx = (currentTestimonialIdx + 1) % testimonials.length;
+      renderTestimonial(currentTestimonialIdx);
+    }
+
+    function prevTestimonial() {
+      currentTestimonialIdx = (currentTestimonialIdx - 1 + testimonials.length) % testimonials.length;
+      renderTestimonial(currentTestimonialIdx);
+    }
+
+    // 6. Booking Modal Handlers
+    function openBookingModal(treatmentName) {
+      const modal = document.getElementById('bookingModal');
+      const input = document.getElementById('modalTreatmentInput');
+      input.value = treatmentName || "Signature Glow Facial";
+      
+      // Set default tomorrow date
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      document.getElementById('modalDate').value = tomorrow.toISOString().split('T')[0];
+
+      modal.classList.remove('hidden');
+    }
+
+    function closeBookingModal() {
+      document.getElementById('bookingModal').classList.add('hidden');
+    }
+
+    // Close modal on escape or outer click
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeBookingModal();
+    });
+    document.getElementById('bookingModal').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('bookingModal')) closeBookingModal();
+    });
+
+    // 7. Form Submissions & WhatsApp Dispatch
+    function handleModalSubmit(e) {
+      e.preventDefault();
+      const treatment = document.getElementById('modalTreatmentInput').value;
+      const date = document.getElementById('modalDate').value;
+      const time = document.getElementById('modalTime').value;
+      const name = document.getElementById('modalName').value;
+      const phone = document.getElementById('modalPhone').value;
+
+      closeBookingModal();
+
+      // Show Custom Success Box
+      const notice = document.getElementById('successNotice');
+      document.getElementById('successNoticeText').textContent = 
+        `Terima kasih Kak ${name}. Reservasi Anda untuk [${treatment}] pada tanggal ${date} (${time}) sedang diverifikasi oleh staf Luméa.`;
+      notice.classList.remove('hidden');
+
+      // Auto redirect to WhatsApp with pre-filled message
+      const text = encodeURIComponent(`Halo LUMÉA Studio, saya ingin konfirmasi reservasi treatment:\n• Nama: ${name}\n• WhatsApp: ${phone}\n• Treatment: ${treatment}\n• Tanggal: ${date}\n• Jam: ${time}\n\nMohon dicek ketersediaan slotnya. Terima kasih!`);
+      const waUrl = `https://wa.me/6281234567890?text=${text}`;
+      
+      setTimeout(() => {
+        window.open(waUrl, '_blank');
+      }, 1200);
+    }
+
+    function handleBookingSubmit(e) {
+      e.preventDefault();
+      const treatment = document.getElementById('bTreatment').value;
+      const specialist = document.getElementById('bSpecialist').value;
+      const date = document.getElementById('bDate').value;
+      const time = document.getElementById('bTime').value;
+      const name = document.getElementById('bName').value;
+      const phone = document.getElementById('bPhone').value;
+      const notes = document.getElementById('bNotes').value;
+
+      const notice = document.getElementById('successNotice');
+      document.getElementById('successNoticeText').textContent = 
+        `Terima kasih Kak ${name}. Reservasi untuk [${treatment}] bersama [${specialist}] pada tanggal ${date} (${time}) berhasil terkirim.`;
+      notice.classList.remove('hidden');
+
+      const text = encodeURIComponent(`Halo LUMÉA Beauty Studio, saya ingin konfirmasi appointment:\n• Nama: ${name}\n• No WA: ${phone}\n• Treatment: ${treatment}\n• Terapis: ${specialist}\n• Tanggal: ${date}\n• Jam: ${time}\n• Catatan: ${notes || '-'}\n\nTerima kasih.`);
+      const waUrl = `https://wa.me/6281234567890?text=${text}`;
+      
+      setTimeout(() => {
+        window.open(waUrl, '_blank');
+      }, 1000);
+    }
+
+    // Set default tomorrow date on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      const dateStr = tomorrow.toISOString().split('T')[0];
+      const mainDateInput = document.getElementById('bDate');
+      if (mainDateInput) mainDateInput.value = dateStr;
+    });
+  </script>
+
+</body>
+</html>

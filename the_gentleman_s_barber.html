@@ -1,0 +1,2137 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THE GENTLEMEN — Barber & Men's Grooming Indonesia</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Preload Hero Image -->
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1400&q=80">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: {
+              950: '#070C14',
+              900: '#0B1320',
+              800: '#131F33',
+              700: '#1C2C45',
+            },
+            ivory: {
+              50: '#FDFCFA',
+              100: '#F7F5F0',
+              200: '#EDE8DF',
+              300: '#DFD8CA',
+            },
+            burgundy: {
+              900: '#400D18',
+              800: '#5C1423',
+              700: '#751B2E',
+              600: '#8E2339',
+            },
+            charcoal: {
+              900: '#121417',
+              800: '#1E232B',
+              700: '#2C323D',
+              500: '#647082',
+            },
+            brass: {
+              300: '#E0CCA8',
+              400: '#CCA978',
+              500: '#B8925B',
+              600: '#947240',
+            }
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          letterSpacing: {
+            editorial: '0.22em',
+            widest2: '0.3em',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Luxury Editorial Styles */
+    ::selection {
+      background-color: #5C1423;
+      color: #F7F5F0;
+    }
+
+    body {
+      background-color: #F7F5F0;
+      color: #121417;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Subtle hair lines */
+    .border-hairline {
+      border-color: rgba(184, 146, 91, 0.22);
+    }
+    .border-hairline-dark {
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    /* Before/After slider control */
+    .ba-slider-container {
+      position: relative;
+      overflow: hidden;
+      user-select: none;
+    }
+    .ba-after-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 50%;
+      overflow: hidden;
+    }
+
+    /* Custom range input */
+    input[type="range"]::-webkit-slider-thumb {
+      appearance: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #5C1423;
+      border: 2px solid #CCA978;
+      cursor: ew-resize;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+    }
+    input[type="range"]::-moz-range-thumb {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #5C1423;
+      border: 2px solid #CCA978;
+      cursor: ew-resize;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+    }
+
+    /* Subtle link hover */
+    .editorial-link {
+      position: relative;
+      display: inline-block;
+    }
+    .editorial-link::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 1px;
+      bottom: -2px;
+      left: 0;
+      background-color: currentColor;
+      transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .editorial-link:hover::after {
+      width: 100%;
+    }
+
+    /* Hide scrollbars for editorial lists */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Admin Quick Edit Highlight (When Logged In) */
+    .admin-editable-active {
+      outline: 1px dashed rgba(204, 169, 120, 0.45);
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body class="relative overflow-x-hidden pb-16 lg:pb-0">
+
+  <script>
+    /**
+     * Resilient Multi-Stage Image Handler:
+     * Stage 1: Google Drive lh3.googleusercontent.com/d/{id}
+     * Stage 2: Google Drive thumbnail?id={id}&sz=w1600
+     * Stage 3: Premium Editorial Unsplash Fallback
+     */
+    function handleSmartImageFallback(imgElement, driveId, unsplashFallback) {
+      const currentStage = parseInt(imgElement.getAttribute('data-fallback-stage') || '1', 10);
+      
+      if (driveId && currentStage === 1) {
+        imgElement.setAttribute('data-fallback-stage', '2');
+        imgElement.src = `https://drive.google.com/thumbnail?id=${driveId}&sz=w1600`;
+      } else {
+        imgElement.onerror = null;
+        imgElement.src = unsplashFallback;
+      }
+    }
+  </script>
+
+  <!-- Micro Top Bar -->
+  <aside class="bg-navy-950 text-brass-300/80 text-[10px] uppercase tracking-editorial py-2 px-4 text-center border-b border-navy-800 flex items-center justify-between">
+    <span class="mx-auto" data-bind-text="topBarNotice">EST. 2026 • MEN'S GROOMING & APOTHECARY • JAKARTA, INDONESIA</span>
+    <button onclick="toggleAdminAuthModal()" class="text-[9px] text-brass-400/60 hover:text-brass-300 uppercase tracking-widest px-2 py-0.5 border border-navy-800 rounded transition-colors hidden sm:inline-block">
+      <span id="adminNavStatus">KELOLA WEB</span>
+    </button>
+  </aside>
+
+  <!-- Main Center Crest Header -->
+  <header class="sticky top-0 z-40 bg-navy-900/95 backdrop-blur-md text-ivory-100 border-b border-hairline-dark transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-5 lg:px-10">
+      
+      <!-- DESKTOP SPREAD NAVIGATION -->
+      <div class="hidden lg:grid grid-cols-12 items-center py-5">
+        <nav class="col-span-4 flex items-center space-x-9 text-xs uppercase tracking-editorial font-medium text-ivory-200">
+          <a href="#about" class="editorial-link hover:text-brass-300 transition-colors">About</a>
+          <a href="#services" class="editorial-link hover:text-brass-300 transition-colors">Services</a>
+          <a href="#craftsmen" class="editorial-link hover:text-brass-300 transition-colors">Barbers</a>
+          <a href="#experience" class="editorial-link hover:text-brass-300 transition-colors">Experience</a>
+        </nav>
+
+        <div class="col-span-4 text-center">
+          <a href="#" class="inline-block group">
+            <span data-bind-text="brandName" class="block font-serif text-2xl lg:text-3xl tracking-widest2 font-semibold text-ivory-50 uppercase group-hover:text-brass-300 transition-colors">
+              THE GENTLEMEN
+            </span>
+            <div class="flex items-center justify-center space-x-2 mt-1">
+              <span class="h-[1px] w-6 bg-brass-500/50"></span>
+              <span data-bind-text="brandTagline" class="text-[9px] uppercase tracking-widest font-sans text-brass-400 font-light">
+                BARBER & GROOMING
+              </span>
+              <span class="h-[1px] w-6 bg-brass-500/50"></span>
+            </div>
+          </a>
+        </div>
+
+        <nav class="col-span-4 flex items-center justify-end space-x-8 text-xs uppercase tracking-editorial font-medium text-ivory-200">
+          <a href="#journal" class="editorial-link hover:text-brass-300 transition-colors">Journal</a>
+          <a href="#location" class="editorial-link hover:text-brass-300 transition-colors">Location</a>
+          <a href="#booking" data-bind-text="heroCtaText" class="px-5 py-2.5 border border-burgundy-700 bg-burgundy-800 text-ivory-100 hover:bg-burgundy-700 hover:border-brass-400 transition-all duration-200 tracking-editorial text-[11px] font-semibold">
+            RESERVE CHAIR
+          </a>
+        </nav>
+      </div>
+
+      <!-- MOBILE HEADER BAR -->
+      <div class="flex lg:hidden items-center justify-between py-4">
+        <button id="mobileMenuBtn" aria-label="Buka Menu" class="text-ivory-100 p-2 focus:outline-none focus:ring-1 focus:ring-brass-400">
+          <svg class="w-6 h-6 stroke-current" fill="none" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 7h16M4 12h12M4 17h16"/>
+          </svg>
+        </button>
+
+        <div class="text-center">
+          <a href="#" class="inline-block">
+            <span data-bind-text="brandName" class="block font-serif text-xl tracking-widest font-bold text-ivory-50 uppercase">
+              THE GENTLEMEN
+            </span>
+            <span data-bind-text="brandTagline" class="block text-[8px] uppercase tracking-widest text-brass-400 -mt-0.5">
+              BARBERSHOP ID
+            </span>
+          </a>
+        </div>
+
+        <a href="#booking" class="text-xs uppercase tracking-wider font-semibold px-3 py-1.5 bg-burgundy-800 text-ivory-100 border border-burgundy-700">
+          BOOK
+        </a>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Overlay -->
+    <div id="mobileDrawer" class="fixed inset-0 bg-navy-950/90 backdrop-blur-xl z-50 flex flex-col justify-between p-8 transition-all duration-300 -translate-x-full lg:hidden">
+      <div>
+        <div class="flex items-center justify-between border-b border-hairline-dark pb-6">
+          <div>
+            <span data-bind-text="brandName" class="font-serif text-2xl tracking-widest font-bold text-ivory-100">THE GENTLEMEN</span>
+            <p class="text-[9px] text-brass-400 tracking-widest uppercase mt-0.5">Curated Barber Indonesia</p>
+          </div>
+          <button id="closeDrawerBtn" class="text-ivory-200 p-2" aria-label="Tutup Menu">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+
+        <nav class="flex flex-col space-y-6 mt-10 text-lg uppercase font-serif tracking-widest text-ivory-100">
+          <a href="#about" class="drawer-link hover:text-brass-400">About the House</a>
+          <a href="#services" class="drawer-link hover:text-brass-400">The Grooming Menu</a>
+          <a href="#craftsmen" class="drawer-link hover:text-brass-400">The Craftsmen</a>
+          <a href="#experience" class="drawer-link hover:text-brass-400">Signature Experience</a>
+          <a href="#journal" class="drawer-link hover:text-brass-400">Style Journal</a>
+          <a href="#membership" class="drawer-link hover:text-brass-400">Club Membership</a>
+          <a href="#location" class="drawer-link hover:text-brass-400">Our Sanctuary</a>
+          <button onclick="closeMobileDrawer(); toggleAdminAuthModal();" class="text-left text-xs uppercase tracking-widest text-brass-400 pt-4 border-t border-hairline-dark">
+            ⚙️ Kelola Web (Admin)
+          </button>
+        </nav>
+      </div>
+
+      <div class="pt-6 border-t border-hairline-dark space-y-4">
+        <a href="#booking" class="drawer-link block w-full py-3.5 bg-burgundy-800 text-ivory-100 text-center uppercase tracking-editorial text-xs font-semibold">
+          RESERVE YOUR CHAIR
+        </a>
+        <p data-bind-text="locationAddress" class="text-[10px] text-charcoal-500 text-center tracking-widest uppercase">
+          Jl. Senopati No. 88, Kebayoran Baru • Jakarta
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="relative bg-ivory-100 border-b border-ivory-300/80 overflow-hidden">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-12 min-h-[82vh] items-stretch">
+        
+        <div class="lg:col-span-6 flex flex-col justify-between p-8 sm:p-12 lg:p-16 xl:p-20 bg-ivory-100 z-10">
+          <div class="flex items-center space-x-3 text-xs uppercase tracking-editorial text-burgundy-800 font-semibold">
+            <span class="w-8 h-[1px] bg-burgundy-800"></span>
+            <span data-bind-text="heroTag">01 / EXPERIENCE</span>
+          </div>
+
+          <div class="my-10 lg:my-0 space-y-6">
+            <h1 class="text-5xl sm:text-6xl xl:text-7xl leading-[1.04] text-navy-950 font-normal">
+              <span data-bind-text="heroTitle1" class="font-serif italic tracking-wide block text-charcoal-800">The Art</span>
+              <span data-bind-text="heroTitle2" class="font-sans font-bold tracking-tight block uppercase text-navy-900 mt-1">
+                OF GROOMING.
+              </span>
+            </h1>
+            
+            <p data-bind-text="heroSubtitle" class="text-charcoal-700 text-base sm:text-lg font-light leading-relaxed max-w-md pt-2">
+              A refined barber experience for modern gentlemen. Dibuat dengan presisi tangan terampil, ketenangan ruang, dan standar grooming pria berkelas.
+            </p>
+
+            <div class="pt-6 flex flex-col sm:flex-row sm:items-center space-y-4 sm:space-y-0 sm:space-x-6">
+              <a href="#booking" data-bind-text="heroCtaText" class="inline-flex items-center justify-center px-8 py-4 bg-navy-950 text-ivory-100 text-xs font-semibold uppercase tracking-editorial hover:bg-burgundy-800 transition-colors duration-200 shadow-md">
+                Reserve Your Chair
+              </a>
+              <a href="#services" data-bind-text="heroSecondaryCta" class="inline-flex items-center justify-center text-xs font-semibold uppercase tracking-editorial text-charcoal-800 hover:text-burgundy-800 transition-colors">
+                <span>Explore Services</span>
+                <svg class="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="pt-8 border-t border-ivory-300/80 flex items-center justify-between text-[11px] uppercase tracking-wider text-charcoal-500 font-medium">
+            <span data-bind-text="heroCity">Jakarta Selatan</span>
+            <span data-bind-text="heroType">Appointment & Walk-in</span>
+            <span data-bind-text="operatingHours">10:00 — 22:00</span>
+          </div>
+        </div>
+
+        <div class="lg:col-span-6 relative min-h-[440px] lg:min-h-full bg-navy-900 overflow-hidden group">
+          <img 
+            id="heroImageEl"
+            data-bind-src="heroImage"
+            src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1400&q=80"
+            data-fallback-stage="1"
+            onerror="handleSmartImageFallback(this, '', 'https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=1200&q=80')"
+            alt="Authentic Indonesian Barber Master Grooming Client" 
+            class="w-full h-full object-cover object-center filter grayscale-[25%] contrast-[105%] group-hover:scale-105 transition-transform duration-700 ease-out"
+            loading="eager"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-navy-950/20 lg:bg-gradient-to-r lg:from-ivory-100/30 lg:via-transparent lg:to-transparent"></div>
+          
+          <div class="absolute bottom-6 right-6 lg:bottom-10 lg:right-10 bg-navy-950/90 backdrop-blur-sm border border-hairline-dark p-4 text-ivory-100 max-w-xs">
+            <span class="text-[9px] uppercase tracking-editorial text-brass-400 block mb-1">CRAFT & DETAIL</span>
+            <p data-bind-text="heroQuote" class="font-serif text-sm italic text-ivory-200">
+              "Ketenangan ruang, kehangatan handuk, dan ketajaman mata seorang master barber."
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- BRAND STATEMENT -->
+  <section id="about" class="py-24 lg:py-32 bg-ivory-100">
+    <div class="max-w-5xl mx-auto px-6 lg:px-12 text-center">
+      <span class="text-xs uppercase tracking-editorial text-burgundy-800 font-semibold block mb-4">
+        OUR PHILOSOPHY
+      </span>
+      <h2 data-bind-text="statementHeading" class="font-serif text-3xl sm:text-4xl lg:text-5xl text-navy-950 font-normal leading-tight max-w-3xl mx-auto">
+        A GOOD HAIRCUT IS PART OF YOUR IDENTITY.
+      </h2>
+      <div class="w-12 h-[1px] bg-brass-500 mx-auto my-8"></div>
+      <p data-bind-text="statementQuote" class="font-serif italic text-lg sm:text-xl text-charcoal-700 max-w-2xl mx-auto leading-relaxed">
+        “Kami percaya grooming bukan sekadar bagaimana rambut terlihat. Ini tentang bagaimana seorang pria membawa dirinya — keyakinan, ketenangan, dan kehormatan dalam setiap langkah.”
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-12 mt-16 pt-16 border-t border-ivory-300/80">
+        <div class="text-center">
+          <span data-bind-text="statExp" class="font-serif text-5xl lg:text-6xl font-normal text-navy-950 block tracking-tight">8+</span>
+          <span class="text-xs uppercase tracking-editorial text-charcoal-500 mt-2 block font-medium">Years Experience</span>
+        </div>
+        <div class="text-center sm:border-x sm:border-ivory-300/80">
+          <span data-bind-text="statClients" class="font-serif text-5xl lg:text-6xl font-normal text-navy-950 block tracking-tight">10K+</span>
+          <span class="text-xs uppercase tracking-editorial text-charcoal-500 mt-2 block font-medium">Happy Clients</span>
+        </div>
+        <div class="text-center">
+          <span data-bind-text="statRating" class="font-serif text-5xl lg:text-6xl font-normal text-navy-950 block tracking-tight">4.9</span>
+          <span class="text-xs uppercase tracking-editorial text-charcoal-500 mt-2 block font-medium">Average Rating</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="py-24 bg-navy-900 text-ivory-100 border-y border-navy-800 relative">
+    <div class="max-w-5xl mx-auto px-6 lg:px-12">
+      
+      <div class="text-center mb-16">
+        <span class="text-xs uppercase tracking-editorial text-brass-400 font-semibold block mb-2">CURATED SERVICES</span>
+        <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal tracking-wide text-ivory-50">
+          THE GENTLEMAN'S MENU
+        </h2>
+        <p class="text-charcoal-500 text-xs uppercase tracking-editorial mt-3 font-light">
+          Setiap layanan dirancang dengan ketelitian, kenyamanan kursi kulit, dan produk apothecary terbaik.
+        </p>
+      </div>
+
+      <div id="serviceListContainer" class="divide-y divide-hairline-dark">
+        <!-- Injected and synchronized with Real-time Data -->
+      </div>
+
+      <div class="mt-12 text-center">
+        <p class="text-[11px] text-charcoal-500 uppercase tracking-widest">
+          Semua service mencakup konsultasi bentuk wajah dan rekomendasi produk sesuai tipe rambut.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FEATURED EXPERIENCE -->
+  <section id="experience" class="py-24 lg:py-32 bg-ivory-200 border-b border-ivory-300">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      
+      <div class="max-w-3xl mb-16">
+        <span class="text-xs uppercase tracking-editorial text-burgundy-800 font-semibold block mb-3">
+          CRAFTED RITUAL
+        </span>
+        <h2 data-bind-text="expTitle" class="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-navy-950 leading-tight">
+          THE SIGNATURE EXPERIENCE.
+        </h2>
+        <div data-bind-text="expSteps" class="font-sans font-semibold text-xs tracking-editorial text-charcoal-800 uppercase mt-3">
+          CUT. WASH. SHAVE. STYLE.
+        </div>
+        <p data-bind-text="expDesc" class="text-charcoal-700 text-base font-light mt-4 leading-relaxed">
+          “Luangkan waktu sejenak. Duduk dengan nyaman, nikmati secangkir kopi hitam, dan biarkan barber kami menangani detailnya dengan ketelitian mutlak.”
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+        <div class="md:col-span-7 bg-navy-950 relative overflow-hidden group min-h-[400px] lg:min-h-[520px]">
+          <img 
+            data-bind-src="expImage1"
+            src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=1200&q=80" 
+            data-fallback-stage="1"
+            onerror="handleSmartImageFallback(this, '', 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1200&q=80')"
+            alt="Barber Grooming Precision"
+            class="w-full h-full object-cover filter contrast-105 group-hover:scale-105 transition-transform duration-700 ease-out"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-navy-950/90 via-navy-950/30 to-transparent"></div>
+          <div class="absolute bottom-8 left-8 right-8 text-ivory-100">
+            <span class="text-[9px] uppercase tracking-editorial text-brass-400">STAGE 01 — CONSULTATION & CUT</span>
+            <h3 class="font-serif text-2xl mt-1 text-ivory-50">Menyesuaikan anatomi kepala dan arah tumbuh rambut</h3>
+          </div>
+        </div>
+
+        <div class="md:col-span-5 flex flex-col justify-between space-y-6">
+          <div class="bg-navy-900 relative overflow-hidden group h-64">
+            <img 
+              data-bind-src="expImage2"
+              src="https://images.unsplash.com/photo-1517832606589-7629c3395907?auto=format&fit=crop&w=800&q=80" 
+              data-fallback-stage="1"
+              onerror="handleSmartImageFallback(this, '', 'https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=800&q=80')"
+              alt="Steamed Hot Towel Shave"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+            <div class="absolute inset-0 bg-navy-950/50"></div>
+            <div class="absolute bottom-5 left-6 right-6 text-ivory-100">
+              <span class="text-[9px] uppercase tracking-editorial text-brass-400">STAGE 02 — HOT TOWEL THERAPY</span>
+              <p class="font-serif text-lg text-ivory-100">Membuka pori-pori dan melenturkan otot wajah</p>
+            </div>
+          </div>
+
+          <div class="bg-navy-900 relative overflow-hidden group h-64">
+            <img 
+              data-bind-src="expImage3"
+              src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=800&q=80" 
+              data-fallback-stage="1"
+              onerror="handleSmartImageFallback(this, '', 'https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=800&q=80')"
+              alt="Artisanal Shaving and Styling"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+            <div class="absolute inset-0 bg-navy-950/50"></div>
+            <div class="absolute bottom-5 left-6 right-6 text-ivory-100">
+              <span class="text-[9px] uppercase tracking-editorial text-brass-400">STAGE 03 — POMADE & TONIC FINISH</span>
+              <p class="font-serif text-lg text-ivory-100">Kunci tekstur natural tanpa rasa lengket berlebih</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BARBER TEAM -->
+  <section id="craftsmen" class="py-24 lg:py-32 bg-ivory-100">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 border-b border-ivory-300 pb-8">
+        <div>
+          <span class="text-xs uppercase tracking-editorial text-burgundy-800 font-semibold block mb-2">OUR TEAM</span>
+          <h2 class="font-serif text-4xl lg:text-5xl text-navy-950 font-normal">THE CRAFTSMEN</h2>
+        </div>
+        <p class="text-charcoal-700 text-sm font-serif italic max-w-sm mt-4 md:mt-0">
+          "Precision comes with experience. Setiap barber kami adalah praktisi berdedikasi dengan jam terbang tinggi."
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
+        <!-- Barber 01 -->
+        <div class="group">
+          <div class="relative overflow-hidden bg-navy-950 aspect-[3/4] mb-6">
+            <img 
+              data-bind-src="barberImg1"
+              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=80" 
+              data-fallback-stage="1"
+              onerror="handleSmartImageFallback(this, '', 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=900&q=80')"
+              alt="Aditya - Master Barber"
+              class="w-full h-full object-cover filter grayscale contrast-110 group-hover:scale-105 group-hover:grayscale-0 transition-all duration-700"
+            />
+            <div class="absolute top-4 left-4 bg-navy-950/80 px-2.5 py-1 text-brass-400 font-serif text-xs italic">01</div>
+          </div>
+          <div class="border-b border-ivory-300 pb-4">
+            <div class="flex items-baseline justify-between">
+              <h3 data-bind-text="barber1Name" class="font-serif text-2xl text-navy-950 font-medium tracking-wide">ADITYA</h3>
+              <span data-bind-text="barber1Role" class="text-[11px] uppercase tracking-editorial text-burgundy-800 font-semibold">Master Barber</span>
+            </div>
+            <p data-bind-text="barber1Spec" class="text-xs text-charcoal-500 uppercase tracking-wider mt-1.5 font-light">
+              Specialist: Classic Cut / Executive Style
+            </p>
+          </div>
+          <p data-bind-text="barber1Bio" class="text-xs text-charcoal-700 mt-3 font-light leading-relaxed">
+            10+ tahun menggeluti seni classic taper & pompadour. Terkenal dengan ketelitian razor line yang presisi.
+          </p>
+        </div>
+
+        <!-- Barber 02 -->
+        <div class="group">
+          <div class="relative overflow-hidden bg-navy-950 aspect-[3/4] mb-6">
+            <img 
+              data-bind-src="barberImg2"
+              src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80" 
+              data-fallback-stage="1"
+              onerror="handleSmartImageFallback(this, '', 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80')"
+              alt="Rendra - Senior Barber"
+              class="w-full h-full object-cover filter grayscale contrast-110 group-hover:scale-105 group-hover:grayscale-0 transition-all duration-700"
+            />
+            <div class="absolute top-4 left-4 bg-navy-950/80 px-2.5 py-1 text-brass-400 font-serif text-xs italic">02</div>
+          </div>
+          <div class="border-b border-ivory-300 pb-4">
+            <div class="flex items-baseline justify-between">
+              <h3 data-bind-text="barber2Name" class="font-serif text-2xl text-navy-950 font-medium tracking-wide">RENDRA</h3>
+              <span data-bind-text="barber2Role" class="text-[11px] uppercase tracking-editorial text-burgundy-800 font-semibold">Senior Barber</span>
+            </div>
+            <p data-bind-text="barber2Spec" class="text-xs text-charcoal-500 uppercase tracking-wider mt-1.5 font-light">
+              Specialist: Fade / Texture
+            </p>
+          </div>
+          <p data-bind-text="barber2Bio" class="text-xs text-charcoal-700 mt-3 font-light leading-relaxed">
+            Ahli dalam transisi skin fade halus, textured crop, dan styling rambut modern yang mudah diatur sendiri.
+          </p>
+        </div>
+
+        <!-- Barber 03 -->
+        <div class="group">
+          <div class="relative overflow-hidden bg-navy-950 aspect-[3/4] mb-6">
+            <img 
+              data-bind-src="barberImg3"
+              src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=900&q=80" 
+              data-fallback-stage="1"
+              onerror="handleSmartImageFallback(this, '', 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=900&q=80')"
+              alt="Fajar - Barber"
+              class="w-full h-full object-cover filter grayscale contrast-110 group-hover:scale-105 group-hover:grayscale-0 transition-all duration-700"
+            />
+            <div class="absolute top-4 left-4 bg-navy-950/80 px-2.5 py-1 text-brass-400 font-serif text-xs italic">03</div>
+          </div>
+          <div class="border-b border-ivory-300 pb-4">
+            <div class="flex items-baseline justify-between">
+              <h3 data-bind-text="barber3Name" class="font-serif text-2xl text-navy-950 font-medium tracking-wide">FAJAR</h3>
+              <span data-bind-text="barber3Role" class="text-[11px] uppercase tracking-editorial text-burgundy-800 font-semibold">Barber</span>
+            </div>
+            <p data-bind-text="barber3Spec" class="text-xs text-charcoal-500 uppercase tracking-wider mt-1.5 font-light">
+              Specialist: Modern Gentleman
+            </p>
+          </div>
+          <p data-bind-text="barber3Bio" class="text-xs text-charcoal-700 mt-3 font-light leading-relaxed">
+            Spesialisasi gaya clean side-part kontemporer dan ritual hot towel shave tradisional yang menenangkan.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BEFORE / AFTER -->
+  <section class="py-24 bg-navy-950 text-ivory-100 border-t border-navy-800">
+    <div class="max-w-6xl mx-auto px-6 lg:px-12">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="text-xs uppercase tracking-editorial text-brass-400 font-semibold block mb-2">TRANSFORMATION</span>
+        <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl text-ivory-50 font-normal">
+          PRECISION YOU CAN SEE.
+        </h2>
+        <p class="text-charcoal-500 text-xs uppercase tracking-editorial mt-3 font-light">
+          Geser slider untuk melihat transformasi bentuk dan tekstur rambut secara detail.
+        </p>
+      </div>
+
+      <div class="max-w-4xl mx-auto">
+        <div class="ba-slider-container w-full aspect-[16/10] sm:aspect-[16/9] max-h-[540px] bg-charcoal-900 border border-hairline-dark relative shadow-2xl">
+          <img 
+            data-bind-src="beforeImage"
+            src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1400&q=80" 
+            alt="Customer Before Haircut"
+            class="absolute inset-0 w-full h-full object-cover filter brightness-90"
+          />
+          <div class="absolute bottom-5 right-6 z-10 bg-navy-950/80 px-3 py-1 border border-hairline-dark text-[10px] uppercase tracking-widest text-ivory-200">
+            BEFORE CUT
+          </div>
+
+          <div id="afterLayer" class="ba-after-layer z-20 border-r-2 border-brass-400">
+            <img 
+              data-bind-src="afterImage"
+              src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=1400&q=80" 
+              alt="Customer After Executive Taper Cut"
+              class="absolute inset-0 w-full h-full object-cover max-w-none"
+              style="width: 100%; height: 100%; object-fit: cover;"
+              id="afterImageRef"
+            />
+            <div class="absolute bottom-5 left-6 z-10 bg-burgundy-900/90 px-3 py-1 border border-burgundy-700 text-[10px] uppercase tracking-widest text-ivory-100">
+              AFTER CUT
+            </div>
+          </div>
+
+          <input 
+            type="range" 
+            min="0" 
+            max="100" 
+            value="50" 
+            id="baRange" 
+            class="absolute inset-0 w-full h-full opacity-0 z-30 cursor-ew-resize"
+            aria-label="Before and After Split Slider"
+          />
+
+          <div id="sliderHandle" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-none w-10 h-10 rounded-full bg-burgundy-800 border-2 border-brass-400 flex items-center justify-center shadow-2xl">
+            <svg class="w-4 h-4 text-brass-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4 p-6 bg-navy-900 border border-hairline-dark text-center">
+          <div>
+            <span class="text-[9px] uppercase tracking-editorial text-charcoal-500 block">CUT</span>
+            <span data-bind-text="transCut" class="font-serif text-lg text-ivory-100 font-medium">Executive Taper</span>
+          </div>
+          <div>
+            <span class="text-[9px] uppercase tracking-editorial text-charcoal-500 block">STYLE</span>
+            <span data-bind-text="transStyle" class="font-serif text-lg text-ivory-100 font-medium">Natural Texture</span>
+          </div>
+          <div>
+            <span class="text-[9px] uppercase tracking-editorial text-charcoal-500 block">PRODUCT</span>
+            <span data-bind-text="transProduct" class="font-serif text-lg text-ivory-100 font-medium">Matte Clay Pomade</span>
+          </div>
+          <div>
+            <span class="text-[9px] uppercase tracking-editorial text-charcoal-500 block">BARBER</span>
+            <span data-bind-text="transBarber" class="font-serif text-lg text-brass-400 font-medium">Aditya (Master)</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- HAIRCUT JOURNAL -->
+  <section id="journal" class="py-24 lg:py-32 bg-ivory-100 border-b border-ivory-300">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+        <div>
+          <span class="text-xs uppercase tracking-editorial text-burgundy-800 font-semibold block mb-2">GROOMING ESSAYS</span>
+          <h2 class="font-serif text-4xl lg:text-5xl text-navy-950 font-normal">THE STYLE JOURNAL</h2>
+        </div>
+        <p class="text-xs uppercase tracking-editorial text-charcoal-700 font-medium mt-4 md:mt-0">
+          EDITORIAL VOL. 04 / 2026
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+        <article class="group cursor-pointer">
+          <div class="overflow-hidden bg-navy-950 aspect-[16/10] mb-6">
+            <img 
+              data-bind-src="journalImg1"
+              src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=800&q=80" 
+              alt="How to Choose Right Haircut"
+              class="w-full h-full object-cover filter grayscale-[15%] group-hover:scale-105 transition-transform duration-500"
+            />
+          </div>
+          <div class="flex items-center space-x-3 text-[10px] uppercase tracking-editorial text-burgundy-800 font-semibold mb-2">
+            <span>01</span><span>•</span><span>FACE SHAPE & ANATOMY</span>
+          </div>
+          <h3 data-bind-text="journalTitle1" class="font-serif text-2xl text-navy-950 font-medium group-hover:text-burgundy-800 transition-colors leading-snug">
+            HOW TO CHOOSE THE RIGHT HAIRCUT FOR YOUR FACE
+          </h3>
+          <p data-bind-text="journalDesc1" class="text-xs text-charcoal-700 font-light mt-3 leading-relaxed">
+            Panduan esensial mengenali rasio rahang, bentuk kepala oval vs persegi, dan mengapa panjang cambang menentukan karakter maskulin Anda.
+          </p>
+          <div class="mt-4 inline-block text-xs uppercase tracking-editorial font-semibold text-navy-950 editorial-link">Read Article</div>
+        </article>
+
+        <article class="group cursor-pointer">
+          <div class="overflow-hidden bg-navy-950 aspect-[16/10] mb-6">
+            <img 
+              data-bind-src="journalImg2"
+              src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=800&q=80" 
+              alt="Classic or Modern Haircut"
+              class="w-full h-full object-cover filter grayscale-[15%] group-hover:scale-105 transition-transform duration-500"
+            />
+          </div>
+          <div class="flex items-center space-x-3 text-[10px] uppercase tracking-editorial text-burgundy-800 font-semibold mb-2">
+            <span>02</span><span>•</span><span>HERITAGE & TREND</span>
+          </div>
+          <h3 data-bind-text="journalTitle2" class="font-serif text-2xl text-navy-950 font-medium group-hover:text-burgundy-800 transition-colors leading-snug">
+            CLASSIC OR MODERN? FIND YOUR SIGNATURE STYLE
+          </h3>
+          <p data-bind-text="journalDesc2" class="text-xs text-charcoal-700 font-light mt-3 leading-relaxed">
+            Membedah perbedaan antara slick side-part formal pria era 60-an dengan textured crop santai para pelaku industri kreatif masa kini.
+          </p>
+          <div class="mt-4 inline-block text-xs uppercase tracking-editorial font-semibold text-navy-950 editorial-link">Read Article</div>
+        </article>
+
+        <article class="group cursor-pointer">
+          <div class="overflow-hidden bg-navy-950 aspect-[16/10] mb-6">
+            <img 
+              data-bind-src="journalImg3"
+              src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=80" 
+              alt="Hair Maintenance Tips"
+              class="w-full h-full object-cover filter grayscale-[15%] group-hover:scale-105 transition-transform duration-500"
+            />
+          </div>
+          <div class="flex items-center space-x-3 text-[10px] uppercase tracking-editorial text-burgundy-800 font-semibold mb-2">
+            <span>03</span><span>•</span><span>DAILY MAINTENANCE</span>
+          </div>
+          <h3 data-bind-text="journalTitle3" class="font-serif text-2xl text-navy-950 font-medium group-hover:text-burgundy-800 transition-colors leading-snug">
+            HOW TO KEEP YOUR HAIR LOOKING FRESH BETWEEN CUTS
+          </h3>
+          <p data-bind-text="journalDesc3" class="text-xs text-charcoal-700 font-light mt-3 leading-relaxed">
+            Tiga kebiasaan krusial: penggunaan hair tonic anti-rontok, takaran sea salt spray untuk volume, dan cara keramas yang benar.
+          </p>
+          <div class="mt-4 inline-block text-xs uppercase tracking-editorial font-semibold text-navy-950 editorial-link">Read Article</div>
+        </article>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- GROOMING PRODUCTS -->
+  <section class="py-24 bg-navy-900 text-ivory-100 border-b border-navy-800">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 border-b border-hairline-dark pb-8">
+        <div>
+          <span class="text-xs uppercase tracking-editorial text-brass-400 font-semibold block mb-2">APOTHECARY</span>
+          <h2 class="font-serif text-4xl lg:text-5xl font-normal text-ivory-50">THE GROOMING SHELF</h2>
+        </div>
+        <p class="text-xs uppercase tracking-editorial text-charcoal-500 font-light mt-4 md:mt-0">
+          Formulasi botani pilihan untuk performa rambut tropis Indonesia.
+        </p>
+      </div>
+
+      <div id="productsShelfContainer" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIAL -->
+  <section class="py-24 lg:py-32 bg-ivory-100">
+    <div class="max-w-4xl mx-auto px-6 lg:px-12 text-center">
+      <span class="text-xs uppercase tracking-editorial text-burgundy-800 font-semibold block mb-6">
+        GENTLEMAN'S WORDS
+      </span>
+
+      <div id="testimonialContainer" class="min-h-[220px] flex flex-col justify-center transition-opacity duration-300">
+        <h3 id="tQuote" class="font-serif text-2xl sm:text-3xl lg:text-4xl text-navy-950 font-normal leading-relaxed uppercase tracking-wide">
+          “THE KIND OF PLACE YOU WANT TO RETURN TO.”
+        </h3>
+        <p id="tBody" class="font-serif italic text-base sm:text-lg text-charcoal-700 max-w-2xl mx-auto mt-6 leading-relaxed">
+          "Barbernya detail banget dan hasilnya sangat natural. Tempatnya nyaman, tenang, tidak bising, dan keramahan pelayanannya berkelas."
+        </p>
+        <span id="tAuthor" class="text-xs uppercase tracking-editorial text-burgundy-800 font-semibold mt-6 block">
+          — ANDREW P., MANAGING PARTNER
+        </span>
+      </div>
+
+      <div class="flex items-center justify-center space-x-6 mt-12 pt-8 border-t border-ivory-300">
+        <button id="prevTestimonial" aria-label="Previous Testimonial" class="p-2 text-charcoal-500 hover:text-navy-950 transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7"/>
+          </svg>
+        </button>
+        <span id="tPagination" class="font-serif text-sm tracking-widest text-navy-950 font-medium">01 / 03</span>
+        <button id="nextTestimonial" aria-label="Next Testimonial" class="p-2 text-charcoal-500 hover:text-navy-950 transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"/>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MEMBERSHIP -->
+  <section id="membership" class="py-24 bg-navy-950 text-ivory-100 border-y border-navy-800 relative">
+    <div class="max-w-5xl mx-auto px-6 lg:px-12">
+      <div class="border border-hairline-dark bg-navy-900/70 p-8 sm:p-14 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-brass-500/10 to-transparent pointer-events-none"></div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <div class="lg:col-span-7 space-y-6">
+            <span class="text-xs uppercase tracking-editorial text-brass-400 font-semibold block">
+              PRIVATE SANCTUARY
+            </span>
+            <h2 data-bind-text="memberTitle" class="font-serif text-3xl sm:text-4xl text-ivory-50 font-normal">
+              THE GENTLEMAN'S CLUB
+            </h2>
+            <p data-bind-text="memberSubtitle" class="font-serif italic text-lg text-brass-300/90 leading-relaxed">
+              Your regular seat. Your regular barber. Your signature style.
+            </p>
+            <p data-bind-text="memberDesc" class="text-xs text-charcoal-500 font-light leading-relaxed">
+              Keanggotaan eksklusif bagi pria yang menghargai konsistensi grooming tanpa kerepotan antrean, lengkap dengan benefit reserved chair pribadi setiap bulan.
+            </p>
+
+            <ul class="space-y-3 pt-2 text-xs uppercase tracking-wider text-ivory-200">
+              <li class="flex items-center space-x-3">
+                <span class="w-1.5 h-1.5 bg-brass-400"></span>
+                <span>Priority Booking (Tanpa Waiting List)</span>
+              </li>
+              <li class="flex items-center space-x-3">
+                <span class="w-1.5 h-1.5 bg-brass-400"></span>
+                <span>Member Pricing on All Apothecary Products</span>
+              </li>
+              <li class="flex items-center space-x-3">
+                <span class="w-1.5 h-1.5 bg-brass-400"></span>
+                <span>Monthly Grooming & Scalp Therapy Benefit</span>
+              </li>
+              <li class="flex items-center space-x-3">
+                <span class="w-1.5 h-1.5 bg-brass-400"></span>
+                <span>Birthday Privilege & Single Malt Hospitality</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="lg:col-span-5 bg-navy-950 p-8 border border-hairline-dark text-center">
+            <span class="text-[10px] uppercase tracking-widest text-charcoal-500 block mb-2">ANNUAL INVITATION</span>
+            <span data-bind-text="memberTier" class="font-serif text-3xl text-brass-400 font-normal">TIER BLACK</span>
+            <div class="w-8 h-[1px] bg-brass-500/40 mx-auto my-4"></div>
+            <p data-bind-text="memberNotice" class="text-[11px] text-ivory-200 leading-relaxed mb-6 font-light">
+              Pendaftaran terbatas untuk 50 member aktif demi menjaga kenyamanan ruang dan ketenangan pelayanan.
+            </p>
+            <button onclick="openMembershipModal()" data-bind-text="memberBtnText" class="w-full py-3.5 bg-burgundy-800 hover:bg-burgundy-700 text-ivory-100 text-xs font-semibold uppercase tracking-editorial transition-colors">
+              JOIN THE CLUB
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING SECTION -->
+  <section id="booking" class="py-24 lg:py-32 bg-ivory-100">
+    <div class="max-w-4xl mx-auto px-6 lg:px-12">
+      <div class="text-center mb-16">
+        <span class="text-xs uppercase tracking-editorial text-burgundy-800 font-semibold block mb-2">APPOINTMENT</span>
+        <h2 data-bind-text="bookingTitle" class="font-serif text-4xl lg:text-5xl text-navy-950 font-normal">RESERVE YOUR CHAIR</h2>
+        <p data-bind-text="bookingSubtitle" class="text-charcoal-700 text-sm font-serif italic mt-3">
+          "Choose your service, barber, and preferred time."
+        </p>
+      </div>
+
+      <form id="bookingForm" class="bg-ivory-50 border border-ivory-300 p-8 sm:p-12 shadow-sm space-y-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div>
+            <label for="serviceSelect" class="block text-[11px] uppercase tracking-editorial text-charcoal-700 font-semibold mb-2">SERVICE</label>
+            <select id="serviceSelect" required class="w-full bg-ivory-100 border border-ivory-300 px-4 py-3 text-xs text-navy-950 uppercase tracking-wider focus:outline-none focus:border-burgundy-800 transition-colors">
+              <option value="" disabled selected>Select service</option>
+              <!-- Options populated dynamically -->
+            </select>
+          </div>
+
+          <div>
+            <label for="barberSelect" class="block text-[11px] uppercase tracking-editorial text-charcoal-700 font-semibold mb-2">BARBER</label>
+            <select id="barberSelect" required class="w-full bg-ivory-100 border border-ivory-300 px-4 py-3 text-xs text-navy-950 uppercase tracking-wider focus:outline-none focus:border-burgundy-800 transition-colors">
+              <option value="" disabled selected>Choose your barber</option>
+              <option value="Aditya (Master Barber - Classic Specialist)">Aditya — Master Barber (Classic Cut)</option>
+              <option value="Rendra (Senior Barber - Fade Specialist)">Rendra — Senior Barber (Fade & Texture)</option>
+              <option value="Fajar (Barber - Modern Specialist)">Fajar — Barber (Modern Gentleman)</option>
+              <option value="Any Available Craftsman">Any Available Craftsman</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="dateSelect" class="block text-[11px] uppercase tracking-editorial text-charcoal-700 font-semibold mb-2">DATE</label>
+            <input type="date" id="dateSelect" required class="w-full bg-ivory-100 border border-ivory-300 px-4 py-3 text-xs text-navy-950 tracking-wider focus:outline-none focus:border-burgundy-800 transition-colors">
+          </div>
+
+          <div>
+            <label for="timeSelect" class="block text-[11px] uppercase tracking-editorial text-charcoal-700 font-semibold mb-2">TIME</label>
+            <select id="timeSelect" required class="w-full bg-ivory-100 border border-ivory-300 px-4 py-3 text-xs text-navy-950 uppercase tracking-wider focus:outline-none focus:border-burgundy-800 transition-colors">
+              <option value="" disabled selected>Select time</option>
+              <option value="10:00">10:00 AM</option>
+              <option value="11:30">11:30 AM</option>
+              <option value="13:00">01:00 PM</option>
+              <option value="14:30">02:30 PM</option>
+              <option value="16:00">04:00 PM</option>
+              <option value="17:30">05:30 PM</option>
+              <option value="19:00">07:00 PM</option>
+              <option value="20:30">08:30 PM</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="customerName" class="block text-[11px] uppercase tracking-editorial text-charcoal-700 font-semibold mb-2">NAME</label>
+            <input type="text" id="customerName" placeholder="Your full name" required class="w-full bg-ivory-100 border border-ivory-300 px-4 py-3 text-xs text-navy-950 placeholder-charcoal-500 focus:outline-none focus:border-burgundy-800 transition-colors">
+          </div>
+
+          <div>
+            <label for="customerWa" class="block text-[11px] uppercase tracking-editorial text-charcoal-700 font-semibold mb-2">WHATSAPP</label>
+            <input type="tel" id="customerWa" placeholder="08xxxxxxxxxx" required class="w-full bg-ivory-100 border border-ivory-300 px-4 py-3 text-xs text-navy-950 placeholder-charcoal-500 focus:outline-none focus:border-burgundy-800 transition-colors">
+          </div>
+        </div>
+
+        <div class="pt-4 text-center">
+          <button type="submit" data-bind-text="bookingBtnText" class="w-full sm:w-auto px-12 py-4 bg-navy-950 hover:bg-burgundy-800 text-ivory-100 text-xs font-semibold uppercase tracking-editorial transition-colors shadow-md">
+            CONFIRM APPOINTMENT
+          </button>
+          <p class="text-[10px] text-charcoal-500 uppercase tracking-widest mt-3">
+            Konfirmasi instan akan dikirimkan langsung melalui WhatsApp reservasi resmi kami.
+          </p>
+        </div>
+      </form>
+
+    </div>
+  </section>
+
+  <!-- LOCATION -->
+  <section id="location" class="py-24 bg-navy-900 text-ivory-100 border-b border-navy-800">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <div class="lg:col-span-5 space-y-8">
+          <div>
+            <span class="text-xs uppercase tracking-editorial text-brass-400 font-semibold block mb-2">VISIT US</span>
+            <h2 data-bind-text="locTitle" class="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-ivory-50">YOUR CHAIR IS WAITING.</h2>
+          </div>
+
+          <div class="space-y-6 pt-2">
+            <div>
+              <span class="text-[10px] uppercase tracking-editorial text-charcoal-500 block">LOCATION</span>
+              <p data-bind-text="locationStore" class="font-serif text-2xl text-ivory-100 mt-1">THE GENTLEMEN BARBER</p>
+              <p data-bind-text="locationAddress" class="text-xs text-charcoal-500 leading-relaxed mt-1">
+                Jl. Senopati Raya No. 88, Kebayoran Baru, Jakarta Selatan 12190
+              </p>
+            </div>
+
+            <div>
+              <span class="text-[10px] uppercase tracking-editorial text-charcoal-500 block">OPERATING HOURS</span>
+              <p class="font-serif text-xl text-brass-400 mt-1">OPEN DAILY</p>
+              <p data-bind-text="operatingHoursDetail" class="text-xs text-ivory-200 mt-1 font-light tracking-wide">10.00 — 22.00 WIB</p>
+            </div>
+
+            <div class="flex items-center space-x-6 pt-4 border-t border-hairline-dark text-xs uppercase tracking-editorial font-medium">
+              <a id="mapsLinkEl" href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="text-brass-300 hover:text-ivory-100 editorial-link">
+                Google Maps
+              </a>
+              <a id="waConciergeLinkEl" href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" class="text-brass-300 hover:text-ivory-100 editorial-link">
+                WhatsApp Concierge
+              </a>
+              <a id="igLinkEl" href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="text-brass-300 hover:text-ivory-100 editorial-link">
+                Instagram
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 bg-navy-950 border border-hairline-dark p-4 relative">
+          <div class="relative w-full aspect-[16/10] bg-charcoal-900 overflow-hidden flex items-center justify-center">
+            <svg class="absolute inset-0 w-full h-full stroke-navy-800/80 fill-navy-950/90" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                  <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#grid)" />
+              <path d="M 0 140 Q 250 120 500 200 T 1000 220" fill="none" stroke="rgba(204, 169, 120, 0.25)" stroke-width="3"/>
+              <path d="M 220 0 L 260 400" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="2"/>
+              <path d="M 550 0 L 520 400" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="2"/>
+            </svg>
+
+            <div class="relative z-10 flex flex-col items-center">
+              <div class="w-12 h-12 rounded-full bg-burgundy-800 border-2 border-brass-400 flex items-center justify-center shadow-2xl">
+                <svg class="w-6 h-6 text-brass-300" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <div class="mt-3 bg-navy-950/95 border border-hairline-dark px-4 py-2 text-center shadow-xl">
+                <span data-bind-text="brandName" class="font-serif text-sm text-ivory-100 font-semibold block">THE GENTLEMEN</span>
+                <span data-bind-text="heroCity" class="text-[9px] uppercase tracking-widest text-brass-400">SENOPATI, JAKARTA</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTAGRAM -->
+  <section class="py-20 bg-ivory-100 border-b border-ivory-300">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div class="flex items-center justify-between mb-10">
+        <div>
+          <span class="text-xs uppercase tracking-editorial text-burgundy-800 font-semibold block">SOCIAL ARCHIVE</span>
+          <h2 class="font-serif text-2xl sm:text-3xl text-navy-950 font-normal mt-1">FOLLOW THE CRAFT</h2>
+        </div>
+        <a id="igHandleEl" href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="text-xs uppercase tracking-editorial text-navy-950 font-semibold editorial-link">
+          @thegentlemenbarber
+        </a>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div class="aspect-square bg-navy-950 overflow-hidden group relative">
+          <img 
+            data-bind-src="insta1"
+            src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=600&q=80" 
+            alt="Barbershop Craft Haircut"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 filter contrast-105"
+          />
+          <div class="absolute inset-0 bg-navy-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+            <span class="text-ivory-100 text-[10px] tracking-widest uppercase font-semibold">VIEW POST</span>
+          </div>
+        </div>
+        <div class="aspect-square bg-navy-950 overflow-hidden group relative">
+          <img 
+            data-bind-src="insta2"
+            src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=600&q=80" 
+            alt="Barber Tools and Scissors"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 filter contrast-105"
+          />
+          <div class="absolute inset-0 bg-navy-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+            <span class="text-ivory-100 text-[10px] tracking-widest uppercase font-semibold">VIEW POST</span>
+          </div>
+        </div>
+        <div class="aspect-square bg-navy-950 overflow-hidden group relative">
+          <img 
+            data-bind-src="insta3"
+            src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=600&q=80" 
+            alt="Warm Leather Interior"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 filter contrast-105"
+          />
+          <div class="absolute inset-0 bg-navy-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+            <span class="text-ivory-100 text-[10px] tracking-widest uppercase font-semibold">VIEW POST</span>
+          </div>
+        </div>
+        <div class="aspect-square bg-navy-950 overflow-hidden group relative">
+          <img 
+            data-bind-src="insta4"
+            src="https://images.unsplash.com/photo-1517832606589-7629c3395907?auto=format&fit=crop&w=600&q=80" 
+            alt="Steamed Hot Towel"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 filter contrast-105"
+          />
+          <div class="absolute inset-0 bg-navy-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+            <span class="text-ivory-100 text-[10px] tracking-widest uppercase font-semibold">VIEW POST</span>
+          </div>
+        </div>
+        <div class="aspect-square bg-navy-950 overflow-hidden group relative col-span-2 sm:col-span-1">
+          <img 
+            data-bind-src="insta5"
+            src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=600&q=80" 
+            alt="Modern Gentleman Client"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 filter contrast-105"
+          />
+          <div class="absolute inset-0 bg-navy-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+            <span class="text-ivory-100 text-[10px] tracking-widest uppercase font-semibold">VIEW POST</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-navy-950 text-ivory-100 pt-20 pb-28 lg:pb-16 border-t border-hairline-dark">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-12 pb-16 border-b border-hairline-dark">
+        <div class="md:col-span-5 space-y-4">
+          <span data-bind-text="brandName" class="font-serif text-2xl tracking-widest2 font-semibold text-ivory-50 block uppercase">
+            THE GENTLEMEN
+          </span>
+          <span data-bind-text="brandTagline" class="text-[10px] uppercase tracking-widest text-brass-400 block font-light">
+            BARBER & GROOMING HOUSE
+          </span>
+          <p data-bind-text="footerTagline" class="font-serif italic text-base text-charcoal-500 max-w-sm pt-2">
+            “Crafted for the modern gentleman who values silence, precision, and the quiet dignity of a refined haircut.”
+          </p>
+        </div>
+
+        <div class="md:col-span-4 grid grid-cols-2 gap-8 text-xs uppercase tracking-editorial font-medium text-ivory-200">
+          <div class="space-y-3">
+            <span class="text-[9px] uppercase tracking-widest text-charcoal-500 block mb-2">EXPLORE</span>
+            <a href="#about" class="block hover:text-brass-300 transition-colors">About</a>
+            <a href="#services" class="block hover:text-brass-300 transition-colors">Services</a>
+            <a href="#craftsmen" class="block hover:text-brass-300 transition-colors">Barbers</a>
+            <a href="#experience" class="block hover:text-brass-300 transition-colors">Experience</a>
+          </div>
+          <div class="space-y-3">
+            <span class="text-[9px] uppercase tracking-widest text-charcoal-500 block mb-2">ENGAGE</span>
+            <a href="#journal" class="block hover:text-brass-300 transition-colors">Journal</a>
+            <a href="#membership" class="block hover:text-brass-300 transition-colors">Membership</a>
+            <a href="#booking" class="block hover:text-brass-300 transition-colors">Booking</a>
+            <a href="#location" class="block hover:text-brass-300 transition-colors">Location</a>
+          </div>
+        </div>
+
+        <div class="md:col-span-3 space-y-4">
+          <span class="text-[9px] uppercase tracking-widest text-charcoal-500 block">CONNECT</span>
+          <div class="flex flex-col space-y-2 text-xs uppercase tracking-editorial font-medium text-ivory-200">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="hover:text-brass-300 transition-colors">Instagram</a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="hover:text-brass-300 transition-colors">TikTok</a>
+            <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" class="hover:text-brass-300 transition-colors">WhatsApp Direct</a>
+          </div>
+          <p data-bind-text="locationAddress" class="text-[11px] text-charcoal-500 pt-3">
+            Senopati, Jakarta Selatan • 10.00 - 22.00
+          </p>
+          <div class="pt-2">
+            <button onclick="toggleAdminAuthModal()" class="text-[10px] uppercase tracking-editorial text-brass-400/80 hover:text-brass-300 flex items-center space-x-1.5 border border-navy-800 px-3 py-1.5 rounded">
+              <span>⚙️ Panel Manajemen Web</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-[10px] uppercase tracking-editorial text-charcoal-500">
+        <span>© 2026 THE GENTLEMEN BARBER. ALL RIGHTS RESERVED.</span>
+        <span class="mt-3 sm:mt-0">INDONESIAN MASTER GROOMING STANDARDS</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MOBILE STICKY BOTTOM BAR -->
+  <div class="fixed bottom-0 left-0 right-0 z-40 bg-navy-950/95 backdrop-blur-lg border-t border-hairline-dark lg:hidden py-2 px-4 shadow-2xl">
+    <div class="flex items-center justify-around text-center">
+      <a href="#" class="flex flex-col items-center text-ivory-200 hover:text-brass-300 py-1">
+        <svg class="w-4 h-4 stroke-current" fill="none" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+        </svg>
+        <span class="text-[9px] uppercase tracking-wider mt-1">HOME</span>
+      </a>
+
+      <a href="#services" class="flex flex-col items-center text-ivory-200 hover:text-brass-300 py-1">
+        <svg class="w-4 h-4 stroke-current" fill="none" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h7"/>
+        </svg>
+        <span class="text-[9px] uppercase tracking-wider mt-1">SERVICES</span>
+      </a>
+
+      <a href="#booking" class="flex flex-col items-center -mt-5">
+        <div class="w-12 h-12 rounded-full bg-burgundy-800 border-2 border-brass-400 flex items-center justify-center text-ivory-100 shadow-xl">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          </svg>
+        </div>
+        <span class="text-[9px] uppercase tracking-widest text-brass-400 font-bold mt-1">BOOK</span>
+      </a>
+
+      <a href="#journal" class="flex flex-col items-center text-ivory-200 hover:text-brass-300 py-1">
+        <svg class="w-4 h-4 stroke-current" fill="none" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+        </svg>
+        <span class="text-[9px] uppercase tracking-wider mt-1">JOURNAL</span>
+      </a>
+
+      <button id="mobileBottomMenuBtn" class="flex flex-col items-center text-ivory-200 hover:text-brass-300 py-1">
+        <svg class="w-4 h-4 stroke-current" fill="none" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+        <span class="text-[9px] uppercase tracking-wider mt-1">MENU</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- FLOATING ADMIN TOGGLE BUTTON -->
+  <div id="adminFloatTrigger" class="fixed bottom-20 lg:bottom-6 right-6 z-40">
+    <button onclick="toggleAdminAuthModal()" class="flex items-center space-x-2 bg-navy-950/90 border border-brass-400/80 hover:border-brass-300 text-brass-300 px-3.5 py-2.5 rounded-full shadow-2xl backdrop-blur-md transition-all hover:scale-105">
+      <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+      <span class="text-xs uppercase tracking-wider font-semibold" id="adminBadgeLabel">Kelola Web</span>
+    </button>
+  </div>
+
+  <!-- ADMIN AUTH LOGIN MODAL -->
+  <div id="adminAuthModal" class="fixed inset-0 z-50 bg-navy-950/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
+    <div class="bg-navy-900 border border-hairline-dark text-ivory-100 max-w-sm w-full p-8 relative shadow-2xl rounded">
+      <button onclick="closeAdminAuthModal()" class="absolute top-4 right-4 text-charcoal-500 hover:text-ivory-100 p-2">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+      <span class="text-[10px] uppercase tracking-editorial text-brass-400 block mb-1">OTORISASI AKSES</span>
+      <h3 class="font-serif text-2xl text-ivory-50">Panel Kelola Web</h3>
+      <p class="text-xs text-charcoal-500 mt-1 mb-6 font-light">Masuk untuk mengedit teks, harga, tombol & gambar secara langsung.</p>
+
+      <form id="adminLoginForm" class="space-y-4">
+        <div>
+          <label class="block text-[10px] uppercase tracking-editorial text-ivory-200 mb-1">Username</label>
+          <input type="text" id="adminUserField" required class="w-full bg-navy-950 border border-hairline-dark px-3 py-2 text-xs text-ivory-100 focus:outline-none focus:border-brass-400" placeholder="Username pengelola">
+        </div>
+        <div>
+          <label class="block text-[10px] uppercase tracking-editorial text-ivory-200 mb-1">Password</label>
+          <input type="password" id="adminPassField" required class="w-full bg-navy-950 border border-hairline-dark px-3 py-2 text-xs text-ivory-100 focus:outline-none focus:border-brass-400" placeholder="••••••••">
+        </div>
+        <p id="adminLoginErr" class="text-[11px] text-rose-400 hidden">Username atau password kelola web salah.</p>
+        <button type="submit" class="w-full py-3 bg-burgundy-800 hover:bg-burgundy-700 text-ivory-100 text-xs uppercase tracking-editorial font-semibold transition-colors mt-2">
+          MASUK KE PANEL
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ADMIN EDIT PANEL DRAWER / FULL EDITOR -->
+  <aside id="adminPanelDrawer" class="fixed top-0 right-0 bottom-0 z-50 w-full sm:w-[480px] bg-navy-950/98 backdrop-blur-xl border-l border-hairline-dark text-ivory-100 shadow-2xl flex flex-col transition-all duration-300 translate-x-full">
+    <!-- Header -->
+    <div class="p-5 border-b border-hairline-dark flex items-center justify-between bg-navy-900/60">
+      <div class="flex items-center space-x-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        <div>
+          <h3 class="font-serif text-lg text-ivory-50 tracking-wide">Live Website Editor</h3>
+          <span class="text-[9px] uppercase tracking-widest text-brass-400">Sinkronisasi Realtime Aktif</span>
+        </div>
+      </div>
+      <div class="flex items-center space-x-2">
+        <button onclick="handleAdminLogout()" class="text-[10px] uppercase tracking-widest text-rose-400 hover:text-rose-300 px-2 py-1 border border-rose-900/50 rounded">Logout</button>
+        <button onclick="closeAdminDrawer()" class="text-charcoal-500 hover:text-ivory-100 p-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Category Tabs -->
+    <div class="flex border-b border-hairline-dark text-[10px] uppercase tracking-widest bg-navy-900/40 divide-x divide-hairline-dark overflow-x-auto no-scrollbar">
+      <button onclick="switchAdminTab('general')" id="tabBtn-general" class="admin-tab-btn flex-1 py-3 px-3 text-center text-brass-400 font-semibold border-b-2 border-brass-400 whitespace-nowrap">Umum & Hero</button>
+      <button onclick="switchAdminTab('services')" id="tabBtn-services" class="admin-tab-btn flex-1 py-3 px-3 text-center text-charcoal-500 hover:text-ivory-100 whitespace-nowrap">Daftar Layanan</button>
+      <button onclick="switchAdminTab('products')" id="tabBtn-products" class="admin-tab-btn flex-1 py-3 px-3 text-center text-charcoal-500 hover:text-ivory-100 whitespace-nowrap">Produk</button>
+      <button onclick="switchAdminTab('contact')" id="tabBtn-contact" class="admin-tab-btn flex-1 py-3 px-3 text-center text-charcoal-500 hover:text-ivory-100 whitespace-nowrap">Kontak & Lokasi</button>
+    </div>
+
+    <!-- Tab Contents Scroll Area -->
+    <div class="flex-1 overflow-y-auto p-6 space-y-6 no-scrollbar text-xs">
+      
+      <!-- TAB 1: UMUM & HERO -->
+      <div id="tabContent-general" class="space-y-5">
+        <div class="border-b border-hairline-dark pb-2">
+          <h4 class="font-serif text-sm text-brass-300">Identitas & Top Bar</h4>
+        </div>
+        <div>
+          <label class="block text-[10px] uppercase text-charcoal-500 mb-1">Top Notice Bar</label>
+          <input type="text" id="field-topBarNotice" class="w-full bg-navy-900 border border-hairline-dark p-2 text-ivory-100 focus:border-brass-400">
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-[10px] uppercase text-charcoal-500 mb-1">Nama Brand</label>
+            <input type="text" id="field-brandName" class="w-full bg-navy-900 border border-hairline-dark p-2 text-ivory-100 focus:border-brass-400">
+          </div>
+          <div>
+            <label class="block text-[10px] uppercase text-charcoal-500 mb-1">Tagline Brand</label>
+            <input type="text" id="field-brandTagline" class="w-full bg-navy-900 border border-hairline-dark p-2 text-ivory-100 focus:border-brass-400">
+          </div>
+        </div>
+
+        <div class="border-b border-hairline-dark pt-3 pb-2">
+          <h4 class="font-serif text-sm text-brass-300">Hero Section</h4>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-[10px] uppercase text-charcoal-500 mb-1">Headline 1</label>
+            <input type="text" id="field-heroTitle1" class="w-full bg-navy-900 border border-hairline-dark p-2 text-ivory-100 focus:border-brass-400">
+          </div>
+          <div>
+            <label class="block text-[10px] uppercase text-charcoal-500 mb-1">Headline 2</label>
+            <input type="text" id="field-heroTitle2" class="w-full bg-navy-900 border border-hairline-dark p-2 text-ivory-100 focus:border-brass-400">
+          </div>
+        </div>
+        <div>
+          <label class="block text-[10px] uppercase text-charcoal-500 mb-1">Subheadline Hero</label>
+          <textarea id="field-heroSubtitle" rows="2" class="w-full bg-navy-900 border border-hairline-dark p-2 text-ivory-100 focus:border-brass-400"></textarea>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-[10px] uppercase text-charcoal-500 mb-1">Teks Tombol Utama</label>
+            <input type="text" id="field-heroCtaText" class="w-full bg-navy-900 border border-hairline-dark p-2 text-ivory-100 focus:border-brass-400">
+          </div>
+          <div>
+            <label class="block text-[10px] uppercase text-charcoal-500 mb-1">Teks Tombol Sekunder</label>
+            <input type="text" id="field-heroSecondaryCta" class="w-full bg-navy-900 border border-hairline-dark p-2 text-ivory-100 focus:border-brass-400">
+          </div>
+        </div>
+        <div>
+          <label class="block text-[10px] uppercase text-charcoal-500 mb-1">URL Foto Hero (Mendukung link Google Drive atau link Gambar)</label>
+          <input type="text" id="field-heroImage" class="w-full bg-navy-900 border border-hairline-dark p-2 text-ivory-100 focus:border-brass-400" placeholder="https://drive.google.com/... atau https://...">
+        </div>
+        <div>
+          <label class="block text-[10px] uppercase text-charcoal-500 mb-1">Quote Caption Foto Hero</label>
+          <input type="text" id="field-heroQuote" class="w-full bg-navy-900 border border-hairline-dark p-2 text-ivory-100 focus:border-brass-400">
+        </div>
+
+        <div class="border-b border-hairline-dark pt-3 pb-2">
+          <h4 class="font-serif text-sm text-brass-300">Brand Statement & Stats</h4>
+        </div>
+        <div>
+          <label class="block text-[10px] uppercase text-charcoal-500 mb-1">Heading Filosofi</label>
+          <input type="text" id="field-statementHeading" class="w-full bg-navy-900 border border-hairline-dark p-2 text-ivory-100 focus:border-brass-400">
+        </div>
+        <div>
+          <label class="block text-[10px] uppercase text-charcoal-500 mb-1">Kutipan Filosofi</label>
+          <textarea id="field-statementQuote" rows="2" class="w-full bg-navy-900 border border-hairline-dark p-2 text-ivory-100 focus:border-brass-400"></textarea>
+        </div>
+        <div class="grid grid-cols-3 gap-2">
+          <div>
+            <label class="block text-[9px] uppercase text-charcoal-500 mb-1">Pengalaman</label>
+            <input type="text" id="field-statExp" class="w-full bg-navy-900 border border-hairline-dark p-2 text-ivory-100 focus:border-brass-400">
+          </div>
+          <div>
+            <label class="block text-[9px] uppercase text-charcoal-500 mb-1">Klien</label>
+            <input type="text" id="field-statClients" class="w-full bg-navy-900 border border-hairline-dark p-2 text-ivory-100 focus:border-brass-400">
+          </div>
+          <div>
+            <label class="block text-[9px] uppercase text-charcoal-500 mb-1">Rating</label>
+            <input type="text" id="field-statRating" class="w-full bg-navy-900 border border-hairline-dark p-2 text-ivory-100 focus:border-brass-400">
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: LAYANAN -->
+      <div id="tabContent-services" class="space-y-4 hidden">
+        <div class="flex items-center justify-between border-b border-hairline-dark pb-2">
+          <h4 class="font-serif text-sm text-brass-300">Kelola Menu & Harga Layanan</h4>
+          <button onclick="addNewServiceItem()" class="text-[10px] uppercase tracking-widest px-2.5 py-1 bg-burgundy-800 text-ivory-100 rounded hover:bg-burgundy-700">+ Tambah Layanan</button>
+        </div>
+        <div id="adminServicesFormList" class="space-y-4">
+          <!-- Dynamic Service Form Items -->
+        </div>
+      </div>
+
+      <!-- TAB 3: PRODUK -->
+      <div id="tabContent-products" class="space-y-4 hidden">
+        <div class="flex items-center justify-between border-b border-hairline-dark pb-2">
+          <h4 class="font-serif text-sm text-brass-300">Kelola Produk Grooming Shelf</h4>
+        </div>
+        <div id="adminProductsFormList" class="space-y-4">
+          <!-- Dynamic Product Form Items -->
+        </div>
+      </div>
+
+      <!-- TAB 4: KONTAK & LOKASI -->
+      <div id="tabContent-contact" class="space-y-5 hidden">
+        <div class="border-b border-hairline-dark pb-2">
+          <h4 class="font-serif text-sm text-brass-300">Kontak, WhatsApp & Lokasi</h4>
+        </div>
+        <div>
+          <label class="block text-[10px] uppercase text-charcoal-500 mb-1">Nomor WhatsApp Reservasi (Format: 628xxxxxxxxxx)</label>
+          <input type="text" id="field-waNumber" class="w-full bg-navy-900 border border-hairline-dark p-2 text-ivory-100 focus:border-brass-400">
+        </div>
+        <div>
+          <label class="block text-[10px] uppercase text-charcoal-500 mb-1">Alamat Lengkap Barbershop</label>
+          <textarea id="field-locationAddress" rows="2" class="w-full bg-navy-900 border border-hairline-dark p-2 text-ivory-100 focus:border-brass-400"></textarea>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-[10px] uppercase text-charcoal-500 mb-1">Jam Operasional</label>
+            <input type="text" id="field-operatingHours" class="w-full bg-navy-900 border border-hairline-dark p-2 text-ivory-100 focus:border-brass-400">
+          </div>
+          <div>
+            <label class="block text-[10px] uppercase text-charcoal-500 mb-1">Kota</label>
+            <input type="text" id="field-heroCity" class="w-full bg-navy-900 border border-hairline-dark p-2 text-ivory-100 focus:border-brass-400">
+          </div>
+        </div>
+        <div>
+          <label class="block text-[10px] uppercase text-charcoal-500 mb-1">Akun Instagram (contoh: @thegentlemenbarber)</label>
+          <input type="text" id="field-igHandle" class="w-full bg-navy-900 border border-hairline-dark p-2 text-ivory-100 focus:border-brass-400">
+        </div>
+        <div>
+          <label class="block text-[10px] uppercase text-charcoal-500 mb-1">Link Google Maps</label>
+          <input type="text" id="field-mapsUrl" class="w-full bg-navy-900 border border-hairline-dark p-2 text-ivory-100 focus:border-brass-400">
+        </div>
+
+        <div class="border-b border-hairline-dark pt-3 pb-2">
+          <h4 class="font-serif text-sm text-brass-300">Membership Club</h4>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-[10px] uppercase text-charcoal-500 mb-1">Tier Membership</label>
+            <input type="text" id="field-memberTier" class="w-full bg-navy-900 border border-hairline-dark p-2 text-ivory-100 focus:border-brass-400">
+          </div>
+          <div>
+            <label class="block text-[10px] uppercase text-charcoal-500 mb-1">Teks Tombol Member</label>
+            <input type="text" id="field-memberBtnText" class="w-full bg-navy-900 border border-hairline-dark p-2 text-ivory-100 focus:border-brass-400">
+          </div>
+        </div>
+        <div>
+          <label class="block text-[10px] uppercase text-charcoal-500 mb-1">Catatan Kuota Member</label>
+          <input type="text" id="field-memberNotice" class="w-full bg-navy-900 border border-hairline-dark p-2 text-ivory-100 focus:border-brass-400">
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Actions -->
+    <div class="p-5 border-t border-hairline-dark bg-navy-900/80 flex items-center justify-between">
+      <button onclick="resetDefaultContent()" class="text-[10px] uppercase tracking-widest text-charcoal-500 hover:text-ivory-100">
+        Reset Default
+      </button>
+      <button id="saveRealtimeBtn" onclick="saveAdminChangesToRealtime()" class="px-6 py-2.5 bg-burgundy-800 hover:bg-burgundy-700 text-ivory-100 text-xs uppercase tracking-editorial font-semibold rounded shadow-md transition-colors flex items-center space-x-2">
+        <span>SIMPAN PERUBAHAN</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Toast Notification Box -->
+  <div id="toastBox" class="fixed top-6 right-6 z-50 bg-navy-950 text-ivory-100 border border-brass-400 px-6 py-4 shadow-2xl transition-all duration-300 translate-y-[-150%] opacity-0 pointer-events-none max-w-sm">
+    <div class="flex items-center space-x-3">
+      <div class="w-2 h-2 rounded-full bg-brass-400 animate-pulse"></div>
+      <span class="text-xs font-serif tracking-widest text-brass-300 uppercase">THE GENTLEMEN</span>
+    </div>
+    <p id="toastMessage" class="text-xs text-ivory-200 mt-1 font-light leading-relaxed"></p>
+  </div>
+
+  <!-- Booking Confirmation Modal -->
+  <div id="confirmationModal" class="fixed inset-0 z-50 bg-navy-950/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="bg-navy-900 border border-hairline-dark text-ivory-100 max-w-md w-full p-8 relative shadow-2xl">
+      <button onclick="closeConfirmationModal()" class="absolute top-4 right-4 text-charcoal-500 hover:text-ivory-100 p-2">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+      <span class="text-[10px] uppercase tracking-editorial text-brass-400 block mb-2">APPOINTMENT RESERVED</span>
+      <h3 class="font-serif text-2xl text-ivory-50">YOUR CHAIR IS SECURED</h3>
+      <div class="w-10 h-[1px] bg-brass-500/40 my-4"></div>
+      <div id="modalDetails" class="space-y-2 text-xs text-charcoal-500 mb-6 font-light"></div>
+      <div class="space-y-3">
+        <a id="waDirectBtn" href="#" target="_blank" class="block w-full py-3 bg-burgundy-800 hover:bg-burgundy-700 text-ivory-100 text-center text-xs font-semibold uppercase tracking-editorial transition-colors">
+          OPEN IN WHATSAPP
+        </a>
+        <button onclick="closeConfirmationModal()" class="block w-full py-2.5 border border-hairline-dark text-xs uppercase tracking-widest text-ivory-200 hover:bg-navy-800 transition-colors">
+          CLOSE
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Real-time Firebase & Application Logic Module -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    // Standard Default Data Object
+    const DEFAULT_STORE = {
+      topBarNotice: "EST. 2026 • MEN'S GROOMING & APOTHECARY • JAKARTA, INDONESIA",
+      brandName: "THE GENTLEMEN",
+      brandTagline: "BARBER & GROOMING",
+      heroTag: "01 / EXPERIENCE",
+      heroTitle1: "The Art",
+      heroTitle2: "OF GROOMING.",
+      heroSubtitle: "A refined barber experience for modern gentlemen. Dibuat dengan presisi tangan terampil, ketenangan ruang, dan standar grooming pria berkelas.",
+      heroCtaText: "Reserve Your Chair",
+      heroSecondaryCta: "Explore Services",
+      heroImage: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1400&q=80",
+      heroQuote: "Ketenangan ruang, kehangatan handuk, dan ketajaman mata seorang master barber.",
+      heroCity: "Jakarta Selatan",
+      heroType: "Appointment & Walk-in",
+      operatingHours: "10:00 — 22:00",
+      statementHeading: "A GOOD HAIRCUT IS PART OF YOUR IDENTITY.",
+      statementQuote: "“Kami percaya grooming bukan sekadar bagaimana rambut terlihat. Ini tentang bagaimana seorang pria membawa dirinya — keyakinan, ketenangan, dan kehormatan dalam setiap langkah.”",
+      statExp: "8+",
+      statClients: "10K+",
+      statRating: "4.9",
+      expTitle: "THE SIGNATURE EXPERIENCE.",
+      expSteps: "CUT. WASH. SHAVE. STYLE.",
+      expDesc: "“Luangkan waktu sejenak. Duduk dengan nyaman, nikmati secangkir kopi hitam, dan biarkan barber kami menangani detailnya dengan ketelitian mutlak.”",
+      expImage1: "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=1200&q=80",
+      expImage2: "https://images.unsplash.com/photo-1517832606589-7629c3395907?auto=format&fit=crop&w=800&q=80",
+      expImage3: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=800&q=80",
+      beforeImage: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1400&q=80",
+      afterImage: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=1400&q=80",
+      transCut: "Executive Taper",
+      transStyle: "Natural Texture",
+      transProduct: "Matte Clay Pomade",
+      transBarber: "Aditya (Master)",
+      barber1Name: "ADITYA",
+      barber1Role: "Master Barber",
+      barber1Spec: "Specialist: Classic Cut / Executive Style",
+      barber1Bio: "10+ tahun menggeluti seni classic taper & pompadour. Terkenal dengan ketelitian razor line yang presisi.",
+      barberImg1: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=80",
+      barber2Name: "RENDRA",
+      barber2Role: "Senior Barber",
+      barber2Spec: "Specialist: Fade / Texture",
+      barber2Bio: "Ahli dalam transisi skin fade halus, textured crop, dan styling rambut modern yang mudah diatur sendiri.",
+      barberImg2: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80",
+      barber3Name: "FAJAR",
+      barber3Role: "Barber",
+      barber3Spec: "Specialist: Modern Gentleman",
+      barber3Bio: "Spesialisasi gaya clean side-part kontemporer dan ritual hot towel shave tradisional yang menenangkan.",
+      barberImg3: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=900&q=80",
+      journalTitle1: "HOW TO CHOOSE THE RIGHT HAIRCUT FOR YOUR FACE",
+      journalDesc1: "Panduan esensial mengenali rasio rahang, bentuk kepala oval vs persegi, dan mengapa panjang cambang menentukan karakter maskulin Anda.",
+      journalImg1: "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=800&q=80",
+      journalTitle2: "CLASSIC OR MODERN? FIND YOUR SIGNATURE STYLE",
+      journalDesc2: "Membedah perbedaan antara slick side-part formal pria era 60-an dengan textured crop santai para pelaku industri kreatif masa kini.",
+      journalImg2: "https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=800&q=80",
+      journalTitle3: "HOW TO KEEP YOUR HAIR LOOKING FRESH BETWEEN CUTS",
+      journalDesc3: "Tiga kebiasaan krusial: penggunaan hair tonic anti-rontok, takaran sea salt spray untuk volume, dan cara keramas yang benar.",
+      journalImg3: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=80",
+      memberTitle: "THE GENTLEMAN'S CLUB",
+      memberSubtitle: "Your regular seat. Your regular barber. Your signature style.",
+      memberDesc: "Keanggotaan eksklusif bagi pria yang menghargai konsistensi grooming tanpa kerepotan antrean, lengkap dengan benefit reserved chair pribadi setiap bulan.",
+      memberTier: "TIER BLACK",
+      memberNotice: "Pendaftaran terbatas untuk 50 member aktif demi menjaga kenyamanan ruang dan ketenangan pelayanan.",
+      memberBtnText: "JOIN THE CLUB",
+      bookingTitle: "RESERVE YOUR CHAIR",
+      bookingSubtitle: "Choose your service, barber, and preferred time.",
+      bookingBtnText: "CONFIRM APPOINTMENT",
+      locTitle: "YOUR CHAIR IS WAITING.",
+      locationStore: "THE GENTLEMEN BARBER",
+      locationAddress: "Jl. Senopati Raya No. 88, Kebayoran Baru, Jakarta Selatan 12190",
+      operatingHoursDetail: "10.00 — 22.00 WIB",
+      waNumber: "6281234567890",
+      igHandle: "@thegentlemenbarber",
+      mapsUrl: "https://maps.google.com",
+      footerTagline: "“Crafted for the modern gentleman who values silence, precision, and the quiet dignity of a refined haircut.”",
+      insta1: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=600&q=80",
+      insta2: "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=600&q=80",
+      insta3: "https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=600&q=80",
+      insta4: "https://images.unsplash.com/photo-1517832606589-7629c3395907?auto=format&fit=crop&w=600&q=80",
+      insta5: "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=600&q=80",
+      servicesList: [
+        { id: "01", name: "SIGNATURE HAIRCUT", price: "Rp 65K", desc: "Classic precision cut with professional styling, scalp refresh tonic, and neck razor cleanup." },
+        { id: "02", name: "EXECUTIVE CUT", price: "Rp 85K", desc: "Premium haircut + deep clarifying wash + hot towel neck massage + customized styling." },
+        { id: "03", name: "BEARD CRAFT", price: "Rp 50K", desc: "Beard shaping, line definition using straight razor, conditioning herbal beard oil treatment." },
+        { id: "04", name: "HOT TOWEL SHAVE", price: "Rp 60K", desc: "Traditional-inspired premium shave with pre-shave butter, steamed infused towels, and soothing balm." },
+        { id: "05", name: "HAIR & BEARD COMPLETE", price: "Rp 110K", desc: "The full gentleman rite. Executive haircut, full hot towel shave or beard contour, shampoo & signature finish." },
+        { id: "06", name: "KIDS GENTLEMAN", price: "Rp 50K", desc: "Clean, gentle, and patient haircut experience for young gentlemen (under 12 yrs)." }
+      ],
+      productsList: [
+        { name: "Original Pomade", category: "STYLING", price: "Rp 145K", note: "High shine, strong hold" },
+        { name: "Matte Clay", category: "TEXTURE", price: "Rp 155K", note: "Zero shine, reworked hold" },
+        { name: "Hair Cream", category: "CONDITION", price: "Rp 135K", note: "Light control, soft feel" },
+        { name: "Sea Salt Spray", category: "VOLUME", price: "Rp 140K", note: "Matte beach grit effect" },
+        { name: "Apothecary Beard Oil", category: "BEARD CARE", price: "Rp 160K", note: "Argan & cedarwood blend" }
+      ]
+    };
+
+    // State
+    let currentStore = { ...DEFAULT_STORE };
+    let isAdminLoggedIn = false;
+    let authUser = null;
+    let firestoreDb = null;
+    let targetDocRef = null;
+
+    // Helper: Normalize Drive Links to lh3 format
+    function normalizeMediaUrl(url) {
+      if (!url) return '';
+      const driveMatch = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/);
+      if (driveMatch && driveMatch[1]) {
+        return `https://lh3.googleusercontent.com/d/${driveMatch[1]}`;
+      }
+      return url;
+    }
+
+    // Connect Real-time Cloud Store
+    async function initRealtimeConnection() {
+      try {
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'gentleman-barber-v3';
+        
+        let firebaseConfigObj = {
+          apiKey: "AIzaSyBZyvA6_cy2k42eU_Ktt13wFVTDYgZaXkI",
+          authDomain: "gentleman-barbershop.firebaseapp.com",
+          projectId: "gentleman-barbershop",
+          storageBucket: "gentleman-barbershop.appspot.com"
+        };
+
+        if (typeof __firebase_config !== 'undefined') {
+          try {
+            firebaseConfigObj = JSON.parse(__firebase_config);
+          } catch(e) {}
+        }
+
+        const app = initializeApp(firebaseConfigObj);
+        const auth = getAuth(app);
+        firestoreDb = getFirestore(app);
+
+        // Authenticate anonymously or via initial token
+        if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+          await signInWithCustomToken(auth, __initial_auth_token);
+        } else {
+          await signInAnonymously(auth);
+        }
+        authUser = auth.currentUser;
+
+        if (authUser && firestoreDb) {
+          // Rule 1: /artifacts/{appId}/public/data/{collectionName}
+          targetDocRef = doc(firestoreDb, 'artifacts', appId, 'public', 'data', 'siteContent', 'main');
+
+          // Listen real-time
+          onSnapshot(targetDocRef, (snap) => {
+            if (snap.exists()) {
+              const liveData = snap.data();
+              currentStore = { ...DEFAULT_STORE, ...liveData };
+              renderToDOM();
+              if (isAdminLoggedIn) syncFormValues();
+            } else {
+              // If not created, push default template
+              setDoc(targetDocRef, DEFAULT_STORE, { merge: true }).catch(console.warn);
+              renderToDOM();
+            }
+          }, (err) => {
+            console.warn("Realtime listener active in local mode:", err);
+            renderToDOM();
+          });
+        }
+      } catch (err) {
+        console.warn("Realtime fallback to client state:", err);
+        renderToDOM();
+      }
+    }
+
+    // Render store data to DOM elements with data-bind attributes
+    function renderToDOM() {
+      // 1. Text bindings
+      document.querySelectorAll('[data-bind-text]').forEach(el => {
+        const key = el.getAttribute('data-bind-text');
+        if (currentStore[key] !== undefined) {
+          el.textContent = currentStore[key];
+        }
+      });
+
+      // 2. Image bindings
+      document.querySelectorAll('[data-bind-src]').forEach(img => {
+        const key = img.getAttribute('data-bind-src');
+        if (currentStore[key]) {
+          img.src = normalizeMediaUrl(currentStore[key]);
+        }
+      });
+
+      // 3. Links bindings
+      const waConcierge = document.getElementById('waConciergeLinkEl');
+      if (waConcierge) waConcierge.href = `https://wa.me/${currentStore.waNumber}`;
+
+      const mapsLink = document.getElementById('mapsLinkEl');
+      if (mapsLink) mapsLink.href = currentStore.mapsUrl;
+
+      const igLink = document.getElementById('igLinkEl');
+      if (igLink) igLink.href = `https://instagram.com/${currentStore.igHandle.replace('@', '')}`;
+
+      const igHandleEl = document.getElementById('igHandleEl');
+      if (igHandleEl) igHandleEl.textContent = currentStore.igHandle;
+
+      // 4. Render Services dynamically
+      const serviceContainer = document.getElementById('serviceListContainer');
+      const bookingSelect = document.getElementById('serviceSelect');
+      
+      if (serviceContainer && currentStore.servicesList) {
+        serviceContainer.innerHTML = currentStore.servicesList.map(s => `
+          <div class="service-item group py-7 sm:py-8 flex flex-col sm:flex-row sm:items-baseline justify-between transition-colors duration-200 hover:bg-navy-800/40 px-3 cursor-pointer">
+            <div class="sm:max-w-lg">
+              <div class="flex items-center space-x-4">
+                <span class="text-xs font-serif italic text-brass-400 tracking-wider">${s.id}</span>
+                <h3 class="font-serif text-xl sm:text-2xl text-ivory-50 group-hover:text-brass-300 transition-colors font-medium">
+                  ${s.name}
+                </h3>
+              </div>
+              <p class="text-xs text-charcoal-500 mt-2 pl-8 font-light leading-relaxed">
+                ${s.desc}
+              </p>
+            </div>
+            <div class="mt-3 sm:mt-0 pl-8 sm:pl-0 flex items-center justify-between sm:justify-end sm:space-x-6">
+              <span class="font-serif text-lg text-brass-400 font-normal">${s.price}</span>
+              <a href="#booking" onclick="selectServiceToBooking('${s.id} — ${s.name} (${s.price})')" class="text-[10px] uppercase tracking-editorial px-3 py-1 border border-burgundy-700 bg-burgundy-900/50 text-ivory-200 opacity-0 group-hover:opacity-100 transition-opacity hidden sm:inline-block">Select</a>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      if (bookingSelect && currentStore.servicesList) {
+        const curVal = bookingSelect.value;
+        bookingSelect.innerHTML = `<option value="" disabled selected>Select service</option>` +
+          currentStore.servicesList.map(s => `
+            <option value="${s.id} — ${s.name} (${s.price})">${s.id} — ${s.name} (${s.price})</option>
+          `).join('');
+        if (curVal) bookingSelect.value = curVal;
+      }
+
+      // 5. Render Grooming Products dynamically
+      const prodContainer = document.getElementById('productsShelfContainer');
+      if (prodContainer && currentStore.productsList) {
+        prodContainer.innerHTML = currentStore.productsList.map(p => `
+          <div class="group border border-hairline-dark bg-navy-950/60 p-5 flex flex-col justify-between hover:border-brass-400/50 transition-colors">
+            <div class="aspect-square mb-4 overflow-hidden bg-navy-900 flex items-center justify-center p-4">
+              <svg class="w-16 h-16 text-brass-400/60 stroke-current group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+              </svg>
+            </div>
+            <div>
+              <span class="text-[9px] uppercase tracking-widest text-brass-400 block mb-1">${p.category}</span>
+              <h3 class="font-serif text-lg text-ivory-100 font-medium">${p.name}</h3>
+              <p class="text-xs text-charcoal-500 mt-1">${p.note}</p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-hairline-dark flex items-center justify-between">
+              <span class="font-serif text-sm text-brass-300">${p.price}</span>
+              <button onclick="openToast('${p.name} siap ditambahkan ke daftar pesanan')" class="text-[9px] uppercase tracking-widest px-2.5 py-1 border border-hairline-dark hover:bg-burgundy-800 hover:border-burgundy-700 transition-colors">Discover</button>
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+
+    // Sync state values to admin drawer form fields
+    function syncFormValues() {
+      Object.keys(currentStore).forEach(k => {
+        const input = document.getElementById(`field-${k}`);
+        if (input) input.value = currentStore[k];
+      });
+
+      // Render Admin Services Form List
+      const sFormContainer = document.getElementById('adminServicesFormList');
+      if (sFormContainer && currentStore.servicesList) {
+        sFormContainer.innerHTML = currentStore.servicesList.map((s, idx) => `
+          <div class="p-3 bg-navy-900 border border-hairline-dark space-y-2 rounded">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] text-brass-400 uppercase font-semibold">Service #${s.id}</span>
+              <button onclick="removeServiceItem(${idx})" class="text-rose-400 hover:text-rose-300 text-[10px]">Hapus</button>
+            </div>
+            <div class="grid grid-cols-3 gap-2">
+              <input type="text" value="${s.id}" onchange="updateServiceField(${idx}, 'id', this.value)" class="bg-navy-950 border border-hairline-dark p-1.5 text-xs text-ivory-100" placeholder="01">
+              <input type="text" value="${s.name}" onchange="updateServiceField(${idx}, 'name', this.value)" class="col-span-2 bg-navy-950 border border-hairline-dark p-1.5 text-xs text-ivory-100" placeholder="Nama Layanan">
+            </div>
+            <div class="grid grid-cols-3 gap-2">
+              <input type="text" value="${s.price}" onchange="updateServiceField(${idx}, 'price', this.value)" class="bg-navy-950 border border-hairline-dark p-1.5 text-xs text-ivory-100" placeholder="Rp 65K">
+              <input type="text" value="${s.desc}" onchange="updateServiceField(${idx}, 'desc', this.value)" class="col-span-2 bg-navy-950 border border-hairline-dark p-1.5 text-xs text-ivory-100" placeholder="Deskripsi ringkas">
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // Render Admin Products Form List
+      const pFormContainer = document.getElementById('adminProductsFormList');
+      if (pFormContainer && currentStore.productsList) {
+        pFormContainer.innerHTML = currentStore.productsList.map((p, idx) => `
+          <div class="p-3 bg-navy-900 border border-hairline-dark space-y-2 rounded">
+            <div class="grid grid-cols-2 gap-2">
+              <input type="text" value="${p.name}" onchange="updateProductField(${idx}, 'name', this.value)" class="bg-navy-950 border border-hairline-dark p-1.5 text-xs text-ivory-100" placeholder="Nama Produk">
+              <input type="text" value="${p.category}" onchange="updateProductField(${idx}, 'category', this.value)" class="bg-navy-950 border border-hairline-dark p-1.5 text-xs text-ivory-100" placeholder="Kategori">
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+              <input type="text" value="${p.price}" onchange="updateProductField(${idx}, 'price', this.value)" class="bg-navy-950 border border-hairline-dark p-1.5 text-xs text-ivory-100" placeholder="Harga">
+              <input type="text" value="${p.note}" onchange="updateProductField(${idx}, 'note', this.value)" class="bg-navy-950 border border-hairline-dark p-1.5 text-xs text-ivory-100" placeholder="Keterangan">
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+
+    // Admin Authentication Check
+    window.handleAdminLogin = function(e) {
+      if (e) e.preventDefault();
+      const u = document.getElementById('adminUserField').value.trim();
+      const p = document.getElementById('adminPassField').value.trim();
+      const err = document.getElementById('adminLoginErr');
+
+      if (u === 'kelolaweb2026' && p === 'kelolaweb2026') {
+        isAdminLoggedIn = true;
+        if (err) err.classList.add('hidden');
+        closeAdminAuthModal();
+        openAdminDrawer();
+        openToast('Berhasil masuk! Mode kelola website realtime aktif.');
+        
+        // Update badge
+        const badge = document.getElementById('adminBadgeLabel');
+        if (badge) badge.textContent = 'Admin Aktif';
+        const navStatus = document.getElementById('adminNavStatus');
+        if (navStatus) navStatus.textContent = 'EDITOR AKTIF';
+
+        syncFormValues();
+      } else {
+        if (err) err.classList.remove('hidden');
+      }
+    };
+
+    window.handleAdminLogout = function() {
+      isAdminLoggedIn = false;
+      closeAdminDrawer();
+      const badge = document.getElementById('adminBadgeLabel');
+      if (badge) badge.textContent = 'Kelola Web';
+      const navStatus = document.getElementById('adminNavStatus');
+      if (navStatus) navStatus.textContent = 'KELOLA WEB';
+      openToast('Anda telah logout dari panel pengelola.');
+    };
+
+    window.saveAdminChangesToRealtime = async function() {
+      const saveBtn = document.getElementById('saveRealtimeBtn');
+      if (saveBtn) {
+        saveBtn.disabled = true;
+        saveBtn.innerHTML = `<span>Menyimpan...</span>`;
+      }
+
+      // Collect values
+      Object.keys(currentStore).forEach(k => {
+        const input = document.getElementById(`field-${k}`);
+        if (input) currentStore[k] = input.value;
+      });
+
+      // Save to Firebase Firestore Real-time
+      try {
+        if (targetDocRef && authUser) {
+          await setDoc(targetDocRef, currentStore, { merge: true });
+        }
+        renderToDOM();
+        openToast('Perubahan website berhasil disimpan secara realtime!');
+      } catch (err) {
+        console.warn("Save note:", err);
+        renderToDOM();
+        openToast('Tersimpan di sesi aktif website!');
+      } finally {
+        if (saveBtn) {
+          saveBtn.disabled = false;
+          saveBtn.innerHTML = `<span>SIMPAN PERUBAHAN</span>`;
+        }
+      }
+    };
+
+    window.resetDefaultContent = function() {
+      currentStore = { ...DEFAULT_STORE };
+      syncFormValues();
+      saveAdminChangesToRealtime();
+    };
+
+    // Service helper functions
+    window.updateServiceField = function(idx, key, val) {
+      if (currentStore.servicesList && currentStore.servicesList[idx]) {
+        currentStore.servicesList[idx][key] = val;
+      }
+    };
+
+    window.addNewServiceItem = function() {
+      const nextNum = (currentStore.servicesList.length + 1).toString().padStart(2, '0');
+      currentStore.servicesList.push({
+        id: nextNum,
+        name: "NEW SERVICE",
+        price: "Rp 75K",
+        desc: "Deskripsi layanan grooming pria."
+      });
+      syncFormValues();
+    };
+
+    window.removeServiceItem = function(idx) {
+      currentStore.servicesList.splice(idx, 1);
+      syncFormValues();
+    };
+
+    // Product helper functions
+    window.updateProductField = function(idx, key, val) {
+      if (currentStore.productsList && currentStore.productsList[idx]) {
+        currentStore.productsList[idx][key] = val;
+      }
+    };
+
+    window.selectServiceToBooking = function(val) {
+      const sel = document.getElementById('serviceSelect');
+      if (sel) sel.value = val;
+    };
+
+    // Attach submit listener
+    const loginForm = document.getElementById('adminLoginForm');
+    if (loginForm) loginForm.addEventListener('submit', window.handleAdminLogin);
+
+    // Initializer
+    window.addEventListener('DOMContentLoaded', () => {
+      initRealtimeConnection();
+    });
+  </script>
+
+  <script>
+    // ==========================================
+    // UI Drawer & Modal Controls
+    // ==========================================
+    function toggleAdminAuthModal() {
+      const authModal = document.getElementById('adminAuthModal');
+      const drawer = document.getElementById('adminPanelDrawer');
+      if (drawer && !drawer.classList.contains('translate-x-full')) {
+        // already opened, toggle close
+        drawer.classList.add('translate-x-full');
+        return;
+      }
+      if (authModal) authModal.classList.toggle('hidden');
+    }
+
+    function closeAdminAuthModal() {
+      const authModal = document.getElementById('adminAuthModal');
+      if (authModal) authModal.classList.add('hidden');
+    }
+
+    function openAdminDrawer() {
+      const drawer = document.getElementById('adminPanelDrawer');
+      if (drawer) drawer.classList.remove('translate-x-full');
+    }
+
+    function closeAdminDrawer() {
+      const drawer = document.getElementById('adminPanelDrawer');
+      if (drawer) drawer.classList.add('translate-x-full');
+    }
+
+    function switchAdminTab(tabName) {
+      const tabs = ['general', 'services', 'products', 'contact'];
+      tabs.forEach(t => {
+        const content = document.getElementById(`tabContent-${t}`);
+        const btn = document.getElementById(`tabBtn-${t}`);
+        if (content) {
+          if (t === tabName) {
+            content.classList.remove('hidden');
+          } else {
+            content.classList.add('hidden');
+          }
+        }
+        if (btn) {
+          if (t === tabName) {
+            btn.classList.add('text-brass-400', 'font-semibold', 'border-b-2', 'border-brass-400');
+            btn.classList.remove('text-charcoal-500');
+          } else {
+            btn.classList.remove('text-brass-400', 'font-semibold', 'border-b-2', 'border-brass-400');
+            btn.classList.add('text-charcoal-500');
+          }
+        }
+      });
+    }
+
+    // Mobile Menu
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileBottomMenuBtn = document.getElementById('mobileBottomMenuBtn');
+    const closeDrawerBtn = document.getElementById('closeDrawerBtn');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    const drawerLinks = document.querySelectorAll('.drawer-link');
+
+    function openMobileDrawer() {
+      mobileDrawer.classList.remove('-translate-x-full');
+      mobileDrawer.classList.add('translate-x-0');
+      document.body.classList.add('overflow-hidden');
+    }
+
+    function closeMobileDrawer() {
+      mobileDrawer.classList.remove('translate-x-0');
+      mobileDrawer.classList.add('-translate-x-full');
+      document.body.classList.remove('overflow-hidden');
+    }
+
+    if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', openMobileDrawer);
+    if (mobileBottomMenuBtn) mobileBottomMenuBtn.addEventListener('click', openMobileDrawer);
+    if (closeDrawerBtn) closeDrawerBtn.addEventListener('click', closeMobileDrawer);
+    drawerLinks.forEach(link => link.addEventListener('click', closeMobileDrawer));
+
+    // Interactive Before/After Split Slider
+    const baRange = document.getElementById('baRange');
+    const afterLayer = document.getElementById('afterLayer');
+    const sliderHandle = document.getElementById('sliderHandle');
+    const afterImageRef = document.getElementById('afterImageRef');
+
+    if (baRange && afterLayer && sliderHandle) {
+      function updateSliderPosition(val) {
+        afterLayer.style.width = `${val}%`;
+        sliderHandle.style.left = `${val}%`;
+      }
+
+      baRange.addEventListener('input', (e) => {
+        updateSliderPosition(e.target.value);
+      });
+
+      window.addEventListener('resize', () => {
+        const container = afterLayer.parentElement;
+        if (container && afterImageRef) {
+          afterImageRef.style.width = `${container.offsetWidth}px`;
+          afterImageRef.style.height = `${container.offsetHeight}px`;
+        }
+      });
+
+      setTimeout(() => {
+        const container = afterLayer.parentElement;
+        if (container && afterImageRef) {
+          afterImageRef.style.width = `${container.offsetWidth}px`;
+          afterImageRef.style.height = `${container.offsetHeight}px`;
+        }
+      }, 200);
+    }
+
+    // Editorial Testimonial Carousel
+    const testimonials = [
+      {
+        quote: "“THE KIND OF PLACE YOU WANT TO RETURN TO.”",
+        body: "Barbernya detail banget dan hasilnya sangat natural. Tempatnya nyaman, tenang, tidak bising, dan keramahan pelayanannya berkelas.",
+        author: "— ANDREW P., MANAGING PARTNER"
+      },
+      {
+        quote: "“CONSISTENCY THAT IS HARD TO FIND ELSEWHERE.”",
+        body: "Setiap potong dengan Aditya selalu presisi. Saya tidak perlu menjelaskan ulang setiap datang; dia paham betul anatomi rambut saya.",
+        author: "— RICHARD K., ENTREPRENEUR"
+      },
+      {
+        quote: "“A SACRED RITUAL BEFORE EVERY BOARD MEETING.”",
+        body: "Hot towel shave dan executive cut di sini adalah ritual mingguan saya. Sensasi rileks dan ketajaman hasil potongannya luar biasa.",
+        author: "— DIMITRI S., CHIEF EXECUTIVE"
+      }
+    ];
+
+    let currentTestimonial = 0;
+    const tContainer = document.getElementById('testimonialContainer');
+    const tQuote = document.getElementById('tQuote');
+    const tBody = document.getElementById('tBody');
+    const tAuthor = document.getElementById('tAuthor');
+    const tPagination = document.getElementById('tPagination');
+    const prevTBtn = document.getElementById('prevTestimonial');
+    const nextTBtn = document.getElementById('nextTestimonial');
+
+    function renderTestimonial(idx) {
+      if (!tContainer) return;
+      tContainer.style.opacity = '0';
+      setTimeout(() => {
+        tQuote.textContent = testimonials[idx].quote;
+        tBody.textContent = testimonials[idx].body;
+        tAuthor.textContent = testimonials[idx].author;
+        tPagination.textContent = `0${idx + 1} / 03`;
+        tContainer.style.opacity = '1';
+      }, 250);
+    }
+
+    if (prevTBtn && nextTBtn) {
+      prevTBtn.addEventListener('click', () => {
+        currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
+        renderTestimonial(currentTestimonial);
+      });
+      nextTBtn.addEventListener('click', () => {
+        currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+        renderTestimonial(currentTestimonial);
+      });
+    }
+
+    // Toast Notification System
+    const toastBox = document.getElementById('toastBox');
+    const toastMessage = document.getElementById('toastMessage');
+    let toastTimeout;
+
+    function openToast(msg) {
+      if (!toastBox) return;
+      clearTimeout(toastTimeout);
+      toastMessage.textContent = msg;
+      toastBox.classList.remove('translate-y-[-150%]', 'opacity-0', 'pointer-events-none');
+      toastBox.classList.add('translate-y-0', 'opacity-100');
+
+      toastTimeout = setTimeout(() => {
+        toastBox.classList.remove('translate-y-0', 'opacity-100');
+        toastBox.classList.add('translate-y-[-150%]', 'opacity-0', 'pointer-events-none');
+      }, 3500);
+    }
+
+    function openMembershipModal() {
+      openToast('Undangan Membership Tier Black: Silakan hubungi concierge kami di WhatsApp untuk validasi kuota 50 member.');
+    }
+
+    // Booking Submission & WhatsApp Redirect
+    const bookingForm = document.getElementById('bookingForm');
+    const confirmationModal = document.getElementById('confirmationModal');
+    const modalDetails = document.getElementById('modalDetails');
+    const waDirectBtn = document.getElementById('waDirectBtn');
+
+    if (bookingForm) {
+      const dateInput = document.getElementById('dateSelect');
+      if (dateInput) {
+        dateInput.min = new Date().toISOString().split('T')[0];
+      }
+
+      bookingForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const service = document.getElementById('serviceSelect').value;
+        const barber = document.getElementById('barberSelect').value;
+        const date = document.getElementById('dateSelect').value;
+        const time = document.getElementById('timeSelect').value;
+        const name = document.getElementById('customerName').value;
+        const wa = document.getElementById('customerWa').value;
+
+        modalDetails.innerHTML = `
+          <div class="border-b border-hairline-dark pb-2 mb-2">
+            <span class="text-ivory-100 font-medium">Guest:</span> ${name} (${wa})
+          </div>
+          <div class="border-b border-hairline-dark pb-2 mb-2">
+            <span class="text-ivory-100 font-medium">Service:</span> ${service}
+          </div>
+          <div class="border-b border-hairline-dark pb-2 mb-2">
+            <span class="text-ivory-100 font-medium">Barber:</span> ${barber}
+          </div>
+          <div>
+            <span class="text-ivory-100 font-medium">Schedule:</span> ${date} at ${time} WIB
+          </div>
+        `;
+
+        const waText = encodeURIComponent(
+          `Halo Concierge The Gentlemen Barber,\n\nSaya ingin mengonfirmasi reservasi appointment:\n` +
+          `• Nama: ${name}\n` +
+          `• WhatsApp: ${wa}\n` +
+          `• Service: ${service}\n` +
+          `• Barber: ${barber}\n` +
+          `• Tanggal: ${date}\n` +
+          `• Waktu: ${time} WIB\n\n` +
+          `Mohon informasikan ketersediaan kursi. Terima kasih.`
+        );
+
+        waDirectBtn.href = `https://wa.me/6281234567890?text=${waText}`;
+        confirmationModal.classList.remove('hidden');
+      });
+    }
+
+    function closeConfirmationModal() {
+      if (confirmationModal) confirmationModal.classList.add('hidden');
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeConfirmationModal();
+        closeAdminAuthModal();
+        closeAdminDrawer();
+      }
+    });
+  </script>
+
+</body>
+</html>

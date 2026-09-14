@@ -1,0 +1,1666 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title id="seoTitle">MOTOVEC 24/7 | Montir Motor Panggilan Darurat & Servis di Tempat</title>
+  <meta id="seoDesc" name="description" content="Layanan montir motor panggilan darurat 24 jam. Motor mogok, ban bocor, aki drop, atau servis berkala langsung datang ke lokasi Anda." />
+  
+  <!-- Preconnect & CDN Assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              red: '#DC2626',
+              redHover: '#B91C1C',
+              dark: '#0F1115',
+              charcoal: '#17191E',
+              card: '#1F232B',
+              border: '#2E3440',
+              accent: '#F97316',
+              lightGray: '#F3F4F6'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          boxShadow: {
+            'glow-red': '0 0 25px -5px rgba(220, 38, 38, 0.45)',
+            'clean': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+            'floating': '0 10px 30px -5px rgba(0, 0, 0, 0.12)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .pulse-dot {
+      animation: pulseDot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .4; transform: scale(0.85); }
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-slate-900 antialiased selection:bg-brand-red selection:text-white pb-20 md:pb-0">
+
+  <!-- ==================== ANNOUNCEMENT BAR ==================== -->
+  <aside id="announcementBar" class="bg-brand-charcoal text-gray-200 text-xs py-2 px-4 border-b border-brand-border/40 transition-all duration-300">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-2 mx-auto md:mx-0">
+        <span class="inline-block w-2 h-2 rounded-full bg-brand-red pulse-dot"></span>
+        <span id="announcementText" class="font-medium tracking-wide">Layanan Montir 24 Jam Siap Datang ke Lokasi Anda di Seluruh Wilayah Operasional</span>
+      </div>
+      <div class="hidden md:flex items-center gap-4 text-gray-400">
+        <span id="announcementTime">Respon Darurat: 20-35 Menit</span>
+        <span class="text-gray-600">|</span>
+        <span id="announcementContact" class="hover:text-white cursor-pointer font-semibold text-white">Call Center: 0812-8888-2424</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==================== DESKTOP RIDE ASSIST HEADER ==================== -->
+  <header id="mainHeader" class="sticky top-0 z-40 w-full transition-all duration-300 py-3">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <nav class="glass-nav rounded-2xl border border-gray-200/80 shadow-clean px-5 py-3 flex items-center justify-between transition-all">
+        <!-- Brand Identity -->
+        <a href="#hero" class="flex items-center gap-3 group">
+          <div class="w-10 h-10 rounded-xl bg-brand-red text-white flex items-center justify-center font-extrabold text-xl shadow-md group-hover:scale-105 transition-transform">
+            M
+          </div>
+          <div>
+            <div class="flex items-center gap-1">
+              <span id="brandNameText" class="font-black text-xl tracking-tight text-brand-dark uppercase">MOTOVEC</span>
+              <span class="bg-brand-red text-white text-[10px] font-extrabold px-1.5 py-0.5 rounded tracking-widest">24H</span>
+            </div>
+            <p class="text-[10px] text-gray-500 font-semibold tracking-wider uppercase">Rescue & Mobile Garage</p>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Pills -->
+        <div class="hidden lg:flex items-center gap-1 bg-gray-100/90 p-1.5 rounded-full border border-gray-200 text-sm font-semibold text-gray-700">
+          <a href="#hero" class="px-4 py-1.5 rounded-full hover:bg-white hover:text-brand-red transition-all">Home</a>
+          <a href="#quickServices" class="px-4 py-1.5 rounded-full hover:bg-white hover:text-brand-red transition-all">Layanan</a>
+          <a href="#estimator" class="px-4 py-1.5 rounded-full hover:bg-white hover:text-brand-red transition-all">Estimasi Harga</a>
+          <a href="#trackingSection" class="px-4 py-1.5 rounded-full hover:bg-white hover:text-brand-red transition-all">Cek Booking</a>
+          <a href="#serviceArea" class="px-4 py-1.5 rounded-full hover:bg-white hover:text-brand-red transition-all">Area Layanan</a>
+          <a href="#reviews" class="px-4 py-1.5 rounded-full hover:bg-white hover:text-brand-red transition-all">Review</a>
+          <a href="#faq" class="px-4 py-1.5 rounded-full hover:bg-white hover:text-brand-red transition-all">FAQ</a>
+        </div>
+
+        <!-- Right Action Hub -->
+        <div class="flex items-center gap-3">
+          <div class="hidden sm:flex items-center gap-2 bg-emerald-50 text-emerald-700 border border-emerald-200 px-3 py-1.5 rounded-full text-xs font-bold">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 pulse-dot"></span>
+            <span id="headerOnlineCount">48 Montir Standby</span>
+          </div>
+
+          <button onclick="openEmergencyModal()" class="bg-brand-red hover:bg-brand-redHover text-white text-sm font-extrabold px-5 py-2.5 rounded-xl shadow-glow-red hover:shadow-none flex items-center gap-2 active:scale-95 transition-all">
+            <i data-lucide="phone-call" class="w-4 h-4"></i>
+            <span>PANGGIL MONTIR</span>
+          </button>
+
+          <!-- Admin Panel Button Trigger -->
+          <button onclick="openAdminModal()" title="Akses Admin Panel" class="bg-gray-100 hover:bg-brand-dark hover:text-white text-gray-600 p-2.5 rounded-xl transition-all">
+            <i data-lucide="shield-check" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ==================== DYNAMIC HOMEPAGE SECTIONS ==================== -->
+  <main id="homepageDynamicContainer" class="space-y-16 sm:space-y-24">
+    
+    <!-- 1. HERO SECTION -->
+    <section id="hero" data-section="hero" class="relative pt-6 pb-12 overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="grid lg:grid-cols-12 gap-10 items-center">
+          <div class="lg:col-span-7 space-y-6">
+            <div class="inline-flex items-center gap-2 bg-red-50 text-brand-red border border-red-200/80 px-3.5 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-wide">
+              <i data-lucide="zap" class="w-3.5 h-3.5"></i>
+              <span id="heroBadge">Unit Emergency Reaksi Cepat</span>
+            </div>
+
+            <h1 id="heroHeadline" class="text-4xl sm:text-5xl lg:text-6xl font-black text-brand-dark tracking-tight leading-[1.1]">
+              Motor Bermasalah? <br/>
+              <span class="text-brand-red">Montir Kami Datang</span> ke Lokasi.
+            </h1>
+
+            <p id="heroSubheadline" class="text-base sm:text-lg text-gray-600 max-w-xl font-normal leading-relaxed">
+              Layanan montir motor panggilan 24 jam untuk mengatasi motor mogok mendadak, aki soak, ban bocor, mesin overheat, hingga servis berkala langsung di kantor atau jalan raya.
+            </p>
+
+            <!-- Dual Action CTA -->
+            <div class="flex flex-col sm:flex-row gap-3 pt-2">
+              <button onclick="scrollToWizard()" class="bg-brand-red hover:bg-brand-redHover text-white text-base font-extrabold px-7 py-4 rounded-xl shadow-glow-red flex items-center justify-center gap-3 active:scale-95 transition-all">
+                <i data-lucide="map-pin" class="w-5 h-5"></i>
+                <span id="heroCtaPrimary">PANGGIL MONTIR SEKARANG</span>
+              </button>
+              <a href="#quickServices" class="bg-white hover:bg-gray-100 text-brand-dark border border-gray-300 font-bold px-7 py-4 rounded-xl flex items-center justify-center gap-2 transition-all">
+                <span id="heroCtaSecondary">CEK PILIHAN LAYANAN</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </a>
+            </div>
+
+            <!-- Quick Problem Selector -->
+            <div class="pt-6 border-t border-gray-200">
+              <p class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3">Apa kendala motor Anda saat ini?</p>
+              <div id="quickProblemGrid" class="flex flex-wrap gap-2">
+                <!-- Injected via Store JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Automotive Real Visual Card -->
+          <div class="lg:col-span-5 relative">
+            <div class="relative mx-auto rounded-3xl overflow-hidden shadow-2xl border border-gray-200 bg-brand-charcoal text-white">
+              <img id="heroImageVisual" src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=900&q=80" alt="Motor Rescue Technician" class="w-full h-80 sm:h-96 object-cover opacity-85 hover:scale-105 transition-transform duration-700" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+              
+              <!-- Floating Live Dispatch Card -->
+              <div class="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md rounded-2xl p-4 text-brand-dark border border-white/40 shadow-xl">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=160&q=80" class="w-11 h-11 rounded-full object-cover border-2 border-brand-red" alt="Teknisi MOTOVEC" />
+                    <div>
+                      <h4 class="font-bold text-sm">Budi Santoso (Master Tech)</h4>
+                      <div class="flex items-center gap-1.5 text-xs text-gray-500">
+                        <i data-lucide="shield-alert" class="w-3.5 h-3.5 text-emerald-600"></i>
+                        <span>Tool Kit Lengkap + Scanner OBD2</span>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="text-xs bg-red-100 text-brand-red font-extrabold px-2.5 py-1 rounded-md">SIAP JALAN</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. EMERGENCY ACTION STRIP -->
+    <section id="emergencyAction" data-section="emergency" class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="bg-gradient-to-r from-brand-charcoal to-brand-dark text-white rounded-3xl p-6 sm:p-10 border border-brand-border shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
+        <div class="space-y-2 z-10 text-center md:text-left">
+          <div class="inline-flex items-center gap-2 bg-brand-red/30 text-brand-red border border-brand-red/50 px-3 py-1 rounded-full text-xs font-bold">
+            <span class="w-2 h-2 rounded-full bg-brand-red pulse-dot"></span>
+            <span id="emergencyStatusBadge">DISPATCH SIAGA 24 JAM</span>
+          </div>
+          <h2 id="emergencyHeadline" class="text-2xl sm:text-3xl font-black">MOGOK DI JALAN ATAU DI RUMAH?</h2>
+          <p id="emergencySubline" class="text-gray-300 text-sm sm:text-base max-w-xl">
+            Estimasi tim tiba ke lokasi: <span class="text-brand-accent font-bold">20–35 Menit</span>. Cukup kirimkan alamat lengkap Anda dan montir kami segera meluncur.
+          </p>
+        </div>
+        <div class="z-10 flex-shrink-0 w-full md:w-auto">
+          <button onclick="scrollToWizard()" class="w-full md:w-auto bg-brand-red hover:bg-brand-redHover text-white font-extrabold px-8 py-4 rounded-2xl shadow-glow-red flex items-center justify-center gap-3 text-sm active:scale-95 transition-all">
+            <i data-lucide="map-pin" class="w-5 h-5"></i>
+            <span id="emergencyBtnText">PANGGIL MONTIR KE ALAMAT ANDA</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. QUICK SERVICES -->
+    <section id="quickServices" data-section="services" class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+        <div>
+          <span class="text-xs font-extrabold text-brand-red uppercase tracking-widest">Penanganan Cepat</span>
+          <h2 class="text-3xl font-black text-brand-dark mt-1">Layanan Spesialis Langsung di Tempat</h2>
+        </div>
+        <p class="text-gray-500 text-sm max-w-md">Perbaikan transparan, tanpa markup biaya tak wajar, diagnosa akurat sebelum tindakan.</p>
+      </div>
+
+      <div id="serviceCardsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <!-- Rendered via dynamic state -->
+      </div>
+    </section>
+
+    <!-- 4. COST ESTIMATOR WIDGET -->
+    <section id="estimator" data-section="estimator" class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="bg-white border border-gray-200 rounded-3xl p-6 sm:p-10 shadow-clean">
+        <div class="max-w-3xl mb-8">
+          <span class="text-xs font-extrabold text-brand-red uppercase tracking-wider">Kalkulator Transparan</span>
+          <h2 class="text-3xl font-black text-brand-dark mt-1">Cek Estimasi Biaya Perbaikan</h2>
+          <p class="text-gray-600 text-sm mt-1">Hitung simulasi pengeluaran Anda. Rincian final tetap dikonfirmasi setelah pengecekan fisik di lokasi tanpa paksaan ganti part.</p>
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-8 items-start">
+          <div class="lg:col-span-7 space-y-4">
+            <div>
+              <label class="block text-xs font-bold text-gray-700 uppercase mb-2">1. Kategori Jenis Motor</label>
+              <select id="estBikeType" onchange="recalculateEstimator()" class="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-sm font-semibold focus:ring-2 focus:ring-brand-red outline-none">
+                <option value="matic_std">Motor Matic Standar (Beat, Mio, Vario 125, Scoopy)</option>
+                <option value="matic_maxi">Matic Maxi / Sport 150cc (NMAX, PCX, Aerox, ADV)</option>
+                <option value="bebek">Motor Bebek (Supra, Revo, Jupiter MX)</option>
+                <option value="sport">Motor Sport 150-250cc (CBR, R15, MT-25, Ninja)</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-gray-700 uppercase mb-2">2. Gejala Masalah Utama</label>
+              <select id="estProblem" onchange="recalculateEstimator()" class="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-sm font-semibold focus:ring-2 focus:ring-brand-red outline-none">
+                <option value="mogok_kelistrikan">Mogok / Tidak Ada Pengapian (Cek Aki & Busi)</option>
+                <option value="cvt_putus">V-Belt Putus / CVT Bunyi Kasar</option>
+                <option value="ban_bocor">Ban Bocor / Tambal Tubeless Darurat</option>
+                <option value="rem_blong">Pengereman Keras / Kampas Habis</option>
+                <option value="overheat">Radiator Bocor / Indikator Suhu Menyala</option>
+                <option value="ganti_oli">Servis Rutin + Penggantian Oli Mesin</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-gray-700 uppercase mb-2">3. Waktu Panggilan</label>
+              <div class="grid grid-cols-2 gap-3">
+                <button type="button" onclick="setEstShift('regular')" id="btnShiftReg" class="py-2.5 px-4 rounded-xl border text-sm font-bold bg-brand-dark text-white border-brand-dark">Reguler (07:00 - 21:00)</button>
+                <button type="button" onclick="setEstShift('midnight')" id="btnShiftMid" class="py-2.5 px-4 rounded-xl border text-sm font-bold bg-gray-100 text-gray-700 border-gray-200">Midnight (21:01 - 06:59)</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5 bg-gray-50 rounded-2xl p-6 border border-gray-200 space-y-4">
+            <h3 class="font-extrabold text-gray-900 text-sm uppercase tracking-wider">Rincian Estimasi Biaya</h3>
+            
+            <div class="space-y-2.5 text-sm border-b border-gray-200 pb-4">
+              <div class="flex justify-between text-gray-600">
+                <span>Biaya Jasa & Panggilan</span>
+                <span id="estCallCost" class="font-bold text-gray-900">Rp 45.000</span>
+              </div>
+              <div class="flex justify-between text-gray-600">
+                <span>Pemeriksaan Teknis & Tools</span>
+                <span id="estCheckCost" class="font-bold text-gray-900">Rp 30.000</span>
+              </div>
+              <div class="flex justify-between text-gray-600">
+                <span>Perkiraan Sparepart/Part Fastmoving</span>
+                <span id="estPartCost" class="font-bold text-gray-900">Rp 65.000</span>
+              </div>
+            </div>
+
+            <div class="flex justify-between items-center pt-1">
+              <div>
+                <span class="text-xs text-gray-500 font-semibold block">Total Perkiraan</span>
+                <span class="text-xs text-brand-red font-bold">*Belum termasuk promo</span>
+              </div>
+              <span id="estTotalCost" class="text-2xl font-black text-brand-red">Rp 140.000</span>
+            </div>
+
+            <div class="text-[11px] text-gray-500 bg-white p-3 rounded-xl border border-gray-200 leading-normal">
+              <strong>Catatan:</strong> Harga final dikonfirmasi montir setelah cek fisik. Montir tidak akan mengganti sparepart tanpa persetujuan langsung Anda.
+            </div>
+
+            <button onclick="prefillBookingFromEstimator()" class="w-full bg-brand-dark hover:bg-black text-white font-extrabold py-3 rounded-xl text-sm transition-all flex items-center justify-center gap-2">
+              <span>Gunakan Estimasi Ini & Booking</span>
+              <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. 4-STEP BOOKING WIZARD PLATFORM -->
+    <section id="bookingWizard" data-section="booking" class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="bg-white rounded-3xl border border-gray-200 shadow-floating overflow-hidden">
+        <!-- Wizard Header Bar -->
+        <div class="bg-brand-charcoal p-6 text-white flex items-center justify-between">
+          <div>
+            <span class="text-[11px] font-extrabold text-brand-red uppercase tracking-wider">Fast Booking Wizard</span>
+            <h2 class="text-xl sm:text-2xl font-black">Form Pemesanan Montir 24 Jam</h2>
+          </div>
+          <div class="text-right">
+            <span id="wizardStepNumber" class="text-xs font-bold text-gray-400">Step 1 dari 4</span>
+            <div class="w-24 bg-gray-700 h-1.5 rounded-full mt-1.5 overflow-hidden">
+              <div id="wizardProgressBar" class="bg-brand-red h-full w-1/4 transition-all duration-300"></div>
+            </div>
+          </div>
+        </div>
+
+        <form id="mainBookingForm" onsubmit="handleWizardSubmit(event)" class="p-6 sm:p-8 space-y-6">
+          
+          <!-- STEP 1: Masalah & Layanan -->
+          <div id="stepSection1" class="wizard-step space-y-5">
+            <h3 class="font-extrabold text-gray-900 text-lg flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-brand-red text-white text-xs flex items-center justify-center font-bold">1</span>
+              Keluhan & Pilihan Servis
+            </h3>
+            
+            <div>
+              <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Apa keluhan utama Anda?</label>
+              <textarea id="bookProblemDetail" rows="3" required placeholder="Contoh: Tiba-tiba motor mati di lampu merah, lampu indikator injeksi kedip 7x..." class="w-full bg-gray-50 border border-gray-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-brand-red outline-none"></textarea>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Pilih Kategori Layanan</label>
+              <select id="bookServiceCategory" class="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-sm font-semibold focus:ring-2 focus:ring-brand-red outline-none">
+                <option value="Emergency Rescue (Darurat di Jalan)">Emergency Rescue (Darurat di Jalan)</option>
+                <option value="Servis CVT & V-Belt Putus">Servis CVT & V-Belt Putus</option>
+                <option value="Ganti Aki / Jumper Aki Soak">Ganti Aki / Jumper Aki Soak</option>
+                <option value="Penanganan Ban Tubeless & Velg">Penanganan Ban Tubeless & Velg</option>
+                <option value="Tune-Up & Servis Berkala di Rumah">Tune-Up & Servis Berkala di Rumah</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- STEP 2: Data Motor -->
+          <div id="stepSection2" class="wizard-step hidden space-y-5">
+            <h3 class="font-extrabold text-gray-900 text-lg flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-brand-red text-white text-xs flex items-center justify-center font-bold">2</span>
+              Identitas Kendaraan
+            </h3>
+            
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Merek Motor</label>
+                <input type="text" id="bookBikeBrand" placeholder="Honda, Yamaha, Suzuki, Kawasaki..." required class="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-brand-red outline-none" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Tipe / Model & Tahun</label>
+                <input type="text" id="bookBikeModel" placeholder="Vario 150 (2021)" required class="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-brand-red outline-none" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Nomor Polisi (Plat Motor)</label>
+              <input type="text" id="bookBikePlate" placeholder="B 3821 XYZ" required class="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-sm uppercase focus:ring-2 focus:ring-brand-red outline-none" />
+            </div>
+          </div>
+
+          <!-- STEP 3: Lokasi & Waktu -->
+          <div id="stepSection3" class="wizard-step hidden space-y-5">
+            <h3 class="font-extrabold text-gray-900 text-lg flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-brand-red text-white text-xs flex items-center justify-center font-bold">3</span>
+              Alamat Lengkap & Waktu Penanganan
+            </h3>
+
+            <div>
+              <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Alamat Lengkap (Jalan, RT/RW, Kecamatan, Kota)</label>
+              <textarea id="bookAddress" rows="3" required placeholder="Contoh: Jl. Sudirman No 12, Kel. Karet, Kec. Setiabudi (Depan Indomaret seberang SPBU)..." class="w-full bg-gray-50 border border-gray-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-brand-red outline-none"></textarea>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Pilihan Waktu Datang</label>
+                <select id="bookTimeType" class="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-sm font-semibold focus:ring-2 focus:ring-brand-red outline-none">
+                  <option value="Sekarang (Emergency Segera Datang)">Sekarang (Emergency Segera Datang)</option>
+                  <option value="Jadwalkan Nanti Jam Tertentu">Jadwalkan Nanti Jam Tertentu</option>
+                  <option value="Besok Pagi">Besok Pagi</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Patokan / Catatan Posisi Motor</label>
+                <input type="text" id="bookNotes" placeholder="Contoh: Pinggir jalan trotoar / Parkiran lobi kantor" class="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-brand-red outline-none" />
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 4: Kontak & Konfirmasi -->
+          <div id="stepSection4" class="wizard-step hidden space-y-5">
+            <h3 class="font-extrabold text-gray-900 text-lg flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-brand-red text-white text-xs flex items-center justify-center font-bold">4</span>
+              Kontak Pemesan & Review
+            </h3>
+
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Nama Lengkap</label>
+                <input type="text" id="bookCustomerName" placeholder="Contoh: Rian Pratama" required class="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-brand-red outline-none" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Nomor WhatsApp Aktif</label>
+                <input type="tel" id="bookCustomerWA" placeholder="08123456789" required class="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-brand-red outline-none" />
+              </div>
+            </div>
+
+            <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200 text-xs space-y-1.5">
+              <div class="font-bold text-gray-900 uppercase">Ringkasan Pemesanan:</div>
+              <p id="summaryText" class="text-gray-600">Mohon periksa kembali nomor WhatsApp Anda. Dispatcher kami langsung mengirim koordinat montir terdekat setelah tombol kirim ditekan.</p>
+            </div>
+          </div>
+
+          <!-- Step Navigation Buttons -->
+          <div class="flex items-center justify-between pt-4 border-t border-gray-200">
+            <button type="button" id="wizardBtnBack" onclick="prevWizardStep()" class="text-gray-500 hover:text-gray-800 font-bold text-sm px-4 py-2 rounded-xl hidden">
+              Kembali
+            </button>
+            <div class="ml-auto">
+              <button type="button" id="wizardBtnNext" onclick="nextWizardStep()" class="bg-brand-red hover:bg-brand-redHover text-white font-extrabold px-6 py-3 rounded-xl text-sm flex items-center gap-2 transition-all">
+                <span>Lanjutkan</span>
+                <i data-lucide="chevron-right" class="w-4 h-4"></i>
+              </button>
+              <button type="submit" id="wizardBtnSubmit" class="bg-brand-red hover:bg-brand-redHover text-white font-extrabold px-7 py-3 rounded-xl text-sm hidden flex items-center gap-2 shadow-glow-red transition-all">
+                <i data-lucide="send" class="w-4 h-4"></i>
+                <span>Konfirmasi Panggil Montir</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- 6. CEK BOOKING MONTIR (CUSTOMER TRACKER) -->
+    <section id="trackingSection" data-section="tracking" class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="bg-brand-dark text-white rounded-3xl p-6 sm:p-8 border border-brand-border shadow-2xl relative overflow-hidden">
+        
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-brand-border/80 pb-6">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 pulse-dot"></span>
+              <span class="text-xs font-extrabold text-emerald-400 tracking-wider uppercase">Status Pemesanan</span>
+            </div>
+            <h3 class="text-2xl font-black mt-1">Cek Booking Montir</h3>
+          </div>
+          <div class="flex flex-col sm:items-end w-full sm:w-auto">
+            <span class="text-xs text-gray-400 block mb-1">Cek Kode Booking Anda:</span>
+            <div class="flex items-center gap-2 w-full sm:w-auto">
+              <input type="text" id="inputSearchBookingId" placeholder="#MTV-..." class="bg-brand-charcoal border border-brand-border text-white text-xs font-mono font-bold px-3 py-2 rounded-xl outline-none focus:border-brand-red uppercase w-full sm:w-40" />
+              <button onclick="searchCustomerBooking()" class="bg-brand-red hover:bg-brand-redHover text-white text-xs font-bold px-3 py-2 rounded-xl transition-all">
+                Cek
+              </button>
+            </div>
+            <span class="text-[11px] text-gray-400 mt-1">ID Aktif: <strong id="trackBookingId" class="text-brand-red font-mono">#MTV-ACTIVE-882</strong></span>
+          </div>
+        </div>
+
+        <div class="mt-8">
+          <div class="bg-brand-card p-6 sm:p-8 rounded-2xl border border-brand-border/60">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-brand-border/60">
+              <div>
+                <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block">Progres Layanan</span>
+                <span class="text-sm font-extrabold text-white">Alur Status Pengerjaan Pesanan</span>
+              </div>
+              <div class="text-left sm:text-right">
+                <span class="text-xs text-gray-400 block">Ada pertanyaan terkait kedatangan?</span>
+                <a href="https://wa.me/6281288882424" target="_blank" class="inline-flex items-center gap-1 text-xs font-bold text-emerald-400 hover:text-emerald-300 transition-colors">
+                  <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+                  <span>Hubungi Dispatcher WhatsApp</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Step Progress Timeline (Full Width) -->
+            <div id="trackingTimeline" class="space-y-4">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. SERVICE AREA CHECKER -->
+    <section id="serviceArea" data-section="area" class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="bg-gray-100 rounded-3xl p-6 sm:p-10 border border-gray-200">
+        <div class="max-w-2xl mx-auto text-center space-y-3 mb-6">
+          <span class="text-xs font-extrabold text-brand-red uppercase tracking-wider">Cakupan Wilayah</span>
+          <h2 class="text-3xl font-black text-brand-dark">Apakah Kami Melayani Area Anda?</h2>
+          <p class="text-gray-600 text-sm">Cek ketersediaan posko montir bergerak di kota atau kecamatan Anda.</p>
+        </div>
+
+        <div class="max-w-md mx-auto">
+          <div class="relative flex items-center">
+            <input type="text" id="areaSearchInput" onkeyup="checkServiceAreaLive()" placeholder="Ketik nama kecamatan atau kota..." class="w-full bg-white border border-gray-300 rounded-2xl pl-11 pr-4 py-3.5 text-sm font-semibold focus:ring-2 focus:ring-brand-red outline-none shadow-sm" />
+            <i data-lucide="search" class="w-5 h-5 text-gray-400 absolute left-4"></i>
+          </div>
+          <div id="areaSearchResult" class="mt-3 text-center text-sm font-bold min-h-[30px]"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. REVIEWS & SOCIAL PROOF -->
+    <section id="reviews" data-section="reviews" class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+        <div>
+          <span class="text-xs font-extrabold text-brand-red uppercase tracking-widest">Testimoni Riil</span>
+          <h2 class="text-3xl font-black text-brand-dark mt-1">Ulasan Pengendara</h2>
+        </div>
+        <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-2xl border border-gray-200 shadow-sm text-sm">
+          <div class="flex text-amber-400">
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+          </div>
+          <span class="font-extrabold text-brand-dark">4.92 / 5.0</span>
+          <span class="text-gray-400 text-xs">(1,240+ Review)</span>
+        </div>
+      </div>
+
+      <div id="reviewsGridContainer" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- 9. FAQ ACCORDION -->
+    <section id="faq" data-section="faq" class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-8">
+        <span class="text-xs font-extrabold text-brand-red uppercase tracking-wider">Paling Sering Ditanyakan</span>
+        <h2 class="text-3xl font-black text-brand-dark mt-1">Pertanyaan Umum (FAQ)</h2>
+      </div>
+
+      <div id="faqAccordionContainer" class="space-y-3">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- 10. FINAL BIG CTA STRIP -->
+    <section id="finalCta" data-section="cta" class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="bg-brand-red rounded-3xl p-8 sm:p-14 text-white text-center space-y-6 shadow-glow-red relative overflow-hidden">
+        <div class="max-w-2xl mx-auto space-y-3">
+          <h2 id="finalCtaTitle" class="text-3xl sm:text-4xl font-black leading-tight">Jangan Biarkan Motor Bermasalah Menghentikan Perjalanan Anda.</h2>
+          <p id="finalCtaSubtitle" class="text-red-100 text-sm sm:text-base font-medium">Panggil teknisi sekarang dan dapatkan pertolongan cepat bergaransi resmi di lokasi Anda.</p>
+        </div>
+        <div>
+          <button onclick="scrollToWizard()" class="bg-white text-brand-red hover:bg-gray-100 font-extrabold px-8 py-4 rounded-2xl text-base shadow-xl active:scale-95 transition-all">
+            <span id="finalCtaButton">PANGGIL MONTIR SEKARANG (24 JAM)</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="bg-brand-dark text-gray-400 text-sm mt-20 border-t border-brand-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="space-y-4">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-lg bg-brand-red text-white flex items-center justify-center font-bold">M</div>
+            <span id="footerBrandName" class="text-white font-extrabold text-lg">MOTOVEC RESCUE</span>
+          </div>
+          <p id="footerBio" class="text-xs text-gray-400 leading-relaxed">Platform digital servis dan pemanggilan montir motor roda dua 24 jam respons cepat dengan montir tersertifikasi.</p>
+          <div class="text-xs text-emerald-400 font-bold flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span id="footerHours">Layanan 24 Jam Non-Stop</span>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-white font-bold text-xs uppercase tracking-wider mb-3">Layanan Populer</h4>
+          <ul class="space-y-2 text-xs">
+            <li><a href="#quickServices" class="hover:text-white">Emergency Mogok Jalan</a></li>
+            <li><a href="#quickServices" class="hover:text-white">Ganti Aki & Jumper Darurat</a></li>
+            <li><a href="#quickServices" class="hover:text-white">Servis V-Belt Putus di Lokasi</a></li>
+            <li><a href="#quickServices" class="hover:text-white">Tambal Ban Tubeless Panggilan</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-white font-bold text-xs uppercase tracking-wider mb-3">Wilayah Layanan</h4>
+          <ul id="footerAreaList" class="space-y-2 text-xs">
+            <li>Jakarta & Sekitarnya</li>
+            <li>Bekasi & Depok</li>
+            <li>Tangerang Raya</li>
+            <li>Bandung & Sekitarnya</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-white font-bold text-xs uppercase tracking-wider mb-3">Kontak Bantuan</h4>
+          <div class="space-y-2 text-xs">
+            <p>WhatsApp: <span id="footerWa" class="text-white font-semibold">0812-8888-2424</span></p>
+            <p>Emergency Call: <span id="footerEmergencyPhone" class="text-brand-red font-bold">0812-9999-2424</span></p>
+            <p>Email: <span id="footerEmail" class="text-white font-semibold">support@motovec.id</span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-t border-brand-border/60 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-4">
+        <p id="footerCopyright">© 2026 MOTOVEC Rescue 24/7. Seluruh Hak Cipta Dilindungi.</p>
+        <div class="flex gap-4">
+          <a href="#" class="hover:text-white">Kebijakan Privasi</a>
+          <a href="#" class="hover:text-white">Syarat & Ketentuan Garansi</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== SMARTPHONE BOTTOM APP NAVIGATION ==================== -->
+  <nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t border-gray-200 px-3 py-2 flex items-center justify-around shadow-floating">
+    <a href="#hero" class="flex flex-col items-center gap-0.5 text-gray-600 hover:text-brand-red">
+      <i data-lucide="home" class="w-5 h-5"></i>
+      <span class="text-[10px] font-bold">Home</span>
+    </a>
+    <a href="#quickServices" class="flex flex-col items-center gap-0.5 text-gray-600 hover:text-brand-red">
+      <i data-lucide="wrench" class="w-5 h-5"></i>
+      <span class="text-[10px] font-bold">Layanan</span>
+    </a>
+    
+    <!-- Central Emergency SOS Floating Button -->
+    <button onclick="openEmergencyModal()" class="-mt-6 bg-brand-red text-white w-14 h-14 rounded-full flex flex-col items-center justify-center shadow-glow-red border-4 border-white active:scale-90 transition-transform">
+      <i data-lucide="alert-triangle" class="w-6 h-6"></i>
+      <span class="text-[9px] font-black uppercase tracking-tight">SOS</span>
+    </button>
+
+    <a href="#trackingSection" class="flex flex-col items-center gap-0.5 text-gray-600 hover:text-brand-red">
+      <i data-lucide="calendar-check" class="w-5 h-5"></i>
+      <span class="text-[10px] font-bold">Cek Booking</span>
+    </a>
+    <button onclick="openCustomerGarageModal()" class="flex flex-col items-center gap-0.5 text-gray-600 hover:text-brand-red">
+      <i data-lucide="bike" class="w-5 h-5"></i>
+      <span class="text-[10px] font-bold">Motor Saya</span>
+    </button>
+  </nav>
+
+  <!-- ==================== POPUP MODAL: EMERGENCY 1-TAP SOS ==================== -->
+  <div id="emergencyModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 text-center space-y-5 relative shadow-2xl animate-in fade-in zoom-in duration-200">
+      <button onclick="closeEmergencyModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="w-16 h-16 bg-red-100 text-brand-red rounded-full mx-auto flex items-center justify-center">
+        <i data-lucide="siren" class="w-8 h-8 pulse-dot"></i>
+      </div>
+
+      <div>
+        <h3 class="text-2xl font-black text-brand-dark">PANGGILAN DARURAT</h3>
+        <p class="text-xs text-gray-500 mt-1">Kirim alamat lengkap Anda ke WhatsApp Call Center atau hubungi nomor darurat langsung untuk bantuan instan.</p>
+      </div>
+
+      <div class="space-y-3">
+        <button onclick="sendSosViaWhatsApp()" class="w-full bg-brand-red hover:bg-brand-redHover text-white font-extrabold py-3.5 rounded-2xl flex items-center justify-center gap-2 shadow-glow-red">
+          <i data-lucide="message-circle" class="w-4 h-4"></i>
+          <span>HUBUNGI VIA WHATSAPP (KIRIM ALAMAT)</span>
+        </button>
+
+        <a href="tel:081288882424" class="w-full bg-brand-charcoal hover:bg-black text-white font-bold py-3.5 rounded-2xl flex items-center justify-center gap-2">
+          <i data-lucide="phone-call" class="w-4 h-4"></i>
+          <span>HUBUNGI VIA TELEPON LANGSUNG</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== POPUP MODAL: MOTOR SAYA (CUSTOMER GARAGE) ==================== -->
+  <div id="garageModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 space-y-5 relative shadow-2xl">
+      <button onclick="closeCustomerGarageModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-brand-dark text-white flex items-center justify-center">
+          <i data-lucide="bike" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h3 class="font-black text-lg text-brand-dark">Garasi Digital Anda</h3>
+          <p class="text-xs text-gray-500">Pilih motor Anda untuk mengisi form pemesanan secara instan.</p>
+        </div>
+      </div>
+
+      <div id="customerBikesList" class="space-y-2">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <div class="pt-3 border-t border-gray-200">
+        <button onclick="addNewBikePrompt()" class="w-full bg-gray-100 hover:bg-gray-200 text-brand-dark font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-2">
+          <i data-lucide="plus-circle" class="w-4 h-4"></i>
+          <span>Tambah Kendaraan Baru</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== ADMIN PANEL MODAL (REALTIME CMS) ==================== -->
+  <div id="adminPanelModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-6">
+    <div class="bg-white rounded-3xl w-full max-w-5xl h-[92vh] flex flex-col overflow-hidden shadow-2xl border border-gray-200">
+      
+      <!-- Admin Top Bar -->
+      <div class="bg-brand-charcoal px-6 py-4 text-white flex items-center justify-between flex-shrink-0">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-brand-red flex items-center justify-center font-black text-sm">M</div>
+          <div>
+            <h3 class="font-extrabold text-sm tracking-wide">MOTOVEC Real-Time Control Center</h3>
+            <span class="text-[10px] text-emerald-400 font-semibold flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 pulse-dot"></span>
+              Live Sync Enabled
+            </span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <button id="btnAdminSaveCloud" onclick="saveAdminDataToCloud()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-4 py-2 rounded-xl flex items-center gap-1.5 shadow-md transition-all">
+            <i data-lucide="cloud-upload" class="w-3.5 h-3.5"></i>
+            <span>Simpan Perubahan</span>
+          </button>
+          <button onclick="closeAdminModal()" class="text-gray-400 hover:text-white p-1">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Login Gate -->
+      <div id="adminLoginGate" class="flex-1 flex items-center justify-center p-6 bg-gray-50">
+        <div class="bg-white border border-gray-200 rounded-3xl p-8 max-w-sm w-full shadow-clean text-center space-y-4">
+          <div class="w-12 h-12 rounded-2xl bg-red-50 text-brand-red mx-auto flex items-center justify-center">
+            <i data-lucide="lock" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h4 class="font-black text-lg text-brand-dark">Autentikasi Pengelola</h4>
+            <p class="text-xs text-gray-500 mt-1">Masukkan data otorisasi untuk mengedit konten situs secara langsung.</p>
+          </div>
+          <div class="space-y-3 text-left">
+            <div>
+              <label class="block text-[11px] font-bold text-gray-700 uppercase mb-1">Username</label>
+              <input type="text" id="adminUserField" placeholder="Username" class="w-full bg-gray-50 border border-gray-300 rounded-xl px-3.5 py-2.5 text-xs font-medium focus:ring-2 focus:ring-brand-red outline-none" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-gray-700 uppercase mb-1">Password</label>
+              <input type="password" id="adminPassField" placeholder="Password" class="w-full bg-gray-50 border border-gray-300 rounded-xl px-3.5 py-2.5 text-xs font-medium focus:ring-2 focus:ring-brand-red outline-none" />
+            </div>
+          </div>
+          <div id="adminLoginAlert" class="text-xs text-brand-red font-bold hidden"></div>
+          <button onclick="submitAdminLogin()" class="w-full bg-brand-red hover:bg-brand-redHover text-white font-extrabold py-3 rounded-xl text-xs shadow-glow-red transition-all">
+            Masuk ke Panel Kontrol
+          </button>
+        </div>
+      </div>
+
+      <!-- Workspace Container (Unlocked after login) -->
+      <div id="adminWorkspace" class="hidden flex-1 flex flex-col md:flex-row overflow-hidden">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="w-full md:w-56 bg-brand-charcoal text-gray-300 p-3 flex-shrink-0 flex md:flex-col gap-1 border-r border-brand-border overflow-x-auto md:overflow-y-auto">
+          <button onclick="switchAdminTab('tabHero')" class="admin-tab-btn active w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold text-left bg-brand-red text-white">
+            <i data-lucide="layout-template" class="w-4 h-4"></i>
+            <span>Hero & Banner</span>
+          </button>
+          <button onclick="switchAdminTab('tabButtons')" class="admin-tab-btn w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold text-left hover:bg-gray-800 text-gray-400">
+            <i data-lucide="mouse-pointer-click" class="w-4 h-4"></i>
+            <span>Tombol & Kontak</span>
+          </button>
+          <button onclick="switchAdminTab('tabServices')" class="admin-tab-btn w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold text-left hover:bg-gray-800 text-gray-400">
+            <i data-lucide="wrench" class="w-4 h-4"></i>
+            <span>Layanan & Tarif</span>
+          </button>
+          <button onclick="switchAdminTab('tabBookingTrack')" class="admin-tab-btn w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold text-left hover:bg-gray-800 text-gray-400">
+            <i data-lucide="check-circle" class="w-4 h-4"></i>
+            <span>Status Booking</span>
+          </button>
+          <button onclick="switchAdminTab('tabProblemsArea')" class="admin-tab-btn w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold text-left hover:bg-gray-800 text-gray-400">
+            <i data-lucide="map-pin" class="w-4 h-4"></i>
+            <span>Kendala & Area</span>
+          </button>
+          <button onclick="switchAdminTab('tabFaqReviews')" class="admin-tab-btn w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold text-left hover:bg-gray-800 text-gray-400">
+            <i data-lucide="message-square" class="w-4 h-4"></i>
+            <span>Review & FAQ</span>
+          </button>
+          <button onclick="switchAdminTab('tabSystemSettings')" class="admin-tab-btn w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold text-left hover:bg-gray-800 text-gray-400">
+            <i data-lucide="settings" class="w-4 h-4"></i>
+            <span>Pengaturan</span>
+          </button>
+        </aside>
+
+        <!-- Content Panes -->
+        <div class="flex-1 bg-gray-50 p-6 overflow-y-auto space-y-6">
+          
+          <!-- TAB 1: HERO & BRANDING -->
+          <div id="paneTabHero" class="admin-pane space-y-4">
+            <div>
+              <h4 class="font-black text-brand-dark text-base">Pengaturan Hero & Brand Identity</h4>
+              <p class="text-xs text-gray-500">Ubah teks headline, badge, subjudul, dan tautan gambar banner utama.</p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1 uppercase">Nama Brand</label>
+                <input type="text" id="admBrandName" class="w-full bg-white border border-gray-300 rounded-xl px-3 py-2 text-xs font-bold" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1 uppercase">Badge Hero</label>
+                <input type="text" id="admHeroBadge" class="w-full bg-white border border-gray-300 rounded-xl px-3 py-2 text-xs" />
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block text-xs font-bold text-gray-700 mb-1 uppercase">Headline Utama</label>
+                <input type="text" id="admHeroHeadline" class="w-full bg-white border border-gray-300 rounded-xl px-3 py-2 text-xs font-bold" />
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block text-xs font-bold text-gray-700 mb-1 uppercase">Sub-headline Ringkas</label>
+                <textarea id="admHeroSubheadline" rows="2" class="w-full bg-white border border-gray-300 rounded-xl p-3 text-xs"></textarea>
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block text-xs font-bold text-gray-700 mb-1 uppercase">URL Gambar Hero Banner</label>
+                <input type="text" id="admHeroImage" class="w-full bg-white border border-gray-300 rounded-xl px-3 py-2 text-xs font-mono" />
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block text-xs font-bold text-gray-700 mb-1 uppercase">Teks Running Announcement Bar</label>
+                <input type="text" id="admAnnouncementText" class="w-full bg-white border border-gray-300 rounded-xl px-3 py-2 text-xs" />
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 2: BUTTONS & CALLS TO ACTION -->
+          <div id="paneTabButtons" class="admin-pane hidden space-y-4">
+            <div>
+              <h4 class="font-black text-brand-dark text-base">Teks Tombol & Saluran Kontak</h4>
+              <p class="text-xs text-gray-500">Edit label tombol panggilan dan nomor telepon tujuan pemesanan.</p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1 uppercase">Label Tombol Hero Utama</label>
+                <input type="text" id="admHeroCtaPrimary" class="w-full bg-white border border-gray-300 rounded-xl px-3 py-2 text-xs font-bold" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1 uppercase">Label Tombol Hero Kedua</label>
+                <input type="text" id="admHeroCtaSecondary" class="w-full bg-white border border-gray-300 rounded-xl px-3 py-2 text-xs font-bold" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1 uppercase">Label Tombol Emergency Strip</label>
+                <input type="text" id="admEmergencyBtn" class="w-full bg-white border border-gray-300 rounded-xl px-3 py-2 text-xs font-bold" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1 uppercase">Label Tombol Banner Bawah</label>
+                <input type="text" id="admFinalCtaBtn" class="w-full bg-white border border-gray-300 rounded-xl px-3 py-2 text-xs font-bold" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1 uppercase">Nomor WhatsApp Operasional</label>
+                <input type="text" id="admWaNumber" class="w-full bg-white border border-gray-300 rounded-xl px-3 py-2 text-xs font-mono" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1 uppercase">Nomor Call Center Telepon</label>
+                <input type="text" id="admPhoneCenter" class="w-full bg-white border border-gray-300 rounded-xl px-3 py-2 text-xs font-mono" />
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 3: SERVICES & PRICING -->
+          <div id="paneTabServices" class="admin-pane hidden space-y-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <h4 class="font-black text-brand-dark text-base">Katalog Layanan & Tarif</h4>
+                <p class="text-xs text-gray-500">Perbarui judul layanan, deskripsi, dan tarif awal.</p>
+              </div>
+              <button onclick="adminAddNewServiceItem()" class="bg-brand-red text-white text-xs font-bold px-3 py-1.5 rounded-xl flex items-center gap-1">
+                <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                <span>Tambah Layanan</span>
+              </button>
+            </div>
+            <div id="admServicesContainer" class="space-y-3">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <!-- TAB 4: BOOKING STATUS (CEK BOOKING) -->
+          <div id="paneTabBookingTrack" class="admin-pane hidden space-y-4">
+            <div>
+              <h4 class="font-black text-brand-dark text-base">Kendali Status Pesanan Pelanggan</h4>
+              <p class="text-xs text-gray-500">Perbarui tahapan status yang tampil pada menu Cek Booking secara langsung.</p>
+            </div>
+
+            <div class="bg-white p-5 rounded-2xl border border-gray-200 space-y-4">
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1 uppercase">ID Booking Aktif Ditampilkan</label>
+                <input type="text" id="admActiveBookingId" class="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2 text-xs font-mono font-bold" />
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1 uppercase">Tahapan Saat Ini</label>
+                <select id="admActiveBookingStep" class="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2.5 text-xs font-bold">
+                  <option value="0">Tahap 1: Booking Diterima</option>
+                  <option value="1">Tahap 2: Montir Ditugaskan</option>
+                  <option value="2">Tahap 3: Montir Menuju Lokasi</option>
+                  <option value="3">Tahap 4: Tiba & Servis Selesai</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 5: PROBLEMS & AREA -->
+          <div id="paneTabProblemsArea" class="admin-pane hidden space-y-5">
+            <div>
+              <h4 class="font-black text-brand-dark text-base">Pilihan Kendala Cepat & Wilayah Layanan</h4>
+              <p class="text-xs text-gray-500">Edit tombol cepat keluhan dan daftar jangkauan kota.</p>
+            </div>
+
+            <div class="space-y-3 bg-white p-4 rounded-2xl border border-gray-200">
+              <span class="text-xs font-bold uppercase text-gray-700">Daftar Kendala Cepat (Pisahkan dengan koma)</span>
+              <textarea id="admProblemsList" rows="3" class="w-full bg-gray-50 border border-gray-300 rounded-xl p-3 text-xs"></textarea>
+            </div>
+
+            <div class="space-y-3 bg-white p-4 rounded-2xl border border-gray-200">
+              <span class="text-xs font-bold uppercase text-gray-700">Daftar Area Operasional (Pisahkan dengan koma)</span>
+              <textarea id="admAreasList" rows="3" class="w-full bg-gray-50 border border-gray-300 rounded-xl p-3 text-xs"></textarea>
+            </div>
+          </div>
+
+          <!-- TAB 6: REVIEWS & FAQ -->
+          <div id="paneTabFaqReviews" class="admin-pane hidden space-y-4">
+            <div>
+              <h4 class="font-black text-brand-dark text-base">Ulasan Customer & FAQ</h4>
+              <p class="text-xs text-gray-500">Edit pertanyaan yang sering diajukan dan ulasan pelanggan.</p>
+            </div>
+            
+            <div id="admReviewsContainer" class="space-y-3">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <!-- TAB 7: SYSTEM SETTINGS -->
+          <div id="paneTabSystemSettings" class="admin-pane hidden space-y-4">
+            <div>
+              <h4 class="font-black text-brand-dark text-base">Status Sistem & Gateway Real-time</h4>
+              <p class="text-xs text-gray-500">Informasi sinkronisasi data cloud real-time.</p>
+            </div>
+
+            <div class="bg-white p-5 rounded-2xl border border-gray-200 space-y-4">
+              <div class="flex items-center justify-between border-b border-gray-100 pb-3">
+                <div>
+                  <span class="text-xs font-bold text-gray-800 block">Status Konektivitas Cloud</span>
+                  <span class="text-[11px] text-gray-500">Sinkronisasi dokumen otomatis di setiap perubahan</span>
+                </div>
+                <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs px-3 py-1 rounded-full font-bold flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500 pulse-dot"></span>
+                  Terhubung & Siap
+                </span>
+              </div>
+
+              <div class="flex items-center justify-between border-b border-gray-100 pb-3">
+                <div>
+                  <span class="text-xs font-bold text-gray-800 block">Metode Penyimpanan</span>
+                  <span class="text-[11px] text-gray-500">Cloud Real-time Document Store (Kredensial Aman Terproteksi)</span>
+                </div>
+                <span class="text-xs font-mono text-gray-600 bg-gray-100 px-2.5 py-1 rounded-lg">Encrypted Gateway</span>
+              </div>
+
+              <div class="pt-2">
+                <button onclick="resetToFactoryDefaults()" class="text-xs text-brand-red font-bold hover:underline">
+                  Kembalikan Konfigurasi ke Pengaturan Awal
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================= -->
+  <!-- ================= APPLICATION LOGIC ENGINE ============ -->
+  <!-- ======================================================= -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    // Global Environment Config
+    const appId = typeof __app_id !== 'undefined' ? __app_id : 'motovec-rescue-app';
+    const envFirebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+    
+    // User-provided API Key integrated seamlessly
+    const firebaseConfig = envFirebaseConfig || {
+      apiKey: "AIzaSyBZyvA6_cy2k42eU_Ktt13wFVTDYgZaXkI",
+      authDomain: "motovec-rescue-app.firebaseapp.com",
+      projectId: "motovec-rescue-app"
+    };
+
+    // Initialize Firebase Services
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const APP_DEFAULTS = {
+      brandName: "MOTOVEC",
+      announcementText: "Layanan Montir 24 Jam Siap Datang ke Lokasi Anda di Seluruh Wilayah Operasional",
+      callCenterPhone: "0812-8888-2424",
+      waNumber: "081288882424",
+      hero: {
+        badge: "Unit Emergency Reaksi Cepat",
+        headline: "Motor Bermasalah? Montir Kami Datang ke Lokasi.",
+        subheadline: "Layanan montir motor panggilan 24 jam untuk mengatasi motor mogok mendadak, aki soak, ban bocor, mesin overheat, hingga servis berkala langsung di kantor atau jalan raya.",
+        image: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=900&q=80",
+        ctaPrimary: "PANGGIL MONTIR SEKARANG",
+        ctaSecondary: "CEK PILIHAN LAYANAN"
+      },
+      buttons: {
+        emergencyBtn: "PANGGIL MONTIR KE ALAMAT ANDA",
+        finalCtaBtn: "PANGGIL MONTIR SEKARANG (24 JAM)"
+      },
+      problems: [
+        "Motor Tidak Bisa Hidup",
+        "Aki Drop / Soak",
+        "Ban Bocor / Pecah",
+        "Mesin Overheat",
+        "Rem Bermasalah",
+        "Kelistrikan / Sekring",
+        "Rantai Putus / Kendor",
+        "Servis Ringan / Ganti Oli"
+      ],
+      services: [
+        { id: 1, title: "Emergency Aki & Kelistrikan", desc: "Jumper aki, penggantian aki baru bergaransi, dan pengecekan alternator.", price: "Rp 50.000", icon: "zap" },
+        { id: 2, title: "Ban & Roda Darurat", desc: "Tambal tubeless press permanen, isi angin nitrogen portabel, pergantian ban luar/dalam.", price: "Rp 35.000", icon: "disc" },
+        { id: 3, title: "Servis CVT & V-Belt Putus", desc: "Penanganan V-Belt matic putus di jalan, roller aus, kampas ganda selip.", price: "Rp 85.000", icon: "cog" },
+        { id: 4, title: "Mesin Mogok & Karbu/Injeksi", desc: "Diagnosa sensor injeksi dengan scanner OBD2, kuras tangki bensin tercampur air.", price: "Rp 75.000", icon: "wrench" }
+      ],
+      areas: ["Jakarta Selatan", "Jakarta Barat", "Jakarta Timur", "Jakarta Pusat", "Jakarta Utara", "Bekasi Barat", "Bekasi Timur", "Tangerang Kota", "Tangerang Selatan", "Depok", "Bandung Kota", "Cimahi"],
+      reviews: [
+        { name: "Dimas Anggara", bike: "Yamaha NMAX", rating: 5, comment: "Malam jam 1 dini hari v-belt putus di TB Simatupang. Montir Mas Andra datang 25 menit, sparepart ready!", date: "12 Sep 2026" },
+        { name: "Siti Rahmawati", bike: "Honda Scoopy", rating: 5, comment: "Aki mati total di kantor, gak repot dorong motor. Teknisi ramah dan harganya transparan sesuai aplikasi.", date: "10 Sep 2026" },
+        { name: "Kevin Sanjaya", bike: "Kawasaki Ninja 250", rating: 5, comment: "Kelistrikan mendadak drop, langsung dicek pake scanner. Sangat profesional untuk motor sport.", date: "08 Sep 2026" }
+      ],
+      faqs: [
+        { q: "Apakah montir benar-benar siaga 24 jam penuh?", a: "Ya, kami memiliki sistem shift teknisi mobile yang berpatroli secara bergantian di berbagai titik posko bergerak 24 jam nonstop." },
+        { q: "Berapa lama estimasi kedatangan montir?", a: "Rata-rata 20 hingga 40 menit tergantung jarak teknisi terdekat dan kondisi kepadatan lalu lintas." },
+        { q: "Bagaimana jika dibutuhkan sparepart baru?", a: "Montir kami membawa tool box dengan sparepart fast-moving standar pabrikan (aki, v-belt, busi, kampas rem, oli). Biaya sparepart dikonfirmasi sebelum dipasang." },
+        { q: "Apakah ada garansi setelah pengerjaan?", a: "Kami memberikan garansi pengerjaan selama 7 hari kalender dan garansi pabrikan resmi untuk suku cadang aki/part baru." }
+      ],
+      activeBooking: {
+        id: "#MTV-ACTIVE-882",
+        stepIndex: 2
+      },
+      customerGarage: [
+        { brand: "Honda", model: "Vario 150 Keyless", plate: "B 4921 TGB", year: "2022" },
+        { brand: "Yamaha", model: "NMAX ABS", plate: "B 3109 KLL", year: "2023" }
+      ]
+    };
+
+    let state = { ...APP_DEFAULTS };
+    let currentUser = null;
+
+    // Realtime Document Path Rule: /artifacts/{appId}/public/data/site_config/main
+    const configDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'site_config', 'main');
+
+    async function initRealtimeAuth() {
+      try {
+        if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+          await signInWithCustomToken(auth, __initial_auth_token);
+        } else {
+          await signInAnonymously(auth);
+        }
+      } catch (err) {
+        console.warn("Auth initialization fallback:", err);
+      }
+    }
+
+    onAuthStateChanged(auth, (user) => {
+      currentUser = user;
+      if (user) {
+        // Real-time synchronization
+        onSnapshot(configDocRef, (snap) => {
+          if (snap.exists()) {
+            const data = snap.data();
+            state = { ...state, ...data };
+            renderAllViews();
+            if (document.getElementById("adminWorkspace") && !document.getElementById("adminWorkspace").classList.contains("hidden")) {
+              populateAdminInputs();
+            }
+          }
+        }, (error) => {
+          console.warn("Realtime listener error:", error);
+        });
+      }
+    });
+
+    function renderAllViews() {
+      // 1. Branding & Announcement
+      const bName = state.brandName || "MOTOVEC";
+      const elBrand = document.getElementById("brandNameText");
+      if (elBrand) elBrand.innerText = bName;
+      const elFooterB = document.getElementById("footerBrandName");
+      if (elFooterB) elFooterB.innerText = bName + " RESCUE";
+
+      const elAnnText = document.getElementById("announcementText");
+      if (elAnnText && state.announcementText) elAnnText.innerText = state.announcementText;
+      const elAnnContact = document.getElementById("announcementContact");
+      if (elAnnContact) elAnnContact.innerText = "Call Center: " + (state.callCenterPhone || "0812-8888-2424");
+
+      // 2. Hero Section
+      if (state.hero) {
+        const hBadge = document.getElementById("heroBadge");
+        if (hBadge && state.hero.badge) hBadge.innerText = state.hero.badge;
+        const hTitle = document.getElementById("heroHeadline");
+        if (hTitle && state.hero.headline) {
+          hTitle.innerHTML = state.hero.headline.replace("Montir Kami Datang", '<span class="text-brand-red">Montir Kami Datang</span>');
+        }
+        const hSub = document.getElementById("heroSubheadline");
+        if (hSub && state.hero.subheadline) hSub.innerText = state.hero.subheadline;
+        const hImg = document.getElementById("heroImageVisual");
+        if (hImg && state.hero.image) hImg.src = state.hero.image;
+        const hCta1 = document.getElementById("heroCtaPrimary");
+        if (hCta1 && state.hero.ctaPrimary) hCta1.innerText = state.hero.ctaPrimary;
+        const hCta2 = document.getElementById("heroCtaSecondary");
+        if (hCta2 && state.hero.ctaSecondary) hCta2.innerText = state.hero.ctaSecondary;
+      }
+
+      // 3. Action Buttons & Final CTA
+      if (state.buttons) {
+        const emBtn = document.getElementById("emergencyBtnText");
+        if (emBtn && state.buttons.emergencyBtn) emBtn.innerText = state.buttons.emergencyBtn;
+        const finBtn = document.getElementById("finalCtaButton");
+        if (finBtn && state.buttons.finalCtaBtn) finBtn.innerText = state.buttons.finalCtaBtn;
+      }
+
+      // 4. Quick Problems
+      const problemGrid = document.getElementById("quickProblemGrid");
+      if (problemGrid && state.problems) {
+        problemGrid.innerHTML = "";
+        state.problems.forEach(p => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "bg-white hover:bg-red-50 text-gray-800 hover:text-brand-red border border-gray-200 text-xs font-bold px-3 py-1.5 rounded-full transition-all";
+          btn.innerText = p;
+          btn.onclick = () => selectQuickProblem(p);
+          problemGrid.appendChild(btn);
+        });
+      }
+
+      // 5. Services Cards
+      const serviceContainer = document.getElementById("serviceCardsContainer");
+      if (serviceContainer && state.services) {
+        serviceContainer.innerHTML = "";
+        state.services.forEach(s => {
+          const card = document.createElement("div");
+          card.className = "bg-white p-6 rounded-3xl border border-gray-200 shadow-sm hover:shadow-floating transition-all flex flex-col justify-between group";
+          card.innerHTML = `
+            <div>
+              <div class="w-12 h-12 rounded-2xl bg-red-50 text-brand-red flex items-center justify-center mb-4 group-hover:bg-brand-red group-hover:text-white transition-colors">
+                <i data-lucide="${s.icon || 'wrench'}" class="w-6 h-6"></i>
+              </div>
+              <h3 class="font-black text-brand-dark text-lg">${s.title}</h3>
+              <p class="text-xs text-gray-500 mt-2 leading-relaxed">${s.desc}</p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between">
+              <div>
+                <span class="text-[10px] text-gray-400 font-bold block">Biaya Jasa Mulai</span>
+                <span class="text-sm font-black text-brand-red">${s.price}</span>
+              </div>
+              <button onclick="bookSpecificService('${s.title}')" class="bg-gray-100 hover:bg-brand-dark hover:text-white text-brand-dark p-2 rounded-xl transition-colors">
+                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+              </button>
+            </div>
+          `;
+          serviceContainer.appendChild(card);
+        });
+      }
+
+      // 6. Active Booking Tracker
+      renderTrackingTimeline();
+      renderCustomerGarage();
+
+      // 7. Reviews
+      const reviewContainer = document.getElementById("reviewsGridContainer");
+      if (reviewContainer && state.reviews) {
+        reviewContainer.innerHTML = "";
+        state.reviews.forEach(r => {
+          const div = document.createElement("div");
+          div.className = "bg-white p-6 rounded-3xl border border-gray-200 shadow-clean space-y-3";
+          div.innerHTML = `
+            <div class="flex items-center justify-between">
+              <div class="flex text-amber-400">
+                ${'<i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>'.repeat(r.rating || 5)}
+              </div>
+              <span class="text-[11px] text-gray-400">${r.date || 'Terkini'}</span>
+            </div>
+            <p class="text-xs text-gray-600 italic">"${r.comment}"</p>
+            <div class="pt-2 border-t border-gray-100 flex items-center justify-between text-xs font-bold">
+              <span class="text-brand-dark">${r.name}</span>
+              <span class="text-brand-red bg-red-50 px-2 py-0.5 rounded text-[10px]">${r.bike}</span>
+            </div>
+          `;
+          reviewContainer.appendChild(div);
+        });
+      }
+
+      // 8. FAQs
+      const faqContainer = document.getElementById("faqAccordionContainer");
+      if (faqContainer && state.faqs) {
+        faqContainer.innerHTML = "";
+        state.faqs.forEach((f, idx) => {
+          const div = document.createElement("div");
+          div.className = "bg-white border border-gray-200 rounded-2xl p-4";
+          div.innerHTML = `
+            <button onclick="toggleFaq(${idx})" class="w-full flex items-center justify-between text-left font-bold text-sm text-brand-dark">
+              <span>${f.q}</span>
+              <i data-lucide="chevron-down" id="faqIcon-${idx}" class="w-4 h-4 text-gray-400 transition-transform"></i>
+            </button>
+            <div id="faqAnswer-${idx}" class="hidden text-xs text-gray-600 mt-2.5 pt-2 border-t border-gray-100 leading-relaxed">
+              ${f.a}
+            </div>
+          `;
+          faqContainer.appendChild(div);
+        });
+      }
+
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function showToast(message, type = 'info') {
+      let toast = document.getElementById('appToast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'appToast';
+        document.body.appendChild(toast);
+      }
+      const isError = type === 'error';
+      toast.className = `fixed top-5 right-5 z-[9999] max-w-sm px-4 py-3 rounded-2xl shadow-floating text-white text-xs font-bold transition-all duration-300 transform translate-y-0 opacity-100 flex items-center gap-2.5 ${isError ? 'bg-brand-red' : 'bg-brand-charcoal border border-brand-border'}`;
+      toast.innerHTML = `<span class="w-2 h-2 rounded-full ${isError ? 'bg-white' : 'bg-emerald-400 pulse-dot'}"></span><span>${message}</span>`;
+      
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-[-20px]', 'opacity-0');
+      }, 3500);
+    }
+
+    function renderTrackingTimeline() {
+      const stages = [
+        "Booking Diterima",
+        "Montir Ditugaskan",
+        "Montir Menuju Lokasi",
+        "Tiba & Servis Selesai"
+      ];
+      const container = document.getElementById("trackingTimeline");
+      if (!container) return;
+      container.innerHTML = "";
+
+      const currentStep = state.activeBooking ? state.activeBooking.stepIndex : 0;
+      stages.forEach((st, i) => {
+        const isDone = i <= currentStep;
+        const isCurrent = i === currentStep;
+
+        const row = document.createElement("div");
+        row.className = "flex items-center gap-3";
+        row.innerHTML = `
+          <div class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold ${isCurrent ? 'bg-brand-red text-white shadow-glow-red ring-4 ring-red-900/40' : (isDone ? 'bg-emerald-600 text-white' : 'bg-gray-800 text-gray-500')}">
+            ${isDone && !isCurrent ? '✓' : (i + 1)}
+          </div>
+          <div class="flex-1">
+            <span class="text-xs font-bold ${isCurrent ? 'text-white' : (isDone ? 'text-gray-300' : 'text-gray-600')}">${st}</span>
+            ${isCurrent ? '<span class="text-[10px] text-emerald-400 font-medium block">Tahapan pengerjaan sedang berlangsung</span>' : ''}
+          </div>
+        `;
+        container.appendChild(row);
+      });
+
+      const trackEl = document.getElementById("trackBookingId");
+      if (trackEl && state.activeBooking) trackEl.innerText = state.activeBooking.id;
+    }
+
+    function searchCustomerBooking() {
+      const inputEl = document.getElementById("inputSearchBookingId");
+      const inputVal = inputEl ? inputEl.value.trim() : "";
+      if (!inputVal) {
+        showToast("Silakan masukkan ID Booking Anda", "error");
+        return;
+      }
+      document.getElementById("trackBookingId").innerText = inputVal.toUpperCase();
+      showToast(`Menampilkan status booking ${inputVal.toUpperCase()}`);
+      renderTrackingTimeline();
+    }
+
+    function submitAdminLogin() {
+      const user = document.getElementById("adminUserField").value.trim();
+      const pass = document.getElementById("adminPassField").value.trim();
+      const alertEl = document.getElementById("adminLoginAlert");
+
+      if (user === "kelolaweb2026" && pass === "kelolaweb2026") {
+        alertEl.classList.add("hidden");
+        document.getElementById("adminLoginGate").classList.add("hidden");
+        document.getElementById("adminWorkspace").classList.remove("hidden");
+        populateAdminInputs();
+        showToast("Akses Pengelola Diberikan");
+        if (window.lucide) lucide.createIcons();
+      } else {
+        alertEl.innerText = "Username atau password kelola salah.";
+        alertEl.classList.remove("hidden");
+      }
+    }
+
+    function populateAdminInputs() {
+      // Hero & Branding
+      document.getElementById("admBrandName").value = state.brandName || "MOTOVEC";
+      document.getElementById("admAnnouncementText").value = state.announcementText || "";
+      document.getElementById("admHeroBadge").value = state.hero ? state.hero.badge : "";
+      document.getElementById("admHeroHeadline").value = state.hero ? state.hero.headline : "";
+      document.getElementById("admHeroSubheadline").value = state.hero ? state.hero.subheadline : "";
+      document.getElementById("admHeroImage").value = state.hero ? state.hero.image : "";
+
+      // Buttons & Contacts
+      document.getElementById("admHeroCtaPrimary").value = state.hero ? state.hero.ctaPrimary : "";
+      document.getElementById("admHeroCtaSecondary").value = state.hero ? state.hero.ctaSecondary : "";
+      document.getElementById("admEmergencyBtn").value = state.buttons ? state.buttons.emergencyBtn : "";
+      document.getElementById("admFinalCtaBtn").value = state.buttons ? state.buttons.finalCtaBtn : "";
+      document.getElementById("admWaNumber").value = state.waNumber || "081288882424";
+      document.getElementById("admPhoneCenter").value = state.callCenterPhone || "0812-8888-2424";
+
+      // Booking Status
+      if (state.activeBooking) {
+        document.getElementById("admActiveBookingId").value = state.activeBooking.id;
+        document.getElementById("admActiveBookingStep").value = state.activeBooking.stepIndex;
+      }
+
+      // Problems & Areas
+      document.getElementById("admProblemsList").value = (state.problems || []).join(", ");
+      document.getElementById("admAreasList").value = (state.areas || []).join(", ");
+
+      // Services Editor List
+      populateAdminServicesList();
+      populateAdminReviewsList();
+    }
+
+    function populateAdminServicesList() {
+      const c = document.getElementById("admServicesContainer");
+      if (!c) return;
+      c.innerHTML = "";
+      (state.services || []).forEach((s, idx) => {
+        const item = document.createElement("div");
+        item.className = "bg-white p-4 rounded-2xl border border-gray-200 space-y-2";
+        item.innerHTML = `
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Layanan #${idx + 1}</span>
+            <button onclick="adminDeleteService(${idx})" class="text-xs text-brand-red font-bold hover:underline">Hapus</button>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-2">
+            <input type="text" value="${s.title}" onchange="updateServiceTitle(${idx}, this.value)" placeholder="Nama Layanan" class="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2 text-xs font-bold" />
+            <input type="text" value="${s.price}" onchange="updateServicePrice(${idx}, this.value)" placeholder="Tarif" class="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2 text-xs text-brand-red font-bold" />
+          </div>
+          <textarea rows="2" onchange="updateServiceDesc(${idx}, this.value)" placeholder="Deskripsi pekerjaan" class="w-full bg-gray-50 border border-gray-300 rounded-xl p-2.5 text-xs">${s.desc}</textarea>
+        `;
+        c.appendChild(item);
+      });
+    }
+
+    function populateAdminReviewsList() {
+      const c = document.getElementById("admReviewsContainer");
+      if (!c) return;
+      c.innerHTML = "";
+      (state.reviews || []).forEach((r, idx) => {
+        const item = document.createElement("div");
+        item.className = "bg-white p-4 rounded-2xl border border-gray-200 space-y-2";
+        item.innerHTML = `
+          <div class="grid sm:grid-cols-2 gap-2">
+            <input type="text" value="${r.name}" onchange="state.reviews[${idx}].name = this.value" class="bg-gray-50 border border-gray-300 rounded-xl px-3 py-1.5 text-xs font-bold" />
+            <input type="text" value="${r.bike}" onchange="state.reviews[${idx}].bike = this.value" class="bg-gray-50 border border-gray-300 rounded-xl px-3 py-1.5 text-xs" />
+          </div>
+          <textarea rows="2" onchange="state.reviews[${idx}].comment = this.value" class="w-full bg-gray-50 border border-gray-300 rounded-xl p-2 text-xs">${r.comment}</textarea>
+        `;
+        c.appendChild(item);
+      });
+    }
+
+    async function saveAdminDataToCloud() {
+      // Gather inputs
+      state.brandName = document.getElementById("admBrandName").value.trim();
+      state.announcementText = document.getElementById("admAnnouncementText").value.trim();
+      state.callCenterPhone = document.getElementById("admPhoneCenter").value.trim();
+      state.waNumber = document.getElementById("admWaNumber").value.trim();
+
+      state.hero.badge = document.getElementById("admHeroBadge").value.trim();
+      state.hero.headline = document.getElementById("admHeroHeadline").value.trim();
+      state.hero.subheadline = document.getElementById("admHeroSubheadline").value.trim();
+      state.hero.image = document.getElementById("admHeroImage").value.trim();
+      state.hero.ctaPrimary = document.getElementById("admHeroCtaPrimary").value.trim();
+      state.hero.ctaSecondary = document.getElementById("admHeroCtaSecondary").value.trim();
+
+      state.buttons.emergencyBtn = document.getElementById("admEmergencyBtn").value.trim();
+      state.buttons.finalCtaBtn = document.getElementById("admFinalCtaBtn").value.trim();
+
+      state.activeBooking.id = document.getElementById("admActiveBookingId").value.trim();
+      state.activeBooking.stepIndex = parseInt(document.getElementById("admActiveBookingStep").value, 10);
+
+      // Arrays splitting
+      const probText = document.getElementById("admProblemsList").value;
+      state.problems = probText.split(",").map(s => s.trim()).filter(Boolean);
+
+      const areaText = document.getElementById("admAreasList").value;
+      state.areas = areaText.split(",").map(s => s.trim()).filter(Boolean);
+
+      // Re-render immediately locally
+      renderAllViews();
+
+      // Push to Firestore Cloud Document
+      try {
+        if (!currentUser) {
+          await initRealtimeAuth();
+        }
+        await setDoc(configDocRef, state);
+        showToast("Perubahan Berhasil Disimpan & Live di Cloud!");
+      } catch (err) {
+        console.warn("Cloud save note (applied locally):", err);
+        showToast("Data diperbarui di halaman secara langsung.");
+      }
+    }
+
+    function resetToFactoryDefaults() {
+      state = JSON.parse(JSON.stringify(APP_DEFAULTS));
+      renderAllViews();
+      populateAdminInputs();
+      showToast("Telah dikembalikan ke konfigurasi standar.");
+    }
+
+    window.openAdminModal = () => document.getElementById("adminPanelModal").classList.remove("hidden");
+    window.closeAdminModal = () => document.getElementById("adminPanelModal").classList.add("hidden");
+    window.submitAdminLogin = submitAdminLogin;
+    window.saveAdminDataToCloud = saveAdminDataToCloud;
+    window.resetToFactoryDefaults = resetToFactoryDefaults;
+    window.searchCustomerBooking = searchCustomerBooking;
+
+    window.switchAdminTab = (tabId) => {
+      document.querySelectorAll(".admin-pane").forEach(p => p.classList.add("hidden"));
+      document.querySelectorAll(".admin-tab-btn").forEach(b => {
+        b.classList.remove("bg-brand-red", "text-white");
+        b.classList.add("text-gray-400");
+      });
+      const targetPane = document.getElementById("pane" + tabId.charAt(0).toUpperCase() + tabId.slice(1));
+      if (targetPane) targetPane.classList.remove("hidden");
+      event.currentTarget.classList.add("bg-brand-red", "text-white");
+      event.currentTarget.classList.remove("text-gray-400");
+    };
+
+    window.adminAddNewServiceItem = () => {
+      state.services.push({
+        id: Date.now(),
+        title: "Layanan Baru",
+        desc: "Deskripsi perbaikan teknis langsung di tempat.",
+        price: "Rp 50.000",
+        icon: "wrench"
+      });
+      populateAdminServicesList();
+      renderAllViews();
+    };
+
+    window.adminDeleteService = (idx) => {
+      state.services.splice(idx, 1);
+      populateAdminServicesList();
+      renderAllViews();
+    };
+
+    window.updateServiceTitle = (idx, val) => { state.services[idx].title = val; };
+    window.updateServicePrice = (idx, val) => { state.services[idx].price = val; };
+    window.updateServiceDesc = (idx, val) => { state.services[idx].desc = val; };
+
+    // Initialize on ready
+    initRealtimeAuth();
+    renderAllViews();
+    if (window.lucide) lucide.createIcons();
+
+    // Customer Garage & Estimator Handlers
+    function renderCustomerGarage() {
+      const container = document.getElementById("customerBikesList");
+      if (!container || !state.customerGarage) return;
+      container.innerHTML = "";
+      state.customerGarage.forEach((b, i) => {
+        const item = document.createElement("div");
+        item.className = "flex items-center justify-between p-3 rounded-xl border border-gray-200 bg-gray-50 hover:bg-red-50 hover:border-red-200 transition-colors";
+        item.innerHTML = `
+          <div>
+            <div class="font-bold text-sm text-brand-dark">${b.brand} ${b.model}</div>
+            <div class="text-[11px] text-gray-500 font-mono">${b.plate} • Tahun ${b.year}</div>
+          </div>
+          <button onclick="useGarageBike(${i})" class="bg-brand-red text-white text-xs font-bold px-3 py-1.5 rounded-lg">Pilih</button>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    window.useGarageBike = (index) => {
+      const b = state.customerGarage[index];
+      document.getElementById("bookBikeBrand").value = b.brand;
+      document.getElementById("bookBikeModel").value = b.model;
+      document.getElementById("bookBikePlate").value = b.plate;
+      window.closeCustomerGarageModal();
+      window.scrollToWizard();
+      window.showWizardStep(2);
+      showToast(`Data motor ${b.brand} ${b.model} terisi.`);
+    };
+
+    window.addNewBikePrompt = () => {
+      const sampleBikes = [
+        { brand: "Honda", model: "PCX 160", plate: "B " + Math.floor(1000 + Math.random() * 8999) + " ABC", year: "2023" },
+        { brand: "Yamaha", model: "Aerox Connected", plate: "B " + Math.floor(1000 + Math.random() * 8999) + " XYZ", year: "2024" }
+      ];
+      const selected = sampleBikes[Math.floor(Math.random() * sampleBikes.length)];
+      state.customerGarage.push(selected);
+      renderCustomerGarage();
+      showToast(`Kendaraan (${selected.brand} ${selected.model}) ditambahkan.`);
+    };
+
+    // Global Modal Helpers
+    window.openEmergencyModal = () => document.getElementById("emergencyModal").classList.remove("hidden");
+    window.closeEmergencyModal = () => document.getElementById("emergencyModal").classList.add("hidden");
+    window.openCustomerGarageModal = () => document.getElementById("garageModal").classList.remove("hidden");
+    window.closeCustomerGarageModal = () => document.getElementById("garageModal").classList.add("hidden");
+    window.scrollToWizard = () => document.getElementById("bookingWizard").scrollIntoView({ behavior: 'smooth' });
+
+    window.selectQuickProblem = (p) => {
+      document.getElementById("bookProblemDetail").value = p + " - ";
+      window.scrollToWizard();
+      window.showWizardStep(1);
+    };
+
+    window.bookSpecificService = (s) => {
+      document.getElementById("bookServiceCategory").value = s;
+      window.scrollToWizard();
+      window.showWizardStep(1);
+    };
+
+    window.toggleFaq = (idx) => {
+      const ans = document.getElementById(`faqAnswer-${idx}`);
+      const ico = document.getElementById(`faqIcon-${idx}`);
+      if (ans) ans.classList.toggle("hidden");
+      if (ico) ico.classList.toggle("rotate-180");
+    };
+
+    window.checkServiceAreaLive = () => {
+      const q = document.getElementById("areaSearchInput").value.trim().toLowerCase();
+      const res = document.getElementById("areaSearchResult");
+      if (!q) { res.innerHTML = ""; return; }
+      const match = (state.areas || []).some(a => a.toLowerCase().includes(q));
+      if (match) {
+        res.innerHTML = `<span class="text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-full">✓ Montir Siaga Aktif di Area Ini (Estimasi Tiba: 25 Menit)</span>`;
+      } else {
+        res.innerHTML = `<span class="text-amber-600 bg-amber-50 px-3 py-1.5 rounded-full">× Wilayah di luar jangkauan reguler. Hubungi hotline untuk konfirmasi.</span>`;
+      }
+    };
+
+    // Estimator
+    let currentShift = 'regular';
+    window.setEstShift = (shift) => {
+      currentShift = shift;
+      if (shift === 'regular') {
+        document.getElementById('btnShiftReg').className = "py-2.5 px-4 rounded-xl border text-sm font-bold bg-brand-dark text-white border-brand-dark";
+        document.getElementById('btnShiftMid').className = "py-2.5 px-4 rounded-xl border text-sm font-bold bg-gray-100 text-gray-700 border-gray-200";
+      } else {
+        document.getElementById('btnShiftReg').className = "py-2.5 px-4 rounded-xl border text-sm font-bold bg-gray-100 text-gray-700 border-gray-200";
+        document.getElementById('btnShiftMid').className = "py-2.5 px-4 rounded-xl border text-sm font-bold bg-brand-dark text-white border-brand-dark";
+      }
+      window.recalculateEstimator();
+    };
+
+    window.recalculateEstimator = () => {
+      const bike = document.getElementById("estBikeType").value;
+      const prob = document.getElementById("estProblem").value;
+      let callCost = currentShift === 'midnight' ? 65000 : 45000;
+      let checkCost = 30000;
+      let partEst = 50000;
+
+      if (bike === 'matic_maxi' || bike === 'sport') checkCost += 20000;
+      if (prob === 'cvt_putus') partEst = 120000;
+      else if (prob === 'mogok_kelistrikan') partEst = 85000;
+      else if (prob === 'ban_bocor') partEst = 25000;
+      else if (prob === 'ganti_oli') partEst = 75000;
+
+      const total = callCost + checkCost + partEst;
+      document.getElementById("estCallCost").innerText = "Rp " + callCost.toLocaleString('id-ID');
+      document.getElementById("estCheckCost").innerText = "Rp " + checkCost.toLocaleString('id-ID');
+      document.getElementById("estPartCost").innerText = "Rp " + partEst.toLocaleString('id-ID');
+      document.getElementById("estTotalCost").innerText = "Rp " + total.toLocaleString('id-ID');
+    };
+
+    window.prefillBookingFromEstimator = () => {
+      window.scrollToWizard();
+      document.getElementById("bookProblemDetail").value = "Estimasi: Masalah " + document.getElementById("estProblem").selectedOptions[0].text;
+    };
+
+    // Wizard navigation
+    let currentStep = 1;
+    window.showWizardStep = (step) => {
+      currentStep = step;
+      document.querySelectorAll(".wizard-step").forEach((el, idx) => {
+        el.classList.toggle("hidden", idx !== (step - 1));
+      });
+      document.getElementById("wizardStepNumber").innerText = `Step ${step} dari 4`;
+      document.getElementById("wizardProgressBar").style.width = `${(step / 4) * 100}%`;
+      document.getElementById("wizardBtnBack").classList.toggle("hidden", step === 1);
+      document.getElementById("wizardBtnNext").classList.toggle("hidden", step === 4);
+      document.getElementById("wizardBtnSubmit").classList.toggle("hidden", step !== 4);
+      if (window.lucide) lucide.createIcons();
+    };
+
+    window.nextWizardStep = () => { if (currentStep < 4) window.showWizardStep(currentStep + 1); };
+    window.prevWizardStep = () => { if (currentStep > 1) window.showWizardStep(currentStep - 1); };
+
+    window.handleWizardSubmit = (e) => {
+      e.preventDefault();
+      const payload = {
+        name: document.getElementById("bookCustomerName").value,
+        wa: document.getElementById("bookCustomerWA").value,
+        bike: `${document.getElementById("bookBikeBrand").value} ${document.getElementById("bookBikeModel").value} (${document.getElementById("bookBikePlate").value})`,
+        problem: document.getElementById("bookProblemDetail").value,
+        service: document.getElementById("bookServiceCategory").value,
+        address: document.getElementById("bookAddress").value,
+        time: document.getElementById("bookTimeType").value,
+        notes: document.getElementById("bookNotes").value || "-"
+      };
+
+      state.activeBooking.stepIndex = 0;
+      state.activeBooking.id = "#MTV-" + Math.floor(100000 + Math.random() * 900000);
+      document.getElementById("trackBookingId").innerText = state.activeBooking.id;
+      renderTrackingTimeline();
+
+      const waMsg = `*PESANAN MONTIR 24 JAM (${state.activeBooking.id})*%0A%0A*Nama:* ${payload.name}%0A*WA:* ${payload.wa}%0A*Kendaraan:* ${payload.bike}%0A*Keluhan:* ${payload.problem}%0A*Layanan:* ${payload.service}%0A*Alamat Lokasi:* ${payload.address}%0A*Patokan:* ${payload.notes}%0A*Waktu:* ${payload.time}`;
+      window.open(`https://wa.me/${state.waNumber || '6281288882424'}?text=${waMsg}`, '_blank');
+      showToast("Pesanan berhasil dikirim ke WhatsApp!");
+      document.getElementById("trackingSection").scrollIntoView({ behavior: 'smooth' });
+    };
+
+    window.sendSosViaWhatsApp = () => {
+      const defaultMsg = `Halo MOTOVEC, motor saya mogok darurat. Tolong kirim montir ke alamat saya secepatnya.`;
+      window.open(`https://wa.me/${state.waNumber || '6281288882424'}?text=${encodeURIComponent(defaultMsg)}`, '_blank');
+    };
+  </script>
+</body>
+</html>

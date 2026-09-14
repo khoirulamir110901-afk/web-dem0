@@ -1,0 +1,1945 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title id="metaTitle">TORQ24 - Bengkel Mobil Panggilan 24 Jam & Emergency Roadside Assistance</title>
+  <meta id="metaDesc" name="description" content="Layanan mekanik mobil panggilan 24 jam darurat langsung ke lokasi Anda.">
+
+  <!-- Font & Icons (Non-Blocking & Preload) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              red: '#E11D48',
+              redHover: '#BE123C',
+              dark: '#0F172A',
+              charcoal: '#1E293B',
+              surface: '#F8FAFC',
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Leaflet Map CSS & JS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #FAFAFA;
+      color: #0F172A;
+      overflow-x: hidden;
+      padding-bottom: 76px;
+    }
+    @media (min-width: 1024px) {
+      body { padding-bottom: 0px; }
+    }
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .leaflet-container {
+      width: 100% !important;
+      height: 100% !important;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased selection:bg-rose-500 selection:text-white">
+
+  <!-- NOTIFICATION TOAST -->
+  <div id="toastContainer" class="fixed top-5 right-5 z-[9999] flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- EMERGENCY TOP BANNER -->
+  <div id="emergencySiteBanner" class="bg-rose-600 text-white text-xs sm:text-sm font-semibold py-2 px-4 text-center transition-all shadow-md">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2 mx-auto">
+        <span class="inline-block w-2 h-2 rounded-full bg-white animate-ping"></span>
+        <span id="emergencyBannerText">Saat ini permintaan mekanik sedang tinggi. Estimasi kedatangan 20–35 menit.</span>
+      </div>
+      <button onclick="document.getElementById('emergencySiteBanner').classList.add('hidden')" class="text-white/80 hover:text-white text-sm font-bold">&times;</button>
+    </div>
+  </div>
+
+  <!-- 1. DESKTOP HEADER -->
+  <header id="desktopHeader" class="sticky top-0 z-40 w-full transition-all duration-300 py-3 hidden lg:block">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="glass-nav rounded-2xl border border-slate-200/80 shadow-sm px-5 py-3 flex items-center justify-between">
+        
+        <div class="flex items-center gap-3">
+          <a href="#" class="flex items-center gap-2.5 group">
+            <div class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-rose-500 font-extrabold text-xl shadow-inner group-hover:scale-105 transition-transform">
+              <i class="fa-solid fa-wrench"></i>
+            </div>
+            <div>
+              <span id="navBrandName" class="text-xl font-extrabold tracking-tight text-slate-900 flex items-center gap-1.5">
+                TORQ<span class="text-rose-600">24</span>
+              </span>
+              <p id="navSubBrand" class="text-[10px] font-semibold text-slate-400 tracking-wider uppercase -mt-1">Roadside Assistance</p>
+            </div>
+          </a>
+          <div class="ml-4 pl-4 border-l border-slate-200 flex items-center gap-2">
+            <span class="relative flex h-2.5 w-2.5">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+            </span>
+            <span id="navStatusText" class="text-xs font-semibold text-slate-700">7 Mekanik Online</span>
+          </div>
+        </div>
+
+        <nav class="flex items-center gap-6 text-sm font-medium text-slate-600">
+          <a href="#hero" class="hover:text-rose-600 transition-colors">Home</a>
+          <a href="#services" class="hover:text-rose-600 transition-colors">Layanan</a>
+          <a href="#estimator" class="hover:text-rose-600 transition-colors">Estimasi</a>
+          <a href="#packages" class="hover:text-rose-600 transition-colors">Paket</a>
+          <a href="#areas" class="hover:text-rose-600 transition-colors">Area</a>
+          <a href="#reviews" class="hover:text-rose-600 transition-colors">Review</a>
+          <a href="#faqSection" class="hover:text-rose-600 transition-colors">FAQ</a>
+        </nav>
+
+        <div class="flex items-center gap-3">
+          <div class="text-right mr-1">
+            <div class="text-[10px] font-bold text-rose-600 tracking-wider uppercase flex items-center justify-end gap-1">
+              <i class="fa-solid fa-shield-halved text-[9px]"></i> Siaga 24 Jam
+            </div>
+            <a id="navCallHotline" href="tel:08123456789" class="text-xs font-bold text-slate-800 hover:text-rose-600">0812-3456-7890</a>
+          </div>
+          
+          <button onclick="openBookingModal()" class="bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-lg shadow-rose-600/25 transition-all transform active:scale-95 flex items-center gap-2">
+            <i class="fa-solid fa-truck-pickup"></i>
+            <span>Panggil Mekanik</span>
+          </button>
+          
+          <button onclick="toggleAdminModal()" title="Admin Operations Panel" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center text-xs ml-1">
+            <i class="fa-solid fa-gear"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. MOBILE HEADER -->
+  <header class="lg:hidden sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 px-4 py-2.5">
+    <div class="flex items-center justify-between">
+      <a href="#" class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-lg bg-slate-900 flex items-center justify-center text-rose-500 font-extrabold text-sm">
+          <i class="fa-solid fa-wrench"></i>
+        </div>
+        <span id="mobileBrandName" class="text-lg font-extrabold tracking-tight text-slate-900">
+          TORQ<span class="text-rose-600">24</span>
+        </span>
+      </a>
+
+      <div class="flex items-center gap-2">
+        <div class="flex items-center gap-1.5 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-full text-[11px] font-semibold text-emerald-700">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span id="mobileStatusText">Online 24 Jam</span>
+        </div>
+        
+        <button onclick="toggleAdminModal()" class="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-600 text-xs">
+          <i class="fa-solid fa-gear"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 3. HERO SECTION -->
+  <section id="hero" class="relative pt-6 pb-14 sm:pt-12 sm:pb-20 overflow-hidden bg-gradient-to-b from-white via-slate-50 to-slate-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        
+        <div class="lg:col-span-7 space-y-6 text-left">
+          <div class="inline-flex items-center gap-2 bg-rose-50 border border-rose-200 px-3 py-1.5 rounded-full text-xs font-bold text-rose-700">
+            <i class="fa-solid fa-bolt-lightning text-rose-600"></i>
+            <span id="heroBadge">RESPON DARURAT CEPAT 20-30 MENIT SAMPAI LOKASI</span>
+          </div>
+
+          <h1 id="heroHeadline" class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">
+            Mobil Bermasalah? <br>
+            <span class="text-rose-600">Kami Datang ke Lokasi</span> Anda Sekarang.
+          </h1>
+
+          <p id="heroSubheadline" class="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed">
+            Bengkel mobil panggilan 24 jam dengan mekanik bersertifikasi siap membantu kendaraan mogok, aki mati, ban kempes, hingga servis berkala di rumah maupun jalan tol.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-4 pt-2">
+            <button onclick="openBookingModal()" class="w-full sm:w-auto bg-rose-600 hover:bg-rose-700 text-white font-bold text-base px-8 py-4 rounded-xl shadow-xl shadow-rose-600/30 transition-all transform active:scale-95 flex items-center justify-center gap-3">
+              <i class="fa-solid fa-car-burst text-lg"></i>
+              <span id="heroCtaText">PANGGIL MEKANIK SEKARANG</span>
+            </button>
+            <a href="#services" class="w-full sm:w-auto bg-white border border-slate-300 hover:border-slate-400 text-slate-800 font-semibold text-base px-6 py-4 rounded-xl shadow-sm text-center transition-all">
+              Lihat Layanan
+            </a>
+          </div>
+
+          <!-- Hero Metrics (Dinamis dari Admin) -->
+          <div class="grid grid-cols-3 gap-4 pt-4 border-t border-slate-200/80">
+            <div>
+              <div class="text-xl sm:text-2xl font-black text-slate-900" id="heroStat1Val">20-40 Mnt</div>
+              <p class="text-xs text-slate-500 font-medium" id="heroStat1Lbl">Rata-rata Tiba</p>
+            </div>
+            <div>
+              <div class="text-xl sm:text-2xl font-black text-slate-900" id="heroStat2Val">100% Transparan</div>
+              <p class="text-xs text-slate-500 font-medium" id="heroStat2Lbl">Estimasi di Awal</p>
+            </div>
+            <div>
+              <div class="text-xl sm:text-2xl font-black text-slate-900" id="heroStat3Val">4.9/5 ★</div>
+              <p class="text-xs text-slate-500 font-medium" id="heroStat3Lbl">2.400+ Servis Sukses</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Card Form -->
+        <div class="lg:col-span-5">
+          <div class="bg-white rounded-3xl p-6 sm:p-7 shadow-2xl border border-slate-200/80 relative">
+            <div class="absolute -top-3 right-6 bg-slate-900 text-white text-[10px] font-extrabold uppercase px-3 py-1 rounded-full tracking-wider shadow">
+              Pusat Panggilan Cepat
+            </div>
+
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center font-bold text-lg">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+              </div>
+              <div>
+                <h2 class="text-lg font-bold text-slate-900">Apa Masalah Mobil Anda?</h2>
+                <p class="text-xs text-slate-500">Pilih keluhan untuk panggil teknisi yang tepat:</p>
+              </div>
+            </div>
+
+            <!-- Dynamic Quick Pick Issue List -->
+            <div class="grid grid-cols-2 gap-2.5 mb-5" id="heroIssueListContainer"></div>
+
+            <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200 mb-4 flex items-center justify-between">
+              <div>
+                <p class="text-[11px] font-bold text-slate-700">Butuh respons cepat?</p>
+                <p class="text-[10px] text-slate-500">Hubungi langsung via WhatsApp</p>
+              </div>
+              <a id="heroWaDirect" href="https://wa.me/628123456789" target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3.5 py-2 rounded-xl flex items-center gap-1.5 shadow">
+                <i class="fa-brands fa-whatsapp text-sm"></i> Chat WA
+              </a>
+            </div>
+
+            <button onclick="openBookingModal()" class="w-full bg-slate-900 hover:bg-black text-white font-bold py-3.5 rounded-xl text-sm transition flex items-center justify-center gap-2">
+              <span>Buka Formulir Panggilan</span>
+              <i class="fa-solid fa-arrow-right text-xs"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. ESTIMATOR SECTION -->
+  <section id="estimator" class="py-16 bg-slate-50">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <span class="text-xs font-extrabold uppercase text-rose-600 tracking-wider">Kalkulator Transparan</span>
+        <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight mt-1">Cek Estimasi Biaya Servis</h2>
+        <p class="text-slate-600 text-sm mt-1">Dapatkan perkiraan biaya sebelum memanggil mekanik tanpa biaya siluman.</p>
+      </div>
+
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-xl">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          <div class="space-y-4">
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-700 mb-1.5">Jenis Layanan</label>
+              <select id="estService" onchange="calculateEstimate()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-medium focus:ring-2 focus:ring-rose-500 focus:outline-none"></select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-700 mb-1.5">Jenis Kendaraan</label>
+              <select id="estVehicleType" onchange="calculateEstimate()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-medium focus:ring-2 focus:ring-rose-500 focus:outline-none">
+                <option value="0">City Car / Sedan (Normal)</option>
+                <option value="25000">MPV / SUV Standar (+ Rp 25.000)</option>
+                <option value="60000">Big SUV / Diesel (+ Rp 60.000)</option>
+                <option value="100000">Mobil Mewah / Eropa (+ Rp 100.000)</option>
+              </select>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-700 mb-1.5">Waktu Panggilan</label>
+                <select id="estTimeSlot" onchange="calculateEstimate()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs font-medium focus:ring-2 focus:ring-rose-500 focus:outline-none">
+                  <option value="0">Siang Hari (07:00 - 18:00)</option>
+                  <option value="35000">Malam Hari (+Rp 35rb)</option>
+                  <option value="70000">Dini Hari / Jalur Tol (+Rp 70rb)</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-700 mb-1.5">Jarak Pos Siaga</label>
+                <select id="estDistance" onchange="calculateEstimate()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs font-medium focus:ring-2 focus:ring-rose-500 focus:outline-none">
+                  <option value="0">Dalam Kota (0 - 5 km)</option>
+                  <option value="25000">Sedang (5 - 15 km) +Rp 25rb</option>
+                  <option value="50000">Jauh / Tol (+Rp 50rb)</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-700 mb-1.5">Spare Part Tambahan (Opsional)</label>
+              <select id="estPartCost" onchange="calculateEstimate()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs font-medium focus:ring-2 focus:ring-rose-500 focus:outline-none">
+                <option value="0">Tanpa Suku Cadang (Hanya Jasa)</option>
+                <option value="850000">Aki Baru 45Ah - 60Ah (Est. Rp 850.000)</option>
+                <option value="350000">Oli Mesin 4 Liter (Est. Rp 350.000)</option>
+                <option value="120000">Radiator Coolant (Est. Rp 120.000)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between">
+            <div>
+              <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 border-b border-slate-800 pb-3 mb-4">
+                Rincian Estimasi Biaya
+              </h3>
+
+              <div class="space-y-3 text-xs sm:text-sm">
+                <div class="flex justify-between">
+                  <span class="text-slate-400">Jasa Dasar:</span>
+                  <span id="calcBaseFee" class="font-bold">Rp 150.000</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-400">Penyesuaian Kendaraan:</span>
+                  <span id="calcVehicleFee" class="font-bold">Rp 0</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-400">Transport & Waktu:</span>
+                  <span id="calcTransportFee" class="font-bold">Rp 0</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-400">Perkiraan Spare Part:</span>
+                  <span id="calcPartFee" class="font-bold">Rp 0</span>
+                </div>
+                <div class="border-t border-slate-800 pt-3 flex justify-between items-baseline">
+                  <span class="text-sm font-extrabold text-rose-400">Total Perkiraan:</span>
+                  <span id="calcTotalFee" class="text-2xl font-black text-white">Rp 150.000</span>
+                </div>
+              </div>
+
+              <div class="mt-4 p-3 bg-slate-800/80 rounded-xl text-[11px] text-slate-400 border border-slate-700">
+                <i class="fa-solid fa-circle-info text-rose-400 mr-1"></i>
+                <span id="estimatorDisclaimerText">Biaya akhir dapat disesuaikan setelah mekanik memeriksa langsung di lokasi.</span>
+              </div>
+            </div>
+
+            <button onclick="bookWithEstimate()" class="mt-6 w-full bg-rose-600 hover:bg-rose-700 text-white font-bold py-3.5 rounded-xl text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow-lg shadow-rose-600/30">
+              <i class="fa-solid fa-check"></i>
+              <span>Panggil dengan Estimasi Ini</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 5. KATALOG LAYANAN -->
+  <section id="services" class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
+        <div>
+          <span class="text-xs font-extrabold uppercase text-rose-600 tracking-wider">Katalog Layanan</span>
+          <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight mt-1">Layanan Panggilan 24 Jam</h2>
+          <p class="text-slate-600 text-sm mt-1">Dari perbaikan darurat di jalan tol sampai servis berkala di rumah.</p>
+        </div>
+      </div>
+      <div id="servicesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+    </div>
+  </section>
+
+  <!-- 6. PAKET SERVICE POPULER -->
+  <section id="packages" class="py-16 bg-slate-50 border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <span class="text-xs font-extrabold uppercase text-rose-600 tracking-wider">Paket Hemat</span>
+        <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight mt-1">Paket Servis Terpopuler</h2>
+      </div>
+      <div id="packagesContainer" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+    </div>
+  </section>
+
+  <!-- 7. AREA LAYANAN -->
+  <section id="areas" class="py-16 bg-slate-900 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-5 space-y-4">
+          <span class="text-xs font-extrabold uppercase text-rose-400 tracking-wider">Cakupan Wilayah</span>
+          <h2 class="text-3xl font-extrabold text-white leading-tight">Area Jangkauan Reaksi Cepat</h2>
+          <p class="text-slate-400 text-sm">Pos siaga tersebar di berbagai titik strategis dan akses tol.</p>
+          <div class="pt-2">
+            <div class="flex gap-2">
+              <input type="text" id="areaCheckInput" placeholder="Ketik kecamatan atau kota..." class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-4 py-2.5 text-xs focus:outline-none focus:ring-2 focus:ring-rose-500">
+              <button onclick="checkServiceArea()" class="bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold px-5 rounded-xl transition">Cek</button>
+            </div>
+            <div id="areaCheckResult" class="mt-3 text-xs hidden"></div>
+          </div>
+        </div>
+        <div class="lg:col-span-7">
+          <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700">
+            <h4 class="text-xs font-bold text-slate-200 mb-3 uppercase tracking-wider">Daftar Wilayah Siaga</h4>
+            <div id="activeAreaTags" class="flex flex-wrap gap-2"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. CARA KERJA -->
+  <section id="howItWorks" class="py-16 bg-white border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center max-w-xl mx-auto mb-12">
+        <span class="text-xs font-extrabold uppercase text-rose-600 tracking-wider">Alur Singkat</span>
+        <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight mt-1">4 Langkah Mudah</h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200">
+          <span class="text-lg font-black text-rose-600">01</span>
+          <h4 class="font-bold text-sm text-slate-900 mt-2">Pilih Masalah</h4>
+          <p class="text-xs text-slate-600 mt-1">Tentukan keluhan aki, ban, mesin mogok, atau kelistrikan.</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200">
+          <span class="text-lg font-black text-rose-600">02</span>
+          <h4 class="font-bold text-sm text-slate-900 mt-2">Kirim Titik Lokasi</h4>
+          <p class="text-xs text-slate-600 mt-1">Kirim alamat atau gunakan pin map GPS akurat.</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200">
+          <span class="text-lg font-black text-rose-600">03</span>
+          <h4 class="font-bold text-sm text-slate-900 mt-2">Mekanik Bergerak</h4>
+          <p class="text-xs text-slate-600 mt-1">Teknisi terdekat menuju ke lokasi Anda dalam 20–40 menit.</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200">
+          <span class="text-lg font-black text-rose-600">04</span>
+          <h4 class="font-bold text-sm text-slate-900 mt-2">Selesai & Bergaransi</h4>
+          <p class="text-xs text-slate-600 mt-1">Pemeriksaan menyeluruh disertai jaminan garansi pengerjaan.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. REVIEW SECTION -->
+  <section id="reviews" class="py-16 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="flex justify-between items-center mb-10">
+        <div>
+          <span class="text-xs font-extrabold uppercase text-rose-600 tracking-wider">Ulasan Nyata</span>
+          <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight mt-1">Testimoni Pelanggan</h2>
+        </div>
+      </div>
+      <div id="reviewsContainer" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+    </div>
+  </section>
+
+  <!-- 10. FAQ SECTION -->
+  <section id="faqSection" class="py-16 bg-white border-t border-slate-200">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="text-center max-w-xl mx-auto mb-10">
+        <span class="text-xs font-extrabold uppercase text-rose-600 tracking-wider">Tanya Jawab</span>
+        <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight mt-1">Pertanyaan Sering Diajukan</h2>
+      </div>
+      <div id="faqAccordionContainer" class="space-y-3"></div>
+    </div>
+  </section>
+
+  <!-- 11. FOOTER -->
+  <footer id="mainFooter" class="bg-slate-950 text-slate-400 text-xs py-14 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
+      
+      <div class="space-y-3">
+        <span id="footerBrand" class="text-lg font-extrabold text-white flex items-center gap-1.5">
+          TORQ<span class="text-rose-600">24</span>
+        </span>
+        <p id="footerAbout" class="text-slate-400 text-xs leading-relaxed">
+          Platform layanan darurat roadside assistance & bengkel mobil panggilan 24 jam dengan integrasi armada reaksi cepat.
+        </p>
+      </div>
+
+      <div>
+        <h4 class="font-bold text-white uppercase text-xs tracking-wider mb-3">Layanan Siaga</h4>
+        <ul class="space-y-2">
+          <li><a href="#services" class="hover:text-white">Jumper Aki Darurat</a></li>
+          <li><a href="#services" class="hover:text-white">Ganti Ban Cadangan</a></li>
+          <li><a href="#services" class="hover:text-white">Mesin Mogok Total</a></li>
+          <li><a href="#services" class="hover:text-white">Overheat Radiator</a></li>
+          <li><a href="#services" class="hover:text-white">Derek Towing Flatbed</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-bold text-white uppercase text-xs tracking-wider mb-3">Kontak Darurat</h4>
+        <div class="space-y-2">
+          <p><i class="fa-solid fa-phone text-rose-500 mr-2"></i> Hotline: <span id="footerPhone">0812-3456-7890</span></p>
+          <p><i class="fa-brands fa-whatsapp text-emerald-500 mr-2"></i> WA: <span id="footerWa">628123456789</span></p>
+          <p><i class="fa-solid fa-envelope text-slate-400 mr-2"></i> Email: <span id="footerEmail">support@torq24.id</span></p>
+          <p><i class="fa-solid fa-location-dot text-rose-500 mr-2"></i> Area: Jabodetabek 24 Jam</p>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="font-bold text-white uppercase text-xs tracking-wider mb-3">Garansi Servis</h4>
+        <p id="footerGuarantee" class="text-slate-400 leading-relaxed mb-3">
+          Setiap penanganan mekanik dilindungi jaminan garansi servis 14 hari serta suku cadang asli bergaransi pabrikan.
+        </p>
+        <div class="p-3 bg-slate-900 rounded-xl border border-slate-800 text-[11px] text-slate-400">
+          <i class="fa-solid fa-shield-check text-rose-500 mr-1"></i> Teknisi Bersertifikasi Resmi
+        </div>
+      </div>
+
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 mt-10 pt-6 border-t border-slate-900 flex flex-col sm:flex-row justify-between items-center gap-3 text-slate-500">
+      <div id="footerCopyright">&copy; 2026 TORQ24 Mobile Workshop. Hak Cipta Dilindungi.</div>
+      <div class="flex gap-4">
+        <a href="javascript:void(0)" onclick="toggleAdminModal()" class="hover:text-white">Admin Portal</a>
+        <a href="#" class="hover:text-white">Syarat & Ketentuan</a>
+        <a href="#" class="hover:text-white">Kebijakan Privasi</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 12. SPECIAL MOBILE BOTTOM APP BAR -->
+  <div class="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 px-2 py-1.5 shadow-2xl">
+    <div class="grid grid-cols-5 items-center text-center">
+      <a href="#hero" class="flex flex-col items-center py-1 text-slate-600 hover:text-rose-600">
+        <i class="fa-solid fa-house text-base"></i>
+        <span class="text-[10px] font-bold mt-0.5">Home</span>
+      </a>
+      <a href="#services" class="flex flex-col items-center py-1 text-slate-600 hover:text-rose-600">
+        <i class="fa-solid fa-toolbox text-base"></i>
+        <span class="text-[10px] font-bold mt-0.5">Layanan</span>
+      </a>
+      <div class="relative -top-5 flex justify-center">
+        <button onclick="openBookingModal()" class="w-14 h-14 rounded-full bg-rose-600 text-white flex flex-col items-center justify-center shadow-lg shadow-rose-600/50 border-4 border-white active:scale-90 transition-transform">
+          <i class="fa-solid fa-car-burst text-lg"></i>
+          <span class="text-[9px] font-black uppercase tracking-tighter mt-0.5">SOS</span>
+        </button>
+      </div>
+      <button onclick="openTrackingModal()" class="flex flex-col items-center py-1 text-slate-600 hover:text-rose-600">
+        <i class="fa-solid fa-truck-fast text-base"></i>
+        <span class="text-[10px] font-bold mt-0.5">Pesanan</span>
+      </button>
+      <button onclick="openCustomerModal()" class="flex flex-col items-center py-1 text-slate-600 hover:text-rose-600">
+        <i class="fa-solid fa-user text-base"></i>
+        <span class="text-[10px] font-bold mt-0.5">Akun</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- 13. BOOKING WIZARD MODAL -->
+  <div id="bookingModal" class="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto" onclick="handleBackdropClick(event, 'bookingModal')">
+    <div class="bg-white rounded-3xl w-full max-w-2xl overflow-hidden shadow-2xl border border-slate-200 my-auto" onclick="event.stopPropagation()">
+      <div class="bg-slate-900 text-white px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-rose-600 flex items-center justify-center text-white text-sm">
+            <i class="fa-solid fa-truck-pickup"></i>
+          </div>
+          <div>
+            <h3 class="font-extrabold text-base">Booking Panggilan Mekanik</h3>
+            <p class="text-[11px] text-slate-400" id="wizardStepIndicator">Langkah 1 dari 8: Masalah Mobil</p>
+          </div>
+        </div>
+        <button onclick="closeBookingModal()" class="text-slate-400 hover:text-white text-xl font-bold">&times;</button>
+      </div>
+
+      <div class="w-full bg-slate-100 h-1.5">
+        <div id="wizardProgressBar" class="bg-rose-600 h-1.5 transition-all duration-300 w-[12.5%]"></div>
+      </div>
+
+      <form id="bookingForm" onsubmit="handleBookingSubmit(event)" class="p-6 space-y-5">
+        <!-- STEP 1 -->
+        <div id="wizardStep1" class="wizard-step space-y-3">
+          <h4 class="text-sm font-bold text-slate-800">STEP 01: Keluhan Mobil Utama</h4>
+          <div class="grid grid-cols-2 gap-2" id="wizardRadioContainer"></div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Catatan Gejala Tambahan:</label>
+            <textarea id="orderIssueDetail" rows="2" placeholder="Tuliskan tanda kerusakan secara singkat..." class="w-full p-2.5 text-xs bg-slate-50 border rounded-xl"></textarea>
+          </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div id="wizardStep2" class="wizard-step hidden space-y-3">
+          <h4 class="text-sm font-bold text-slate-800">STEP 02: Kategori Layanan</h4>
+          <select id="orderServiceCategory" class="w-full p-3 text-xs bg-slate-50 border rounded-xl font-medium">
+            <option value="Emergency Roadside (Tiba Segera)">Layanan Darurat Cepat (Prioritas Langsung)</option>
+            <option value="Ganti Aki Baru di Tempat">Pemasangan Aki Baru di Tempat</option>
+            <option value="Ganti Ban / Pompa Darurat">Penanganan Ban Bocor / Cadangan</option>
+            <option value="Servis Berkala di Rumah">Home Service Tune Up / Ganti Oli</option>
+          </select>
+        </div>
+
+        <!-- STEP 3 -->
+        <div id="wizardStep3" class="wizard-step hidden space-y-3">
+          <div class="flex justify-between items-center">
+            <h4 class="text-sm font-bold text-slate-800">STEP 03: Data Kendaraan</h4>
+            <button type="button" onclick="loadVehicleFromGarage()" class="text-xs text-rose-600 font-bold hover:underline">
+              Pilih Dari Garasi Saya
+            </button>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="text-[11px] font-bold text-slate-700">Merek Mobil *</label>
+              <input type="text" id="orderCarBrand" placeholder="Toyota, Honda..." class="w-full p-2.5 text-xs bg-slate-50 border rounded-xl">
+            </div>
+            <div>
+              <label class="text-[11px] font-bold text-slate-700">Model & Tipe *</label>
+              <input type="text" id="orderCarModel" placeholder="Avanza, Brio..." class="w-full p-2.5 text-xs bg-slate-50 border rounded-xl">
+            </div>
+            <div>
+              <label class="text-[11px] font-bold text-slate-700">Tahun</label>
+              <input type="number" id="orderCarYear" placeholder="2020" class="w-full p-2.5 text-xs bg-slate-50 border rounded-xl">
+            </div>
+            <div>
+              <label class="text-[11px] font-bold text-slate-700">Nomor Polisi</label>
+              <input type="text" id="orderCarPlate" placeholder="B 1234 XYZ" class="w-full p-2.5 text-xs bg-slate-50 border rounded-xl">
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 4 -->
+        <div id="wizardStep4" class="wizard-step hidden space-y-3">
+          <div class="flex justify-between items-center">
+            <h4 class="text-sm font-bold text-slate-800">STEP 04: Kirim Titik Lokasi</h4>
+            <button type="button" onclick="getCurrentGpsLocation()" class="bg-rose-50 text-rose-600 hover:bg-rose-100 border border-rose-200 px-3 py-1 rounded-xl text-xs font-bold">
+              Gunakan GPS
+            </button>
+          </div>
+          <input type="text" id="orderLocationAddress" placeholder="Masukkan alamat lengkap atau patokan jalan..." class="w-full p-3 text-xs bg-slate-50 border rounded-xl">
+          <div class="h-44 w-full rounded-xl border border-slate-200 overflow-hidden relative" id="wizardMapContainer"></div>
+          <div class="text-[11px] text-slate-500">Koordinat: <b id="orderCoordsText">-6.2088, 106.8456</b></div>
+        </div>
+
+        <!-- STEP 5 -->
+        <div id="wizardStep5" class="wizard-step hidden space-y-3">
+          <h4 class="text-sm font-bold text-slate-800">STEP 05: Waktu Penanganan</h4>
+          <div class="space-y-2">
+            <label class="border p-3.5 rounded-xl flex items-center justify-between cursor-pointer hover:border-rose-500 bg-rose-50/50">
+              <div class="flex items-center gap-2 text-xs font-bold text-slate-800">
+                <input type="radio" name="orderTiming" value="SEKARANG_DARURAT" checked class="accent-rose-600">
+                <span>SEKARANG JUGA (Emergency Roadside)</span>
+              </div>
+              <span class="text-[10px] bg-rose-600 text-white font-bold px-2 py-0.5 rounded-full">Prioritas</span>
+            </label>
+            <label class="border p-3.5 rounded-xl flex items-center justify-between cursor-pointer hover:border-rose-500">
+              <div class="flex items-center gap-2 text-xs font-bold text-slate-800">
+                <input type="radio" name="orderTiming" value="JADWAL_HARI_INI" class="accent-rose-600">
+                <span>Jadwalkan Hari Ini</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- STEP 6 -->
+        <div id="wizardStep6" class="wizard-step hidden space-y-3">
+          <h4 class="text-sm font-bold text-slate-800">STEP 06: Data Kontak Pemesan</h4>
+          <div class="space-y-3">
+            <div>
+              <label class="text-[11px] font-bold text-slate-700">Nama Pemesan *</label>
+              <input type="text" id="orderCustomerName" placeholder="Contoh: Budi Santoso" class="w-full p-2.5 text-xs bg-slate-50 border rounded-xl">
+            </div>
+            <div>
+              <label class="text-[11px] font-bold text-slate-700">Nomor WhatsApp / HP Aktif *</label>
+              <input type="tel" id="orderCustomerPhone" placeholder="08123456789" class="w-full p-2.5 text-xs bg-slate-50 border rounded-xl">
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 7 -->
+        <div id="wizardStep7" class="wizard-step hidden space-y-3">
+          <h4 class="text-sm font-bold text-slate-800">STEP 07: Review Rincian Pesanan</h4>
+          <div class="bg-slate-50 border rounded-2xl p-4 text-xs space-y-2">
+            <div class="flex justify-between border-b pb-1.5"><span class="text-slate-500">Keluhan:</span><span id="revIssue" class="font-bold">-</span></div>
+            <div class="flex justify-between border-b pb-1.5"><span class="text-slate-500">Kendaraan:</span><span id="revCar" class="font-bold">-</span></div>
+            <div class="flex justify-between border-b pb-1.5"><span class="text-slate-500">Lokasi:</span><span id="revLocation" class="font-bold truncate max-w-[200px]">-</span></div>
+            <div class="flex justify-between border-b pb-1.5"><span class="text-slate-500">Pemesan:</span><span id="revContact" class="font-bold">-</span></div>
+            <div class="flex justify-between pt-1 text-sm font-extrabold text-slate-900"><span>Estimasi Biaya:</span><span id="revPrice">Rp 150.000</span></div>
+          </div>
+        </div>
+
+        <!-- STEP 8 -->
+        <div id="wizardStep8" class="wizard-step hidden text-center space-y-4 py-4">
+          <div class="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl mx-auto">
+            <i class="fa-solid fa-satellite-dish animate-pulse"></i>
+          </div>
+          <h4 class="text-base font-extrabold text-slate-900">Konfirmasi Pemanggilan Armada</h4>
+          <p class="text-xs text-slate-600 max-w-sm mx-auto">
+            Klik konfirmasi di bawah untuk mendisposisikan mekanik terdekat langsung ke lokasi Anda.
+          </p>
+        </div>
+
+        <div class="flex items-center justify-between pt-4 border-t border-slate-200">
+          <button type="button" id="wizardPrevBtn" onclick="wizardStepPrev()" class="hidden px-4 py-2 text-xs font-bold text-slate-600 hover:text-slate-900">
+            Kembali
+          </button>
+          <div class="ml-auto flex gap-2">
+            <button type="button" id="wizardNextBtn" onclick="wizardStepNext()" class="bg-slate-900 hover:bg-black text-white px-6 py-2.5 rounded-xl text-xs font-bold">
+              Selanjutnya
+            </button>
+            <button type="submit" id="wizardSubmitBtn" class="hidden bg-rose-600 hover:bg-rose-700 text-white px-6 py-2.5 rounded-xl text-xs font-bold shadow-lg shadow-rose-600/30">
+              Konfirmasi Panggilan
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 14. TRACKING MODAL -->
+  <div id="trackingModal" class="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto" onclick="handleBackdropClick(event, 'trackingModal')">
+    <div class="bg-white rounded-3xl w-full max-w-lg overflow-hidden shadow-2xl border border-slate-200 my-auto" onclick="event.stopPropagation()">
+      <div class="bg-slate-900 text-white p-4 flex justify-between items-center">
+        <h3 class="text-sm font-extrabold flex items-center gap-2">
+          <i class="fa-solid fa-truck-fast text-rose-500"></i>
+          <span>Status Mekanik Realtime</span>
+        </h3>
+        <button onclick="closeTrackingModal()" class="text-slate-400 hover:text-white text-xl font-bold">&times;</button>
+      </div>
+      <div class="p-6 space-y-4">
+        <div class="flex items-center gap-3 p-3.5 bg-slate-50 rounded-2xl border">
+          <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=120&auto=format&fit=crop&q=80" loading="lazy" decoding="async" alt="Mekanik" class="w-12 h-12 rounded-xl object-cover">
+          <div>
+            <h4 class="font-bold text-xs text-slate-900">Hendra Wijaya (Senior Tech)</h4>
+            <p class="text-[11px] text-slate-500">Armada Motor Reaksi Cepat • B 4521 TOR</p>
+            <div class="text-amber-500 text-[11px]"><i class="fa-solid fa-star"></i> 4.9 (540+ job selesai)</div>
+          </div>
+        </div>
+        <div class="p-3 bg-rose-50 border border-rose-200 rounded-xl text-center">
+          <p class="text-[11px] text-rose-800 font-semibold">Estimasi Tiba:</p>
+          <div class="text-2xl font-black text-rose-600">~ 20 Menit</div>
+        </div>
+        <button onclick="closeTrackingModal()" class="w-full bg-slate-900 text-white text-xs font-bold py-3 rounded-xl">Tutup Jendela</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 15. CUSTOMER DASHBOARD MODAL -->
+  <div id="customerModal" class="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto" onclick="handleBackdropClick(event, 'customerModal')">
+    <div class="bg-white rounded-3xl w-full max-w-xl overflow-hidden shadow-2xl border border-slate-200 my-auto" onclick="event.stopPropagation()">
+      <div class="bg-slate-900 text-white p-4 flex justify-between items-center">
+        <h3 class="font-extrabold text-sm">Dashboard Garasi Saya</h3>
+        <button onclick="closeCustomerModal()" class="text-slate-400 hover:text-white text-xl font-bold">&times;</button>
+      </div>
+      <div class="p-5 space-y-3">
+        <div class="flex justify-between items-center">
+          <span class="text-xs font-bold text-slate-700">Kendaraan Tersimpan</span>
+          <button onclick="addNewGarageCar()" class="text-xs bg-slate-900 text-white px-2.5 py-1 rounded-lg">+ Tambah</button>
+        </div>
+        <div id="garageCarList" class="space-y-2"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 16. FULL OPERATIONS ADMIN PANEL (LENGKAP SEMUA FITUR DAPAT DIEDIT & DIRESET) -->
+  <div id="adminModal" class="fixed inset-0 z-50 bg-slate-900/90 backdrop-blur-md hidden flex items-center justify-center p-2 sm:p-4 overflow-y-auto" onclick="handleBackdropClick(event, 'adminModal')">
+    <div class="bg-slate-100 rounded-3xl w-full max-w-5xl h-[88vh] overflow-hidden shadow-2xl border border-slate-700 flex flex-col" onclick="event.stopPropagation()">
+      
+      <div class="bg-slate-950 text-white px-5 py-3 flex items-center justify-between border-b border-slate-800">
+        <div class="flex items-center gap-2 text-sm font-bold">
+          <i class="fa-solid fa-sliders text-rose-500"></i>
+          <span>Operations CMS & Content Builder</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="text-xs text-emerald-400 font-semibold flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Terhubung
+          </span>
+          <button onclick="saveAllCmsChanges()" class="bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold px-3.5 py-1.5 rounded-lg shadow">
+            Simpan Perubahan
+          </button>
+          <button onclick="toggleAdminModal()" class="text-slate-400 hover:text-white text-lg font-bold">&times;</button>
+        </div>
+      </div>
+
+      <div class="flex-1 flex overflow-hidden">
+        <!-- Sidebar Navigation CMS -->
+        <aside class="w-56 bg-slate-900 text-slate-300 p-3 flex flex-col justify-between border-r border-slate-800 overflow-y-auto">
+          <nav class="space-y-1 text-xs font-bold">
+            <button onclick="switchAdminTab('dashboard')" id="admNav-dashboard" class="w-full text-left px-3 py-2 rounded-xl bg-rose-600 text-white flex items-center gap-2">
+              <i class="fa-solid fa-chart-line w-4"></i> Dashboard
+            </button>
+            <button onclick="switchAdminTab('homepage')" id="admNav-homepage" class="w-full text-left px-3 py-2 rounded-xl hover:bg-slate-800 text-slate-300 flex items-center gap-2">
+              <i class="fa-solid fa-pen-to-square w-4"></i> Teks & Statistik
+            </button>
+            <button onclick="switchAdminTab('heroissues')" id="admNav-heroissues" class="w-full text-left px-3 py-2 rounded-xl hover:bg-slate-800 text-slate-300 flex items-center gap-2">
+              <i class="fa-solid fa-triangle-exclamation w-4"></i> Keluhan Cepat Hero
+            </button>
+            <button onclick="switchAdminTab('services')" id="admNav-services" class="w-full text-left px-3 py-2 rounded-xl hover:bg-slate-800 text-slate-300 flex items-center gap-2">
+              <i class="fa-solid fa-wrench w-4"></i> Kelola Layanan
+            </button>
+            <button onclick="switchAdminTab('packages')" id="admNav-packages" class="w-full text-left px-3 py-2 rounded-xl hover:bg-slate-800 text-slate-300 flex items-center gap-2">
+              <i class="fa-solid fa-box-open w-4"></i> Paket Servis
+            </button>
+            <button onclick="switchAdminTab('areas')" id="admNav-areas" class="w-full text-left px-3 py-2 rounded-xl hover:bg-slate-800 text-slate-300 flex items-center gap-2">
+              <i class="fa-solid fa-map-location-dot w-4"></i> Area Jangkauan
+            </button>
+            <button onclick="switchAdminTab('reviews')" id="admNav-reviews" class="w-full text-left px-3 py-2 rounded-xl hover:bg-slate-800 text-slate-300 flex items-center gap-2">
+              <i class="fa-solid fa-star w-4"></i> Testimoni / Review
+            </button>
+            <button onclick="switchAdminTab('faqs')" id="admNav-faqs" class="w-full text-left px-3 py-2 rounded-xl hover:bg-slate-800 text-slate-300 flex items-center gap-2">
+              <i class="fa-solid fa-circle-question w-4"></i> Tanya Jawab (FAQ)
+            </button>
+            <button onclick="switchAdminTab('footer')" id="admNav-footer" class="w-full text-left px-3 py-2 rounded-xl hover:bg-slate-800 text-slate-300 flex items-center gap-2">
+              <i class="fa-solid fa-shoe-prints w-4"></i> Footer & Kontak
+            </button>
+          </nav>
+          <div class="pt-4 border-t border-slate-800">
+            <button onclick="triggerResetDefaultAll()" class="w-full text-left text-[11px] text-rose-400 hover:text-rose-300 font-bold p-2 rounded-lg hover:bg-rose-950/40">
+              <i class="fa-solid fa-rotate-left mr-1"></i> Reset Factory Default
+            </button>
+          </div>
+        </aside>
+
+        <!-- Main Content CMS -->
+        <main class="flex-1 bg-slate-100 p-5 overflow-y-auto">
+          
+          <!-- TAB 1: DASHBOARD -->
+          <div id="admTabContent-dashboard" class="space-y-4">
+            <h3 class="text-sm font-bold text-slate-900">Live Orders Dispatch</h3>
+            <div class="overflow-x-auto bg-white rounded-xl border p-2">
+              <table class="w-full text-xs text-left">
+                <thead class="bg-slate-50 border-b">
+                  <tr>
+                    <th class="p-2">ID</th>
+                    <th class="p-2">Waktu</th>
+                    <th class="p-2">Pelanggan</th>
+                    <th class="p-2">Keluhan</th>
+                    <th class="p-2">Status</th>
+                  </tr>
+                </thead>
+                <tbody id="admLiveOrderTable" class="divide-y"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- TAB 2: HOMEPAGE & STATS -->
+          <div id="admTabContent-homepage" class="space-y-3 hidden">
+            <h3 class="text-sm font-bold text-slate-900">Konten Utama & Statistik Hero</h3>
+            <div class="bg-white p-4 rounded-xl border space-y-3 text-xs">
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="font-bold">Nama Brand:</label>
+                  <input type="text" id="admBrandInput" class="w-full p-2 border rounded-lg mt-1">
+                </div>
+                <div>
+                  <label class="font-bold">Sub-Brand Text:</label>
+                  <input type="text" id="admSubBrandInput" class="w-full p-2 border rounded-lg mt-1">
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="font-bold">Status Mekanik Desktop:</label>
+                  <input type="text" id="admNavStatusInput" class="w-full p-2 border rounded-lg mt-1">
+                </div>
+                <div>
+                  <label class="font-bold">Status Mobile Header:</label>
+                  <input type="text" id="admMobileStatusInput" class="w-full p-2 border rounded-lg mt-1">
+                </div>
+              </div>
+              <div>
+                <label class="font-bold">Emergency Top Banner Text:</label>
+                <input type="text" id="admEmergencyBannerInput" class="w-full p-2 border rounded-lg mt-1">
+              </div>
+              <div>
+                <label class="font-bold">Hero Badge:</label>
+                <input type="text" id="admHeroBadgeInput" class="w-full p-2 border rounded-lg mt-1">
+              </div>
+              <div>
+                <label class="font-bold">Headline Hero (Gunakan tag &lt;span class="text-rose-600"&gt; untuk warna merah):</label>
+                <input type="text" id="admHeroHeadlineInput" class="w-full p-2 border rounded-lg mt-1">
+              </div>
+              <div>
+                <label class="font-bold">Subheadline Hero:</label>
+                <textarea id="admHeroSubheadlineInput" rows="2" class="w-full p-2 border rounded-lg mt-1"></textarea>
+              </div>
+              <div>
+                <label class="font-bold">Teks Tombol CTA Hero:</label>
+                <input type="text" id="admHeroCtaInput" class="w-full p-2 border rounded-lg mt-1">
+              </div>
+              <div class="grid grid-cols-3 gap-3 border-t pt-3">
+                <div>
+                  <label class="font-bold">Metrik 1 (Nilai & Label):</label>
+                  <input type="text" id="admStat1Val" class="w-full p-1.5 border rounded-lg mt-1">
+                  <input type="text" id="admStat1Lbl" class="w-full p-1.5 border rounded-lg mt-1">
+                </div>
+                <div>
+                  <label class="font-bold">Metrik 2 (Nilai & Label):</label>
+                  <input type="text" id="admStat2Val" class="w-full p-1.5 border rounded-lg mt-1">
+                  <input type="text" id="admStat2Lbl" class="w-full p-1.5 border rounded-lg mt-1">
+                </div>
+                <div>
+                  <label class="font-bold">Metrik 3 (Nilai & Label):</label>
+                  <input type="text" id="admStat3Val" class="w-full p-1.5 border rounded-lg mt-1">
+                  <input type="text" id="admStat3Lbl" class="w-full p-1.5 border rounded-lg mt-1">
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-3 border-t pt-3">
+                <div>
+                  <label class="font-bold">Hotline Phone:</label>
+                  <input type="text" id="admPhoneInput" class="w-full p-2 border rounded-lg mt-1">
+                </div>
+                <div>
+                  <label class="font-bold">WhatsApp Darurat (Format angka):</label>
+                  <input type="text" id="admWaInput" class="w-full p-2 border rounded-lg mt-1">
+                </div>
+              </div>
+              <button onclick="saveHomepageCms()" class="bg-slate-900 hover:bg-black text-white font-bold px-4 py-2 rounded-lg">Simpan Teks & Statistik</button>
+            </div>
+          </div>
+
+          <!-- TAB 3: HERO QUICK ISSUES -->
+          <div id="admTabContent-heroissues" class="space-y-3 hidden">
+            <div class="flex justify-between items-center">
+              <h3 class="text-sm font-bold text-slate-900">Kelola Tombol Keluhan Cepat (Hero Form)</h3>
+              <button onclick="adminAddNewHeroIssue()" class="bg-rose-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg">+ Tambah Keluhan</button>
+            </div>
+            <div id="admHeroIssueListManager" class="space-y-2"></div>
+          </div>
+
+          <!-- TAB 4: SERVICES -->
+          <div id="admTabContent-services" class="space-y-3 hidden">
+            <div class="flex justify-between items-center">
+              <h3 class="text-sm font-bold text-slate-900">Katalog Layanan & Tarif (Sinkron ke Estimator)</h3>
+              <button onclick="adminAddNewService()" class="bg-rose-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg">+ Tambah Layanan</button>
+            </div>
+            <div id="admServiceListManager" class="space-y-2"></div>
+          </div>
+
+          <!-- TAB 5: PACKAGES -->
+          <div id="admTabContent-packages" class="space-y-3 hidden">
+            <div class="flex justify-between items-center">
+              <h3 class="text-sm font-bold text-slate-900">Daftar Paket Servis</h3>
+              <button onclick="adminAddNewPackage()" class="bg-rose-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg">+ Tambah Paket</button>
+            </div>
+            <div id="admPackagesListManager" class="space-y-2"></div>
+          </div>
+
+          <!-- TAB 6: AREAS -->
+          <div id="admTabContent-areas" class="space-y-3 hidden">
+            <div class="flex justify-between items-center">
+              <h3 class="text-sm font-bold text-slate-900">Daftar Wilayah Jangkauan</h3>
+              <button onclick="adminAddNewArea()" class="bg-rose-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg">+ Tambah Wilayah</button>
+            </div>
+            <div id="admAreaListManager" class="space-y-2"></div>
+          </div>
+
+          <!-- TAB 7: REVIEWS -->
+          <div id="admTabContent-reviews" class="space-y-3 hidden">
+            <div class="flex justify-between items-center">
+              <h3 class="text-sm font-bold text-slate-900">Ulasan & Testimoni Pelanggan</h3>
+              <button onclick="adminAddNewReview()" class="bg-rose-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg">+ Tambah Review</button>
+            </div>
+            <div id="admReviewListManager" class="space-y-2"></div>
+          </div>
+
+          <!-- TAB 8: FAQS -->
+          <div id="admTabContent-faqs" class="space-y-3 hidden">
+            <div class="flex justify-between items-center">
+              <h3 class="text-sm font-bold text-slate-900">Pertanyaan Sering Diajukan (FAQ)</h3>
+              <button onclick="adminAddNewFaq()" class="bg-rose-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg">+ Tambah Tanya Jawab</button>
+            </div>
+            <div id="admFaqListManager" class="space-y-2"></div>
+          </div>
+
+          <!-- TAB 9: FOOTER -->
+          <div id="admTabContent-footer" class="space-y-3 hidden">
+            <h3 class="text-sm font-bold text-slate-900">Kelola Footer, Kontak & Garansi</h3>
+            <div class="bg-white p-4 rounded-xl border space-y-3 text-xs">
+              <div>
+                <label class="font-bold">Deskripsi Singkat Footer:</label>
+                <textarea id="admFooterAboutInput" rows="2" class="w-full p-2 border rounded-lg mt-1"></textarea>
+              </div>
+              <div>
+                <label class="font-bold">Email Dukungan:</label>
+                <input type="email" id="admFooterEmailInput" class="w-full p-2 border rounded-lg mt-1">
+              </div>
+              <div>
+                <label class="font-bold">Teks Jaminan Garansi:</label>
+                <textarea id="admFooterGuaranteeInput" rows="2" class="w-full p-2 border rounded-lg mt-1"></textarea>
+              </div>
+              <div>
+                <label class="font-bold">Teks Copyright:</label>
+                <input type="text" id="admFooterCopyInput" class="w-full p-2 border rounded-lg mt-1">
+              </div>
+              <button onclick="saveFooterCms()" class="bg-slate-900 hover:bg-black text-white font-bold px-4 py-2 rounded-lg">Simpan Pengaturan Footer</button>
+            </div>
+          </div>
+        </main>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SCRIPT UTAMA & CMS ENGINE -->
+  <script>
+    /* 1. INITIAL APP STATE (100% DINAMIS & DAPAT DIEDIT/RESET) */
+    const defaultAppState = {
+      brandName: "TORQ24",
+      subBrandText: "Roadside Assistance",
+      navStatusText: "7 Mekanik Online",
+      mobileStatusText: "Online 24 Jam",
+      emergencyBannerText: "Saat ini permintaan mekanik sedang tinggi. Estimasi kedatangan 20–35 menit.",
+      hotlinePhone: "0812-3456-7890",
+      whatsappNumber: "628123456789",
+      heroBadge: "RESPON DARURAT CEPAT 20-30 MENIT SAMPAI LOKASI",
+      heroHeadline: "Mobil Bermasalah? <br><span class=\"text-rose-600\">Kami Datang ke Lokasi</span> Anda Sekarang.",
+      heroSubheadline: "Bengkel mobil panggilan 24 jam dengan mekanik bersertifikasi siap membantu kendaraan mogok, aki mati, ban kempes, hingga servis berkala di rumah maupun jalan tol.",
+      heroCtaText: "PANGGIL MEKANIK SEKARANG",
+      stats: [
+        { val: "20-40 Mnt", lbl: "Rata-rata Tiba" },
+        { val: "100% Transparan", lbl: "Estimasi di Awal" },
+        { val: "4.9/5 ★", lbl: "2.400+ Servis Sukses" }
+      ],
+      heroIssues: [
+        { id: "hi-1", text: "Aki Mati / Jumper", label: "Aki Mati / Drop", icon: "fa-car-battery" },
+        { id: "hi-2", text: "Ban Bocor", label: "Ban Bocor / Kempes", icon: "fa-circle-notch" },
+        { id: "hi-3", text: "Mesin Mati Total", label: "Mesin Mogok Total", icon: "fa-power-off" },
+        { id: "hi-4", text: "Overheat Radiator", label: "Mesin Overheat", icon: "fa-temperature-arrow-up" },
+        { id: "hi-5", text: "Starter Macet", label: "Starter Macet", icon: "fa-key" },
+        { id: "hi-6", text: "Lainnya / Servis Rutin", label: "Keluhan Lainnya...", icon: "fa-wrench" }
+      ],
+      footerAbout: "Platform layanan darurat roadside assistance & bengkel mobil panggilan 24 jam dengan integrasi armada reaksi cepat.",
+      footerEmail: "support@torq24.id",
+      footerGuarantee: "Setiap penanganan mekanik dilindungi jaminan garansi servis 14 hari serta suku cadang asli bergaransi pabrikan.",
+      footerCopyright: "© 2026 TORQ24 Mobile Workshop. Hak Cipta Dilindungi.",
+      services: [
+        {
+          id: "srv-aki",
+          title: "Jumper & Ganti Aki Mobil",
+          desc: "Penanganan aki drop, jumper voltase stabil, dan penggantian aki baru di tempat.",
+          price: 150000,
+          img: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=600&auto=format&fit=crop&q=80"
+        },
+        {
+          id: "srv-ban",
+          title: "Tambal & Ganti Ban Cadangan",
+          desc: "Bongkar pasang ban bocor di jalan, buka baut macet, dan pengisian angin kompresor.",
+          price: 120000,
+          img: "https://images.unsplash.com/photo-1578844251758-2f71da64c96f?w=600&auto=format&fit=crop&q=80"
+        },
+        {
+          id: "srv-mesin",
+          title: "Mesin Mogok & Scanner OBD",
+          desc: "Diagnosa sensor mesin EFI/VVT-i, atasi mesin mati mendadak, dan kelistrikan pompa bensin.",
+          price: 200000,
+          img: "https://images.unsplash.com/photo-1486006920555-c77dce18193b?w=600&auto=format&fit=crop&q=80"
+        },
+        {
+          id: "srv-overheat",
+          title: "Overheat & Radiator",
+          desc: "Pengecekan radiator bocor, ekstra-fan mati, dan penggantian selang serta coolant.",
+          price: 180000,
+          img: "https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?w=600&auto=format&fit=crop&q=80"
+        }
+      ],
+      packages: [
+        { name: "Emergency Starter Kit", price: 185000, features: ["Jumper Aki Multi-Ampere", "Inspeksi Alternator Dinamo", "Gratis Cek Tekanan Ban"] },
+        { name: "Complete Home Tune-Up", price: 349000, features: ["Scanner OBD2 Lengkap", "Pembersihan Throttle Body", "Cek 4 Busi & Koil"] },
+        { name: "Tol Roadside Rescue", price: 499000, features: ["Prioritas Reaksi Cepat", "Penanganan Bahu Jalan Tol", "Emergency Coolant Darurat"] }
+      ],
+      areas: ["Jakarta Selatan", "Jakarta Pusat", "Jakarta Barat", "Tangerang Kota", "Tangerang Selatan (BSD)", "Bekasi Barat", "Depok", "Jalur Tol JORR & Jagorawi"],
+      reviews: [
+        { name: "Darmawan K.", car: "Honda CR-V", text: "Mekanik sampai cuma 20 menit di basement kantor. Sangat sigap!", rating: 5 },
+        { name: "dr. Anita R.", car: "Toyota Yaris", text: "Ban kempes di tol langsung tertangani dengan aman.", rating: 5 }
+      ],
+      faqs: [
+        { q: "Berapa lama estimasi mekanik tiba di lokasi?", a: "Rata-rata 20 hingga 40 menit tergantung jarak pos terdekat dan lalu lintas jalan." },
+        { q: "Apakah melayani darurat di jalur tol?", a: "Ya, kami memiliki armada reaksi cepat khusus yang bersiap melayani bahu jalan tol dengan SOP keamanan resmi." },
+        { q: "Metode pembayaran apa saja yang tersedia?", a: "Tersedia Tunai di tempat, Transfer Bank, dan QRIS instan setelah mobil selesai ditangani." }
+      ],
+      garageCars: [
+        { brand: "Toyota", model: "Innova Reborn", year: "2021", plate: "B 1982 TOR" }
+      ],
+      liveOrders: [
+        { orderId: "#TRQ-9901", time: "20:10", customer: "Bpk. Gunawan", issue: "Aki Drop", status: "Mekanik Meluncur" }
+      ]
+    };
+
+    let appState = JSON.parse(localStorage.getItem('torq24_state')) || defaultAppState;
+
+    /* 2. SAFE RENDERING KE HALAMAN UTAMA */
+    function renderApp() {
+      try {
+        const brandHtml = `${appState.brandName.slice(0, 4)}<span class="text-rose-600">${appState.brandName.slice(4)}</span>`;
+        if (document.getElementById('navBrandName')) document.getElementById('navBrandName').innerHTML = brandHtml;
+        if (document.getElementById('mobileBrandName')) document.getElementById('mobileBrandName').innerHTML = brandHtml;
+        if (document.getElementById('footerBrand')) document.getElementById('footerBrand').innerHTML = brandHtml;
+
+        if (document.getElementById('navSubBrand')) document.getElementById('navSubBrand').innerText = appState.subBrandText || "Roadside Assistance";
+        if (document.getElementById('navStatusText')) document.getElementById('navStatusText').innerText = appState.navStatusText || "7 Mekanik Online";
+        if (document.getElementById('mobileStatusText')) document.getElementById('mobileStatusText').innerText = appState.mobileStatusText || "Online 24 Jam";
+        if (document.getElementById('emergencyBannerText')) document.getElementById('emergencyBannerText').innerText = appState.emergencyBannerText;
+
+        if (document.getElementById('heroBadge')) document.getElementById('heroBadge').innerText = appState.heroBadge;
+        if (document.getElementById('heroHeadline')) document.getElementById('heroHeadline').innerHTML = appState.heroHeadline;
+        if (document.getElementById('heroSubheadline')) document.getElementById('heroSubheadline').innerText = appState.heroSubheadline;
+        if (document.getElementById('heroCtaText')) document.getElementById('heroCtaText').innerText = appState.heroCtaText || "PANGGIL MEKANIK SEKARANG";
+
+        // Render Metrik
+        if (appState.stats && appState.stats.length >= 3) {
+          document.getElementById('heroStat1Val').innerText = appState.stats[0].val;
+          document.getElementById('heroStat1Lbl').innerText = appState.stats[0].lbl;
+          document.getElementById('heroStat2Val').innerText = appState.stats[1].val;
+          document.getElementById('heroStat2Lbl').innerText = appState.stats[1].lbl;
+          document.getElementById('heroStat3Val').innerText = appState.stats[2].val;
+          document.getElementById('heroStat3Lbl').innerText = appState.stats[2].lbl;
+        }
+
+        // Render Hero Quick Issues
+        const heroIssuesContainer = document.getElementById('heroIssueListContainer');
+        if (heroIssuesContainer && appState.heroIssues) {
+          heroIssuesContainer.innerHTML = appState.heroIssues.map(hi => `
+            <button onclick="quickPickIssue('${hi.text}')" class="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 hover:border-rose-500 hover:bg-rose-50 text-left transition group">
+              <i class="fa-solid ${hi.icon || 'fa-wrench'} text-rose-600 text-sm"></i>
+              <span class="text-xs font-semibold text-slate-700 group-hover:text-rose-700">${hi.label}</span>
+            </button>
+          `).join('');
+        }
+
+        // Render Wizard Radio Options (sinkron dari hero issues)
+        const wizardRadioContainer = document.getElementById('wizardRadioContainer');
+        if (wizardRadioContainer && appState.heroIssues) {
+          wizardRadioContainer.innerHTML = appState.heroIssues.slice(0, 4).map((hi, idx) => `
+            <label class="border p-3 rounded-xl flex items-center gap-2 cursor-pointer hover:border-rose-500 text-xs font-semibold">
+              <input type="radio" name="orderIssue" value="${hi.text}" ${idx === 0 ? 'checked' : ''} class="accent-rose-600">
+              <span>${hi.label}</span>
+            </label>
+          `).join('');
+        }
+        
+        if (document.getElementById('navCallHotline')) {
+          document.getElementById('navCallHotline').innerText = appState.hotlinePhone;
+          document.getElementById('navCallHotline').href = `tel:${appState.hotlinePhone.replace(/\D/g, '')}`;
+        }
+        if (document.getElementById('heroWaDirect')) {
+          document.getElementById('heroWaDirect').href = `https://wa.me/${appState.whatsappNumber}`;
+        }
+
+        // Render Footer Details
+        if (document.getElementById('footerAbout')) document.getElementById('footerAbout').innerText = appState.footerAbout;
+        if (document.getElementById('footerPhone')) document.getElementById('footerPhone').innerText = appState.hotlinePhone;
+        if (document.getElementById('footerWa')) document.getElementById('footerWa').innerText = appState.whatsappNumber;
+        if (document.getElementById('footerEmail')) document.getElementById('footerEmail').innerText = appState.footerEmail;
+        if (document.getElementById('footerGuarantee')) document.getElementById('footerGuarantee').innerText = appState.footerGuarantee;
+        if (document.getElementById('footerCopyright')) document.getElementById('footerCopyright').innerText = appState.footerCopyright;
+
+        // Render Layanan
+        const servicesContainer = document.getElementById('servicesGrid');
+        if (servicesContainer) {
+          servicesContainer.innerHTML = appState.services.map(s => `
+            <div class="bg-slate-50 hover:bg-white rounded-2xl p-4 border border-slate-200 hover:shadow-xl transition flex flex-col justify-between">
+              <div>
+                <div class="h-36 rounded-xl overflow-hidden mb-3 bg-slate-200">
+                  <img src="${s.img}" alt="${s.title}" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1486006920555-c77dce18193b?w=600&auto=format&fit=crop&q=80'">
+                </div>
+                <h3 class="text-sm font-bold text-slate-900">${s.title}</h3>
+                <p class="text-xs text-slate-600 mt-1 leading-relaxed">${s.desc}</p>
+              </div>
+              <div class="pt-3 mt-3 border-t flex items-center justify-between">
+                <span class="text-xs font-black text-slate-900">Rp ${Number(s.price).toLocaleString('id-ID')}</span>
+                <button onclick="orderSpecificService('${s.title}', ${s.price})" class="bg-slate-900 hover:bg-rose-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition">Panggil</button>
+              </div>
+            </div>
+          `).join('');
+        }
+
+        // Render Pilihan Layanan di Estimator Kalkulator
+        const estServiceSelect = document.getElementById('estService');
+        if (estServiceSelect) {
+          estServiceSelect.innerHTML = appState.services.map(s => `
+            <option value="${s.price}" data-name="${s.title}">${s.title} (Rp ${Number(s.price).toLocaleString('id-ID')})</option>
+          `).join('');
+        }
+
+        // Render Paket
+        const pkgContainer = document.getElementById('packagesContainer');
+        if (pkgContainer) {
+          pkgContainer.innerHTML = appState.packages.map(p => `
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between">
+              <div>
+                <h4 class="font-bold text-sm text-slate-900">${p.name}</h4>
+                <div class="text-2xl font-black text-slate-900 my-2">Rp ${Number(p.price).toLocaleString('id-ID')}</div>
+                <ul class="text-xs space-y-1.5 text-slate-600">
+                  ${p.features.map(f => `<li><i class="fa-solid fa-check text-rose-500 mr-1.5"></i>${f}</li>`).join('')}
+                </ul>
+              </div>
+              <button onclick="orderSpecificService('${p.name}', ${p.price})" class="mt-5 w-full bg-slate-900 hover:bg-black text-white text-xs font-bold py-2.5 rounded-xl transition">Pilih Paket</button>
+            </div>
+          `).join('');
+        }
+
+        // Render Area Tags
+        const areaTags = document.getElementById('activeAreaTags');
+        if (areaTags) {
+          areaTags.innerHTML = appState.areas.map(a => `
+            <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-xs font-medium text-slate-200">
+              <i class="fa-solid fa-location-dot text-rose-400 mr-1 text-[10px]"></i>${a}
+            </span>
+          `).join('');
+        }
+
+        // Render Review
+        const revContainer = document.getElementById('reviewsContainer');
+        if (revContainer) {
+          revContainer.innerHTML = appState.reviews.map(r => `
+            <div class="bg-white p-4 rounded-2xl border border-slate-200 text-xs flex flex-col justify-between">
+              <p class="italic text-slate-700 leading-relaxed">"${r.text}"</p>
+              <div class="mt-3 pt-2 border-t font-bold text-slate-900">${r.name} - <span class="text-slate-500 font-normal">${r.car}</span></div>
+            </div>
+          `).join('');
+        }
+
+        // Render FAQ
+        const faqContainer = document.getElementById('faqAccordionContainer');
+        if (faqContainer) {
+          faqContainer.innerHTML = appState.faqs.map((f, i) => `
+            <div class="bg-slate-50 rounded-xl border border-slate-200 overflow-hidden">
+              <button onclick="toggleFaq(${i})" class="w-full text-left p-4 flex items-center justify-between font-bold text-xs sm:text-sm text-slate-800">
+                <span>${f.q}</span>
+                <i class="fa-solid fa-chevron-down text-xs transition-transform" id="faqIcon-${i}"></i>
+              </button>
+              <div id="faqAnswer-${i}" class="hidden px-4 pb-4 text-xs text-slate-600 leading-relaxed border-t border-slate-100 pt-2">
+                ${f.a}
+              </div>
+            </div>
+          `).join('');
+        }
+
+        syncAdminFormValues();
+      } catch (err) {
+        console.error("Rendering error:", err);
+      }
+    }
+
+    /* 3. ESTIMATOR */
+    function calculateEstimate() {
+      const base = parseInt(document.getElementById('estService')?.value) || 0;
+      const veh = parseInt(document.getElementById('estVehicleType')?.value) || 0;
+      const time = parseInt(document.getElementById('estTimeSlot')?.value) || 0;
+      const dist = parseInt(document.getElementById('estDistance')?.value) || 0;
+      const part = parseInt(document.getElementById('estPartCost')?.value) || 0;
+
+      const transport = time + dist;
+      const total = base + veh + transport + part;
+
+      if (document.getElementById('calcBaseFee')) document.getElementById('calcBaseFee').innerText = `Rp ${base.toLocaleString('id-ID')}`;
+      if (document.getElementById('calcVehicleFee')) document.getElementById('calcVehicleFee').innerText = `Rp ${veh.toLocaleString('id-ID')}`;
+      if (document.getElementById('calcTransportFee')) document.getElementById('calcTransportFee').innerText = `Rp ${transport.toLocaleString('id-ID')}`;
+      if (document.getElementById('calcPartFee')) document.getElementById('calcPartFee').innerText = `Rp ${part.toLocaleString('id-ID')}`;
+      if (document.getElementById('calcTotalFee')) document.getElementById('calcTotalFee').innerText = `Rp ${total.toLocaleString('id-ID')}`;
+      return total;
+    }
+
+    function bookWithEstimate() {
+      const total = calculateEstimate();
+      openBookingModal();
+      if (document.getElementById('revPrice')) document.getElementById('revPrice').innerText = `Rp ${total.toLocaleString('id-ID')}`;
+    }
+
+    /* 4. WIZARD BOOKING & MAP ENGINE */
+    let currentStep = 1;
+    let mapInstance = null;
+    let mapMarker = null;
+
+    function openBookingModal() {
+      document.getElementById('bookingModal').classList.remove('hidden');
+      currentStep = 1;
+      showWizardStep(1);
+    }
+
+    function closeBookingModal() {
+      document.getElementById('bookingModal').classList.add('hidden');
+    }
+
+    function quickPickIssue(issueText) {
+      openBookingModal();
+      const radios = document.querySelectorAll('input[name="orderIssue"]');
+      radios.forEach(r => {
+        if (r.value === issueText) r.checked = true;
+      });
+      wizardStepNext();
+    }
+
+    function orderSpecificService(name, price) {
+      openBookingModal();
+      if (document.getElementById('revPrice')) document.getElementById('revPrice').innerText = `Rp ${Number(price).toLocaleString('id-ID')}`;
+      currentStep = 3;
+      showWizardStep(3);
+    }
+
+    function showWizardStep(step) {
+      for (let i = 1; i <= 8; i++) {
+        const el = document.getElementById(`wizardStep${i}`);
+        if (el) el.classList.add('hidden');
+      }
+      const activeEl = document.getElementById(`wizardStep${step}`);
+      if (activeEl) activeEl.classList.remove('hidden');
+
+      if (document.getElementById('wizardStepIndicator')) document.getElementById('wizardStepIndicator').innerText = `Langkah ${step} dari 8`;
+      if (document.getElementById('wizardProgressBar')) document.getElementById('wizardProgressBar').style.width = `${(step / 8) * 100}%`;
+
+      document.getElementById('wizardPrevBtn').classList.toggle('hidden', step === 1);
+      document.getElementById('wizardNextBtn').classList.toggle('hidden', step === 8);
+      document.getElementById('wizardSubmitBtn').classList.toggle('hidden', step !== 8);
+
+      if (step === 4) {
+        setTimeout(initWizardMap, 250);
+      }
+      if (step === 7) {
+        populateReview();
+      }
+    }
+
+    function validateStep(step) {
+      if (step === 3) {
+        const brand = document.getElementById('orderCarBrand').value.trim();
+        const model = document.getElementById('orderCarModel').value.trim();
+        if (!brand || !model) {
+          showToast('Harap isi Merek dan Model mobil Anda.');
+          return false;
+        }
+      }
+      if (step === 4) {
+        const loc = document.getElementById('orderLocationAddress').value.trim();
+        if (!loc) {
+          showToast('Harap isi alamat lokasi atau pilih titik GPS.');
+          return false;
+        }
+      }
+      if (step === 6) {
+        const name = document.getElementById('orderCustomerName').value.trim();
+        const phone = document.getElementById('orderCustomerPhone').value.trim();
+        if (!name || !phone) {
+          showToast('Harap isi Nama dan Nomor WhatsApp aktif.');
+          return false;
+        }
+      }
+      return true;
+    }
+
+    function wizardStepNext() {
+      if (!validateStep(currentStep)) return;
+      if (currentStep < 8) {
+        currentStep++;
+        showWizardStep(currentStep);
+      }
+    }
+
+    function wizardStepPrev() {
+      if (currentStep > 1) {
+        currentStep--;
+        showWizardStep(currentStep);
+      }
+    }
+
+    function populateReview() {
+      const issue = document.querySelector('input[name="orderIssue"]:checked')?.value || "-";
+      document.getElementById('revIssue').innerText = issue;
+      document.getElementById('revCar').innerText = `${document.getElementById('orderCarBrand').value} ${document.getElementById('orderCarModel').value}`;
+      document.getElementById('revLocation').innerText = document.getElementById('orderLocationAddress').value || "Titik GPS Terlampir";
+      document.getElementById('revContact').innerText = `${document.getElementById('orderCustomerName').value} (${document.getElementById('orderCustomerPhone').value})`;
+    }
+
+    function initWizardMap() {
+      const mapContainer = document.getElementById('wizardMapContainer');
+      if (!mapContainer) return;
+
+      if (typeof L === 'undefined') {
+        setTimeout(initWizardMap, 300);
+        return;
+      }
+
+      if (!mapInstance) {
+        mapInstance = L.map('wizardMapContainer').setView([-6.2088, 106.8456], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 }).addTo(mapInstance);
+        mapMarker = L.marker([-6.2088, 106.8456], { draggable: true }).addTo(mapInstance);
+        mapMarker.on('dragend', function (e) {
+          const pos = e.target.getLatLng();
+          document.getElementById('orderCoordsText').innerText = `${pos.lat.toFixed(5)}, ${pos.lng.toFixed(5)}`;
+        });
+      }
+      mapInstance.invalidateSize();
+    }
+
+    function getCurrentGpsLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(pos => {
+          const lat = pos.coords.latitude;
+          const lng = pos.coords.longitude;
+          document.getElementById('orderCoordsText').innerText = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+          document.getElementById('orderLocationAddress').value = `GPS Posisi Akurat (${lat.toFixed(4)}, ${lng.toFixed(4)})`;
+          if (mapInstance && mapMarker) {
+            mapInstance.setView([lat, lng], 15);
+            mapMarker.setLatLng([lat, lng]);
+          }
+          showToast('Titik GPS berhasil disinkronkan.');
+        }, () => {
+          showToast('Izin GPS ditolak atau tidak tersedia.');
+        });
+      }
+    }
+
+    function handleBookingSubmit(e) {
+      e.preventDefault();
+      const order = {
+        orderId: "#TRQ-" + Math.floor(1000 + Math.random() * 9000),
+        time: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }),
+        customer: document.getElementById('orderCustomerName').value,
+        issue: document.querySelector('input[name="orderIssue"]:checked')?.value || "Aki",
+        status: "Mekanik Ditugaskan"
+      };
+
+      if (!appState.liveOrders) appState.liveOrders = [];
+      appState.liveOrders.unshift(order);
+      saveStateLocally();
+
+      closeBookingModal();
+      openTrackingModal();
+      showToast('Panggilan mekanik berhasil diproses!');
+    }
+
+    /* 5. MODAL MANAGERS & UTILS */
+    function openTrackingModal() { document.getElementById('trackingModal').classList.remove('hidden'); }
+    function closeTrackingModal() { document.getElementById('trackingModal').classList.add('hidden'); }
+
+    function openCustomerModal() {
+      document.getElementById('customerModal').classList.remove('hidden');
+      renderGarageCars();
+    }
+    function closeCustomerModal() { document.getElementById('customerModal').classList.add('hidden'); }
+
+    function toggleAdminModal() {
+      const modal = document.getElementById('adminModal');
+      modal.classList.toggle('hidden');
+      if (!modal.classList.contains('hidden')) {
+        renderAdminDashboard();
+        renderAdminHeroIssues();
+        renderAdminServices();
+        renderAdminPackages();
+        renderAdminAreas();
+        renderAdminReviews();
+        renderAdminFaqs();
+      }
+    }
+
+    function handleBackdropClick(event, modalId) {
+      if (event.target.id === modalId) {
+        document.getElementById(modalId).classList.add('hidden');
+      }
+    }
+
+    function toggleFaq(index) {
+      const answer = document.getElementById(`faqAnswer-${index}`);
+      const icon = document.getElementById(`faqIcon-${index}`);
+      if (answer) {
+        answer.classList.toggle('hidden');
+        if (icon) icon.classList.toggle('rotate-180');
+      }
+    }
+
+    function checkServiceArea() {
+      const val = document.getElementById('areaCheckInput').value.trim().toLowerCase();
+      const res = document.getElementById('areaCheckResult');
+      res.classList.remove('hidden');
+      if (!val) {
+        res.innerHTML = `<span class="text-amber-400">Masukkan nama wilayah Anda.</span>`;
+        return;
+      }
+      const match = appState.areas.some(a => a.toLowerCase().includes(val));
+      if (match) {
+        res.innerHTML = `<div class="p-2.5 bg-emerald-500/20 text-emerald-300 rounded-xl border border-emerald-500/40">Area "${val}" tercover pos siaga 24 jam.</div>`;
+      } else {
+        res.innerHTML = `<div class="p-2.5 bg-rose-500/20 text-rose-300 rounded-xl border border-rose-500/40">Area "${val}" di luar radius reguler, konfirmasi hotline.</div>`;
+      }
+    }
+
+    function renderGarageCars() {
+      const container = document.getElementById('garageCarList');
+      if (container) {
+        container.innerHTML = appState.garageCars.map(c => `
+          <div class="p-3 bg-slate-50 border rounded-xl flex items-center justify-between text-xs">
+            <div>
+              <span class="font-bold">${c.brand} ${c.model} (${c.year})</span>
+              <p class="text-slate-500">${c.plate}</p>
+            </div>
+            <button onclick="pickCarForOrder('${c.brand}', '${c.model}', '${c.year}', '${c.plate}')" class="bg-rose-50 text-rose-600 font-bold px-3 py-1 rounded-lg border border-rose-200">Gunakan</button>
+          </div>
+        `).join('');
+      }
+    }
+
+    function addNewGarageCar() {
+      const brand = prompt("Merek Mobil:");
+      const model = prompt("Model:");
+      const plate = prompt("Plat Nomor:");
+      if (brand && model) {
+        appState.garageCars.push({ brand, model, year: "2022", plate: plate || "B 1234" });
+        saveStateLocally();
+        renderGarageCars();
+        showToast("Mobil ditambahkan.");
+      }
+    }
+
+    function loadVehicleFromGarage() {
+      if (appState.garageCars.length > 0) {
+        const c = appState.garageCars[0];
+        pickCarForOrder(c.brand, c.model, c.year, c.plate);
+      } else {
+        showToast("Garasi masih kosong.");
+      }
+    }
+
+    function pickCarForOrder(brand, model, year, plate) {
+      document.getElementById('orderCarBrand').value = brand;
+      document.getElementById('orderCarModel').value = model;
+      document.getElementById('orderCarYear').value = year;
+      document.getElementById('orderCarPlate').value = plate;
+      
+      closeCustomerModal();
+      document.getElementById('bookingModal').classList.remove('hidden');
+      currentStep = 3;
+      showWizardStep(3);
+      showToast(`Memuat ${brand} ${model}`);
+    }
+
+    /* 6. ADMIN CMS HANDLERS */
+    function switchAdminTab(tab) {
+      const tabs = ['dashboard', 'homepage', 'heroissues', 'services', 'packages', 'areas', 'reviews', 'faqs', 'footer'];
+      tabs.forEach(t => {
+        const content = document.getElementById(`admTabContent-${t}`);
+        const nav = document.getElementById(`admNav-${t}`);
+        if (content) content.classList.add('hidden');
+        if (nav) {
+          nav.classList.remove('bg-rose-600', 'text-white');
+          nav.classList.add('text-slate-300');
+        }
+      });
+      const activeContent = document.getElementById(`admTabContent-${tab}`);
+      const activeNav = document.getElementById(`admNav-${tab}`);
+      if (activeContent) activeContent.classList.remove('hidden');
+      if (activeNav) {
+        activeNav.classList.add('bg-rose-600', 'text-white');
+        activeNav.classList.remove('text-slate-300');
+      }
+
+      if (tab === 'heroissues') renderAdminHeroIssues();
+      if (tab === 'services') renderAdminServices();
+      if (tab === 'packages') renderAdminPackages();
+      if (tab === 'areas') renderAdminAreas();
+      if (tab === 'reviews') renderAdminReviews();
+      if (tab === 'faqs') renderAdminFaqs();
+    }
+
+    function renderAdminDashboard() {
+      const tb = document.getElementById('admLiveOrderTable');
+      if (tb) {
+        tb.innerHTML = (appState.liveOrders || []).map(o => `
+          <tr>
+            <td class="p-2 font-bold">${o.orderId}</td>
+            <td class="p-2">${o.time}</td>
+            <td class="p-2">${o.customer}</td>
+            <td class="p-2">${o.issue}</td>
+            <td class="p-2"><span class="bg-rose-100 text-rose-700 px-2 py-0.5 rounded text-[10px] font-bold">${o.status}</span></td>
+          </tr>
+        `).join('');
+      }
+    }
+
+    /* CMS KELUHAN CEPAT HERO */
+    function renderAdminHeroIssues() {
+      const c = document.getElementById('admHeroIssueListManager');
+      if (c && appState.heroIssues) {
+        c.innerHTML = appState.heroIssues.map((hi, idx) => `
+          <div class="p-2.5 bg-white border rounded-xl flex items-center justify-between text-xs">
+            <div>
+              <span class="font-bold"><i class="fa-solid ${hi.icon} text-rose-600 mr-1.5"></i>${hi.label}</span>
+              <p class="text-slate-500">Nilai Order: "${hi.text}"</p>
+            </div>
+            <div class="flex gap-2">
+              <button onclick="editHeroIssue(${idx})" class="bg-slate-100 hover:bg-slate-200 px-2 py-1 rounded font-bold">Edit</button>
+              <button onclick="deleteHeroIssue(${idx})" class="text-rose-600 hover:text-rose-800 font-bold px-1">&times;</button>
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+
+    function adminAddNewHeroIssue() {
+      const label = prompt("Label Teks Tombol (Contoh: Ban Bocor / Kempes):");
+      const icon = prompt("Font Awesome Icon (Contoh: fa-circle-notch, fa-car-battery):", "fa-wrench");
+      if (label) {
+        appState.heroIssues.push({
+          id: "hi-" + Date.now(),
+          text: label,
+          label: label,
+          icon: icon || "fa-wrench"
+        });
+        saveStateLocally();
+        renderApp();
+        renderAdminHeroIssues();
+      }
+    }
+
+    function editHeroIssue(idx) {
+      const item = appState.heroIssues[idx];
+      const newLbl = prompt("Label Teks Tombol:", item.label);
+      const newIcon = prompt("Font Awesome Icon Class:", item.icon);
+      if (newLbl) {
+        item.label = newLbl;
+        item.text = newLbl;
+        if (newIcon) item.icon = newIcon;
+        saveStateLocally();
+        renderApp();
+        renderAdminHeroIssues();
+      }
+    }
+
+    function deleteHeroIssue(idx) {
+      if (confirm("Hapus tombol keluhan ini?")) {
+        appState.heroIssues.splice(idx, 1);
+        saveStateLocally();
+        renderApp();
+        renderAdminHeroIssues();
+      }
+    }
+
+    /* CMS LAYANAN */
+    function renderAdminServices() {
+      const c = document.getElementById('admServiceListManager');
+      if (c) {
+        c.innerHTML = appState.services.map((s, idx) => `
+          <div class="p-2.5 bg-white border rounded-xl flex items-center justify-between text-xs">
+            <div>
+              <span class="font-bold">${s.title}</span>
+              <p class="text-slate-500">Rp ${Number(s.price).toLocaleString('id-ID')}</p>
+            </div>
+            <div class="flex gap-2">
+              <button onclick="editServicePrice(${idx})" class="bg-slate-100 hover:bg-slate-200 px-2 py-1 rounded font-bold">Ubah Tarif</button>
+              <button onclick="deleteService(${idx})" class="text-rose-600 hover:text-rose-800 font-bold px-1">&times;</button>
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+
+    function editServicePrice(idx) {
+      const p = prompt("Tarif baru (Rp):", appState.services[idx].price);
+      if (p && !isNaN(p)) {
+        appState.services[idx].price = parseInt(p);
+        saveStateLocally();
+        renderApp();
+        renderAdminServices();
+      }
+    }
+
+    function deleteService(idx) {
+      if (confirm("Hapus layanan ini?")) {
+        appState.services.splice(idx, 1);
+        saveStateLocally();
+        renderApp();
+        renderAdminServices();
+      }
+    }
+
+    function adminAddNewService() {
+      const t = prompt("Nama Layanan Baru:");
+      const p = prompt("Tarif (Rp):", "150000");
+      if (t) {
+        appState.services.push({
+          id: "srv-" + Date.now(),
+          title: t,
+          desc: "Penanganan profesional langsung ke lokasi Anda.",
+          price: parseInt(p) || 150000,
+          img: "https://images.unsplash.com/photo-1486006920555-c77dce18193b?w=600&auto=format&fit=crop&q=80"
+        });
+        saveStateLocally();
+        renderApp();
+        renderAdminServices();
+      }
+    }
+
+    /* CMS PAKET */
+    function renderAdminPackages() {
+      const c = document.getElementById('admPackagesListManager');
+      if (c) {
+        c.innerHTML = appState.packages.map((p, idx) => `
+          <div class="p-2.5 bg-white border rounded-xl text-xs flex justify-between items-center">
+            <div>
+              <span class="font-bold">${p.name}</span>
+              <p class="text-slate-500">Rp ${Number(p.price).toLocaleString('id-ID')} (${p.features.length} fitur)</p>
+            </div>
+            <div class="flex gap-2">
+              <button onclick="editPackagePrice(${idx})" class="bg-slate-100 hover:bg-slate-200 px-2 py-1 rounded font-bold">Tarif</button>
+              <button onclick="deletePackage(${idx})" class="text-rose-600 hover:text-rose-800 font-bold px-1">&times;</button>
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+
+    function adminAddNewPackage() {
+      const name = prompt("Nama Paket Baru:");
+      const price = prompt("Harga Paket (Rp):", "250000");
+      const f1 = prompt("Fitur 1:", "Inspeksi Kelistrikan");
+      const f2 = prompt("Fitur 2:", "Gratis Cek Tekanan Ban");
+      if (name && price) {
+        appState.packages.push({
+          name: name,
+          price: parseInt(price) || 250000,
+          features: [f1, f2].filter(Boolean)
+        });
+        saveStateLocally();
+        renderApp();
+        renderAdminPackages();
+      }
+    }
+
+    function editPackagePrice(idx) {
+      const p = prompt("Harga Paket Baru (Rp):", appState.packages[idx].price);
+      if (p && !isNaN(p)) {
+        appState.packages[idx].price = parseInt(p);
+        saveStateLocally();
+        renderApp();
+        renderAdminPackages();
+      }
+    }
+
+    function deletePackage(idx) {
+      if (confirm("Hapus paket servis ini?")) {
+        appState.packages.splice(idx, 1);
+        saveStateLocally();
+        renderApp();
+        renderAdminPackages();
+      }
+    }
+
+    /* CMS AREA */
+    function renderAdminAreas() {
+      const c = document.getElementById('admAreaListManager');
+      if (c) {
+        c.innerHTML = appState.areas.map((a, idx) => `
+          <div class="p-2.5 bg-white border rounded-xl text-xs flex justify-between items-center">
+            <span class="font-semibold"><i class="fa-solid fa-location-dot text-rose-500 mr-1.5"></i>${a}</span>
+            <button onclick="deleteArea(${idx})" class="text-rose-600 hover:text-rose-800 font-bold px-1">&times;</button>
+          </div>
+        `).join('');
+      }
+    }
+
+    function adminAddNewArea() {
+      const name = prompt("Nama Wilayah / Kota / Jalur Tol:");
+      if (name) {
+        appState.areas.push(name.trim());
+        saveStateLocally();
+        renderApp();
+        renderAdminAreas();
+      }
+    }
+
+    function deleteArea(idx) {
+      if (confirm("Hapus area layanan ini?")) {
+        appState.areas.splice(idx, 1);
+        saveStateLocally();
+        renderApp();
+        renderAdminAreas();
+      }
+    }
+
+    /* CMS REVIEW */
+    function renderAdminReviews() {
+      const c = document.getElementById('admReviewListManager');
+      if (c) {
+        c.innerHTML = appState.reviews.map((r, idx) => `
+          <div class="p-2.5 bg-white border rounded-xl text-xs flex justify-between items-center">
+            <div>
+              <span class="font-bold">${r.name} (${r.car})</span>
+              <p class="text-slate-500 italic">"${r.text}"</p>
+            </div>
+            <button onclick="deleteReview(${idx})" class="text-rose-600 hover:text-rose-800 font-bold px-1">&times;</button>
+          </div>
+        `).join('');
+      }
+    }
+
+    function adminAddNewReview() {
+      const name = prompt("Nama Pelanggan:");
+      const car = prompt("Mobil (Contoh: Toyota Avanza):");
+      const text = prompt("Isi Testimoni:");
+      if (name && text) {
+        appState.reviews.push({ name, car: car || "Pelanggan", text, rating: 5 });
+        saveStateLocally();
+        renderApp();
+        renderAdminReviews();
+      }
+    }
+
+    function deleteReview(idx) {
+      if (confirm("Hapus ulasan ini?")) {
+        appState.reviews.splice(idx, 1);
+        saveStateLocally();
+        renderApp();
+        renderAdminReviews();
+      }
+    }
+
+    /* CMS FAQ */
+    function renderAdminFaqs() {
+      const c = document.getElementById('admFaqListManager');
+      if (c) {
+        c.innerHTML = appState.faqs.map((f, idx) => `
+          <div class="p-2.5 bg-white border rounded-xl text-xs flex justify-between items-center">
+            <div class="max-w-[80%]">
+              <span class="font-bold">${f.q}</span>
+              <p class="text-slate-500 truncate">${f.a}</p>
+            </div>
+            <button onclick="deleteFaq(${idx})" class="text-rose-600 hover:text-rose-800 font-bold px-1">&times;</button>
+          </div>
+        `).join('');
+      }
+    }
+
+    function adminAddNewFaq() {
+      const q = prompt("Pertanyaan FAQ:");
+      const a = prompt("Jawaban FAQ:");
+      if (q && a) {
+        appState.faqs.push({ q, a });
+        saveStateLocally();
+        renderApp();
+        renderAdminFaqs();
+      }
+    }
+
+    function deleteFaq(idx) {
+      if (confirm("Hapus pertanyaan FAQ ini?")) {
+        appState.faqs.splice(idx, 1);
+        saveStateLocally();
+        renderApp();
+        renderAdminFaqs();
+      }
+    }
+
+    /* SINKRONISASI FORM VALUES */
+    function syncAdminFormValues() {
+      if (document.getElementById('admBrandInput')) document.getElementById('admBrandInput').value = appState.brandName;
+      if (document.getElementById('admSubBrandInput')) document.getElementById('admSubBrandInput').value = appState.subBrandText || "Roadside Assistance";
+      if (document.getElementById('admNavStatusInput')) document.getElementById('admNavStatusInput').value = appState.navStatusText || "7 Mekanik Online";
+      if (document.getElementById('admMobileStatusInput')) document.getElementById('admMobileStatusInput').value = appState.mobileStatusText || "Online 24 Jam";
+      if (document.getElementById('admEmergencyBannerInput')) document.getElementById('admEmergencyBannerInput').value = appState.emergencyBannerText;
+
+      if (document.getElementById('admHeroBadgeInput')) document.getElementById('admHeroBadgeInput').value = appState.heroBadge;
+      if (document.getElementById('admHeroHeadlineInput')) document.getElementById('admHeroHeadlineInput').value = appState.heroHeadline;
+      if (document.getElementById('admHeroSubheadlineInput')) document.getElementById('admHeroSubheadlineInput').value = appState.heroSubheadline;
+      if (document.getElementById('admHeroCtaInput')) document.getElementById('admHeroCtaInput').value = appState.heroCtaText || "PANGGIL MEKANIK SEKARANG";
+
+      if (appState.stats && appState.stats.length >= 3) {
+        if (document.getElementById('admStat1Val')) document.getElementById('admStat1Val').value = appState.stats[0].val;
+        if (document.getElementById('admStat1Lbl')) document.getElementById('admStat1Lbl').value = appState.stats[0].lbl;
+        if (document.getElementById('admStat2Val')) document.getElementById('admStat2Val').value = appState.stats[1].val;
+        if (document.getElementById('admStat2Lbl')) document.getElementById('admStat2Lbl').value = appState.stats[1].lbl;
+        if (document.getElementById('admStat3Val')) document.getElementById('admStat3Val').value = appState.stats[2].val;
+        if (document.getElementById('admStat3Lbl')) document.getElementById('admStat3Lbl').value = appState.stats[2].lbl;
+      }
+
+      if (document.getElementById('admPhoneInput')) document.getElementById('admPhoneInput').value = appState.hotlinePhone;
+      if (document.getElementById('admWaInput')) document.getElementById('admWaInput').value = appState.whatsappNumber;
+
+      if (document.getElementById('admFooterAboutInput')) document.getElementById('admFooterAboutInput').value = appState.footerAbout;
+      if (document.getElementById('admFooterEmailInput')) document.getElementById('admFooterEmailInput').value = appState.footerEmail;
+      if (document.getElementById('admFooterGuaranteeInput')) document.getElementById('admFooterGuaranteeInput').value = appState.footerGuarantee;
+      if (document.getElementById('admFooterCopyInput')) document.getElementById('admFooterCopyInput').value = appState.footerCopyright;
+    }
+
+    function saveHomepageCms() {
+      appState.brandName = document.getElementById('admBrandInput').value;
+      appState.subBrandText = document.getElementById('admSubBrandInput').value;
+      appState.navStatusText = document.getElementById('admNavStatusInput').value;
+      appState.mobileStatusText = document.getElementById('admMobileStatusInput').value;
+      appState.emergencyBannerText = document.getElementById('admEmergencyBannerInput').value;
+
+      appState.heroBadge = document.getElementById('admHeroBadgeInput').value;
+      appState.heroHeadline = document.getElementById('admHeroHeadlineInput').value;
+      appState.heroSubheadline = document.getElementById('admHeroSubheadlineInput').value;
+      appState.heroCtaText = document.getElementById('admHeroCtaInput').value;
+
+      appState.stats = [
+        { val: document.getElementById('admStat1Val').value, lbl: document.getElementById('admStat1Lbl').value },
+        { val: document.getElementById('admStat2Val').value, lbl: document.getElementById('admStat2Lbl').value },
+        { val: document.getElementById('admStat3Val').value, lbl: document.getElementById('admStat3Lbl').value }
+      ];
+
+      appState.hotlinePhone = document.getElementById('admPhoneInput').value;
+      appState.whatsappNumber = document.getElementById('admWaInput').value;
+      saveStateLocally();
+      renderApp();
+      showToast("Teks homepage & statistik diperbarui!");
+    }
+
+    function saveFooterCms() {
+      appState.footerAbout = document.getElementById('admFooterAboutInput').value;
+      appState.footerEmail = document.getElementById('admFooterEmailInput').value;
+      appState.footerGuarantee = document.getElementById('admFooterGuaranteeInput').value;
+      appState.footerCopyright = document.getElementById('admFooterCopyInput').value;
+      saveStateLocally();
+      renderApp();
+      showToast("Pengaturan footer tersimpan!");
+    }
+
+    function saveAllCmsChanges() {
+      saveHomepageCms();
+      saveFooterCms();
+      showToast("Semua perubahan tersimpan & live!");
+    }
+
+    function triggerResetDefaultAll() {
+      if (confirm("Reset seluruh konfigurasi data ke default bawaan pabrik? Semua perubahan kustom Anda akan dikembalikan.")) {
+        localStorage.removeItem('torq24_state');
+        appState = JSON.parse(JSON.stringify(defaultAppState));
+        saveStateLocally();
+        renderApp();
+        toggleAdminModal();
+        showToast("Sistem berhasil direset ke kondisi default.");
+      }
+    }
+
+    function saveStateLocally() {
+      localStorage.setItem('torq24_state', JSON.stringify(appState));
+    }
+
+    function showToast(msg) {
+      const c = document.getElementById('toastContainer');
+      if (!c) return;
+      const t = document.createElement('div');
+      t.className = "bg-slate-900 text-white text-xs font-bold px-4 py-3 rounded-xl shadow-xl flex items-center gap-2 border border-slate-700 pointer-events-auto";
+      t.innerHTML = `<i class="fa-solid fa-bell text-rose-500"></i><span>${msg}</span>`;
+      c.appendChild(t);
+      setTimeout(() => t.remove(), 3200);
+    }
+
+    /* 7. INITIALIZATION */
+    window.addEventListener('DOMContentLoaded', () => {
+      renderApp();
+      calculateEstimate();
+    });
+  </script>
+</body>
+</html>

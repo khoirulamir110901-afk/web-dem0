@@ -1,0 +1,1897 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>FIXPRO TEKNIK — Jasa Service AC & Elektronik Rumah Profesional</title>
+  <meta name="description" content="Jasa service AC, kulkas, mesin cuci, TV & pompa air bergaransi resmi. Teknisi bersertifikat siap datang langsung ke rumah Anda. Transparan, cepat, terpercaya.">
+
+  <!-- Preload Hero Image -->
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1200&q=80">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    :root {
+      --primary: #D32F2F;
+      --primary-hover: #B71C1C;
+      --primary-soft: #FFEBEE;
+      --dark: #1A1D24;
+      --dark-card: #242933;
+      --gray-bg: #F8F9FA;
+      --gray-card: #F1F3F5;
+      --border: #E5E7EB;
+      --text-main: #1F2937;
+      --text-muted: #6B7280;
+      --success: #10B981;
+      --success-soft: #D1FAE5;
+      --warning: #F59E0B;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+      --shadow-md: 0 8px 24px rgba(0,0,0,0.06);
+      --shadow-lg: 0 16px 36px rgba(0,0,0,0.08);
+      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      --font-heading: 'Plus Jakarta Sans', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-body);
+      color: var(--text-main);
+      background-color: #FFFFFF;
+      line-height: 1.6;
+      overflow-x: hidden;
+      padding-bottom: 80px;
+    }
+
+    @media (min-width: 992px) {
+      body { padding-bottom: 0; }
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-heading);
+      color: var(--dark);
+      line-height: 1.25;
+      font-weight: 700;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+    img { max-width: 100%; height: auto; display: block; object-fit: cover; }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .badge-primary { background-color: var(--primary-soft); color: var(--primary); }
+    .badge-online {
+      background-color: #ECFDF5;
+      color: #065F46;
+      border: 1px solid #A7F3D0;
+    }
+    .badge-online::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background-color: #10B981;
+      border-radius: 50%;
+      box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border-radius: var(--radius-md);
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: #FFFFFF;
+      box-shadow: 0 4px 14px rgba(211, 47, 47, 0.25);
+    }
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(211, 47, 47, 0.35);
+    }
+
+    .btn-secondary {
+      background-color: var(--gray-card);
+      color: var(--dark);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { background-color: #E2E8F0; }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--dark);
+      border: 1.5px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--dark); }
+
+    .section-title-wrap {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 48px;
+    }
+    .section-title-wrap h2 {
+      font-size: 2.2rem;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+    .section-title-wrap p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+
+    /* Modern Floating Header */
+    .header-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 16px 20px;
+      transition: var(--transition);
+    }
+    .header-wrapper.scrolled { padding: 8px 20px; }
+
+    .navbar-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(229, 231, 235, 0.8);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 24px;
+      transition: var(--transition);
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: var(--dark);
+      letter-spacing: -0.02em;
+    }
+    .brand-logo .brand-icon {
+      width: 38px;
+      height: 38px;
+      background: var(--primary);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+    }
+
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--text-main);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--primary); }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .mobile-menu-trigger {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      color: var(--dark);
+    }
+
+    @media (min-width: 992px) {
+      .nav-links { display: flex; }
+      .mobile-menu-trigger { display: none; }
+    }
+
+    /* Mobile Bottom Navigation */
+    .mobile-bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 68px;
+      background: #FFFFFF;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      z-index: 999;
+      box-shadow: 0 -4px 16px rgba(0,0,0,0.05);
+      padding: 0 8px;
+    }
+    @media (min-width: 992px) {
+      .mobile-bottom-nav { display: none; }
+    }
+
+    .bottom-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      flex: 1;
+      height: 100%;
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      font-weight: 500;
+    }
+    .bottom-nav-item.active { color: var(--primary); font-weight: 600; }
+    .bottom-nav-item i { width: 20px; height: 20px; }
+
+    .bottom-nav-booking-btn {
+      position: relative;
+      top: -12px;
+      background: var(--primary);
+      color: #fff;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(211, 47, 47, 0.4);
+    }
+    .bottom-nav-booking-btn i { width: 22px; height: 22px; }
+    .bottom-nav-booking-btn span { font-size: 0.65rem; font-weight: 700; margin-top: 2px; }
+
+    /* Mobile Drawer */
+    .mobile-drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px);
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+    .mobile-drawer-overlay.active { opacity: 1; visibility: visible; }
+
+    .mobile-drawer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border-radius: 24px 24px 0 0;
+      z-index: 2001;
+      padding: 24px 20px 36px;
+      transform: translateY(100%);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+    .mobile-drawer.active { transform: translateY(0); }
+
+    .drawer-handle {
+      width: 48px;
+      height: 5px;
+      background: #E2E8F0;
+      border-radius: 3px;
+      margin: 0 auto 20px;
+    }
+    .drawer-nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .drawer-nav-list a {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--dark);
+      padding: 12px 14px;
+      border-radius: var(--radius-md);
+      background: var(--gray-bg);
+    }
+
+    /* Hero */
+    .hero-section {
+      padding-top: 130px;
+      padding-bottom: 60px;
+      background: linear-gradient(180deg, #FAFAFA 0%, #FFFFFF 100%);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    @media (min-width: 992px) {
+      .hero-grid { grid-template-columns: 1.15fr 1fr; gap: 60px; }
+    }
+    .hero-content h1 { font-size: 2.5rem; letter-spacing: -0.03em; margin-bottom: 16px; }
+    @media (min-width: 768px) {
+      .hero-content h1 { font-size: 3.2rem; }
+    }
+    .hero-content p { font-size: 1.12rem; color: var(--text-muted); margin-bottom: 28px; line-height: 1.65; }
+
+    .hero-search-box {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 14px;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    @media (min-width: 640px) {
+      .hero-search-box { flex-direction: row; align-items: center; padding: 8px 8px 8px 18px; }
+    }
+    .search-select-wrapper { display: flex; align-items: center; gap: 10px; flex: 1; }
+    .search-select-wrapper select {
+      width: 100%; border: none; font-family: inherit; font-size: 0.95rem; color: var(--dark); background: transparent; outline: none; cursor: pointer; font-weight: 500;
+    }
+
+    .hero-image-wrap {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+    .hero-image-wrap img { width: 100%; height: 440px; object-fit: cover; }
+
+    /* Trust bar */
+    .trust-bar-section {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: #FFFFFF;
+      padding: 24px 0;
+    }
+    .trust-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    @media (min-width: 768px) {
+      .trust-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    .trust-item { display: flex; align-items: center; gap: 12px; }
+    .trust-icon-box {
+      width: 44px; height: 44px; background: var(--gray-bg); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; color: var(--primary); flex-shrink: 0;
+    }
+    .trust-text h4 { font-size: 0.92rem; font-weight: 700; }
+    .trust-text p { font-size: 0.8rem; color: var(--text-muted); }
+
+    /* Services Grid */
+    .services-section { padding: 70px 0; background: var(--gray-bg); }
+    .services-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+    @media (min-width: 640px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .services-grid { grid-template-columns: repeat(3, 1fr); } }
+
+    .service-card {
+      background: #FFFFFF;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+    }
+    .service-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .service-card-img-wrap { height: 180px; width: 100%; overflow: hidden; }
+    .service-card-img-wrap img { width: 100%; height: 100%; }
+    .service-card-body { padding: 20px; display: flex; flex-direction: column; flex: 1; }
+    .service-card-body h3 { font-size: 1.2rem; margin-bottom: 8px; }
+    .service-card-body p { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 18px; flex: 1; }
+    .service-card-footer { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #F1F5F9; padding-top: 14px; }
+    .price-label { font-size: 0.76rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600; }
+    .price-amount { font-size: 1.1rem; font-weight: 800; color: var(--primary); }
+
+    /* Booking Stepper */
+    .booking-section { padding: 80px 0; background: #FFFFFF; }
+    .booking-container-card {
+      max-width: 820px; margin: 0 auto; background: #FFFFFF; border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); overflow: hidden;
+    }
+    .booking-progress-header { background: var(--dark); padding: 24px 20px; color: #fff; }
+    .stepper-nav { display: flex; justify-content: space-between; }
+    .step-item { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; }
+    .step-circle {
+      width: 32px; height: 32px; border-radius: 50%; background: var(--dark-card); border: 2px solid #4B5563; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700; color: #9CA3AF;
+    }
+    .step-item.active .step-circle { background: var(--primary); border-color: var(--primary); color: #fff; }
+    .step-item.completed .step-circle { background: var(--success); border-color: var(--success); color: #fff; }
+    .step-title { font-size: 0.72rem; color: #9CA3AF; font-weight: 600; display: none; }
+    @media (min-width: 640px) { .step-title { display: block; } }
+
+    .booking-body { padding: 28px 20px; }
+    @media (min-width: 768px) { .booking-body { padding: 40px; } }
+    .step-content-pane { display: none; }
+    .step-content-pane.active { display: block; }
+
+    .options-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-top: 14px; }
+    .select-card {
+      border: 1.5px solid var(--border); border-radius: var(--radius-md); padding: 16px; cursor: pointer; transition: var(--transition); display: flex; flex-direction: column; gap: 6px;
+    }
+    .select-card.selected { border-color: var(--primary); background-color: var(--primary-soft); }
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 6px; }
+    .form-control {
+      width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: var(--radius-sm); font-family: inherit; font-size: 0.95rem;
+    }
+    .form-control:focus { outline: none; border-color: var(--primary); }
+    .form-row { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    @media (min-width: 640px) { .form-row { grid-template-columns: 1fr 1fr; } }
+    .step-actions { display: flex; justify-content: space-between; margin-top: 32px; border-top: 1px solid var(--border); padding-top: 20px; }
+
+    /* Lacak Status Pesanan */
+    .tracking-section { padding: 70px 0; background: var(--gray-bg); }
+    .tracking-card { max-width: 720px; margin: 0 auto; background: #FFFFFF; border-radius: var(--radius-lg); border: 1px solid var(--border); padding: 30px 24px; box-shadow: var(--shadow-sm); }
+    .tracking-input-group { display: flex; gap: 10px; margin-bottom: 24px; }
+    
+    .tracking-empty-placeholder {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-muted);
+      border: 1.5px dashed var(--border);
+      border-radius: var(--radius-md);
+      background: #FAFAFA;
+    }
+
+    .tracking-timeline { position: relative; padding-left: 32px; margin-top: 24px; }
+    .tracking-timeline::before { content: ''; position: absolute; left: 11px; top: 6px; bottom: 6px; width: 2px; background: #E5E7EB; }
+    .timeline-node { position: relative; margin-bottom: 24px; }
+    .timeline-node:last-child { margin-bottom: 0; }
+    .timeline-dot {
+      position: absolute; left: -32px; top: 3px; width: 24px; height: 24px; border-radius: 50%; background: #E5E7EB; border: 3px solid #FFFFFF; display: flex; align-items: center; justify-content: center;
+    }
+    .timeline-node.done .timeline-dot { background: var(--success); }
+    .timeline-node.active .timeline-dot { background: var(--primary); box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.25); }
+
+    /* Pricing Table */
+    .pricing-section { padding: 70px 0; background: #FFFFFF; }
+    .pricing-table-wrap { max-width: 900px; margin: 0 auto; border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; }
+    .pricing-table { width: 100%; border-collapse: collapse; text-align: left; }
+    .pricing-table th, .pricing-table td { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+    .pricing-table th { background: var(--gray-bg); font-weight: 700; font-size: 0.88rem; color: var(--dark); }
+
+    /* Coverage */
+    .coverage-section { padding: 70px 0; background: var(--gray-bg); }
+    .coverage-card { max-width: 700px; margin: 0 auto; background: #fff; padding: 32px 24px; border-radius: var(--radius-lg); border: 1px solid var(--border); text-align: center; }
+    .area-tags-cloud { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 20px 0; }
+    .area-tag { background: var(--gray-card); padding: 6px 14px; border-radius: var(--radius-full); font-size: 0.84rem; font-weight: 500; }
+
+    /* Technicians */
+    .technicians-section { padding: 70px 0; background: #FFFFFF; }
+    .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+    .tech-card { background: #FFFFFF; border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; text-align: center; }
+    .tech-avatar { width: 88px; height: 88px; border-radius: 50%; margin: 0 auto 14px; border: 3px solid var(--primary-soft); object-fit: cover; }
+    .tech-name { font-size: 1.1rem; font-weight: 700; }
+    .tech-specialty { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px; }
+    .tech-stats { display: flex; justify-content: center; gap: 16px; padding-top: 12px; border-top: 1px solid #F1F5F9; font-size: 0.85rem; font-weight: 600; }
+
+    /* FAQ */
+    .faq-section { padding: 70px 0; background: #FFFFFF; }
+    .faq-container { max-width: 780px; margin: 0 auto; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-question { width: 100%; text-align: left; padding: 18px 0; display: flex; justify-content: space-between; align-items: center; font-size: 1.02rem; font-weight: 600; color: var(--dark); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; }
+    .faq-item.active .faq-answer { max-height: 200px; padding-bottom: 18px; }
+
+    /* Footer */
+    .site-footer { background: #11141A; color: #9CA3AF; padding: 60px 0 24px; border-top: 1px solid #1F2430; font-size: 0.88rem; }
+    .footer-grid { display: grid; grid-template-columns: 1fr; gap: 36px; margin-bottom: 48px; }
+    @media (min-width: 768px) { .footer-grid { grid-template-columns: 1.5fr repeat(3, 1fr); } }
+    .footer-col h4 { color: #FFFFFF; font-size: 0.98rem; margin-bottom: 18px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+    /* Admin Panel */
+    .admin-overlay { position: fixed; inset: 0; background: #0B0E14; z-index: 3000; display: none; flex-direction: column; color: #E2E8F0; }
+    .admin-overlay.open { display: flex; }
+    .admin-header { background: #141824; border-bottom: 1px solid #23293B; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }
+    .admin-body { display: flex; flex: 1; overflow: hidden; }
+    .admin-sidebar { width: 250px; background: #10141F; border-right: 1px solid #23293B; overflow-y: auto; padding: 16px 8px; display: flex; flex-direction: column; gap: 4px; }
+    .admin-nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: var(--radius-sm); color: #94A3B8; font-size: 0.88rem; font-weight: 500; cursor: pointer; }
+    .admin-nav-item:hover, .admin-nav-item.active { background: #1E2435; color: #FFFFFF; }
+    .admin-nav-item.active { border-left: 3px solid var(--primary); }
+    .admin-content-area { flex: 1; padding: 24px; overflow-y: auto; background: #0B0E14; }
+    .admin-tab-pane { display: none; }
+    .admin-tab-pane.active { display: block; }
+    .admin-card { background: #141824; border: 1px solid #23293B; border-radius: var(--radius-md); padding: 20px; margin-bottom: 20px; }
+    .admin-card h3 { color: #FFFFFF; font-size: 1.1rem; margin-bottom: 16px; }
+    .admin-input-dark { width: 100%; background: #0B0E14; border: 1px solid #2D3748; color: #fff; padding: 10px 14px; border-radius: 6px; font-size: 0.9rem; margin-bottom: 14px; }
+    .admin-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    .admin-table th, .admin-table td { padding: 12px 14px; border-bottom: 1px solid #23293B; text-align: left; }
+    .admin-table th { background: #10141F; color: #94A3B8; }
+
+    /* Admin Login */
+    .admin-login-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(6px); z-index: 3500; display: none; align-items: center; justify-content: center; padding: 20px; }
+    .admin-login-modal.open { display: flex; }
+    .admin-login-box { background: #141824; border: 1px solid #23293B; border-radius: var(--radius-lg); padding: 30px; width: 100%; max-width: 380px; color: #fff; }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Header Desktop -->
+  <div class="header-wrapper" id="floatingHeader">
+    <header class="navbar-container">
+      <a href="#" class="brand-logo">
+        <div class="brand-icon"><i data-lucide="wrench"></i></div>
+        <span id="brandNameText">FIXPRO TEKNIK</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#hero">Beranda</a></li>
+        <li><a href="#layanan">Layanan</a></li>
+        <li><a href="#harga">Harga</a></li>
+        <li><a href="#area">Area Layanan</a></li>
+        <li><a href="#teknisi">Teknisi</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <div class="header-actions">
+        <span class="badge badge-online d-none-sm" id="headerTechOnlineCount">3 Teknisi Online</span>
+        <a href="#booking" class="btn btn-primary" style="padding: 9px 18px; font-size: 0.88rem;">
+          <i data-lucide="calendar-check" style="width: 16px; height: 16px;"></i>
+          <span>BOOKING SEKARANG</span>
+        </a>
+        <button class="mobile-menu-trigger" id="openMobileMenu"><i data-lucide="menu"></i></button>
+      </div>
+    </header>
+  </div>
+
+  <!-- Mobile Bottom Nav -->
+  <nav class="mobile-bottom-nav">
+    <a href="#hero" class="bottom-nav-item active"><i data-lucide="home"></i><span>Beranda</span></a>
+    <a href="#layanan" class="bottom-nav-item"><i data-lucide="grid"></i><span>Layanan</span></a>
+    <a href="#booking" class="bottom-nav-booking-btn"><i data-lucide="calendar-plus"></i><span>BOOK</span></a>
+    <a href="#tracking" class="bottom-nav-item"><i data-lucide="clock"></i><span>Pesanan</span></a>
+    <button class="bottom-nav-item" id="openAdminLoginBottom"><i data-lucide="shield-check"></i><span>Admin</span></button>
+  </nav>
+
+  <!-- Mobile Bottom Sheet Drawer -->
+  <div class="mobile-drawer-overlay" id="mobileOverlay"></div>
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="drawer-handle"></div>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+      <span style="font-weight: 700; font-size: 1.1rem;">Menu Navigasi</span>
+      <button id="closeMobileMenu"><i data-lucide="x"></i></button>
+    </div>
+    <ul class="drawer-nav-list">
+      <li><a href="#hero" class="drawer-link"><i data-lucide="home"></i> Beranda Utama</a></li>
+      <li><a href="#layanan" class="drawer-link"><i data-lucide="tool"></i> Katalog Layanan</a></li>
+      <li><a href="#booking" class="drawer-link"><i data-lucide="calendar"></i> Booking Teknisi</a></li>
+      <li><a href="#tracking" class="drawer-link"><i data-lucide="activity"></i> Lacak Pesanan</a></li>
+      <li><a href="#harga" class="drawer-link"><i data-lucide="tag"></i> Estimasi Biaya</a></li>
+      <li><a href="#area" class="drawer-link"><i data-lucide="map-pin"></i> Area Layanan</a></li>
+      <li><a href="#teknisi" class="drawer-link"><i data-lucide="users"></i> Daftar Teknisi</a></li>
+    </ul>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero-section" id="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <span class="badge badge-primary" style="margin-bottom: 16px;">
+            <i data-lucide="shield-check" style="width: 14px; height: 14px;"></i> Garansi Service 30 Hari
+          </span>
+          <h1 id="heroHeadline">Butuh Teknisi? Booking Service Tanpa Ribet.</h1>
+          <p id="heroSubheadline">Service AC, kulkas, mesin cuci, dan elektronik rumah dengan teknisi berpengalaman yang siap datang langsung ke lokasi rumah atau kantor Anda.</p>
+
+          <div class="hero-search-box">
+            <div class="search-select-wrapper">
+              <i data-lucide="search" style="color: var(--primary); width: 20px; height: 20px;"></i>
+              <select id="quickServiceSelect">
+                <!-- Injected via Firebase State -->
+              </select>
+            </div>
+            <button class="btn btn-primary" onclick="window.proceedQuickBooking()">
+              <span>BOOKING TEKNISI</span>
+              <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="hero-image-wrap">
+          <img id="heroImg" src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1200&q=80" alt="Teknisi Profesional" onerror="this.src='https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80'">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Bar -->
+  <section class="trust-bar-section">
+    <div class="container">
+      <div class="trust-grid">
+        <div class="trust-item"><div class="trust-icon-box"><i data-lucide="user-check"></i></div><div class="trust-text"><h4>Teknisi Berpengalaman</h4><p>Teruji & bersertifikat</p></div></div>
+        <div class="trust-item"><div class="trust-icon-box"><i data-lucide="badge-dollar-sign"></i></div><div class="trust-text"><h4>Harga Transparan</h4><p>Tanpa biaya siluman</p></div></div>
+        <div class="trust-item"><div class="trust-icon-box"><i data-lucide="zap"></i></div><div class="trust-text"><h4>Booking Mudah</h4><p>Cepat tanpa ribet</p></div></div>
+        <div class="trust-item"><div class="trust-icon-box"><i data-lucide="shield"></i></div><div class="trust-text"><h4>Garansi Service</h4><p>Jaminan komplain gratis</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Layanan Populer (Katalog Utama) -->
+  <section class="services-section" id="layanan">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="badge badge-primary" style="margin-bottom: 12px;">Solusi Lengkap</span>
+        <h2>Layanan yang Banyak Dicari</h2>
+        <p>Pilih kebutuhan reparasi dan perawatan peralatan elektronik rumah Anda hari ini.</p>
+      </div>
+      <div class="services-grid" id="servicesGridContainer">
+        <!-- Rendered via Firebase -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Step-by-Step Booking -->
+  <section class="booking-section" id="booking">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="badge badge-primary" style="margin-bottom: 12px;">Sistem Cepat</span>
+        <h2>Booking Teknisi ke Rumah</h2>
+        <p>Hanya 6 langkah praktis. Jadwal fleksibel, konfirmasi pesanan instan.</p>
+      </div>
+
+      <div class="booking-container-card">
+        <div class="booking-progress-header">
+          <div class="stepper-nav">
+            <div class="step-item active" id="stepIndicator1"><div class="step-circle">1</div><span class="step-title">Layanan</span></div>
+            <div class="step-item" id="stepIndicator2"><div class="step-circle">2</div><span class="step-title">Keluhan</span></div>
+            <div class="step-item" id="stepIndicator3"><div class="step-circle">3</div><span class="step-title">Tanggal</span></div>
+            <div class="step-item" id="stepIndicator4"><div class="step-circle">4</div><span class="step-title">Waktu</span></div>
+            <div class="step-item" id="stepIndicator5"><div class="step-circle">5</div><span class="step-title">Alamat</span></div>
+            <div class="step-item" id="stepIndicator6"><div class="step-circle">6</div><span class="step-title">Konfirmasi</span></div>
+          </div>
+        </div>
+
+        <div class="booking-body">
+          <form id="bookingForm" onsubmit="event.preventDefault();">
+            <!-- Step 1 -->
+            <div class="step-content-pane active" id="paneStep1">
+              <h3>Pilih Jenis Layanan Service</h3>
+              <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 16px;">Tentukan perangkat yang memerlukan penanganan teknisi.</p>
+              <div class="options-grid" id="serviceOptions">
+                <!-- Rendered dynamically -->
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="step-content-pane" id="paneStep2">
+              <h3>Pilih atau Tuliskan Keluhan</h3>
+              <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 16px;">Informasi ini membantu teknisi menyiapkan suku cadang yang tepat.</p>
+              <div class="options-grid" id="problemOptions">
+                <div class="select-card selected" onclick="window.pickProblemOption(this, 'Tidak Dingin / Kurang Dingin')"><h4>Kurang / Tidak Dingin</h4></div>
+                <div class="select-card" onclick="window.pickProblemOption(this, 'Mati Total / Tidak Menyala')"><h4>Mati Total</h4></div>
+                <div class="select-card" onclick="window.pickProblemOption(this, 'Bocor Air / Menetes')"><h4>Bocor Air / Menetes</h4></div>
+                <div class="select-card" onclick="window.pickProblemOption(this, 'Suara Berisik / Bergetar')"><h4>Suara Bising</h4></div>
+              </div>
+              <div class="form-group" style="margin-top: 20px;">
+                <label for="customProblem">Catatan Tambahan Keluhan (Opsional)</label>
+                <textarea id="customProblem" class="form-control" rows="2" placeholder="Tuliskan keluhan atau gejala lainnya..."></textarea>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="step-content-pane" id="paneStep3">
+              <h3>Pilih Tanggal Kunjungan</h3>
+              <div class="form-group">
+                <label for="bookingDate">Tanggal Kedatangan Teknisi</label>
+                <input type="date" id="bookingDate" class="form-control">
+              </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="step-content-pane" id="paneStep4">
+              <h3>Pilih Waktu Kedatangan</h3>
+              <div class="options-grid">
+                <div class="select-card selected" onclick="window.pickTimeOption(this, '08:00 - 10:00 (Pagi)')"><h4>08:00 - 10:00</h4><p>Pagi</p></div>
+                <div class="select-card" onclick="window.pickTimeOption(this, '10:00 - 12:00 (Siang)')"><h4>10:00 - 12:00</h4><p>Menjelang Siang</p></div>
+                <div class="select-card" onclick="window.pickTimeOption(this, '13:00 - 15:00 (Siang)')"><h4>13:00 - 15:00</h4><p>Siang</p></div>
+                <div class="select-card" onclick="window.pickTimeOption(this, '15:00 - 17:00 (Sore)')"><h4>15:00 - 17:00</h4><p>Sore</p></div>
+              </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="step-content-pane" id="paneStep5">
+              <h3>Data Pemesan & Alamat Rumah</h3>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="custName">Nama Lengkap *</label>
+                  <input type="text" id="custName" class="form-control" placeholder="Nama Anda" required>
+                </div>
+                <div class="form-group">
+                  <label for="custWa">Nomor WhatsApp Aktif *</label>
+                  <input type="tel" id="custWa" class="form-control" placeholder="08xxxxxxxxxx" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="custAddress">Alamat Lengkap & Patokan Rumah *</label>
+                <textarea id="custAddress" class="form-control" rows="3" placeholder="Alamat lengkap, nomor rumah, patokan..." required></textarea>
+              </div>
+            </div>
+
+            <!-- Step 6 -->
+            <div class="step-content-pane" id="paneStep6">
+              <h3>Konfirmasi Ringkasan Booking</h3>
+              <div style="background: var(--gray-bg); padding: 20px; border-radius: var(--radius-md); border: 1px solid var(--border); margin-bottom: 20px;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 0.92rem;">
+                  <div><span style="color: var(--text-muted);">Layanan:</span> <strong id="summaryService">-</strong></div>
+                  <div><span style="color: var(--text-muted);">Keluhan:</span> <strong id="summaryProblem">-</strong></div>
+                  <div><span style="color: var(--text-muted);">Jadwal:</span> <strong id="summarySchedule">-</strong></div>
+                  <div><span style="color: var(--text-muted);">Customer:</span> <strong id="summaryCustomer">-</strong></div>
+                </div>
+                <div style="margin-top: 10px; padding-top: 10px; border-top: 1px dashed #CBD5E1; font-size: 0.9rem;">
+                  <span style="color: var(--text-muted);">Alamat Kunjungan:</span><br>
+                  <strong id="summaryAddress">-</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- Success State -->
+            <div class="step-content-pane" id="paneStepSuccess" style="text-align: center; padding: 20px 0;">
+              <div style="width: 64px; height: 64px; background: var(--success-soft); color: var(--success); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+                <i data-lucide="check" style="width: 36px; height: 36px;"></i>
+              </div>
+              <h3 style="font-size: 1.6rem; margin-bottom: 8px;">Booking Berhasil Dibuat!</h3>
+              <p style="color: var(--text-muted); margin-bottom: 24px;">Teknisi kami telah menerima pesanan dan data otomatis tersimpan di database.</p>
+              <div style="max-width: 440px; margin: 0 auto; background: var(--gray-bg); border-radius: var(--radius-md); padding: 20px; text-align: left; font-size: 0.9rem; border: 1px solid var(--border); margin-bottom: 24px;">
+                <div style="margin-bottom: 8px;"><span style="color: var(--text-muted);">Nomor Booking:</span> <strong id="successBookingId" style="color: var(--primary);">#BK-0000</strong></div>
+                <div style="margin-bottom: 8px;"><span style="color: var(--text-muted);">Layanan:</span> <strong id="successService">-</strong></div>
+                <div style="margin-bottom: 8px;"><span style="color: var(--text-muted);">Jadwal:</span> <strong id="successSchedule">-</strong></div>
+                <div><span style="color: var(--text-muted);">Status:</span> <span class="badge badge-primary">Booking Diterima</span></div>
+              </div>
+              <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+                <a href="#tracking" class="btn btn-secondary" onclick="window.checkSpecificBookingId()">Lacak Status Pesanan</a>
+                <button class="btn btn-primary" onclick="window.resetBookingFlow()">Buat Booking Baru</button>
+              </div>
+            </div>
+
+            <div class="step-actions" id="bookingNavActions">
+              <button type="button" class="btn btn-secondary" id="prevStepBtn" onclick="window.navigateBookingStep(-1)" style="visibility: hidden;">Kembali</button>
+              <button type="button" class="btn btn-primary" id="nextStepBtn" onclick="window.navigateBookingStep(1)">Lanjut ke Keluhan</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lacak Status Pesanan (Kosong Secara Default) -->
+  <section class="tracking-section" id="tracking">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="badge badge-primary" style="margin-bottom: 12px;">Transparansi Kerja</span>
+        <h2>Lacak Status Pesanan</h2>
+        <p>Pantau posisi teknisi dan tahapan penanganan perangkat Anda secara real-time.</p>
+      </div>
+
+      <div class="tracking-card">
+        <div class="tracking-input-group">
+          <input type="text" id="trackQueryInput" class="form-control" placeholder="Masukkan Nomor Booking (contoh: BK-2026-9011) atau No. WhatsApp">
+          <button class="btn btn-primary" onclick="window.searchLiveTracking()">Lacak</button>
+        </div>
+
+        <div id="trackingResultArea">
+          <div class="tracking-empty-placeholder">
+            <i data-lucide="search" style="width: 38px; height: 38px; margin: 0 auto 12px; color: #9CA3AF;"></i>
+            <h4 style="color: var(--dark); margin-bottom: 6px;">Belum Ada Pesanan yang Dilacak</h4>
+            <p style="font-size: 0.88rem; max-width: 440px; margin: 0 auto;">Masukkan nomor booking atau nomor WhatsApp Anda pada kolom di atas untuk melihat progress pengerjaan teknisi secara langsung.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Harga Transparan -->
+  <section class="pricing-section" id="harga">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="badge badge-primary" style="margin-bottom: 12px;">Daftar Tarif</span>
+        <h2>Harga Service Transparan</h2>
+        <p>Estimasi biaya jasa standar tanpa mark-up sepihak.</p>
+      </div>
+
+      <div class="pricing-table-wrap">
+        <table class="pricing-table">
+          <thead>
+            <tr>
+              <th>Nama Layanan</th>
+              <th>Cakupan Pekerjaan</th>
+              <th>Biaya Jasa Mulai</th>
+            </tr>
+          </thead>
+          <tbody id="pricingTableBody">
+            <!-- Rendered via Firebase -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Area Layanan -->
+  <section class="coverage-section" id="area">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="badge badge-primary" style="margin-bottom: 12px;">Area Operasional</span>
+        <h2>Kami Melayani Area Anda</h2>
+        <p>Jangkauan teknisi siap datang dengan respon cepat di area berikut:</p>
+      </div>
+
+      <div class="coverage-card">
+        <div style="display: flex; gap: 10px; max-width: 500px; margin: 0 auto 20px;">
+          <input type="text" id="areaSearchInput" class="form-control" placeholder="Ketik nama kecamatan / kelurahan...">
+          <button class="btn btn-primary" onclick="window.verifyAreaCoverage()">Cek</button>
+        </div>
+        <div id="areaCheckFeedback" style="display: none; padding: 12px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; margin-bottom: 20px;"></div>
+        <div class="area-tags-cloud" id="areaTagsList">
+          <span class="area-tag">Kedaton</span>
+          <span class="area-tag">Way Halim</span>
+          <span class="area-tag">Sukarame</span>
+          <span class="area-tag">Tanjung Karang</span>
+          <span class="area-tag">Teluk Betung</span>
+          <span class="area-tag">Rajabasa</span>
+          <span class="area-tag">Kemiling</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Teknisi -->
+  <section class="technicians-section" id="teknisi">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="badge badge-primary" style="margin-bottom: 12px;">Tenaga Ahli</span>
+        <h2>Teknisi Profesional Kami</h2>
+        <p>Setiap teknisi melewati uji sertifikasi kelistrikan dan standar SOP ramah pelanggan.</p>
+      </div>
+      <div class="tech-grid" id="techniciansGrid">
+        <!-- Rendered via Firebase -->
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section" id="faq">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="badge badge-primary" style="margin-bottom: 12px;">Bantuan</span>
+        <h2>Pertanyaan yang Sering Diajukan</h2>
+      </div>
+      <div class="faq-container">
+        <div class="faq-item">
+          <button class="faq-question"><span>Berapa biaya service di tempat?</span><i data-lucide="chevron-down"></i></button>
+          <div class="faq-answer">Biaya disesuaikan dengan jenis perbaikan. Teknisi kami selalu menginfokan total biaya secara transparan sebelum memulai reparasi.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question"><span>Apakah ada garansi setelah pengerjaan?</span><i data-lucide="chevron-down"></i></button>
+          <div class="faq-answer">Tentu. Semua pekerjaan dilindungi garansi resmi selama 30 hari.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="brand-logo" style="color: #fff; margin-bottom: 14px;">
+            <div class="brand-icon"><i data-lucide="wrench"></i></div>
+            <span id="footerBrandName">FIXPRO TEKNIK</span>
+          </div>
+          <p>Layanan service panggilan terpercaya untuk AC dan elektronik rumah tangga.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigasi</h4>
+          <ul>
+            <li><a href="#layanan">Katalog Layanan</a></li>
+            <li><a href="#booking">Booking Teknisi</a></li>
+            <li><a href="#harga">Tarif Jasa</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Kontak</h4>
+          <p>WhatsApp: 0812-3456-7890</p>
+          <p>Buka Setiap Hari: 07:30 - 20:00 WIB</p>
+          <button id="adminLoginFooterBtn" style="color: #64748B; font-size: 0.8rem; margin-top: 10px; text-decoration: underline;">Login Pengelola CMS</button>
+        </div>
+      </div>
+      <div style="border-top: 1px solid #1F2430; padding-top: 20px; text-align: center; font-size: 0.82rem;">
+        © 2026 FIXPRO TEKNIK. Seluruh Hak Cipta Dilindungi.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Admin Login Modal -->
+  <div class="admin-login-modal" id="adminLoginModal">
+    <div class="admin-login-box">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h3 style="font-size: 1.2rem; color: #fff;">Login Admin CMS</h3>
+        <button id="closeLoginModal" style="color: #94A3B8;"><i data-lucide="x"></i></button>
+      </div>
+      <form id="adminLoginForm" onsubmit="event.preventDefault(); window.handleAdminAuth();">
+        <div style="margin-bottom: 14px;">
+          <label style="font-size: 0.82rem; color: #94A3B8; display: block; margin-bottom: 4px;">Username</label>
+          <input type="text" id="adminUserField" class="admin-input-dark" value="kelolaweb2026" required>
+        </div>
+        <div style="margin-bottom: 18px;">
+          <label style="font-size: 0.82rem; color: #94A3B8; display: block; margin-bottom: 4px;">Password</label>
+          <input type="password" id="adminPassField" class="admin-input-dark" value="kelolaweb2026" required>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Masuk Panel Admin</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ADMIN PANEL CMS OVERLAY -->
+  <div class="admin-overlay" id="adminPanelOverlay">
+    <div class="admin-header">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span style="background: var(--primary); color: #fff; padding: 4px 8px; border-radius: 4px; font-weight: 800; font-size: 0.8rem;">CMS</span>
+        <strong style="color: #fff; font-size: 1.1rem;">FIXPRO TEKNIK — Control Panel</strong>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <button class="btn btn-primary" style="padding: 6px 14px; font-size: 0.85rem;" onclick="window.closeAdminPanel()">
+          <i data-lucide="check" style="width: 14px; height: 14px;"></i>
+          <span>Simpan & Kembali</span>
+        </button>
+        <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 0.85rem; background: #23293B; color: #fff; border: none;" onclick="window.closeAdminPanel()">
+          <i data-lucide="log-out" style="width: 14px; height: 14px;"></i>
+          <span>Keluar</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="admin-body">
+      <aside class="admin-sidebar">
+        <div class="admin-nav-item active" onclick="window.switchAdminTab('tabDashboard')"><i data-lucide="layout-dashboard" style="width: 18px;"></i> Dashboard</div>
+        <div class="admin-nav-item" onclick="window.switchAdminTab('tabLayananKatalog')"><i data-lucide="layers" style="width: 18px;"></i> Katalog Layanan (<span id="serviceCountBadge">0</span>)</div>
+        <div class="admin-nav-item" onclick="window.switchAdminTab('tabBookingList')"><i data-lucide="calendar" style="width: 18px;"></i> Data Booking (<span id="bookingCountBadge">0</span>)</div>
+        <div class="admin-nav-item" onclick="window.switchAdminTab('tabTeknisi')"><i data-lucide="users" style="width: 18px;"></i> Teknisi Siap Tugas (<span id="techCountBadge">0</span>)</div>
+        <div class="admin-nav-item" onclick="window.switchAdminTab('tabHomepage')"><i data-lucide="home" style="width: 18px;"></i> Homepage & Teks</div>
+        <div class="admin-nav-item" onclick="window.switchAdminTab('tabSettings')"><i data-lucide="settings" style="width: 18px;"></i> Settings</div>
+      </aside>
+
+      <main class="admin-content-area">
+        <!-- TAB 1: DASHBOARD -->
+        <div class="admin-tab-pane active" id="tabDashboard">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 24px;">
+            <div class="admin-card" style="margin-bottom: 0;">
+              <span style="color: #94A3B8; font-size: 0.8rem;">Total Booking Bulan Ini</span>
+              <h2 style="color: #fff; font-size: 2.2rem; margin-top: 4px;" id="dashTotalBookings">0 Pesanan</h2>
+            </div>
+            <div class="admin-card" style="margin-bottom: 0;">
+              <span style="color: #94A3B8; font-size: 0.8rem;">Teknisi Aktif Lapangan</span>
+              <h2 style="color: var(--success); font-size: 2.2rem; margin-top: 4px;" id="dashActiveTechs">0 Online</h2>
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <h3>Pesanan Booking Terbaru</h3>
+            <div style="overflow-x: auto;">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>ID Booking</th>
+                    <th>Pelanggan</th>
+                    <th>WhatsApp</th>
+                    <th>Layanan</th>
+                    <th>Jadwal</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="adminRecentBookings"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 2: KATALOG & LAYANAN -->
+        <div class="admin-tab-pane" id="tabLayananKatalog">
+          <div class="admin-card">
+            <h3 id="formServiceTitle">Tambah Layanan Baru ke Katalog</h3>
+            <p style="color: #94A3B8; font-size: 0.85rem; margin-bottom: 16px;">Semua data yang ditambahkan akan otomatis masuk ke database Firebase dan langsung muncul di halaman utama.</p>
+            <form id="serviceForm" onsubmit="event.preventDefault(); window.saveServiceItem();">
+              <input type="hidden" id="serviceEditIndex" value="-1">
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+                <div>
+                  <label style="font-size: 0.82rem; color: #94A3B8; display: block; margin-bottom: 4px;">Nama Layanan *</label>
+                  <input type="text" id="svcName" class="admin-input-dark" placeholder="Contoh: Service AC Cassette" required>
+                </div>
+                <div>
+                  <label style="font-size: 0.82rem; color: #94A3B8; display: block; margin-bottom: 4px;">Biaya Jasa Mulai *</label>
+                  <input type="text" id="svcPrice" class="admin-input-dark" placeholder="Contoh: Rp 120.000" required>
+                </div>
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+                <div>
+                  <label style="font-size: 0.82rem; color: #94A3B8; display: block; margin-bottom: 4px;">Cakupan Pekerjaan *</label>
+                  <input type="text" id="svcScope" class="admin-input-dark" placeholder="Contoh: Cuci indoor, outdoor, freon test" required>
+                </div>
+                <div>
+                  <label style="font-size: 0.82rem; color: #94A3B8; display: block; margin-bottom: 4px;">URL Gambar (Foto Service)</label>
+                  <input type="text" id="svcImg" class="admin-input-dark" placeholder="https://images.unsplash.com/..." value="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80">
+                </div>
+              </div>
+              <div style="margin-bottom: 14px;">
+                <label style="font-size: 0.82rem; color: #94A3B8; display: block; margin-bottom: 4px;">Deskripsi Singkat *</label>
+                <textarea id="svcDesc" class="admin-input-dark" rows="2" placeholder="Penjelasan singkat..." required></textarea>
+              </div>
+              <div style="display: flex; gap: 10px;">
+                <button type="submit" class="btn btn-primary" id="btnSaveService">Tambah ke Katalog</button>
+                <button type="button" class="btn btn-secondary" onclick="window.resetServiceForm()" style="background: #23293B; color: #fff; border: none;">Reset Form</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="admin-card">
+            <h3>Daftar Katalog Layanan Aktif</h3>
+            <div style="overflow-x: auto;">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Layanan</th>
+                    <th>Biaya Mulai</th>
+                    <th>Cakupan</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="adminServicesTable"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: DATA BOOKING -->
+        <div class="admin-tab-pane" id="tabBookingList">
+          <div class="admin-card">
+            <h3>Manajemen Seluruh Booking</h3>
+            <p style="color: #94A3B8; font-size: 0.85rem; margin-bottom: 16px;">Ubah status di dropdown ini. Indikator tahapan di Lacak Pesanan milik customer akan langsung bergeser real-time.</p>
+            <div style="overflow-x: auto;">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>ID Booking</th>
+                    <th>Nama</th>
+                    <th>WhatsApp</th>
+                    <th>Layanan</th>
+                    <th>Jadwal</th>
+                    <th>Alamat</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="adminFullBookingTable"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 4: TEKNISI -->
+        <div class="admin-tab-pane" id="tabTeknisi">
+          <div class="admin-card">
+            <h3 id="formTechTitle">Tambah Teknisi Baru</h3>
+            <form id="techForm" onsubmit="event.preventDefault(); window.saveTechItem();">
+              <input type="hidden" id="techEditIndex" value="-1">
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+                <div>
+                  <label style="font-size: 0.82rem; color: #94A3B8; display: block; margin-bottom: 4px;">Nama Lengkap *</label>
+                  <input type="text" id="techNameInput" class="admin-input-dark" placeholder="Nama teknisi..." required>
+                </div>
+                <div>
+                  <label style="font-size: 0.82rem; color: #94A3B8; display: block; margin-bottom: 4px;">Spesialisasi *</label>
+                  <input type="text" id="techSpecInput" class="admin-input-dark" placeholder="Contoh: Spesialis AC & Pendingin" required>
+                </div>
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px;">
+                <div>
+                  <label style="font-size: 0.82rem; color: #94A3B8; display: block; margin-bottom: 4px;">Rating (1.0 - 5.0)</label>
+                  <input type="text" id="techRatingInput" class="admin-input-dark" value="4.9">
+                </div>
+                <div>
+                  <label style="font-size: 0.82rem; color: #94A3B8; display: block; margin-bottom: 4px;">Jumlah Selesai Service</label>
+                  <input type="text" id="techCountInput" class="admin-input-dark" value="100+ Service">
+                </div>
+                <div>
+                  <label style="font-size: 0.82rem; color: #94A3B8; display: block; margin-bottom: 4px;">Status Kesiapan</label>
+                  <select id="techStatusInput" class="admin-input-dark">
+                    <option value="true">Online (Siap Kunjungan)</option>
+                    <option value="false">Offline / Libur</option>
+                  </select>
+                </div>
+              </div>
+              <div style="margin-bottom: 14px;">
+                <label style="font-size: 0.82rem; color: #94A3B8; display: block; margin-bottom: 4px;">URL Foto Profil</label>
+                <input type="text" id="techImgInput" class="admin-input-dark" value="https://images.unsplash.com/photo-1540569014015-19a7be504e3a?auto=format&fit=crop&w=200&q=80">
+              </div>
+              <div style="display: flex; gap: 10px;">
+                <button type="submit" class="btn btn-primary" id="btnSaveTech">Simpan Data Teknisi</button>
+                <button type="button" class="btn btn-secondary" onclick="window.resetTechForm()" style="background: #23293B; color: #fff; border: none;">Reset Form</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="admin-card">
+            <h3>Daftar Teknisi Siap Tugas</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px;" id="adminTechList"></div>
+          </div>
+        </div>
+
+        <!-- TAB 5: HOMEPAGE -->
+        <div class="admin-tab-pane" id="tabHomepage">
+          <div class="admin-card">
+            <h3>Edit Teks Utama Homepage</h3>
+            <div style="margin-bottom: 14px;">
+              <label style="font-size: 0.85rem; color: #94A3B8; display: block; margin-bottom: 4px;">Nama Brand</label>
+              <input type="text" id="editBrandName" class="admin-input-dark" value="FIXPRO TEKNIK">
+            </div>
+            <div style="margin-bottom: 14px;">
+              <label style="font-size: 0.85rem; color: #94A3B8; display: block; margin-bottom: 4px;">Headline Hero</label>
+              <input type="text" id="editHeadline" class="admin-input-dark" value="Butuh Teknisi? Booking Service Tanpa Ribet.">
+            </div>
+            <div style="margin-bottom: 14px;">
+              <label style="font-size: 0.85rem; color: #94A3B8; display: block; margin-bottom: 4px;">Sub-headline Hero</label>
+              <textarea id="editSubheadline" class="admin-input-dark" rows="3">Service AC, kulkas, mesin cuci, dan elektronik rumah dengan teknisi berpengalaman yang siap datang langsung ke lokasi rumah atau kantor Anda.</textarea>
+            </div>
+            <button class="btn btn-primary" onclick="window.saveHomepageContent()">Terapkan Perubahan</button>
+          </div>
+        </div>
+
+        <!-- TAB 6: SETTINGS -->
+        <div class="admin-tab-pane" id="tabSettings">
+          <div class="admin-card">
+            <h3>Pengaturan Sistem & Sinkronisasi API</h3>
+            <div style="margin-bottom: 12px;">
+              <label style="font-size: 0.8rem; color: #94A3B8;">Status Server Database:</label>
+              <div style="color: var(--success); font-weight: 700; margin-top: 4px;">● Terhubung</div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- FIREBASE INTEGRATED MODULAR ENGINE -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { 
+      getFirestore, 
+      collection, 
+      doc, 
+      setDoc, 
+      updateDoc, 
+      deleteDoc, 
+      onSnapshot, 
+      query, 
+      orderBy 
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+    // Konfigurasi Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyBZyvA6_cy2k42eU_Ktt13wFVTDYgZaXkI",
+      authDomain: "semua-web-f8628.firebaseapp.com",
+      projectId: "semua-web-f8628",
+      storageBucket: "semua-web-f8628.firebasestorage.app",
+      messagingSenderId: "220101602354",
+      appId: "1:220101602354:web:c1e942a2f1971a0bc9e02b"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const colBookings = collection(db, "fixpro_bookings");
+    const colServices = collection(db, "fixpro_services");
+    const colTechnicians = collection(db, "fixpro_technicians");
+
+    let bookingsState = [];
+    let servicesState = [];
+    let techniciansState = [];
+    let currentlyTrackedId = null;
+
+    let currentBookingData = {
+      step: 1,
+      service: "",
+      problem: "Tidak Dingin / Kurang Dingin",
+      date: "",
+      time: "08:00 - 10:00 (Pagi)",
+      name: "",
+      wa: "",
+      address: ""
+    };
+
+    const defaultServices = [
+      { id: "svc_1", name: "Service AC", price: "Rp 75.000", scope: "Pembersihan indoor, outdoor, filter, cek freon", desc: "Cuci rutin, perbaikan pipa bocor, dan isi ulang freon R32/R410/R22.", img: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80" },
+      { id: "svc_2", name: "Service Kulkas", price: "Rp 90.000", scope: "Pengecekan thermostat, kompresor, relay", desc: "Pengecekan kompresor mati, freezer tidak dingin, dan perbaikan kelistrikan.", img: "https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?auto=format&fit=crop&w=600&q=80" },
+      { id: "svc_3", name: "Service Mesin Cuci", price: "Rp 85.000", scope: "Ganti kapasitor, dinamo, sensor air", desc: "Reparasi mesin cuci 1 dan 2 tabung, motor pengering, dan pembuangan mampet.", img: "https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=600&q=80" },
+      { id: "svc_4", name: "Service TV", price: "Rp 95.000", scope: "Penggantian backlight LED, mainboard", desc: "Perbaikan TV LED/Smart TV layar gelap, mati total, atau tidak ada suara.", img: "https://images.unsplash.com/photo-1593784991095-a205069470b6?auto=format&fit=crop&w=600&q=80" },
+      { id: "svc_5", name: "Service Pompa Air", price: "Rp 80.000", scope: "Cek pipa hisap, ganti switch otomatis", desc: "Perbaikan pompa air berdengung, gulung dinamo, dan penggantian seal bocor.", img: "https://images.unsplash.com/photo-1585338107529-13afc5f02586?auto=format&fit=crop&w=600&q=80" },
+      { id: "svc_6", name: "Elektronik Lainnya", price: "Rp 65.000", scope: "Pemeriksaan elemen pemanas & saklar", desc: "Reparasi dispenser galon, microwave, water heater listrik, dan instalasi rumah.", img: "https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=600&q=80" }
+    ];
+
+    const defaultTechs = [
+      { id: "tech_1", name: "Andi Prasetyo", specialty: "Spesialis AC & Pendingin Ruang", rating: "4.9", count: "850+ Service", online: true, img: "https://images.unsplash.com/photo-1540569014015-19a7be504e3a?auto=format&fit=crop&w=200&q=80" },
+      { id: "tech_2", name: "Budi Hartono", specialty: "Teknisi Mesin Cuci & Kulkas", rating: "4.8", count: "620+ Service", online: true, img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=200&q=80" },
+      { id: "tech_3", name: "Rian Suhendra", specialty: "Spesialis TV & Elektronik Rumah", rating: "4.9", count: "490+ Service", online: true, img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80" }
+    ];
+
+    function initFirebaseRealtime() {
+      // 1. Realtime Bookings Listener
+      const qBookings = query(colBookings, orderBy("createdAt", "desc"));
+      onSnapshot(qBookings, (snapshot) => {
+        bookingsState = [];
+        snapshot.forEach(docSnap => {
+          bookingsState.push({ docId: docSnap.id, ...docSnap.data() });
+        });
+        renderBookingsRealtime();
+
+        if (currentlyTrackedId) {
+          const match = bookingsState.find(b => b.id === currentlyTrackedId);
+          if (match) renderTrackingTimeline(match);
+        }
+      });
+
+      // 2. Realtime Services Listener
+      onSnapshot(colServices, (snapshot) => {
+        if (snapshot.empty) {
+          defaultServices.forEach(s => setDoc(doc(db, "fixpro_services", s.id), s));
+        } else {
+          servicesState = [];
+          snapshot.forEach(docSnap => servicesState.push({ docId: docSnap.id, ...docSnap.data() }));
+          renderServicesRealtime();
+        }
+      });
+
+      // 3. Realtime Technicians Listener
+      onSnapshot(colTechnicians, (snapshot) => {
+        if (snapshot.empty) {
+          defaultTechs.forEach(t => setDoc(doc(db, "fixpro_technicians", t.id), t));
+        } else {
+          techniciansState = [];
+          snapshot.forEach(docSnap => techniciansState.push({ docId: docSnap.id, ...docSnap.data() }));
+          renderTechniciansRealtime();
+        }
+      });
+    }
+
+    /* ==========================================================
+       RENDER FUNCTIONS
+    =========================================================== */
+    function renderServicesRealtime() {
+      const grid = document.getElementById("servicesGridContainer");
+      const pTable = document.getElementById("pricingTableBody");
+      const bOpts = document.getElementById("serviceOptions");
+      const qSelect = document.getElementById("quickServiceSelect");
+      const aTable = document.getElementById("adminServicesTable");
+      const badge = document.getElementById("serviceCountBadge");
+
+      if (badge) badge.innerText = servicesState.length;
+
+      if (grid) {
+        grid.innerHTML = servicesState.map(s => `
+          <div class="service-card">
+            <div class="service-card-img-wrap"><img src="${s.img}" alt="${s.name}" onerror="this.src='https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80'"></div>
+            <div class="service-card-body">
+              <h3>${s.name}</h3>
+              <p>${s.desc}</p>
+              <div class="service-card-footer">
+                <div><div class="price-label">Mulai Dari</div><div class="price-amount">${s.price}</div></div>
+                <button class="btn btn-outline" onclick="window.selectServiceForBooking('${s.name}')">Pilih Jasa</button>
+              </div>
+            </div>
+          </div>
+        `).join("");
+      }
+
+      if (pTable) {
+        pTable.innerHTML = servicesState.map(s => `
+          <tr>
+            <td><strong>${s.name}</strong></td>
+            <td>${s.scope}</td>
+            <td><span style="font-weight:700; color:var(--primary);">Mulai ${s.price}</span></td>
+          </tr>
+        `).join("");
+      }
+
+      if (bOpts) {
+        if (!currentBookingData.service && servicesState.length > 0) currentBookingData.service = servicesState[0].name;
+        bOpts.innerHTML = servicesState.map(s => `
+          <div class="select-card ${s.name === currentBookingData.service ? 'selected' : ''}" onclick="window.pickServiceOption(this, '${s.name}')">
+            <h4>${s.name}</h4>
+            <p>Mulai ${s.price}</p>
+          </div>
+        `).join("");
+      }
+
+      if (qSelect) {
+        qSelect.innerHTML = servicesState.map(s => `<option value="${s.name}">${s.name} — Mulai ${s.price}</option>`).join("");
+      }
+
+      if (aTable) {
+        aTable.innerHTML = servicesState.map(s => `
+          <tr>
+            <td><strong>${s.name}</strong></td>
+            <td style="color:var(--primary); font-weight:700;">${s.price}</td>
+            <td>${s.scope}</td>
+            <td>
+              <button style="color:#38BDF8; margin-right:8px;" onclick="window.editServiceItem('${s.docId}')">Edit</button>
+              <button style="color:#EF4444;" onclick="window.deleteServiceItem('${s.docId}')">Hapus</button>
+            </td>
+          </tr>
+        `).join("");
+      }
+      lucide.createIcons();
+    }
+
+    function renderTechniciansRealtime() {
+      const techGrid = document.getElementById("techniciansGrid");
+      const adminList = document.getElementById("adminTechList");
+      const dashActiveTechs = document.getElementById("dashActiveTechs");
+      const headerTechCount = document.getElementById("headerTechOnlineCount");
+      const badge = document.getElementById("techCountBadge");
+
+      const onlineCount = techniciansState.filter(t => t.online).length;
+      if (dashActiveTechs) dashActiveTechs.innerText = `${onlineCount} Online`;
+      if (headerTechCount) headerTechCount.innerText = `${onlineCount} Teknisi Online`;
+      if (badge) badge.innerText = techniciansState.length;
+
+      if (techGrid) {
+        techGrid.innerHTML = techniciansState.map(t => `
+          <div class="tech-card">
+            <img class="tech-avatar" src="${t.img}" alt="${t.name}" onerror="this.src='https://images.unsplash.com/photo-1540569014015-19a7be504e3a?auto=format&fit=crop&w=200&q=80'">
+            <div class="tech-name">${t.name}</div>
+            <div class="tech-specialty">${t.specialty}</div>
+            <span class="badge ${t.online ? 'badge-online' : 'badge-primary'}" style="margin-bottom:12px;">
+              ${t.online ? 'Online & Siap Kunjungan' : 'Sedang Istirahat / Libur'}
+            </span>
+            <div class="tech-stats">
+              <div>★ ${t.rating}</div>
+              <div>•</div>
+              <div>${t.count}</div>
+            </div>
+          </div>
+        `).join("");
+      }
+
+      if (adminList) {
+        adminList.innerHTML = techniciansState.map(t => `
+          <div style="background:#10141F; border:1px solid #23293B; padding:14px; border-radius:8px; display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+              <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+                <img src="${t.img}" style="width:40px; height:40px; border-radius:50%; object-fit:cover;">
+                <div>
+                  <strong style="color:#fff; font-size:0.95rem;">${t.name}</strong>
+                  <div style="color:#94A3B8; font-size:0.78rem;">${t.specialty}</div>
+                </div>
+              </div>
+              <div style="font-size:0.8rem; color:#CBD5E1; margin-bottom:6px;">Rating: ★ ${t.rating} | ${t.count}</div>
+              <div><span class="badge ${t.online ? 'badge-online' : 'badge-primary'}" style="font-size:0.72rem; padding:2px 8px;">${t.online ? 'Online' : 'Offline'}</span></div>
+            </div>
+            <div style="display:flex; gap:8px; margin-top:12px; border-top:1px solid #23293B; padding-top:8px;">
+              <button style="color:#38BDF8; font-size:0.8rem;" onclick="window.editTechItem('${t.docId}')">Edit Data</button>
+              <button style="color:#EF4444; font-size:0.8rem;" onclick="window.deleteTechItem('${t.docId}')">Hapus</button>
+            </div>
+          </div>
+        `).join("");
+      }
+      lucide.createIcons();
+    }
+
+    function renderBookingsRealtime() {
+      const rContainer = document.getElementById("adminRecentBookings");
+      const fContainer = document.getElementById("adminFullBookingTable");
+      const badge = document.getElementById("bookingCountBadge");
+      const dTotal = document.getElementById("dashTotalBookings");
+
+      const total = bookingsState.length;
+      if (dTotal) dTotal.innerText = `${total} Pesanan`;
+      if (badge) badge.innerText = total;
+
+      if (rContainer) {
+        if (total === 0) {
+          rContainer.innerHTML = `<tr><td colspan="6" style="text-align:center; color:#94A3B8; padding:24px;">Belum ada data booking masuk.</td></tr>`;
+        } else {
+          rContainer.innerHTML = bookingsState.slice(0, 5).map(b => `
+            <tr>
+              <td><strong>${b.id}</strong></td>
+              <td>${b.name}</td>
+              <td>${b.wa}</td>
+              <td>${b.service}</td>
+              <td>${b.date}</td>
+              <td><span class="badge ${b.status.includes('Selesai') ? 'badge-online' : 'badge-primary'}">${b.status}</span></td>
+            </tr>
+          `).join("");
+        }
+      }
+
+      if (fContainer) {
+        if (total === 0) {
+          fContainer.innerHTML = `<tr><td colspan="8" style="text-align:center; color:#94A3B8; padding:24px;">Belum ada pesanan aktif. Lakukan booking di halaman depan untuk menguji.</td></tr>`;
+        } else {
+          fContainer.innerHTML = bookingsState.map(b => `
+            <tr>
+              <td><strong>${b.id}</strong></td>
+              <td>${b.name}</td>
+              <td>${b.wa}</td>
+              <td>${b.service}</td>
+              <td>${b.date} (${b.time})</td>
+              <td style="max-width:150px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${b.address}</td>
+              <td>
+                <select class="admin-input-dark" style="padding:4px 6px; margin:0; font-size:0.8rem;" onchange="window.updateBookingStatus('${b.docId}', this.value)">
+                  <option ${b.status === 'Booking Diterima' ? 'selected' : ''}>Booking Diterima</option>
+                  <option ${b.status === 'Teknisi Ditugaskan' ? 'selected' : ''}>Teknisi Ditugaskan</option>
+                  <option ${b.status === 'Teknisi Menuju Lokasi' ? 'selected' : ''}>Teknisi Menuju Lokasi</option>
+                  <option ${b.status === 'Service Berlangsung' ? 'selected' : ''}>Service Berlangsung</option>
+                  <option ${b.status === 'Service Selesai' ? 'selected' : ''}>Service Selesai</option>
+                  <option ${b.status === 'Dibatalkan' ? 'selected' : ''}>Dibatalkan</option>
+                </select>
+              </td>
+              <td><button style="color:#EF4444; font-size:0.8rem;" onclick="window.deleteBooking('${b.docId}')">Hapus</button></td>
+            </tr>
+          `).join("");
+        }
+      }
+    }
+
+    /* ==========================================================
+       ACTIONS: FIREBASE DB CRUD
+    =========================================================== */
+    window.submitFinalBooking = async function() {
+      const bookingId = `BK-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
+      const newBooking = {
+        id: bookingId,
+        name: currentBookingData.name,
+        wa: currentBookingData.wa,
+        service: currentBookingData.service,
+        problem: currentBookingData.problem,
+        date: currentBookingData.date,
+        time: currentBookingData.time,
+        address: currentBookingData.address,
+        status: "Booking Diterima",
+        createdAt: new Date().toISOString()
+      };
+
+      try {
+        await setDoc(doc(db, "fixpro_bookings", bookingId), newBooking);
+
+        for (let i = 1; i <= 6; i++) {
+          document.getElementById(`paneStep${i}`).classList.remove("active");
+        }
+        document.getElementById("paneStepSuccess").classList.add("active");
+        document.getElementById("bookingNavActions").style.display = "none";
+
+        document.getElementById("successBookingId").innerText = bookingId;
+        document.getElementById("successService").innerText = newBooking.service;
+        document.getElementById("successSchedule").innerText = `${newBooking.date} / ${newBooking.time}`;
+      } catch (e) {
+        alert("Gagal mengirim booking: " + e.message);
+      }
+    };
+
+    window.updateBookingStatus = async function(docId, newStatus) {
+      try {
+        await updateDoc(doc(db, "fixpro_bookings", docId), { status: newStatus });
+      } catch (e) {
+        alert("Gagal update status: " + e.message);
+      }
+    };
+
+    window.deleteBooking = async function(docId) {
+      if (confirm("Hapus pesanan ini dari database?")) {
+        await deleteDoc(doc(db, "fixpro_bookings", docId));
+      }
+    };
+
+    window.saveServiceItem = async function() {
+      const docId = document.getElementById("serviceEditIndex").value;
+      const name = document.getElementById("svcName").value.trim();
+      const price = document.getElementById("svcPrice").value.trim();
+      const scope = document.getElementById("svcScope").value.trim();
+      const img = document.getElementById("svcImg").value.trim() || "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80";
+      const desc = document.getElementById("svcDesc").value.trim();
+
+      const targetId = (docId !== "-1") ? docId : "svc_" + Date.now();
+      await setDoc(doc(db, "fixpro_services", targetId), { id: targetId, name, price, scope, img, desc });
+
+      window.resetServiceForm();
+      alert("Katalog layanan berhasil diperbarui!");
+    };
+
+    window.editServiceItem = function(docId) {
+      const s = servicesState.find(x => x.docId === docId);
+      if (!s) return;
+      document.getElementById("serviceEditIndex").value = docId;
+      document.getElementById("svcName").value = s.name;
+      document.getElementById("svcPrice").value = s.price;
+      document.getElementById("svcScope").value = s.scope;
+      document.getElementById("svcImg").value = s.img;
+      document.getElementById("svcDesc").value = s.desc;
+      document.getElementById("formServiceTitle").innerText = "Edit Layanan: " + s.name;
+      document.getElementById("btnSaveService").innerText = "Simpan Perubahan";
+    };
+
+    window.deleteServiceItem = async function(docId) {
+      if (confirm("Hapus layanan ini dari katalog Firestore?")) {
+        await deleteDoc(doc(db, "fixpro_services", docId));
+      }
+    };
+
+    window.resetServiceForm = function() {
+      document.getElementById("serviceForm").reset();
+      document.getElementById("serviceEditIndex").value = "-1";
+      document.getElementById("formServiceTitle").innerText = "Tambah Layanan Baru ke Katalog";
+      document.getElementById("btnSaveService").innerText = "Tambah ke Katalog";
+    };
+
+    window.saveTechItem = async function() {
+      const docId = document.getElementById("techEditIndex").value;
+      const name = document.getElementById("techNameInput").value.trim();
+      const specialty = document.getElementById("techSpecInput").value.trim();
+      const rating = document.getElementById("techRatingInput").value.trim() || "4.9";
+      const count = document.getElementById("techCountInput").value.trim() || "50+ Service";
+      const online = document.getElementById("techStatusInput").value === "true";
+      const img = document.getElementById("techImgInput").value.trim() || "https://images.unsplash.com/photo-1540569014015-19a7be504e3a?auto=format&fit=crop&w=200&q=80";
+
+      const targetId = (docId !== "-1") ? docId : "tech_" + Date.now();
+      await setDoc(doc(db, "fixpro_technicians", targetId), { id: targetId, name, specialty, rating, count, online, img });
+
+      window.resetTechForm();
+      alert("Data teknisi berhasil disimpan ke Firestore!");
+    };
+
+    window.editTechItem = function(docId) {
+      const t = techniciansState.find(x => x.docId === docId);
+      if (!t) return;
+      document.getElementById("techEditIndex").value = docId;
+      document.getElementById("techNameInput").value = t.name;
+      document.getElementById("techSpecInput").value = t.specialty;
+      document.getElementById("techRatingInput").value = t.rating;
+      document.getElementById("techCountInput").value = t.count;
+      document.getElementById("techStatusInput").value = t.online ? "true" : "false";
+      document.getElementById("techImgInput").value = t.img;
+      document.getElementById("formTechTitle").innerText = "Edit Teknisi: " + t.name;
+      document.getElementById("btnSaveTech").innerText = "Simpan Perubahan";
+    };
+
+    window.deleteTechItem = async function(docId) {
+      if (confirm("Hapus teknisi ini dari Firestore?")) {
+        await deleteDoc(doc(db, "fixpro_technicians", docId));
+      }
+    };
+
+    window.resetTechForm = function() {
+      document.getElementById("techForm").reset();
+      document.getElementById("techEditIndex").value = "-1";
+      document.getElementById("formTechTitle").innerText = "Tambah Teknisi Baru";
+      document.getElementById("btnSaveTech").innerText = "Simpan Data Teknisi";
+    };
+
+    /* ==========================================================
+       PELACAKAN PESANAN (TIMELINE REALTIME)
+    =========================================================== */
+    window.searchLiveTracking = function() {
+      const q = document.getElementById("trackQueryInput").value.trim().toLowerCase();
+      if (!q) { alert("Harap masukkan nomor booking atau nomor WhatsApp."); return; }
+
+      const found = bookingsState.find(b => b.id.toLowerCase().includes(q) || b.wa.includes(q));
+      if (found) {
+        currentlyTrackedId = found.id;
+        renderTrackingTimeline(found);
+      } else {
+        alert("Nomor booking atau WhatsApp tidak ditemukan di catatan aktif.");
+      }
+    };
+
+    function renderTrackingTimeline(booking) {
+      const container = document.getElementById("trackingResultArea");
+      const stages = [
+        { key: "Booking Diterima", title: "Booking Diterima", desc: "Data pesanan terverifikasi di sistem." },
+        { key: "Teknisi Ditugaskan", title: "Teknisi Ditugaskan", desc: "Teknisi siap siaga & konfirmasi jadwal." },
+        { key: "Teknisi Menuju Lokasi", title: "Teknisi Menuju Lokasi", desc: "Perjalanan ke alamat Anda." },
+        { key: "Service Berlangsung", title: "Service Berlangsung", desc: "Pemeriksaan & pengerjaan di lokasi." },
+        { key: "Service Selesai", title: "Service Selesai", desc: "Pekerjaan tuntas & garansi resmi 30 hari aktif." }
+      ];
+
+      if (booking.status === "Dibatalkan") {
+        container.innerHTML = `
+          <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:12px;">
+            <div><span style="font-size:0.8rem; color:var(--text-muted);">Nomor Booking</span><h4>${booking.id}</h4></div>
+            <div style="text-align:right;"><span style="font-size:0.8rem; color:var(--text-muted);">Layanan</span><h4>${booking.service}</h4></div>
+          </div>
+          <div style="background:#FEF2F2; border:1px solid #FCA5A5; color:#991B1B; padding:20px; border-radius:12px; margin-top:20px; text-align:center;">
+            <i data-lucide="alert-triangle" style="width:32px; height:32px; margin:0 auto 8px; color:#EF4444;"></i>
+            <h4 style="margin-bottom:4px;">Pesanan Dibatalkan</h4>
+            <p style="font-size:0.85rem;">Pesanan ini telah dibatalkan.</p>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      const currentIdx = stages.findIndex(s => s.key === booking.status);
+      const activeIndex = currentIdx >= 0 ? currentIdx : 0;
+
+      let timelineHtml = stages.map((stage, idx) => {
+        let nodeClass = (idx < activeIndex) ? "done" : (idx === activeIndex ? "active" : "");
+        let dotContent = (idx < activeIndex) ? `<i data-lucide="check" style="width:12px; height:12px; color:#fff;"></i>` : "";
+
+        return `
+          <div class="timeline-node ${nodeClass}">
+            <div class="timeline-dot">${dotContent}</div>
+            <div class="timeline-content">
+              <h4 style="${idx === activeIndex ? 'color:var(--primary);' : ''}">${stage.title}</h4>
+              <p>${stage.desc}</p>
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      container.innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:12px;">
+          <div><span style="font-size:0.8rem; color:var(--text-muted);">Nomor Booking</span><h4>${booking.id}</h4></div>
+          <div style="text-align:right;"><span style="font-size:0.8rem; color:var(--text-muted);">Layanan</span><h4>${booking.service}</h4></div>
+        </div>
+        <div class="tracking-timeline">${timelineHtml}</div>
+      `;
+      lucide.createIcons();
+    }
+
+    window.checkSpecificBookingId = function() {
+      const id = document.getElementById("successBookingId").innerText.trim();
+      document.getElementById("trackQueryInput").value = id;
+      window.searchLiveTracking();
+    };
+
+    /* ==========================================================
+       FRONTEND STEPPER & UTILITY
+    =========================================================== */
+    window.pickServiceOption = function(el, name) {
+      document.querySelectorAll("#serviceOptions .select-card").forEach(c => c.classList.remove("selected"));
+      el.classList.add("selected");
+      currentBookingData.service = name;
+    };
+
+    window.pickProblemOption = function(el, prob) {
+      document.querySelectorAll("#problemOptions .select-card").forEach(c => c.classList.remove("selected"));
+      el.classList.add("selected");
+      currentBookingData.problem = prob;
+    };
+
+    window.pickTimeOption = function(el, time) {
+      el.parentElement.querySelectorAll(".select-card").forEach(c => c.classList.remove("selected"));
+      el.classList.add("selected");
+      currentBookingData.time = time;
+    };
+
+    window.selectServiceForBooking = function(name) {
+      currentBookingData.service = name;
+      renderServicesRealtime();
+      window.location.href = "#booking";
+    };
+
+    window.proceedQuickBooking = function() {
+      const val = document.getElementById("quickServiceSelect").value;
+      window.selectServiceForBooking(val);
+    };
+
+    window.navigateBookingStep = function(dir) {
+      const next = currentBookingData.step + dir;
+      if (dir > 0) {
+        if (currentBookingData.step === 3) {
+          const dt = document.getElementById("bookingDate").value;
+          if (!dt) { alert("Harap tentukan tanggal kunjungan."); return; }
+          currentBookingData.date = dt;
+        }
+        if (currentBookingData.step === 5) {
+          const nm = document.getElementById("custName").value.trim();
+          const wa = document.getElementById("custWa").value.trim();
+          const addr = document.getElementById("custAddress").value.trim();
+          if (!nm || !wa || !addr) { alert("Harap lengkapi nama, WhatsApp, dan alamat."); return; }
+
+          currentBookingData.name = nm;
+          currentBookingData.wa = wa;
+          currentBookingData.address = addr;
+
+          document.getElementById("summaryService").innerText = currentBookingData.service;
+          const custom = document.getElementById("customProblem").value.trim();
+          document.getElementById("summaryProblem").innerText = custom ? `${currentBookingData.problem} (${custom})` : currentBookingData.problem;
+          document.getElementById("summarySchedule").innerText = `${currentBookingData.date} / ${currentBookingData.time}`;
+          document.getElementById("summaryCustomer").innerText = `${currentBookingData.name} (${currentBookingData.wa})`;
+          document.getElementById("summaryAddress").innerText = currentBookingData.address;
+        }
+        if (currentBookingData.step === 6) {
+          window.submitFinalBooking();
+          return;
+        }
+      }
+      currentBookingData.step = next;
+      renderBookingStep();
+    };
+
+    function renderBookingStep() {
+      for (let i = 1; i <= 6; i++) {
+        const ind = document.getElementById(`stepIndicator${i}`);
+        ind.classList.remove("active", "completed");
+        if (i < currentBookingData.step) ind.classList.add("completed");
+        else if (i === currentBookingData.step) ind.classList.add("active");
+
+        const pane = document.getElementById(`paneStep${i}`);
+        if (pane) pane.classList.remove("active");
+      }
+      const activePane = document.getElementById(`paneStep${currentBookingData.step}`);
+      if (activePane) activePane.classList.add("active");
+
+      const prev = document.getElementById("prevStepBtn");
+      const next = document.getElementById("nextStepBtn");
+      if (currentBookingData.step === 1) {
+        prev.style.visibility = "hidden";
+        next.innerText = "Lanjut ke Keluhan";
+      } else if (currentBookingData.step === 6) {
+        prev.style.visibility = "visible";
+        next.innerText = "KONFIRMASI BOOKING SEKARANG";
+      } else {
+        prev.style.visibility = "visible";
+        next.innerText = "Lanjutkan";
+      }
+    }
+
+    window.resetBookingFlow = function() {
+      currentBookingData.step = 1;
+      document.getElementById("paneStepSuccess").classList.remove("active");
+      document.getElementById("bookingNavActions").style.display = "flex";
+      document.getElementById("custName").value = "";
+      document.getElementById("custWa").value = "";
+      document.getElementById("custAddress").value = "";
+      renderBookingStep();
+    };
+
+    window.verifyAreaCoverage = function() {
+      const q = document.getElementById("areaSearchInput").value.trim().toLowerCase();
+      const fb = document.getElementById("areaCheckFeedback");
+      if (!q) return;
+
+      const areas = ["kedaton", "way halim", "sukarame", "tanjung karang", "teluk betung", "rajabasa", "kemiling"];
+      const match = areas.some(a => q.includes(a) || a.includes(q));
+      fb.style.display = "block";
+      if (match) {
+        fb.style.background = "#DCFCE7";
+        fb.style.color = "#15803D";
+        fb.innerText = "✓ Ya, teknisi kami siap melayani area Anda!";
+      } else {
+        fb.style.background = "#FEF3C7";
+        fb.style.color = "#B45309";
+        fb.innerText = "Area belum terjangkau jadwal otomatis. Hubungi admin untuk jadwal khusus.";
+      }
+    };
+
+    /* ==========================================================
+       ADMIN AUTH & UI MODAL
+    =========================================================== */
+    const adminModal = document.getElementById("adminLoginModal");
+    const adminPanel = document.getElementById("adminPanelOverlay");
+
+    document.getElementById("adminLoginFooterBtn").addEventListener("click", () => adminModal.classList.add("open"));
+    document.getElementById("openAdminLoginBottom").addEventListener("click", () => adminModal.classList.add("open"));
+    document.getElementById("closeLoginModal").addEventListener("click", () => adminModal.classList.remove("open"));
+
+    window.handleAdminAuth = function() {
+      const u = document.getElementById("adminUserField").value.trim();
+      const p = document.getElementById("adminPassField").value.trim();
+      if (u === "kelolaweb2026" && p === "kelolaweb2026") {
+        adminModal.classList.remove("open");
+        adminPanel.classList.add("open");
+        lucide.createIcons();
+      } else {
+        alert("Username atau Password Admin salah!");
+      }
+    };
+
+    window.closeAdminPanel = function() {
+      adminPanel.classList.remove("open");
+    };
+
+    window.switchAdminTab = function(tabId) {
+      document.querySelectorAll(".admin-tab-pane").forEach(p => p.classList.remove("active"));
+      document.querySelectorAll(".admin-nav-item").forEach(n => n.classList.remove("active"));
+      document.getElementById(tabId).classList.add("active");
+      event.currentTarget.classList.add("active");
+      lucide.createIcons();
+    };
+
+    window.saveHomepageContent = function() {
+      const b = document.getElementById("editBrandName").value.trim();
+      const h = document.getElementById("editHeadline").value.trim();
+      const s = document.getElementById("editSubheadline").value.trim();
+      if (b) {
+        document.getElementById("brandNameText").innerText = b;
+        document.getElementById("footerBrandName").innerText = b;
+      }
+      if (h) document.getElementById("heroHeadline").innerText = h;
+      if (s) document.getElementById("heroSubheadline").innerText = s;
+      alert("Perubahan teks berhasil disimpan!");
+    };
+
+    document.addEventListener("DOMContentLoaded", () => {
+      initFirebaseRealtime();
+
+      const today = new Date();
+      today.setDate(today.getDate() + 1);
+      const str = today.toISOString().split("T")[0];
+      const el = document.getElementById("bookingDate");
+      if (el) { el.value = str; el.min = new Date().toISOString().split("T")[0]; currentBookingData.date = str; }
+
+      const header = document.getElementById("floatingHeader");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 40) header.classList.add("scrolled");
+        else header.classList.remove("scrolled");
+      });
+
+      const openBtn = document.getElementById("openMobileMenu");
+      const closeBtn = document.getElementById("closeMobileMenu");
+      const overlay = document.getElementById("mobileOverlay");
+      const drawer = document.getElementById("mobileDrawer");
+
+      openBtn.addEventListener("click", () => { overlay.classList.add("active"); drawer.classList.add("active"); });
+      closeBtn.addEventListener("click", () => { overlay.classList.remove("active"); drawer.classList.remove("active"); });
+      overlay.addEventListener("click", () => { overlay.classList.remove("active"); drawer.classList.remove("active"); });
+      document.querySelectorAll(".drawer-link").forEach(l => l.addEventListener("click", () => {
+        overlay.classList.remove("active"); drawer.classList.remove("active");
+      }));
+
+      document.querySelectorAll(".faq-item").forEach(item => {
+        item.querySelector(".faq-question").addEventListener("click", () => {
+          const active = item.classList.contains("active");
+          document.querySelectorAll(".faq-item").forEach(i => i.classList.remove("active"));
+          if (!active) item.classList.add("active");
+        });
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,2574 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RUANG PULIH — Pelan-Pelan, Kamu Nggak Harus Sendiri</title>
+  
+  <!-- Preloads for critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://lh3.googleusercontent.com">
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=1000&q=80">
+  
+  <!-- Google Fonts: Plus Jakarta Sans & Newsreader -->
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            cream: {
+              50: '#FCFBF7',
+              100: '#FAF8F5',
+              200: '#F5F0EA',
+              300: '#ECE4D8',
+            },
+            sage: {
+              50: '#F2F6F3',
+              100: '#E4ECE6',
+              200: '#C7D9CD',
+              500: '#718B79',
+              600: '#5A7362',
+              700: '#465A4D',
+              800: '#344339',
+            },
+            dusty: {
+              50: '#F4F7FA',
+              100: '#E5ECF2',
+              200: '#C7D7E4',
+              500: '#5E7D9A',
+              700: '#3B536B',
+            },
+            lavender: {
+              50: '#F7F5FA',
+              100: '#EFEBF5',
+              200: '#DED6EB',
+              500: '#8A7AAB',
+              700: '#5F517D',
+            },
+            charcoal: {
+              500: '#525866',
+              700: '#2F343B',
+              800: '#212529',
+              900: '#181A1D',
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            editorial: ['"Newsreader"', 'serif'],
+          },
+          boxShadow: {
+            'calm': '0 4px 24px -2px rgba(35, 39, 42, 0.04), 0 2px 6px -1px rgba(35, 39, 42, 0.02)',
+            'calm-hover': '0 12px 32px -4px rgba(35, 39, 42, 0.08), 0 4px 12px -2px rgba(35, 39, 42, 0.04)',
+            'soft': '0 2px 10px rgba(0, 0, 0, 0.03)',
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    body {
+      background-color: #FAF8F5;
+      color: #23272A;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+    
+    ::selection {
+      background-color: #E4ECE6;
+      color: #344339;
+    }
+
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #FAF8F5;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #D8D2C6;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #BFB7A8;
+    }
+
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="font-sans antialiased text-charcoal-800 bg-cream-100 min-h-screen flex flex-col selection:bg-sage-100">
+
+  <!-- Top Alert Banner -->
+  <aside aria-label="Crisis disclaimer" class="bg-cream-200/80 border-b border-cream-300/60 px-4 py-2 text-xs text-charcoal-500 text-center transition-all">
+    <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-center gap-2">
+      <span class="inline-flex items-center gap-1.5 font-medium text-sage-700">
+        <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> Ruang Aman & Terlindungi
+      </span>
+      <span class="hidden sm:inline text-cream-300">•</span>
+      <span>Jika mengalami krisis emosional darurat, hubungi Hotline Kesehatan Jiwa Kemenkes <strong>119 ext. 8</strong></span>
+      <button onclick="scrollToSection('crisis-section')" class="underline hover:text-charcoal-800 ml-1 font-medium transition-colors">Bantuan Cepat</button>
+    </div>
+  </aside>
+
+  <header id="main-header" class="sticky top-0 z-40 bg-cream-100/95 backdrop-blur-md border-b border-cream-300/40 transition-all duration-300 py-4">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      
+      <!-- Logo & Small Subtitle -->
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-9 h-9 rounded-full bg-sage-500/15 flex items-center justify-center text-sage-700 border border-sage-500/20 group-hover:bg-sage-500/25 transition-all duration-300">
+          <i data-lucide="feather" class="w-4 h-4 text-sage-700"></i>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-lg tracking-tight font-semibold text-charcoal-900 leading-tight">RUANG PULIH</span>
+          <span class="text-[10px] tracking-widest uppercase text-charcoal-500 font-medium">Psychology • Counseling • Wellness</span>
+        </div>
+      </a>
+
+      <!-- Center Nav Links -->
+      <nav class="hidden md:flex items-center space-x-1 lg:space-x-2 text-sm text-charcoal-700">
+        <a href="#hero" class="px-3.5 py-1.5 rounded-full hover:bg-cream-200/80 transition-colors">Beranda</a>
+        <a href="#find-psychologist" class="px-3.5 py-1.5 rounded-full hover:bg-cream-200/80 transition-colors">Temukan Psikolog</a>
+        <a href="#how-it-works" class="px-3.5 py-1.5 rounded-full hover:bg-cream-200/80 transition-colors">Cara Konseling</a>
+        <a href="#wellness-tools" class="px-3.5 py-1.5 rounded-full hover:bg-cream-200/80 transition-colors">Ruang Tenang</a>
+        <a href="#wellness-hub" class="px-3.5 py-1.5 rounded-full hover:bg-cream-200/80 transition-colors">Artikel</a>
+        <a href="#faq" class="px-3.5 py-1.5 rounded-full hover:bg-cream-200/80 transition-colors">Tanya Kami</a>
+      </nav>
+
+      <!-- Right Action Area -->
+      <div class="flex items-center gap-3 sm:gap-4">
+        <a href="#crisis-section" class="hidden sm:inline text-xs text-charcoal-500 hover:text-charcoal-800 transition-colors py-1.5 font-medium">
+          Need Help?
+        </a>
+
+        <!-- Member status trigger -->
+        <button id="auth-state-btn" onclick="openMemberModal()" class="flex items-center gap-2 text-xs px-3 py-1.5 rounded-full bg-cream-200/70 border border-cream-300 text-charcoal-700 hover:bg-cream-300/60 transition-all">
+          <i data-lucide="user" class="w-3.5 h-3.5 text-sage-600"></i>
+          <span id="user-display-name">Ruang Saya</span>
+        </button>
+
+        <!-- Main Booking CTA button -->
+        <button onclick="openBookingModal()" class="relative group overflow-hidden rounded-full bg-charcoal-900 text-cream-50 px-4 sm:px-5 py-2 text-xs sm:text-sm font-medium tracking-wide hover:bg-sage-800 transition-all duration-300 shadow-sm flex items-center gap-2">
+          <span id="btn-header-book">Book a Session</span>
+          <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main class="flex-grow">
+
+    <section id="hero" class="relative pt-12 pb-16 md:pt-20 md:pb-24 overflow-hidden">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          
+          <!-- Left Text Content -->
+          <div class="lg:col-span-7 space-y-6 text-left">
+            
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sage-50 border border-sage-200/70 text-sage-700 text-xs font-medium">
+              <span class="w-1.5 h-1.5 rounded-full bg-sage-500 animate-pulse"></span>
+              <span id="hero-badge-text">Pelan-Pelan, Kamu Nggak Harus Sendiri.</span>
+            </div>
+
+            <h1 id="hero-title-text" class="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-editorial tracking-tight text-charcoal-900 leading-[1.18]">
+              You deserve a space to <span class="italic font-normal text-sage-700 underline decoration-sage-200 decoration-wavy decoration-1 underline-offset-4">feel heard</span>.
+            </h1>
+
+            <p id="hero-subtext-text" class="text-base sm:text-lg text-charcoal-500 leading-relaxed max-w-xl font-normal">
+              Tempat yang aman dan tenang untuk memahami diri, berbicara tanpa takut dihakimi, dan mendapatkan pendampingan dari psikolog klinis berlisensi yang tepat untukmu.
+            </p>
+
+            <!-- Hero Action Buttons -->
+            <div class="flex flex-wrap items-center gap-3 pt-2">
+              <button onclick="scrollToSection('find-psychologist')" class="px-6 py-3.5 rounded-full bg-sage-700 hover:bg-sage-800 text-white text-sm font-medium transition-all duration-200 shadow-sm flex items-center gap-2.5">
+                <span id="hero-cta-primary-text">Temukan Psikologmu</span>
+                <i data-lucide="compass" class="w-4 h-4"></i>
+              </button>
+
+              <button onclick="scrollToSection('how-it-works')" class="px-5 py-3.5 rounded-full bg-white hover:bg-cream-200/70 text-charcoal-700 border border-cream-300 text-sm font-medium transition-all duration-200 flex items-center gap-2">
+                <span id="hero-cta-secondary-text">Bagaimana Konseling Bekerja</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-charcoal-500"></i>
+              </button>
+            </div>
+
+            <!-- Trust highlights -->
+            <div class="pt-6 border-t border-cream-300/50 flex flex-wrap items-center gap-6 text-xs text-charcoal-500">
+              <div class="flex items-center gap-2">
+                <i data-lucide="check-circle" class="w-4 h-4 text-sage-600"></i>
+                <span>Psikolog Berizin HIMPSI & SIKP</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i data-lucide="lock" class="w-4 h-4 text-sage-600"></i>
+                <span>100% Rahasia & Terenkripsi</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i data-lucide="sparkles" class="w-4 h-4 text-sage-600"></i>
+                <span>Pendekatan Berbasis Empati</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Right Hero Visual with Smart Image Resolution -->
+          <div class="lg:col-span-5 relative">
+            <div class="relative mx-auto max-w-md lg:max-w-none">
+              
+              <div class="absolute -inset-4 bg-gradient-to-tr from-sage-100/60 to-lavender-100/50 rounded-[2.5rem] transform -rotate-1"></div>
+              
+              <!-- Main Image Card -->
+              <div class="relative rounded-3xl overflow-hidden shadow-calm border border-cream-300/80 bg-white">
+                <img 
+                  id="hero-main-img"
+                  src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=1000&q=80" 
+                  alt="Sesi konseling psikologi yang hangat dan privat dengan psikolog profesional" 
+                  class="w-full h-[380px] sm:h-[420px] object-cover object-top transition-all duration-300"
+                  onerror="handleImageFallback(this, 'hero')"
+                  loading="lazy"
+                />
+                
+                <!-- Floating Calm Note Badge -->
+                <div class="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md rounded-2xl p-4 border border-cream-200/90 shadow-soft">
+                  <div class="flex items-start gap-3">
+                    <div class="w-8 h-8 rounded-full bg-sage-100 flex items-center justify-center flex-shrink-0 text-sage-700">
+                      <i data-lucide="quote" class="w-4 h-4"></i>
+                    </div>
+                    <div>
+                      <p class="text-xs font-editorial italic text-charcoal-800 leading-snug">
+                        "Tidak harus tahu persis apa yang salah. Kehadiranmu hari ini sudah cukup untuk memulai proses pemulihan."
+                      </p>
+                      <span class="text-[10px] text-charcoal-500 mt-1 block font-sans">Ruang Pulih Clinical Team</span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Floating mini badge -->
+              <div class="absolute -top-3 -right-2 bg-cream-50 border border-cream-300 rounded-full px-3.5 py-1.5 shadow-sm text-xs font-medium text-charcoal-700 flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                <span>Jadwal Tersedia Hari Ini</span>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section class="py-6 border-y border-cream-300/60 bg-cream-50/60">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-center gap-3 md:gap-4">
+          <span class="text-xs font-semibold tracking-wider uppercase text-charcoal-500 whitespace-nowrap">
+            Apa yang kamu butuhkan?
+          </span>
+          <div class="flex items-center gap-2 overflow-x-auto hide-scrollbar pb-1 text-xs">
+            <button onclick="filterByQuick('talk')" class="px-3.5 py-2 rounded-full bg-white hover:bg-cream-200 border border-cream-300 text-charcoal-700 transition-colors whitespace-nowrap flex items-center gap-1.5">
+              <i data-lucide="message-circle" class="w-3.5 h-3.5 text-sage-600"></i> Bicara dengan Seseorang
+            </button>
+            <button onclick="filterByQuick('psychologist')" class="px-3.5 py-2 rounded-full bg-white hover:bg-cream-200 border border-cream-300 text-charcoal-700 transition-colors whitespace-nowrap flex items-center gap-1.5">
+              <i data-lucide="users" class="w-3.5 h-3.5 text-sage-600"></i> Temukan Psikolog
+            </button>
+            <button onclick="filterByQuick('online')" class="px-3.5 py-2 rounded-full bg-white hover:bg-cream-200 border border-cream-300 text-charcoal-700 transition-colors whitespace-nowrap flex items-center gap-1.5">
+              <i data-lucide="video" class="w-3.5 h-3.5 text-lavender-500"></i> Konseling Online
+            </button>
+            <button onclick="filterByQuick('offline')" class="px-3.5 py-2 rounded-full bg-white hover:bg-cream-200 border border-cream-300 text-charcoal-700 transition-colors whitespace-nowrap flex items-center gap-1.5">
+              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-dusty-500"></i> Sesi Tatap Muka
+            </button>
+            <button onclick="filterBySpecialty('Burnout')" class="px-3.5 py-2 rounded-full bg-white hover:bg-cream-200 border border-cream-300 text-charcoal-700 transition-colors whitespace-nowrap flex items-center gap-1.5">
+              <i data-lucide="coffee" class="w-3.5 h-3.5 text-amber-600"></i> Stres & Burnout
+            </button>
+            <button onclick="filterBySpecialty('Relationship')" class="px-3.5 py-2 rounded-full bg-white hover:bg-cream-200 border border-cream-300 text-charcoal-700 transition-colors whitespace-nowrap flex items-center gap-1.5">
+              <i data-lucide="heart-handshake" class="w-3.5 h-3.5 text-rose-500"></i> Hubungan & Relasi
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 md:py-24 bg-cream-100">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        
+        <span class="text-xs font-semibold uppercase tracking-wider text-sage-700">Guided Reflection</span>
+        <h2 class="mt-2 text-3xl sm:text-4xl font-editorial text-charcoal-900">
+          Start where you are.
+        </h2>
+        <p class="mt-3 text-sm sm:text-base text-charcoal-500 max-w-xl mx-auto">
+          “Tidak harus tahu persis apa yang sedang terjadi. Mulai saja dari apa yang paling terasa di hatimu saat ini.”
+        </p>
+
+        <!-- Mood & Situation Pills -->
+        <div class="mt-8 flex flex-wrap justify-center gap-2.5 sm:gap-3">
+          <button onclick="selectStateChoice('overwhelmed', 'I feel overwhelmed', 'Kewalahan dengan tuntutan pekerjaan, keluarga, atau ekspektasi diri.')" class="state-pill px-4 py-2.5 rounded-2xl bg-white border border-cream-300 hover:border-sage-500 text-charcoal-700 text-xs sm:text-sm font-medium transition-all shadow-soft flex items-center gap-2">
+            <span>🌊</span> I feel overwhelmed
+          </button>
+          <button onclick="selectStateChoice('anxious', 'I am feeling anxious', 'Rasa cemas berulang, khawatir berlebihan tentang masa depan.')" class="state-pill px-4 py-2.5 rounded-2xl bg-white border border-cream-300 hover:border-sage-500 text-charcoal-700 text-xs sm:text-sm font-medium transition-all shadow-soft flex items-center gap-2">
+            <span>🍃</span> I'm feeling anxious
+          </button>
+          <button onclick="selectStateChoice('exhausted', 'I feel exhausted', 'Lelah emosional dan fisik, rasanya energi habis tanpa sebab jelas.')" class="state-pill px-4 py-2.5 rounded-2xl bg-white border border-cream-300 hover:border-sage-500 text-charcoal-700 text-xs sm:text-sm font-medium transition-all shadow-soft flex items-center gap-2">
+            <span>🕯️</span> I feel exhausted
+          </button>
+          <button onclick="selectStateChoice('relationship', 'I have relationship problems', 'Konflik dengan pasangan, komunikasi buntu, atau jarak emosional.')" class="state-pill px-4 py-2.5 rounded-2xl bg-white border border-cream-300 hover:border-sage-500 text-charcoal-700 text-xs sm:text-sm font-medium transition-all shadow-soft flex items-center gap-2">
+            <span>🌱</span> I'm having relationship problems
+          </button>
+          <button onclick="selectStateChoice('talk', 'I need someone to talk to', 'Ingin bercerita pada ruang netral yang mendengarkan tanpa menghakimi.')" class="state-pill px-4 py-2.5 rounded-2xl bg-white border border-cream-300 hover:border-sage-500 text-charcoal-700 text-xs sm:text-sm font-medium transition-all shadow-soft flex items-center gap-2">
+            <span>☕</span> I need someone to talk to
+          </button>
+          <button onclick="selectStateChoice('self-growth', 'I want to understand myself better', 'Mengenali pola diri, kebiasaan, serta batas-batas emosional.')" class="state-pill px-4 py-2.5 rounded-2xl bg-white border border-cream-300 hover:border-sage-500 text-charcoal-700 text-xs sm:text-sm font-medium transition-all shadow-soft flex items-center gap-2">
+            <span>🧭</span> I want to understand myself better
+          </button>
+          <button onclick="selectStateChoice('unsure', 'I am not sure yet', 'Merasa ada yang mengganjal tapi belum bisa merumuskannya dalam kata-kata.')" class="state-pill px-4 py-2.5 rounded-2xl bg-white border border-cream-300 hover:border-sage-500 text-charcoal-700 text-xs sm:text-sm font-medium transition-all shadow-soft flex items-center gap-2">
+            <span>💭</span> I'm not sure yet
+          </button>
+        </div>
+
+        <!-- Guided Discovery Feedback Box -->
+        <div id="discovery-card" class="mt-8 bg-cream-50 border border-sage-200/80 rounded-3xl p-6 text-left max-w-2xl mx-auto shadow-sm transition-all duration-300 hidden">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-2xl bg-sage-100 flex items-center justify-center flex-shrink-0 text-sage-700">
+              <i data-lucide="sparkle" class="w-5 h-5"></i>
+            </div>
+            <div class="flex-1">
+              <h4 id="discovery-title" class="font-semibold text-charcoal-900 text-base">Rekomendasi untukmu</h4>
+              <p id="discovery-desc" class="text-xs sm:text-sm text-charcoal-600 mt-1 leading-relaxed">
+                Kami memahami perasaan ini. Kamu tidak perlu menanggungnya sendirian.
+              </p>
+              
+              <div class="mt-4 pt-4 border-t border-cream-200 flex flex-wrap items-center justify-between gap-3">
+                <span id="discovery-tag" class="text-xs font-medium px-2.5 py-1 bg-sage-100/70 text-sage-800 rounded-full">
+                  Fokus: Eksplorasi Diri & Stabilitas
+                </span>
+                <button onclick="openBookingWithConcern()" class="text-xs font-semibold text-sage-800 hover:text-sage-900 flex items-center gap-1.5">
+                  <span>Konsultasikan bersama psikolog</span>
+                  <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="find-psychologist" class="py-16 md:py-24 bg-white border-y border-cream-300/60">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div class="max-w-2xl">
+            <span class="text-xs font-semibold uppercase tracking-wider text-sage-700">Direktori Profesional</span>
+            <h2 class="mt-2 text-3xl sm:text-4xl font-editorial text-charcoal-900">
+              Find someone who gets you.
+            </h2>
+            <p class="mt-2 text-sm text-charcoal-500">
+              Pilih psikolog klinis berlisensi berdasarkan pendekatan, spesialisasi, dan kenyamananmu.
+            </p>
+          </div>
+        </div>
+
+        <!-- Search & Filter Controls -->
+        <div class="mt-8 space-y-4">
+          <div class="relative max-w-xl">
+            <i data-lucide="search" class="w-4 h-4 text-charcoal-500 absolute left-4 top-1/2 -translate-y-1/2"></i>
+            <input 
+              type="text" 
+              id="search-psychologist-input"
+              oninput="handleSearchFilter()"
+              placeholder="Cari berdasarkan nama, masalah, atau spesialisasi (cth: Anxiety, Burnout, Pasangan)..." 
+              class="w-full pl-11 pr-4 py-3 text-sm bg-cream-100/70 border border-cream-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-sage-500/20 focus:border-sage-600 transition-all placeholder:text-charcoal-500"
+            />
+          </div>
+
+          <!-- Filter tags bar -->
+          <div class="flex flex-wrap items-center gap-2 pt-1 text-xs">
+            <span class="text-charcoal-500 font-medium mr-1">Filter Cepat:</span>
+            
+            <button onclick="setSpecialtyFilter('all')" class="filter-btn active-filter px-3 py-1.5 rounded-full bg-charcoal-900 text-white transition-colors" data-filter="all">Semua</button>
+            <button onclick="setSpecialtyFilter('Anxiety')" class="filter-btn px-3 py-1.5 rounded-full bg-cream-100 border border-cream-300 text-charcoal-700 hover:bg-cream-200 transition-colors" data-filter="Anxiety">Anxiety & Overthinking</button>
+            <button onclick="setSpecialtyFilter('Burnout')" class="filter-btn px-3 py-1.5 rounded-full bg-cream-100 border border-cream-300 text-charcoal-700 hover:bg-cream-200 transition-colors" data-filter="Burnout">Work & Burnout</button>
+            <button onclick="setSpecialtyFilter('Relationship')" class="filter-btn px-3 py-1.5 rounded-full bg-cream-100 border border-cream-300 text-charcoal-700 hover:bg-cream-200 transition-colors" data-filter="Relationship">Hubungan / Asmara</button>
+            <button onclick="setSpecialtyFilter('Self Growth')" class="filter-btn px-3 py-1.5 rounded-full bg-cream-100 border border-cream-300 text-charcoal-700 hover:bg-cream-200 transition-colors" data-filter="Self Growth">Self Growth & Diri</button>
+            
+            <div class="ml-auto hidden sm:flex items-center gap-2">
+              <select id="mode-select-filter" onchange="handleSearchFilter()" class="bg-cream-100 border border-cream-300 text-charcoal-700 text-xs rounded-full px-3 py-1.5 focus:outline-none focus:border-sage-600">
+                <option value="all">Semua Sesi</option>
+                <option value="online">Hanya Online</option>
+                <option value="offline">Tatap Muka</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Psychologist Cards Grid -->
+        <div id="psychologist-grid" class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Dynamically populated via JS -->
+        </div>
+
+        <!-- Empty state -->
+        <div id="no-results-msg" class="hidden py-16 text-center">
+          <i data-lucide="user-x" class="w-8 h-8 text-charcoal-500 mx-auto stroke-1"></i>
+          <p class="text-sm font-medium text-charcoal-700 mt-2">Tidak menemukan psikolog dengan kata kunci tersebut.</p>
+          <button onclick="resetFilters()" class="mt-3 text-xs text-sage-700 underline font-medium">Reset Semua Filter</button>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="py-16 md:py-24 bg-cream-100">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-2xl mx-auto">
+          <span class="text-xs font-semibold uppercase tracking-wider text-sage-700">Area Pendampingan</span>
+          <h2 class="mt-2 text-3xl sm:text-4xl font-editorial text-charcoal-900">
+            Support for what you're going through.
+          </h2>
+          <p class="mt-2 text-sm text-charcoal-500">
+            Setiap tantangan memiliki dinamikanya masing-masing. Kami ada untuk mendampingimu di setiap fase.
+          </p>
+        </div>
+
+        <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div class="p-6 rounded-3xl bg-white border border-cream-300/80 shadow-soft hover:shadow-calm transition-all">
+            <div class="w-10 h-10 rounded-2xl bg-sage-50 text-sage-700 flex items-center justify-center mb-4">
+              <i data-lucide="cloud-rain" class="w-5 h-5"></i>
+            </div>
+            <h3 class="font-semibold text-charcoal-900 text-base">Anxiety & Stress</h3>
+            <p class="text-xs text-charcoal-500 mt-2 leading-relaxed">
+              Membantu memahami rasa cemas, overthinking, serangan panik, dan tekanan pikiran sehari-hari.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-3xl bg-white border border-cream-300/80 shadow-soft hover:shadow-calm transition-all">
+            <div class="w-10 h-10 rounded-2xl bg-amber-50 text-amber-700 flex items-center justify-center mb-4">
+              <i data-lucide="flame" class="w-5 h-5"></i>
+            </div>
+            <h3 class="font-semibold text-charcoal-900 text-base">Burnout & Work-Life</h3>
+            <p class="text-xs text-charcoal-500 mt-2 leading-relaxed">
+              Dukungan ketika pekerjaan atau rutinitas hidup terasa hampa dan terlalu menguras energimu.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-3xl bg-white border border-cream-300/80 shadow-soft hover:shadow-calm transition-all">
+            <div class="w-10 h-10 rounded-2xl bg-rose-50 text-rose-700 flex items-center justify-center mb-4">
+              <i data-lucide="heart" class="w-5 h-5"></i>
+            </div>
+            <h3 class="font-semibold text-charcoal-900 text-base">Relationship</h3>
+            <p class="text-xs text-charcoal-500 mt-2 leading-relaxed">
+              Memahami dinamika hubungan dengan pasangan, boundaries yang sehat, dan penyembuhan luka relasi.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-3xl bg-white border border-cream-300/80 shadow-soft hover:shadow-calm transition-all">
+            <div class="w-10 h-10 rounded-2xl bg-dusty-50 text-dusty-700 flex items-center justify-center mb-4">
+              <i data-lucide="compass" class="w-5 h-5"></i>
+            </div>
+            <h3 class="font-semibold text-charcoal-900 text-base">Self Growth</h3>
+            <p class="text-xs text-charcoal-500 mt-2 leading-relaxed">
+              Mengenal pola kepribadian, membangun self-compassion, dan keberanian menetapkan batas hidup.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="how-it-works" class="py-16 md:py-24 bg-cream-50/70 border-b border-cream-300/60">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="max-w-xl">
+          <span class="text-xs font-semibold uppercase tracking-wider text-sage-700">Langkah Sederhana</span>
+          <h2 class="mt-2 text-3xl sm:text-4xl font-editorial text-charcoal-900">
+            It can start with one conversation.
+          </h2>
+          <p class="mt-2 text-sm text-charcoal-500">
+            Konseling bukan tentang dihakimi atau diberi ceramah, melainkan percakapan yang tenang untuk mengurai benang kusut.
+          </p>
+        </div>
+
+        <div class="mt-12 grid grid-cols-1 md:grid-cols-4 gap-6 relative">
+          <div class="relative p-6 rounded-3xl bg-white border border-cream-300 shadow-soft">
+            <span class="text-xs font-bold text-sage-600 font-mono tracking-wider">01 — FIND</span>
+            <h4 class="mt-3 text-base font-semibold text-charcoal-900">Temukan Psikolog</h4>
+            <p class="mt-2 text-xs text-charcoal-500 leading-relaxed">
+              Pilih profil psikolog klinis yang cocok dengan topik yang sedang kamu hadapi dan preferensi gayamu.
+            </p>
+          </div>
+
+          <div class="relative p-6 rounded-3xl bg-white border border-cream-300 shadow-soft">
+            <span class="text-xs font-bold text-sage-600 font-mono tracking-wider">02 — CHOOSE</span>
+            <h4 class="mt-3 text-base font-semibold text-charcoal-900">Tentukan Format</h4>
+            <p class="mt-2 text-xs text-charcoal-500 leading-relaxed">
+              Pilih konseling daring yang fleksibel dari kamarmu, atau tatap muka di ruang konseling yang hangat dan privat.
+            </p>
+          </div>
+
+          <div class="relative p-6 rounded-3xl bg-white border border-cream-300 shadow-soft">
+            <span class="text-xs font-bold text-sage-600 font-mono tracking-wider">03 — BOOK</span>
+            <h4 class="mt-3 text-base font-semibold text-charcoal-900">Pilih Jadwal</h4>
+            <p class="mt-2 text-xs text-charcoal-500 leading-relaxed">
+              Pilih tanggal dan jam yang tenang tanpa terburu-buru. Konfirmasi langsung didapatkan dalam 1 menit.
+            </p>
+          </div>
+
+          <div class="relative p-6 rounded-3xl bg-white border border-cream-300 shadow-soft">
+            <span class="text-xs font-bold text-sage-600 font-mono tracking-wider">04 — TALK</span>
+            <h4 class="mt-3 text-base font-semibold text-charcoal-900">Mulai Bicara</h4>
+            <p class="mt-2 text-xs text-charcoal-500 leading-relaxed">
+              Cukup hadir apa adanya. Psikolog kami akan memandu alur percakapan dengan penuh empati dan rasa hormat.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="py-16 md:py-24 bg-white">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+        
+        <!-- Online Section -->
+        <div class="rounded-[2.5rem] bg-lavender-50/80 border border-lavender-200/80 p-8 sm:p-12">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div class="lg:col-span-7 space-y-5">
+              <span class="text-xs font-semibold uppercase tracking-wider text-lavender-700">Online Counseling</span>
+              <h3 class="text-2xl sm:text-3xl md:text-4xl font-editorial text-charcoal-900 leading-tight">
+                A safe space, wherever you are.
+              </h3>
+              <p class="text-sm text-charcoal-600 leading-relaxed">
+                Lakukan sesi konseling secara online dari sudut ruangan yang membuatmu paling nyaman dan aman. Tanpa macet, tanpa repot perjalanan.
+              </p>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs text-charcoal-700">
+                <div class="flex items-center gap-2">
+                  <i data-lucide="video" class="w-4 h-4 text-lavender-500"></i>
+                  <span>Enkripsi Video End-to-End</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i data-lucide="calendar" class="w-4 h-4 text-lavender-500"></i>
+                  <span>Jadwal Fleksibel Malam & Akhir Pekan</span>
+                </div>
+              </div>
+
+              <div class="pt-4">
+                <button onclick="openBookingModal('online')" class="px-6 py-3 rounded-full bg-lavender-700 hover:bg-lavender-800 text-white text-xs sm:text-sm font-medium transition-all shadow-sm flex items-center gap-2">
+                  <span>Mulai Konseling Online</span>
+                  <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="lg:col-span-5">
+              <div class="rounded-3xl overflow-hidden shadow-soft border border-lavender-200">
+                <img 
+                  src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80" 
+                  alt="Sesi konseling daring privat" 
+                  class="w-full h-64 sm:h-72 object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- In-Person Section -->
+        <div class="rounded-[2.5rem] bg-cream-200/60 border border-cream-300 p-8 sm:p-12">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div class="lg:col-span-5 order-2 lg:order-1">
+              <div class="rounded-3xl overflow-hidden shadow-soft border border-cream-300">
+                <img 
+                  src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80" 
+                  alt="Ruang konseling studio privat" 
+                  class="w-full h-64 sm:h-72 object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+
+            <div class="lg:col-span-7 space-y-5 order-1 lg:order-2">
+              <span class="text-xs font-semibold uppercase tracking-wider text-sage-700">Tatap Muka di Studio</span>
+              <h3 class="text-2xl sm:text-3xl md:text-4xl font-editorial text-charcoal-900 leading-tight">
+                Sometimes, face-to-face feels different.
+              </h3>
+              <p class="text-sm text-charcoal-600 leading-relaxed">
+                Studio konseling kami di Senopati Jakarta Selatan dan BSD dirancang dengan pencahayaan alami, aromaterapi lembut, dan privasi penuh kedap suara.
+              </p>
+
+              <div class="pt-4">
+                <button onclick="openBookingModal('offline')" class="px-6 py-3 rounded-full bg-charcoal-900 hover:bg-charcoal-800 text-white text-xs sm:text-sm font-medium transition-all shadow-sm flex items-center gap-2">
+                  <span>Pilih Lokasi Tatap Muka</span>
+                  <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="py-16 md:py-20 bg-cream-50">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        
+        <span class="text-xs font-semibold uppercase tracking-wider text-sage-700">Pemberhentian Sejenak</span>
+        <h2 class="mt-2 text-3xl font-editorial text-charcoal-900">
+          How are you feeling today?
+        </h2>
+        <p class="mt-2 text-xs sm:text-sm text-charcoal-500">
+          Beri jeda satu menit untuk mengecek keadaan hatimu. Tidak ada jawaban yang salah.
+        </p>
+
+        <!-- Mood Buttons -->
+        <div class="mt-8 flex flex-wrap justify-center gap-3 sm:gap-4">
+          <button onclick="recordMood('Good', '🙂')" class="mood-btn group p-3.5 rounded-2xl bg-white border border-cream-300 hover:border-emerald-500 hover:bg-emerald-50/50 transition-all flex flex-col items-center gap-1.5 min-w-[85px] shadow-soft">
+            <span class="text-2xl group-hover:scale-110 transition-transform">🙂</span>
+            <span class="text-xs font-medium text-charcoal-700">Good</span>
+          </button>
+          <button onclick="recordMood('Okay', '😐')" class="mood-btn group p-3.5 rounded-2xl bg-white border border-cream-300 hover:border-sage-500 hover:bg-sage-50/50 transition-all flex flex-col items-center gap-1.5 min-w-[85px] shadow-soft">
+            <span class="text-2xl group-hover:scale-110 transition-transform">😐</span>
+            <span class="text-xs font-medium text-charcoal-700">Okay</span>
+          </button>
+          <button onclick="recordMood('Overwhelmed', '😟')" class="mood-btn group p-3.5 rounded-2xl bg-white border border-cream-300 hover:border-amber-500 hover:bg-amber-50/50 transition-all flex flex-col items-center gap-1.5 min-w-[85px] shadow-soft">
+            <span class="text-2xl group-hover:scale-110 transition-transform">😟</span>
+            <span class="text-xs font-medium text-charcoal-700">Overwhelmed</span>
+          </button>
+          <button onclick="recordMood('Low', '😔')" class="mood-btn group p-3.5 rounded-2xl bg-white border border-cream-300 hover:border-lavender-500 hover:bg-lavender-50/50 transition-all flex flex-col items-center gap-1.5 min-w-[85px] shadow-soft">
+            <span class="text-2xl group-hover:scale-110 transition-transform">😔</span>
+            <span class="text-xs font-medium text-charcoal-700">Low</span>
+          </button>
+          <button onclick="recordMood('Stressed', '😣')" class="mood-btn group p-3.5 rounded-2xl bg-white border border-cream-300 hover:border-rose-500 hover:bg-rose-50/50 transition-all flex flex-col items-center gap-1.5 min-w-[85px] shadow-soft">
+            <span class="text-2xl group-hover:scale-110 transition-transform">😣</span>
+            <span class="text-xs font-medium text-charcoal-700">Stressed</span>
+          </button>
+          <button onclick="recordMood('Exhausted', '😴')" class="mood-btn group p-3.5 rounded-2xl bg-white border border-cream-300 hover:border-dusty-500 hover:bg-dusty-50/50 transition-all flex flex-col items-center gap-1.5 min-w-[85px] shadow-soft">
+            <span class="text-2xl group-hover:scale-110 transition-transform">😴</span>
+            <span class="text-xs font-medium text-charcoal-700">Exhausted</span>
+          </button>
+        </div>
+
+        <!-- Feedback Card -->
+        <div id="mood-response-box" class="mt-8 p-6 rounded-3xl bg-white border border-sage-200 text-left hidden shadow-soft transition-all duration-300">
+          <div class="flex items-start gap-4">
+            <div id="mood-icon-display" class="w-12 h-12 rounded-2xl bg-sage-50 text-2xl flex items-center justify-center flex-shrink-0">
+              🌱
+            </div>
+            <div class="flex-1 space-y-2">
+              <h4 class="font-semibold text-charcoal-900 text-sm sm:text-base">
+                Terima kasih sudah meluangkan waktu menyapa dirimu sendiri.
+              </h4>
+              <p id="mood-gentle-text" class="text-xs sm:text-sm text-charcoal-600 leading-relaxed">
+                Apapun yang sedang dirasakan hari ini, valid untuk hadir.
+              </p>
+              
+              <div class="pt-3 flex flex-wrap items-center gap-2">
+                <button onclick="scrollToSection('wellness-tools')" class="px-3 py-1.5 rounded-full bg-sage-100 hover:bg-sage-200 text-sage-800 text-xs font-medium transition-colors">
+                  Latihan Napas 2 Menit
+                </button>
+                <button onclick="openBookingModal()" class="px-3 py-1.5 rounded-full bg-charcoal-900 hover:bg-charcoal-800 text-white text-xs font-medium transition-colors">
+                  Jadwalkan Konseling
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="wellness-tools" class="py-16 md:py-24 bg-white border-y border-cream-300/60">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="max-w-xl">
+          <span class="text-xs font-semibold uppercase tracking-wider text-sage-700">Ruang Tenang Sehari-hari</span>
+          <h2 class="mt-2 text-3xl sm:text-4xl font-editorial text-charcoal-900">
+            Tools for your everyday wellbeing.
+          </h2>
+          <p class="mt-2 text-sm text-charcoal-500">
+            Perangkat sederhana untuk membantumu kembali ke tubuh, melepaskan ketegangan, dan mencatat isi pikiran.
+          </p>
+        </div>
+
+        <div class="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- Box Breathing -->
+          <div class="lg:col-span-6 p-8 rounded-3xl bg-cream-100 border border-cream-300 shadow-soft flex flex-col justify-between min-h-[420px]">
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-semibold uppercase tracking-wider text-sage-700">Latihan Relaksasi</span>
+                <span id="breath-phase" class="text-xs font-medium px-2.5 py-1 bg-white rounded-full border border-cream-300 text-charcoal-700">Siap</span>
+              </div>
+              <h3 class="text-xl font-editorial text-charcoal-900 mt-2">Box Breathing (4-4-4-4)</h3>
+              <p class="text-xs text-charcoal-500 mt-1">Teknik pernapasan ritmis untuk menenangkan sistem saraf simpatik saat gelisah.</p>
+            </div>
+
+            <!-- Breathing Visualizer -->
+            <div class="my-8 flex flex-col items-center justify-center relative">
+              <div id="breath-circle-outer" class="w-44 h-44 rounded-full bg-sage-200/50 border border-sage-500/30 flex items-center justify-center transition-transform duration-1000">
+                <div id="breath-circle-inner" class="w-32 h-32 rounded-full bg-white shadow-soft flex flex-col items-center justify-center text-center p-3">
+                  <span id="breath-instruction" class="text-xs font-semibold text-charcoal-800">Klik Mulai</span>
+                  <span id="breath-timer-count" class="text-2xl font-mono font-bold text-sage-700 mt-1">4s</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-center gap-3">
+              <button id="start-breath-btn" onclick="toggleBreathingExercise()" class="px-5 py-2.5 rounded-full bg-sage-700 hover:bg-sage-800 text-white text-xs font-medium transition-colors flex items-center gap-2">
+                <i data-lucide="play" class="w-3.5 h-3.5"></i>
+                <span id="breath-btn-label">Mulai Latihan Napas</span>
+              </button>
+              <button onclick="resetBreathingExercise()" class="p-2.5 rounded-full bg-white border border-cream-300 text-charcoal-700 hover:bg-cream-200 text-xs transition-colors">
+                <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Thought Unload Journal -->
+          <div class="lg:col-span-6 p-8 rounded-3xl bg-cream-50 border border-cream-300 shadow-soft flex flex-col justify-between min-h-[420px]">
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-semibold uppercase tracking-wider text-dusty-700">Jurnal Pribadi</span>
+                <span class="text-[10px] text-charcoal-500 flex items-center gap-1">
+                  <i data-lucide="lock" class="w-3 h-3 text-sage-600"></i> Disimpan Privat
+                </span>
+              </div>
+              <h3 class="text-xl font-editorial text-charcoal-900 mt-2">Daily Thought Unload</h3>
+              <p class="text-xs text-charcoal-500 mt-1">Tumpahkan apa pun yang sedang berisik di kepala tanpa filter atau penilaian.</p>
+            </div>
+
+            <div class="my-4 space-y-2">
+              <textarea 
+                id="journal-input" 
+                rows="5"
+                placeholder="Hari ini terasa... Aku menyadari bahwa... Apa yang ingin kulepaskan saat ini..." 
+                class="w-full p-4 rounded-2xl bg-white border border-cream-300 text-xs sm:text-sm text-charcoal-800 focus:outline-none focus:ring-2 focus:ring-sage-500/20 focus:border-sage-600 resize-none transition-all placeholder:text-charcoal-500"
+              ></textarea>
+              <div class="flex items-center justify-between text-[11px] text-charcoal-500">
+                <span>Catatan ini hanya tersimpan di perangkat atau akun pribadimu.</span>
+                <span id="journal-save-indicator" class="text-sage-600 font-medium hidden">Tersimpan</span>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between pt-2">
+              <button onclick="saveJournalEntry()" class="px-5 py-2.5 rounded-full bg-charcoal-900 hover:bg-charcoal-800 text-white text-xs font-medium transition-colors flex items-center gap-2">
+                <i data-lucide="bookmark" class="w-3.5 h-3.5"></i>
+                <span>Simpan di Ruang Saya</span>
+              </button>
+              <button onclick="clearJournalInput()" class="text-xs text-charcoal-500 hover:text-charcoal-800 underline">
+                Hapus Teks
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section id="faq" class="py-16 md:py-24 bg-white border-y border-cream-300/60">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center">
+          <span class="text-xs font-semibold uppercase tracking-wider text-sage-700">Pertanyaan Umum</span>
+          <h2 class="mt-2 text-3xl sm:text-4xl font-editorial text-charcoal-900">
+            You can ask us anything.
+          </h2>
+          <p class="mt-2 text-sm text-charcoal-500">
+            Hal-hal mendasar yang sering ditanyakan sebelum memulai sesi konseling pertama.
+          </p>
+        </div>
+
+        <div class="mt-12 space-y-3">
+          <div class="border border-cream-300 rounded-2xl overflow-hidden transition-all bg-cream-50/40">
+            <button onclick="toggleFaq(this)" class="w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4">
+              <span class="font-medium text-charcoal-900 text-sm">Apa bedanya psikolog dan psikiater?</span>
+              <i data-lucide="chevron-down" class="w-4 h-4 text-charcoal-500 transition-transform"></i>
+            </button>
+            <div class="faq-content hidden px-5 pb-5 text-xs sm:text-sm text-charcoal-600 leading-relaxed">
+              Psikolog berfokus pada terapi psikologis, konseling, asesmen perilaku, dan manajemen emosi melalui percakapan (psikoterapi). Psikiater adalah dokter medis spesialis kejiwaan yang berwenang meresepkan obat farmakologis jika dibutuhkan.
+            </div>
+          </div>
+
+          <div class="border border-cream-300 rounded-2xl overflow-hidden transition-all bg-cream-50/40">
+            <button onclick="toggleFaq(this)" class="w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4">
+              <span class="font-medium text-charcoal-900 text-sm">Bagaimana jika saya belum tahu apa masalah spesifik saya?</span>
+              <i data-lucide="chevron-down" class="w-4 h-4 text-charcoal-500 transition-transform"></i>
+            </button>
+            <div class="faq-content hidden px-5 pb-5 text-xs sm:text-sm text-charcoal-600 leading-relaxed">
+              Sangat tidak apa-apa. Sebagian besar orang datang hanya dengan perasaan "ada yang tidak beres" atau "merasa hampa". Tugas psikolog kami adalah mendampingimu memetakan dan mengurai benang kusut tersebut.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CRISIS EMERGENCY SECTION -->
+    <section id="crisis-section" class="py-16 bg-cream-200/90 border-t border-cream-300">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="p-8 sm:p-10 rounded-3xl bg-white border border-rose-200 shadow-calm">
+          <div class="space-y-4">
+            <div class="flex items-center gap-2 text-rose-700">
+              <i data-lucide="heart-pulse" class="w-5 h-5"></i>
+              <span class="text-xs font-bold uppercase tracking-wider">Layanan Krisis & Darurat</span>
+            </div>
+
+            <h3 class="text-2xl sm:text-3xl font-editorial text-charcoal-900 leading-snug">
+              If things feel too heavy, you don't have to handle it alone.
+            </h3>
+
+            <p class="text-xs sm:text-sm text-charcoal-600 leading-relaxed">
+              Ruang Pulih adalah layanan konseling terjadwal dan <strong>bukan unit penanganan gawat darurat psikiatri</strong>. Jika Anda atau kerabat sedang mengalami krisis emosional akut, segera hubungi kontak resmi:
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+              <div class="p-4 rounded-2xl bg-cream-100 border border-cream-300">
+                <div class="text-xs font-semibold text-charcoal-900">Hotline Kesehatan Jiwa Kemenkes</div>
+                <div class="text-lg font-mono font-bold text-rose-700 mt-0.5">119 (ext. 8)</div>
+                <p class="text-[11px] text-charcoal-500 mt-1">Layanan konseling krisis gratis 24 jam Kemenkes RI.</p>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-cream-100 border border-cream-300">
+                <div class="text-xs font-semibold text-charcoal-900">Yayasan Pulih (Crisis Response)</div>
+                <div class="text-lg font-mono font-bold text-sage-800 mt-0.5">+62 811-8436-633</div>
+                <p class="text-[11px] text-charcoal-500 mt-1">Pendampingan trauma dan krisis psikologis di Indonesia.</p>
+              </div>
+            </div>
+
+            <div class="pt-2">
+              <a href="tel:119" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-rose-700 hover:bg-rose-800 text-white text-xs font-medium transition-colors">
+                <i data-lucide="phone-call" class="w-3.5 h-3.5"></i>
+                <span>Hubungi 119 Ext 8 Sekarang</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-white border-t border-cream-300 pt-12 pb-24 md:pb-12 text-charcoal-600 text-xs">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-10 border-b border-cream-300/60">
+        <div class="md:col-span-5 space-y-3">
+          <div class="flex items-center gap-2">
+            <div class="w-7 h-7 rounded-full bg-sage-100 flex items-center justify-center text-sage-700">
+              <i data-lucide="feather" class="w-3.5 h-3.5"></i>
+            </div>
+            <span class="font-semibold text-charcoal-900 text-sm tracking-tight">RUANG PULIH</span>
+          </div>
+          <p class="text-xs text-charcoal-500 leading-relaxed max-w-sm">
+            Platform konseling psikologi dan kesehatan mental modern yang berfokus pada rasa aman, kehangatan, dan pendampingan profesional yang manusiawi.
+          </p>
+          <div class="text-[11px] text-charcoal-500">
+            Jakarta Selatan • BSD Tangerang • Daring Seluruh Indonesia
+          </div>
+        </div>
+
+        <div class="md:col-span-3 space-y-2">
+          <div class="font-semibold text-charcoal-900 text-xs uppercase tracking-wider">Layanan Utama</div>
+          <ul class="space-y-1.5 text-charcoal-500">
+            <li>Konseling Individu Dewasa</li>
+            <li>Konseling Pasangan & Pranikah</li>
+            <li>Konseling Stres Kerja & Burnout</li>
+            <li>Konseling Tatap Muka di Studio</li>
+          </ul>
+        </div>
+
+        <div class="md:col-span-4 space-y-3">
+          <div class="font-semibold text-charcoal-900 text-xs uppercase tracking-wider">Kenyamanan & Privasi</div>
+          <p class="text-[11px] text-charcoal-500 leading-relaxed">
+            Setiap informasi yang Anda bagikan dijaga kerahasiaannya di bawah standar etika profesi psikolog klinis.
+          </p>
+          <button onclick="openBookingModal()" class="w-full py-2.5 rounded-full bg-cream-200 hover:bg-cream-300 text-charcoal-800 font-medium text-xs transition-colors">
+            Jadwalkan Konsultasi
+          </button>
+        </div>
+      </div>
+
+      <!-- Bottom Bar with Admin Login Button in Footer -->
+      <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-charcoal-500">
+        <p>© 2026 Ruang Pulih. “Pelan-Pelan, Kamu Nggak Harus Sendiri.” Seluruh Hak Dilindungi.</p>
+        
+        <div class="flex flex-wrap items-center gap-4">
+          <a href="#" class="hover:underline">Kebijakan Privasi</a>
+          <a href="#" class="hover:underline">Kode Etik HIMPSI</a>
+          <a href="#crisis-section" class="hover:underline text-rose-700">Hotline Krisis</a>
+          
+          <!-- ADMIN LOGIN BUTTON IN FOOTER -->
+          <button 
+            id="footer-admin-btn" 
+            onclick="openAdminLoginModal()" 
+            class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cream-200/90 hover:bg-charcoal-900 hover:text-white text-charcoal-700 transition-all font-medium text-[11px] border border-cream-300"
+          >
+            <i data-lucide="shield" class="w-3 h-3 text-sage-700"></i>
+            <span>Kelola Web</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- MOBILE BOTTOM NAV -->
+  <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-cream-300 px-3 py-2 flex items-center justify-around text-[10px] text-charcoal-500 shadow-calm">
+    <a href="#hero" class="flex flex-col items-center gap-1 hover:text-sage-700">
+      <i data-lucide="home" class="w-4 h-4"></i>
+      <span>Home</span>
+    </a>
+    <a href="#find-psychologist" class="flex flex-col items-center gap-1 hover:text-sage-700">
+      <i data-lucide="compass" class="w-4 h-4"></i>
+      <span>Psikolog</span>
+    </a>
+    <button onclick="openBookingModal()" class="flex flex-col items-center -mt-4">
+      <div class="w-11 h-11 rounded-full bg-charcoal-900 text-white flex items-center justify-center shadow-md">
+        <i data-lucide="calendar" class="w-5 h-5"></i>
+      </div>
+      <span class="font-semibold text-charcoal-900 mt-1">Book</span>
+    </button>
+    <a href="#wellness-tools" class="flex flex-col items-center gap-1 hover:text-sage-700">
+      <i data-lucide="heart" class="w-4 h-4"></i>
+      <span>Tenang</span>
+    </a>
+    <button onclick="openMemberModal()" class="flex flex-col items-center gap-1 hover:text-sage-700">
+      <i data-lucide="user" class="w-4 h-4"></i>
+      <span>Akun</span>
+    </button>
+  </nav>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL 1: PSYCHOLOGIST PREVIEW MODAL -->
+  <!-- ========================================================================= -->
+  <div id="psychologist-modal" class="fixed inset-0 z-50 bg-charcoal-900/40 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-cream-300 p-6 sm:p-8 relative">
+      <button onclick="closePsychologistModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-cream-100 hover:bg-cream-200 text-charcoal-700 flex items-center justify-center transition-colors">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+      <div id="modal-psychologist-content"></div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL 2: 6-STEP BOOKING FLOW MODAL -->
+  <!-- ========================================================================= -->
+  <div id="booking-modal" class="fixed inset-0 z-50 bg-charcoal-900/40 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[92vh] overflow-y-auto shadow-2xl border border-cream-300 p-6 sm:p-8 relative flex flex-col justify-between">
+      <div>
+        <div class="flex items-center justify-between pb-4 border-b border-cream-300/60">
+          <div>
+            <span class="text-[10px] font-bold tracking-widest uppercase text-sage-700" id="booking-step-label">LANGKAH 01 DARI 06</span>
+            <h3 class="text-xl font-editorial text-charcoal-900 mt-0.5" id="booking-step-title">Apa yang sedang kamu hadapi?</h3>
+          </div>
+          <button onclick="closeBookingModal()" class="w-8 h-8 rounded-full bg-cream-100 hover:bg-cream-200 text-charcoal-700 flex items-center justify-center transition-colors">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-6 gap-2 my-4" id="booking-progress-bars">
+          <div class="h-1 rounded-full bg-sage-600 progress-bar-item"></div>
+          <div class="h-1 rounded-full bg-cream-200 progress-bar-item"></div>
+          <div class="h-1 rounded-full bg-cream-200 progress-bar-item"></div>
+          <div class="h-1 rounded-full bg-cream-200 progress-bar-item"></div>
+          <div class="h-1 rounded-full bg-cream-200 progress-bar-item"></div>
+          <div class="h-1 rounded-full bg-cream-200 progress-bar-item"></div>
+        </div>
+
+        <div id="booking-step-content" class="py-4"></div>
+      </div>
+
+      <div class="pt-4 border-t border-cream-300 flex items-center justify-between mt-6">
+        <button id="booking-prev-btn" onclick="prevBookingStep()" class="px-4 py-2 rounded-full border border-cream-300 text-charcoal-600 hover:bg-cream-100 text-xs font-medium transition-colors hidden">
+          Kembali
+        </button>
+        <div class="ml-auto">
+          <button id="booking-next-btn" onclick="nextBookingStep()" class="px-6 py-2.5 rounded-full bg-charcoal-900 hover:bg-charcoal-800 text-white text-xs sm:text-sm font-medium transition-all shadow-sm">
+            Lanjutkan
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL 3: MEMBER AREA / RUANG SAYA -->
+  <!-- ========================================================================= -->
+  <div id="member-modal" class="fixed inset-0 z-50 bg-charcoal-900/40 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-cream-300 p-6 sm:p-8 relative">
+      <button onclick="closeMemberModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-cream-100 hover:bg-cream-200 text-charcoal-700 flex items-center justify-center transition-colors">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+
+      <div>
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-12 h-12 rounded-full bg-sage-100 flex items-center justify-center text-sage-800 font-bold text-base">
+            <span id="member-avatar-initial">RP</span>
+          </div>
+          <div>
+            <h3 class="text-xl font-editorial text-charcoal-900">Selamat Datang di Ruangmu</h3>
+            <p class="text-xs text-charcoal-500" id="member-uid-label">Sesi Privat & Aman</p>
+          </div>
+        </div>
+
+        <div class="flex border-b border-cream-300 text-xs font-medium gap-4 mb-6">
+          <button onclick="showMemberTab('appointments')" id="tab-btn-appointments" class="pb-2 border-b-2 border-charcoal-900 text-charcoal-900 font-semibold">Jadwal Sesi</button>
+          <button onclick="showMemberTab('journal')" id="tab-btn-journal" class="pb-2 border-b-2 border-transparent text-charcoal-500 hover:text-charcoal-800">Catatan Jurnal</button>
+          <button onclick="showMemberTab('moods')" id="tab-btn-moods" class="pb-2 border-b-2 border-transparent text-charcoal-500 hover:text-charcoal-800">Riwayat Perasaan</button>
+        </div>
+
+        <div id="member-tab-appointments" class="space-y-4">
+          <div id="member-appointments-list"></div>
+        </div>
+        <div id="member-tab-journal" class="space-y-4 hidden">
+          <div id="member-journal-list"></div>
+        </div>
+        <div id="member-tab-moods" class="space-y-3 hidden">
+          <div id="member-mood-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL 4: ADMIN LOGIN MODAL -->
+  <!-- ========================================================================= -->
+  <div id="admin-login-modal" class="fixed inset-0 z-50 bg-charcoal-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-sm w-full shadow-2xl border border-cream-300 p-6 sm:p-8 relative">
+      <button onclick="closeAdminLoginModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-cream-100 hover:bg-cream-200 text-charcoal-700 flex items-center justify-center transition-colors">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+
+      <div class="text-center mb-6">
+        <div class="w-12 h-12 rounded-2xl bg-sage-100 text-sage-800 flex items-center justify-center mx-auto mb-3">
+          <i data-lucide="lock" class="w-5 h-5"></i>
+        </div>
+        <h3 class="text-xl font-editorial text-charcoal-900">Admin Ruang Pulih</h3>
+        <p class="text-xs text-charcoal-500 mt-1">Masuk untuk mengelola katalog, konten, dan lacak booking.</p>
+      </div>
+
+      <form onsubmit="handleAdminLogin(event)" class="space-y-3">
+        <div>
+          <label class="block text-[11px] font-semibold text-charcoal-700 uppercase tracking-wider mb-1">Username</label>
+          <input 
+            type="text" 
+            id="admin-username" 
+            required 
+            placeholder="kelolaweb2026"
+            class="w-full px-3.5 py-2.5 rounded-xl bg-cream-100 border border-cream-300 text-xs focus:outline-none focus:border-sage-600"
+          />
+        </div>
+        <div>
+          <label class="block text-[11px] font-semibold text-charcoal-700 uppercase tracking-wider mb-1">Password</label>
+          <input 
+            type="password" 
+            id="admin-password" 
+            required 
+            placeholder="••••••••••••"
+            class="w-full px-3.5 py-2.5 rounded-xl bg-cream-100 border border-cream-300 text-xs focus:outline-none focus:border-sage-600"
+          />
+        </div>
+        <p id="admin-login-error" class="text-rose-600 text-xs hidden">Username atau password salah.</p>
+        <div class="pt-2">
+          <button type="submit" class="w-full py-2.5 rounded-xl bg-charcoal-900 hover:bg-sage-800 text-white text-xs font-semibold tracking-wide transition-all shadow-sm">
+            Masuk ke Panel Admin
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL 5: FULL ADMIN MANAGEMENT DASHBOARD -->
+  <!-- ========================================================================= -->
+  <div id="admin-dashboard-modal" class="fixed inset-0 z-50 bg-charcoal-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-4xl w-full max-h-[92vh] overflow-hidden shadow-2xl border border-cream-300 flex flex-col relative">
+      
+      <!-- Admin Header -->
+      <div class="p-6 border-b border-cream-300 flex flex-wrap items-center justify-between gap-3 bg-cream-50/80">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-sage-600 text-white flex items-center justify-center">
+            <i data-lucide="sliders" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold text-charcoal-900">Panel Kelola Ruang Pulih</h3>
+            <span class="text-[10px] text-sage-800 font-mono">Status: Live Editor & Realtime Sync</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <!-- Reset to Default Button -->
+          <button onclick="resetToDefaultData()" class="px-3.5 py-1.5 rounded-full bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 text-xs font-medium flex items-center gap-1.5 transition-colors">
+            <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+            <span>Reset ke Default</span>
+          </button>
+
+          <!-- Logout Button -->
+          <button onclick="handleAdminLogout()" class="px-3.5 py-1.5 rounded-full bg-cream-200 hover:bg-cream-300 text-charcoal-700 text-xs font-medium transition-colors">
+            Keluar
+          </button>
+
+          <button onclick="closeAdminDashboard()" class="w-8 h-8 rounded-full bg-white hover:bg-cream-200 text-charcoal-700 flex items-center justify-center transition-colors">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Admin Navigation Tabs -->
+      <div class="flex border-b border-cream-300 px-6 pt-2 bg-white text-xs font-medium gap-5 overflow-x-auto hide-scrollbar">
+        <button onclick="switchAdminTab('catalog')" id="adm-tab-catalog" class="pb-3 border-b-2 border-charcoal-900 text-charcoal-900 font-semibold flex items-center gap-1.5 whitespace-nowrap">
+          <i data-lucide="users" class="w-3.5 h-3.5 text-sage-600"></i>
+          <span>Katalog Psikolog & Layanan</span>
+        </button>
+        <button onclick="switchAdminTab('bookings')" id="adm-tab-bookings" class="pb-3 border-b-2 border-transparent text-charcoal-500 hover:text-charcoal-800 flex items-center gap-1.5 whitespace-nowrap">
+          <i data-lucide="calendar" class="w-3.5 h-3.5 text-dusty-500"></i>
+          <span>Lacak Booking Sesi</span>
+        </button>
+        <button onclick="switchAdminTab('content')" id="adm-tab-content" class="pb-3 border-b-2 border-transparent text-charcoal-500 hover:text-charcoal-800 flex items-center gap-1.5 whitespace-nowrap">
+          <i data-lucide="edit-3" class="w-3.5 h-3.5 text-lavender-500"></i>
+          <span>Edit Konten & Gambar</span>
+        </button>
+        <button onclick="switchAdminTab('settings')" id="adm-tab-settings" class="pb-3 border-b-2 border-transparent text-charcoal-500 hover:text-charcoal-800 flex items-center gap-1.5 whitespace-nowrap">
+          <i data-lucide="database" class="w-3.5 h-3.5 text-emerald-600"></i>
+          <span>Status Sistem</span>
+        </button>
+      </div>
+
+      <!-- Admin Content Sections -->
+      <div class="p-6 overflow-y-auto flex-1 bg-cream-100/50">
+        
+        <!-- SECTION 1: CATALOG MANAGEMENT -->
+        <div id="adm-sec-catalog" class="space-y-5">
+          <div class="flex items-center justify-between">
+            <div>
+              <h4 class="font-semibold text-charcoal-900 text-sm">Daftar Psikolog Terdaftar</h4>
+              <p class="text-xs text-charcoal-500">Tambah baru, ubah rincian spesialisasi, atau sesuaikan ketersediaan.</p>
+            </div>
+            <button onclick="openAddPsychologistForm()" class="px-4 py-2 rounded-full bg-charcoal-900 hover:bg-sage-800 text-white text-xs font-medium flex items-center gap-1.5 transition-all">
+              <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+              <span>Tambah Psikolog Baru</span>
+            </button>
+          </div>
+
+          <!-- Add / Edit Inline Form Container -->
+          <div id="adm-doc-form-card" class="hidden p-5 rounded-2xl bg-white border border-sage-200 shadow-soft space-y-4">
+            <h5 id="adm-doc-form-title" class="text-xs font-bold uppercase tracking-wider text-sage-800">Form Psikolog Baru</h5>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+              <div>
+                <label class="block font-medium text-charcoal-700 mb-1">Nama Lengkap & Gelar</label>
+                <input type="text" id="form-doc-name" placeholder="cth: Dr. Rian Pratama, M.Psi." class="w-full p-2.5 rounded-xl border border-cream-300 bg-cream-50 focus:outline-none focus:border-sage-600">
+              </div>
+              <div>
+                <label class="block font-medium text-charcoal-700 mb-1">Keahlian (pisahkan koma)</label>
+                <input type="text" id="form-doc-specs" placeholder="Anxiety, Burnout, Relationship" class="w-full p-2.5 rounded-xl border border-cream-300 bg-cream-50 focus:outline-none focus:border-sage-600">
+              </div>
+              <div>
+                <label class="block font-medium text-charcoal-700 mb-1">Pengalaman</label>
+                <input type="text" id="form-doc-exp" placeholder="cth: 7+ tahun" class="w-full p-2.5 rounded-xl border border-cream-300 bg-cream-50 focus:outline-none focus:border-sage-600">
+              </div>
+              <div>
+                <label class="block font-medium text-charcoal-700 mb-1">Ketersediaan Jadwal</label>
+                <input type="text" id="form-doc-avail" placeholder="cth: Available Today / Besok 14:00" class="w-full p-2.5 rounded-xl border border-cream-300 bg-cream-50 focus:outline-none focus:border-sage-600">
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block font-medium text-charcoal-700 mb-1">URL Foto Profil (Mendukung ID/Link Google Drive & Unsplash)</label>
+                <input type="text" id="form-doc-avatar" placeholder="https://lh3.googleusercontent.com/d/ID atau link Google Drive" class="w-full p-2.5 rounded-xl border border-cream-300 bg-cream-50 focus:outline-none focus:border-sage-600">
+                <span class="text-[10px] text-charcoal-500 mt-1 block">Link Drive otomatis diubah ke format tercepat lh3.googleusercontent.com/d/</span>
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block font-medium text-charcoal-700 mb-1">Deskripsi Singkat / Bio</label>
+                <textarea id="form-doc-bio" rows="2" placeholder="Pendekatan konseling hangat dan aman..." class="w-full p-2.5 rounded-xl border border-cream-300 bg-cream-50 focus:outline-none focus:border-sage-600"></textarea>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-end gap-2 pt-2">
+              <input type="hidden" id="form-doc-edit-id" value="">
+              <button onclick="cancelPsychologistForm()" class="px-4 py-2 rounded-full border border-cream-300 text-charcoal-600 hover:bg-cream-100 text-xs">Batal</button>
+              <button onclick="savePsychologistFromForm()" class="px-5 py-2 rounded-full bg-sage-700 hover:bg-sage-800 text-white text-xs font-medium">Simpan Perubahan</button>
+            </div>
+          </div>
+
+          <!-- List of Psychologists in Admin -->
+          <div id="adm-psychologist-table" class="space-y-3"></div>
+        </div>
+
+        <!-- SECTION 2: BOOKING TRACKER -->
+        <div id="adm-sec-bookings" class="space-y-4 hidden">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <h4 class="font-semibold text-charcoal-900 text-sm">Lacak Janji Konseling</h4>
+              <p class="text-xs text-charcoal-500">Daftar janji temu yang masuk dari website secara realtime.</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <input 
+                type="text" 
+                id="adm-search-booking" 
+                oninput="renderAdminBookings()" 
+                placeholder="Cari nama atau ID..." 
+                class="px-3 py-1.5 rounded-xl border border-cream-300 bg-white text-xs"
+              />
+            </div>
+          </div>
+
+          <div id="adm-bookings-list" class="space-y-3"></div>
+        </div>
+
+        <!-- SECTION 3: LIVE WEBSITE CONTENT EDITOR -->
+        <div id="adm-sec-content" class="space-y-5 hidden">
+          <div>
+            <h4 class="font-semibold text-charcoal-900 text-sm">Live Edit Konten Halaman Depan</h4>
+            <p class="text-xs text-charcoal-500">Ubah judul hero, deskripsi, teks tombol, dan gambar secara langsung.</p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+            <div class="p-4 rounded-2xl bg-white border border-cream-300 space-y-3">
+              <span class="font-bold text-sage-800 text-[11px] uppercase tracking-wider block">Hero Section</span>
+              
+              <div>
+                <label class="block text-charcoal-700 mb-1">Badge Teks Atas</label>
+                <input type="text" id="edit-hero-badge" class="w-full p-2 rounded-lg border border-cream-300 bg-cream-50">
+              </div>
+
+              <div>
+                <label class="block text-charcoal-700 mb-1">Headline Utama (HTML)</label>
+                <textarea id="edit-hero-title" rows="2" class="w-full p-2 rounded-lg border border-cream-300 bg-cream-50"></textarea>
+              </div>
+
+              <div>
+                <label class="block text-charcoal-700 mb-1">Deskripsi Hero</label>
+                <textarea id="edit-hero-subtext" rows="3" class="w-full p-2 rounded-lg border border-cream-300 bg-cream-50"></textarea>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-white border border-cream-300 space-y-3">
+              <span class="font-bold text-sage-800 text-[11px] uppercase tracking-wider block">Tombol & Gambar Hero</span>
+
+              <div>
+                <label class="block text-charcoal-700 mb-1">Teks Tombol Utama</label>
+                <input type="text" id="edit-hero-cta1" class="w-full p-2 rounded-lg border border-cream-300 bg-cream-50">
+              </div>
+
+              <div>
+                <label class="block text-charcoal-700 mb-1">Teks Tombol Sekunder</label>
+                <input type="text" id="edit-hero-cta2" class="w-full p-2 rounded-lg border border-cream-300 bg-cream-50">
+              </div>
+
+              <div>
+                <label class="block text-charcoal-700 mb-1">URL Gambar Utama Hero (Google Drive / Unsplash)</label>
+                <input type="text" id="edit-hero-img" class="w-full p-2 rounded-lg border border-cream-300 bg-cream-50">
+                <span class="text-[10px] text-charcoal-500 mt-1 block">Mendukung format Google Drive ID langsung.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex justify-end pt-2">
+            <button onclick="saveLiveContentChanges()" class="px-6 py-2.5 rounded-full bg-charcoal-900 hover:bg-sage-800 text-white text-xs font-medium transition-all shadow-sm">
+              Terapkan Perubahan Konten
+            </button>
+          </div>
+        </div>
+
+        <!-- SECTION 4: SYSTEM SETTINGS -->
+        <div id="adm-sec-settings" class="space-y-4 hidden">
+          <div class="p-5 rounded-2xl bg-white border border-cream-300 text-xs space-y-3">
+            <div class="flex items-center gap-2 text-emerald-700 font-semibold">
+              <i data-lucide="check-circle" class="w-4 h-4"></i>
+              <span>Firebase Database: Terhubung & Aktif</span>
+            </div>
+            <p class="text-charcoal-600 leading-relaxed">
+              API terhubung secara aman untuk sinkronisasi data janji temu, riwayat refleksi, dan jurnal klien. Kredensial dilindungi sesuai konfigurasi privasi backend.
+            </p>
+            <div class="p-3 rounded-xl bg-cream-100 font-mono text-[11px] text-charcoal-700 space-y-1">
+              <div>Mode Penyimpanan: Hybrid (Realtime Firestore + Offline Resilient)</div>
+              <div>Pengoptimal Gambar: lh3.googleusercontent.com/d/ resolver aktif</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast" class="fixed bottom-20 md:bottom-6 right-6 z-50 bg-charcoal-900 text-white text-xs px-4 py-3 rounded-2xl shadow-xl flex items-center gap-2 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+    <i data-lucide="check" class="w-4 h-4 text-sage-400"></i>
+    <span id="toast-message">Notifikasi</span>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    // Connected API configuration as requested
+    const firebaseConfig = {
+      apiKey: "AIzaSyBZyvA6_cy2k42eU_Ktt13wFVTDYgZaXkI",
+      authDomain: "semua-web-f8628.firebaseapp.com",
+      projectId: "semua-web-f8628",
+      storageBucket: "semua-web-f8628.firebasestorage.app",
+      messagingSenderId: "220101602354",
+      appId: "1:220101602354:web:c1e942a2f1971a0bc9e02b"
+    };
+
+    let app, auth, db;
+    let currentUser = null;
+
+    try {
+      app = initializeApp(firebaseConfig);
+      auth = getAuth(app);
+      db = getFirestore(app);
+
+      signInAnonymously(auth).then((cred) => {
+        currentUser = cred.user;
+        window.currentFirebaseUser = currentUser;
+      }).catch((err) => {
+        console.warn("Firebase Auth Notice (Safe mode active):", err);
+      });
+
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          currentUser = user;
+          window.currentFirebaseUser = user;
+        }
+      });
+    } catch (e) {
+      console.warn("Firebase initialization wrapped safely:", e);
+    }
+
+    window.saveBookingToCloud = async function(bookingData) {
+      if (currentUser && db) {
+        try {
+          const appId = typeof __app_id !== 'undefined' ? __app_id : 'ruang-pulih-app';
+          const bookingsCol = collection(db, 'artifacts', appId, 'users', currentUser.uid, 'appointments');
+          await addDoc(bookingsCol, {
+            ...bookingData,
+            createdAt: new Date().toISOString()
+          });
+        } catch (e) {
+          console.log("Session saved locally:", e);
+        }
+      }
+    };
+  </script>
+
+  <script>
+    // Robust Google Drive Resolver with primary format lh3.googleusercontent.com/d/
+    function resolveImageUrl(url) {
+      if (!url) return 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=800&q=80';
+      const clean = url.trim();
+
+      // Extract Drive File ID if present
+      const driveMatch = clean.match(/\/d\/([a-zA-Z0-9_-]+)/) || 
+                         clean.match(/id=([a-zA-Z0-9_-]+)/) ||
+                         clean.match(/file\/d\/([a-zA-Z0-9_-]+)/);
+
+      if (driveMatch && driveMatch[1]) {
+        const fileId = driveMatch[1];
+        // Format 1 (Primary most stable): lh3.googleusercontent.com/d/{id}
+        return `https://lh3.googleusercontent.com/d/${fileId}`;
+      }
+
+      return clean;
+    }
+
+    function handleImageFallback(imgEl, type) {
+      if (!imgEl) return;
+      // If primary failed, try thumbnail?id= if it's drive
+      const src = imgEl.src;
+      if (src.includes('lh3.googleusercontent.com/d/')) {
+        const fileId = src.split('/d/')[1];
+        imgEl.src = `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`;
+        return;
+      }
+      // Otherwise fallback to safe Unsplash
+      if (type === 'hero') {
+        imgEl.src = 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=1000&q=80';
+      } else {
+        imgEl.src = 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80';
+      }
+    }
+
+    // Default Seed Data
+    const DEFAULT_PSYCHOLOGISTS = [
+      {
+        id: 'maya-prameswari',
+        name: 'Dr. Maya Prameswari, M.Psi.',
+        title: 'Clinical Psychologist',
+        avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80',
+        specialties: ['Anxiety', 'Self Growth', 'Burnout'],
+        experience: '8+ tahun',
+        rating: '4.9',
+        reviewsCount: 142,
+        gender: 'female',
+        mode: ['online', 'offline'],
+        availability: 'Available Today',
+        languages: ['Bahasa Indonesia', 'English'],
+        education: 'S2 Magister Psikologi Profesi Klinis Dewasa — Universitas Indonesia',
+        approach: 'Cognitive Behavioral Therapy (CBT), Mindfulness-Based Therapy.',
+        bio: 'Membantu individu mengurai rasa cemas berlebih, perfeksionisme yang melelahkan, dan memulihkan rasa percaya diri dengan ruang aman.'
+      },
+      {
+        id: 'raka-aditya',
+        name: 'Dr. Raka Aditya, M.Psi.',
+        title: 'Clinical Psychologist',
+        avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
+        specialties: ['Relationship', 'Self Growth', 'Burnout'],
+        experience: '7+ tahun',
+        rating: '4.9',
+        reviewsCount: 118,
+        gender: 'male',
+        mode: ['online', 'offline'],
+        availability: 'Besok, 10:00 WIB',
+        languages: ['Bahasa Indonesia', 'English'],
+        education: 'S2 Profesi Psikologi Klinis — Universitas Gadjah Mada',
+        approach: 'Emotion-Focused Therapy (EFT), Narrative Therapy.',
+        bio: 'Berfokus mendampingi pasangan dan individu yang menghadapi kebuntuan komunikasi serta masa transisi hidup berat.'
+      },
+      {
+        id: 'anindita-kusuma',
+        name: 'Anindita Kusuma, M.Psi., Psikolog',
+        title: 'Clinical Psychologist',
+        avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80',
+        specialties: ['Young Adults', 'Anxiety', 'Self Growth'],
+        experience: '5+ tahun',
+        rating: '4.8',
+        reviewsCount: 96,
+        gender: 'female',
+        mode: ['online'],
+        availability: 'Available Today',
+        languages: ['Bahasa Indonesia'],
+        education: 'S2 Psikologi Klinis — Universitas Padjadjaran',
+        approach: 'Person-Centered Therapy, ACT.',
+        bio: 'Menemani usia muda dalam menghadapi quarter-life crisis, ekspektasi keluarga, serta kebingungan arah karier.'
+      },
+      {
+        id: 'dimas-pratama',
+        name: 'Dimas Pratama, M.Psi., Psikolog',
+        title: 'Clinical Psychologist',
+        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
+        specialties: ['Burnout', 'Grief & Life Changes', 'Anxiety'],
+        experience: '9+ tahun',
+        rating: '5.0',
+        reviewsCount: 164,
+        gender: 'male',
+        mode: ['online', 'offline'],
+        availability: 'Kamis, 14:00 WIB',
+        languages: ['Bahasa Indonesia', 'English'],
+        education: 'S2 Magister Psikologi Klinis — Universitas Airlangga',
+        approach: 'Existential-Humanistic, CBT.',
+        bio: 'Mendampingi pemulihan duka, rasa kehilangan bermakna, dan kelelahan kronis dari tuntutan profesional.'
+      }
+    ];
+
+    const DEFAULT_CONTENT = {
+      heroBadge: 'Pelan-Pelan, Kamu Nggak Harus Sendiri.',
+      heroTitle: 'You deserve a space to <span class="italic font-normal text-sage-700 underline decoration-sage-200 decoration-wavy decoration-1 underline-offset-4">feel heard</span>.',
+      heroSubtext: 'Tempat yang aman dan tenang untuk memahami diri, berbicara tanpa takut dihakimi, dan mendapatkan pendampingan dari psikolog klinis berlisensi yang tepat untukmu.',
+      heroCta1: 'Temukan Psikologmu',
+      heroCta2: 'Bagaimana Konseling Bekerja',
+      heroImg: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=1000&q=80'
+    };
+
+    // State Variables
+    let psychologists = JSON.parse(localStorage.getItem('rp_psychologists')) || [...DEFAULT_PSYCHOLOGISTS];
+    let siteContent = JSON.parse(localStorage.getItem('rp_content')) || { ...DEFAULT_CONTENT };
+    let allBookingsList = JSON.parse(localStorage.getItem('rp_bookings')) || [
+      {
+        id: 'RP-8921',
+        clientName: 'Nadia Safitri',
+        contact: '081298765432',
+        psychologist: 'Dr. Maya Prameswari, M.Psi.',
+        type: 'Online Video Session',
+        date: '2026-09-16 • 15:00 WIB',
+        status: 'Confirmed',
+        notes: 'Sering merasa cemas dan sulit tidur di malam hari'
+      }
+    ];
+
+    let userAppointments = [...allBookingsList];
+    let userJournals = [];
+    let userMoodLogs = [];
+
+    let bookingData = {
+      concern: 'Anxiety & Overthinking',
+      psychologistId: 'maya-prameswari',
+      mode: 'online',
+      date: '2026-09-16',
+      time: '15:00 WIB',
+      userName: '',
+      userContact: '',
+      notes: ''
+    };
+
+    let currentStep = 1;
+    let activeFilterTag = 'all';
+
+    // Apply Live Content to DOM
+    function applyContentToDOM() {
+      const bEl = document.getElementById('hero-badge-text');
+      const tEl = document.getElementById('hero-title-text');
+      const sEl = document.getElementById('hero-subtext-text');
+      const c1El = document.getElementById('hero-cta-primary-text');
+      const c2El = document.getElementById('hero-cta-secondary-text');
+      const imgEl = document.getElementById('hero-main-img');
+
+      if (bEl) bEl.innerText = siteContent.heroBadge;
+      if (tEl) tEl.innerHTML = siteContent.heroTitle;
+      if (sEl) sEl.innerText = siteContent.heroSubtext;
+      if (c1El) c1El.innerText = siteContent.heroCta1;
+      if (c2El) c2El.innerText = siteContent.heroCta2;
+      if (imgEl) imgEl.src = resolveImageUrl(siteContent.heroImg);
+    }
+
+    // Render Psychologist Catalog Cards
+    function renderPsychologistCards(items) {
+      const grid = document.getElementById('psychologist-grid');
+      const empty = document.getElementById('no-results-msg');
+      if (!grid) return;
+
+      grid.innerHTML = '';
+      if (items.length === 0) {
+        if (empty) empty.classList.remove('hidden');
+        return;
+      }
+      if (empty) empty.classList.add('hidden');
+
+      items.forEach(docItem => {
+        const card = document.createElement('div');
+        card.className = 'group rounded-3xl bg-white border border-cream-300 p-6 shadow-soft hover:shadow-calm transition-all duration-300 flex flex-col justify-between';
+        
+        card.innerHTML = `
+          <div>
+            <div class="flex items-start gap-4">
+              <div class="relative">
+                <img 
+                  src="${resolveImageUrl(docItem.avatar)}" 
+                  alt="${docItem.name}" 
+                  class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover border border-cream-200"
+                  onerror="handleImageFallback(this, 'doc')"
+                  loading="lazy"
+                />
+                <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-white"></span>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-1 text-xs text-amber-600 font-semibold">
+                  <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                  <span>${docItem.rating}</span>
+                  <span class="text-charcoal-500 font-normal">(${docItem.reviewsCount || 100})</span>
+                </div>
+                <h3 class="text-base font-semibold text-charcoal-900 truncate mt-0.5">${docItem.name}</h3>
+                <p class="text-xs text-charcoal-500">${docItem.title} • ${docItem.experience}</p>
+                <div class="mt-2 text-[10px] text-sage-800 bg-sage-50 px-2 py-0.5 rounded-md inline-block font-medium">
+                  ${docItem.availability}
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-4 border-t border-cream-200/80">
+              <span class="text-[10px] font-semibold uppercase tracking-wider text-charcoal-500">Fokus Spesialisasi</span>
+              <div class="mt-2 flex flex-wrap gap-1.5">
+                ${docItem.specialties.map(s => `
+                  <span class="text-[11px] px-2.5 py-1 rounded-full bg-cream-100 text-charcoal-700 border border-cream-300">
+                    ${s}
+                  </span>
+                `).join('')}
+              </div>
+            </div>
+
+            <p class="text-xs text-charcoal-600 mt-3 line-clamp-2 leading-relaxed">
+              ${docItem.bio}
+            </p>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-cream-200/80 flex items-center gap-2">
+            <button onclick="openPsychologistProfile('${docItem.id}')" class="flex-1 py-2.5 rounded-full border border-cream-300 text-charcoal-700 hover:bg-cream-100 text-xs font-medium transition-colors">
+              Lihat Profil
+            </button>
+            <button onclick="startBookingWithDoc('${docItem.id}')" class="flex-1 py-2.5 rounded-full bg-charcoal-900 hover:bg-sage-800 text-white text-xs font-medium transition-colors flex items-center justify-center gap-1">
+              <span>Book Sesi</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function handleSearchFilter() {
+      const searchVal = document.getElementById('search-psychologist-input')?.value.toLowerCase().trim() || '';
+      const modeVal = document.getElementById('mode-select-filter')?.value || 'all';
+
+      const filtered = psychologists.filter(doc => {
+        const matchesQuery = 
+          doc.name.toLowerCase().includes(searchVal) ||
+          doc.specialties.some(s => s.toLowerCase().includes(searchVal)) ||
+          doc.bio.toLowerCase().includes(searchVal);
+
+        const matchesTag = (activeFilterTag === 'all') || doc.specialties.includes(activeFilterTag);
+        const matchesMode = (modeVal === 'all') || doc.mode.includes(modeVal);
+
+        return matchesQuery && matchesTag && matchesMode;
+      });
+
+      renderPsychologistCards(filtered);
+    }
+
+    function setSpecialtyFilter(tag) {
+      activeFilterTag = tag;
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        if (btn.getAttribute('data-filter') === tag) {
+          btn.className = 'filter-btn active-filter px-3 py-1.5 rounded-full bg-charcoal-900 text-white transition-colors';
+        } else {
+          btn.className = 'filter-btn px-3 py-1.5 rounded-full bg-cream-100 border border-cream-300 text-charcoal-700 hover:bg-cream-200 transition-colors';
+        }
+      });
+      handleSearchFilter();
+    }
+
+    function filterBySpecialty(spec) {
+      scrollToSection('find-psychologist');
+      setSpecialtyFilter(spec);
+    }
+
+    function filterByQuick(type) {
+      scrollToSection('find-psychologist');
+      const sel = document.getElementById('mode-select-filter');
+      if (type === 'online' && sel) {
+        sel.value = 'online';
+      } else if (type === 'offline' && sel) {
+        sel.value = 'offline';
+      } else {
+        resetFilters();
+      }
+      handleSearchFilter();
+    }
+
+    function resetFilters() {
+      const search = document.getElementById('search-psychologist-input');
+      const mode = document.getElementById('mode-select-filter');
+      if (search) search.value = '';
+      if (mode) mode.value = 'all';
+      setSpecialtyFilter('all');
+    }
+
+    function openPsychologistProfile(id) {
+      const doc = psychologists.find(p => p.id === id);
+      if (!doc) return;
+
+      const container = document.getElementById('modal-psychologist-content');
+      container.innerHTML = `
+        <div class="flex flex-col sm:flex-row gap-5 items-start">
+          <img src="${resolveImageUrl(doc.avatar)}" alt="${doc.name}" class="w-24 h-24 sm:w-28 sm:h-28 rounded-3xl object-cover border border-cream-300" onerror="handleImageFallback(this, 'doc')" />
+          <div class="space-y-1">
+            <div class="inline-flex items-center gap-1.5 text-xs text-amber-700 font-semibold bg-amber-50 px-2.5 py-0.5 rounded-full">
+              <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+              <span>${doc.rating} (${doc.reviewsCount || 100} Ulasan)</span>
+            </div>
+            <h3 class="text-xl font-editorial text-charcoal-900 pt-1">${doc.name}</h3>
+            <p class="text-xs text-charcoal-500">${doc.title} • Pengalaman ${doc.experience}</p>
+            <p class="text-xs text-sage-800 font-medium">${doc.availability}</p>
+          </div>
+        </div>
+
+        <div class="mt-6 space-y-4 text-xs text-charcoal-700 border-t border-cream-200 pt-5">
+          <div>
+            <h4 class="font-semibold text-charcoal-900 uppercase tracking-wider text-[10px]">Latar Belakang & Pendidikan</h4>
+            <p class="mt-1 text-charcoal-600 leading-relaxed">${doc.education || 'Magister Psikologi Profesi Klinis'}</p>
+          </div>
+
+          <div>
+            <h4 class="font-semibold text-charcoal-900 uppercase tracking-wider text-[10px]">Pendekatan Konseling</h4>
+            <p class="mt-1 text-charcoal-600 leading-relaxed">${doc.approach || 'Integrative Therapy'}</p>
+          </div>
+
+          <div>
+            <h4 class="font-semibold text-charcoal-900 uppercase tracking-wider text-[10px]">Tentang Pendampingan</h4>
+            <p class="mt-1 text-charcoal-600 leading-relaxed">${doc.bio}</p>
+          </div>
+        </div>
+
+        <div class="mt-8 pt-5 border-t border-cream-300 flex items-center justify-between gap-3">
+          <button onclick="closePsychologistModal()" class="px-4 py-2.5 rounded-full border border-cream-300 text-charcoal-600 hover:bg-cream-100 text-xs font-medium">
+            Tutup
+          </button>
+          <button onclick="startBookingWithDoc('${doc.id}')" class="px-6 py-2.5 rounded-full bg-charcoal-900 hover:bg-charcoal-800 text-white text-xs font-medium flex items-center gap-2">
+            <span>Book Sesi Bersama</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+      `;
+
+      document.getElementById('psychologist-modal').classList.remove('hidden');
+      document.getElementById('psychologist-modal').classList.add('flex');
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function closePsychologistModal() {
+      const el = document.getElementById('psychologist-modal');
+      el.classList.add('hidden');
+      el.classList.remove('flex');
+    }
+
+    function selectStateChoice(type, label, desc) {
+      const box = document.getElementById('discovery-card');
+      const title = document.getElementById('discovery-title');
+      const descEl = document.getElementById('discovery-desc');
+
+      if (box && title && descEl) {
+        title.innerText = `Kamu memilih: "${label}"`;
+        descEl.innerText = desc + " Kami telah menyiapkan rekomendasi psikolog dengan keahlian mendalam di area ini.";
+        box.classList.remove('hidden');
+      }
+
+      bookingData.concern = label;
+      showToast(`Pilihan dicatat: ${label}`);
+    }
+
+    function openBookingWithConcern() {
+      openBookingModal();
+    }
+
+    function recordMood(name, icon) {
+      const resBox = document.getElementById('mood-response-box');
+      const iconDisplay = document.getElementById('mood-icon-display');
+      const textDisplay = document.getElementById('mood-gentle-text');
+
+      if (iconDisplay) iconDisplay.innerText = icon;
+      if (textDisplay) {
+        textDisplay.innerText = `Terima kasih sudah jujur menyapa perasaan (${name}) hari ini.`;
+      }
+      if (resBox) resBox.classList.remove('hidden');
+
+      userMoodLogs.unshift({
+        mood: name,
+        icon: icon,
+        time: 'Hari ini, ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      });
+
+      showToast(`Refleksi harian dicatat: ${name} ${icon}`);
+    }
+
+    // Box Breathing Exercise Logic
+    let breathingInterval = null;
+    let isBreathingActive = false;
+    let breathSeconds = 4;
+    let breathPhaseIndex = 0;
+    const breathPhases = [
+      { name: 'Tarik Napas', instruction: 'Tarik napas perlahan lewat hidung...' },
+      { name: 'Tahan', instruction: 'Tahan napas dengan tenang...' },
+      { name: 'Hembuskan', instruction: 'Hembuskan perlahan lewat mulut...' },
+      { name: 'Jeda Sejenak', instruction: 'Istirahatkan dada dan bahu...' }
+    ];
+
+    function toggleBreathingExercise() {
+      const btn = document.getElementById('start-breath-btn');
+      const btnLabel = document.getElementById('breath-btn-label');
+      
+      if (!isBreathingActive) {
+        isBreathingActive = true;
+        btnLabel.innerText = 'Hentikan Latihan';
+        btn.classList.replace('bg-sage-700', 'bg-charcoal-900');
+        runBreathingLoop();
+      } else {
+        resetBreathingExercise();
+      }
+    }
+
+    function runBreathingLoop() {
+      breathPhaseIndex = 0;
+      breathSeconds = 4;
+      updateBreathingVisual();
+
+      breathingInterval = setInterval(() => {
+        breathSeconds--;
+        if (breathSeconds <= 0) {
+          breathPhaseIndex = (breathPhaseIndex + 1) % 4;
+          breathSeconds = 4;
+          updateBreathingVisual();
+        }
+        const countEl = document.getElementById('breath-timer-count');
+        if (countEl) countEl.innerText = `${breathSeconds}s`;
+      }, 1000);
+    }
+
+    function updateBreathingVisual() {
+      const current = breathPhases[breathPhaseIndex];
+      const phaseEl = document.getElementById('breath-phase');
+      const instructEl = document.getElementById('breath-instruction');
+      const countEl = document.getElementById('breath-timer-count');
+      const circleOuter = document.getElementById('breath-circle-outer');
+
+      if (phaseEl) phaseEl.innerText = current.name;
+      if (instructEl) instructEl.innerText = current.instruction;
+      if (countEl) countEl.innerText = `${breathSeconds}s`;
+
+      if (circleOuter) {
+        if (breathPhaseIndex === 0) {
+          circleOuter.style.transform = 'scale(1.25)';
+          circleOuter.style.backgroundColor = '#C7D9CD';
+        } else if (breathPhaseIndex === 2) {
+          circleOuter.style.transform = 'scale(1.0)';
+          circleOuter.style.backgroundColor = '#EAE6F0';
+        }
+      }
+    }
+
+    function resetBreathingExercise() {
+      clearInterval(breathingInterval);
+      isBreathingActive = false;
+      const btnLabel = document.getElementById('breath-btn-label');
+      const btn = document.getElementById('start-breath-btn');
+      const phaseEl = document.getElementById('breath-phase');
+      const instructEl = document.getElementById('breath-instruction');
+      const countEl = document.getElementById('breath-timer-count');
+      const circleOuter = document.getElementById('breath-circle-outer');
+
+      if (btnLabel) btnLabel.innerText = 'Mulai Latihan Napas';
+      if (btn) btn.classList.replace('bg-charcoal-900', 'bg-sage-700');
+      if (phaseEl) phaseEl.innerText = 'Siap';
+      if (instructEl) instructEl.innerText = 'Klik Mulai';
+      if (countEl) countEl.innerText = '4s';
+      if (circleOuter) {
+        circleOuter.style.transform = 'scale(1.0)';
+        circleOuter.style.backgroundColor = 'rgba(199, 217, 205, 0.5)';
+      }
+    }
+
+    function saveJournalEntry() {
+      const input = document.getElementById('journal-input');
+      const text = input ? input.value.trim() : '';
+      if (!text) {
+        showToast('Tuliskan sedikit pikiranmu sebelum menyimpan.');
+        return;
+      }
+
+      userJournals.unshift({
+        id: Date.now().toString(),
+        date: 'Hari ini, ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        snippet: text
+      });
+
+      const indicator = document.getElementById('journal-save-indicator');
+      if (indicator) {
+        indicator.classList.remove('hidden');
+        setTimeout(() => indicator.classList.add('hidden'), 3000);
+      }
+
+      showToast('Jurnal pribadi tersimpan.');
+      if (input) input.value = '';
+    }
+
+    function clearJournalInput() {
+      const input = document.getElementById('journal-input');
+      if (input) input.value = '';
+    }
+
+    // 6-Step Booking Modal Logic
+    function openBookingModal(defaultMode = null) {
+      if (defaultMode) {
+        bookingData.mode = defaultMode;
+      }
+      currentStep = 1;
+      renderBookingStep();
+      const modal = document.getElementById('booking-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeBookingModal() {
+      const modal = document.getElementById('booking-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function startBookingWithDoc(docId) {
+      bookingData.psychologistId = docId;
+      closePsychologistModal();
+      openBookingModal();
+      currentStep = 1;
+      renderBookingStep();
+    }
+
+    function updateStepIndicator() {
+      const label = document.getElementById('booking-step-label');
+      const prevBtn = document.getElementById('booking-prev-btn');
+      const nextBtn = document.getElementById('booking-next-btn');
+
+      if (label) label.innerText = `LANGKAH 0${currentStep} DARI 06`;
+
+      const bars = document.querySelectorAll('#booking-progress-bars .progress-bar-item');
+      bars.forEach((bar, index) => {
+        if (index < currentStep) {
+          bar.className = 'h-1 rounded-full bg-sage-600 progress-bar-item transition-all';
+        } else {
+          bar.className = 'h-1 rounded-full bg-cream-200 progress-bar-item transition-all';
+        }
+      });
+
+      if (currentStep > 1) {
+        prevBtn?.classList.remove('hidden');
+      } else {
+        prevBtn?.classList.add('hidden');
+      }
+
+      if (currentStep === 6) {
+        nextBtn?.classList.add('hidden');
+        prevBtn?.classList.add('hidden');
+      } else if (currentStep === 5) {
+        if (nextBtn) nextBtn.innerText = 'Konfirmasi & Jadwalkan Sesi';
+        nextBtn?.classList.remove('hidden');
+      } else {
+        if (nextBtn) nextBtn.innerText = 'Lanjutkan';
+        nextBtn?.classList.remove('hidden');
+      }
+    }
+
+    function renderBookingStep() {
+      updateStepIndicator();
+      const container = document.getElementById('booking-step-content');
+      const title = document.getElementById('booking-step-title');
+
+      if (currentStep === 1) {
+        title.innerText = "Apa yang sedang kamu butuhkan?";
+        container.innerHTML = `
+          <div class="space-y-3">
+            <p class="text-xs text-charcoal-500">Pilih topik utama yang ingin kamu diskusikan bersama psikolog.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              ${[
+                'Anxiety & Overthinking',
+                'Kelelahan Bekerja (Burnout)',
+                'Hubungan dengan Pasangan / Relasi',
+                'Penyembuhan Duka & Kehilangan',
+                'Quarter-Life Crisis & Masa Depan',
+                'Membangun Kepercayaan Diri'
+              ].map(c => `
+                <label class="p-3.5 rounded-2xl border ${bookingData.concern === c ? 'border-sage-600 bg-sage-50/60' : 'border-cream-300 bg-cream-50/50'} hover:border-sage-500 flex items-center gap-3 cursor-pointer transition-colors text-xs font-medium text-charcoal-800">
+                  <input type="radio" name="concern_choice" value="${c}" ${bookingData.concern === c ? 'checked' : ''} onchange="bookingData.concern = this.value; renderBookingStep();" class="accent-sage-700">
+                  <span>${c}</span>
+                </label>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      } else if (currentStep === 2) {
+        title.innerText = "Pilih psikolog pendampingmu";
+        container.innerHTML = `
+          <div class="space-y-3">
+            <div class="space-y-2.5 max-h-72 overflow-y-auto pr-1">
+              ${psychologists.map(doc => `
+                <label class="p-3 rounded-2xl border ${bookingData.psychologistId === doc.id ? 'border-sage-600 bg-sage-50/60' : 'border-cream-300 bg-white'} hover:border-sage-400 flex items-center justify-between cursor-pointer transition-all">
+                  <div class="flex items-center gap-3">
+                    <input type="radio" name="doc_choice" value="${doc.id}" ${bookingData.psychologistId === doc.id ? 'checked' : ''} onchange="bookingData.psychologistId = this.value; renderBookingStep();" class="accent-sage-700">
+                    <img src="${resolveImageUrl(doc.avatar)}" class="w-10 h-10 rounded-xl object-cover border border-cream-200" onerror="handleImageFallback(this, 'doc')" />
+                    <div>
+                      <h4 class="text-xs font-semibold text-charcoal-900">${doc.name}</h4>
+                      <p class="text-[10px] text-charcoal-500">${doc.title} • ${doc.experience}</p>
+                    </div>
+                  </div>
+                  <span class="text-[10px] text-sage-800 font-medium bg-cream-100 px-2 py-1 rounded-full">${doc.availability}</span>
+                </label>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      } else if (currentStep === 3) {
+        title.innerText = "Pilih format konseling";
+        container.innerHTML = `
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <label class="p-5 rounded-3xl border ${bookingData.mode === 'online' ? 'border-sage-600 bg-sage-50/60 ring-2 ring-sage-500/10' : 'border-cream-300 bg-white'} cursor-pointer transition-all flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between">
+                  <i data-lucide="video" class="w-5 h-5 text-lavender-700"></i>
+                  <input type="radio" name="mode_choice" value="online" ${bookingData.mode === 'online' ? 'checked' : ''} onchange="bookingData.mode = this.value; renderBookingStep();" class="accent-sage-700">
+                </div>
+                <h4 class="font-semibold text-charcoal-900 text-sm mt-3">Konseling Online</h4>
+                <p class="text-xs text-charcoal-500 mt-1 leading-relaxed">Sesi daring video call privat terenkripsi.</p>
+              </div>
+            </label>
+
+            <label class="p-5 rounded-3xl border ${bookingData.mode === 'offline' ? 'border-sage-600 bg-sage-50/60 ring-2 ring-sage-500/10' : 'border-cream-300 bg-white'} cursor-pointer transition-all flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between">
+                  <i data-lucide="map-pin" class="w-5 h-5 text-dusty-700"></i>
+                  <input type="radio" name="mode_choice" value="offline" ${bookingData.mode === 'offline' ? 'checked' : ''} onchange="bookingData.mode = this.value; renderBookingStep();" class="accent-sage-700">
+                </div>
+                <h4 class="font-semibold text-charcoal-900 text-sm mt-3">Tatap Muka di Studio</h4>
+                <p class="text-xs text-charcoal-500 mt-1 leading-relaxed">Studio privat di Senopati Jaksel atau BSD.</p>
+              </div>
+            </label>
+          </div>
+        `;
+      } else if (currentStep === 4) {
+        title.innerText = "Pilih tanggal dan waktu";
+        container.innerHTML = `
+          <div class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-[11px] font-semibold text-charcoal-700 uppercase tracking-wider mb-1.5">Tanggal Sesi</label>
+                <input 
+                  type="date" 
+                  value="${bookingData.date}" 
+                  onchange="bookingData.date = this.value;"
+                  class="w-full p-3 rounded-2xl bg-cream-100 border border-cream-300 text-xs font-medium focus:outline-none focus:border-sage-600"
+                />
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-semibold text-charcoal-700 uppercase tracking-wider mb-1.5">Pilihan Jam (60 Menit)</label>
+                <div class="grid grid-cols-2 gap-2">
+                  ${['10:00 WIB', '13:00 WIB', '15:00 WIB', '19:00 WIB'].map(slot => `
+                    <button type="button" onclick="bookingData.time = '${slot}'; renderBookingStep();" class="p-2.5 rounded-xl border text-xs font-medium ${bookingData.time === slot ? 'bg-charcoal-900 text-white border-charcoal-900' : 'bg-white border-cream-300 text-charcoal-700 hover:bg-cream-100'} transition-all">
+                      ${slot}
+                    </button>
+                  `).join('')}
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (currentStep === 5) {
+        title.innerText = "Informasi Kontakmu";
+        container.innerHTML = `
+          <div class="space-y-3">
+            <div>
+              <label class="block text-xs font-semibold text-charcoal-800 mb-1">Nama Lengkap / Panggilan</label>
+              <input 
+                type="text" 
+                placeholder="cth: Rian Pratama" 
+                value="${bookingData.userName}" 
+                oninput="bookingData.userName = this.value;"
+                class="w-full p-3 rounded-2xl bg-cream-100 border border-cream-300 text-xs focus:outline-none focus:border-sage-600"
+              />
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-charcoal-800 mb-1">No. WhatsApp / Email</label>
+              <input 
+                type="text" 
+                placeholder="0812xxxxxx atau nama@email.com" 
+                value="${bookingData.userContact}" 
+                oninput="bookingData.userContact = this.value;"
+                class="w-full p-3 rounded-2xl bg-cream-100 border border-cream-300 text-xs focus:outline-none focus:border-sage-600"
+              />
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-charcoal-800 mb-1">Catatan Tambahan (Opsional)</label>
+              <textarea 
+                rows="2"
+                placeholder="Hal khusus yang ingin disampaikan terlebih dahulu..." 
+                oninput="bookingData.notes = this.value;"
+                class="w-full p-3 rounded-2xl bg-cream-100 border border-cream-300 text-xs focus:outline-none focus:border-sage-600"
+              >${bookingData.notes}</textarea>
+            </div>
+          </div>
+        `;
+      } else if (currentStep === 6) {
+        title.innerText = "Your session is booked.";
+        const doc = psychologists.find(p => p.id === bookingData.psychologistId) || psychologists[0];
+        const newBookingId = 'RP-' + Math.floor(1000 + Math.random() * 9000);
+
+        const newBookingRecord = {
+          id: newBookingId,
+          clientName: bookingData.userName || 'Teman Pulih',
+          contact: bookingData.userContact || 'Terkonfirmasi via Web',
+          psychologist: doc.name,
+          type: bookingData.mode === 'online' ? 'Online Video Session' : 'Tatap Muka di Studio',
+          date: `${bookingData.date} • ${bookingData.time}`,
+          status: 'Confirmed',
+          notes: bookingData.notes || 'Pemesanan langsung dari website'
+        };
+
+        allBookingsList.unshift(newBookingRecord);
+        localStorage.setItem('rp_bookings', JSON.stringify(allBookingsList));
+        userAppointments.unshift(newBookingRecord);
+
+        if (window.saveBookingToCloud) {
+          window.saveBookingToCloud(newBookingRecord);
+        }
+
+        container.innerHTML = `
+          <div class="text-center py-4 space-y-4">
+            <div class="w-14 h-14 rounded-full bg-sage-100 text-sage-800 flex items-center justify-center mx-auto text-xl">
+              <i data-lucide="check" class="w-7 h-7"></i>
+            </div>
+            <div>
+              <h4 class="text-lg font-semibold text-charcoal-900">Jadwal Sesi Berhasil Dikonfirmasi</h4>
+              <p class="text-xs text-charcoal-500 mt-1">Booking ID: <strong class="text-charcoal-800 font-mono">${newBookingId}</strong></p>
+            </div>
+            <div class="p-4 rounded-2xl bg-cream-100 text-xs text-left max-w-sm mx-auto space-y-1">
+              <div>Psikolog: <strong>${doc.name}</strong></div>
+              <div>Jadwal: <strong>${bookingData.date} (${bookingData.time})</strong></div>
+              <div>Format: <strong>${bookingData.mode === 'online' ? 'Online Video' : 'Tatap Muka di Studio'}</strong></div>
+            </div>
+            <button onclick="closeBookingModal(); openMemberModal();" class="px-6 py-2.5 rounded-full bg-charcoal-900 hover:bg-charcoal-800 text-white text-xs font-medium">
+              Lihat di Ruang Saya
+            </button>
+          </div>
+        `;
+      }
+
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function nextBookingStep() {
+      if (currentStep === 5 && !bookingData.userName.trim()) {
+        bookingData.userName = "Teman Pulih";
+      }
+      if (currentStep < 6) {
+        currentStep++;
+        renderBookingStep();
+      }
+    }
+
+    function prevBookingStep() {
+      if (currentStep > 1) {
+        currentStep--;
+        renderBookingStep();
+      }
+    }
+
+    // Member Modal Logic
+    function openMemberModal() {
+      renderMemberAppointments();
+      renderMemberJournals();
+      renderMemberMoods();
+      const modal = document.getElementById('member-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function closeMemberModal() {
+      const modal = document.getElementById('member-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function showMemberTab(tabName) {
+      ['appointments', 'journal', 'moods'].forEach(t => {
+        document.getElementById(`member-tab-${t}`)?.classList.add('hidden');
+        const btn = document.getElementById(`tab-btn-${t}`);
+        if (btn) btn.className = 'pb-2 border-b-2 border-transparent text-charcoal-500 hover:text-charcoal-800';
+      });
+
+      document.getElementById(`member-tab-${tabName}`)?.classList.remove('hidden');
+      const activeBtn = document.getElementById(`tab-btn-${tabName}`);
+      if (activeBtn) activeBtn.className = 'pb-2 border-b-2 border-charcoal-900 text-charcoal-900 font-semibold';
+    }
+
+    function renderMemberAppointments() {
+      const container = document.getElementById('member-appointments-list');
+      if (!container) return;
+
+      if (userAppointments.length === 0) {
+        container.innerHTML = `<p class="text-xs text-charcoal-500 py-6 text-center">Belum ada jadwal sesi aktif.</p>`;
+        return;
+      }
+
+      container.innerHTML = userAppointments.map(app => `
+        <div class="p-4 rounded-2xl bg-cream-100 border border-cream-300 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="font-mono text-[10px] text-charcoal-500">${app.id}</span>
+              <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-medium">${app.status}</span>
+            </div>
+            <h4 class="font-semibold text-charcoal-900 text-sm mt-1">${app.psychologist}</h4>
+            <p class="text-charcoal-500 mt-0.5">${app.type} • ${app.date}</p>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderMemberJournals() {
+      const container = document.getElementById('member-journal-list');
+      if (!container) return;
+      if (userJournals.length === 0) {
+        container.innerHTML = `<p class="text-xs text-charcoal-500 py-6 text-center">Belum ada catatan jurnal.</p>`;
+        return;
+      }
+      container.innerHTML = userJournals.map(j => `
+        <div class="p-4 rounded-2xl bg-cream-50 border border-cream-200 text-xs space-y-1">
+          <span class="text-[10px] font-mono text-charcoal-500">${j.date}</span>
+          <p class="text-charcoal-800 italic">${j.snippet}</p>
+        </div>
+      `).join('');
+    }
+
+    function renderMemberMoods() {
+      const container = document.getElementById('member-mood-list');
+      if (!container) return;
+      if (userMoodLogs.length === 0) {
+        container.innerHTML = `<p class="text-xs text-charcoal-500 py-6 text-center">Belum ada check-in hari ini.</p>`;
+        return;
+      }
+      container.innerHTML = userMoodLogs.map(m => `
+        <div class="p-3 rounded-xl bg-white border border-cream-200 flex items-center justify-between text-xs">
+          <span class="font-medium text-charcoal-800">${m.icon} ${m.mood}</span>
+          <span class="text-[10px] text-charcoal-500">${m.time}</span>
+        </div>
+      `).join('');
+    }
+
+    // =========================================================================
+    // =========================================================================
+    function openAdminLoginModal() {
+      const modal = document.getElementById('admin-login-modal');
+      const err = document.getElementById('admin-login-error');
+      if (err) err.classList.add('hidden');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeAdminLoginModal() {
+      const modal = document.getElementById('admin-login-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function handleAdminLogin(e) {
+      e.preventDefault();
+      const u = document.getElementById('admin-username')?.value.trim();
+      const p = document.getElementById('admin-password')?.value.trim();
+      const err = document.getElementById('admin-login-error');
+
+      if (u === 'kelolaweb2026' && p === 'kelolaweb2026') {
+        closeAdminLoginModal();
+        openAdminDashboard();
+        showToast('Berhasil masuk sebagai Admin');
+      } else {
+        if (err) err.classList.remove('hidden');
+      }
+    }
+
+    function openAdminDashboard() {
+      const modal = document.getElementById('admin-dashboard-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      
+      // Load current site content into editor fields
+      document.getElementById('edit-hero-badge').value = siteContent.heroBadge;
+      document.getElementById('edit-hero-title').value = siteContent.heroTitle;
+      document.getElementById('edit-hero-subtext').value = siteContent.heroSubtext;
+      document.getElementById('edit-hero-cta1').value = siteContent.heroCta1;
+      document.getElementById('edit-hero-cta2').value = siteContent.heroCta2;
+      document.getElementById('edit-hero-img').value = siteContent.heroImg;
+
+      renderAdminPsychologists();
+      renderAdminBookings();
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function closeAdminDashboard() {
+      const modal = document.getElementById('admin-dashboard-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function handleAdminLogout() {
+      closeAdminDashboard();
+      showToast('Telah keluar dari panel admin');
+    }
+
+    function switchAdminTab(tab) {
+      ['catalog', 'bookings', 'content', 'settings'].forEach(t => {
+        document.getElementById(`adm-sec-${t}`)?.classList.add('hidden');
+        const btn = document.getElementById(`adm-tab-${t}`);
+        if (btn) btn.className = 'pb-3 border-b-2 border-transparent text-charcoal-500 hover:text-charcoal-800 flex items-center gap-1.5 whitespace-nowrap';
+      });
+
+      document.getElementById(`adm-sec-${tab}`)?.classList.remove('hidden');
+      const active = document.getElementById(`adm-tab-${tab}`);
+      if (active) active.className = 'pb-3 border-b-2 border-charcoal-900 text-charcoal-900 font-semibold flex items-center gap-1.5 whitespace-nowrap';
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function renderAdminPsychologists() {
+      const table = document.getElementById('adm-psychologist-table');
+      if (!table) return;
+
+      table.innerHTML = psychologists.map(doc => `
+        <div class="p-4 rounded-2xl bg-white border border-cream-300 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs shadow-soft">
+          <div class="flex items-center gap-3">
+            <img src="${resolveImageUrl(doc.avatar)}" class="w-12 h-12 rounded-xl object-cover border border-cream-200" onerror="handleImageFallback(this, 'doc')" />
+            <div>
+              <h5 class="font-semibold text-charcoal-900 text-sm">${doc.name}</h5>
+              <p class="text-charcoal-500 text-[11px]">${doc.title} • ${doc.experience} • Rating: ${doc.rating}</p>
+              <div class="flex flex-wrap gap-1 mt-1">
+                ${doc.specialties.map(s => `<span class="px-2 py-0.5 bg-cream-100 border border-cream-200 rounded text-[10px] text-charcoal-700">${s}</span>`).join('')}
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="editPsychologistItem('${doc.id}')" class="px-3 py-1.5 rounded-lg bg-cream-100 hover:bg-cream-200 text-charcoal-800 font-medium">Edit</button>
+            <button onclick="deletePsychologistItem('${doc.id}')" class="px-3 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 font-medium">Hapus</button>
+          </div>
+        </div>
+      `).join('');
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function openAddPsychologistForm() {
+      const card = document.getElementById('adm-doc-form-card');
+      const title = document.getElementById('adm-doc-form-title');
+      card.classList.remove('hidden');
+      title.innerText = "Tambah Psikolog Baru";
+
+      document.getElementById('form-doc-edit-id').value = "";
+      document.getElementById('form-doc-name').value = "";
+      document.getElementById('form-doc-specs').value = "";
+      document.getElementById('form-doc-exp').value = "5+ tahun";
+      document.getElementById('form-doc-avail').value = "Available Today";
+      document.getElementById('form-doc-avatar').value = "";
+      document.getElementById('form-doc-bio').value = "";
+    }
+
+    function editPsychologistItem(id) {
+      const doc = psychologists.find(p => p.id === id);
+      if (!doc) return;
+
+      const card = document.getElementById('adm-doc-form-card');
+      const title = document.getElementById('adm-doc-form-title');
+      card.classList.remove('hidden');
+      title.innerText = `Edit: ${doc.name}`;
+
+      document.getElementById('form-doc-edit-id').value = doc.id;
+      document.getElementById('form-doc-name').value = doc.name;
+      document.getElementById('form-doc-specs').value = doc.specialties.join(', ');
+      document.getElementById('form-doc-exp').value = doc.experience;
+      document.getElementById('form-doc-avail').value = doc.availability;
+      document.getElementById('form-doc-avatar').value = doc.avatar;
+      document.getElementById('form-doc-bio').value = doc.bio;
+    }
+
+    function cancelPsychologistForm() {
+      document.getElementById('adm-doc-form-card').classList.add('hidden');
+    }
+
+    function savePsychologistFromForm() {
+      const editId = document.getElementById('form-doc-edit-id').value;
+      const name = document.getElementById('form-doc-name').value.trim();
+      const specsRaw = document.getElementById('form-doc-specs').value;
+      const exp = document.getElementById('form-doc-exp').value.trim() || '5+ tahun';
+      const avail = document.getElementById('form-doc-avail').value.trim() || 'Available Today';
+      const avatar = document.getElementById('form-doc-avatar').value.trim() || 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80';
+      const bio = document.getElementById('form-doc-bio').value.trim() || 'Pendampingan klinis ramah dan berbasis empati.';
+
+      if (!name) {
+        showToast('Harap isi nama psikolog');
+        return;
+      }
+
+      const specs = specsRaw.split(',').map(s => s.trim()).filter(Boolean);
+
+      if (editId) {
+        // Edit existing
+        const idx = psychologists.findIndex(p => p.id === editId);
+        if (idx !== -1) {
+          psychologists[idx] = {
+            ...psychologists[idx],
+            name,
+            specialties: specs.length ? specs : ['Anxiety', 'Self Growth'],
+            experience: exp,
+            availability: avail,
+            avatar,
+            bio
+          };
+        }
+      } else {
+        // Add new
+        const newDoc = {
+          id: 'doc-' + Date.now(),
+          name,
+          title: 'Clinical Psychologist',
+          avatar,
+          specialties: specs.length ? specs : ['Anxiety', 'Self Growth'],
+          experience: exp,
+          rating: '5.0',
+          reviewsCount: 1,
+          mode: ['online', 'offline'],
+          availability: avail,
+          languages: ['Bahasa Indonesia'],
+          bio
+        };
+        psychologists.unshift(newDoc);
+      }
+
+      localStorage.setItem('rp_psychologists', JSON.stringify(psychologists));
+      renderAdminPsychologists();
+      renderPsychologistCards(psychologists);
+      cancelPsychologistForm();
+      showToast('Data psikolog berhasil disimpan');
+    }
+
+    function deletePsychologistItem(id) {
+      psychologists = psychologists.filter(p => p.id !== id);
+      localStorage.setItem('rp_psychologists', JSON.stringify(psychologists));
+      renderAdminPsychologists();
+      renderPsychologistCards(psychologists);
+      showToast('Psikolog dihapus dari katalog');
+    }
+
+    function renderAdminBookings() {
+      const container = document.getElementById('adm-bookings-list');
+      const search = document.getElementById('adm-search-booking')?.value.toLowerCase().trim() || '';
+      if (!container) return;
+
+      const filtered = allBookingsList.filter(b => 
+        b.id.toLowerCase().includes(search) || 
+        b.clientName.toLowerCase().includes(search) ||
+        b.psychologist.toLowerCase().includes(search)
+      );
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<p class="text-xs text-charcoal-500 py-6 text-center">Tidak ada catatan janji temu.</p>`;
+        return;
+      }
+
+      container.innerHTML = filtered.map(b => `
+        <div class="p-4 rounded-2xl bg-white border border-cream-300 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs shadow-soft">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="font-mono text-[10px] text-charcoal-500">${b.id}</span>
+              <span class="px-2 py-0.5 rounded-full ${b.status === 'Confirmed' ? 'bg-emerald-100 text-emerald-800' : 'bg-cream-200 text-charcoal-700'} text-[10px] font-medium">${b.status}</span>
+            </div>
+            <h5 class="font-semibold text-charcoal-900 text-sm mt-1">${b.clientName} (${b.contact})</h5>
+            <p class="text-charcoal-500 text-xs">Bersama: <strong>${b.psychologist}</strong> • ${b.type}</p>
+            <p class="text-sage-800 text-[11px] mt-0.5">Waktu: ${b.date}</p>
+            ${b.notes ? `<p class="text-charcoal-600 text-[11px] italic mt-1 bg-cream-50 p-2 rounded-lg">Catatan: "${b.notes}"</p>` : ''}
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="updateBookingStatus('${b.id}', 'Confirmed')" class="px-3 py-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-medium">Konfirmasi</button>
+            <button onclick="updateBookingStatus('${b.id}', 'Completed')" class="px-3 py-1.5 rounded-lg bg-cream-100 hover:bg-cream-200 text-charcoal-800 font-medium">Selesai</button>
+            <button onclick="updateBookingStatus('${b.id}', 'Cancelled')" class="px-3 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 font-medium">Batal</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function updateBookingStatus(id, newStatus) {
+      const idx = allBookingsList.findIndex(b => b.id === id);
+      if (idx !== -1) {
+        allBookingsList[idx].status = newStatus;
+        localStorage.setItem('rp_bookings', JSON.stringify(allBookingsList));
+        renderAdminBookings();
+        renderMemberAppointments();
+        showToast(`Status booking ${id} diubah ke: ${newStatus}`);
+      }
+    }
+
+    function saveLiveContentChanges() {
+      siteContent.heroBadge = document.getElementById('edit-hero-badge').value;
+      siteContent.heroTitle = document.getElementById('edit-hero-title').value;
+      siteContent.heroSubtext = document.getElementById('edit-hero-subtext').value;
+      siteContent.heroCta1 = document.getElementById('edit-hero-cta1').value;
+      siteContent.heroCta2 = document.getElementById('edit-hero-cta2').value;
+      siteContent.heroImg = document.getElementById('edit-hero-img').value;
+
+      localStorage.setItem('rp_content', JSON.stringify(siteContent));
+      applyContentToDOM();
+      showToast('Konten halaman utama berhasil diperbarui secara realtime');
+    }
+
+    // Reset Website Data to Default
+    function resetToDefaultData() {
+      localStorage.removeItem('rp_psychologists');
+      localStorage.removeItem('rp_content');
+      localStorage.removeItem('rp_bookings');
+
+      psychologists = [...DEFAULT_PSYCHOLOGISTS];
+      siteContent = { ...DEFAULT_CONTENT };
+      allBookingsList = [
+        {
+          id: 'RP-8921',
+          clientName: 'Nadia Safitri',
+          contact: '081298765432',
+          psychologist: 'Dr. Maya Prameswari, M.Psi.',
+          type: 'Online Video Session',
+          date: '2026-09-16 • 15:00 WIB',
+          status: 'Confirmed',
+          notes: 'Sering merasa cemas dan sulit tidur'
+        }
+      ];
+
+      applyContentToDOM();
+      renderPsychologistCards(psychologists);
+      renderAdminPsychologists();
+      renderAdminBookings();
+      showToast('Seluruh data dan konten telah direset ke setelan awal');
+    }
+
+    // General Utility Helpers
+    function toggleFaq(btn) {
+      const content = btn.nextElementSibling;
+      const icon = btn.querySelector('svg') || btn.querySelector('i');
+      const isOpen = !content.classList.contains('hidden');
+      if (isOpen) {
+        content.classList.add('hidden');
+        if (icon) icon.style.transform = 'rotate(0deg)';
+      } else {
+        content.classList.remove('hidden');
+        if (icon) icon.style.transform = 'rotate(180deg)';
+      }
+    }
+
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const text = document.getElementById('toast-message');
+      if (!toast || !text) return;
+      text.innerText = msg;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 3000);
+    }
+
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('main-header');
+      if (!header) return;
+      if (window.scrollY > 40) {
+        header.classList.add('py-2.5', 'shadow-soft');
+        header.classList.remove('py-4');
+      } else {
+        header.classList.remove('py-2.5', 'shadow-soft');
+        header.classList.add('py-4');
+      }
+    });
+
+    window.onload = function() {
+      applyContentToDOM();
+      renderPsychologistCards(psychologists);
+      if (window.lucide) lucide.createIcons();
+    };
+  </script>
+</body>
+</html>

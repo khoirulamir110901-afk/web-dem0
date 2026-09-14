@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WARISAN NUSANTARA — Jasa Pijat Tradisional Indonesia & Booking Online</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- React & ReactDOM -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <!-- Babel Standalone for JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #FAF7F2;
+      color: #2C2621;
+    }
+    .font-serif {
+      font-family: 'Playfair Display', serif;
+    }
+  </style>
+</head>
+<body class="bg-[#FAF7F2] text-[#2C2621] antialiased selection:bg-[#C05A3E] selection:text-white">
+  <!-- Root Container for React App -->
+  <div id="root"></div>
+
+  <!-- React Application Code -->
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    const INITIAL_DATA = {
+      brand: {
+        name: "WARISAN NUSANTARA",
+        tagline: "Pijat Tradisional Indonesia",
+        phone: "6281234567890",
+        phoneDisplay: "+62 812-3456-7890",
+        address: "Jl. Senopati No. 45, Kebayoran Baru, Jakarta Selatan",
+        rating: "4.9",
+        totalReviews: "1.250+",
+      },
+      services: [
+        {
+          id: "jawa",
+          name: "Pijat Tradisional Jawa",
+          desc: "Teknik pijat leluhur Jawa dengan karakter tekanan berirama dan ritmik menggunakan minyak rempah hangat untuk melancarkan peredaran darah.",
+          durations: [60, 90, 120],
+          basePrice: 150000,
+          image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=800&q=80",
+          tag: "Paling Populer",
+          category: "Tradisional"
+        },
+        {
+          id: "urut",
+          name: "Pijat Urut Tradisional",
+          desc: "Fokus pada pelenturan otot tegang, pegal linu, dan pemulihan stamina fisik dengan teknik remasan terarah dan minyak kelapa dara nusantara.",
+          durations: [60, 90],
+          basePrice: 150000,
+          image: "https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=800&q=80",
+          tag: "Pelepas Pegal",
+          category: "Tradisional"
+        },
+        {
+          id: "relaksasi",
+          name: "Pijat Relaksasi Nusantara",
+          desc: "Perpaduan usapan lembut panjang berpadu dengan alunan musik gamelan instrumental lembut untuk ketenangan pikiran dan peremajaan jiwa.",
+          durations: [60, 90],
+          basePrice: 175000,
+          image: "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=800&q=80",
+          tag: "Anti Stres",
+          category: "Wellness"
+        },
+        {
+          id: "aroma",
+          name: "Pijat Aromaterapi",
+          desc: "Massage holistik berbalut esensial mawar, sereh wangi, dan kayu cendana lokal pilihan yang menyeimbangkan energi tubuh.",
+          durations: [60, 90],
+          basePrice: 175000,
+          image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=800&q=80",
+          tag: "Aroma Alami",
+          category: "Wellness"
+        },
+        {
+          id: "panggilan",
+          name: "Pijat Panggilan Eksklusif",
+          desc: "Nikmati kenyamanan perawatan prima langsung di kediaman Anda. Terapis bersertifikat hadir membawa perlengkapan steril dan higienis.",
+          durations: [60, 90, 120],
+          basePrice: 200000,
+          image: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=800&q=80",
+          tag: "Home Service",
+          category: "Panggilan"
+        }
+      ],
+      therapists: [
+        {
+          id: "maya",
+          name: "Ibu Maya",
+          role: "Terapis Senior Tradisional Jawa",
+          exp: "8 Tahun Pengalaman",
+          rating: 4.9,
+          reviewsCount: 340,
+          specialty: "Pijat Jawa, Titik Refleksi, Pemulihan Otot",
+          image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80",
+          status: "Available",
+          nextSlot: "14:00"
+        },
+        {
+          id: "rina",
+          name: "Mbak Rina",
+          role: "Spesialis Relaksasi & Aromaterapi",
+          exp: "6 Tahun Pengalaman",
+          rating: 4.9,
+          reviewsCount: 285,
+          specialty: "Aromatherapy Nusantara, Balinese Stroke, Me-Time",
+          image: "https://images.unsplash.com/photo-1580894732444-8ecded7900cd?auto=format&fit=crop&w=600&q=80",
+          status: "Available",
+          nextSlot: "16:00"
+        },
+        {
+          id: "sari",
+          name: "Ibu Sari",
+          role: "Master Pijat Urut & Kebugaran",
+          exp: "10 Tahun Pengalaman",
+          rating: 5.0,
+          reviewsCount: 420,
+          specialty: "Pijat Urut Dalam, Reda Kaku Pinggang & Pundak",
+          image: "https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&w=600&q=80",
+          status: "Available",
+          nextSlot: "19:00"
+        },
+        {
+          id: "dewi",
+          name: "Mbak Dewi",
+          role: "Terapis Panggilan Spesialis Wellness",
+          exp: "7 Tahun Pengalaman",
+          rating: 4.8,
+          reviewsCount: 198,
+          specialty: "Home Service, Kombinasi Tradisional, Relaksasi",
+          image: "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?auto=format&fit=crop&w=600&q=80",
+          status: "Fully Booked",
+          nextSlot: "Besok Pagi"
+        }
+      ],
+      packages: [
+        {
+          id: "pkg-rileks",
+          name: "Paket Rileks Singkat",
+          duration: "60 Menit",
+          desc: "Pijat Tradisional Jawa + Minyak Hangat Rempah",
+          price: 150000,
+          badge: "Esensial"
+        },
+        {
+          id: "pkg-nusantara",
+          name: "Paket Nusantara Harmoni",
+          duration: "90 Menit",
+          desc: "Pijat Relaksasi + Aromaterapi Esensial + Baluran Hangat",
+          price: 225000,
+          badge: "Paling Laris"
+        },
+        {
+          id: "pkg-signature",
+          name: "Paket Signature Royal",
+          duration: "120 Menit",
+          desc: "Pijat Komplit Tubuh + Lulur Tradisional + Teh Herbal Jahe Merah",
+          price: 325000,
+          badge: "Eksklusif"
+        }
+      ],
+      faqs: [
+        {
+          q: "Apakah harus melakukan reservasi / booking terlebih dahulu?",
+          a: "Sangat disarankan untuk booking online terlebih dahulu agar mendapatkan slot terapis favorit dan jam perawatan yang pasti tanpa harus menunggu."
+        },
+        {
+          q: "Apakah tersedia layanan pijat panggilan ke rumah / hotel?",
+          a: "Ya, kami melayani Pijat Panggilan dengan terapis berpengalaman yang membawa seluruh perlengkapan steril, matras/kain bersih, dan minyak higienis."
+        },
+        {
+          q: "Bagaimana cara memilih intensitas atau tekanan pijat?",
+          a: "Sebelum sesi dimulai, terapis kami akan menanyakan preferensi tekanan Anda (ringan, sedang, kuat) dan fokus keluhan tubuh yang ingin ditangani."
+        },
+        {
+          q: "Apakah bisa melakukan pembatalan atau perubahan jadwal (reschedule)?",
+          a: "Bisa, Anda dapat melakukan reschedule minimal 2 jam sebelum waktu sesi dimulai melalui konfirmasi langsung ke WhatsApp Customer Care kami."
+        },
+        {
+          q: "Apa saja metode pembayaran yang diterima?",
+          a: "Kami menerima Transfer Bank (BCA, Mandiri, BNI, BRI), QRIS, GoPay, OVO, serta pembayaran tunai langsung di studio maupun ke terapis panggilan."
+        }
+      ]
+    };
+
+    const formatRupiah = (num) => {
+      return new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+        maximumFractionDigits: 0
+      }).format(num);
+    };
+
+    const getUpcomingDates = () => {
+      const dates = [];
+      const today = new Date();
+      for (let i = 0; i < 7; i++) {
+        const d = new Date(today);
+        d.setDate(today.getDate() + i);
+        dates.push({
+          full: d.toISOString().split('T')[0],
+          dayName: d.toLocaleDateString('id-ID', { weekday: 'short' }),
+          dayNumber: d.getDate(),
+          monthName: d.toLocaleDateString('id-ID', { month: 'short' }),
+          isToday: i === 0
+        });
+      }
+      return dates;
+    };
+
+    const TIME_SLOTS = [
+      "09:00", "10:30", "12:00", "13:30", "15:00", "16:30", "18:00", "19:30", "21:00"
+    ];
+
+    function App() {
+      const [activeTab, setActiveTab] = useState('home'); // 'home' | 'admin'
+      const [isMenuOpen, setIsMenuOpen] = useState(false);
+      const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+      const [selectedServiceDetail, setSelectedServiceDetail] = useState(null);
+      const [selectedTherapistDetail, setSelectedTherapistDetail] = useState(null);
+      const [faqOpenIndex, setFaqOpenIndex] = useState(0);
+
+      // Quick Bar Filter States
+      const [quickService, setQuickService] = useState('jawa');
+      const [quickLocation, setQuickLocation] = useState('Studio');
+      const [quickDate, setQuickDate] = useState(getUpcomingDates()[0].full);
+      const [quickTime, setQuickTime] = useState('14:00');
+
+      // Interactive 7-Step Booking Flow State
+      const [bookingStep, setBookingStep] = useState(1);
+      const [bookingData, setBookingData] = useState({
+        serviceId: 'jawa',
+        duration: 90,
+        locationType: 'Studio',
+        address: '',
+        notesAddress: '',
+        therapistId: 'maya',
+        date: getUpcomingDates()[0].full,
+        time: '14:00',
+        customerName: '',
+        customerPhone: '',
+        customerEmail: '',
+        customerNotes: '',
+        bookingId: '',
+        totalPrice: 225000
+      });
+
+      const [bookingSuccess, setBookingSuccess] = useState(false);
+
+      // Admin Dashboard State
+      const [adminAuth, setAdminAuth] = useState(false);
+      const [adminEmail, setAdminEmail] = useState('');
+      const [adminPassword, setAdminPassword] = useState('');
+      const [adminTab, setAdminTab] = useState('bookings');
+      const [allBookings, setAllBookings] = useState([
+        {
+          id: "WN-9021",
+          customerName: "Bpk. Hendra Gunawan",
+          customerPhone: "081298765432",
+          serviceName: "Pijat Tradisional Jawa",
+          duration: 90,
+          locationType: "Studio",
+          therapistName: "Ibu Maya",
+          date: "2026-09-14",
+          time: "14:00",
+          totalPrice: 225000,
+          status: "Confirmed"
+        },
+        {
+          id: "WN-9022",
+          customerName: "Ibu Siska Amelia",
+          customerPhone: "081344556677",
+          serviceName: "Pijat Aromaterapi",
+          duration: 60,
+          locationType: "Panggilan",
+          therapistName: "Mbak Rina",
+          date: "2026-09-14",
+          time: "16:00",
+          totalPrice: 225000,
+          status: "Confirmed"
+        }
+      ]);
+
+      useEffect(() => {
+        const s = INITIAL_DATA.services.find(item => item.id === bookingData.serviceId);
+        if (!s) return;
+
+        let base = s.basePrice;
+        if (bookingData.duration === 90) base = Math.round(base * 1.45);
+        if (bookingData.duration === 120) base = Math.round(base * 1.9);
+
+        if (bookingData.locationType === 'Panggilan') {
+          base += 35000;
+        }
+
+        setBookingData(prev => ({
+          ...prev,
+          totalPrice: base
+        }));
+      }, [bookingData.serviceId, bookingData.duration, bookingData.locationType]);
+
+      // Re-initialize Lucide icons after render
+      useEffect(() => {
+        if (window.lucide) {
+          window.lucide.createIcons();
+        }
+      });
+
+      const openBookingWithService = (serviceId, initialDuration = 90, location = 'Studio') => {
+        setBookingData(prev => ({
+          ...prev,
+          serviceId: serviceId || 'jawa',
+          duration: initialDuration,
+          locationType: location
+        }));
+        setBookingStep(1);
+        setBookingSuccess(false);
+        setIsBookingModalOpen(true);
+      };
+
+      const openBookingWithTherapist = (therapistId) => {
+        const therapist = INITIAL_DATA.therapists.find(t => t.id === therapistId);
+        setBookingData(prev => ({
+          ...prev,
+          therapistId: therapistId,
+          time: therapist?.nextSlot?.includes(':') ? therapist.nextSlot : '15:00'
+        }));
+        setBookingStep(3);
+        setBookingSuccess(false);
+        setIsBookingModalOpen(true);
+      };
+
+      const handleQuickCheckSchedule = () => {
+        setBookingData(prev => ({
+          ...prev,
+          serviceId: quickService,
+          locationType: quickLocation,
+          date: quickDate,
+          time: quickTime
+        }));
+        setBookingStep(3);
+        setBookingSuccess(false);
+        setIsBookingModalOpen(true);
+      };
+
+      const handleConfirmBooking = (e) => {
+        if (e) e.preventDefault();
+        if (!bookingData.customerName || !bookingData.customerPhone) {
+          alert("Silakan lengkapi nama dan nomor WhatsApp Anda terlebih dahulu.");
+          return;
+        }
+
+        const newId = "WN-" + Math.floor(1000 + Math.random() * 9000);
+        const selectedService = INITIAL_DATA.services.find(s => s.id === bookingData.serviceId);
+        const selectedTherapist = INITIAL_DATA.therapists.find(t => t.id === bookingData.therapistId);
+
+        const newEntry = {
+          id: newId,
+          customerName: bookingData.customerName,
+          customerPhone: bookingData.customerPhone,
+          serviceName: selectedService ? selectedService.name : "Pijat Tradisional",
+          duration: bookingData.duration,
+          locationType: bookingData.locationType,
+          therapistName: selectedTherapist ? selectedTherapist.name : "Terapis Tersedia",
+          date: bookingData.date,
+          time: bookingData.time,
+          totalPrice: bookingData.totalPrice,
+          status: "Confirmed"
+        };
+
+        setAllBookings([newEntry, ...allBookings]);
+        setBookingData(prev => ({ ...prev, bookingId: newId }));
+        setBookingSuccess(true);
+      };
+
+      const generateWhatsAppUrl = (customMsg = null) => {
+        const phone = INITIAL_DATA.brand.phone;
+        let text = "";
+
+        if (customMsg) {
+          text = encodeURIComponent(customMsg);
+        } else {
+          const selectedService = INITIAL_DATA.services.find(s => s.id === bookingData.serviceId);
+          const selectedTherapist = INITIAL_DATA.therapists.find(t => t.id === bookingData.therapistId);
+
+          text = encodeURIComponent(
+            `Halo Warisan Nusantara,\nSaya ingin konfirmasi booking:\n\n` +
+            `• Booking ID: ${bookingData.bookingId || "Baru"}\n` +
+            `• Nama: ${bookingData.customerName || "Pelanggan"}\n` +
+            `• Layanan: ${selectedService ? selectedService.name : "Pijat Tradisional"} (${bookingData.duration} Menit)\n` +
+            `• Terapis: ${selectedTherapist ? selectedTherapist.name : "Terapis Tersedia"}\n` +
+            `• Lokasi: ${bookingData.locationType} ${bookingData.locationType === 'Panggilan' ? `(${bookingData.address})` : ''}\n` +
+            `• Jadwal: ${bookingData.date} pukul ${bookingData.time} WIB\n` +
+            `• Total: ${formatRupiah(bookingData.totalPrice)}\n\n` +
+            `Mohon konfirmasi ketersediaannya. Terima kasih!`
+          );
+        }
+        return `https://wa.me/${phone}?text=${text}`;
+      };
+
+      const handleAdminLogin = (e) => {
+        e.preventDefault();
+        setAdminAuth(true);
+      };
+
+      return (
+        <div className="min-h-screen bg-[#FAF7F2] text-[#2C2621] font-sans antialiased selection:bg-[#C05A3E] selection:text-white flex flex-col justify-between">
+          
+          {/* ================= HEADER ================= */}
+          <header className="sticky top-0 z-40 bg-[#FAF7F2]/95 backdrop-blur-md border-b border-[#E6DEC8] transition-all">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+              
+              <button 
+                onClick={() => { setActiveTab('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                className="flex flex-col text-left focus:outline-none group"
+              >
+                <span className="font-serif text-xl sm:text-2xl tracking-[0.18em] font-bold text-[#1E392A] group-hover:text-[#C05A3E] transition-colors">
+                  WARISAN NUSANTARA
+                </span>
+                <span className="text-[10px] sm:text-[11px] tracking-[0.25em] text-[#8C6D53] uppercase font-medium">
+                  Pijat Tradisional Indonesia
+                </span>
+              </button>
+
+              <nav className="hidden lg:flex items-center space-x-8 text-sm font-medium text-[#4A3F35]">
+                <a href="#beranda" className="hover:text-[#C05A3E] transition-colors">Beranda</a>
+                <a href="#layanan" className="hover:text-[#C05A3E] transition-colors">Layanan</a>
+                <a href="#terapis" className="hover:text-[#C05A3E] transition-colors">Terapis</a>
+                <a href="#tentang" className="hover:text-[#C05A3E] transition-colors">Tentang Kami</a>
+                <a href="#pengalaman" className="hover:text-[#C05A3E] transition-colors">Keunggulan</a>
+                <a href="#ulasan" className="hover:text-[#C05A3E] transition-colors">Ulasan</a>
+                <a href="#faq" className="hover:text-[#C05A3E] transition-colors">FAQ</a>
+                <a href="#kontak" className="hover:text-[#C05A3E] transition-colors">Kontak</a>
+              </nav>
+
+              <div className="hidden sm:flex items-center">
+                <button
+                  onClick={() => openBookingWithService('jawa', 90)}
+                  className="px-6 py-2.5 bg-[#1E392A] hover:bg-[#15271D] text-white text-xs tracking-[0.15em] uppercase font-semibold rounded-md shadow-sm hover:shadow-md transition-all active:scale-[0.98]"
+                >
+                  BOOKING SEKARANG
+                </button>
+              </div>
+
+              <div className="flex items-center lg:hidden">
+                <button
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                  className="p-2 text-[#1E392A] focus:outline-none"
+                  aria-label="Buka Menu"
+                >
+                  <i data-lucide={isMenuOpen ? "x" : "menu"} className="w-6 h-6"></i>
+                </button>
+              </div>
+            </div>
+
+            {isMenuOpen && (
+              <div className="lg:hidden bg-[#FAF7F2] border-b border-[#E6DEC8] px-6 py-5 space-y-4">
+                <div className="flex flex-col space-y-3 text-sm font-medium text-[#4A3F35]">
+                  <a href="#beranda" onClick={() => setIsMenuOpen(false)} className="py-1">Beranda</a>
+                  <a href="#layanan" onClick={() => setIsMenuOpen(false)} className="py-1">Layanan</a>
+                  <a href="#terapis" onClick={() => setIsMenuOpen(false)} className="py-1">Terapis</a>
+                  <a href="#tentang" onClick={() => setIsMenuOpen(false)} className="py-1">Tentang Kami</a>
+                  <a href="#pengalaman" onClick={() => setIsMenuOpen(false)} className="py-1">Keunggulan</a>
+                  <a href="#ulasan" onClick={() => setIsMenuOpen(false)} className="py-1">Ulasan</a>
+                  <a href="#faq" onClick={() => setIsMenuOpen(false)} className="py-1">FAQ</a>
+                  <a href="#kontak" onClick={() => setIsMenuOpen(false)} className="py-1">Kontak</a>
+                </div>
+                <button
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    openBookingWithService('jawa', 90);
+                  }}
+                  className="w-full py-3 bg-[#1E392A] text-white text-xs tracking-[0.18em] uppercase font-semibold rounded-md shadow"
+                >
+                  BOOKING SEKARANG
+                </button>
+              </div>
+            )}
+          </header>
+
+          {activeTab === 'admin' ? (
+            <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10">
+              {!adminAuth ? (
+                <div className="max-w-md mx-auto bg-white p-8 rounded-xl border border-[#E6DEC8] shadow-sm">
+                  <div className="text-center mb-6">
+                    <span className="text-xs font-semibold tracking-widest text-[#8C6D53] uppercase">Portal Keamanan</span>
+                    <h2 className="font-serif text-2xl font-bold text-[#1E392A] mt-1">Masuk Panel Admin</h2>
+                    <p className="text-xs text-[#6B5E51] mt-2">Gunakan kredensial pengelola untuk mengelola jadwal & pemesanan.</p>
+                  </div>
+
+                  <form onSubmit={handleAdminLogin} className="space-y-4">
+                    <div>
+                      <label className="block text-xs font-medium text-[#4A3F35] mb-1">Email Administrator</label>
+                      <input
+                        type="email"
+                        value={adminEmail}
+                        onChange={(e) => setAdminEmail(e.target.value)}
+                        placeholder="admin@nusantara.id"
+                        className="w-full text-sm px-3.5 py-2.5 rounded border border-[#D9CBB0] focus:ring-1 focus:ring-[#1E392A] focus:outline-none"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-[#4A3F35] mb-1">Password</label>
+                      <input
+                        type="password"
+                        value={adminPassword}
+                        onChange={(e) => setAdminPassword(e.target.value)}
+                        placeholder="••••••••"
+                        className="w-full text-sm px-3.5 py-2.5 rounded border border-[#D9CBB0] focus:ring-1 focus:ring-[#1E392A] focus:outline-none"
+                        required
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      className="w-full py-2.5 bg-[#1E392A] hover:bg-[#15271D] text-white text-xs tracking-wider uppercase font-semibold rounded transition"
+                    >
+                      MASUK DASHBOARD
+                    </button>
+                  </form>
+                </div>
+              ) : (
+                <div className="space-y-8">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-[#E6DEC8]">
+                    <div>
+                      <span className="text-xs uppercase tracking-widest text-[#C05A3E] font-bold">Admin Management System</span>
+                      <h1 className="font-serif text-3xl font-bold text-[#1E392A]">Pusat Operasional Reservasi</h1>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <button
+                        onClick={() => setAdminAuth(false)}
+                        className="flex items-center gap-2 text-xs px-3.5 py-2 rounded border border-[#D9CBB0] text-[#6B5E51] hover:bg-white transition"
+                      >
+                        Keluar Admin
+                      </button>
+                      <button
+                        onClick={() => setActiveTab('home')}
+                        className="flex items-center gap-2 text-xs px-4 py-2 rounded bg-[#1E392A] text-white hover:bg-[#15271D] transition"
+                      >
+                        Buka Website Utama
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div className="bg-white p-5 rounded-lg border border-[#E6DEC8]">
+                      <p className="text-xs text-[#8C6D53] font-medium">Booking Hari Ini</p>
+                      <p className="text-2xl font-serif font-bold text-[#1E392A] mt-1">12 Sesi</p>
+                    </div>
+                    <div className="bg-white p-5 rounded-lg border border-[#E6DEC8]">
+                      <p className="text-xs text-[#8C6D53] font-medium">Terapis Aktif</p>
+                      <p className="text-2xl font-serif font-bold text-[#1E392A] mt-1">4 Terapis</p>
+                    </div>
+                    <div className="bg-white p-5 rounded-lg border border-[#E6DEC8]">
+                      <p className="text-xs text-[#8C6D53] font-medium">Omset Hari Ini</p>
+                      <p className="text-2xl font-serif font-bold text-[#C05A3E] mt-1">{formatRupiah(2650000)}</p>
+                    </div>
+                    <div className="bg-white p-5 rounded-lg border border-[#E6DEC8]">
+                      <p className="text-xs text-[#8C6D53] font-medium">Kepuasan</p>
+                      <p className="text-2xl font-serif font-bold text-[#1E392A] mt-1">4.9 / 5.0</p>
+                    </div>
+                  </div>
+
+                  <div className="bg-white rounded-lg border border-[#E6DEC8] overflow-hidden">
+                    <div className="px-6 py-4 border-b border-[#E6DEC8] flex justify-between items-center bg-[#FAF7F2]/50">
+                      <h3 className="font-serif font-bold text-[#1E392A]">Daftar Pemesanan Pelanggan</h3>
+                    </div>
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-left text-xs">
+                        <thead className="bg-[#FAF7F2] text-[#4A3F35] font-semibold border-b border-[#E6DEC8]">
+                          <tr>
+                            <th className="px-6 py-3">ID & Nama</th>
+                            <th className="px-6 py-3">Layanan & Durasi</th>
+                            <th className="px-6 py-3">Terapis</th>
+                            <th className="px-6 py-3">Jadwal & Lokasi</th>
+                            <th className="px-6 py-3">Total Harga</th>
+                            <th className="px-6 py-3">Status</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-[#E6DEC8]/60 text-[#2C2621]">
+                          {allBookings.map((b) => (
+                            <tr key={b.id} className="hover:bg-[#FAF7F2]/40 transition">
+                              <td className="px-6 py-4">
+                                <div className="font-semibold text-[#1E392A]">{b.customerName}</div>
+                                <div className="text-[#8C6D53] text-[11px]">{b.id} • {b.customerPhone}</div>
+                              </td>
+                              <td className="px-6 py-4">
+                                <div>{b.serviceName}</div>
+                                <span className="text-[#8C6D53]">{b.duration} Menit</span>
+                              </td>
+                              <td className="px-6 py-4 font-medium text-[#1E392A]">{b.therapistName}</td>
+                              <td className="px-6 py-4">
+                                <div>{b.date} pukul {b.time}</div>
+                                <span className="inline-block mt-0.5 px-2 py-0.5 rounded text-[10px] font-semibold bg-[#EAE2D0] text-[#554332]">{b.locationType}</span>
+                              </td>
+                              <td className="px-6 py-4 font-semibold text-[#C05A3E]">{formatRupiah(b.totalPrice)}</td>
+                              <td className="px-6 py-4">
+                                <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">{b.status}</span>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </main>
+          ) : (
+            <main>
+              {/* ================= HERO SECTION ================= */}
+              <section id="beranda" className="relative min-h-[90vh] flex items-center bg-[#1E392A] text-[#FAF7F2] overflow-hidden">
+                <div className="absolute inset-0 z-0">
+                  <img
+                    src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=2000&q=85"
+                    alt="Pijat Tradisional Indonesia"
+                    className="w-full h-full object-cover object-center opacity-30 brightness-95"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#14261C] via-[#1E392A]/90 to-[#14261C]/75" />
+                </div>
+
+                <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 w-full">
+                  <div className="max-w-2xl space-y-6">
+                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FAF7F2]/10 border border-[#FAF7F2]/20 backdrop-blur-sm">
+                      <i data-lucide="award" className="w-4 h-4 text-[#C69A56]"></i>
+                      <span className="text-xs tracking-wider uppercase font-semibold text-[#FAF7F2]/90">
+                        TERAPIS BERPENGALAMAN & BERSERTIFIKAT
+                      </span>
+                    </div>
+
+                    <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.15] text-[#FAF7F2]">
+                      Sentuhan Tradisi Indonesia, <br className="hidden sm:block" />
+                      <span className="text-[#E0D5BE] italic font-normal font-serif">Untuk Tubuh yang Lebih Rileks.</span>
+                    </h1>
+
+                    <p className="text-base sm:text-lg text-[#D2C8B5] font-light leading-relaxed max-w-xl">
+                      Nikmati pengalaman pijat tradisional dengan sentuhan pelayanan modern, terapis terkurasi, dan kemudahan booking online untuk studio maupun di rumah Anda.
+                    </p>
+
+                    <div className="pt-3 flex flex-wrap items-center gap-4">
+                      <button
+                        onClick={() => openBookingWithService('jawa', 90)}
+                        className="px-8 py-4 bg-[#C05A3E] hover:bg-[#A84C33] text-white text-xs tracking-[0.2em] uppercase font-bold rounded shadow-lg hover:shadow-xl transition-all active:scale-[0.98] flex items-center gap-2"
+                      >
+                        <span>BOOKING SEKARANG</span>
+                        <i data-lucide="arrow-right" className="w-4 h-4"></i>
+                      </button>
+
+                      <a
+                        href="#layanan"
+                        className="px-7 py-4 bg-transparent hover:bg-white/10 text-[#FAF7F2] border border-[#FAF7F2]/40 text-xs tracking-[0.18em] uppercase font-semibold rounded transition-all"
+                      >
+                        LIHAT LAYANAN
+                      </a>
+                    </div>
+
+                    <div className="pt-6 border-t border-white/15 flex items-center gap-6">
+                      <div className="flex items-center gap-1.5">
+                        {[...Array(5)].map((_, i) => (
+                          <i key={i} data-lucide="star" className="w-4 h-4 fill-[#C69A56] text-[#C69A56]"></i>
+                        ))}
+                      </div>
+                      <div className="text-xs text-[#D2C8B5]">
+                        <span className="font-bold text-white">4.9 / 5.0</span> dari 1.250+ pelanggan terpuaskan
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* ================= QUICK BOOKING BAR ================= */}
+              <section className="relative z-20 -mt-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="bg-white rounded-xl shadow-xl border border-[#E6DEC8] p-5 lg:p-7">
+                  <div className="text-xs uppercase tracking-widest text-[#8C6D53] font-bold mb-3 flex items-center gap-2">
+                    <i data-lucide="calendar-check" className="w-4 h-4 text-[#C05A3E]"></i>
+                    <span>CARI JADWAL PIJAT HARI INI</span>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
+                    <div>
+                      <label className="block text-[11px] font-semibold text-[#554332] mb-1.5">PILIH LAYANAN</label>
+                      <select
+                        value={quickService}
+                        onChange={(e) => setQuickService(e.target.value)}
+                        className="w-full text-xs font-medium bg-[#FAF7F2] border border-[#D9CBB0] rounded-lg px-3 py-3 text-[#2C2621] focus:outline-none focus:border-[#1E392A]"
+                      >
+                        {INITIAL_DATA.services.map(s => (
+                          <option key={s.id} value={s.id}>{s.name}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] font-semibold text-[#554332] mb-1.5">PILIH LOKASI</label>
+                      <select
+                        value={quickLocation}
+                        onChange={(e) => setQuickLocation(e.target.value)}
+                        className="w-full text-xs font-medium bg-[#FAF7F2] border border-[#D9CBB0] rounded-lg px-3 py-3 text-[#2C2621] focus:outline-none focus:border-[#1E392A]"
+                      >
+                        <option value="Studio">Studio (Senopati, Jaksel)</option>
+                        <option value="Panggilan">Panggilan (Home Service)</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] font-semibold text-[#554332] mb-1.5">PILIH TANGGAL</label>
+                      <select
+                        value={quickDate}
+                        onChange={(e) => setQuickDate(e.target.value)}
+                        className="w-full text-xs font-medium bg-[#FAF7F2] border border-[#D9CBB0] rounded-lg px-3 py-3 text-[#2C2621] focus:outline-none focus:border-[#1E392A]"
+                      >
+                        {getUpcomingDates().map(d => (
+                          <option key={d.full} value={d.full}>
+                            {d.isToday ? 'Hari Ini - ' : ''}{d.dayName}, {d.dayNumber} {d.monthName}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] font-semibold text-[#554332] mb-1.5">PILIH JAM</label>
+                      <select
+                        value={quickTime}
+                        onChange={(e) => setQuickTime(e.target.value)}
+                        className="w-full text-xs font-medium bg-[#FAF7F2] border border-[#D9CBB0] rounded-lg px-3 py-3 text-[#2C2621] focus:outline-none focus:border-[#1E392A]"
+                      >
+                        {TIME_SLOTS.map(t => (
+                          <option key={t} value={t}>{t} WIB</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <button
+                        onClick={handleQuickCheckSchedule}
+                        className="w-full py-3 bg-[#1E392A] hover:bg-[#15271D] text-white text-xs font-bold tracking-wider uppercase rounded-lg shadow transition active:scale-[0.98] flex items-center justify-center gap-2"
+                      >
+                        <span>CEK JADWAL</span>
+                        <i data-lucide="chevron-right" className="w-4 h-4"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* ================= DARI NUSANTARA (STORY) ================= */}
+              <section id="tentang" className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                  <div className="relative">
+                    <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border border-[#E0D5BE]">
+                      <img
+                        src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=1000&q=80"
+                        alt="Pijat Tradisional Nusantara"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-6">
+                    <span className="text-xs uppercase tracking-[0.25em] text-[#C05A3E] font-bold">
+                      DARI NUSANTARA UNTUK ANDA
+                    </span>
+                    <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#1E392A] leading-tight">
+                      Berawal dari Tradisi, <br />
+                      Dirawat untuk Masa Kini.
+                    </h2>
+                    <p className="text-sm sm:text-base text-[#554332] leading-relaxed font-normal">
+                      Pijat tradisional telah menjadi bagian dari keseharian masyarakat Indonesia selama beberapa generasi—sebagai ikhtiar alami melepaskan penat, memulihkan otot yang tegang, dan menyeimbangkan ritme tubuh.
+                    </p>
+                    <p className="text-sm sm:text-base text-[#554332] leading-relaxed font-normal">
+                      Kami menghadirkan kembali kearifan sentuhan leluhur tersebut dalam standar pelayanan modern: ruangan higienis, terapis beretika tinggi, aromaterapi lokal autentik, serta kemudahan reservasi digital yang transparan.
+                    </p>
+                  </div>
+                </div>
+              </section>
+
+              {/* ================= PIJAT NUSANTARA (SERVICES) ================= */}
+              <section id="layanan" className="py-20 bg-[#F4EFE6] border-y border-[#E6DEC8]">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                  <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
+                    <span className="text-xs uppercase tracking-[0.25em] text-[#C05A3E] font-bold">
+                      LAYANAN UTAMA
+                    </span>
+                    <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#1E392A]">
+                      Pilih Sentuhan Khas Nusantara
+                    </h2>
+                    <p className="text-sm text-[#6B5E51]">
+                      Setiap teknik dirancang khusus sesuai ritme tubuh Anda dengan pilihan durasi dan terapis terpercaya.
+                    </p>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {INITIAL_DATA.services.map((service) => (
+                      <div
+                        key={service.id}
+                        className="bg-white rounded-2xl overflow-hidden border border-[#E6DEC8] shadow-sm hover:shadow-md transition-all flex flex-col justify-between group"
+                      >
+                        <div>
+                          <div className="relative aspect-[16/10] overflow-hidden bg-stone-200">
+                            <img
+                              src={service.image}
+                              alt={service.name}
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            />
+                            <span className="absolute top-3 left-3 bg-[#1E392A]/90 backdrop-blur-sm text-white text-[10px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded">
+                              {service.tag}
+                            </span>
+                          </div>
+
+                          <div className="p-6">
+                            <h3 className="font-serif text-xl font-bold text-[#1E392A] mb-2">{service.name}</h3>
+                            <p className="text-xs text-[#554332] leading-relaxed mb-4">{service.desc}</p>
+                            <div className="flex items-center gap-2 mb-4">
+                              <i data-lucide="clock" className="w-3.5 h-3.5 text-[#8C6D53]"></i>
+                              <span className="text-xs font-semibold text-[#8C6D53]">
+                                Pilihan: {service.durations.join(" / ")} Menit
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="p-6 pt-0 border-t border-[#FAF7F2] flex items-center justify-between">
+                          <div>
+                            <span className="text-[10px] text-[#8C6D53] uppercase block font-medium">Mulai dari</span>
+                            <span className="font-serif text-lg font-bold text-[#C05A3E]">
+                              {formatRupiah(service.basePrice)}
+                            </span>
+                          </div>
+
+                          <div className="flex items-center gap-2">
+                            <button
+                              onClick={() => setSelectedServiceDetail(service)}
+                              className="px-3 py-2 text-xs font-medium text-[#4A3F35] hover:text-[#1E392A] border border-[#D9CBB0] rounded hover:bg-[#FAF7F2] transition"
+                            >
+                              DETAIL
+                            </button>
+                            <button
+                              onClick={() => openBookingWithService(service.id, 90)}
+                              className="px-4 py-2 bg-[#1E392A] hover:bg-[#15271D] text-white text-xs font-semibold rounded tracking-wider uppercase transition shadow-sm"
+                            >
+                              BOOKING
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+
+              {/* ================= TERAPIS ================= */}
+              <section id="terapis" className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-4">
+                  <div>
+                    <span className="text-xs uppercase tracking-[0.25em] text-[#C05A3E] font-bold">
+                      TENAGA PROFESIONAL
+                    </span>
+                    <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#1E392A] mt-1">
+                      Ditangani oleh Terapis Berpengalaman
+                    </h2>
+                  </div>
+
+                  <div className="inline-flex items-center gap-2 bg-[#EAE2D0] px-4 py-2.5 rounded-lg border border-[#D9CBB0]">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-600 animate-pulse" />
+                    <span className="text-xs font-semibold text-[#1E392A]">
+                      3 Terapis Tersedia Hari Ini
+                    </span>
+                  </div>
+                </div>
+
+                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {INITIAL_DATA.therapists.map((t) => (
+                    <div key={t.id} className="bg-white rounded-xl border border-[#E6DEC8] overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+                      <div>
+                        <div className="relative aspect-[4/5] bg-stone-100 overflow-hidden">
+                          <img src={t.image} alt={t.name} className="w-full h-full object-cover object-top" />
+                          <span className={`absolute top-3 right-3 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider backdrop-blur-md ${t.status === 'Available' ? 'bg-emerald-800/90 text-white' : 'bg-stone-800/90 text-stone-300'}`}>
+                            {t.status === 'Available' ? `Tersedia: ${t.nextSlot}` : 'Penuh'}
+                          </span>
+                        </div>
+
+                        <div className="p-5">
+                          <div className="flex items-center justify-between mb-1">
+                            <h3 className="font-serif font-bold text-lg text-[#1E392A]">{t.name}</h3>
+                            <div className="flex items-center text-xs text-[#C69A56] font-bold">
+                              <i data-lucide="star" className="w-3.5 h-3.5 fill-[#C69A56] mr-1"></i>
+                              {t.rating}
+                            </div>
+                          </div>
+                          <p className="text-xs font-medium text-[#8C6D53] mb-2">{t.role}</p>
+                          <p className="text-[11px] text-[#6B5E51] leading-relaxed line-clamp-2">{t.specialty}</p>
+                        </div>
+                      </div>
+
+                      <div className="p-5 pt-0 grid grid-cols-2 gap-2">
+                        <button
+                          onClick={() => setSelectedTherapistDetail(t)}
+                          className="py-2 text-[11px] font-semibold text-[#4A3F35] border border-[#D9CBB0] rounded hover:bg-[#FAF7F2] transition text-center"
+                        >
+                          PROFIL
+                        </button>
+                        <button
+                          onClick={() => openBookingWithTherapist(t.id)}
+                          className="py-2 text-[11px] font-bold text-white bg-[#1E392A] hover:bg-[#15271D] rounded tracking-wider uppercase transition shadow-sm text-center"
+                        >
+                          PILIH
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              {/* ================= TESTIMONIALS ================= */}
+              <section id="ulasan" className="py-20 bg-[#F4EFE6] border-y border-[#E6DEC8]">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                  <div className="text-center max-w-xl mx-auto mb-14 space-y-2">
+                    <span className="text-xs uppercase tracking-[0.25em] text-[#C05A3E] font-bold">
+                      TESTIMONI PELANGGAN
+                    </span>
+                    <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#1E392A]">
+                      Cerita dari Mereka yang Sudah Merasakan
+                    </h2>
+                  </div>
+
+                  <div className="grid md:grid-cols-3 gap-8">
+                    {[
+                      {
+                        name: "Bpk. Andi Wijaya",
+                        role: "Pengusaha (Senopati, Jaksel)",
+                        quote: "Suasananya sangat nyaman, terapis ramah dan pijatnya terasa profesional sekali. Pegal leher langsung hilang total.",
+                        stars: 5,
+                        treatment: "Pijat Tradisional Jawa (90 Menit)"
+                      },
+                      {
+                        name: "Ibu Rina Kusuma",
+                        role: "Karyawati Swasta (SCBD)",
+                        quote: "Sangat senang bisa memilih jam dan terapis sendiri secara transparan. Terapis Ibu Maya paham betul titik urat yang tegang.",
+                        stars: 5,
+                        treatment: "Pijat Relaksasi Nusantara (90 Menit)"
+                      },
+                      {
+                        name: "Bpk. Raditya Pratama",
+                        role: "Arsitek (Kebayoran Baru)",
+                        quote: "Layanan home service terbaik yang pernah saya coba. Terapis datang tepat waktu dengan perlengkapan sangat higienis.",
+                        stars: 5,
+                        treatment: "Pijat Panggilan Eksklusif (120 Menit)"
+                      }
+                    ].map((item, i) => (
+                      <div key={i} className="bg-white p-7 rounded-xl border border-[#E6DEC8] shadow-sm flex flex-col justify-between">
+                        <div>
+                          <div className="flex items-center gap-1 text-[#C69A56] mb-4">
+                            {[...Array(item.stars)].map((_, s) => (
+                              <i key={s} data-lucide="star" className="w-4 h-4 fill-[#C69A56]"></i>
+                            ))}
+                          </div>
+                          <p className="text-xs sm:text-sm text-[#4A3F35] leading-relaxed italic mb-6">"{item.quote}"</p>
+                        </div>
+                        <div className="pt-4 border-t border-[#FAF7F2]">
+                          <div className="font-serif font-bold text-sm text-[#1E392A]">{item.name}</div>
+                          <div className="text-[11px] text-[#8C6D53]">{item.role}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+
+              {/* ================= FAQ ================= */}
+              <section id="faq" className="py-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="text-center mb-14 space-y-2">
+                  <span className="text-xs uppercase tracking-[0.25em] text-[#C05A3E] font-bold">
+                    PERTANYAAN UMUM
+                  </span>
+                  <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#1E392A]">
+                    Frequently Asked Questions
+                  </h2>
+                </div>
+
+                <div className="space-y-3">
+                  {INITIAL_DATA.faqs.map((faq, index) => {
+                    const isOpen = faqOpenIndex === index;
+                    return (
+                      <div key={index} className="bg-white rounded-lg border border-[#E6DEC8] overflow-hidden">
+                        <button
+                          onClick={() => setFaqOpenIndex(isOpen ? null : index)}
+                          className="w-full text-left px-6 py-4 flex items-center justify-between text-xs sm:text-sm font-semibold text-[#1E392A] focus:outline-none"
+                        >
+                          <span>{faq.q}</span>
+                          <i data-lucide="chevron-down" className={`w-4 h-4 text-[#8C6D53] transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}></i>
+                        </button>
+                        {isOpen && (
+                          <div className="px-6 pb-5 pt-1 text-xs sm:text-sm text-[#554332] leading-relaxed border-t border-[#FAF7F2]">
+                            {faq.a}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </section>
+
+              {/* ================= FINAL CTA ================= */}
+              <section id="kontak" className="relative py-28 bg-[#14261C] text-white overflow-hidden text-center">
+                <div className="absolute inset-0 z-0 opacity-20">
+                  <img
+                    src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=2000&q=80"
+                    alt="Background"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                
+                <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+                  <span className="text-xs uppercase tracking-[0.3em] text-[#C69A56] font-bold">
+                    KESEIMBANGAN RAGA & PIKIRAN
+                  </span>
+                  <h2 className="font-serif text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
+                    Saatnya Berhenti Sejenak.
+                  </h2>
+                  <p className="text-sm sm:text-base text-[#D2C8B5] font-light max-w-xl mx-auto leading-relaxed">
+                    Pilih layanan pijat Anda dan booking waktu yang paling nyaman hari ini. Terapis terbaik kami siap menyambut Anda.
+                  </p>
+
+                  <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
+                    <button
+                      onClick={() => openBookingWithService('jawa', 90)}
+                      className="px-8 py-3.5 border border-white/80 bg-white/10 hover:bg-white hover:text-[#14261C] text-white text-xs tracking-[0.2em] uppercase font-bold rounded transition-all duration-200 active:scale-[0.98] shadow-sm"
+                    >
+                      BOOKING SEKARANG
+                    </button>
+
+                    <a
+                      href={generateWhatsAppUrl("Halo Warisan Nusantara, saya ingin bertanya tentang layanan pijat.")}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="px-8 py-3.5 border border-white/80 bg-transparent hover:bg-white hover:text-[#14261C] text-white text-xs tracking-[0.2em] uppercase font-bold rounded transition-all duration-200 active:scale-[0.98] flex items-center justify-center gap-2"
+                    >
+                      <i data-lucide="message-circle" className="w-4 h-4"></i>
+                      <span>CHAT WHATSAPP</span>
+                    </a>
+                  </div>
+                </div>
+              </section>
+            </main>
+          )}
+
+          {/* ================= FOOTER ================= */}
+          <footer className="bg-[#111C15] text-[#A69B89] text-xs py-14 border-t border-white/10">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-10">
+              <div className="space-y-3">
+                <span className="font-serif text-lg tracking-wider font-bold text-white block">WARISAN NUSANTARA</span>
+                <p className="text-[11px] text-[#A69B89] leading-relaxed">
+                  Warisan pijat tradisional Indonesia yang dikemas secara modern, higienis, dan profesional.
+                </p>
+              </div>
+
+              <div>
+                <h4 className="font-semibold text-white uppercase tracking-wider mb-3">Layanan</h4>
+                <ul className="space-y-2 text-[11px]">
+                  <li><button onClick={() => openBookingWithService('jawa', 90)} className="hover:text-white transition">Pijat Tradisional Jawa</button></li>
+                  <li><button onClick={() => openBookingWithService('urut', 90)} className="hover:text-white transition">Pijat Urut Otot & Kebugaran</button></li>
+                  <li><button onClick={() => openBookingWithService('relaksasi', 90)} className="hover:text-white transition">Pijat Relaksasi Nusantara</button></li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 className="font-semibold text-white uppercase tracking-wider mb-3">Jam Operasional</h4>
+                <ul className="space-y-1.5 text-[11px]">
+                  <li>Senin - Minggu: 09:00 - 22:00 WIB</li>
+                  <li className="pt-2 text-white">WhatsApp: {INITIAL_DATA.brand.phoneDisplay}</li>
+                  <li>Studio: Senopati, Jakarta Selatan</li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 className="font-semibold text-white uppercase tracking-wider mb-3">Akses Kelola</h4>
+                <button
+                  onClick={() => { setActiveTab('admin'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                  className="px-3.5 py-2.5 rounded bg-white/5 hover:bg-white/10 border border-white/15 text-xs text-[#D2C8B5] hover:text-white transition flex items-center gap-2 group"
+                >
+                  <i data-lucide="settings" className="w-3.5 h-3.5 text-[#C69A56] group-hover:rotate-45 transition-transform"></i>
+                  <span>Kelola Reservasi (Admin)</span>
+                </button>
+              </div>
+            </div>
+          </footer>
+
+          {/* ================= MODAL BOOKING ================= */}
+          {isBookingModalOpen && (
+            <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4">
+              <div className="bg-[#FAF7F2] rounded-2xl w-full max-w-3xl border border-[#E6DEC8] shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+                <div className="px-6 py-4 border-b border-[#E6DEC8] flex items-center justify-between bg-white">
+                  <div>
+                    <span className="text-[10px] uppercase tracking-widest text-[#C05A3E] font-bold">SISTEM RESERVASI ONLINE</span>
+                    <h3 className="font-serif font-bold text-lg text-[#1E392A]">
+                      {bookingSuccess ? "Konfirmasi Reservasi Berhasil" : `Langkah 0${bookingStep} dari 07`}
+                    </h3>
+                  </div>
+                  <button onClick={() => setIsBookingModalOpen(false)} className="p-2 text-[#8C6D53] hover:text-[#1E392A] rounded-full">
+                    <i data-lucide="x" className="w-5 h-5"></i>
+                  </button>
+                </div>
+
+                <div className="p-6 overflow-y-auto flex-1">
+                  {bookingSuccess ? (
+                    <div className="text-center py-6 space-y-6">
+                      <div className="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto">
+                        <i data-lucide="check-circle-2" className="w-8 h-8"></i>
+                      </div>
+                      <h4 className="font-serif text-2xl font-bold text-[#1E392A]">Pemesanan Anda Telah Tercatat!</h4>
+                      <p className="text-xs text-[#554332]">ID Reservasi: <span className="font-bold">{bookingData.bookingId}</span></p>
+
+                      <div className="flex justify-center gap-3 pt-2">
+                        <a
+                          href={generateWhatsAppUrl()}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="px-6 py-3 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold tracking-wider uppercase rounded-lg shadow flex items-center gap-2"
+                        >
+                          <i data-lucide="message-circle" className="w-4 h-4"></i>
+                          KONFIRMASI VIA WHATSAPP
+                        </a>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="space-y-6">
+                      {bookingStep === 1 && (
+                        <div>
+                          <h4 className="font-serif font-bold text-base text-[#1E392A] mb-4">Pilih Jenis Pijat & Durasi</h4>
+                          <div className="grid sm:grid-cols-2 gap-3 mb-4">
+                            {INITIAL_DATA.services.map((s) => (
+                              <div
+                                key={s.id}
+                                onClick={() => setBookingData(prev => ({ ...prev, serviceId: s.id }))}
+                                className={`p-4 rounded-xl border cursor-pointer transition ${bookingData.serviceId === s.id ? 'bg-white border-[#1E392A] ring-1 ring-[#1E392A]' : 'bg-white/60 border-[#E6DEC8]'}`}
+                              >
+                                <h5 className="font-serif font-bold text-sm text-[#1E392A]">{s.name}</h5>
+                                <p className="text-[11px] text-[#6B5E51] mt-1 line-clamp-2">{s.desc}</p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {bookingStep === 2 && (
+                        <div>
+                          <h4 className="font-serif font-bold text-base text-[#1E392A] mb-4">Pilih Lokasi Perawatan</h4>
+                          <div className="grid sm:grid-cols-2 gap-4">
+                            <div
+                              onClick={() => setBookingData(prev => ({ ...prev, locationType: 'Studio' }))}
+                              className={`p-5 rounded-xl border cursor-pointer ${bookingData.locationType === 'Studio' ? 'bg-white border-[#1E392A] ring-1 ring-[#1E392A]' : 'bg-white/60 border-[#E6DEC8]'}`}
+                            >
+                              <h5 className="font-serif font-bold text-sm text-[#1E392A]">Studio Warisan Senopati</h5>
+                            </div>
+                            <div
+                              onClick={() => setBookingData(prev => ({ ...prev, locationType: 'Panggilan' }))}
+                              className={`p-5 rounded-xl border cursor-pointer ${bookingData.locationType === 'Panggilan' ? 'bg-white border-[#1E392A] ring-1 ring-[#1E392A]' : 'bg-white/60 border-[#E6DEC8]'}`}
+                            >
+                              <h5 className="font-serif font-bold text-sm text-[#1E392A]">Pijat Panggilan (Home Service)</h5>
+                            </div>
+                          </div>
+                          {bookingData.locationType === 'Panggilan' && (
+                            <div className="mt-4">
+                              <label className="block text-xs font-semibold text-[#4A3F35] mb-1">Alamat Lengkap</label>
+                              <input
+                                type="text"
+                                value={bookingData.address}
+                                onChange={(e) => setBookingData(prev => ({ ...prev, address: e.target.value }))}
+                                placeholder="Masukkan alamat lengkap..."
+                                className="w-full text-xs px-3.5 py-2.5 rounded border border-[#D9CBB0]"
+                              />
+                            </div>
+                          )}
+                        </div>
+                      )}
+
+                      {bookingStep === 3 && (
+                        <div>
+                          <h4 className="font-serif font-bold text-base text-[#1E392A] mb-4">Pilih Terapis Anda</h4>
+                          <div className="grid sm:grid-cols-2 gap-3">
+                            {INITIAL_DATA.therapists.map((t) => (
+                              <div
+                                key={t.id}
+                                onClick={() => setBookingData(prev => ({ ...prev, therapistId: t.id }))}
+                                className={`p-3.5 rounded-xl border cursor-pointer flex items-center gap-3 ${bookingData.therapistId === t.id ? 'bg-white border-[#1E392A] ring-1 ring-[#1E392A]' : 'bg-white/60 border-[#E6DEC8]'}`}
+                              >
+                                <img src={t.image} alt={t.name} className="w-12 h-12 rounded-full object-cover" />
+                                <div>
+                                  <h5 className="font-serif font-bold text-xs text-[#1E392A]">{t.name}</h5>
+                                  <p className="text-[10px] text-[#8C6D53]">{t.exp}</p>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {bookingStep === 4 && (
+                        <div>
+                          <h4 className="font-serif font-bold text-base text-[#1E392A] mb-4">Pilih Tanggal Reservasi</h4>
+                          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                            {getUpcomingDates().map((d) => (
+                              <button
+                                key={d.full}
+                                type="button"
+                                onClick={() => setBookingData(prev => ({ ...prev, date: d.full }))}
+                                className={`p-3 rounded-xl border text-center ${bookingData.date === d.full ? 'bg-[#1E392A] text-white border-[#1E392A]' : 'bg-white border-[#E6DEC8] text-[#4A3F35]'}`}
+                              >
+                                <div className="text-[10px] uppercase font-bold">{d.dayName}</div>
+                                <div className="text-xl font-serif font-bold my-0.5">{d.dayNumber}</div>
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {bookingStep === 5 && (
+                        <div>
+                          <h4 className="font-serif font-bold text-base text-[#1E392A] mb-4">Pilih Waktu / Jam Mulai</h4>
+                          <div className="grid grid-cols-3 sm:grid-cols-4 gap-2.5">
+                            {TIME_SLOTS.map((slot) => (
+                              <button
+                                key={slot}
+                                type="button"
+                                onClick={() => setBookingData(prev => ({ ...prev, time: slot }))}
+                                className={`py-2.5 rounded-lg text-xs font-bold ${bookingData.time === slot ? 'bg-[#1E392A] text-white' : 'bg-white border border-[#D9CBB0] text-[#4A3F35]'}`}
+                              >
+                                {slot} WIB
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {bookingStep === 6 && (
+                        <div>
+                          <h4 className="font-serif font-bold text-base text-[#1E392A] mb-4">Informasi Kontak & Tamu</h4>
+                          <div className="space-y-3">
+                            <div>
+                              <label className="block text-xs font-semibold text-[#4A3F35] mb-1">Nama Lengkap *</label>
+                              <input
+                                type="text"
+                                value={bookingData.customerName}
+                                onChange={(e) => setBookingData(prev => ({ ...prev, customerName: e.target.value }))}
+                                placeholder="Contoh: Hendra Gunawan"
+                                className="w-full text-xs px-3.5 py-2.5 rounded border border-[#D9CBB0]"
+                              />
+                            </div>
+                            <div>
+                              <label className="block text-xs font-semibold text-[#4A3F35] mb-1">Nomor WhatsApp Aktif *</label>
+                              <input
+                                type="tel"
+                                value={bookingData.customerPhone}
+                                onChange={(e) => setBookingData(prev => ({ ...prev, customerPhone: e.target.value }))}
+                                placeholder="Contoh: 081298765432"
+                                className="w-full text-xs px-3.5 py-2.5 rounded border border-[#D9CBB0]"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {bookingStep === 7 && (
+                        <div>
+                          <h4 className="font-serif font-bold text-base text-[#1E392A] mb-4">Ringkasan Pesanan & Konfirmasi</h4>
+                          <div className="bg-white p-5 rounded-xl border border-[#E6DEC8] space-y-2.5 text-xs">
+                            <div className="flex justify-between">
+                              <span className="text-[#8C6D53]">Layanan:</span>
+                              <span className="font-bold text-[#1E392A]">{INITIAL_DATA.services.find(s => s.id === bookingData.serviceId)?.name}</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-[#8C6D53]">Waktu:</span>
+                              <span className="font-medium text-[#1E392A]">{bookingData.date} pukul {bookingData.time} WIB</span>
+                            </div>
+                            <div className="flex justify-between pt-2 border-t font-bold text-sm text-[#C05A3E]">
+                              <span>Total Pembayaran:</span>
+                              <span>{formatRupiah(bookingData.totalPrice)}</span>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+
+                {!bookingSuccess && (
+                  <div className="px-6 py-4 border-t border-[#E6DEC8] bg-white flex items-center justify-between">
+                    <span className="font-serif font-bold text-sm text-[#C05A3E]">{formatRupiah(bookingData.totalPrice)}</span>
+                    <div className="flex items-center gap-2">
+                      {bookingStep > 1 && (
+                        <button onClick={() => setBookingStep(bookingStep - 1)} className="px-4 py-2 text-xs font-semibold text-[#4A3F35] border rounded-lg">KEMBALI</button>
+                      )}
+                      {bookingStep < 7 ? (
+                        <button onClick={() => setBookingStep(bookingStep + 1)} className="px-5 py-2 bg-[#1E392A] text-white text-xs font-bold rounded-lg">LANJUTKAN</button>
+                      ) : (
+                        <button onClick={handleConfirmBooking} className="px-6 py-2 bg-[#C05A3E] text-white text-xs font-bold rounded-lg">KONFIRMASI BOOKING</button>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>

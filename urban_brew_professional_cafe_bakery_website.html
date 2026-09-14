@@ -1,0 +1,2096 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="meta-title">Urban Brew — Specialty Coffee & Handcrafted Bakery</title>
+  <meta id="meta-desc" name="description" content="Good Coffee. Good Food. Good Moments. Urban Brew menyajikan specialty coffee, artisan bakery segar, dan ruang nyaman di tengah kota.">
+  <link id="meta-favicon" rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232B1A12'><path d='M2 21h18v-2H2v2zm2-4h14V5H4v12zm16-9h2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-2V8z'/></svg>">
+  
+  <!-- Preconnect and Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#FAF7F2',
+              100: '#F5EFE6',
+              200: '#EADCCE',
+              300: '#DEC2AD',
+              400: '#CE9E7C',
+              500: '#B87A4F',
+              600: '#9B5B32',
+              700: '#7B4222',
+              800: '#542B15',
+              900: '#2C160B',
+              dark: '#140D09',
+            },
+            espresso: '#1A1412',
+            cream: '#FAF8F5',
+            sand: '#F2ECE4',
+            surface: '#FFFFFF',
+            accent: '#C47B49',
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+          },
+          boxShadow: {
+            'subtle': '0 2px 10px rgba(26, 20, 18, 0.04)',
+            'card': '0 8px 30px rgba(26, 20, 18, 0.06)',
+            'float': '0 20px 40px -15px rgba(26, 20, 18, 0.12)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #FAF8F5;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #DEC2AD;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #CE9E7C;
+    }
+    
+    /* Image loader subtle transition */
+    .img-fade {
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+    .img-fade.loaded {
+      opacity: 1;
+    }
+    
+    /* Smooth modal transition */
+    .admin-modal {
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .admin-modal.hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.98);
+    }
+    
+    /* Lightbox modal */
+    .lightbox-modal {
+      transition: opacity 0.2s ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-cream text-espresso font-sans antialiased selection:bg-brand-200 selection:text-brand-900 min-h-screen flex flex-col">
+
+  <!-- 1. NAVBAR -->
+  <header id="site-header" class="fixed top-0 left-0 right-0 z-40 transition-all duration-300 bg-cream/80 backdrop-blur-md border-b border-sand">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <!-- Logo -->
+        <a href="#home" class="flex items-center gap-3 group focus:outline-none">
+          <div class="w-10 h-10 rounded-full bg-brand-900 text-cream flex items-center justify-center font-serif text-lg font-bold tracking-wider shadow-sm group-hover:bg-accent transition-colors">
+            <span id="nav-logo-letter">U</span>
+          </div>
+          <div class="flex flex-col">
+            <span id="nav-brand-name" class="font-serif font-bold text-xl tracking-tight text-espresso">Urban Brew</span>
+            <span id="nav-brand-tagline" class="text-[10px] uppercase tracking-widest text-brand-700 font-medium -mt-1">Specialty & Bakery</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center space-x-8 text-sm font-medium tracking-wide text-espresso/80">
+          <a href="#home" class="hover:text-accent transition-colors">Home</a>
+          <a href="#about" class="hover:text-accent transition-colors">About</a>
+          <a href="#signatures" class="hover:text-accent transition-colors">Signatures</a>
+          <a href="#menu" class="hover:text-accent transition-colors">Menu</a>
+          <a href="#gallery" class="hover:text-accent transition-colors">Gallery</a>
+          <a href="#location" class="hover:text-accent transition-colors">Location</a>
+        </nav>
+
+        <!-- Right Action Button -->
+        <div class="hidden md:flex items-center gap-4">
+          <a id="nav-order-btn" href="#menu" class="inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-brand-900 text-white text-xs font-semibold uppercase tracking-wider hover:bg-brand-700 active:scale-95 transition-all shadow-sm">
+            Order Now
+          </a>
+        </div>
+
+        <!-- Mobile Hamburger Button -->
+        <div class="flex md:hidden items-center gap-2">
+          <button id="mobile-menu-toggle" type="button" aria-label="Toggle navigation menu" class="p-2.5 rounded-lg text-espresso hover:bg-sand/60 focus:outline-none">
+            <svg id="hamburger-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+            <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Menu -->
+    <div id="mobile-drawer" class="hidden md:hidden border-b border-sand bg-cream px-4 pt-3 pb-6 space-y-3 shadow-lg">
+      <nav class="flex flex-col space-y-3 text-base font-medium text-espresso/90">
+        <a href="#home" class="mobile-nav-link px-3 py-2 rounded-lg hover:bg-sand/50">Home</a>
+        <a href="#about" class="mobile-nav-link px-3 py-2 rounded-lg hover:bg-sand/50">About</a>
+        <a href="#signatures" class="mobile-nav-link px-3 py-2 rounded-lg hover:bg-sand/50">Signatures</a>
+        <a href="#menu" class="mobile-nav-link px-3 py-2 rounded-lg hover:bg-sand/50">Menu</a>
+        <a href="#gallery" class="mobile-nav-link px-3 py-2 rounded-lg hover:bg-sand/50">Gallery</a>
+        <a href="#location" class="mobile-nav-link px-3 py-2 rounded-lg hover:bg-sand/50">Location</a>
+      </nav>
+      <div class="pt-3 border-t border-sand flex flex-col gap-2">
+        <a id="mobile-order-btn" href="#menu" class="w-full text-center py-3 rounded-full bg-brand-900 text-white text-xs font-semibold uppercase tracking-wider hover:bg-brand-700">
+          Order Now
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. HERO SECTION -->
+  <section id="home" class="relative pt-28 pb-16 md:pt-36 md:pb-28 overflow-hidden bg-cream border-b border-sand">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <!-- Hero Left / Content -->
+        <div class="lg:col-span-6 space-y-6 lg:pr-6">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sand border border-brand-200 text-xs font-medium uppercase tracking-wider text-brand-800">
+            <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+            <span id="hero-badge">Specialty Coffee • Fresh Bakery • Cozy Space</span>
+          </div>
+
+          <h1 id="hero-headline" class="font-serif text-4xl sm:text-5xl xl:text-6xl font-semibold tracking-tight text-espresso leading-[1.12]">
+            GOOD COFFEE.<br>GOOD FOOD.<br><span class="italic font-normal text-brand-700">GOOD MOMENTS.</span>
+          </h1>
+
+          <p id="hero-subheadline" class="text-base sm:text-lg text-espresso/70 leading-relaxed font-normal max-w-xl">
+            Freshly brewed coffee, handcrafted food, and warm moments made for your everyday.
+          </p>
+
+          <div class="pt-2 flex flex-wrap items-center gap-4">
+            <a id="hero-cta-menu" href="#menu" class="inline-flex items-center justify-center px-7 py-3.5 rounded-full bg-brand-900 text-white text-xs font-semibold uppercase tracking-wider hover:bg-brand-700 active:scale-95 transition-all shadow-sm">
+              View Our Menu
+            </a>
+            <a id="hero-cta-order" href="#location" class="inline-flex items-center justify-center px-7 py-3.5 rounded-full border border-brand-900/30 text-espresso text-xs font-semibold uppercase tracking-wider hover:bg-sand/60 active:scale-95 transition-all">
+              Order Now
+            </a>
+          </div>
+
+          <!-- Subtle Quick Info Pill -->
+          <div class="pt-6 border-t border-sand flex items-center gap-8 text-xs text-espresso/60">
+            <div>
+              <span class="block font-semibold text-espresso text-sm">Open Daily</span>
+              <span id="hero-hours-pill">07:00 AM – 22:00 PM</span>
+            </div>
+            <div class="w-px h-8 bg-sand"></div>
+            <div>
+              <span class="block font-semibold text-espresso text-sm">Location</span>
+              <span id="hero-location-pill">Senopati No. 42, Jakarta Selatan</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Right / Visual Stage (Real Commercial Photography) -->
+        <div class="lg:col-span-6 relative">
+          <div class="relative rounded-2xl overflow-hidden shadow-card aspect-[4/3] sm:aspect-[16/11] bg-sand/60">
+            <img 
+              id="hero-main-img" 
+              src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=80" 
+              alt="Artisan coffee and freshly baked croissant at Urban Brew cafe"
+              class="w-full h-full object-cover object-center img-fade loaded"
+              loading="eager"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-espresso/40 via-transparent to-transparent"></div>
+            <!-- Floating caption bar -->
+            <div class="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md rounded-xl p-3.5 flex items-center justify-between border border-white/40 shadow-subtle">
+              <div class="flex items-center gap-3">
+                <div class="w-2.5 h-2.5 rounded-full bg-accent"></div>
+                <div class="text-xs">
+                  <p class="font-semibold text-espresso">Single Origin Ethiopia Guji</p>
+                  <p class="text-espresso/60 text-[11px]">Brewed fresh daily by our certified baristas</p>
+                </div>
+              </div>
+              <span class="text-xs font-serif italic text-brand-800 font-medium">Urban Brew</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. INTRO / ABOUT SHORT SECTION -->
+  <section id="about" class="py-20 md:py-28 bg-white border-b border-sand">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <!-- Visual Column -->
+        <div class="lg:col-span-5 relative order-2 lg:order-1">
+          <div class="relative rounded-2xl overflow-hidden shadow-card aspect-[4/5] bg-sand">
+            <img 
+              id="intro-img"
+              src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80" 
+              alt="Barista brewing specialty pour over coffee" 
+              class="w-full h-full object-cover img-fade loaded"
+              loading="lazy"
+            />
+          </div>
+          <!-- Decorative Stamp -->
+          <div class="absolute -bottom-5 -right-5 bg-brand-900 text-cream p-5 rounded-2xl shadow-float hidden sm:flex flex-col items-center justify-center text-center w-36">
+            <span class="font-serif text-2xl font-bold">100%</span>
+            <span class="text-[10px] tracking-wider uppercase text-brand-200">Arabica Specialty</span>
+          </div>
+        </div>
+
+        <!-- Text Content Column -->
+        <div class="lg:col-span-7 space-y-6 order-1 lg:order-2">
+          <div class="inline-block text-xs font-semibold tracking-widest text-brand-700 uppercase">
+            Our Philosophy
+          </div>
+          <h2 id="intro-headline" class="font-serif text-3xl sm:text-4xl font-semibold text-espresso tracking-tight leading-snug">
+            MORE THAN JUST A CUP OF COFFEE.
+          </h2>
+          <div id="intro-description" class="space-y-4 text-espresso/70 text-base sm:text-lg leading-relaxed">
+            <p>
+              Urban Brew didirikan dengan komitmen sederhana: menghadirkan secangkir kopi istimewa, roti artisan yang dipanggang segar setiap pagi, serta ruang bersahabat bagi siapa pun yang melangkah masuk.
+            </p>
+            <p>
+              Baik Anda mencari sudut tenang untuk bekerja, tempat hangat bertukar cerita dengan sahabat, maupun ritual pagi sebelum memulai kesibukan kota, kami siap menyambut Anda dengan kehangatan dan dedikasi penuh.
+            </p>
+          </div>
+          <div class="pt-3">
+            <a id="intro-cta" href="#story" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-900 hover:text-accent transition-colors group">
+              <span>DISCOVER OUR STORY</span>
+              <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. FEATURE / HIGHLIGHT SECTION -->
+  <section id="features" class="py-16 md:py-24 bg-cream border-b border-sand">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+        <span class="text-xs uppercase tracking-widest text-brand-700 font-semibold">The Urban Brew Standard</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-espresso">Crafted with Purpose</h2>
+        <p class="text-espresso/70 text-sm sm:text-base">Setiap detail kami persembahkan untuk memberikan pengalaman rasa dan suasana terbaik.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Feature 1 -->
+        <div class="p-6 rounded-xl bg-white border border-sand shadow-subtle hover:border-brand-200 transition-colors space-y-4">
+          <div class="w-12 h-12 rounded-lg bg-brand-50 flex items-center justify-center text-brand-800">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"></path>
+              <line x1="6" y1="1" x2="6" y2="4" stroke-linecap="round" stroke-width="1.5"></line>
+              <line x1="10" y1="1" x2="10" y2="4" stroke-linecap="round" stroke-width="1.5"></line>
+              <line x1="14" y1="1" x2="14" y2="4" stroke-linecap="round" stroke-width="1.5"></line>
+            </svg>
+          </div>
+          <h3 id="feat-title-1" class="font-serif text-lg font-semibold text-espresso">SPECIALTY COFFEE</h3>
+          <p id="feat-desc-1" class="text-sm text-espresso/70 leading-relaxed">
+            Carefully selected beans and expertly brewed coffee. Biji kopi pilihan dari petani lokal dan internasional.
+          </p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="p-6 rounded-xl bg-white border border-sand shadow-subtle hover:border-brand-200 transition-colors space-y-4">
+          <div class="w-12 h-12 rounded-lg bg-brand-50 flex items-center justify-center text-brand-800">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"></path>
+            </svg>
+          </div>
+          <h3 id="feat-title-2" class="font-serif text-lg font-semibold text-espresso">FRESHLY BAKED</h3>
+          <p id="feat-desc-2" class="text-sm text-espresso/70 leading-relaxed">
+            Fresh bread, pastry and bakery favorites prepared with care. Dipanggang dari oven setiap subuh.
+          </p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="p-6 rounded-xl bg-white border border-sand shadow-subtle hover:border-brand-200 transition-colors space-y-4">
+          <div class="w-12 h-12 rounded-lg bg-brand-50 flex items-center justify-center text-brand-800">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+            </svg>
+          </div>
+          <h3 id="feat-title-3" class="font-serif text-lg font-semibold text-espresso">COZY SPACE</h3>
+          <p id="feat-desc-3" class="text-sm text-espresso/70 leading-relaxed">
+            A comfortable place to work, meet and relax. Suasana tenang dengan stopkontak lengkap & Wi-Fi cepat.
+          </p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="p-6 rounded-xl bg-white border border-sand shadow-subtle hover:border-brand-200 transition-colors space-y-4">
+          <div class="w-12 h-12 rounded-lg bg-brand-50 flex items-center justify-center text-brand-800">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+            </svg>
+          </div>
+          <h3 id="feat-title-4" class="font-serif text-lg font-semibold text-espresso">MADE WITH CARE</h3>
+          <p id="feat-desc-4" class="text-sm text-espresso/70 leading-relaxed">
+            Quality ingredients and thoughtful preparation in every serving. Dari susu segar hingga butter Prancis.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. SIGNATURE MENU -->
+  <section id="signatures" class="py-20 md:py-28 bg-white border-b border-sand">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div>
+          <span class="text-xs uppercase tracking-widest text-brand-700 font-semibold">Chef & Barista Picks</span>
+          <h2 id="sig-title" class="font-serif text-3xl sm:text-4xl font-semibold text-espresso mt-1">OUR SIGNATURES</h2>
+          <p id="sig-subtitle" class="text-espresso/70 text-sm sm:text-base mt-2 max-w-xl">
+            A few of our favorites, made fresh and served with care.
+          </p>
+        </div>
+        <a href="#menu" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-900 hover:text-accent transition-colors">
+          <span>Explore All Menu</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Signature Items Catalog Grid -->
+      <div id="signatures-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Rendered dynamically by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. MENU CATEGORY & FULL MENU -->
+  <section id="menu" class="py-20 md:py-28 bg-cream border-b border-sand">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12 space-y-3">
+        <span class="text-xs uppercase tracking-widest text-brand-700 font-semibold">Fresh From Bar & Kitchen</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-espresso">EXPLORE OUR MENU</h2>
+        <p class="text-espresso/70 text-sm sm:text-base">Pilih kategori menu favorit Anda untuk melihat sajian lengkap kami.</p>
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <div class="flex items-center justify-center flex-wrap gap-2 sm:gap-3 mb-12" id="category-tabs">
+        <button data-category="ALL" class="menu-tab-btn active px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all bg-brand-900 text-white shadow-sm">All</button>
+        <button data-category="COFFEE" class="menu-tab-btn px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all bg-white text-espresso hover:bg-sand border border-sand">Coffee</button>
+        <button data-category="NON-COFFEE" class="menu-tab-btn px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all bg-white text-espresso hover:bg-sand border border-sand">Non-Coffee</button>
+        <button data-category="BAKERY" class="menu-tab-btn px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all bg-white text-espresso hover:bg-sand border border-sand">Bakery</button>
+        <button data-category="FOOD" class="menu-tab-btn px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all bg-white text-espresso hover:bg-sand border border-sand">Food</button>
+        <button data-category="DESSERT" class="menu-tab-btn px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all bg-white text-espresso hover:bg-sand border border-sand">Dessert</button>
+      </div>
+
+      <!-- Full Menu Items Grid -->
+      <div id="full-menu-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <!-- Rendered dynamically by JavaScript -->
+      </div>
+      
+      <!-- Quick Info Bar below menu -->
+      <div class="mt-14 p-6 rounded-2xl bg-white border border-sand flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+        <div class="space-y-1">
+          <p class="text-sm font-semibold text-espresso">Ingin pesan dalam jumlah banyak atau reservasi meja khusus?</p>
+          <p class="text-xs text-espresso/60">Hubungi tim concierge Urban Brew via WhatsApp untuk bantuan langsung.</p>
+        </div>
+        <button onclick="openWhatsAppModal('Halo Urban Brew, saya ingin memesan menu / reservasi meja.')" class="px-6 py-2.5 rounded-full bg-brand-800 hover:bg-brand-900 text-white text-xs font-semibold uppercase tracking-wider shrink-0 transition-colors">
+          Hubungi Barista
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. PROMO / SPECIAL OFFER -->
+  <section id="promo" class="py-16 md:py-24 bg-brand-900 text-cream relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="rounded-3xl bg-brand-dark/40 border border-brand-700/40 p-8 sm:p-12 lg:p-16">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <div class="lg:col-span-7 space-y-6">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-accent/20 border border-accent/40 text-[11px] font-semibold tracking-widest uppercase text-brand-200">
+              Limited Offer
+            </div>
+            <h2 id="promo-headline" class="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-white leading-tight">
+              SOMETHING SPECIAL FOR YOU.
+            </h2>
+            <div class="space-y-2">
+              <h3 id="promo-title" class="text-xl sm:text-2xl font-serif text-brand-200">WEEKEND COFFEE & CROISSANT</h3>
+              <p id="promo-desc" class="text-cream/80 text-sm sm:text-base leading-relaxed">
+                Awali akhir pekan dengan segelas Specialty Coffee pilihan bersama Butter Croissant yang hangat dan renyah.
+              </p>
+            </div>
+            <div class="flex items-baseline gap-3 pt-1">
+              <span id="promo-price" class="font-serif text-3xl sm:text-4xl font-bold text-white">Rp 49.000</span>
+              <span id="promo-original-price" class="text-sm text-cream/50 line-through">Rp 72.000</span>
+              <span class="text-xs px-2.5 py-0.5 rounded bg-accent text-white font-semibold">Save 32%</span>
+            </div>
+            <div class="pt-2">
+              <button id="promo-btn" onclick="openWhatsAppModal('Halo Urban Brew, saya ingin mengklaim penawaran: Weekend Coffee & Croissant (Rp49.000)')" class="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-accent hover:bg-brand-500 text-white text-xs font-semibold uppercase tracking-wider transition-all shadow-md active:scale-95">
+                Get This Offer
+              </button>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5">
+            <div class="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/3] bg-brand-800/80">
+              <img 
+                id="promo-img"
+                src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80" 
+                alt="Special offer hot latte and artisan croissant"
+                class="w-full h-full object-cover img-fade loaded"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. VISUAL BREAK / FULL WIDTH IMAGE -->
+  <section id="visual-break" class="relative py-32 md:py-44 bg-espresso overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <img 
+        id="break-img"
+        src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1800&q=80" 
+        alt="Interior ambiance of Urban Brew with natural warm lighting and peaceful cafe customers"
+        class="w-full h-full object-cover object-center opacity-40 img-fade loaded"
+        loading="lazy"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-espresso via-espresso/40 to-espresso"></div>
+    </div>
+    <div class="relative z-10 max-w-4xl mx-auto px-4 text-center space-y-6">
+      <span class="text-xs uppercase tracking-widest text-brand-300 font-medium">Warmth & Community</span>
+      <blockquote id="break-quote" class="font-serif text-2xl sm:text-3xl md:text-4xl text-white font-normal italic leading-snug">
+        “A place for good coffee, good food, and good company.”
+      </blockquote>
+      <div class="w-12 h-px bg-brand-400 mx-auto"></div>
+      <p class="text-xs uppercase tracking-widest text-cream/70">Urban Brew House Ethos</p>
+    </div>
+  </section>
+
+  <!-- 9. GALLERY -->
+  <section id="gallery" class="py-20 md:py-28 bg-white border-b border-sand">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+        <span class="text-xs uppercase tracking-widest text-brand-700 font-semibold">Moments at Urban Brew</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-espresso">GALLERY OF SPACES & CRAFT</h2>
+        <p class="text-espresso/70 text-sm sm:text-base">Melihat lebih dekat aroma kopi, tekstur adonan pastry, dan atmosfer harian kami.</p>
+      </div>
+
+      <!-- Asymmetrical Editorial Grid -->
+      <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-6">
+        <!-- Rendered dynamically by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. ABOUT / BRAND STORY -->
+  <section id="story" class="py-20 md:py-28 bg-cream border-b border-sand">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <div class="lg:col-span-6 space-y-6">
+          <span class="text-xs uppercase tracking-widest text-brand-700 font-semibold">The Journey</span>
+          <h2 id="story-title" class="font-serif text-3xl sm:text-4xl font-semibold text-espresso leading-tight">
+            CRAFTED FOR EVERYDAY MOMENTS.
+          </h2>
+          <div id="story-paragraphs" class="space-y-4 text-espresso/70 text-sm sm:text-base leading-relaxed">
+            <p>
+              Urban Brew bermula dari kecintaan mendalam terhadap ritual seduhan kopi artisan dan roti dengan fermentasi alami. Kami meyakini bahwa kualitas tidak dapat dipercepat: dari pemanggangan biji kopi dengan profil sangrai teliti, hingga adonan croissant laminasi yang memerlukan waktu 48 jam.
+            </p>
+            <p>
+              Kami bekerja sama langsung dengan komunitas petani kopi lokal di nusantara serta roaster terpilih. Di setiap sajian piring dan cangkir, Anda merasakan dedikasi tulus dari para barista dan pastry chef kami.
+            </p>
+          </div>
+
+          <!-- Statistic Pillars -->
+          <div class="pt-6 grid grid-cols-3 gap-4 border-t border-sand">
+            <div>
+              <span id="stat-1-val" class="font-serif text-2xl sm:text-3xl font-bold text-brand-900 block">EST. 2024</span>
+              <span id="stat-1-lbl" class="text-xs text-espresso/60 uppercase tracking-wider font-medium">Heritage</span>
+            </div>
+            <div>
+              <span id="stat-2-val" class="font-serif text-2xl sm:text-3xl font-bold text-brand-900 block">100% FRESH</span>
+              <span id="stat-2-lbl" class="text-xs text-espresso/60 uppercase tracking-wider font-medium">Daily Baked</span>
+            </div>
+            <div>
+              <span id="stat-3-val" class="font-serif text-2xl sm:text-3xl font-bold text-brand-900 block">LOCAL</span>
+              <span id="stat-3-lbl" class="text-xs text-espresso/60 uppercase tracking-wider font-medium">Ethical Sourced</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-6 relative">
+          <div class="relative rounded-2xl overflow-hidden shadow-card aspect-[4/3] bg-sand">
+            <img 
+              id="story-img"
+              src="https://images.unsplash.com/photo-1517256064527-09c73fc73e38?auto=format&fit=crop&w=1000&q=80" 
+              alt="Artisan coffee and freshly baked goods in urban cafe environment"
+              class="w-full h-full object-cover img-fade loaded"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. TESTIMONIAL -->
+  <section id="testimonials" class="py-20 md:py-28 bg-white border-b border-sand">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+        <span class="text-xs uppercase tracking-widest text-brand-700 font-semibold">Community Voices</span>
+        <h2 id="testi-title" class="font-serif text-3xl sm:text-4xl font-semibold text-espresso">WHAT OUR GUESTS SAY</h2>
+        <p class="text-espresso/70 text-sm sm:text-base">Kisah nyata dari para pengunjung setia yang menjadikan Urban Brew rumah kedua mereka.</p>
+      </div>
+
+      <div id="testimonials-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Rendered dynamically by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 12. INSTAGRAM / SOCIAL SECTION -->
+  <section id="social" class="py-20 bg-cream border-b border-sand">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-10 gap-4">
+        <div>
+          <span class="text-xs uppercase tracking-widest text-brand-700 font-semibold">Stay Connected</span>
+          <h2 id="social-title" class="font-serif text-3xl font-semibold text-espresso mt-1">FOLLOW THE BREW.</h2>
+          <p id="social-handle" class="text-accent font-medium text-sm mt-1">@urbanbrew.co</p>
+        </div>
+        <a id="social-ig-link" href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-brand-900/30 text-espresso text-xs font-semibold uppercase tracking-wider hover:bg-white transition-colors">
+          <span>Follow us on Instagram</span>
+          <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- 4 Social Preview Photos -->
+      <div id="social-grid" class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <!-- Rendered dynamically by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 13. LOCATION & CONTACT -->
+  <section id="location" class="py-20 md:py-28 bg-white border-b border-sand">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+        <!-- Left: Detail Info -->
+        <div class="lg:col-span-5 space-y-8">
+          <div>
+            <span class="text-xs uppercase tracking-widest text-brand-700 font-semibold">Find Us</span>
+            <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-espresso mt-1">VISIT US</h2>
+            <p class="text-espresso/70 text-sm mt-2">Kami menantikan kehadiran Anda di ruang seduh dan santai Urban Brew.</p>
+          </div>
+
+          <div class="space-y-6 text-sm">
+            <!-- Address -->
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-lg bg-sand flex items-center justify-center text-brand-800 shrink-0">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-espresso">Address</h3>
+                <p id="contact-address" class="text-espresso/70 mt-1 leading-relaxed">
+                  Jl. Senopati Raya No. 42, Kebayoran Baru, Jakarta Selatan 12190
+                </p>
+              </div>
+            </div>
+
+            <!-- Opening Hours -->
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-lg bg-sand flex items-center justify-center text-brand-800 shrink-0">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-espresso">Opening Hours</h3>
+                <p id="contact-hours-weekdays" class="text-espresso/70 mt-1">Monday – Friday: 07:00 AM – 22:00 PM</p>
+                <p id="contact-hours-weekends" class="text-espresso/70">Saturday – Sunday: 07:00 AM – 23:00 PM</p>
+              </div>
+            </div>
+
+            <!-- Contacts (Phone & WA) -->
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-lg bg-sand flex items-center justify-center text-brand-800 shrink-0">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-espresso">Direct Contact</h3>
+                <p id="contact-phone" class="text-espresso/70 mt-1">Phone: +62 21 5550 8920</p>
+                <p id="contact-email" class="text-espresso/70">Email: hello@urbanbrew.co</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex flex-wrap gap-4 pt-2">
+            <a id="contact-dir-btn" href="https://maps.google.com" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-brand-900 text-white text-xs font-semibold uppercase tracking-wider hover:bg-brand-700 transition-colors shadow-sm">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
+              </svg>
+              <span>Get Directions</span>
+            </a>
+            <button onclick="openWhatsAppModal('Halo Urban Brew, saya ingin bertanya seputar lokasi dan ketersediaan tempat.')" class="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-brand-900 text-espresso text-xs font-semibold uppercase tracking-wider hover:bg-sand transition-colors">
+              <svg class="w-4 h-4 text-emerald-600" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+              </svg>
+              <span>Chat on WhatsApp</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right: Map Frame -->
+        <div class="lg:col-span-7">
+          <div class="relative rounded-2xl overflow-hidden shadow-card border border-sand h-96 lg:h-full min-h-[380px] bg-sand">
+            <iframe 
+              id="google-maps-frame"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.273187212001!2d106.80624647573138!3d-6.227668693760451!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f14dfb0743b3%3A0x6b8c8d84422c53a7!2sSenopati%2C%20Kebayoran%20Baru%2C%20South%20Jakarta%20City%2C%20Jakarta!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid" 
+              width="100%" 
+              height="100%" 
+              style="border:0;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Urban Brew Location Map"
+              class="w-full h-full"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 14. CTA FINAL -->
+  <section id="cta-final" class="py-24 md:py-32 bg-brand-900 text-cream relative overflow-hidden">
+    <div class="absolute inset-0 z-0 opacity-15">
+      <img src="https://images.unsplash.com/photo-1497636577773-f1231844b336?auto=format&fit=crop&w=1600&q=80" alt="Coffee pattern background" class="w-full h-full object-cover">
+    </div>
+    <div class="relative z-10 max-w-4xl mx-auto px-4 text-center space-y-6">
+      <span class="text-xs uppercase tracking-widest text-brand-300 font-semibold">Your Neighborhood Sanctuary</span>
+      <h2 id="final-cta-headline" class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-white tracking-tight leading-tight">
+        YOUR NEXT COFFEE BREAK STARTS HERE.
+      </h2>
+      <p id="final-cta-subheadline" class="text-cream/80 text-base sm:text-lg max-w-xl mx-auto font-normal">
+        Drop by, grab your favorite coffee, and stay awhile.
+      </p>
+      <div class="pt-4 flex flex-wrap items-center justify-center gap-4">
+        <a href="#menu" class="px-8 py-3.5 rounded-full bg-cream text-brand-900 text-xs font-semibold uppercase tracking-wider hover:bg-white active:scale-95 transition-all shadow-md">
+          View Menu
+        </a>
+        <button onclick="openWhatsAppModal('Halo Urban Brew, saya ingin memesan menu takeaway / reservasi.')" class="px-8 py-3.5 rounded-full border border-cream/40 text-cream text-xs font-semibold uppercase tracking-wider hover:bg-white/10 active:scale-95 transition-all">
+          Order Now
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 15. FOOTER -->
+  <footer class="bg-brand-dark text-cream border-t border-brand-800/80 pt-16 pb-12 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-12 border-b border-brand-800">
+        <!-- Col 1: Brand -->
+        <div class="lg:col-span-4 space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-brand-800 text-cream flex items-center justify-center font-serif text-lg font-bold">
+              <span>U</span>
+            </div>
+            <span id="footer-brand-name" class="font-serif font-bold text-xl tracking-tight text-white">Urban Brew</span>
+          </div>
+          <p id="footer-desc" class="text-xs text-cream/70 leading-relaxed max-w-sm">
+            Kafe specialty modern yang berfokus pada biji kopi terkurasi, bakery segar buatan tangan, dan kehangatan ruang berkumpul.
+          </p>
+          <div class="pt-2 flex items-center space-x-3 text-cream/60">
+            <!-- Instagram -->
+            <a id="footer-ig" href="https://instagram.com" target="_blank" rel="noopener" class="w-8 h-8 rounded-full bg-brand-900 flex items-center justify-center hover:text-white hover:bg-brand-700 transition-colors" title="Instagram">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <!-- TikTok -->
+            <a id="footer-tiktok" href="https://tiktok.com" target="_blank" rel="noopener" class="w-8 h-8 rounded-full bg-brand-900 flex items-center justify-center hover:text-white hover:bg-brand-700 transition-colors" title="TikTok">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.64 1.82 2.89 3.5 2.76 1.35-.04 2.58-.87 3.03-2.14.28-.77.34-1.61.34-2.43V.02h-.4z"/></svg>
+            </a>
+            <!-- Facebook -->
+            <a id="footer-fb" href="https://facebook.com" target="_blank" rel="noopener" class="w-8 h-8 rounded-full bg-brand-900 flex items-center justify-center hover:text-white hover:bg-brand-700 transition-colors" title="Facebook">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.667 5H18V0h-3.889C10.5 0 9 1.583 9 4.615V8z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Col 2: Navigation Links -->
+        <div class="lg:col-span-3 space-y-3">
+          <h4 class="text-xs uppercase tracking-widest text-brand-300 font-semibold">Quick Links</h4>
+          <ul class="space-y-2 text-xs text-cream/70">
+            <li><a href="#home" class="hover:text-white transition-colors">Home</a></li>
+            <li><a href="#about" class="hover:text-white transition-colors">Our Philosophy</a></li>
+            <li><a href="#signatures" class="hover:text-white transition-colors">Signatures</a></li>
+            <li><a href="#menu" class="hover:text-white transition-colors">Menu Catalog</a></li>
+            <li><a href="#gallery" class="hover:text-white transition-colors">Photo Gallery</a></li>
+            <li><a href="#location" class="hover:text-white transition-colors">Location & Hours</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Hours & Service -->
+        <div class="lg:col-span-3 space-y-3">
+          <h4 class="text-xs uppercase tracking-widest text-brand-300 font-semibold">Opening Hours</h4>
+          <div class="text-xs text-cream/70 space-y-1.5">
+            <p><strong class="text-white font-medium">Mon – Fri:</strong> 07:00 – 22:00</p>
+            <p><strong class="text-white font-medium">Sat – Sun:</strong> 07:00 – 23:00</p>
+            <p class="pt-2 text-cream/50">Dine-in, Takeaway, & Curbside Pick Up</p>
+          </div>
+        </div>
+
+        <!-- Col 4: Administrative Link -->
+        <div class="lg:col-span-2 space-y-3">
+          <h4 class="text-xs uppercase tracking-widest text-brand-300 font-semibold">Portal</h4>
+          <p class="text-[11px] text-cream/60">Kelola konten dan katalog menu Urban Brew.</p>
+          <button onclick="openAdminModal()" class="inline-flex items-center gap-1.5 text-xs text-brand-300 hover:text-white transition-colors">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+            </svg>
+            <span>Admin Panel</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-cream/50">
+        <p id="footer-copyright">© 2026 Urban Brew. All rights reserved.</p>
+        <div class="flex items-center gap-6">
+          <span class="hover:text-cream/80 cursor-pointer">Privacy Policy</span>
+          <span class="hover:text-cream/80 cursor-pointer">Terms of Service</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL: WHATSAPP QUICK ORDER -->
+  <div id="wa-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-espresso/60 backdrop-blur-sm hidden">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-5 border border-sand animate-in fade-in zoom-in-95 duration-200">
+      <div class="flex items-center justify-between pb-3 border-b border-sand">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+          </div>
+          <h3 class="font-serif font-semibold text-lg text-espresso">Pesan via WhatsApp</h3>
+        </div>
+        <button onclick="closeWhatsAppModal()" class="text-espresso/40 hover:text-espresso p-1">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+
+      <div class="space-y-3 text-sm">
+        <label for="wa-custom-msg" class="block text-xs font-medium text-espresso/70">Pesan yang akan dikirimkan ke Barista:</label>
+        <textarea id="wa-custom-msg" rows="4" class="w-full p-3 text-xs sm:text-sm rounded-xl border border-sand bg-cream/40 focus:outline-none focus:border-brand-500"></textarea>
+      </div>
+
+      <div class="flex items-center justify-end gap-3 pt-2">
+        <button onclick="closeWhatsAppModal()" class="px-4 py-2 rounded-lg text-xs font-semibold text-espresso/70 hover:bg-sand">Batal</button>
+        <button onclick="sendWhatsAppDirect()" class="px-5 py-2.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold uppercase tracking-wider flex items-center gap-2">
+          <span>Kirim WhatsApp</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: IMAGE LIGHTBOX -->
+  <div id="lightbox-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-espresso/90 backdrop-blur-md hidden lightbox-modal opacity-0" onclick="closeLightbox()">
+    <div class="relative max-w-4xl max-h-[85vh] w-full flex items-center justify-center" onclick="event.stopPropagation()">
+      <img id="lightbox-img" src="" alt="Enlarged photo preview" class="max-w-full max-h-[85vh] object-contain rounded-xl shadow-2xl">
+      <button onclick="closeLightbox()" class="absolute -top-12 right-0 text-white hover:text-brand-300 p-2 text-sm flex items-center gap-1">
+        <span>Close</span>
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- 16. ADMIN PANEL DRAWER & LOGIN MODAL -->
+  <div id="admin-container" class="fixed inset-0 z-50 overflow-hidden hidden">
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-espresso/60 backdrop-blur-sm transition-opacity" onclick="closeAdminModal()"></div>
+
+    <!-- Login View (If not authenticated) -->
+    <div id="admin-login-card" class="relative max-w-md w-full mx-auto mt-24 p-8 bg-white rounded-2xl shadow-2xl border border-sand z-10 space-y-6">
+      <div class="text-center space-y-2">
+        <div class="w-12 h-12 rounded-full bg-brand-900 text-white flex items-center justify-center mx-auto font-serif text-xl font-bold">
+          U
+        </div>
+        <h3 class="font-serif text-2xl font-bold text-espresso">Urban Brew Admin</h3>
+        <p class="text-xs text-espresso/60">Masuk untuk mengelola konten dan katalog cafe.</p>
+      </div>
+
+      <form id="admin-login-form" class="space-y-4" onsubmit="handleAdminLogin(event)">
+        <div>
+          <label class="block text-xs font-semibold text-espresso/80 mb-1">Username</label>
+          <input id="login-username" type="text" required class="w-full px-4 py-2.5 rounded-lg border border-sand focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-sm outline-none bg-cream/20" placeholder="kelolaweb2026">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-espresso/80 mb-1">Password</label>
+          <input id="login-password" type="password" required class="w-full px-4 py-2.5 rounded-lg border border-sand focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-sm outline-none bg-cream/20" placeholder="••••••••••••">
+        </div>
+        <div id="login-error" class="text-rose-600 text-xs font-medium hidden">Username atau password tidak sesuai.</div>
+        <div class="pt-2 flex items-center justify-between gap-3">
+          <button type="button" onclick="closeAdminModal()" class="w-1/2 py-2.5 rounded-lg border border-sand text-xs font-semibold text-espresso/70 hover:bg-sand">Batal</button>
+          <button type="submit" class="w-1/2 py-2.5 rounded-lg bg-brand-900 hover:bg-brand-800 text-white text-xs font-semibold uppercase tracking-wider transition-colors">Masuk</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Admin Dashboard (After successful login) -->
+    <div id="admin-dashboard-drawer" class="absolute inset-y-0 right-0 max-w-3xl w-full bg-white shadow-2xl flex flex-col z-20 hidden">
+      <!-- Admin Header -->
+      <div class="px-6 py-4 border-b border-sand flex items-center justify-between bg-cream/50">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-brand-900 text-white flex items-center justify-center font-serif text-sm font-bold">UB</div>
+          <div>
+            <h3 class="font-serif font-bold text-base text-espresso">Urban Brew Content Manager</h3>
+            <span class="text-[10px] uppercase tracking-wider text-brand-700 font-semibold">Template ID: urban-brew-01</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <button onclick="saveAllAdminChanges()" class="px-4 py-1.5 rounded-full bg-brand-900 text-white text-xs font-semibold hover:bg-brand-700 transition-colors shadow-sm flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            <span>Simpan</span>
+          </button>
+          <button onclick="handleAdminLogout()" class="text-xs text-espresso/60 hover:text-rose-600 font-medium">Keluar</button>
+          <button onclick="closeAdminModal()" class="text-espresso/40 hover:text-espresso p-1">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Admin Navigation Tabs -->
+      <div class="flex border-b border-sand bg-white text-xs font-semibold overflow-x-auto px-6 gap-6 scrollbar-none">
+        <button onclick="switchAdminTab('general')" class="admin-tab active py-3 border-b-2 border-brand-900 text-brand-900 whitespace-nowrap" data-tab="general">General & Brand</button>
+        <button onclick="switchAdminTab('hero')" class="admin-tab py-3 border-b-2 border-transparent text-espresso/60 hover:text-espresso whitespace-nowrap" data-tab="hero">Hero & Intro</button>
+        <button onclick="switchAdminTab('menu-mgr')" class="admin-tab py-3 border-b-2 border-transparent text-espresso/60 hover:text-espresso whitespace-nowrap" data-tab="menu-mgr">Menu & Signature</button>
+        <button onclick="switchAdminTab('promo-sec')" class="admin-tab py-3 border-b-2 border-transparent text-espresso/60 hover:text-espresso whitespace-nowrap" data-tab="promo-sec">Promo Offer</button>
+        <button onclick="switchAdminTab('gallery-mgr')" class="admin-tab py-3 border-b-2 border-transparent text-espresso/60 hover:text-espresso whitespace-nowrap" data-tab="gallery-mgr">Gallery</button>
+        <button onclick="switchAdminTab('reviews')" class="admin-tab py-3 border-b-2 border-transparent text-espresso/60 hover:text-espresso whitespace-nowrap" data-tab="reviews">Testimonials</button>
+        <button onclick="switchAdminTab('contact-mgr')" class="admin-tab py-3 border-b-2 border-transparent text-espresso/60 hover:text-espresso whitespace-nowrap" data-tab="contact-mgr">Contact & Map</button>
+        <button onclick="switchAdminTab('tracking')" class="admin-tab py-3 border-b-2 border-transparent text-espresso/60 hover:text-espresso whitespace-nowrap" data-tab="tracking">Marketing & Tracking</button>
+        <button onclick="switchAdminTab('sections')" class="admin-tab py-3 border-b-2 border-transparent text-espresso/60 hover:text-espresso whitespace-nowrap" data-tab="sections">Section Toggles</button>
+      </div>
+
+      <!-- Tab Contents (Scrollable) -->
+      <div class="flex-1 overflow-y-auto p-6 space-y-6 bg-cream/20">
+
+        <!-- TAB: General & Brand -->
+        <div id="tab-general" class="admin-tab-content space-y-5">
+          <div class="space-y-1">
+            <h4 class="font-serif font-bold text-base text-espresso">Informasi Brand & SEO</h4>
+            <p class="text-xs text-espresso/60">Atur identitas utama cafe Anda.</p>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-espresso/80 mb-1">Nama Brand</label>
+              <input id="cfg-brand-name" type="text" class="w-full px-3 py-2 rounded-lg border border-sand text-xs focus:border-brand-500 bg-white">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-espresso/80 mb-1">Tagline</label>
+              <input id="cfg-brand-tagline" type="text" class="w-full px-3 py-2 rounded-lg border border-sand text-xs focus:border-brand-500 bg-white">
+            </div>
+            <div class="sm:col-span-2">
+              <label class="block text-xs font-semibold text-espresso/80 mb-1">Deskripsi Footer / Singkat</label>
+              <textarea id="cfg-brand-desc" rows="2" class="w-full px-3 py-2 rounded-lg border border-sand text-xs focus:border-brand-500 bg-white"></textarea>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-espresso/80 mb-1">Meta Title (SEO)</label>
+              <input id="cfg-meta-title" type="text" class="w-full px-3 py-2 rounded-lg border border-sand text-xs focus:border-brand-500 bg-white">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-espresso/80 mb-1">Meta Description (SEO)</label>
+              <input id="cfg-meta-desc" type="text" class="w-full px-3 py-2 rounded-lg border border-sand text-xs focus:border-brand-500 bg-white">
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: Hero & Intro -->
+        <div id="tab-hero" class="admin-tab-content space-y-5 hidden">
+          <div class="space-y-1">
+            <h4 class="font-serif font-bold text-base text-espresso">Hero & Section Intro</h4>
+            <p class="text-xs text-espresso/60">Sesuaikan headline, subheadline, dan foto utama.</p>
+          </div>
+          <div class="space-y-4">
+            <div>
+              <label class="block text-xs font-semibold text-espresso/80 mb-1">Hero Badge Text</label>
+              <input id="cfg-hero-badge" type="text" class="w-full px-3 py-2 rounded-lg border border-sand text-xs focus:border-brand-500 bg-white">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-espresso/80 mb-1">Hero Main Headline</label>
+              <input id="cfg-hero-headline" type="text" class="w-full px-3 py-2 rounded-lg border border-sand text-xs focus:border-brand-500 bg-white">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-espresso/80 mb-1">Hero Subheadline</label>
+              <textarea id="cfg-hero-subheadline" rows="2" class="w-full px-3 py-2 rounded-lg border border-sand text-xs focus:border-brand-500 bg-white"></textarea>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-espresso/80 mb-1">Hero Image URL atau Google Drive File ID</label>
+              <input id="cfg-hero-img" type="text" class="w-full px-3 py-2 rounded-lg border border-sand text-xs focus:border-brand-500 bg-white">
+              <span class="text-[10px] text-espresso/50">Mendukung direct URL Unsplash/web atau Google Drive ID.</span>
+            </div>
+            <div class="pt-3 border-t border-sand">
+              <label class="block text-xs font-semibold text-espresso/80 mb-1">Intro Section Headline</label>
+              <input id="cfg-intro-headline" type="text" class="w-full px-3 py-2 rounded-lg border border-sand text-xs focus:border-brand-500 bg-white">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-espresso/80 mb-1">Intro Image URL</label>
+              <input id="cfg-intro-img" type="text" class="w-full px-3 py-2 rounded-lg border border-sand text-xs focus:border-brand-500 bg-white">
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: Menu & Signature Manager -->
+        <div id="tab-menu-mgr" class="admin-tab-content space-y-5 hidden">
+          <div class="flex items-center justify-between">
+            <div>
+              <h4 class="font-serif font-bold text-base text-espresso">Katalog Menu</h4>
+              <p class="text-xs text-espresso/60">Kelola harga, foto, kategori, dan status best seller.</p>
+            </div>
+            <button onclick="addNewMenuItemPrompt()" class="px-3 py-1.5 rounded-lg bg-brand-900 text-white text-xs font-medium hover:bg-brand-800">
+              + Tambah Menu
+            </button>
+          </div>
+
+          <div id="admin-menu-list" class="space-y-3">
+            <!-- List of menu items rendered by JS -->
+          </div>
+        </div>
+
+        <!-- TAB: Promo Offer -->
+        <div id="tab-promo-sec" class="admin-tab-content space-y-5 hidden">
+          <div class="space-y-1">
+            <h4 class="font-serif font-bold text-base text-espresso">Special Promo Offer</h4>
+            <p class="text-xs text-espresso/60">Atur penawaran khusus pada section promo.</p>
+          </div>
+          <div class="space-y-4">
+            <div>
+              <label class="block text-xs font-semibold text-espresso/80 mb-1">Headline Promo</label>
+              <input id="cfg-promo-headline" type="text" class="w-full px-3 py-2 rounded-lg border border-sand text-xs focus:border-brand-500 bg-white">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-espresso/80 mb-1">Nama Paket Promo</label>
+              <input id="cfg-promo-title" type="text" class="w-full px-3 py-2 rounded-lg border border-sand text-xs focus:border-brand-500 bg-white">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-espresso/80 mb-1">Deskripsi Paket</label>
+              <textarea id="cfg-promo-desc" rows="2" class="w-full px-3 py-2 rounded-lg border border-sand text-xs focus:border-brand-500 bg-white"></textarea>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-espresso/80 mb-1">Harga Promo (Rp)</label>
+                <input id="cfg-promo-price" type="text" class="w-full px-3 py-2 rounded-lg border border-sand text-xs focus:border-brand-500 bg-white">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-espresso/80 mb-1">Harga Coret (Rp)</label>
+                <input id="cfg-promo-orig" type="text" class="w-full px-3 py-2 rounded-lg border border-sand text-xs focus:border-brand-500 bg-white">
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-espresso/80 mb-1">Foto Promo URL</label>
+              <input id="cfg-promo-img" type="text" class="w-full px-3 py-2 rounded-lg border border-sand text-xs focus:border-brand-500 bg-white">
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: Gallery Manager -->
+        <div id="tab-gallery-mgr" class="admin-tab-content space-y-5 hidden">
+          <div class="space-y-1">
+            <h4 class="font-serif font-bold text-base text-espresso">Gallery Photos</h4>
+            <p class="text-xs text-espresso/60">Ganti foto pada asymmetric gallery.</p>
+          </div>
+          <div id="admin-gallery-list" class="space-y-3">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- TAB: Testimonials -->
+        <div id="tab-reviews" class="admin-tab-content space-y-5 hidden">
+          <div class="space-y-1">
+            <h4 class="font-serif font-bold text-base text-espresso">Ulasan Pelanggan</h4>
+            <p class="text-xs text-espresso/60">Kelola review tamu cafe.</p>
+          </div>
+          <div id="admin-testimonial-list" class="space-y-4">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- TAB: Contact & Map -->
+        <div id="tab-contact-mgr" class="admin-tab-content space-y-5 hidden">
+          <div class="space-y-1">
+            <h4 class="font-serif font-bold text-base text-espresso">Kontak & Lokasi</h4>
+            <p class="text-xs text-espresso/60">Informasi operasional, nomor WhatsApp, dan Google Maps.</p>
+          </div>
+          <div class="space-y-4">
+            <div>
+              <label class="block text-xs font-semibold text-espresso/80 mb-1">Alamat Lengkap</label>
+              <textarea id="cfg-contact-address" rows="2" class="w-full px-3 py-2 rounded-lg border border-sand text-xs focus:border-brand-500 bg-white"></textarea>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-espresso/80 mb-1">Jam Weekdays</label>
+                <input id="cfg-hours-weekdays" type="text" class="w-full px-3 py-2 rounded-lg border border-sand text-xs focus:border-brand-500 bg-white">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-espresso/80 mb-1">Jam Weekends</label>
+                <input id="cfg-hours-weekends" type="text" class="w-full px-3 py-2 rounded-lg border border-sand text-xs focus:border-brand-500 bg-white">
+              </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-espresso/80 mb-1">No. WhatsApp (Format 628...)</label>
+                <input id="cfg-wa-number" type="text" class="w-full px-3 py-2 rounded-lg border border-sand text-xs focus:border-brand-500 bg-white">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-espresso/80 mb-1">Nomor Telepon</label>
+                <input id="cfg-phone" type="text" class="w-full px-3 py-2 rounded-lg border border-sand text-xs focus:border-brand-500 bg-white">
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-espresso/80 mb-1">Email Resmi</label>
+              <input id="cfg-email" type="email" class="w-full px-3 py-2 rounded-lg border border-sand text-xs focus:border-brand-500 bg-white">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-espresso/80 mb-1">Google Maps Embed URL</label>
+              <input id="cfg-maps-url" type="text" class="w-full px-3 py-2 rounded-lg border border-sand text-xs focus:border-brand-500 bg-white">
+            </div>
+            <div class="pt-2 grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-espresso/80 mb-1">Instagram URL</label>
+                <input id="cfg-social-ig" type="text" class="w-full px-3 py-2 rounded-lg border border-sand text-xs focus:border-brand-500 bg-white">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-espresso/80 mb-1">TikTok URL</label>
+                <input id="cfg-social-tiktok" type="text" class="w-full px-3 py-2 rounded-lg border border-sand text-xs focus:border-brand-500 bg-white">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-espresso/80 mb-1">Facebook URL</label>
+                <input id="cfg-social-fb" type="text" class="w-full px-3 py-2 rounded-lg border border-sand text-xs focus:border-brand-500 bg-white">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: Marketing & Tracking -->
+        <div id="tab-tracking" class="admin-tab-content space-y-5 hidden">
+          <div class="space-y-1">
+            <h4 class="font-serif font-bold text-base text-espresso">MARKETING & TRACKING</h4>
+            <p class="text-xs text-espresso/60">Integrasikan pixel dan tag analytics tanpa perlu memodifikasi kode sumber.</p>
+          </div>
+
+          <!-- META -->
+          <div class="p-4 rounded-xl border border-sand bg-white space-y-3">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-blue-600"></span>
+              <h5 class="text-xs font-bold uppercase tracking-wider text-espresso">META (FACEBOOK / INSTAGRAM)</h5>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-espresso/80 mb-1">Meta Pixel ID</label>
+              <input id="cfg-meta-pixel" type="text" placeholder="e.g. 981273918239" class="w-full px-3 py-2 rounded-lg border border-sand text-xs focus:border-brand-500 bg-cream/10">
+            </div>
+          </div>
+
+          <!-- GOOGLE -->
+          <div class="p-4 rounded-xl border border-sand bg-white space-y-3">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+              <h5 class="text-xs font-bold uppercase tracking-wider text-espresso">GOOGLE</h5>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-espresso/80 mb-1">Google Analytics ID (GA4)</label>
+              <input id="cfg-ga-id" type="text" placeholder="e.g. G-XXXXXXXXXX" class="w-full px-3 py-2 rounded-lg border border-sand text-xs focus:border-brand-500 bg-cream/10">
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-espresso/80 mb-1">Google Ads Conversion ID</label>
+                <input id="cfg-gads-id" type="text" placeholder="e.g. AW-123456789" class="w-full px-3 py-2 rounded-lg border border-sand text-xs focus:border-brand-500 bg-cream/10">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-espresso/80 mb-1">Google Ads Conversion Label</label>
+                <input id="cfg-gads-label" type="text" placeholder="e.g. AbC123XyZ" class="w-full px-3 py-2 rounded-lg border border-sand text-xs focus:border-brand-500 bg-cream/10">
+              </div>
+            </div>
+          </div>
+
+          <!-- TIKTOK -->
+          <div class="p-4 rounded-xl border border-sand bg-white space-y-3">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-black"></span>
+              <h5 class="text-xs font-bold uppercase tracking-wider text-espresso">TIKTOK</h5>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-espresso/80 mb-1">TikTok Pixel ID</label>
+              <input id="cfg-tiktok-pixel" type="text" placeholder="e.g. C76GHT1289" class="w-full px-3 py-2 rounded-lg border border-sand text-xs focus:border-brand-500 bg-cream/10">
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: Section Toggles -->
+        <div id="tab-sections" class="admin-tab-content space-y-5 hidden">
+          <div class="space-y-1">
+            <h4 class="font-serif font-bold text-base text-espresso">Visibilitas Section</h4>
+            <p class="text-xs text-espresso/60">Aktifkan atau nonaktifkan section website sesuai kebutuhan promosi.</p>
+          </div>
+          <div class="space-y-3" id="admin-section-toggles">
+            <!-- Dynamically populated toggles -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOATING TOAST NOTIFICATION -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none bg-espresso text-white px-5 py-3 rounded-xl shadow-float text-xs font-medium flex items-center gap-2.5">
+    <span id="toast-icon">✓</span>
+    <span id="toast-message">Perubahan tersimpan</span>
+  </div>
+
+  <script>
+    /* ==========================================================
+       URBAN BREW — CENTRALIZED CONFIGURATION & TEMPLATE ENGINE
+       Template ID: urban-brew-01
+       ========================================================== */
+    const TEMPLATE_CONFIG = {
+      apiKey: 'wbk_demo_key_99214',
+      endpoint: 'https://api-web-demo.khoirul-amir110901.workers.dev/api',
+      templateId: 'urban-brew-01'
+    };
+
+    // Helper: Smart Image Resolver (Priority 1: lh3, Priority 2: thumbnail, Priority 3: Fallback)
+    function resolveImageUrl(srcOrId, fallbackUnsplash) {
+      if (!srcOrId) return fallbackUnsplash;
+      const trimmed = srcOrId.trim();
+      
+      // If user supplied a plain Google Drive File ID (approx 28-35 alphanumeric chars)
+      const driveIdMatch = trimmed.match(/^[a-zA-Z0-9_-]{25,}$/);
+      if (driveIdMatch) {
+        return `https://lh3.googleusercontent.com/d/${trimmed}`;
+      }
+      
+      // If user pasted a drive link with ?id=
+      const urlDriveId = trimmed.match(/id=([a-zA-Z0-9_-]+)/);
+      if (urlDriveId && urlDriveId[1]) {
+        return `https://lh3.googleusercontent.com/d/${urlDriveId[1]}`;
+      }
+      
+      // If normal URL
+      return trimmed;
+    }
+
+    // Default Cafe Dataset (Curated commercial photography & real menu)
+    const DEFAULT_SITE_DATA = {
+      brand: {
+        name: "Urban Brew",
+        letter: "U",
+        tagline: "Specialty & Bakery",
+        footerDesc: "Kafe specialty modern yang berfokus pada biji kopi terkurasi, bakery segar buatan tangan, dan kehangatan ruang berkumpul di jantung kota.",
+        copyright: "© 2026 Urban Brew. All rights reserved."
+      },
+      seo: {
+        metaTitle: "Urban Brew — Specialty Coffee & Handcrafted Bakery",
+        metaDesc: "Good Coffee. Good Food. Good Moments. Urban Brew menyajikan specialty coffee, artisan bakery segar, dan ruang nyaman di tengah kota.",
+        favicon: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232B1A12'><path d='M2 21h18v-2H2v2zm2-4h14V5H4v12zm16-9h2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-2V8z'/></svg>"
+      },
+      hero: {
+        badge: "Specialty Coffee • Fresh Bakery • Cozy Space",
+        headline: "GOOD COFFEE.\nGOOD FOOD.\nGOOD MOMENTS.",
+        subheadline: "Freshly brewed coffee, handcrafted food, and warm moments made for your everyday.",
+        hoursPill: "07:00 AM – 22:00 PM",
+        locationPill: "Senopati No. 42, Jakarta Selatan",
+        image: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=80"
+      },
+      intro: {
+        headline: "MORE THAN JUST A CUP OF COFFEE.",
+        image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80"
+      },
+      promo: {
+        headline: "SOMETHING SPECIAL FOR YOU.",
+        title: "WEEKEND COFFEE & CROISSANT",
+        desc: "Awali akhir pekan dengan segelas Specialty Coffee pilihan bersama Butter Croissant yang hangat dan renyah.",
+        price: "Rp 49.000",
+        origPrice: "Rp 72.000",
+        image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80"
+      },
+      visualBreak: {
+        quote: "“A place for good coffee, good food, and good company.”",
+        image: "https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1800&q=80"
+      },
+      contact: {
+        address: "Jl. Senopati Raya No. 42, Kebayoran Baru, Jakarta Selatan 12190",
+        hoursWeekdays: "Monday – Friday: 07:00 AM – 22:00 PM",
+        hoursWeekends: "Saturday – Sunday: 07:00 AM – 23:00 PM",
+        phone: "+62 21 5550 8920",
+        whatsapp: "6281234567890",
+        email: "hello@urbanbrew.co",
+        mapsUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.273187212001!2d106.80624647573138!3d-6.227668693760451!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f14dfb0743b3%3A0x6b8c8d84422c53a7!2sSenopati%2C%20Kebayoran%20Baru%2C%20South%20Jakarta%20City%2C%20Jakarta!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid"
+      },
+      social: {
+        handle: "@urbanbrew.co",
+        instagram: "https://instagram.com",
+        tiktok: "https://tiktok.com",
+        facebook: "https://facebook.com"
+      },
+      tracking: {
+        metaPixelId: "",
+        gaId: "",
+        gadsId: "",
+        gadsLabel: "",
+        tiktokPixelId: ""
+      },
+      sectionsEnabled: {
+        hero: true,
+        intro: true,
+        features: true,
+        signatures: true,
+        menu: true,
+        promo: true,
+        visualBreak: true,
+        gallery: true,
+        story: true,
+        testimonials: true,
+        social: true,
+        location: true,
+        ctaFinal: true
+      },
+      menuItems: [
+        {
+          id: 1,
+          name: "Signature Spanish Latte",
+          category: "COFFEE",
+          price: "Rp 42.000",
+          desc: "Espresso ganda dengan susu condensed manis lembut bertekstur beludru.",
+          image: "https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=600&q=80",
+          badge: "BEST SELLER",
+          isSignature: true,
+          available: true
+        },
+        {
+          id: 2,
+          name: "Single Origin Flat White",
+          category: "COFFEE",
+          price: "Rp 38.000",
+          desc: "Double ristretto dengan microfoam halus yang menonjolkan aroma buah biji Guji.",
+          image: "https://images.unsplash.com/photo-1577968897966-3d4325b36b61?auto=format&fit=crop&w=600&q=80",
+          badge: "",
+          isSignature: true,
+          available: true
+        },
+        {
+          id: 3,
+          name: "Classic Butter Croissant",
+          category: "BAKERY",
+          price: "Rp 32.000",
+          desc: "Pastry mentega Prancis dengan lapisan renyah di luar dan lembut di dalam.",
+          image: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=600&q=80",
+          badge: "BEST SELLER",
+          isSignature: true,
+          available: true
+        },
+        {
+          id: 4,
+          name: "Pain au Chocolat",
+          category: "BAKERY",
+          price: "Rp 36.000",
+          desc: "Pastry berlapis mentega dengan dua batang cokelat dark Belgia meleleh.",
+          image: "https://images.unsplash.com/photo-1608198093002-ad4e005484ec?auto=format&fit=crop&w=600&q=80",
+          badge: "",
+          isSignature: true,
+          available: true
+        },
+        {
+          id: 5,
+          name: "Urban Club Sandwich",
+          category: "FOOD",
+          price: "Rp 58.000",
+          desc: "Roti sourdough panggang dengan smoked chicken, telur, selada segar & mayo herba.",
+          image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=600&q=80",
+          badge: "RECOMMENDED",
+          isSignature: true,
+          available: true
+        },
+        {
+          id: 6,
+          name: "Valrhona Chocolate Cake",
+          category: "DESSERT",
+          price: "Rp 48.000",
+          desc: "Kue cokelat pekat bertekstur fudgy dengan sea salt dan ganache premium.",
+          image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80",
+          badge: "",
+          isSignature: true,
+          available: true
+        },
+        {
+          id: 7,
+          name: "Cold Brew Reserve",
+          category: "COFFEE",
+          price: "Rp 40.000",
+          desc: "Biji kopi Flores Bajawa diseduh perlahan 18 jam dengan hints cokelat dan karamel.",
+          image: "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=600&q=80",
+          badge: "",
+          isSignature: false,
+          available: true
+        },
+        {
+          id: 8,
+          name: "Matcha Ceremonial Latte",
+          category: "NON-COFFEE",
+          price: "Rp 45.000",
+          desc: "Matcha murni Uji Kyoto dipadukan dengan fresh oat milk yang gurih seimbang.",
+          image: "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=600&q=80",
+          badge: "FAVORITE",
+          isSignature: false,
+          available: true
+        },
+        {
+          id: 9,
+          name: "Artisan Almond Sourdough",
+          category: "BAKERY",
+          price: "Rp 35.000",
+          desc: "Roti fermentasi alami dengan taburan almond renyah dan glaze vanila ringan.",
+          image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80",
+          badge: "",
+          isSignature: false,
+          available: true
+        }
+      ],
+      gallery: [
+        { id: 1, title: "Specialty Pour Over Station", image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80", span: "col-span-1 sm:col-span-2 lg:col-span-6" },
+        { id: 2, title: "Morning Sunlit Corner", image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=800&q=80", span: "col-span-1 sm:col-span-1 lg:col-span-3" },
+        { id: 3, title: "Fresh Butter Croissants", image: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=800&q=80", span: "col-span-1 sm:col-span-1 lg:col-span-3" },
+        { id: 4, title: "Barista Espresso Extraction", image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80", span: "col-span-1 sm:col-span-1 lg:col-span-4" },
+        { id: 5, title: "Artisan Sourdough Loaf", image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=80", span: "col-span-1 sm:col-span-1 lg:col-span-4" },
+        { id: 6, title: "Urban Brew Facade", image: "https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=800&q=80", span: "col-span-1 sm:col-span-2 lg:col-span-4" }
+      ],
+      testimonials: [
+        {
+          id: 1,
+          name: "Amanda Prasetyo",
+          role: "Creative Director",
+          rating: 5,
+          review: "Salah satu cafe di Jakarta Selatan yang paling konsisten menjaga kualitas espresso dan pastry-nya. Croissant-nya renyah sempurna, suasana kerjanya sangat tenang.",
+          avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80"
+        },
+        {
+          id: 2,
+          name: "Dimas Wicaksono",
+          role: "Coffee Enthusiast",
+          rating: 5,
+          review: "Pour over Ethiopia Guji mereka luar biasa jernih dengan floral notes yang kental. Barista ramah dan paham betul karakteristik tiap origin.",
+          avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80"
+        },
+        {
+          id: 3,
+          name: "Nadia Salsabila",
+          role: "Architect",
+          rating: 5,
+          review: "Interior dengan pencahayaan alami dan material kayunya sangat elegan. Tempat ideal untuk meeting santai maupun membaca buku di sore hari.",
+          avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80"
+        }
+      ],
+      socialGrid: [
+        "https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1517256064527-09c73fc73e38?auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1509785307050-d4066910ec1e?auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=400&q=80"
+      ]
+    };
+
+    // Global application state
+    let siteData = JSON.parse(JSON.stringify(DEFAULT_SITE_DATA));
+
+    // Load from LocalStorage if available
+    function loadSavedState() {
+      try {
+        const saved = localStorage.getItem('urban_brew_cms_data');
+        if (saved) {
+          siteData = Object.assign(siteData, JSON.parse(saved));
+        }
+      } catch (err) {
+        console.warn("Storage load warning:", err);
+      }
+    }
+
+    // Save state locally
+    function persistState() {
+      try {
+        localStorage.setItem('urban_brew_cms_data', JSON.stringify(siteData));
+      } catch (e) {
+        console.error("Local save error", e);
+      }
+    }
+
+    // DOM Bindings
+    function renderWebsite() {
+      // 1. Meta & Brand
+      document.title = siteData.seo.metaTitle;
+      const metaDesc = document.getElementById('meta-desc');
+      if (metaDesc) metaDesc.content = siteData.seo.metaDesc;
+      
+      document.getElementById('nav-brand-name').innerText = siteData.brand.name;
+      document.getElementById('nav-brand-tagline').innerText = siteData.brand.tagline;
+      document.getElementById('nav-logo-letter').innerText = siteData.brand.letter || siteData.brand.name.charAt(0);
+      document.getElementById('footer-brand-name').innerText = siteData.brand.name;
+      document.getElementById('footer-desc').innerText = siteData.brand.footerDesc;
+      document.getElementById('footer-copyright').innerText = siteData.brand.copyright;
+
+      // 2. Hero
+      document.getElementById('hero-badge').innerText = siteData.hero.badge;
+      document.getElementById('hero-headline').innerHTML = siteData.hero.headline.replace(/\n/g, '<br>');
+      document.getElementById('hero-subheadline').innerText = siteData.hero.subheadline;
+      document.getElementById('hero-hours-pill').innerText = siteData.hero.hoursPill;
+      document.getElementById('hero-location-pill').innerText = siteData.hero.locationPill;
+      const heroImgEl = document.getElementById('hero-main-img');
+      heroImgEl.src = resolveImageUrl(siteData.hero.image, DEFAULT_SITE_DATA.hero.image);
+      heroImgEl.onerror = () => { heroImgEl.src = DEFAULT_SITE_DATA.hero.image; };
+
+      // 3. Intro
+      document.getElementById('intro-headline').innerText = siteData.intro.headline;
+      const introImgEl = document.getElementById('intro-img');
+      introImgEl.src = resolveImageUrl(siteData.intro.image, DEFAULT_SITE_DATA.intro.image);
+      introImgEl.onerror = () => { introImgEl.src = DEFAULT_SITE_DATA.intro.image; };
+
+      // 4. Promo
+      document.getElementById('promo-headline').innerText = siteData.promo.headline;
+      document.getElementById('promo-title').innerText = siteData.promo.title;
+      document.getElementById('promo-desc').innerText = siteData.promo.desc;
+      document.getElementById('promo-price').innerText = siteData.promo.price;
+      document.getElementById('promo-original-price').innerText = siteData.promo.origPrice;
+      const promoImgEl = document.getElementById('promo-img');
+      promoImgEl.src = resolveImageUrl(siteData.promo.image, DEFAULT_SITE_DATA.promo.image);
+      promoImgEl.onerror = () => { promoImgEl.src = DEFAULT_SITE_DATA.promo.image; };
+
+      // 5. Visual Break
+      document.getElementById('break-quote').innerText = siteData.visualBreak.quote;
+      const breakImgEl = document.getElementById('break-img');
+      breakImgEl.src = resolveImageUrl(siteData.visualBreak.image, DEFAULT_SITE_DATA.visualBreak.image);
+
+      // 6. Contact & Map
+      document.getElementById('contact-address').innerText = siteData.contact.address;
+      document.getElementById('contact-hours-weekdays').innerText = siteData.contact.hoursWeekdays;
+      document.getElementById('contact-hours-weekends').innerText = siteData.contact.hoursWeekends;
+      document.getElementById('contact-phone').innerText = `Phone: ${siteData.contact.phone}`;
+      document.getElementById('contact-email').innerText = `Email: ${siteData.contact.email}`;
+      document.getElementById('google-maps-frame').src = siteData.contact.mapsUrl;
+
+      // 7. Social Links
+      document.getElementById('social-handle').innerText = siteData.social.handle;
+      document.getElementById('social-ig-link').href = siteData.social.instagram;
+      document.getElementById('footer-ig').href = siteData.social.instagram;
+      document.getElementById('footer-tiktok').href = siteData.social.tiktok;
+      document.getElementById('footer-fb').href = siteData.social.facebook;
+
+      // 8. Section Toggles
+      toggleSectionVisibility('about', siteData.sectionsEnabled.intro);
+      toggleSectionVisibility('features', siteData.sectionsEnabled.features);
+      toggleSectionVisibility('signatures', siteData.sectionsEnabled.signatures);
+      toggleSectionVisibility('menu', siteData.sectionsEnabled.menu);
+      toggleSectionVisibility('promo', siteData.sectionsEnabled.promo);
+      toggleSectionVisibility('visual-break', siteData.sectionsEnabled.visualBreak);
+      toggleSectionVisibility('gallery', siteData.sectionsEnabled.gallery);
+      toggleSectionVisibility('story', siteData.sectionsEnabled.story);
+      toggleSectionVisibility('testimonials', siteData.sectionsEnabled.testimonials);
+      toggleSectionVisibility('social', siteData.sectionsEnabled.social);
+      toggleSectionVisibility('location', siteData.sectionsEnabled.location);
+      toggleSectionVisibility('cta-final', siteData.sectionsEnabled.ctaFinal);
+
+      // Render Dynamic Lists
+      renderSignatureMenu();
+      renderFullMenu('ALL');
+      renderGallery();
+      renderTestimonials();
+      renderSocialGrid();
+    }
+
+    function toggleSectionVisibility(id, isVisible) {
+      const el = document.getElementById(id);
+      if (el) {
+        if (isVisible) {
+          el.classList.remove('hidden');
+        } else {
+          el.classList.add('hidden');
+        }
+      }
+    }
+
+    // Render Signatures
+    function renderSignatureMenu() {
+      const grid = document.getElementById('signatures-grid');
+      const sigs = siteData.menuItems.filter(item => item.isSignature);
+      grid.innerHTML = '';
+
+      sigs.forEach(item => {
+        const card = document.createElement('div');
+        card.className = "group flex flex-col justify-between p-4 rounded-2xl bg-cream/40 border border-sand hover:border-brand-300 transition-all hover:shadow-subtle";
+        const imgUrl = resolveImageUrl(item.image, DEFAULT_SITE_DATA.menuItems[0].image);
+
+        card.innerHTML = `
+          <div>
+            <div class="relative rounded-xl overflow-hidden aspect-[4/3] bg-sand mb-4">
+              <img src="${imgUrl}" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.src='${DEFAULT_SITE_DATA.menuItems[0].image}'">
+              ${item.badge ? `<span class="absolute top-2.5 right-2.5 px-2.5 py-0.5 rounded-full bg-brand-900 text-white text-[10px] font-bold uppercase tracking-wider">${item.badge}</span>` : ''}
+              ${!item.available ? `<span class="absolute inset-0 bg-espresso/70 flex items-center justify-center text-white font-semibold text-xs tracking-wider">SOLD OUT</span>` : ''}
+            </div>
+            <div class="flex items-start justify-between gap-2">
+              <h3 class="font-serif font-bold text-base text-espresso group-hover:text-brand-800 transition-colors">${item.name}</h3>
+              <span class="font-serif font-bold text-sm text-brand-900 shrink-0">${item.price}</span>
+            </div>
+            <p class="text-xs text-espresso/70 mt-1.5 line-clamp-2 leading-relaxed">${item.desc}</p>
+          </div>
+          <div class="pt-4 mt-4 border-t border-sand flex items-center justify-between">
+            <span class="text-[10px] uppercase tracking-wider font-semibold text-brand-700">${item.category}</span>
+            <button onclick="orderSingleItem('${item.name}')" class="text-xs font-semibold uppercase tracking-wider text-brand-900 hover:text-accent flex items-center gap-1">
+              <span>Order</span>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // Render Full Menu with Category Filter
+    function renderFullMenu(filterCategory = 'ALL') {
+      const grid = document.getElementById('full-menu-grid');
+      grid.innerHTML = '';
+
+      const filtered = filterCategory === 'ALL' 
+        ? siteData.menuItems 
+        : siteData.menuItems.filter(item => item.category === filterCategory);
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div class="col-span-full py-12 text-center text-espresso/50 text-sm">Tidak ada menu dalam kategori ini.</div>`;
+        return;
+      }
+
+      filtered.forEach(item => {
+        const itemEl = document.createElement('div');
+        itemEl.className = "flex gap-4 p-4 rounded-xl bg-white border border-sand shadow-subtle hover:border-brand-200 transition-all group";
+        const imgUrl = resolveImageUrl(item.image, DEFAULT_SITE_DATA.menuItems[0].image);
+
+        itemEl.innerHTML = `
+          <div class="relative w-24 h-24 rounded-lg overflow-hidden shrink-0 bg-sand">
+            <img src="${imgUrl}" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.src='${DEFAULT_SITE_DATA.menuItems[0].image}'">
+            ${!item.available ? `<div class="absolute inset-0 bg-espresso/75 flex items-center justify-center text-[9px] font-bold text-white uppercase">Habis</div>` : ''}
+          </div>
+          <div class="flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-start justify-between gap-2">
+                <h4 class="font-serif font-bold text-sm text-espresso">${item.name}</h4>
+                <span class="font-serif font-bold text-sm text-brand-900">${item.price}</span>
+              </div>
+              <p class="text-xs text-espresso/60 mt-1 line-clamp-2">${item.desc}</p>
+            </div>
+            <div class="flex items-center justify-between pt-2">
+              <span class="text-[9px] uppercase tracking-wider px-2 py-0.5 rounded bg-sand text-brand-800 font-semibold">${item.category}</span>
+              <button onclick="orderSingleItem('${item.name}')" class="text-xs font-semibold text-brand-900 hover:text-accent">
+                Pesan →
+              </button>
+            </div>
+          </div>
+        `;
+        grid.appendChild(itemEl);
+      });
+    }
+
+    // Category Tabs Event Handling
+    document.getElementById('category-tabs').addEventListener('click', (e) => {
+      const btn = e.target.closest('.menu-tab-btn');
+      if (!btn) return;
+      document.querySelectorAll('.menu-tab-btn').forEach(b => {
+        b.classList.remove('bg-brand-900', 'text-white');
+        b.classList.add('bg-white', 'text-espresso');
+      });
+      btn.classList.add('bg-brand-900', 'text-white');
+      btn.classList.remove('bg-white', 'text-espresso');
+      renderFullMenu(btn.dataset.category);
+    });
+
+    // Render Gallery
+    function renderGallery() {
+      const grid = document.getElementById('gallery-grid');
+      grid.innerHTML = '';
+      siteData.gallery.forEach(photo => {
+        const item = document.createElement('div');
+        item.className = `${photo.span} relative rounded-2xl overflow-hidden aspect-[4/3] bg-sand cursor-pointer group shadow-subtle`;
+        const imgUrl = resolveImageUrl(photo.image, DEFAULT_SITE_DATA.gallery[0].image);
+
+        item.onclick = () => openLightbox(imgUrl);
+        item.innerHTML = `
+          <img src="${imgUrl}" alt="${photo.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" onerror="this.src='${DEFAULT_SITE_DATA.gallery[0].image}'">
+          <div class="absolute inset-0 bg-gradient-to-t from-espresso/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-5">
+            <span class="text-white text-xs font-medium">${photo.title}</span>
+          </div>
+        `;
+        grid.appendChild(item);
+      });
+    }
+
+    // Render Testimonials
+    function renderTestimonials() {
+      const grid = document.getElementById('testimonials-grid');
+      grid.innerHTML = '';
+      siteData.testimonials.forEach(item => {
+        const card = document.createElement('div');
+        card.className = "p-8 rounded-2xl bg-cream border border-sand space-y-5 flex flex-col justify-between";
+        const stars = '★'.repeat(item.rating) + '☆'.repeat(5 - item.rating);
+        const avatarUrl = resolveImageUrl(item.avatar, DEFAULT_SITE_DATA.testimonials[0].avatar);
+
+        card.innerHTML = `
+          <div class="space-y-3">
+            <div class="text-accent text-sm tracking-widest">${stars}</div>
+            <p class="text-espresso/80 text-sm leading-relaxed italic">“${item.review}”</p>
+          </div>
+          <div class="flex items-center gap-3 pt-2">
+            <img src="${avatarUrl}" alt="${item.name}" class="w-10 h-10 rounded-full object-cover border border-brand-200" onerror="this.src='${DEFAULT_SITE_DATA.testimonials[0].avatar}'">
+            <div>
+              <h4 class="font-serif font-bold text-sm text-espresso">${item.name}</h4>
+              <p class="text-[11px] text-espresso/60">${item.role}</p>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // Render Social Grid
+    function renderSocialGrid() {
+      const grid = document.getElementById('social-grid');
+      grid.innerHTML = '';
+      siteData.socialGrid.forEach((imgUrl, i) => {
+        const div = document.createElement('div');
+        div.className = "relative rounded-xl overflow-hidden aspect-square bg-sand group";
+        const cleanUrl = resolveImageUrl(imgUrl, DEFAULT_SITE_DATA.socialGrid[0]);
+        div.innerHTML = `
+          <img src="${cleanUrl}" alt="Urban Brew Instagram Moment ${i+1}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+          <div class="absolute inset-0 bg-espresso/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </div>
+        `;
+        grid.appendChild(div);
+      });
+    }
+
+    // WhatsApp Order Helper
+    function orderSingleItem(itemName) {
+      openWhatsAppModal(`Halo Urban Brew, saya ingin memesan menu: *${itemName}*. Mohon konfirmasi ketersediaan dan detail pembayarannya.`);
+    }
+
+    function openWhatsAppModal(defaultMsg = '') {
+      const modal = document.getElementById('wa-modal');
+      const textarea = document.getElementById('wa-custom-msg');
+      textarea.value = defaultMsg || 'Halo Urban Brew, saya ingin bertanya seputar menu dan reservasi meja.';
+      modal.classList.remove('hidden');
+    }
+
+    function closeWhatsAppModal() {
+      document.getElementById('wa-modal').classList.add('hidden');
+    }
+
+    function sendWhatsAppDirect() {
+      const msg = document.getElementById('wa-custom-msg').value;
+      const num = siteData.contact.whatsapp.replace(/[^0-9]/g, '');
+      const url = `https://wa.me/${num}?text=${encodeURIComponent(msg)}`;
+      window.open(url, '_blank');
+      closeWhatsAppModal();
+    }
+
+    // Lightbox Helper
+    function openLightbox(imgSrc) {
+      const modal = document.getElementById('lightbox-modal');
+      const img = document.getElementById('lightbox-img');
+      img.src = imgSrc;
+      modal.classList.remove('hidden');
+      setTimeout(() => { modal.classList.remove('opacity-0'); }, 10);
+    }
+
+    function closeLightbox() {
+      const modal = document.getElementById('lightbox-modal');
+      modal.classList.add('opacity-0');
+      setTimeout(() => { modal.classList.add('hidden'); }, 200);
+    }
+
+    // Toast Helper
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-message').innerText = message;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 2500);
+    }
+
+    // ADMIN AUTHENTICATION
+    let isAdminLoggedIn = false;
+
+    function openAdminModal() {
+      const container = document.getElementById('admin-container');
+      container.classList.remove('hidden');
+      if (isAdminLoggedIn) {
+        showDashboardDrawer();
+      } else {
+        document.getElementById('admin-login-card').classList.remove('hidden');
+        document.getElementById('admin-dashboard-drawer').classList.add('hidden');
+      }
+    }
+
+    function closeAdminModal() {
+      document.getElementById('admin-container').classList.add('hidden');
+    }
+
+    function handleAdminLogin(e) {
+      e.preventDefault();
+      const u = document.getElementById('login-username').value.trim();
+      const p = document.getElementById('login-password').value.trim();
+      const errEl = document.getElementById('login-error');
+
+      // Requested exact credentials: kelolaweb2026 / kelolaweb2026
+      if (u === 'kelolaweb2026' && p === 'kelolaweb2026') {
+        isAdminLoggedIn = true;
+        errEl.classList.add('hidden');
+        showDashboardDrawer();
+        populateAdminFields();
+        showToast("Login Admin Berhasil");
+      } else {
+        errEl.classList.remove('hidden');
+      }
+    }
+
+    function handleAdminLogout() {
+      isAdminLoggedIn = false;
+      document.getElementById('admin-dashboard-drawer').classList.add('hidden');
+      document.getElementById('admin-login-card').classList.remove('hidden');
+      document.getElementById('admin-login-form').reset();
+      showToast("Telah keluar dari admin");
+    }
+
+    function showDashboardDrawer() {
+      document.getElementById('admin-login-card').classList.add('hidden');
+      document.getElementById('admin-dashboard-drawer').classList.remove('hidden');
+    }
+
+    function switchAdminTab(tabKey) {
+      document.querySelectorAll('.admin-tab').forEach(t => {
+        if (t.dataset.tab === tabKey) {
+          t.classList.add('border-brand-900', 'text-brand-900');
+          t.classList.remove('border-transparent', 'text-espresso/60');
+        } else {
+          t.classList.remove('border-brand-900', 'text-brand-900');
+          t.classList.add('border-transparent', 'text-espresso/60');
+        }
+      });
+
+      document.querySelectorAll('.admin-tab-content').forEach(c => {
+        c.classList.add('hidden');
+      });
+
+      const activeContent = document.getElementById(`tab-${tabKey}`);
+      if (activeContent) activeContent.classList.remove('hidden');
+    }
+
+    // Populate Fields into Admin form
+    function populateAdminFields() {
+      // General
+      document.getElementById('cfg-brand-name').value = siteData.brand.name;
+      document.getElementById('cfg-brand-tagline').value = siteData.brand.tagline;
+      document.getElementById('cfg-brand-desc').value = siteData.brand.footerDesc;
+      document.getElementById('cfg-meta-title').value = siteData.seo.metaTitle;
+      document.getElementById('cfg-meta-desc').value = siteData.seo.metaDesc;
+
+      // Hero & Intro
+      document.getElementById('cfg-hero-badge').value = siteData.hero.badge;
+      document.getElementById('cfg-hero-headline').value = siteData.hero.headline;
+      document.getElementById('cfg-hero-subheadline').value = siteData.hero.subheadline;
+      document.getElementById('cfg-hero-img').value = siteData.hero.image;
+      document.getElementById('cfg-intro-headline').value = siteData.intro.headline;
+      document.getElementById('cfg-intro-img').value = siteData.intro.image;
+
+      // Promo
+      document.getElementById('cfg-promo-headline').value = siteData.promo.headline;
+      document.getElementById('cfg-promo-title').value = siteData.promo.title;
+      document.getElementById('cfg-promo-desc').value = siteData.promo.desc;
+      document.getElementById('cfg-promo-price').value = siteData.promo.price;
+      document.getElementById('cfg-promo-orig').value = siteData.promo.origPrice;
+      document.getElementById('cfg-promo-img').value = siteData.promo.image;
+
+      // Contact & Map
+      document.getElementById('cfg-contact-address').value = siteData.contact.address;
+      document.getElementById('cfg-hours-weekdays').value = siteData.contact.hoursWeekdays;
+      document.getElementById('cfg-hours-weekends').value = siteData.contact.hoursWeekends;
+      document.getElementById('cfg-wa-number').value = siteData.contact.whatsapp;
+      document.getElementById('cfg-phone').value = siteData.contact.phone;
+      document.getElementById('cfg-email').value = siteData.contact.email;
+      document.getElementById('cfg-maps-url').value = siteData.contact.mapsUrl;
+
+      // Socials
+      document.getElementById('cfg-social-ig').value = siteData.social.instagram;
+      document.getElementById('cfg-social-tiktok').value = siteData.social.tiktok;
+      document.getElementById('cfg-social-fb').value = siteData.social.facebook;
+
+      // Marketing & Tracking
+      document.getElementById('cfg-meta-pixel').value = siteData.tracking.metaPixelId || '';
+      document.getElementById('cfg-ga-id').value = siteData.tracking.gaId || '';
+      document.getElementById('cfg-gads-id').value = siteData.tracking.gadsId || '';
+      document.getElementById('cfg-gads-label').value = siteData.tracking.gadsLabel || '';
+      document.getElementById('cfg-tiktok-pixel').value = siteData.tracking.tiktokPixelId || '';
+
+      // Populate Menu List Editor
+      populateAdminMenuList();
+      // Populate Gallery List Editor
+      populateAdminGalleryList();
+      // Populate Testimonial List Editor
+      populateAdminTestimonialList();
+      // Populate Section Toggles
+      populateAdminSectionToggles();
+    }
+
+    // Menu Admin List
+    function populateAdminMenuList() {
+      const container = document.getElementById('admin-menu-list');
+      container.innerHTML = '';
+
+      siteData.menuItems.forEach((item, index) => {
+        const row = document.createElement('div');
+        row.className = "p-3 rounded-lg border border-sand bg-white text-xs space-y-2";
+        row.innerHTML = `
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-espresso">${item.name}</span>
+            <div class="flex items-center gap-2">
+              <label class="flex items-center gap-1 text-[11px] text-espresso/70">
+                <input type="checkbox" ${item.available ? 'checked' : ''} onchange="updateItemAvail(${index}, this.checked)"> Ada
+              </label>
+              <label class="flex items-center gap-1 text-[11px] text-espresso/70">
+                <input type="checkbox" ${item.isSignature ? 'checked' : ''} onchange="updateItemSig(${index}, this.checked)"> Signature
+              </label>
+              <button onclick="deleteMenuItem(${index})" class="text-rose-600 hover:text-rose-800 ml-2">Hapus</button>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+            <input type="text" value="${item.name}" onchange="updateItemProp(${index}, 'name', this.value)" class="p-1.5 border border-sand rounded text-xs" placeholder="Nama Menu">
+            <input type="text" value="${item.price}" onchange="updateItemProp(${index}, 'price', this.value)" class="p-1.5 border border-sand rounded text-xs" placeholder="Harga">
+            <select onchange="updateItemProp(${index}, 'category', this.value)" class="p-1.5 border border-sand rounded text-xs bg-white">
+              <option value="COFFEE" ${item.category === 'COFFEE' ? 'selected' : ''}>COFFEE</option>
+              <option value="NON-COFFEE" ${item.category === 'NON-COFFEE' ? 'selected' : ''}>NON-COFFEE</option>
+              <option value="BAKERY" ${item.category === 'BAKERY' ? 'selected' : ''}>BAKERY</option>
+              <option value="FOOD" ${item.category === 'FOOD' ? 'selected' : ''}>FOOD</option>
+              <option value="DESSERT" ${item.category === 'DESSERT' ? 'selected' : ''}>DESSERT</option>
+            </select>
+          </div>
+          <input type="text" value="${item.image}" onchange="updateItemProp(${index}, 'image', this.value)" class="w-full p-1.5 border border-sand rounded text-xs" placeholder="Image URL atau Drive ID">
+        `;
+        container.appendChild(row);
+      });
+    }
+
+    function updateItemProp(index, prop, val) {
+      siteData.menuItems[index][prop] = val;
+    }
+    function updateItemAvail(index, val) {
+      siteData.menuItems[index].available = val;
+    }
+    function updateItemSig(index, val) {
+      siteData.menuItems[index].isSignature = val;
+    }
+    function deleteMenuItem(index) {
+      siteData.menuItems.splice(index, 1);
+      populateAdminMenuList();
+    }
+    function addNewMenuItemPrompt() {
+      const newItem = {
+        id: Date.now(),
+        name: "New Coffee Specialty",
+        category: "COFFEE",
+        price: "Rp 35.000",
+        desc: "Fresh handcrafted drink.",
+        image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80",
+        badge: "",
+        isSignature: false,
+        available: true
+      };
+      siteData.menuItems.unshift(newItem);
+      populateAdminMenuList();
+    }
+
+    // Gallery Admin List
+    function populateAdminGalleryList() {
+      const container = document.getElementById('admin-gallery-list');
+      container.innerHTML = '';
+      siteData.gallery.forEach((photo, idx) => {
+        const div = document.createElement('div');
+        div.className = "p-3 rounded-lg border border-sand bg-white text-xs space-y-1.5";
+        div.innerHTML = `
+          <div class="flex items-center justify-between">
+            <span class="font-semibold text-espresso">Photo #${idx + 1}: ${photo.title}</span>
+          </div>
+          <input type="text" value="${photo.title}" onchange="siteData.gallery[${idx}].title = this.value" class="w-full p-1.5 border border-sand rounded text-xs" placeholder="Judul Foto">
+          <input type="text" value="${photo.image}" onchange="siteData.gallery[${idx}].image = this.value" class="w-full p-1.5 border border-sand rounded text-xs" placeholder="Image URL / Drive ID">
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    // Testimonials Admin List
+    function populateAdminTestimonialList() {
+      const container = document.getElementById('admin-testimonial-list');
+      container.innerHTML = '';
+      siteData.testimonials.forEach((t, idx) => {
+        const div = document.createElement('div');
+        div.className = "p-3 rounded-lg border border-sand bg-white text-xs space-y-2";
+        div.innerHTML = `
+          <div class="grid grid-cols-2 gap-2">
+            <input type="text" value="${t.name}" onchange="siteData.testimonials[${idx}].name = this.value" class="p-1.5 border border-sand rounded text-xs" placeholder="Nama">
+            <input type="text" value="${t.role}" onchange="siteData.testimonials[${idx}].role = this.value" class="p-1.5 border border-sand rounded text-xs" placeholder="Role/Profesi">
+          </div>
+          <textarea rows="2" onchange="siteData.testimonials[${idx}].review = this.value" class="w-full p-1.5 border border-sand rounded text-xs" placeholder="Isi Ulasan">${t.review}</textarea>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    // Section Toggles
+    function populateAdminSectionToggles() {
+      const container = document.getElementById('admin-section-toggles');
+      container.innerHTML = '';
+      const labels = {
+        hero: "Hero Banner",
+        intro: "Intro Philosophy",
+        features: "Feature Highlights",
+        signatures: "Signature Showcase",
+        menu: "Menu Catalog & Tabs",
+        promo: "Promo Special Offer",
+        visualBreak: "Visual Break Photo & Quote",
+        gallery: "Photo Gallery",
+        story: "Brand Story & Heritage",
+        testimonials: "Guest Reviews",
+        social: "Social / Instagram Grid",
+        location: "Location & Google Maps",
+        ctaFinal: "Final Call-To-Action"
+      };
+
+      for (const [key, enabled] of Object.entries(siteData.sectionsEnabled)) {
+        const row = document.createElement('div');
+        row.className = "flex items-center justify-between p-3 rounded-lg border border-sand bg-white";
+        row.innerHTML = `
+          <span class="text-xs font-semibold text-espresso">${labels[key] || key}</span>
+          <label class="relative inline-flex items-center cursor-pointer">
+            <input type="checkbox" ${enabled ? 'checked' : ''} onchange="siteData.sectionsEnabled['${key}'] = this.checked" class="sr-only peer">
+            <div class="w-9 h-5 bg-sand peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-sand after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-brand-900"></div>
+          </label>
+        `;
+        container.appendChild(row);
+      }
+    }
+
+    // Save all inputs from dashboard
+    function saveAllAdminChanges() {
+      // General
+      siteData.brand.name = document.getElementById('cfg-brand-name').value;
+      siteData.brand.tagline = document.getElementById('cfg-brand-tagline').value;
+      siteData.brand.footerDesc = document.getElementById('cfg-brand-desc').value;
+      siteData.seo.metaTitle = document.getElementById('cfg-meta-title').value;
+      siteData.seo.metaDesc = document.getElementById('cfg-meta-desc').value;
+
+      // Hero
+      siteData.hero.badge = document.getElementById('cfg-hero-badge').value;
+      siteData.hero.headline = document.getElementById('cfg-hero-headline').value;
+      siteData.hero.subheadline = document.getElementById('cfg-hero-subheadline').value;
+      siteData.hero.image = document.getElementById('cfg-hero-img').value;
+      siteData.intro.headline = document.getElementById('cfg-intro-headline').value;
+      siteData.intro.image = document.getElementById('cfg-intro-img').value;
+
+      // Promo
+      siteData.promo.headline = document.getElementById('cfg-promo-headline').value;
+      siteData.promo.title = document.getElementById('cfg-promo-title').value;
+      siteData.promo.desc = document.getElementById('cfg-promo-desc').value;
+      siteData.promo.price = document.getElementById('cfg-promo-price').value;
+      siteData.promo.origPrice = document.getElementById('cfg-promo-orig').value;
+      siteData.promo.image = document.getElementById('cfg-promo-img').value;
+
+      // Contact
+      siteData.contact.address = document.getElementById('cfg-contact-address').value;
+      siteData.contact.hoursWeekdays = document.getElementById('cfg-hours-weekdays').value;
+      siteData.contact.hoursWeekends = document.getElementById('cfg-hours-weekends').value;
+      siteData.contact.whatsapp = document.getElementById('cfg-wa-number').value;
+      siteData.contact.phone = document.getElementById('cfg-phone').value;
+      siteData.contact.email = document.getElementById('cfg-email').value;
+      siteData.contact.mapsUrl = document.getElementById('cfg-maps-url').value;
+
+      // Socials
+      siteData.social.instagram = document.getElementById('cfg-social-ig').value;
+      siteData.social.tiktok = document.getElementById('cfg-social-tiktok').value;
+      siteData.social.facebook = document.getElementById('cfg-social-fb').value;
+
+      // Tracking
+      siteData.tracking.metaPixelId = document.getElementById('cfg-meta-pixel').value.trim();
+      siteData.tracking.gaId = document.getElementById('cfg-ga-id').value.trim();
+      siteData.tracking.gadsId = document.getElementById('cfg-gads-id').value.trim();
+      siteData.tracking.gadsLabel = document.getElementById('cfg-gads-label').value.trim();
+      siteData.tracking.tiktokPixelId = document.getElementById('cfg-tiktok-pixel').value.trim();
+
+      // Persist & Re-render
+      persistState();
+      renderWebsite();
+      showToast("Seluruh perubahan berhasil disimpan!");
+    }
+
+    // Mobile Navbar Menu Toggle
+    const mobileBtn = document.getElementById('mobile-menu-toggle');
+    const mobileDrawer = document.getElementById('mobile-drawer');
+    const hamburgerIcon = document.getElementById('hamburger-icon');
+    const closeIcon = document.getElementById('close-icon');
+
+    mobileBtn.addEventListener('click', () => {
+      const isHidden = mobileDrawer.classList.contains('hidden');
+      if (isHidden) {
+        mobileDrawer.classList.remove('hidden');
+        hamburgerIcon.classList.add('hidden');
+        closeIcon.classList.remove('hidden');
+      } else {
+        mobileDrawer.classList.add('hidden');
+        hamburgerIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+      }
+    });
+
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileDrawer.classList.add('hidden');
+        hamburgerIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+      });
+    });
+
+    // Keyboard shortcut for discrete Admin login: Ctrl + Alt + A
+    window.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && e.altKey && (e.key === 'a' || e.key === 'A')) {
+        e.preventDefault();
+        openAdminModal();
+      }
+    });
+
+    // Initialize application on DOM content loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      loadSavedState();
+      renderWebsite();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hearth & Crumb | Artisan Bakery & Coffee House</title>
+    <meta name="description" content="Handcrafted bread, delicate pastries and thoughtfully brewed coffee, made for slow mornings and good conversations.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            cream: '#FDFBF7',
+                            beige: '#ECE7DF',
+                            brown: '#8B6A47',
+                            coffee: '#2A201A',
+                            terracotta: '#C16A54',
+                            border: '#D8D2C9'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    spacing: {
+                        '18': '4.5rem',
+                        '22': '5.5rem',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- React & ReactDOM -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    
+    <!-- Babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Custom base styles for premium feel */
+        body {
+            background-color: #FDFBF7;
+            color: #2A201A;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+        
+        .editorial-text {
+            text-wrap: balance;
+        }
+
+        /* Hide scrollbar for tabs */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Image hover effect */
+        .img-zoom-container {
+            overflow: hidden;
+        }
+        .img-zoom-container img {
+            transition: transform 0.7s ease;
+        }
+        .img-zoom-container:hover img {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // TEMPLATE CONFIG (Simulating Backend Integration)
+        const TEMPLATE_CONFIG = {
+            apiKey: 'wbk_demo_key_99214',
+            endpoint: 'https://api-web-demo.khoirul-amir110901.workers.dev/api',
+            templateId: 'hearth-crumb-01'
+        };
+
+        // --- SIMULATED CMS DATA ---
+        const initialContent = {
+            global: {
+                brandName: "Hearth & Crumb",
+                tagline: "Artisan Bakery & Coffee",
+                socials: {
+                    instagram: "@hearthandcrumb",
+                    facebook: "Hearth & Crumb",
+                },
+                contact: {
+                    address: "Jl. Senopati No. 42, Kebayoran Baru, Jakarta Selatan",
+                    hours: "Monday - Sunday | 07:00 AM - 09:00 PM",
+                    phone: "+62 811-2345-6789",
+                    email: "hello@hearthandcrumb.com",
+                    whatsapp: "6281123456789"
+                }
+            },
+            hero: {
+                label: "ARTISAN BAKERY & COFFEE",
+                headline: "BAKED FRESH.\nBREWED SLOW.",
+                subheadline: "Handcrafted bread, delicate pastries and thoughtfully brewed coffee, made for slow mornings and good conversations.",
+                ctaPrimary: { text: "EXPLORE OUR MENU", url: "#menu" },
+                ctaSecondary: { text: "OUR STORY", url: "#story" },
+                image: "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80" // Artisan bread/coffee prep
+            },
+            intro: {
+                label: "WELCOME TO HEARTH & CRUMB",
+                headline: "MADE BY HAND, SERVED WITH HEART.",
+                content: "We believe in the beauty of time-honored techniques. Every loaf is naturally leavened, every pastry is folded by hand, and every cup of coffee is crafted to bring out its distinct origin characteristics. This is our dedication to the craft, and our invitation to you to slow down and savor."
+            },
+            highlights: {
+                title: "FRESH FROM THE OVEN",
+                items: [
+                    { id: 1, name: "Butter Croissant", desc: "Classic flaky pastry with premium French butter.", price: "Rp 32.000", image: "https://images.unsplash.com/photo-1549903072-7e6e0bedb7fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
+                    { id: 2, name: "Almond Croissant", desc: "Twice-baked, filled with rich almond frangipane.", price: "Rp 45.000", image: "https://images.unsplash.com/photo-1623366302587-bca2329bc01a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
+                    { id: 3, name: "Country Sourdough", desc: "Naturally leavened, dark crust, open crumb.", price: "Rp 65.000", image: "https://images.unsplash.com/photo-1589367920969-ab8e050bfbb8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
+                    { id: 4, name: "Cinnamon Roll", desc: "Soft brioche, Ceylon cinnamon, cream cheese glaze.", price: "Rp 38.000", image: "https://images.unsplash.com/photo-1509365465985-25d11c17e812?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
+                ]
+            },
+            coffeeSection: {
+                title: "AND THEN, THERE'S COFFEE.",
+                subtitle: "Thoughtfully sourced beans, carefully brewed.",
+                image: "https://images.unsplash.com/photo-1495474472207-464a8d4ee48b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                items: [
+                    { name: "Espresso", desc: "Single origin seasonal espresso." },
+                    { name: "Americano", desc: "Espresso over hot water." },
+                    { name: "Cappuccino", desc: "Equal parts espresso, steamed milk, foam." },
+                    { name: "Cafe Latte", desc: "Espresso with silky steamed milk." },
+                    { name: "Flat White", desc: "Double ristretto, micro-foamed milk." },
+                    { name: "Cold Brew", desc: "Steeped for 18 hours, smooth finish." },
+                ]
+            },
+            menu: {
+                categories: ["BAKERY", "COFFEE", "NON-COFFEE", "LIGHT BITES"],
+                items: [
+                    { cat: "BAKERY", name: "Butter Croissant", desc: "AOP Butter, 72 layers", price: "32K", bestseller: true },
+                    { cat: "BAKERY", name: "Pain au Chocolat", desc: "Valrhona chocolate batons", price: "38K", bestseller: false },
+                    { cat: "BAKERY", name: "Kouign-Amann", desc: "Caramelized laminated pastry", price: "40K", bestseller: true },
+                    { cat: "BAKERY", name: "Olive & Herb Sourdough", desc: "Kalamata olives, rosemary", price: "75K", bestseller: false },
+                    
+                    { cat: "COFFEE", name: "Filter Coffee", desc: "Rotating single origins (V60/Kalita)", price: "45K", bestseller: false },
+                    { cat: "COFFEE", name: "Oat Milk Latte", desc: "Espresso with premium oat milk", price: "48K", bestseller: true },
+                    { cat: "COFFEE", name: "Mocha", desc: "Espresso, artisanal chocolate, milk", price: "45K", bestseller: false },
+                    
+                    { cat: "NON-COFFEE", name: "Matcha Latte", desc: "Ceremonial grade Uji matcha", price: "45K", bestseller: true },
+                    { cat: "NON-COFFEE", name: "Artisan Tea", desc: "Earl grey, Chamomile, or Mint", price: "35K", bestseller: false },
+                    { cat: "NON-COFFEE", name: "Fresh OJ", desc: "100% cold-pressed oranges", price: "40K", bestseller: false },
+                    
+                    { cat: "LIGHT BITES", name: "Avocado Toast", desc: "Sourdough, smashed avo, chili flakes", price: "65K", bestseller: true },
+                    { cat: "LIGHT BITES", name: "Truffle Mushroom Soup", desc: "Served with toasted sourdough slice", price: "55K", bestseller: false },
+                ]
+            },
+            process: {
+                title: "THE ART OF MAKING IT FRESH.",
+                steps: [
+                    { icon: "Wheat", title: "01 — SELECT", desc: "We source our flour from responsible mills and partner with local farmers for the freshest ingredients." },
+                    { icon: "Hand", title: "02 — CRAFT", desc: "Every dough is mixed, folded, and shaped by the skilled hands of our passionate bakers." },
+                    { icon: "Flame", title: "03 — BAKE & SERVE", desc: "Baked fresh every morning to ensure the perfect crust and served warm alongside our specialty coffee." }
+                ]
+            },
+            promo: {
+                label: "THIS WEEK'S FAVORITE",
+                headline: "COFFEE & CROISSANT COMBO",
+                desc: "Your morning essentials, perfectly paired. A classic butter croissant and a hot cafe latte.",
+                price: "Rp 65.000",
+                image: "https://images.unsplash.com/photo-1608198093002-ad4e005484ec?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+                active: true
+            },
+            experience: {
+                text: "STAY FOR A WHILE.",
+                subtext: "A warm space for coffee, conversations and everything in between.",
+                image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
+            },
+            gallery: {
+                images: [
+                    "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", // Food details
+                    "https://images.unsplash.com/photo-1511920170033-f8396924c348?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", // Coffee pouring
+                    "https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", // Interior cozy
+                    "https://images.unsplash.com/photo-1509440159596-0249088772ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", // Bread texture
+                    "https://images.unsplash.com/photo-1445116572660-236099ec97a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", // Barista
+                    "https://images.unsplash.com/photo-1550428312-70b991307b22?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"  // Pastries
+                ]
+            },
+            story: {
+                headline: "A LITTLE PLACE WITH A BIG LOVE FOR GOOD FOOD.",
+                paragraphs: [
+                    "Hearth & Crumb started with a simple desire: to create a neighborhood space where the smell of freshly baked bread and freshly ground coffee welcomes you every morning.",
+                    "We don't take shortcuts. From our 48-hour fermented sourdough to our carefully dialed-in espresso, every detail is intentional. We believe that good food and good coffee are the foundations of community."
+                ]
+            },
+            testimonials: [
+                { id: 1, quote: "Best almond croissant in the city. The space is beautiful and the staff makes you feel right at home.", name: "Sarah Wijaya", rating: 5 },
+                { id: 2, quote: "My go-to spot for slow Sunday mornings. The filter coffee selection is always exceptional.", name: "David Pratama", rating: 5 },
+                { id: 3, quote: "You can taste the quality in every bite. The sourdough loaf has become a staple in our household.", name: "Elena Kusuma", rating: 5 }
+            ]
+        };
+
+        const { useState, useEffect, useMemo } = React;
+
+        // Custom Icon Component using Lucide (rendered as SVGs)
+        const Icon = ({ name, size = 24, className = "" }) => {
+            useEffect(() => {
+                lucide.createIcons();
+            }, [name]);
+            return <i data-lucide={name} className={className} style={{ width: size, height: size, display: 'inline-block' }}></i>;
+        };
+
+        // Button Component (Elegant, no heavy shadows)
+        const Button = ({ children, variant = 'primary', className = "", ...props }) => {
+            const baseStyle = "inline-flex items-center justify-center px-8 py-3.5 text-sm font-medium tracking-wide transition-colors duration-300";
+            const variants = {
+                primary: "bg-brand-coffee text-brand-cream hover:bg-brand-coffee/90",
+                secondary: "border border-brand-coffee text-brand-coffee hover:bg-brand-beige",
+                terracotta: "bg-brand-terracotta text-brand-cream hover:bg-brand-terracotta/90",
+                link: "text-brand-coffee hover:text-brand-terracotta underline-offset-4 hover:underline px-0 py-0"
+            };
+            return (
+                <button className={`${baseStyle} ${variants[variant]} ${className}`} {...props}>
+                    {children}
+                </button>
+            );
+        };
+
+        // Smart Image Component (handles loading, fallback)
+        const SmartImage = ({ src, alt, className = "", imgClassName = "" }) => {
+            // In a real app, this would handle the Google Drive -> Fallback logic.
+            // For this UI demo, we assume the src is valid (Unsplash urls provided in state).
+            return (
+                <div className={`img-zoom-container bg-brand-border/30 ${className}`}>
+                    <img 
+                        src={src} 
+                        alt={alt} 
+                        loading="lazy"
+                        className={`w-full h-full object-cover ${imgClassName}`}
+                    />
+                </div>
+            );
+        };
+
+        const Navbar = ({ data }) => {
+            const [isScrolled, setIsScrolled] = useState(false);
+            const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+            useEffect(() => {
+                const handleScroll = () => setIsScrolled(window.scrollY > 20);
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            const navLinks = [
+                { name: 'Home', href: '#home' },
+                { name: 'Our Story', href: '#story' },
+                { name: 'Menu', href: '#menu' },
+                { name: 'Bakery', href: '#bakery' },
+                { name: 'Visit Us', href: '#visit' },
+            ];
+
+            return (
+                <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-brand-cream/95 backdrop-blur-sm border-b border-brand-border py-4' : 'bg-transparent py-6'}`}>
+                    <div className="container mx-auto px-6 max-w-7xl flex items-center justify-between">
+                        {/* Logo */}
+                        <a href="#" className="flex-shrink-0 text-2xl font-serif font-medium tracking-tight text-brand-coffee">
+                            {data.brandName}
+                        </a>
+
+                        {/* Desktop Nav */}
+                        <nav className="hidden md:flex items-center gap-8">
+                            {navLinks.map((link) => (
+                                <a key={link.name} href={link.href} className="text-sm font-medium text-brand-coffee/80 hover:text-brand-terracotta transition-colors">
+                                    {link.name}
+                                </a>
+                            ))}
+                        </nav>
+
+                        {/* Desktop CTA */}
+                        <div className="hidden md:block">
+                            <Button variant="primary" className="py-2.5 px-6 text-xs">ORDER ONLINE</Button>
+                        </div>
+
+                        {/* Mobile Toggle */}
+                        <button className="md:hidden text-brand-coffee" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+                            <Icon name={mobileMenuOpen ? 'x' : 'menu'} />
+                        </button>
+                    </div>
+
+                    {/* Mobile Menu Drawer */}
+                    {mobileMenuOpen && (
+                        <div className="absolute top-full left-0 w-full bg-brand-cream border-b border-brand-border md:hidden shadow-xl shadow-brand-coffee/5 flex flex-col py-6 px-6 gap-6">
+                            {navLinks.map((link) => (
+                                <a key={link.name} href={link.href} onClick={() => setMobileMenuOpen(false)} className="text-lg font-serif text-brand-coffee">
+                                    {link.name}
+                                </a>
+                            ))}
+                            <Button variant="primary" className="w-full justify-center">ORDER ONLINE</Button>
+                        </div>
+                    )}
+                </header>
+            );
+        };
+
+        const Footer = ({ data }) => (
+            <footer className="bg-brand-coffee text-brand-cream pt-24 pb-12 border-t border-brand-coffee/20">
+                <div className="container mx-auto px-6 max-w-7xl">
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                        <div className="md:col-span-1">
+                            <h3 className="text-2xl font-serif mb-4">{data.brandName}</h3>
+                            <p className="text-brand-cream/70 text-sm leading-relaxed mb-6">
+                                {data.tagline}. Cultivating community through good food and intentional coffee.
+                            </p>
+                            <div className="flex gap-4">
+                                <a href="#" className="text-brand-cream/70 hover:text-brand-cream"><Icon name="instagram" size={20} /></a>
+                                <a href="#" className="text-brand-cream/70 hover:text-brand-cream"><Icon name="facebook" size={20} /></a>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 className="text-xs font-semibold tracking-widest uppercase mb-6 text-brand-cream/50">Visit Us</h4>
+                            <ul className="space-y-4 text-sm text-brand-cream/80">
+                                <li className="flex items-start gap-3">
+                                    <Icon name="map-pin" size={16} className="mt-1 flex-shrink-0" />
+                                    <span>{data.contact.address}</span>
+                                </li>
+                                <li className="flex items-start gap-3">
+                                    <Icon name="clock" size={16} className="mt-1 flex-shrink-0" />
+                                    <span>{data.contact.hours}</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h4 className="text-xs font-semibold tracking-widest uppercase mb-6 text-brand-cream/50">Contact</h4>
+                            <ul className="space-y-4 text-sm text-brand-cream/80">
+                                <li className="flex items-center gap-3">
+                                    <Icon name="phone" size={16} />
+                                    <span>{data.contact.phone}</span>
+                                </li>
+                                <li className="flex items-center gap-3">
+                                    <Icon name="mail" size={16} />
+                                    <span>{data.contact.email}</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h4 className="text-xs font-semibold tracking-widest uppercase mb-6 text-brand-cream/50">Links</h4>
+                            <ul className="space-y-3 text-sm text-brand-cream/80 flex flex-col">
+                                <a href="#home" className="hover:text-brand-cream transition-colors">Home</a>
+                                <a href="#menu" className="hover:text-brand-cream transition-colors">Menu</a>
+                                <a href="#story" className="hover:text-brand-cream transition-colors">Our Story</a>
+                                <a href="#gallery" className="hover:text-brand-cream transition-colors">Gallery</a>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div className="border-t border-brand-cream/10 pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-brand-cream/40">
+                        <p>&copy; 2026 {data.brandName}. All rights reserved.</p>
+                        <p className="mt-2 md:mt-0">Designed by Professional Web Studio</p>
+                    </div>
+                </div>
+            </footer>
+        );
+
+        const Hero = ({ data }) => (
+            <section id="home" className="relative min-h-[90vh] md:min-h-screen flex items-center pt-24 pb-12">
+                <div className="container mx-auto px-6 max-w-7xl">
+                    <div className="flex flex-col md:flex-row items-center gap-12 md:gap-24">
+                        {/* Text Content */}
+                        <div className="w-full md:w-1/2 flex flex-col justify-center order-2 md:order-1">
+                            <div className="flex items-center gap-3 mb-6">
+                                <span className="h-px w-8 bg-brand-brown"></span>
+                                <span className="text-xs font-semibold tracking-[0.2em] text-brand-brown uppercase">{data.label}</span>
+                            </div>
+                            <h1 className="text-5xl md:text-7xl font-serif font-medium leading-[1.1] mb-6 editorial-text whitespace-pre-line text-brand-coffee">
+                                {data.headline}
+                            </h1>
+                            <p className="text-lg text-brand-coffee/70 mb-10 max-w-md leading-relaxed">
+                                {data.subheadline}
+                            </p>
+                            <div className="flex flex-wrap items-center gap-4">
+                                <Button href={data.ctaPrimary.url}>{data.ctaPrimary.text}</Button>
+                                <Button variant="secondary" href={data.ctaSecondary.url}>{data.ctaSecondary.text}</Button>
+                            </div>
+                            <div className="mt-12 flex items-center gap-2 text-sm text-brand-coffee/60 font-medium">
+                                <Icon name="sun" size={16} />
+                                <span>Fresh Every Morning</span>
+                            </div>
+                        </div>
+                        {/* Image */}
+                        <div className="w-full md:w-1/2 h-[50vh] md:h-[80vh] order-1 md:order-2">
+                            <SmartImage 
+                                src={data.image} 
+                                alt="Fresh bread and coffee" 
+                                className="w-full h-full rounded-sm"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </section>
+        );
+
+        const BrandIntro = ({ data }) => (
+            <section id="story" className="py-24 bg-brand-beige/30">
+                <div className="container mx-auto px-6 max-w-4xl text-center">
+                    <span className="text-xs font-semibold tracking-widest text-brand-brown uppercase mb-6 block">{data.label}</span>
+                    <h2 className="text-3xl md:text-5xl font-serif mb-8 text-brand-coffee leading-tight editorial-text">
+                        "{data.headline}"
+                    </h2>
+                    <p className="text-brand-coffee/80 text-lg leading-relaxed md:px-12">
+                        {data.content}
+                    </p>
+                </div>
+            </section>
+        );
+
+        const ProductHighlights = ({ data }) => (
+            <section id="bakery" className="py-24 bg-brand-cream">
+                <div className="container mx-auto px-6 max-w-7xl">
+                    <div className="flex justify-between items-end mb-16">
+                        <h2 className="text-3xl md:text-4xl font-serif text-brand-coffee">{data.title}</h2>
+                        <Button variant="link" className="hidden md:flex gap-2">
+                            VIEW FULL BAKERY MENU <Icon name="arrow-right" size={16} />
+                        </Button>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        {data.items.map((item) => (
+                            <div key={item.id} className="group cursor-pointer">
+                                <SmartImage 
+                                    src={item.image} 
+                                    alt={item.name} 
+                                    className="aspect-[4/5] rounded-sm mb-6" 
+                                />
+                                <div className="flex justify-between items-start mb-2">
+                                    <h3 className="text-lg font-serif font-medium text-brand-coffee">{item.name}</h3>
+                                    <span className="text-sm font-medium">{item.price}</span>
+                                </div>
+                                <p className="text-sm text-brand-coffee/60 line-clamp-2">{item.desc}</p>
+                            </div>
+                        ))}
+                    </div>
+                    <div className="mt-12 text-center md:hidden">
+                        <Button variant="secondary" className="w-full">VIEW FULL BAKERY MENU</Button>
+                    </div>
+                </div>
+            </section>
+        );
+
+        const CoffeeSection = ({ data }) => (
+            <section className="bg-brand-coffee text-brand-cream py-24">
+                <div className="container mx-auto px-6 max-w-7xl">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                        <div className="order-2 lg:order-1">
+                            <h2 className="text-4xl md:text-5xl font-serif mb-4">{data.title}</h2>
+                            <p className="text-brand-cream/70 text-lg mb-12">{data.subtitle}</p>
+                            
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-12 mb-12">
+                                {data.items.map((item, idx) => (
+                                    <div key={idx}>
+                                        <h4 className="font-serif text-lg mb-1">{item.name}</h4>
+                                        <p className="text-sm text-brand-cream/50">{item.desc}</p>
+                                    </div>
+                                ))}
+                            </div>
+                            <Button variant="terracotta">SEE COFFEE MENU</Button>
+                        </div>
+                        <div className="order-1 lg:order-2">
+                            <SmartImage 
+                                src={data.image} 
+                                alt="Pouring coffee" 
+                                className="aspect-square md:aspect-[4/5] rounded-sm opacity-90"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </section>
+        );
+
+        const MenuSection = ({ data }) => {
+            const [activeTab, setActiveTab] = useState(data.categories[0]);
+            
+            const filteredItems = useMemo(() => {
+                return data.items.filter(item => item.cat === activeTab);
+            }, [activeTab, data.items]);
+
+            return (
+                <section id="menu" className="py-24 bg-brand-cream">
+                    <div className="container mx-auto px-6 max-w-4xl">
+                        <div className="text-center mb-16">
+                            <h2 className="text-4xl font-serif text-brand-coffee mb-4">Our Menu</h2>
+                            <p className="text-brand-coffee/60">Available for dine-in and takeaway.</p>
+                        </div>
+
+                        {/* Tabs */}
+                        <div className="flex overflow-x-auto no-scrollbar gap-8 border-b border-brand-border mb-12">
+                            {data.categories.map(cat => (
+                                <button
+                                    key={cat}
+                                    onClick={() => setActiveTab(cat)}
+                                    className={`pb-4 text-sm font-medium tracking-wider whitespace-nowrap uppercase transition-colors relative ${
+                                        activeTab === cat ? 'text-brand-coffee' : 'text-brand-coffee/40 hover:text-brand-coffee/70'
+                                    }`}
+                                >
+                                    {cat}
+                                    {activeTab === cat && (
+                                        <span className="absolute bottom-0 left-0 w-full h-0.5 bg-brand-terracotta"></span>
+                                    )}
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* Menu List */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10">
+                            {filteredItems.map((item, idx) => (
+                                <div key={idx} className="flex flex-col group">
+                                    <div className="flex justify-between items-baseline mb-1 gap-4">
+                                        <h4 className="text-lg font-serif text-brand-coffee flex items-center gap-2">
+                                            {item.name}
+                                            {item.bestseller && <span className="text-[10px] uppercase tracking-wider bg-brand-beige px-2 py-0.5 text-brand-brown rounded-sm">Popular</span>}
+                                        </h4>
+                                        <div className="flex-grow border-b border-dotted border-brand-border/60 mx-2"></div>
+                                        <span className="font-medium text-brand-coffee">{item.price}</span>
+                                    </div>
+                                    <p className="text-sm text-brand-coffee/60">{item.desc}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        const ProcessSection = ({ data }) => (
+            <section className="py-24 bg-brand-beige/20">
+                <div className="container mx-auto px-6 max-w-7xl">
+                    <h2 className="text-3xl font-serif text-center mb-16 text-brand-coffee">{data.title}</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+                        {data.steps.map((step, idx) => (
+                            <div key={idx} className="flex flex-col items-center max-w-sm mx-auto">
+                                <div className="w-16 h-16 flex items-center justify-center rounded-full bg-brand-cream border border-brand-border mb-6 text-brand-terracotta">
+                                    <Icon name={step.icon.toLowerCase()} size={28} strokeWidth={1.5} />
+                                </div>
+                                <h3 className="text-sm font-semibold tracking-widest uppercase mb-4 text-brand-coffee">{step.title}</h3>
+                                <p className="text-brand-coffee/70 text-sm leading-relaxed">{step.desc}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+        );
+
+        const PromoSection = ({ data }) => {
+            if (!data.active) return null;
+            return (
+                <section className="py-24 bg-brand-cream">
+                    <div className="container mx-auto px-6 max-w-5xl">
+                        <div className="bg-brand-coffee text-brand-cream flex flex-col md:flex-row items-center rounded-sm overflow-hidden">
+                            <div className="w-full md:w-1/2 p-12 lg:p-16 flex flex-col justify-center">
+                                <span className="text-xs font-semibold tracking-widest text-brand-cream/50 uppercase mb-4">{data.label}</span>
+                                <h2 className="text-3xl lg:text-4xl font-serif mb-4 leading-tight">{data.headline}</h2>
+                                <p className="text-brand-cream/70 mb-8">{data.desc}</p>
+                                <div className="flex items-center justify-between mb-8 pb-8 border-b border-brand-cream/10">
+                                    <span className="text-sm uppercase tracking-widest text-brand-cream/50">Price</span>
+                                    <span className="text-2xl font-serif">{data.price}</span>
+                                </div>
+                                <Button variant="terracotta" className="w-fit self-start">ORDER NOW</Button>
+                            </div>
+                            <div className="w-full md:w-1/2 h-64 md:h-full">
+                                <img src={data.image} alt={data.headline} className="w-full h-full object-cover" />
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        const FullWidthExperience = ({ data }) => (
+            <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
+                <div className="absolute inset-0 z-0">
+                    <img src={data.image} alt="Cafe Interior" className="w-full h-full object-cover" />
+                    <div className="absolute inset-0 bg-brand-coffee/40"></div>
+                </div>
+                <div className="relative z-10 text-center text-brand-cream px-6 max-w-3xl">
+                    <h2 className="text-4xl md:text-6xl font-serif mb-6">{data.text}</h2>
+                    <p className="text-lg md:text-xl font-light text-brand-cream/90">{data.subtext}</p>
+                </div>
+            </section>
+        );
+
+        const Gallery = ({ data }) => (
+            <section id="gallery" className="py-24 bg-brand-cream">
+                <div className="container mx-auto px-6 max-w-7xl">
+                    <h2 className="text-3xl font-serif text-center mb-16 text-brand-coffee">Moments at Hearth & Crumb</h2>
+                    {/* Editorial Grid */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 auto-rows-[200px] md:auto-rows-[300px]">
+                        {data.images.map((img, idx) => {
+                            // Creating varied sizes for editorial look
+                            let spanClass = "col-span-1 row-span-1";
+                            if (idx === 0) spanClass = "col-span-2 row-span-2";
+                            else if (idx === 3) spanClass = "col-span-2 row-span-1";
+                            
+                            return (
+                                <div key={idx} className={`${spanClass} overflow-hidden rounded-sm group`}>
+                                    <img 
+                                        src={img} 
+                                        alt={`Gallery image ${idx + 1}`} 
+                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                        loading="lazy"
+                                    />
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+            </section>
+        );
+
+        const BrandStory = ({ data }) => (
+            <section className="py-24 bg-brand-beige/30">
+                <div className="container mx-auto px-6 max-w-3xl text-center">
+                    <div className="flex justify-center mb-8 text-brand-brown">
+                        <Icon name="heart" size={32} strokeWidth={1} />
+                    </div>
+                    <h2 className="text-3xl md:text-4xl font-serif mb-10 text-brand-coffee">{data.headline}</h2>
+                    <div className="space-y-6 text-brand-coffee/80 text-lg leading-relaxed font-light">
+                        {data.paragraphs.map((p, idx) => <p key={idx}>{p}</p>)}
+                    </div>
+                    <div className="mt-12 flex justify-center gap-8 text-xs font-semibold tracking-widest text-brand-coffee/60 uppercase">
+                        <span>EST. 2024</span>
+                        <span className="hidden md:inline">•</span>
+                        <span>100% Fresh Daily</span>
+                        <span className="hidden md:inline">•</span>
+                        <span>Specialty Coffee</span>
+                    </div>
+                </div>
+            </section>
+        );
+
+        const Testimonials = ({ data }) => {
+            if (!data || data.length === 0) return null;
+            return (
+                <section className="py-24 bg-brand-cream border-t border-brand-border/50">
+                    <div className="container mx-auto px-6 max-w-7xl">
+                        <h2 className="text-xs font-semibold tracking-widest text-brand-brown uppercase text-center mb-16">Kind Words From Our Guests</h2>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+                            {data.map(review => (
+                                <div key={review.id} className="flex flex-col items-center text-center">
+                                    <div className="flex gap-1 mb-6 text-brand-terracotta">
+                                        {[...Array(review.rating)].map((_, i) => <Icon key={i} name="star" size={16} fill="currentColor" />)}
+                                    </div>
+                                    <p className="font-serif text-lg text-brand-coffee mb-6 italic leading-relaxed">"{review.quote}"</p>
+                                    <span className="text-sm font-medium tracking-wide uppercase text-brand-coffee/60">— {review.name}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        const VisitUs = ({ data }) => (
+            <section id="visit" className="py-24 bg-brand-cream border-t border-brand-border/30">
+                <div className="container mx-auto px-6 max-w-7xl">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                        <div>
+                            <h2 className="text-4xl font-serif text-brand-coffee mb-12">Come Say Hello.</h2>
+                            
+                            <div className="space-y-8">
+                                <div className="flex gap-4">
+                                    <div className="text-brand-terracotta mt-1"><Icon name="map-pin" /></div>
+                                    <div>
+                                        <h4 className="font-semibold text-brand-coffee uppercase tracking-wider text-sm mb-2">Location</h4>
+                                        <p className="text-brand-coffee/70 max-w-xs">{data.contact.address}</p>
+                                    </div>
+                                </div>
+                                <div className="flex gap-4">
+                                    <div className="text-brand-terracotta mt-1"><Icon name="clock" /></div>
+                                    <div>
+                                        <h4 className="font-semibold text-brand-coffee uppercase tracking-wider text-sm mb-2">Hours</h4>
+                                        <p className="text-brand-coffee/70 whitespace-pre-line">{data.contact.hours.replace(' | ', '\n')}</p>
+                                    </div>
+                                </div>
+                                <div className="flex gap-4">
+                                    <div className="text-brand-terracotta mt-1"><Icon name="phone" /></div>
+                                    <div>
+                                        <h4 className="font-semibold text-brand-coffee uppercase tracking-wider text-sm mb-2">Contact</h4>
+                                        <p className="text-brand-coffee/70 mb-1">{data.contact.phone}</p>
+                                        <p className="text-brand-coffee/70">{data.contact.email}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div className="mt-12 flex flex-wrap gap-4">
+                                <Button>GET DIRECTIONS</Button>
+                                <Button variant="secondary" className="flex gap-2">
+                                    <Icon name="message-circle" size={18} /> CHAT WITH US
+                                </Button>
+                            </div>
+                        </div>
+                        <div className="h-[400px] lg:h-auto bg-brand-border/30 rounded-sm overflow-hidden relative">
+                            {/* Static Map Placeholder to avoid API key requirements in template */}
+                            <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Map Location" className="w-full h-full object-cover opacity-80 mix-blend-multiply" />
+                            <div className="absolute inset-0 flex items-center justify-center">
+                                <div className="bg-brand-cream/90 backdrop-blur-sm p-4 rounded-full shadow-lg shadow-brand-coffee/10 animate-bounce">
+                                    <Icon name="map-pin" className="text-brand-terracotta" size={32} />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        );
+
+        const Instagram = ({ data }) => (
+            <section className="py-24 bg-brand-cream overflow-hidden">
+                <div className="text-center mb-12">
+                    <h2 className="text-3xl font-serif text-brand-coffee mb-4">From Our Table To Your Feed</h2>
+                    <a href="#" className="inline-flex items-center gap-2 text-brand-terracotta hover:text-brand-coffee transition-colors font-medium">
+                        <Icon name="instagram" size={18} />
+                        {data.socials.instagram}
+                    </a>
+                </div>
+                {/* Simulated Feed */}
+                <div className="flex gap-4 px-4 overflow-x-auto no-scrollbar pb-8">
+                    {[
+                        "https://images.unsplash.com/photo-1509365465985-25d11c17e812?w=400&q=80",
+                        "https://images.unsplash.com/photo-1495474472207-464a8d4ee48b?w=400&q=80",
+                        "https://images.unsplash.com/photo-1550428312-70b991307b22?w=400&q=80",
+                        "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80",
+                        "https://images.unsplash.com/photo-1549903072-7e6e0bedb7fb?w=400&q=80"
+                    ].map((src, i) => (
+                        <div key={i} className="flex-shrink-0 w-64 md:w-72 h-64 md:h-72 bg-brand-border group relative cursor-pointer overflow-hidden rounded-sm">
+                            <img src={src} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                            <div className="absolute inset-0 bg-brand-coffee/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                <Icon name="heart" className="text-white" />
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </section>
+        );
+
+        const FinalCTA = ({ data }) => (
+            <section className="py-32 bg-brand-coffee text-brand-cream text-center px-6">
+                <div className="container mx-auto max-w-3xl">
+                    <Icon name="coffee" size={40} className="mx-auto mb-8 text-brand-terracotta opacity-80" strokeWidth={1} />
+                    <h2 className="text-4xl md:text-5xl font-serif mb-6 leading-tight">COME FOR THE COFFEE.<br/>STAY FOR THE MOMENT.</h2>
+                    <p className="text-brand-cream/70 text-lg mb-12">Freshly baked favorites and good coffee are waiting.</p>
+                    <div className="flex flex-col sm:flex-row justify-center gap-4">
+                        <Button variant="terracotta">ORDER ONLINE</Button>
+                        <Button variant="secondary" className="border-brand-cream text-brand-cream hover:bg-brand-cream hover:text-brand-coffee">VIEW MENU</Button>
+                    </div>
+                </div>
+            </section>
+        );
+
+        // Main App Component
+        const App = () => {
+            // In a real scenario, this state would be populated via fetch() from the API using TEMPLATE_CONFIG
+            const [content, setContent] = useState(initialContent);
+
+            return (
+                <div className="font-sans text-brand-coffee selection:bg-brand-terracotta/30 selection:text-brand-coffee">
+                    <Navbar data={content.global} />
+                    
+                    <main>
+                        <Hero data={content.hero} />
+                        <BrandIntro data={content.intro} />
+                        <ProductHighlights data={content.highlights} />
+                        <CoffeeSection data={content.coffeeSection} />
+                        <MenuSection data={content.menu} />
+                        <ProcessSection data={content.process} />
+                        <PromoSection data={content.promo} />
+                        <FullWidthExperience data={content.experience} />
+                        <Gallery data={content.gallery} />
+                        <BrandStory data={content.story} />
+                        <Testimonials data={content.testimonials} />
+                        <VisitUs data={content.global} />
+                        <Instagram data={content.global} />
+                        <FinalCTA data={content.global} />
+                    </main>
+
+                    <Footer data={content.global} />
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

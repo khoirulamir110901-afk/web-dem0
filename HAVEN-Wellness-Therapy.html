@@ -1,0 +1,2841 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HAVEN Wellness & Massage Sanctuary — Jasa Pijat Profesional & Booking Online</title>
+  <meta name="description" content="Layanan pijat profesional dan wellness eksklusif untuk meredakan ketegangan otot dan mengembalikan kesegaran tubuh. Booking terapis bersertifikat online dengan mudah dan cepat.">
+  <meta name="keywords" content="jasa pijat, massage profesional, deep tissue massage, reflexology, relaxation massage, spa wellness, booking pijat online">
+  
+  <!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Preload Primary Hero Image for Faster Loading -->
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=2070&auto=format&fit=crop">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              charcoal: '#151D19', // Deep luxurious charcoal forest
+              forest: '#1E2D27',
+              moss: '#2B3D35',
+              sand: '#F7F4EE',    // Warm soothing cream background
+              stone: '#EFEAE1',   // Card border / surface
+              gold: '#C5A059',    // Elegant muted champagne gold
+              goldhover: '#B58E45',
+              cream: '#FAF8F5',
+              muted: '#6F7A74',
+            }
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          boxShadow: {
+            'soft': '0 10px 30px -10px rgba(21, 29, 25, 0.07)',
+            'premium': '0 20px 40px -15px rgba(21, 29, 25, 0.12)',
+            'gold': '0 8px 25px -5px rgba(197, 160, 89, 0.35)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom refined scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F7F4EE;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #D5CBBF;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #C5A059;
+    }
+    
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #D6B268 0%, #B38B3F 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .hero-mask {
+      background: linear-gradient(180deg, rgba(21, 29, 25, 0.65) 0%, rgba(21, 29, 25, 0.88) 100%);
+    }
+
+    /* Modal transition */
+    .fade-in {
+      animation: fadeIn 0.3s ease-in-out forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.98); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body class="bg-brand-sand text-brand-charcoal font-sans antialiased selection:bg-brand-gold selection:text-white pb-20 md:pb-0">
+
+  <!-- Top Announce Bar -->
+  <div id="topBanner" class="bg-brand-forest text-brand-sand text-xs py-2 px-4 text-center tracking-wide flex justify-center items-center gap-2 font-medium border-b border-white/10">
+    <span class="inline-block w-2 h-2 rounded-full bg-brand-gold animate-pulse"></span>
+    <span id="bannerText">PENAWARAN SPESIAL: Diskon 15% untuk Booking Sesi Hari Kerja (Senin - Kamis).</span>
+    <a href="#bookingSection" class="underline text-brand-gold hover:text-white transition-colors ml-2 font-semibold">Klaim Sekarang</a>
+  </div>
+
+  <!-- Main Navigation Header -->
+  <header id="mainHeader" class="sticky top-0 z-40 w-full transition-all duration-300 bg-brand-sand/90 backdrop-blur-md border-b border-brand-stone">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-full border border-brand-gold/40 flex items-center justify-center bg-white shadow-sm group-hover:border-brand-gold transition-colors">
+          <i data-lucide="sparkles" class="w-5 h-5 text-brand-gold"></i>
+        </div>
+        <div>
+          <span id="navBrandName" class="font-serif text-2xl font-bold tracking-tight text-brand-charcoal block leading-tight">HAVEN</span>
+          <span class="text-[10px] tracking-[0.25em] text-brand-muted uppercase block font-semibold">Wellness & Therapy</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-brand-charcoal/80">
+        <a href="#beranda" class="hover:text-brand-gold transition-colors">Beranda</a>
+        <a href="#layanan" class="hover:text-brand-gold transition-colors">Layanan</a>
+        <a href="#terapis" class="hover:text-brand-gold transition-colors">Terapis</a>
+        <a href="#harga" class="hover:text-brand-gold transition-colors">Harga</a>
+        <a href="#keunggulan" class="hover:text-brand-gold transition-colors">Tentang Kami</a>
+        <a href="#faq" class="hover:text-brand-gold transition-colors">FAQ</a>
+        <a href="#lokasi" class="hover:text-brand-gold transition-colors">Kontak</a>
+      </nav>
+
+      <!-- Header CTA (Admin moved to Footer as requested) -->
+      <div class="hidden sm:flex items-center gap-4">
+        <a href="#bookingSection" id="navCtaButton" class="bg-brand-charcoal text-white hover:bg-brand-moss px-6 py-3 rounded-full text-xs uppercase tracking-widest font-semibold transition-all duration-300 shadow-soft hover:shadow-premium flex items-center gap-2 group">
+          <span id="navCtaText">Booking Sekarang</span>
+          <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform text-brand-gold"></i>
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <div class="flex items-center gap-2 lg:hidden">
+        <button id="mobileMenuToggle" onclick="toggleMobileMenu()" class="p-2.5 rounded-lg text-brand-charcoal hover:bg-brand-stone transition-colors" aria-label="Menu">
+          <i data-lucide="menu" id="menuIcon" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Menu -->
+    <div id="mobileMenu" class="hidden lg:hidden bg-white border-b border-brand-stone px-6 py-6 space-y-4 shadow-xl">
+      <nav class="flex flex-col space-y-3 text-base font-medium">
+        <a href="#beranda" onclick="toggleMobileMenu()" class="text-brand-charcoal hover:text-brand-gold py-1">Beranda</a>
+        <a href="#layanan" onclick="toggleMobileMenu()" class="text-brand-charcoal hover:text-brand-gold py-1">Layanan</a>
+        <a href="#terapis" onclick="toggleMobileMenu()" class="text-brand-charcoal hover:text-brand-gold py-1">Terapis</a>
+        <a href="#harga" onclick="toggleMobileMenu()" class="text-brand-charcoal hover:text-brand-gold py-1">Harga</a>
+        <a href="#keunggulan" onclick="toggleMobileMenu()" class="text-brand-charcoal hover:text-brand-gold py-1">Tentang Kami</a>
+        <a href="#faq" onclick="toggleMobileMenu()" class="text-brand-charcoal hover:text-brand-gold py-1">FAQ</a>
+        <a href="#lokasi" onclick="toggleMobileMenu()" class="text-brand-charcoal hover:text-brand-gold py-1">Kontak</a>
+      </nav>
+      <div class="pt-4 border-t border-brand-stone">
+        <a href="#bookingSection" onclick="toggleMobileMenu()" class="w-full bg-brand-charcoal text-white text-center py-3.5 rounded-full text-sm font-semibold tracking-wider uppercase block shadow-soft">
+          Booking Jadwal Sekarang
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <section id="beranda" class="relative min-h-[85vh] flex items-center py-20 lg:py-28 overflow-hidden bg-brand-forest">
+    <!-- Natural Wellness Background Image -->
+    <div class="absolute inset-0 z-0">
+      <img id="heroImageSrc" src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=2070&auto=format&fit=crop" 
+           alt="Luxury Wellness and Spa Experience" 
+           class="w-full h-full object-cover object-center filter brightness-90">
+      <div class="absolute inset-0 hero-mask"></div>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      <div class="max-w-2xl text-white">
+        <!-- Sub-badge -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-brand-gold text-xs font-semibold tracking-wider uppercase mb-6">
+          <i data-lucide="shield-check" class="w-4 h-4 text-brand-gold"></i>
+          <span id="heroBadge">Certified Wellness Sanctuary</span>
+        </div>
+
+        <!-- Headline -->
+        <h1 id="heroTitle" class="font-serif text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[1.15] mb-6 tracking-tight text-brand-cream">
+          Rasakan Relaksasi yang Benar-Benar Anda Butuhkan.
+        </h1>
+
+        <!-- Subheadline -->
+        <p id="heroSubtitle" class="text-base sm:text-lg text-white/80 font-light leading-relaxed mb-10">
+          Layanan pijat profesional dengan teknik terstandarisasi untuk meredakan kelelahan fisik, melancarkan sirkulasi, dan mengembalikan harmoni tubuh serta pikiran Anda.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-12">
+          <a href="#bookingSection" id="heroCtaPrimary" class="bg-brand-gold hover:bg-brand-goldhover text-brand-charcoal text-center px-8 py-4 rounded-full font-semibold text-sm tracking-wider uppercase transition-all duration-300 shadow-gold flex items-center justify-center gap-2.5">
+            <span id="heroCtaPrimaryText">Booking Sekarang</span>
+            <i data-lucide="calendar" class="w-4 h-4"></i>
+          </a>
+          <a href="#layanan" id="heroCtaSecondary" class="bg-white/10 hover:bg-white/20 text-white border border-white/25 text-center px-8 py-4 rounded-full font-medium text-sm tracking-wide transition-all backdrop-blur-sm flex items-center justify-center">
+            <span id="heroCtaSecondaryText">Lihat Menu Layanan</span>
+          </a>
+        </div>
+
+        <!-- Trust Badges Under CTA -->
+        <div class="pt-8 border-t border-white/15 grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs font-medium text-white/85">
+          <div class="flex items-center gap-2">
+            <i data-lucide="check-circle" class="w-4 h-4 text-brand-gold shrink-0"></i>
+            <span>Terapis Bersertifikat</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <i data-lucide="check-circle" class="w-4 h-4 text-brand-gold shrink-0"></i>
+            <span>Booking Real-time</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <i data-lucide="check-circle" class="w-4 h-4 text-brand-gold shrink-0"></i>
+            <span>Jadwal Fleksibel</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <i data-lucide="check-circle" class="w-4 h-4 text-brand-gold shrink-0"></i>
+            <span>Higienis & Privat</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white border-b border-brand-stone py-8 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center divide-y md:divide-y-0 md:divide-x divide-brand-stone">
+        
+        <div class="pt-4 md:pt-0">
+          <div class="flex items-center justify-center gap-1 text-brand-gold mb-1">
+            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+            <span class="font-serif text-3xl font-bold text-brand-charcoal">4.9</span>
+            <span class="text-xs text-brand-muted font-normal">/ 5.0</span>
+          </div>
+          <p class="text-xs font-medium uppercase tracking-wider text-brand-muted">Rating Kepuasan Tamu</p>
+        </div>
+
+        <div class="pt-4 md:pt-0">
+          <div class="font-serif text-3xl font-bold text-brand-charcoal mb-1">1.500+</div>
+          <p class="text-xs font-medium uppercase tracking-wider text-brand-muted">Sesi Pijat Terselesaikan</p>
+        </div>
+
+        <div class="pt-4 md:pt-0">
+          <div class="font-serif text-3xl font-bold text-brand-charcoal mb-1">100%</div>
+          <p class="text-xs font-medium uppercase tracking-wider text-brand-muted">Minyak Aromaterapi Alami</p>
+        </div>
+
+        <div class="pt-4 md:pt-0">
+          <div class="font-serif text-3xl font-bold text-brand-charcoal mb-1">6+ Tahun</div>
+          <p class="text-xs font-medium uppercase tracking-wider text-brand-muted">Dedikasi Pengalaman</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="layanan" class="py-24 bg-brand-sand">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-xs font-bold uppercase tracking-[0.25em] text-brand-gold block mb-3">Menu Perawatan</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-brand-charcoal mb-4">Pilih Perawatan yang Sesuai Kebutuhan Anda</h2>
+        <p class="text-brand-muted text-sm sm:text-base font-light">
+          Setiap sentuhan dirancang khusus dengan perpaduan teknik tradisional dan keahlian anatomis untuk merelaksasi setiap jengkal tubuh.
+        </p>
+      </div>
+
+      <!-- Services Grid Container -->
+      <div id="servicesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Injected via JavaScript from data store -->
+      </div>
+
+      <!-- Service Note -->
+      <div class="mt-14 p-6 rounded-2xl bg-white border border-brand-stone flex flex-col md:flex-row items-center justify-between gap-4 max-w-4xl mx-auto shadow-soft">
+        <div class="flex items-center gap-4 text-left">
+          <div class="w-12 h-12 rounded-xl bg-brand-sand flex items-center justify-center shrink-0 text-brand-gold border border-brand-gold/20">
+            <i data-lucide="help-circle" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h4 class="font-serif font-bold text-base text-brand-charcoal">Bingung memilih terapi yang tepat?</h4>
+            <p class="text-xs text-brand-muted mt-0.5">Konsultasikan keluhan pegal atau ketegangan Anda gratis bersama staf resepsionis kami via WhatsApp.</p>
+          </div>
+        </div>
+        <a href="https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20ingin%20konsultasi%20layanan%20pijat%20yang%20sesuai." target="_blank" class="shrink-0 px-5 py-2.5 rounded-full border border-brand-charcoal text-brand-charcoal hover:bg-brand-charcoal hover:text-white transition-colors text-xs font-semibold uppercase tracking-wider">
+          Tanya Terapis
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="bookingSection" class="py-24 bg-white border-y border-brand-stone relative">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Header Booking -->
+      <div class="text-center max-w-xl mx-auto mb-12">
+        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-sand text-brand-gold text-xs font-semibold uppercase tracking-widest border border-brand-stone mb-3">
+          <i data-lucide="check" class="w-3.5 h-3.5"></i> Sistem Reservasi Instan
+        </span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-brand-charcoal mb-3">Booking Appointment</h2>
+        <p class="text-sm text-brand-muted">Lakukan reservasi dalam beberapa ketukan dengan konfirmasi jadwal langsung tanpa menunggu antrean.</p>
+      </div>
+
+      <!-- Step Indicator Ribbon -->
+      <div class="mb-12 overflow-x-auto pb-2">
+        <div class="flex items-center justify-between min-w-[550px] relative">
+          <div class="absolute left-0 top-1/2 -translate-y-1/2 w-full h-[2px] bg-brand-stone -z-0"></div>
+          
+          <!-- Step 1 Indicator -->
+          <div class="step-badge relative z-10 flex flex-col items-center gap-1 cursor-pointer" onclick="goToStep(1)">
+            <div id="stepDot1" class="w-9 h-9 rounded-full bg-brand-charcoal text-white text-xs font-semibold flex items-center justify-center shadow-md transition-all">1</div>
+            <span class="text-[11px] font-semibold text-brand-charcoal uppercase tracking-wider">Layanan</span>
+          </div>
+
+          <!-- Step 2 Indicator -->
+          <div class="step-badge relative z-10 flex flex-col items-center gap-1 cursor-pointer" onclick="goToStep(2)">
+            <div id="stepDot2" class="w-9 h-9 rounded-full bg-brand-sand border border-brand-stone text-brand-muted text-xs font-semibold flex items-center justify-center transition-all">2</div>
+            <span class="text-[11px] font-semibold text-brand-muted uppercase tracking-wider">Terapis</span>
+          </div>
+
+          <!-- Step 3 Indicator -->
+          <div class="step-badge relative z-10 flex flex-col items-center gap-1 cursor-pointer" onclick="goToStep(3)">
+            <div id="stepDot3" class="w-9 h-9 rounded-full bg-brand-sand border border-brand-stone text-brand-muted text-xs font-semibold flex items-center justify-center transition-all">3</div>
+            <span class="text-[11px] font-semibold text-brand-muted uppercase tracking-wider">Tanggal</span>
+          </div>
+
+          <!-- Step 4 Indicator -->
+          <div class="step-badge relative z-10 flex flex-col items-center gap-1 cursor-pointer" onclick="goToStep(4)">
+            <div id="stepDot4" class="w-9 h-9 rounded-full bg-brand-sand border border-brand-stone text-brand-muted text-xs font-semibold flex items-center justify-center transition-all">4</div>
+            <span class="text-[11px] font-semibold text-brand-muted uppercase tracking-wider">Waktu</span>
+          </div>
+
+          <!-- Step 5 Indicator -->
+          <div class="step-badge relative z-10 flex flex-col items-center gap-1 cursor-pointer" onclick="goToStep(5)">
+            <div id="stepDot5" class="w-9 h-9 rounded-full bg-brand-sand border border-brand-stone text-brand-muted text-xs font-semibold flex items-center justify-center transition-all">5</div>
+            <span class="text-[11px] font-semibold text-brand-muted uppercase tracking-wider">Data Diri</span>
+          </div>
+
+          <!-- Step 6 Indicator -->
+          <div class="step-badge relative z-10 flex flex-col items-center gap-1 cursor-pointer" onclick="goToStep(6)">
+            <div id="stepDot6" class="w-9 h-9 rounded-full bg-brand-sand border border-brand-stone text-brand-muted text-xs font-semibold flex items-center justify-center transition-all">6</div>
+            <span class="text-[11px] font-semibold text-brand-muted uppercase tracking-wider">Konfirmasi</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Booking Card Container -->
+      <div class="bg-brand-sand rounded-3xl p-6 sm:p-10 border border-brand-stone shadow-soft min-h-[460px] flex flex-col justify-between">
+        
+        <!-- STEP 1: Pilih Layanan & Durasi -->
+        <div id="bookingStep1" class="space-y-6">
+          <div class="flex items-center justify-between border-b border-brand-stone pb-4">
+            <div>
+              <h3 class="font-serif text-xl font-bold text-brand-charcoal">Step 1: Pilih Jenis Layanan & Durasi</h3>
+              <p class="text-xs text-brand-muted">Tentukan paket pijat dan waktu yang Anda kehendaki.</p>
+            </div>
+            <span class="text-xs font-mono font-medium text-brand-gold bg-white px-3 py-1 rounded-full border border-brand-stone">Tahap 1 dari 6</span>
+          </div>
+
+          <div id="bookingServiceOptions" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Rendered by JS -->
+          </div>
+
+          <div class="pt-4 border-t border-brand-stone flex justify-between items-center">
+            <span class="text-xs text-brand-muted">Silakan pilih salah satu layanan di atas untuk lanjut.</span>
+            <button onclick="nextFromStep1()" class="bg-brand-charcoal text-white hover:bg-brand-forest px-8 py-3 rounded-full text-xs font-semibold uppercase tracking-wider transition-all flex items-center gap-2">
+              Lanjut ke Terapis <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 2: Pilih Terapis -->
+        <div id="bookingStep2" class="hidden space-y-6">
+          <div class="flex items-center justify-between border-b border-brand-stone pb-4">
+            <div>
+              <h3 class="font-serif text-xl font-bold text-brand-charcoal">Step 2: Pilih Terapis Anda</h3>
+              <p class="text-xs text-brand-muted">Pilih terapis favorit Anda atau biarkan sistem memilihkan terapis terbaik.</p>
+            </div>
+            <span class="text-xs font-mono font-medium text-brand-gold bg-white px-3 py-1 rounded-full border border-brand-stone">Tahap 2 dari 6</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4" id="bookingTherapistList">
+            <!-- Rendered by JS -->
+          </div>
+
+          <div class="pt-4 border-t border-brand-stone flex justify-between items-center">
+            <button onclick="goToStep(1)" class="px-6 py-3 rounded-full text-xs font-semibold uppercase tracking-wider text-brand-charcoal hover:bg-brand-stone transition-all flex items-center gap-2">
+              <i data-lucide="arrow-left" class="w-4 h-4"></i> Kembali
+            </button>
+            <button onclick="nextFromStep2()" class="bg-brand-charcoal text-white hover:bg-brand-forest px-8 py-3 rounded-full text-xs font-semibold uppercase tracking-wider transition-all flex items-center gap-2">
+              Lanjut Pilih Tanggal <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 3: Pilih Tanggal -->
+        <div id="bookingStep3" class="hidden space-y-6">
+          <div class="flex items-center justify-between border-b border-brand-stone pb-4">
+            <div>
+              <h3 class="font-serif text-xl font-bold text-brand-charcoal">Step 3: Tentukan Tanggal Perawatan</h3>
+              <p class="text-xs text-brand-muted">Pilih hari kunjungan Anda dalam 14 hari ke depan.</p>
+            </div>
+            <span class="text-xs font-mono font-medium text-brand-gold bg-white px-3 py-1 rounded-full border border-brand-stone">Tahap 3 dari 6</span>
+          </div>
+
+          <!-- Date Selector Grid (Next 14 Days) -->
+          <div class="overflow-x-auto py-2">
+            <div id="dateCardsContainer" class="flex gap-3 min-w-max pb-2">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+
+          <div class="p-4 rounded-xl bg-white border border-brand-stone flex items-center gap-3 text-xs text-brand-muted">
+            <i data-lucide="info" class="w-4 h-4 text-brand-gold shrink-0"></i>
+            <span>Jadwal buka setiap hari mulai pukul 09:00 hingga 22:00 WIB. Pemesanan dapat dilakukan maksimal 14 hari sebelumnya.</span>
+          </div>
+
+          <div class="pt-4 border-t border-brand-stone flex justify-between items-center">
+            <button onclick="goToStep(2)" class="px-6 py-3 rounded-full text-xs font-semibold uppercase tracking-wider text-brand-charcoal hover:bg-brand-stone transition-all flex items-center gap-2">
+              <i data-lucide="arrow-left" class="w-4 h-4"></i> Kembali
+            </button>
+            <button onclick="nextFromStep3()" class="bg-brand-charcoal text-white hover:bg-brand-forest px-8 py-3 rounded-full text-xs font-semibold uppercase tracking-wider transition-all flex items-center gap-2">
+              Lanjut Pilih Jam <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 4: Pilih Jam (Availability Matrix) -->
+        <div id="bookingStep4" class="hidden space-y-6">
+          <div class="flex items-center justify-between border-b border-brand-stone pb-4">
+            <div>
+              <h3 class="font-serif text-xl font-bold text-brand-charcoal">Step 4: Pilih Slot Waktu</h3>
+              <p class="text-xs text-brand-muted">Slot diperbarui secara real-time berdasarkan ketersediaan terapis.</p>
+            </div>
+            <span class="text-xs font-mono font-medium text-brand-gold bg-white px-3 py-1 rounded-full border border-brand-stone">Tahap 4 dari 6</span>
+          </div>
+
+          <div class="space-y-4">
+            <div class="flex items-center gap-4 text-xs font-medium text-brand-muted">
+              <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-white border border-brand-stone"></span> Tersedia</span>
+              <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-brand-charcoal"></span> Dipilih</span>
+              <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-red-100 text-red-500 border border-red-200"></span> Penuh (FULL)</span>
+            </div>
+
+            <!-- Time Slot Grid -->
+            <div id="timeSlotsGrid" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-brand-stone flex justify-between items-center">
+            <button onclick="goToStep(3)" class="px-6 py-3 rounded-full text-xs font-semibold uppercase tracking-wider text-brand-charcoal hover:bg-brand-stone transition-all flex items-center gap-2">
+              <i data-lucide="arrow-left" class="w-4 h-4"></i> Kembali
+            </button>
+            <button onclick="nextFromStep4()" class="bg-brand-charcoal text-white hover:bg-brand-forest px-8 py-3 rounded-full text-xs font-semibold uppercase tracking-wider transition-all flex items-center gap-2">
+              Lanjut Isi Data <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 5: Data Pelanggan -->
+        <div id="bookingStep5" class="hidden space-y-6">
+          <div class="flex items-center justify-between border-b border-brand-stone pb-4">
+            <div>
+              <h3 class="font-serif text-xl font-bold text-brand-charcoal">Step 5: Informasi Pelanggan</h3>
+              <p class="text-xs text-brand-muted">Isi kontak aktif Anda untuk pengiriman tiket reservasi & konfirmasi WhatsApp.</p>
+            </div>
+            <span class="text-xs font-mono font-medium text-brand-gold bg-white px-3 py-1 rounded-full border border-brand-stone">Tahap 5 dari 6</span>
+          </div>
+
+          <form id="customerForm" onsubmit="event.preventDefault(); nextFromStep5();" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="space-y-1">
+              <label class="text-xs font-semibold uppercase tracking-wider text-brand-charcoal">Nama Lengkap <span class="text-red-500">*</span></label>
+              <input type="text" id="custName" required placeholder="Contoh: Budi Santoso" class="w-full px-4 py-3 rounded-xl bg-white border border-brand-stone focus:border-brand-gold focus:outline-none text-sm">
+            </div>
+
+            <div class="space-y-1">
+              <label class="text-xs font-semibold uppercase tracking-wider text-brand-charcoal">Nomor WhatsApp Aktif <span class="text-red-500">*</span></label>
+              <input type="tel" id="custPhone" required placeholder="081234567890" class="w-full px-4 py-3 rounded-xl bg-white border border-brand-stone focus:border-brand-gold focus:outline-none text-sm">
+            </div>
+
+            <div class="space-y-1 md:col-span-2">
+              <label class="text-xs font-semibold uppercase tracking-wider text-brand-charcoal">Alamat Email (Opsional)</label>
+              <input type="email" id="custEmail" placeholder="nama@email.com" class="w-full px-4 py-3 rounded-xl bg-white border border-brand-stone focus:border-brand-gold focus:outline-none text-sm">
+            </div>
+
+            <div class="space-y-1 md:col-span-2">
+              <label class="text-xs font-semibold uppercase tracking-wider text-brand-charcoal">Catatan Khusus / Area Fokus Pegal</label>
+              <textarea id="custNotes" rows="2" placeholder="Contoh: Tolong fokus pada area bahu dan leher, tekanan sedang." class="w-full px-4 py-3 rounded-xl bg-white border border-brand-stone focus:border-brand-gold focus:outline-none text-sm"></textarea>
+            </div>
+
+            <div class="md:col-span-2 flex items-start gap-2 pt-2">
+              <input type="checkbox" id="agreeTerms" required class="mt-1 w-4 h-4 rounded border-brand-stone text-brand-charcoal focus:ring-brand-gold">
+              <label for="agreeTerms" class="text-xs text-brand-muted leading-relaxed">
+                Saya menyetujui kebijakan reservasi, kepatuhan jadwal tiba tepat waktu (10 menit sebelum sesi), dan pemrosesan data untuk konfirmasi.
+              </label>
+            </div>
+          </form>
+
+          <div class="pt-4 border-t border-brand-stone flex justify-between items-center">
+            <button onclick="goToStep(4)" class="px-6 py-3 rounded-full text-xs font-semibold uppercase tracking-wider text-brand-charcoal hover:bg-brand-stone transition-all flex items-center gap-2">
+              <i data-lucide="arrow-left" class="w-4 h-4"></i> Kembali
+            </button>
+            <button onclick="nextFromStep5()" class="bg-brand-charcoal text-white hover:bg-brand-forest px-8 py-3 rounded-full text-xs font-semibold uppercase tracking-wider transition-all flex items-center gap-2">
+              Lihat Ringkasan <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 6: Konfirmasi & Ringkasan Final -->
+        <div id="bookingStep6" class="hidden space-y-6">
+          <div class="flex items-center justify-between border-b border-brand-stone pb-4">
+            <div>
+              <h3 class="font-serif text-xl font-bold text-brand-charcoal">Step 6: Tinjau & Konfirmasi Reservasi</h3>
+              <p class="text-xs text-brand-muted">Pastikan detail jadwal dan perawatan Anda telah akurat sebelum dikirim.</p>
+            </div>
+            <span class="text-xs font-mono font-medium text-brand-gold bg-white px-3 py-1 rounded-full border border-brand-stone">Tahap 6 dari 6</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Summary Details (Left 2 cols) -->
+            <div class="md:col-span-2 bg-white rounded-2xl p-6 border border-brand-stone space-y-4">
+              <div class="flex justify-between items-start border-b border-brand-stone pb-3">
+                <div>
+                  <span class="text-[11px] font-bold uppercase tracking-wider text-brand-gold">Paket Layanan</span>
+                  <h4 id="summaryServiceName" class="font-serif text-lg font-bold text-brand-charcoal">-</h4>
+                </div>
+                <span id="summaryDuration" class="px-3 py-1 rounded-full bg-brand-sand text-xs font-semibold text-brand-charcoal">-</span>
+              </div>
+
+              <div class="grid grid-cols-2 gap-4 text-xs">
+                <div>
+                  <span class="text-brand-muted block">Terapis:</span>
+                  <span id="summaryTherapistName" class="font-bold text-brand-charcoal text-sm">-</span>
+                </div>
+                <div>
+                  <span class="text-brand-muted block">Jadwal Perawatan:</span>
+                  <span id="summaryDateTime" class="font-bold text-brand-charcoal text-sm">-</span>
+                </div>
+                <div>
+                  <span class="text-brand-muted block">Nama Tamu:</span>
+                  <span id="summaryCustName" class="font-semibold text-brand-charcoal">-</span>
+                </div>
+                <div>
+                  <span class="text-brand-muted block">WhatsApp:</span>
+                  <span id="summaryCustPhone" class="font-semibold text-brand-charcoal">-</span>
+                </div>
+              </div>
+
+              <div id="summaryNotesBlock" class="pt-2 text-xs text-brand-muted border-t border-brand-stone">
+                <span class="font-medium text-brand-charcoal">Catatan:</span> <span id="summaryNotes">-</span>
+              </div>
+            </div>
+
+            <!-- Price Breakdown (Right col) -->
+            <div class="bg-brand-forest text-white rounded-2xl p-6 flex flex-col justify-between">
+              <div>
+                <span class="text-xs uppercase tracking-widest text-brand-gold font-semibold block mb-1">Rincian Biaya</span>
+                <div class="space-y-2 mt-4 text-xs">
+                  <div class="flex justify-between text-white/70">
+                    <span>Tarif Perawatan:</span>
+                    <span id="summaryPriceSubtotal">Rp0</span>
+                  </div>
+                  <div class="flex justify-between text-white/70">
+                    <span>Biaya Reservasi:</span>
+                    <span class="text-brand-gold">GRATIS</span>
+                  </div>
+                  <div class="flex justify-between text-white/70">
+                    <span>Diskon Promo:</span>
+                    <span id="summaryDiscount" class="text-emerald-400">-Rp0</span>
+                  </div>
+                  <div class="pt-3 border-t border-white/10 flex justify-between items-baseline font-bold text-base">
+                    <span class="text-sm font-light">Total Pembayaran:</span>
+                    <span id="summaryPriceTotal" class="text-brand-gold font-serif text-xl">Rp0</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-6 pt-4 border-t border-white/10 text-[11px] text-white/60 leading-tight">
+                *Pembayaran dapat diselesaikan di lokasi saat kedatangan (Cash / QRIS / Transfer).
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-brand-stone flex justify-between items-center">
+            <button onclick="goToStep(5)" class="px-6 py-3 rounded-full text-xs font-semibold uppercase tracking-wider text-brand-charcoal hover:bg-brand-stone transition-all flex items-center gap-2">
+              <i data-lucide="arrow-left" class="w-4 h-4"></i> Edit Data
+            </button>
+            <button id="btnFinalConfirm" onclick="finalizeBooking()" class="bg-brand-gold hover:bg-brand-goldhover text-brand-charcoal px-8 py-3.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all shadow-gold flex items-center gap-2">
+              <span>Konfirmasi Booking Sekarang</span>
+              <i data-lucide="check-circle" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div id="bookingSuccessModal" class="fixed inset-0 z-50 bg-brand-charcoal/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-8 border border-brand-stone shadow-2xl relative fade-in text-center">
+      
+      <!-- Success Icon -->
+      <div class="w-16 h-16 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-600 flex items-center justify-center mx-auto mb-5">
+        <i data-lucide="check" class="w-8 h-8 stroke-[2.5]"></i>
+      </div>
+
+      <span class="text-xs font-mono font-semibold uppercase tracking-wider text-brand-gold block mb-1">Reservasi Terkonfirmasi</span>
+      <h3 class="font-serif text-3xl font-bold text-brand-charcoal mb-2">Booking Berhasil!</h3>
+      <p class="text-xs text-brand-muted mb-6">Terima kasih. Jadwal sesi relaksasi Anda telah tersimpan rapi dalam sistem kami.</p>
+
+      <!-- Ticket Receipt Card -->
+      <div class="bg-brand-sand rounded-2xl p-5 border border-brand-stone text-left text-xs space-y-2.5 mb-6">
+        <div class="flex justify-between items-center border-b border-brand-stone pb-2">
+          <span class="text-brand-muted">Booking ID:</span>
+          <span id="ticketId" class="font-mono font-bold text-brand-charcoal text-sm">#MSG-20260920-001</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-brand-muted">Nama:</span>
+          <span id="ticketName" class="font-semibold text-brand-charcoal">-</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-brand-muted">Layanan:</span>
+          <span id="ticketService" class="font-semibold text-brand-charcoal">-</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-brand-muted">Terapis:</span>
+          <span id="ticketTherapist" class="font-semibold text-brand-charcoal">-</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-brand-muted">Jadwal:</span>
+          <span id="ticketSchedule" class="font-semibold text-brand-charcoal">-</span>
+        </div>
+        <div class="flex justify-between pt-2 border-t border-brand-stone font-bold text-sm">
+          <span>Total Biaya:</span>
+          <span id="ticketTotal" class="text-brand-gold font-serif">-</span>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="space-y-3">
+        <a id="btnWhatsAppConfirm" href="#" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3.5 px-6 rounded-full text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md">
+          <i data-lucide="message-circle" class="w-4 h-4"></i>
+          <span>Konfirmasi via WhatsApp Sekarang</span>
+        </a>
+        <div class="grid grid-cols-2 gap-3">
+          <button onclick="addToGoogleCalendar()" class="w-full py-3 px-4 rounded-full border border-brand-stone hover:bg-brand-sand text-brand-charcoal text-xs font-medium flex items-center justify-center gap-1.5 transition-colors">
+            <i data-lucide="calendar-plus" class="w-4 h-4 text-brand-gold"></i>
+            <span>Simpan Kalender</span>
+          </button>
+          <button onclick="closeSuccessModal()" class="w-full py-3 px-4 rounded-full bg-brand-charcoal hover:bg-brand-forest text-white text-xs font-medium transition-colors">
+            Selesai
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <section id="terapis" class="py-24 bg-brand-sand">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-xs font-bold uppercase tracking-[0.25em] text-brand-gold block mb-3">Tim Ahli Kami</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-brand-charcoal mb-4">Terapis Profesional & Bersertifikat</h2>
+        <p class="text-brand-muted text-sm sm:text-base font-light">
+          Setiap terapis telah melalui pelatihan intensif anatomi tubuh, teknik pijat terapeutik, dan protokol keramahan standar tinggi.
+        </p>
+      </div>
+
+      <div id="therapistsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Rendered by JS -->
+      </div>
+
+    </div>
+  </section>
+
+  <section id="keunggulan" class="py-24 bg-white border-y border-brand-stone">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-xs font-bold uppercase tracking-[0.25em] text-brand-gold block mb-3">Standar Kualitas</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-brand-charcoal mb-4">Kenapa Pelanggan Memilih Kami?</h2>
+        <p class="text-brand-muted text-sm sm:text-base font-light">
+          Kami mengutamakan higienitas mutlak, teknik yang aman bagi tubuh, serta transparansi tanpa biaya terselubung.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        
+        <div class="p-6 rounded-2xl bg-brand-sand/60 border border-brand-stone hover:border-brand-gold/40 transition-all group">
+          <div class="w-12 h-12 rounded-xl bg-white flex items-center justify-center text-brand-gold shadow-sm mb-5 group-hover:bg-brand-charcoal group-hover:text-brand-gold transition-colors">
+            <i data-lucide="award" class="w-6 h-6"></i>
+          </div>
+          <h4 class="font-serif font-bold text-lg text-brand-charcoal mb-2">Terapis Berpengalaman</h4>
+          <p class="text-xs text-brand-muted leading-relaxed">Terapis wanita & pria dengan sertifikasi resmi serta jam terbang minimal 3 tahun.</p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-brand-sand/60 border border-brand-stone hover:border-brand-gold/40 transition-all group">
+          <div class="w-12 h-12 rounded-xl bg-white flex items-center justify-center text-brand-gold shadow-sm mb-5 group-hover:bg-brand-charcoal group-hover:text-brand-gold transition-colors">
+            <i data-lucide="home" class="w-6 h-6"></i>
+          </div>
+          <h4 class="font-serif font-bold text-lg text-brand-charcoal mb-2">Ruangan Bersih & Privat</h4>
+          <p class="text-xs text-brand-muted leading-relaxed">Suhu sejuk teratur, seprai & handuk steril diganti setiap sesi tamu baru.</p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-brand-sand/60 border border-brand-stone hover:border-brand-gold/40 transition-all group">
+          <div class="w-12 h-12 rounded-xl bg-white flex items-center justify-center text-brand-gold shadow-sm mb-5 group-hover:bg-brand-charcoal group-hover:text-brand-gold transition-colors">
+            <i data-lucide="clock" class="w-6 h-6"></i>
+          </div>
+          <h4 class="font-serif font-bold text-lg text-brand-charcoal mb-2">Booking Online 24/7</h4>
+          <p class="text-xs text-brand-muted leading-relaxed">Pilih jadwal dan terapis kapan saja secara transparan tanpa repot telepon.</p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-brand-sand/60 border border-brand-stone hover:border-brand-gold/40 transition-all group">
+          <div class="w-12 h-12 rounded-xl bg-white flex items-center justify-center text-brand-gold shadow-sm mb-5 group-hover:bg-brand-charcoal group-hover:text-brand-gold transition-colors">
+            <i data-lucide="tag" class="w-6 h-6"></i>
+          </div>
+          <h4 class="font-serif font-bold text-lg text-brand-charcoal mb-2">Harga Jelas & Pasti</h4>
+          <p class="text-xs text-brand-muted leading-relaxed">Semua tarif tercantum jelas tanpa ada biaya tip paksaan atau charge tersembunyi.</p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section class="py-20 bg-brand-sand">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <span class="text-xs font-bold uppercase tracking-[0.25em] text-brand-gold block mb-3">Alur Mudah</span>
+      <h2 class="font-serif text-3xl sm:text-4xl font-bold text-brand-charcoal mb-14">Booking Dalam 3 Langkah</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+        <div class="bg-white rounded-2xl p-8 border border-brand-stone shadow-soft relative text-left">
+          <span class="font-serif text-4xl font-bold text-brand-gold/40 block mb-3">01</span>
+          <h3 class="font-serif font-bold text-lg text-brand-charcoal mb-2">Pilih Layanan</h3>
+          <p class="text-xs text-brand-muted leading-relaxed">Tentukan jenis terapi, durasi treatment, dan terapis yang Anda percayai.</p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-8 border border-brand-stone shadow-soft relative text-left">
+          <span class="font-serif text-4xl font-bold text-brand-gold/40 block mb-3">02</span>
+          <h3 class="font-serif font-bold text-lg text-brand-charcoal mb-2">Pilih Jadwal</h3>
+          <p class="text-xs text-brand-muted leading-relaxed">Pilih tanggal dan jam senggang yang masih tersedia di kalender booking.</p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-8 border border-brand-stone shadow-soft relative text-left">
+          <span class="font-serif text-4xl font-bold text-brand-gold/40 block mb-3">03</span>
+          <h3 class="font-serif font-bold text-lg text-brand-charcoal mb-2">Datang & Nikmati</h3>
+          <p class="text-xs text-brand-muted leading-relaxed">Tiba di lokasi atau tunggu di rumah, nikmati sesi peremajaan tubuh secara menyeluruh.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="harga" class="py-24 bg-white border-y border-brand-stone">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-xs font-bold uppercase tracking-[0.25em] text-brand-gold block mb-3">Daftar Biaya</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-brand-charcoal mb-4">Transparansi Paket & Harga</h2>
+        <p class="text-brand-muted text-sm sm:text-base font-light">Pilihan durasi sesuai kebutuhan istirahat Anda.</p>
+      </div>
+
+      <div class="overflow-hidden rounded-2xl border border-brand-stone shadow-soft">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-brand-charcoal text-white text-xs font-semibold tracking-wider uppercase">
+              <th class="py-4 px-6">Jenis Layanan</th>
+              <th class="py-4 px-4 text-center">Durasi 60 Menit</th>
+              <th class="py-4 px-4 text-center">Durasi 90 Menit</th>
+              <th class="py-4 px-4 text-center">Durasi 120 Menit</th>
+              <th class="py-4 px-6 text-right">Tindakan</th>
+            </tr>
+          </thead>
+          <tbody id="pricingTableBody" class="divide-y divide-brand-stone text-xs sm:text-sm">
+            <!-- Rendered by JS -->
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="promoSection" class="py-16 bg-brand-sand">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-brand-forest rounded-3xl p-8 sm:p-12 text-white relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-8 shadow-premium">
+        
+        <div class="relative z-10 max-w-xl">
+          <div class="inline-block px-3 py-1 rounded-full bg-brand-gold/20 text-brand-gold border border-brand-gold/30 text-xs font-bold uppercase tracking-widest mb-4" id="promoBadgeText">
+            SPECIAL WEEKDAY
+          </div>
+          <h3 id="promoTitle" class="font-serif text-3xl sm:text-4xl font-bold text-white mb-3">Diskon 15% Setiap Senin – Kamis</h3>
+          <p id="promoDesc" class="text-sm text-white/80 font-light leading-relaxed mb-6">
+            Segarkan kembali tubuh Anda di tengah padatnya hari kerja dengan potongan harga eksklusif untuk seluruh perawatan 90 menit ke atas.
+          </p>
+          <div class="flex items-center gap-4">
+            <a href="#bookingSection" class="bg-brand-gold hover:bg-brand-goldhover text-brand-charcoal px-8 py-3.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all shadow-gold">
+              Booking Promo Sekarang
+            </a>
+          </div>
+        </div>
+
+        <div class="relative z-10 w-full lg:w-auto shrink-0 flex justify-center">
+          <div class="w-60 h-60 rounded-full border-4 border-white/10 flex flex-col items-center justify-center text-center p-4 backdrop-blur-sm bg-white/5">
+            <span class="text-xs uppercase tracking-widest text-brand-gold font-semibold">Hemat Hingga</span>
+            <span class="font-serif text-5xl font-bold text-white my-1">15%</span>
+            <span class="text-xs text-white/70">Khusus Booking Online</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 bg-white border-y border-brand-stone">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-xs font-bold uppercase tracking-[0.25em] text-brand-gold block mb-3">Ulasan Tamu</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-brand-charcoal mb-4">Apa Kata Pelanggan Kami?</h2>
+        <p class="text-brand-muted text-sm sm:text-base font-light">Kenyamanan dan kepuasan Anda adalah cerminan dedikasi layanan kami.</p>
+      </div>
+
+      <div id="testimonialsContainer" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Rendered by JS -->
+      </div>
+
+    </div>
+  </section>
+
+  <section id="faq" class="py-24 bg-brand-sand">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-xl mx-auto mb-16">
+        <span class="text-xs font-bold uppercase tracking-[0.25em] text-brand-gold block mb-3">Informasi Penting</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-brand-charcoal mb-4">Pertanyaan Umum (FAQ)</h2>
+        <p class="text-brand-muted text-sm font-light">Jawaban cepat seputar sistem reservasi, protokol, dan etika layanan kami.</p>
+      </div>
+
+      <div id="faqAccordion" class="space-y-4">
+        <!-- Rendered by JS -->
+      </div>
+
+    </div>
+  </section>
+
+  <section id="lokasi" class="py-24 bg-white border-t border-brand-stone">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        
+        <!-- Contact Info -->
+        <div class="space-y-8">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-[0.25em] text-brand-gold block mb-3">Kunjungi Kami</span>
+            <h2 class="font-serif text-3xl sm:text-4xl font-bold text-brand-charcoal mb-4">Temukan Ketenangan Anda</h2>
+            <p class="text-sm text-brand-muted leading-relaxed">
+              Lokasi kami berada di area yang tenang dan mudah diakses, dilengkapi fasilitas parkir aman serta lounge relaksasi yang nyaman.
+            </p>
+          </div>
+
+          <div class="space-y-4 text-xs sm:text-sm">
+            <div class="flex items-start gap-4 p-4 rounded-xl bg-brand-sand border border-brand-stone">
+              <div class="w-10 h-10 rounded-lg bg-white flex items-center justify-center text-brand-gold shrink-0">
+                <i data-lucide="map-pin" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <span class="font-bold text-brand-charcoal block mb-0.5">Alamat Sanctuary:</span>
+                <p id="contactAddress" class="text-brand-muted">Jl. Senopati No. 48, Kebayoran Baru, Jakarta Selatan 12190</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4 p-4 rounded-xl bg-brand-sand border border-brand-stone">
+              <div class="w-10 h-10 rounded-lg bg-white flex items-center justify-center text-brand-gold shrink-0">
+                <i data-lucide="clock" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <span class="font-bold text-brand-charcoal block mb-0.5">Jam Operasional:</span>
+                <p id="contactHours" class="text-brand-muted">Senin – Minggu: 09:00 – 22:00 WIB (Sesi Terakhir: 20:30)</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4 p-4 rounded-xl bg-brand-sand border border-brand-stone">
+              <div class="w-10 h-10 rounded-lg bg-white flex items-center justify-center text-brand-gold shrink-0">
+                <i data-lucide="phone" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <span class="font-bold text-brand-charcoal block mb-0.5">Layanan Pelanggan / WhatsApp:</span>
+                <p id="contactWhatsapp" class="text-brand-muted">+62 812-3456-7890</p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <a href="https://maps.google.com" target="_blank" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-brand-charcoal text-white hover:bg-brand-forest transition-colors text-xs font-semibold uppercase tracking-wider">
+              <i data-lucide="navigation" class="w-4 h-4 text-brand-gold"></i>
+              <span>Petunjuk Arah Google Maps</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Visual Map Embed / Container -->
+        <div class="rounded-3xl overflow-hidden border border-brand-stone shadow-soft h-[380px] bg-brand-stone relative">
+          <iframe 
+            title="Google Maps Location"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126920.28507851214!2d106.75693444458008!3d-6.229569450000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3e49fe3ecb3%3A0x74297a76059d490!2sJakarta%20Selatan!5e0!3m2!1sid!2sid!4v1680000000000!5m2!1sid!2sid" 
+            class="w-full h-full border-0 filter grayscale-[20%] contrast-[95%]" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="bg-brand-charcoal text-white border-t border-white/10 pt-16 pb-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+        
+        <!-- Brand Info -->
+        <div class="space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full border border-brand-gold/40 flex items-center justify-center bg-white/5">
+              <i data-lucide="sparkles" class="w-4 h-4 text-brand-gold"></i>
+            </div>
+            <span class="font-serif text-2xl font-bold tracking-tight text-white" id="footerBrandName">HAVEN</span>
+          </div>
+          <p class="text-xs text-white/60 leading-relaxed font-light">
+            Sanctuary relaksasi eksklusif yang berfokus pada pemulihan kebugaran, pelemasan otot kaku, dan ketenangan jiwa melalui terapi pijat profesional.
+          </p>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-widest text-brand-gold mb-4">Navigasi Cepat</h4>
+          <ul class="space-y-2 text-xs text-white/70">
+            <li><a href="#beranda" class="hover:text-white transition-colors">Beranda</a></li>
+            <li><a href="#layanan" class="hover:text-white transition-colors">Menu Perawatan</a></li>
+            <li><a href="#terapis" class="hover:text-white transition-colors">Terapis Ahli</a></li>
+            <li><a href="#harga" class="hover:text-white transition-colors">Daftar Harga</a></li>
+            <li><a href="#bookingSection" class="hover:text-white transition-colors">Reservasi Online</a></li>
+            <li><a href="#faq" class="hover:text-white transition-colors">Tanya Jawab (FAQ)</a></li>
+          </ul>
+        </div>
+
+        <!-- Social & Direct -->
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-widest text-brand-gold mb-4">Sosial Media</h4>
+          <ul class="space-y-2 text-xs text-white/70">
+            <li><a href="#" class="hover:text-white transition-colors flex items-center gap-2"><i data-lucide="instagram" class="w-3.5 h-3.5 text-brand-gold"></i> Instagram @havenwellness</a></li>
+            <li><a href="#" class="hover:text-white transition-colors flex items-center gap-2"><i data-lucide="facebook" class="w-3.5 h-3.5 text-brand-gold"></i> Facebook Haven Therapy</a></li>
+            <li><a href="#" class="hover:text-white transition-colors flex items-center gap-2"><i data-lucide="video" class="w-3.5 h-3.5 text-brand-gold"></i> TikTok @havenwellness</a></li>
+          </ul>
+        </div>
+
+        <!-- Admin & Security Section (Prominently placed in footer) -->
+        <div class="bg-white/5 p-5 rounded-2xl border border-white/10">
+          <h4 class="text-xs font-bold uppercase tracking-widest text-brand-gold mb-2 flex items-center gap-2">
+            <i data-lucide="shield-check" class="w-4 h-4"></i>
+            <span>Portal Admin Web</span>
+          </h4>
+          <p class="text-xs text-white/60 mb-4 leading-relaxed">
+            Kelola reservasi, lacak booking, ubah gambar, tombol & katalog layanan secara real-time.
+          </p>
+          <button onclick="openAdminModal()" class="w-full py-3 px-4 rounded-xl bg-brand-gold hover:bg-brand-goldhover text-brand-charcoal text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-gold cursor-pointer">
+            <i data-lucide="lock" class="w-4 h-4"></i>
+            <span>Login Admin Panel</span>
+          </button>
+        </div>
+
+      </div>
+
+      <div class="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/50">
+        <p>&copy; <span id="currentYear">2026</span> HAVEN Wellness & Therapy. Hak Cipta Dilindungi.</p>
+        <div class="flex items-center gap-6">
+          <a href="#" class="hover:text-white transition-colors">Kebijakan Privasi</a>
+          <a href="#" class="hover:text-white transition-colors">Syarat & Ketentuan</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile Bottom Sticky Booking Bar -->
+  <div class="md:hidden fixed bottom-0 left-0 right-0 z-30 bg-white/95 backdrop-blur-md border-t border-brand-stone p-3 flex items-center gap-3 shadow-2xl">
+    <a id="mobileFloatingWa" href="https://wa.me/6281234567890" target="_blank" class="w-12 h-12 rounded-full bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-md" aria-label="WhatsApp">
+      <i data-lucide="message-circle" class="w-6 h-6"></i>
+    </a>
+    <a href="#bookingSection" class="flex-1 bg-brand-charcoal text-white text-center py-3.5 rounded-full text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-soft">
+      <span>Booking Sekarang</span>
+      <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-brand-gold"></i>
+    </a>
+  </div>
+
+  <div id="adminModal" class="fixed inset-0 z-50 bg-brand-charcoal/90 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-5xl w-full my-auto border border-brand-stone shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+      
+      <!-- Modal Header -->
+      <div class="bg-brand-forest text-white px-6 py-4 flex items-center justify-between border-b border-white/10 shrink-0">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-brand-gold">
+            <i data-lucide="shield" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h3 class="font-serif font-bold text-base text-white leading-tight">Admin Operations & CMS</h3>
+            <span class="text-[10px] text-white/60 tracking-wider uppercase">Haven Wellness Management</span>
+          </div>
+        </div>
+        <button onclick="closeAdminModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white text-sm transition-colors">
+          &times;
+        </button>
+      </div>
+
+      <!-- Admin Content Container -->
+      <div id="adminLoginView" class="p-8 sm:p-12 text-center max-w-sm mx-auto w-full my-auto">
+        <div class="w-14 h-14 rounded-full bg-brand-sand border border-brand-stone flex items-center justify-center mx-auto mb-4 text-brand-gold">
+          <i data-lucide="lock" class="w-7 h-7"></i>
+        </div>
+        <h4 class="font-serif text-2xl font-bold text-brand-charcoal mb-1">Admin Login</h4>
+        <p class="text-xs text-brand-muted mb-6">Masukkan kredensial pengelola untuk mengedit seluruh konten dan sistem booking.</p>
+        
+        <form onsubmit="event.preventDefault(); handleAdminLogin();" class="space-y-4 text-left">
+          <div>
+            <label class="text-xs font-semibold text-brand-charcoal block mb-1">Username</label>
+            <input type="text" id="adminEmailInput" placeholder="kelolaweb2026" class="w-full px-4 py-2.5 rounded-xl border border-brand-stone text-xs focus:outline-none focus:border-brand-gold">
+          </div>
+          <div>
+            <label class="text-xs font-semibold text-brand-charcoal block mb-1">Password</label>
+            <input type="password" id="adminPassInput" placeholder="••••••••••••" class="w-full px-4 py-2.5 rounded-xl border border-brand-stone text-xs focus:outline-none focus:border-brand-gold">
+          </div>
+          <button type="submit" class="w-full bg-brand-charcoal hover:bg-brand-forest text-white py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors shadow-md">
+            Masuk ke Dashboard
+          </button>
+        </form>
+      </div>
+
+      <!-- Admin Main Dashboard Interface (Tabs) -->
+      <div id="adminDashboardView" class="hidden flex-1 flex flex-col overflow-hidden">
+        
+        <!-- Admin Sub-Navigation Tabs -->
+        <div class="bg-brand-sand border-b border-brand-stone px-6 flex gap-2 overflow-x-auto shrink-0 text-xs font-semibold">
+          <button onclick="switchAdminTab('overview')" id="tabBtn-overview" class="py-3 px-4 border-b-2 border-brand-charcoal text-brand-charcoal">Ikhtisar</button>
+          <button onclick="switchAdminTab('bookings')" id="tabBtn-bookings" class="py-3 px-4 border-b-2 border-transparent text-brand-muted hover:text-brand-charcoal">Lacak & Kelola Booking (<span id="adminBookingCount">0</span>)</button>
+          <button onclick="switchAdminTab('services')" id="tabBtn-services" class="py-3 px-4 border-b-2 border-transparent text-brand-muted hover:text-brand-charcoal">Katalog Produk / Layanan</button>
+          <button onclick="switchAdminTab('cms')" id="tabBtn-cms" class="py-3 px-4 border-b-2 border-transparent text-brand-muted hover:text-brand-charcoal">Edit Gambar & Tombol (CMS)</button>
+          <button onclick="switchAdminTab('therapists')" id="tabBtn-therapists" class="py-3 px-4 border-b-2 border-transparent text-brand-muted hover:text-brand-charcoal">Kelola Terapis</button>
+          <button onclick="switchAdminTab('settings')" id="tabBtn-settings" class="py-3 px-4 border-b-2 border-transparent text-brand-muted hover:text-brand-charcoal">Pengaturan & Reset</button>
+        </div>
+
+        <!-- Scrollable Tab Panes -->
+        <div class="flex-1 overflow-y-auto p-6 bg-white">
+          
+          <!-- TAB 1: Overview Dashboard -->
+          <div id="adminTab-overview" class="space-y-6">
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <div class="bg-brand-sand p-4 rounded-2xl border border-brand-stone">
+                <span class="text-xs text-brand-muted block">Total Reservasi</span>
+                <span id="statTotalBookings" class="font-serif text-2xl font-bold text-brand-charcoal">0</span>
+              </div>
+              <div class="bg-brand-sand p-4 rounded-2xl border border-brand-stone">
+                <span class="text-xs text-brand-muted block">Booking Hari Ini</span>
+                <span id="statTodayBookings" class="font-serif text-2xl font-bold text-brand-charcoal">0</span>
+              </div>
+              <div class="bg-brand-sand p-4 rounded-2xl border border-brand-stone">
+                <span class="text-xs text-brand-muted block">Estimasi Omzet</span>
+                <span id="statEstimatedRevenue" class="font-serif text-2xl font-bold text-brand-gold">Rp0</span>
+              </div>
+              <div class="bg-brand-sand p-4 rounded-2xl border border-brand-stone">
+                <span class="text-xs text-brand-muted block">Status Cloud Database</span>
+                <span id="cloudStatusBadge" class="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-600 mt-1">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Terhubung Realtime
+                </span>
+              </div>
+            </div>
+
+            <!-- Recent Bookings Table -->
+            <div class="border border-brand-stone rounded-2xl overflow-hidden">
+              <div class="p-4 bg-brand-sand border-b border-brand-stone flex justify-between items-center">
+                <h4 class="font-serif font-bold text-sm text-brand-charcoal">Reservasi Terbaru Masuk</h4>
+                <button onclick="switchAdminTab('bookings')" class="text-xs text-brand-gold font-semibold hover:underline">Lihat Semua di Lacak Booking</button>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs">
+                  <thead class="bg-gray-50 text-brand-muted uppercase text-[10px]">
+                    <tr>
+                      <th class="p-3">ID</th>
+                      <th class="p-3">Pelanggan</th>
+                      <th class="p-3">Layanan</th>
+                      <th class="p-3">Jadwal</th>
+                      <th class="p-3">Terapis</th>
+                      <th class="p-3">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="overviewRecentTable" class="divide-y divide-brand-stone">
+                    <!-- Injected by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 2: Bookings Management & Tracking -->
+          <div id="adminTab-bookings" class="space-y-4 hidden">
+            <div class="flex flex-col sm:flex-row justify-between gap-3 bg-brand-sand/50 p-4 rounded-2xl border border-brand-stone">
+              <div class="flex-1">
+                <label class="text-[11px] font-bold text-brand-charcoal block mb-1">Cari & Lacak Booking</label>
+                <input type="text" id="bookingSearchInput" oninput="filterAdminBookings()" placeholder="Masukkan No. ID (#MSG-...), Nama, atau WhatsApp..." class="px-4 py-2 border border-brand-stone rounded-xl text-xs w-full bg-white">
+              </div>
+              <div class="w-full sm:w-48">
+                <label class="text-[11px] font-bold text-brand-charcoal block mb-1">Filter Status</label>
+                <select id="bookingStatusFilter" onchange="filterAdminBookings()" class="w-full px-4 py-2 border border-brand-stone rounded-xl text-xs bg-white">
+                  <option value="ALL">Semua Status</option>
+                  <option value="Confirmed">Confirmed</option>
+                  <option value="Pending">Pending</option>
+                  <option value="Completed">Completed</option>
+                  <option value="Cancelled">Cancelled</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="border border-brand-stone rounded-2xl overflow-x-auto">
+              <table class="w-full text-left text-xs">
+                <thead class="bg-brand-sand text-brand-charcoal uppercase text-[10px] font-bold">
+                  <tr>
+                    <th class="p-3">ID Booking</th>
+                    <th class="p-3">Pelanggan</th>
+                    <th class="p-3">Layanan & Durasi</th>
+                    <th class="p-3">Jadwal Sesi</th>
+                    <th class="p-3">Terapis</th>
+                    <th class="p-3">Biaya</th>
+                    <th class="p-3">Catatan</th>
+                    <th class="p-3">Status</th>
+                    <th class="p-3 text-right">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="adminBookingsTableBody" class="divide-y divide-brand-stone">
+                  <!-- Injected by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- TAB 3: Services / Products Catalog Management -->
+          <div id="adminTab-services" class="space-y-6 hidden">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-brand-sand/60 p-5 rounded-2xl border border-brand-stone">
+              <div>
+                <h4 class="font-serif font-bold text-lg text-brand-charcoal">Katalog Produk & Layanan Pijat</h4>
+                <p class="text-xs text-brand-muted">Tambah layanan baru, ganti gambar produk (support Google Drive & Unsplash), serta sesuaikan tarif.</p>
+              </div>
+              <button onclick="openAddServiceModal()" class="bg-brand-charcoal text-white hover:bg-brand-moss px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 shadow-soft">
+                <i data-lucide="plus-circle" class="w-4 h-4 text-brand-gold"></i>
+                <span>+ Tambah Layanan Baru</span>
+              </button>
+            </div>
+
+            <!-- List of current services with comprehensive inline editing -->
+            <div id="adminServicesList" class="space-y-4">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+
+          <!-- TAB 4: Therapists Management -->
+          <div id="adminTab-therapists" class="space-y-6 hidden">
+            <div class="flex justify-between items-center bg-brand-sand/50 p-4 rounded-2xl border border-brand-stone">
+              <div>
+                <h4 class="font-serif font-bold text-base text-brand-charcoal">Daftar Tim Terapis</h4>
+                <p class="text-xs text-brand-muted">Atur ketersediaan dan profil terapis aktif.</p>
+              </div>
+              <button onclick="addNewTherapistPrompt()" class="bg-brand-charcoal text-white px-4 py-2 rounded-xl text-xs font-semibold hover:bg-brand-forest transition-colors">
+                + Tambah Terapis
+              </button>
+            </div>
+
+            <div id="adminTherapistsList" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+
+          <!-- TAB 5: Live CMS, Images & Buttons Editor -->
+          <div id="adminTab-cms" class="space-y-6 hidden">
+            <div class="bg-brand-sand/50 p-4 rounded-2xl border border-brand-stone">
+              <h4 class="font-serif font-bold text-base text-brand-charcoal">Editor Tampilan: Gambar, Teks & Tombol</h4>
+              <p class="text-xs text-brand-muted">Ubah banner, gambar hero, headline, teks tombol CTA, serta nomor WhatsApp secara realtime.</p>
+            </div>
+
+            <form onsubmit="event.preventDefault(); saveCmsContent();" class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+              
+              <!-- Brand & Contacts -->
+              <div>
+                <label class="font-semibold block mb-1 text-brand-charcoal">Nama Brand Utama</label>
+                <input type="text" id="cmsBrandName" class="w-full px-3 py-2 border border-brand-stone rounded-xl">
+              </div>
+              <div>
+                <label class="font-semibold block mb-1 text-brand-charcoal">Nomor WhatsApp Bisnis (Untuk Notifikasi Booking)</label>
+                <input type="text" id="cmsWhatsapp" class="w-full px-3 py-2 border border-brand-stone rounded-xl">
+              </div>
+
+              <!-- Top Announcement Banner -->
+              <div class="sm:col-span-2">
+                <label class="font-semibold block mb-1 text-brand-charcoal">Teks Pengumuman Banner Atas</label>
+                <input type="text" id="cmsBannerText" class="w-full px-3 py-2 border border-brand-stone rounded-xl">
+              </div>
+
+              <!-- Hero Texts -->
+              <div class="sm:col-span-2">
+                <label class="font-semibold block mb-1 text-brand-charcoal">Headline Utama (Hero Title)</label>
+                <input type="text" id="cmsHeroTitle" class="w-full px-3 py-2 border border-brand-stone rounded-xl">
+              </div>
+              <div class="sm:col-span-2">
+                <label class="font-semibold block mb-1 text-brand-charcoal">Sub-headline Hero</label>
+                <textarea id="cmsHeroSubtitle" rows="2" class="w-full px-3 py-2 border border-brand-stone rounded-xl"></textarea>
+              </div>
+
+              <!-- Buttons Customization -->
+              <div>
+                <label class="font-semibold block mb-1 text-brand-charcoal">Teks Tombol Utama Hero</label>
+                <input type="text" id="cmsHeroCtaPrimaryText" class="w-full px-3 py-2 border border-brand-stone rounded-xl">
+              </div>
+              <div>
+                <label class="font-semibold block mb-1 text-brand-charcoal">Teks Tombol Kedua Hero</label>
+                <input type="text" id="cmsHeroCtaSecondaryText" class="w-full px-3 py-2 border border-brand-stone rounded-xl">
+              </div>
+              <div>
+                <label class="font-semibold block mb-1 text-brand-charcoal">Teks Tombol Header Navbar</label>
+                <input type="text" id="cmsNavCtaText" class="w-full px-3 py-2 border border-brand-stone rounded-xl">
+              </div>
+              <div>
+                <label class="font-semibold block mb-1 text-brand-charcoal">Badge Hero</label>
+                <input type="text" id="cmsHeroBadge" class="w-full px-3 py-2 border border-brand-stone rounded-xl">
+              </div>
+
+              <!-- Hero Image (Supports Google Drive & Web URLs) -->
+              <div class="sm:col-span-2 bg-brand-sand p-4 rounded-xl border border-brand-stone">
+                <label class="font-semibold block mb-1 text-brand-charcoal">URL Foto Hero Background</label>
+                <input type="text" id="cmsHeroImgUrl" placeholder="Google Drive URL atau link gambar langsung" class="w-full px-3 py-2 border border-brand-stone rounded-xl mb-1 bg-white">
+                <p class="text-[11px] text-brand-muted">
+                  Bisa menggunakan link Google Drive (misal: <code>https://drive.google.com/file/d/...</code>) atau link Unsplash. Sistem otomatis mengonversi ke URL stabil <code>lh3.googleusercontent.com/d/</code> dengan fallback.
+                </p>
+              </div>
+
+              <!-- Address -->
+              <div class="sm:col-span-2">
+                <label class="font-semibold block mb-1 text-brand-charcoal">Alamat Lengkap Sanctuary / Salon</label>
+                <input type="text" id="cmsAddress" class="w-full px-3 py-2 border border-brand-stone rounded-xl">
+              </div>
+
+              <div class="sm:col-span-2 pt-2">
+                <button type="submit" class="bg-brand-gold hover:bg-brand-goldhover text-brand-charcoal px-6 py-3 rounded-xl font-bold uppercase tracking-wider text-xs shadow-gold transition-all">
+                  Simpan Semua Perubahan Tampilan
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- TAB 6: Settings & Reset Data -->
+          <div id="adminTab-settings" class="space-y-6 hidden">
+            <h4 class="font-serif font-bold text-base text-brand-charcoal">Pengaturan & Pemulihan Sistem</h4>
+            
+            <div class="p-5 rounded-2xl bg-brand-sand border border-brand-stone space-y-4 text-xs">
+              <div class="flex items-center justify-between pb-3 border-b border-brand-stone">
+                <div>
+                  <span class="font-semibold block text-brand-charcoal">Sinkronisasi Cloud Realtime</span>
+                  <span class="text-brand-muted">Koneksi database terenkripsi aktif untuk pencatatan booking & pembaruan katalog.</span>
+                </div>
+                <span class="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full font-bold text-[10px]">
+                  ● Terhubung
+                </span>
+              </div>
+
+              <div class="flex items-center justify-between pb-3 border-b border-brand-stone">
+                <div>
+                  <span class="font-semibold block text-brand-charcoal">Mode Konfirmasi Otomatis</span>
+                  <span class="text-brand-muted">Setiap pesanan baru langsung berstatus 'Confirmed'.</span>
+                </div>
+                <input type="checkbox" id="settingAutoConfirm" checked class="w-4 h-4 rounded text-brand-charcoal focus:ring-brand-gold">
+              </div>
+
+              <!-- Reset to Default Factory Button -->
+              <div class="pt-2">
+                <h5 class="font-bold text-red-600 mb-1">Reset Halaman Utama ke Default Pabrik</h5>
+                <p class="text-brand-muted mb-3">
+                  Kembalikan semua teks, tombol, gambar, katalog layanan, dan susunan awal website persis seperti versi bawaan.
+                </p>
+                <button type="button" onclick="confirmResetAllToDefault()" class="px-5 py-2.5 rounded-xl bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 text-xs font-bold uppercase tracking-wider transition-colors flex items-center gap-2">
+                  <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+                  <span>Reset Default Semua Data Halaman Utama</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Modal Tambah / Edit Produk Layanan -->
+  <div id="serviceEditModal" class="fixed inset-0 z-50 bg-brand-charcoal/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 border border-brand-stone shadow-2xl relative fade-in max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center border-b border-brand-stone pb-3 mb-4">
+        <h4 id="serviceModalTitle" class="font-serif text-xl font-bold text-brand-charcoal">Tambah Layanan Pijat Baru</h4>
+        <button onclick="closeServiceEditModal()" class="text-brand-muted hover:text-brand-charcoal text-xl">&times;</button>
+      </div>
+
+      <form id="serviceForm" onsubmit="event.preventDefault(); handleSaveService();" class="space-y-3 text-xs">
+        <input type="hidden" id="srvFormId">
+        
+        <div>
+          <label class="font-semibold text-brand-charcoal block mb-1">Nama Layanan <span class="text-red-500">*</span></label>
+          <input type="text" id="srvFormName" required placeholder="Contoh: Balinese Hot Stone Therapy" class="w-full px-3 py-2 border border-brand-stone rounded-xl">
+        </div>
+
+        <div>
+          <label class="font-semibold text-brand-charcoal block mb-1">Badge / Label Singkat</label>
+          <input type="text" id="srvFormBadge" placeholder="Contoh: Terapi Otot Kaku" class="w-full px-3 py-2 border border-brand-stone rounded-xl">
+        </div>
+
+        <div>
+          <label class="font-semibold text-brand-charcoal block mb-1">Deskripsi Layanan <span class="text-red-500">*</span></label>
+          <textarea id="srvFormDesc" rows="3" required placeholder="Jelaskan manfaat dan sensasi pijat..." class="w-full px-3 py-2 border border-brand-stone rounded-xl"></textarea>
+        </div>
+
+        <div class="bg-brand-sand/50 p-3 rounded-xl border border-brand-stone">
+          <label class="font-semibold text-brand-charcoal block mb-1">URL Gambar Layanan (Google Drive / Unsplash / Direct Link)</label>
+          <input type="text" id="srvFormImage" placeholder="https://drive.google.com/file/d/... atau https://images.unsplash.com/..." class="w-full px-3 py-2 border border-brand-stone rounded-xl bg-white mb-1">
+          <span class="text-[10px] text-brand-muted block">Mendukung format Google Drive link publik secara otomatis.</span>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 pt-2">
+          <div>
+            <label class="font-semibold text-brand-charcoal block mb-1">Harga 60 Menit (Rp) <span class="text-red-500">*</span></label>
+            <input type="number" id="srvFormPrice60" required placeholder="150000" class="w-full px-3 py-2 border border-brand-stone rounded-xl">
+          </div>
+          <div>
+            <label class="font-semibold text-brand-charcoal block mb-1">Harga 90 Menit (Rp)</label>
+            <input type="number" id="srvFormPrice90" placeholder="225000" class="w-full px-3 py-2 border border-brand-stone rounded-xl">
+          </div>
+          <div class="col-span-2">
+            <label class="font-semibold text-brand-charcoal block mb-1">Harga 120 Menit (Rp - Opsional)</label>
+            <input type="number" id="srvFormPrice120" placeholder="300000" class="w-full px-3 py-2 border border-brand-stone rounded-xl">
+          </div>
+        </div>
+
+        <div class="pt-4 flex justify-end gap-3 border-t border-brand-stone mt-4">
+          <button type="button" onclick="closeServiceEditModal()" class="px-5 py-2.5 rounded-xl border border-brand-stone text-brand-charcoal hover:bg-brand-sand text-xs font-semibold">
+            Batal
+          </button>
+          <button type="submit" class="bg-brand-charcoal text-white hover:bg-brand-forest px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider">
+            Simpan Layanan
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Firebase Modular SDK & Core Engine -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    const appId = typeof __app_id !== 'undefined' ? __app_id : 'semua-web-f8628';
+    const firebaseConfig = {
+      apiKey: "AIzaSyBZyvA6_cy2k42eU_Ktt13wFVTDYgZaXkI",
+      authDomain: "semua-web-f8628.firebaseapp.com",
+      projectId: "semua-web-f8628",
+      storageBucket: "semua-web-f8628.appspot.com",
+      messagingSenderId: "367205167812",
+      appId: "1:367205167812:web:78fa62a046c31bfbe6b3f8"
+    };
+
+    let db = null;
+    let auth = null;
+    let isCloudSyncActive = false;
+
+    // Initialize Firebase silently
+    try {
+      const app = initializeApp(firebaseConfig);
+      db = getFirestore(app);
+      auth = getAuth(app);
+      
+      const authPromise = (typeof __initial_auth_token !== 'undefined' && __initial_auth_token)
+        ? signInWithCustomToken(auth, __initial_auth_token)
+        : signInAnonymously(auth);
+
+      authPromise.then((userCredential) => {
+        isCloudSyncActive = true;
+        updateCloudStatusUI(true);
+        listenToCloudState();
+      }).catch(err => {
+        console.warn("Firebase Auth fallback to offline memory mode:", err);
+        updateCloudStatusUI(false);
+      });
+    } catch (e) {
+      console.warn("Firebase init offline mode active:", e);
+      updateCloudStatusUI(false);
+    }
+
+    function updateCloudStatusUI(connected) {
+      const badge = document.getElementById('cloudStatusBadge');
+      if (badge) {
+        if (connected) {
+          badge.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Terhubung Realtime';
+          badge.className = 'inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-600 mt-1';
+        } else {
+          badge.innerHTML = '<span class="w-2 h-2 rounded-full bg-amber-500"></span> Mode Lokal Aktif';
+          badge.className = 'inline-flex items-center gap-1.5 text-xs font-semibold text-amber-600 mt-1';
+        }
+      }
+    }
+
+    function listenToCloudState() {
+      if (!db || !auth || !auth.currentUser) return;
+      
+      // Strict Rule 1 Path: /artifacts/{appId}/public/data/{collectionName}
+      const contentDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'site_content', 'main_config');
+      onSnapshot(contentDocRef, (snap) => {
+        if (snap.exists()) {
+          const remoteData = snap.data();
+          if (remoteData.siteContent) {
+            window.appState.siteContent = { ...window.appState.siteContent, ...remoteData.siteContent };
+            applyLiveCmsToDom();
+          }
+          if (remoteData.services && Array.isArray(remoteData.services) && remoteData.services.length > 0) {
+            window.appState.services = remoteData.services;
+            window.renderPublicServices();
+            window.renderPricingTable();
+            if (document.getElementById('adminTab-services') && !document.getElementById('adminTab-services').classList.contains('hidden')) {
+              window.renderAdminServicesList();
+            }
+          }
+        }
+      }, (error) => {
+        console.warn("Firestore onSnapshot error:", error);
+      });
+
+      const bookingsDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'bookings_registry', 'all_bookings');
+      onSnapshot(bookingsDocRef, (snap) => {
+        if (snap.exists()) {
+          const remoteBookings = snap.data();
+          if (remoteBookings.list && Array.isArray(remoteBookings.list)) {
+            window.appState.bookings = remoteBookings.list;
+            window.updateAdminDashboardData();
+            window.renderAdminBookingsTable();
+          }
+        }
+      }, (error) => {
+        console.warn("Bookings snapshot error:", error);
+      });
+    }
+
+    // Export Cloud Sync Helper to Global Window
+    window.syncStateToCloud = async function() {
+      if (!db || !auth || !auth.currentUser) return;
+      try {
+        const contentDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'site_content', 'main_config');
+        await setDoc(contentDocRef, {
+          siteContent: window.appState.siteContent,
+          services: window.appState.services,
+          updatedAt: new Date().toISOString()
+        }, { merge: true });
+
+        const bookingsDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'bookings_registry', 'all_bookings');
+        await setDoc(bookingsDocRef, {
+          list: window.appState.bookings,
+          updatedAt: new Date().toISOString()
+        }, { merge: true });
+      } catch (err) {
+        console.error("Gagal sinkron ke cloud database:", err);
+      }
+    };
+  </script>
+
+  <script>
+    /**
+     * Google Drive URL Handler with Multi-tier Fallback:
+     * 1. Primary: https://lh3.googleusercontent.com/d/{FILE_ID}
+     * 2. Secondary fallback: https://drive.google.com/thumbnail?id={FILE_ID}&sz=w1200
+     * 3. Final Fallback: Curated high-resolution Unsplash wellness image
+     */
+    const WELLNESS_FALLBACK_IMAGE = "https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1200&auto=format&fit=crop";
+
+    function extractGoogleDriveId(url) {
+      if (!url) return null;
+      const fileMatch = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+      if (fileMatch) return fileMatch[1];
+      const idMatch = url.match(/id=([a-zA-Z0-9_-]+)/);
+      if (idMatch) return idMatch[1];
+      const directMatch = url.match(/googleusercontent\.com\/d\/([a-zA-Z0-9_-]+)/);
+      if (directMatch) return directMatch[1];
+      return null;
+    }
+
+    function formatOptimizedImageUrl(rawUrl) {
+      if (!rawUrl || typeof rawUrl !== 'string') return WELLNESS_FALLBACK_IMAGE;
+      const cleanUrl = rawUrl.trim();
+      const driveId = extractGoogleDriveId(cleanUrl);
+      if (driveId) {
+        return `https://lh3.googleusercontent.com/d/${driveId}`;
+      }
+      return cleanUrl;
+    }
+
+    function handleImageError(imgEl, rawUrl) {
+      if (!imgEl) return;
+      const driveId = extractGoogleDriveId(rawUrl);
+      
+      // Tier 2 Fallback: Google Drive thumbnail
+      if (driveId && !imgEl.dataset.triedThumbnail) {
+        imgEl.dataset.triedThumbnail = "true";
+        imgEl.src = `https://drive.google.com/thumbnail?id=${driveId}&sz=w1200`;
+        return;
+      }
+
+      // Tier 3 Fallback: Unsplash Curated
+      if (!imgEl.dataset.triedUnsplash) {
+        imgEl.dataset.triedUnsplash = "true";
+        imgEl.src = WELLNESS_FALLBACK_IMAGE;
+      }
+    }
+
+    const defaultServices = [
+      {
+        id: 'srv-1',
+        name: 'Relaxation Massage',
+        desc: 'Pijat relaksasi lembut dengan teknik sentuhan ritmis untuk membantu tubuh terasa lebih ringan, melepas stres, dan menenangkan saraf.',
+        durations: [60, 90, 120],
+        prices: { 60: 150000, 90: 225000, 120: 300000 },
+        badge: 'Favorit Tamu',
+        image: 'https://images.unsplash.com/photo-1600334129128-685c5582fd35?q=80&w=800&auto=format&fit=crop'
+      },
+      {
+        id: 'srv-2',
+        name: 'Deep Tissue Massage',
+        desc: 'Perawatan dengan tekanan lebih dalam menargetkan lapisan otot dalam dan fasia untuk meredakan ketegangan otot kronis pada punggung & leher.',
+        durations: [60, 90],
+        prices: { 60: 175000, 90: 250000 },
+        badge: 'Best for Stiff Muscles',
+        image: 'https://images.unsplash.com/photo-1519823551278-64ac92734fb1?q=80&w=800&auto=format&fit=crop'
+      },
+      {
+        id: 'srv-3',
+        name: 'Aromatherapy Massage',
+        desc: 'Pijat relaksasi yang dipadukan dengan minyak esensial murni (Lavender, Lemongrass, Chamomile) untuk memulihkan kesegaran mental.',
+        durations: [60, 90],
+        prices: { 60: 175000, 90: 250000 },
+        badge: 'Pure Essential Oils',
+        image: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=800&auto=format&fit=crop'
+      },
+      {
+        id: 'srv-4',
+        name: 'Sport Massage',
+        desc: 'Diformulasikan khusus bagi pelanggan yang aktif berolahraga untuk mempercepat pemulihan jaringan otot dan fleksibilitas sendi.',
+        durations: [60, 90],
+        prices: { 60: 200000, 90: 275000 },
+        badge: 'Athletes & Fitness',
+        image: 'https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=800&auto=format&fit=crop'
+      },
+      {
+        id: 'srv-5',
+        name: 'Traditional Javanese Massage',
+        desc: 'Pijat tradisional nusantara menggunakan teknik remasan jempol dan telapak tangan untuk melancarkan sirkulasi energi tubuh.',
+        durations: [60, 90],
+        prices: { 60: 150000, 90: 220000 },
+        badge: 'Warisan Tradisi',
+        image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=800&auto=format&fit=crop'
+      },
+      {
+        id: 'srv-6',
+        name: 'Head, Neck & Shoulder Therapy',
+        desc: 'Terapi terfokus untuk meredakan migrain ringan, kekakuan akibat posisi duduk kerja berkepanjangan di depan layar komputer.',
+        durations: [45, 60],
+        prices: { 45: 120000, 60: 160000 },
+        badge: 'Express Relief',
+        image: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=800&auto=format&fit=crop'
+      }
+    ];
+
+    const defaultSiteContent = {
+      brandName: 'HAVEN',
+      whatsapp: '+62 812-3456-7890',
+      address: 'Jl. Senopati No. 48, Kebayoran Baru, Jakarta Selatan 12190',
+      heroTitle: 'Rasakan Relaksasi yang Benar-Benar Anda Butuhkan.',
+      heroSubtitle: 'Layanan pijat profesional dengan teknik terstandarisasi untuk meredakan kelelahan fisik, melancarkan sirkulasi, dan mengembalikan harmoni tubuh serta pikiran Anda.',
+      heroBadge: 'Certified Wellness Sanctuary',
+      heroImage: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=2070&auto=format&fit=crop',
+      heroCtaPrimaryText: 'Booking Sekarang',
+      heroCtaSecondaryText: 'Lihat Menu Layanan',
+      navCtaText: 'Booking Sekarang',
+      bannerText: 'PENAWARAN SPESIAL: Diskon 15% untuk Booking Sesi Hari Kerja (Senin - Kamis).'
+    };
+
+    const defaultTherapists = [
+      {
+        id: 'th-1',
+        name: 'Alya Rahma',
+        role: 'Senior Relaxation Specialist',
+        exp: '5 Tahun',
+        rating: 4.9,
+        sessions: '1.200+',
+        photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=600&auto=format&fit=crop',
+        active: true
+      },
+      {
+        id: 'th-2',
+        name: 'Rina Wijaya',
+        role: 'Deep Tissue & Sport Therapist',
+        exp: '6 Tahun',
+        rating: 4.8,
+        sessions: '950+',
+        photo: 'https://images.unsplash.com/photo-1580894732444-8ecded7900cd?q=80&w=600&auto=format&fit=crop',
+        active: true
+      },
+      {
+        id: 'th-3',
+        name: 'Dina Kusuma',
+        role: 'Aromatherapy & Reflexology Specialist',
+        exp: '4 Tahun',
+        rating: 4.9,
+        sessions: '800+',
+        photo: 'https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?q=80&w=600&auto=format&fit=crop',
+        active: true
+      },
+      {
+        id: 'th-4',
+        name: 'Budi Prasetyo',
+        role: 'Senior Sport & Traditional Specialist',
+        exp: '7 Tahun',
+        rating: 5.0,
+        sessions: '1.450+',
+        photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop',
+        active: true
+      }
+    ];
+
+    const defaultTestimonials = [
+      {
+        name: 'Clarissa Hendrawan',
+        role: 'Interior Architect',
+        rating: 5,
+        text: 'Tekanan pijat Alya benar-benar pas di area leher saya yang kaku karena seharian di depan CAD. Suasana ruangannya sangat privat dan aromaterapinya menenangkan.',
+        avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop'
+      },
+      {
+        name: 'Michael Gunawan',
+        role: 'Marathon Runner',
+        rating: 5,
+        text: 'Sport massage setelah latihan lari jarak jauh sangat membantu mencegah DOMS. Booking online-nya sangat cepat dan terapisnya mengerti anatomi otot dengan baik.',
+        avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop'
+      },
+      {
+        name: 'Siti Sarah',
+        role: 'Financial Analyst',
+        rating: 5,
+        text: 'Website-nya mudah sekali dipakai, tidak perlu konfirmasi manual berbelit-belit. Terapis datang tepat waktu dan higienitas alatnya sangat terjaga. 10/10!',
+        avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&auto=format&fit=crop'
+      }
+    ];
+
+    const defaultFaqs = [
+      {
+        q: 'Apakah saya wajib melakukan booking terlebih dahulu?',
+        a: 'Sangat kami sarankan untuk melakukan reservasi online agar Anda mendapatkan slot waktu dan terapis pilihan tanpa perlu mengantre di lounge.'
+      },
+      {
+        q: 'Bagaimana cara memilih terapis tertentu?',
+        a: 'Pada Step 2 di sistem reservasi, Anda dapat memilih foto & profil terapis yang diinginkan, atau memilih opsi "Pilihkan Terapis Terbaik" agar sistem mencarikan yang paling sesuai.'
+      },
+      {
+        q: 'Apakah jadwal reservasi bisa di-reschedule?',
+        a: 'Ya, Anda dapat melakukan penjadwalan ulang minimal 2 jam sebelum sesi dimulai dengan mengonfirmasi melalui nomor WhatsApp kami.'
+      },
+      {
+        q: 'Bagaimana jika saya terlambat datang ke lokasi?',
+        a: 'Kami menyarankan tiba 10 menit sebelum sesi. Keterlambatan lebih dari 15 menit dapat memotong durasi perawatan agar tidak mengganggu tamu di slot berikutnya.'
+      },
+      {
+        q: 'Metode pembayaran apa saja yang diterima?',
+        a: 'Kami menerima pembayaran tunai di tempat, transfer bank BCA/Mandiri, QRIS (GoPay, OVO, ShopeePay, Dana), serta kartu debit.'
+      },
+      {
+        q: 'Apakah tersedia layanan Home Service (Panggil ke Rumah)?',
+        a: 'Ya, kami melayani Home Service untuk area terpilih dengan biaya transportasi yang dihitung transparan via WhatsApp.'
+      }
+    ];
+
+    const initialBookings = [
+      {
+        id: '#MSG-20260920-001',
+        name: 'Agus Pratama',
+        phone: '081298765432',
+        email: 'agus@gmail.com',
+        serviceId: 'srv-1',
+        serviceName: 'Relaxation Massage',
+        duration: 90,
+        therapistId: 'th-1',
+        therapistName: 'Alya Rahma',
+        date: '2026-09-20',
+        time: '14:00',
+        price: 225000,
+        status: 'Confirmed',
+        notes: 'Fokus di punggung bawah.',
+        createdDate: '19 Sep 2026'
+      },
+      {
+        id: '#MSG-20260920-002',
+        name: 'Nadia Putri',
+        phone: '081311223344',
+        email: 'nadia@outlook.com',
+        serviceId: 'srv-2',
+        serviceName: 'Deep Tissue Massage',
+        duration: 60,
+        therapistId: 'th-2',
+        therapistName: 'Rina Wijaya',
+        date: '2026-09-20',
+        time: '10:00',
+        price: 175000,
+        status: 'Completed',
+        notes: 'Pundak sering pegal.',
+        createdDate: '19 Sep 2026'
+      },
+      {
+        id: '#MSG-20260921-003',
+        name: 'Bambang Sudibyo',
+        phone: '081577889900',
+        email: 'bambang@company.com',
+        serviceId: 'srv-4',
+        serviceName: 'Sport Massage',
+        duration: 90,
+        therapistId: 'th-4',
+        therapistName: 'Budi Prasetyo',
+        date: '2026-09-21',
+        time: '16:00',
+        price: 275000,
+        status: 'Pending',
+        notes: 'Setelah tenis.',
+        createdDate: '20 Sep 2026'
+      }
+    ];
+
+    window.appState = {
+      services: JSON.parse(JSON.stringify(defaultServices)),
+      therapists: JSON.parse(JSON.stringify(defaultTherapists)),
+      testimonials: JSON.parse(JSON.stringify(defaultTestimonials)),
+      faqs: JSON.parse(JSON.stringify(defaultFaqs)),
+      bookings: JSON.parse(JSON.stringify(initialBookings)),
+      siteContent: JSON.parse(JSON.stringify(defaultSiteContent)),
+      currentStep: 1,
+      activeBookingDraft: {
+        serviceId: 'srv-1',
+        duration: 90,
+        therapistId: 'auto',
+        date: '',
+        time: '',
+        name: '',
+        phone: '',
+        email: '',
+        notes: '',
+        totalPrice: 225000
+      }
+    };
+
+    function formatIDR(amount) {
+      return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(amount);
+    }
+
+    function renderPublicServices() {
+      const container = document.getElementById('servicesGrid');
+      if (!container) return;
+      container.innerHTML = window.appState.services.map(srv => {
+        const lowestPrice = Math.min(...Object.values(srv.prices));
+        const finalImgUrl = formatOptimizedImageUrl(srv.image);
+        return `
+          <div class="bg-white rounded-3xl overflow-hidden border border-brand-stone hover:shadow-premium transition-all duration-300 flex flex-col justify-between group">
+            <div class="relative h-56 overflow-hidden bg-brand-stone">
+              <img src="${finalImgUrl}" 
+                   onerror="handleImageError(this, '${srv.image}')" 
+                   alt="${srv.name}" 
+                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <span class="absolute top-4 left-4 bg-brand-charcoal/80 backdrop-blur-md text-brand-gold text-[10px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full border border-white/10">
+                ${srv.badge || 'Wellness Therapy'}
+              </span>
+            </div>
+            
+            <div class="p-6 sm:p-8 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-serif text-xl font-bold text-brand-charcoal mb-2">${srv.name}</h3>
+                <p class="text-xs text-brand-muted leading-relaxed mb-6">${srv.desc}</p>
+                
+                <div class="mb-6">
+                  <span class="text-[11px] font-semibold text-brand-charcoal block mb-2">Pilihan Durasi:</span>
+                  <div class="flex flex-wrap gap-1.5">
+                    ${srv.durations.map(d => `
+                      <span class="px-2.5 py-1 bg-brand-sand border border-brand-stone rounded-md text-[11px] font-medium text-brand-muted">
+                        ${d} Menit
+                      </span>
+                    `).join('')}
+                  </div>
+                </div>
+              </div>
+
+              <div class="pt-6 border-t border-brand-stone flex items-center justify-between">
+                <div>
+                  <span class="text-[10px] uppercase tracking-wider text-brand-muted block">Mulai dari</span>
+                  <span class="font-serif font-bold text-lg text-brand-charcoal">${formatIDR(lowestPrice)}</span>
+                </div>
+                <button onclick="selectServiceForBooking('${srv.id}', ${srv.durations[0]})" class="bg-brand-sand hover:bg-brand-charcoal hover:text-white text-brand-charcoal px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-colors border border-brand-stone cursor-pointer">
+                  Pilih Layanan
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderPublicTherapists() {
+      const container = document.getElementById('therapistsGrid');
+      if (!container) return;
+      container.innerHTML = window.appState.therapists.map(th => {
+        const photoUrl = formatOptimizedImageUrl(th.photo);
+        return `
+        <div class="bg-white rounded-3xl overflow-hidden border border-brand-stone hover:shadow-soft transition-all text-center p-6 flex flex-col items-center">
+          <div class="w-28 h-28 rounded-full overflow-hidden mb-4 border-2 border-brand-gold/30 p-1 bg-brand-sand">
+            <img src="${photoUrl}" onerror="handleImageError(this, '${th.photo}')" alt="${th.name}" class="w-full h-full object-cover rounded-full">
+          </div>
+          <span class="inline-flex items-center gap-1 text-brand-gold text-xs font-bold mb-1">
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i> ${th.rating}
+          </span>
+          <h4 class="font-serif font-bold text-lg text-brand-charcoal">${th.name}</h4>
+          <span class="text-xs text-brand-muted mb-4 block">${th.role}</span>
+          
+          <div class="w-full grid grid-cols-2 gap-2 text-[11px] py-3 border-y border-brand-stone bg-brand-sand/40 rounded-xl mb-5">
+            <div>
+              <span class="text-brand-muted block">Pengalaman</span>
+              <span class="font-semibold text-brand-charcoal">${th.exp}</span>
+            </div>
+            <div>
+              <span class="text-brand-muted block">Layanan</span>
+              <span class="font-semibold text-brand-charcoal">${th.sessions}</span>
+            </div>
+          </div>
+
+          <button onclick="selectTherapistForBooking('${th.id}')" class="w-full py-2.5 px-4 rounded-full border border-brand-charcoal text-brand-charcoal hover:bg-brand-charcoal hover:text-white text-xs font-semibold uppercase tracking-wider transition-colors cursor-pointer">
+            Pilih Terapis
+          </button>
+        </div>
+      `;
+      }).join('');
+    }
+
+    function renderPricingTable() {
+      const container = document.getElementById('pricingTableBody');
+      if (!container) return;
+      container.innerHTML = window.appState.services.map(srv => `
+        <tr class="hover:bg-brand-sand/50 transition-colors">
+          <td class="py-4 px-6 font-medium text-brand-charcoal">
+            <span class="font-bold block">${srv.name}</span>
+            <span class="text-[11px] text-brand-muted">${srv.badge || '-'}</span>
+          </td>
+          <td class="py-4 px-4 text-center font-medium">${srv.prices[60] ? formatIDR(srv.prices[60]) : '—'}</td>
+          <td class="py-4 px-4 text-center font-medium">${srv.prices[90] ? formatIDR(srv.prices[90]) : '—'}</td>
+          <td class="py-4 px-4 text-center font-medium">${srv.prices[120] ? formatIDR(srv.prices[120]) : '—'}</td>
+          <td class="py-4 px-6 text-right">
+            <button onclick="selectServiceForBooking('${srv.id}', ${srv.durations[0]})" class="px-4 py-1.5 rounded-full bg-brand-charcoal text-white hover:bg-brand-moss text-xs font-semibold cursor-pointer">
+              Pesan
+            </button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function renderTestimonials() {
+      const container = document.getElementById('testimonialsContainer');
+      if (!container) return;
+      container.innerHTML = window.appState.testimonials.map(t => `
+        <div class="bg-brand-sand rounded-3xl p-8 border border-brand-stone relative flex flex-col justify-between shadow-soft">
+          <div>
+            <div class="flex text-brand-gold gap-1 mb-4">
+              ${Array(t.rating).fill(0).map(() => '<i data-lucide="star" class="w-4 h-4 fill-current"></i>').join('')}
+            </div>
+            <p class="text-xs sm:text-sm text-brand-charcoal/90 italic leading-relaxed mb-6">"${t.text}"</p>
+          </div>
+          <div class="flex items-center gap-3 pt-4 border-t border-brand-stone">
+            <img src="${t.avatar}" alt="${t.name}" class="w-10 h-10 rounded-full object-cover border border-brand-gold/30">
+            <div>
+              <h5 class="font-serif font-bold text-sm text-brand-charcoal">${t.name}</h5>
+              <span class="text-[11px] text-brand-muted">${t.role}</span>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderFaqs() {
+      const container = document.getElementById('faqAccordion');
+      if (!container) return;
+      container.innerHTML = window.appState.faqs.map((faq, idx) => `
+        <div class="bg-white rounded-2xl border border-brand-stone overflow-hidden transition-all">
+          <button onclick="toggleFaq(${idx})" class="w-full text-left p-5 flex items-center justify-between gap-4 focus:outline-none">
+            <span class="font-serif font-bold text-sm sm:text-base text-brand-charcoal">${faq.q}</span>
+            <i data-lucide="chevron-down" id="faqIcon-${idx}" class="w-4 h-4 text-brand-gold transition-transform"></i>
+          </button>
+          <div id="faqContent-${idx}" class="hidden px-5 pb-5 pt-1 text-xs sm:text-sm text-brand-muted leading-relaxed border-t border-brand-stone/40">
+            ${faq.a}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function toggleFaq(index) {
+      const content = document.getElementById(`faqContent-${index}`);
+      const icon = document.getElementById(`faqIcon-${index}`);
+      if (content.classList.contains('hidden')) {
+        content.classList.remove('hidden');
+        icon.classList.add('rotate-180');
+      } else {
+        content.classList.add('hidden');
+        icon.classList.remove('rotate-180');
+      }
+    }
+
+    function initDateOptions() {
+      const container = document.getElementById('dateCardsContainer');
+      if (!container) return;
+      container.innerHTML = '';
+
+      const today = new Date();
+      const tomorrow = new Date(today);
+      tomorrow.setDate(today.getDate() + 1);
+      const tomorrowStr = tomorrow.toISOString().split('T')[0];
+      if (!window.appState.activeBookingDraft.date) {
+        window.appState.activeBookingDraft.date = tomorrowStr;
+      }
+
+      const daysOfWeek = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+
+      for (let i = 1; i <= 14; i++) {
+        const d = new Date(today);
+        d.setDate(today.getDate() + i);
+        const isoDate = d.toISOString().split('T')[0];
+        const dayName = daysOfWeek[d.getDay()];
+        const dateNum = d.getDate();
+        const monthName = months[d.getMonth()];
+        const isSelected = window.appState.activeBookingDraft.date === isoDate;
+
+        const card = document.createElement('button');
+        card.className = `p-4 rounded-2xl border text-center transition-all min-w-[90px] flex flex-col items-center justify-center cursor-pointer ${
+          isSelected 
+            ? 'bg-brand-charcoal text-white border-brand-charcoal shadow-md scale-105' 
+            : 'bg-white text-brand-charcoal border-brand-stone hover:border-brand-gold/60'
+        }`;
+        card.innerHTML = `
+          <span class="text-[10px] uppercase font-semibold tracking-wider ${isSelected ? 'text-brand-gold' : 'text-brand-muted'}">${dayName}</span>
+          <span class="font-serif text-2xl font-bold my-1">${dateNum}</span>
+          <span class="text-[10px] ${isSelected ? 'text-white/80' : 'text-brand-muted'}">${monthName}</span>
+        `;
+        card.onclick = () => {
+          window.appState.activeBookingDraft.date = isoDate;
+          initDateOptions();
+          renderTimeSlots();
+        };
+        container.appendChild(card);
+      }
+    }
+
+    function renderTimeSlots() {
+      const container = document.getElementById('timeSlotsGrid');
+      if (!container) return;
+      container.innerHTML = '';
+
+      const slots = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:30', '19:30', '20:30'];
+      const currentDate = window.appState.activeBookingDraft.date;
+      const currentTherapistId = window.appState.activeBookingDraft.therapistId;
+
+      slots.forEach(slot => {
+        const isBooked = window.appState.bookings.some(b => {
+          if (b.status === 'Cancelled') return false;
+          if (b.date === currentDate && b.time === slot) {
+            if (currentTherapistId === 'auto') return false;
+            return b.therapistId === currentTherapistId;
+          }
+          return false;
+        });
+
+        const isSelected = window.appState.activeBookingDraft.time === slot;
+
+        const btn = document.createElement('button');
+        if (isBooked) {
+          btn.disabled = true;
+          btn.className = 'py-3 px-2 rounded-xl bg-red-50 border border-red-200 text-red-400 text-xs font-semibold cursor-not-allowed opacity-60 flex flex-col items-center justify-center';
+          btn.innerHTML = `<span>${slot}</span><span class="text-[9px] font-bold text-red-500 uppercase tracking-tight">FULL</span>`;
+        } else {
+          btn.className = `py-3 px-2 rounded-xl border text-xs font-semibold transition-all flex flex-col items-center justify-center cursor-pointer ${
+            isSelected
+              ? 'bg-brand-charcoal text-white border-brand-charcoal shadow-md scale-105'
+              : 'bg-white text-brand-charcoal border-brand-stone hover:border-brand-gold/60'
+          }`;
+          btn.innerHTML = `<span>${slot}</span><span class="text-[9px] ${isSelected ? 'text-brand-gold' : 'text-emerald-600'}">Tersedia</span>`;
+          btn.onclick = () => {
+            window.appState.activeBookingDraft.time = slot;
+            renderTimeSlots();
+          };
+        }
+        container.appendChild(btn);
+      });
+    }
+
+    function renderBookingStep1Options() {
+      const container = document.getElementById('bookingServiceOptions');
+      if (!container) return;
+      container.innerHTML = window.appState.services.map(srv => {
+        const isSelectedSrv = window.appState.activeBookingDraft.serviceId === srv.id;
+        return `
+          <div class="p-5 rounded-2xl border transition-all ${isSelectedSrv ? 'bg-white border-brand-charcoal shadow-md ring-1 ring-brand-charcoal' : 'bg-white/80 border-brand-stone hover:border-brand-gold/50'}">
+            <div class="flex justify-between items-start mb-2">
+              <h4 class="font-serif font-bold text-base text-brand-charcoal">${srv.name}</h4>
+              <span class="text-[10px] font-semibold text-brand-gold bg-brand-sand px-2 py-0.5 rounded">${srv.badge || 'Layanan'}</span>
+            </div>
+            <p class="text-xs text-brand-muted mb-4 leading-relaxed">${srv.desc}</p>
+            
+            <div class="space-y-2">
+              <span class="text-[11px] font-bold text-brand-charcoal block">Pilih Durasi & Tarif:</span>
+              <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                ${srv.durations.map(dur => {
+                  const price = srv.prices[dur];
+                  const isDurActive = isSelectedSrv && window.appState.activeBookingDraft.duration === dur;
+                  return `
+                    <button type="button" onclick="selectDurationOption('${srv.id}', ${dur}, ${price})" class="p-2 rounded-xl border text-center transition-all text-xs cursor-pointer ${isDurActive ? 'bg-brand-charcoal text-white border-brand-charcoal font-bold' : 'bg-brand-sand border-brand-stone text-brand-charcoal hover:bg-brand-stone'}">
+                      <span class="block text-[11px]">${dur} Mnt</span>
+                      <span class="block text-[10px] font-semibold text-brand-gold">${formatIDR(price)}</span>
+                    </button>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function selectDurationOption(serviceId, duration, price) {
+      window.appState.activeBookingDraft.serviceId = serviceId;
+      window.appState.activeBookingDraft.duration = duration;
+      window.appState.activeBookingDraft.totalPrice = price;
+      renderBookingStep1Options();
+    }
+
+    function renderBookingStep2Therapists() {
+      const container = document.getElementById('bookingTherapistList');
+      if (!container) return;
+
+      const isAuto = window.appState.activeBookingDraft.therapistId === 'auto';
+      let html = `
+        <div onclick="selectTherapistDraft('auto')" class="cursor-pointer p-4 rounded-2xl border text-center transition-all flex flex-col items-center justify-center ${isAuto ? 'bg-white border-brand-charcoal shadow-md ring-1 ring-brand-charcoal' : 'bg-white border-brand-stone hover:border-brand-gold/50'}">
+          <div class="w-16 h-16 rounded-full bg-brand-sand flex items-center justify-center text-brand-gold mb-3 border border-brand-stone">
+            <i data-lucide="sparkles" class="w-8 h-8"></i>
+          </div>
+          <h4 class="font-serif font-bold text-sm text-brand-charcoal">Terapis Otomatis</h4>
+          <span class="text-[11px] text-brand-muted mt-1 leading-tight">Sistem pilihkan terapis terbaik yang sedang standby</span>
+          <span class="mt-3 text-[10px] font-bold uppercase tracking-wider text-brand-gold bg-brand-sand px-2.5 py-0.5 rounded-full">Rekomendasi</span>
+        </div>
+      `;
+
+      html += window.appState.therapists.map(th => {
+        const isSelected = window.appState.activeBookingDraft.therapistId === th.id;
+        const photoUrl = formatOptimizedImageUrl(th.photo);
+        return `
+          <div onclick="selectTherapistDraft('${th.id}')" class="cursor-pointer p-4 rounded-2xl border text-center transition-all flex flex-col items-center justify-between ${isSelected ? 'bg-white border-brand-charcoal shadow-md ring-1 ring-brand-charcoal' : 'bg-white border-brand-stone hover:border-brand-gold/50'}">
+            <div class="w-16 h-16 rounded-full overflow-hidden mb-3 border-2 border-brand-gold/20 bg-brand-sand">
+              <img src="${photoUrl}" onerror="handleImageError(this, '${th.photo}')" alt="${th.name}" class="w-full h-full object-cover">
+            </div>
+            <div>
+              <h4 class="font-serif font-bold text-sm text-brand-charcoal">${th.name}</h4>
+              <span class="text-[11px] text-brand-muted block">${th.role}</span>
+              <span class="text-[10px] font-semibold text-brand-gold mt-1 block">★ ${th.rating} (${th.exp})</span>
+            </div>
+            <span class="mt-3 text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full ${isSelected ? 'bg-brand-charcoal text-white' : 'bg-brand-sand text-brand-muted'}">
+              ${isSelected ? 'Dipilih' : 'Pilih Ini'}
+            </span>
+          </div>
+        `;
+      }).join('');
+
+      container.innerHTML = html;
+      lucide.createIcons();
+    }
+
+    function selectTherapistDraft(therapistId) {
+      window.appState.activeBookingDraft.therapistId = therapistId;
+      renderBookingStep2Therapists();
+    }
+
+    function selectServiceForBooking(serviceId, duration) {
+      const srv = window.appState.services.find(s => s.id === serviceId);
+      if (!srv) return;
+      window.appState.activeBookingDraft.serviceId = serviceId;
+      window.appState.activeBookingDraft.duration = duration || srv.durations[0];
+      window.appState.activeBookingDraft.totalPrice = srv.prices[window.appState.activeBookingDraft.duration];
+      
+      goToStep(1);
+      document.getElementById('bookingSection').scrollIntoView({ behavior: 'smooth' });
+      renderBookingStep1Options();
+    }
+
+    function selectTherapistForBooking(therapistId) {
+      window.appState.activeBookingDraft.therapistId = therapistId;
+      goToStep(2);
+      document.getElementById('bookingSection').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function goToStep(step) {
+      if (step < 1 || step > 6) return;
+      window.appState.currentStep = step;
+
+      for (let i = 1; i <= 6; i++) {
+        const stepDiv = document.getElementById(`bookingStep${i}`);
+        if (stepDiv) stepDiv.classList.add('hidden');
+        
+        const dot = document.getElementById(`stepDot${i}`);
+        if (dot) {
+          if (i < step) {
+            dot.className = 'w-9 h-9 rounded-full bg-emerald-600 text-white text-xs font-semibold flex items-center justify-center transition-all';
+            dot.innerHTML = '✓';
+          } else if (i === step) {
+            dot.className = 'w-9 h-9 rounded-full bg-brand-charcoal text-white text-xs font-semibold flex items-center justify-center shadow-md transition-all ring-2 ring-brand-gold';
+            dot.innerHTML = i;
+          } else {
+            dot.className = 'w-9 h-9 rounded-full bg-brand-sand border border-brand-stone text-brand-muted text-xs font-semibold flex items-center justify-center transition-all';
+            dot.innerHTML = i;
+          }
+        }
+      }
+
+      const activeStepDiv = document.getElementById(`bookingStep${step}`);
+      if (activeStepDiv) activeStepDiv.classList.remove('hidden');
+
+      if (step === 1) renderBookingStep1Options();
+      if (step === 2) renderBookingStep2Therapists();
+      if (step === 3) initDateOptions();
+      if (step === 4) renderTimeSlots();
+      if (step === 6) renderStep6Summary();
+
+      lucide.createIcons();
+    }
+
+    function nextFromStep1() {
+      if (!window.appState.activeBookingDraft.serviceId) {
+        showCustomAlert("Silakan pilih salah satu layanan pijat.");
+        return;
+      }
+      goToStep(2);
+    }
+
+    function nextFromStep2() {
+      goToStep(3);
+    }
+
+    function nextFromStep3() {
+      if (!window.appState.activeBookingDraft.date) {
+        showCustomAlert("Silakan pilih tanggal kedatangan.");
+        return;
+      }
+      goToStep(4);
+    }
+
+    function nextFromStep4() {
+      if (!window.appState.activeBookingDraft.time) {
+        showCustomAlert("Silakan pilih jam slot waktu yang tersedia.");
+        return;
+      }
+      goToStep(5);
+    }
+
+    function nextFromStep5() {
+      const name = document.getElementById('custName').value.trim();
+      const phone = document.getElementById('custPhone').value.trim();
+      const email = document.getElementById('custEmail').value.trim();
+      const notes = document.getElementById('custNotes').value.trim();
+      const agree = document.getElementById('agreeTerms').checked;
+
+      if (!name) {
+        showCustomAlert("Mohon isi Nama Lengkap Anda.");
+        return;
+      }
+      if (!phone || phone.length < 9) {
+        showCustomAlert("Mohon isi Nomor WhatsApp aktif yang valid.");
+        return;
+      }
+      if (!agree) {
+        showCustomAlert("Anda harus menyetujui kebijakan booking.");
+        return;
+      }
+
+      window.appState.activeBookingDraft.name = name;
+      window.appState.activeBookingDraft.phone = phone;
+      window.appState.activeBookingDraft.email = email;
+      window.appState.activeBookingDraft.notes = notes;
+
+      goToStep(6);
+    }
+
+    function renderStep6Summary() {
+      const draft = window.appState.activeBookingDraft;
+      const srv = window.appState.services.find(s => s.id === draft.serviceId) || window.appState.services[0];
+      
+      let therapistName = 'Otomatis (Terapis Terbaik)';
+      if (draft.therapistId !== 'auto') {
+        const th = window.appState.therapists.find(t => t.id === draft.therapistId);
+        if (th) therapistName = th.name;
+      }
+
+      document.getElementById('summaryServiceName').textContent = srv.name;
+      document.getElementById('summaryDuration').textContent = `${draft.duration} Menit`;
+      document.getElementById('summaryTherapistName').textContent = therapistName;
+      document.getElementById('summaryDateTime').textContent = `${draft.date} @ ${draft.time} WIB`;
+      document.getElementById('summaryCustName').textContent = draft.name;
+      document.getElementById('summaryCustPhone').textContent = draft.phone;
+      document.getElementById('summaryNotes').textContent = draft.notes || 'Tidak ada catatan khusus.';
+
+      const basePrice = srv.prices[draft.duration] || 150000;
+      document.getElementById('summaryPriceSubtotal').textContent = formatIDR(basePrice);
+      
+      const bookingDateObj = new Date(draft.date);
+      const dayNum = bookingDateObj.getDay();
+      let discountAmount = 0;
+      if (dayNum >= 1 && dayNum <= 4 && draft.duration >= 90) {
+        discountAmount = Math.round(basePrice * 0.15);
+        document.getElementById('summaryDiscount').textContent = `-${formatIDR(discountAmount)}`;
+      } else {
+        document.getElementById('summaryDiscount').textContent = '-Rp0';
+      }
+
+      const finalTotal = basePrice - discountAmount;
+      window.appState.activeBookingDraft.totalPrice = finalTotal;
+      document.getElementById('summaryPriceTotal').textContent = formatIDR(finalTotal);
+    }
+
+    function finalizeBooking() {
+      const draft = window.appState.activeBookingDraft;
+      
+      const isCollision = window.appState.bookings.some(b => 
+        b.status !== 'Cancelled' && 
+        b.date === draft.date && 
+        b.time === draft.time && 
+        draft.therapistId !== 'auto' && 
+        b.therapistId === draft.therapistId
+      );
+
+      if (isCollision) {
+        showCustomAlert("Maaf, slot waktu atau terapis tersebut baru saja dipesan pelanggan lain. Silakan pilih jam atau terapis lainnya.");
+        goToStep(4);
+        return;
+      }
+
+      const srv = window.appState.services.find(s => s.id === draft.serviceId) || window.appState.services[0];
+      let assignedTherapistId = draft.therapistId;
+      let assignedTherapistName = 'Alya Rahma';
+
+      if (assignedTherapistId === 'auto') {
+        const availableTherapist = window.appState.therapists.find(t => t.active) || window.appState.therapists[0];
+        assignedTherapistId = availableTherapist.id;
+        assignedTherapistName = availableTherapist.name;
+      } else {
+        const th = window.appState.therapists.find(t => t.id === assignedTherapistId);
+        if (th) assignedTherapistName = th.name;
+      }
+
+      const dateNoDash = draft.date.replace(/-/g, '');
+      const randomSeq = Math.floor(100 + Math.random() * 900);
+      const newBookingId = `#MSG-${dateNoDash}-${randomSeq}`;
+
+      const newBooking = {
+        id: newBookingId,
+        name: draft.name,
+        phone: draft.phone,
+        email: draft.email,
+        serviceId: draft.serviceId,
+        serviceName: srv.name,
+        duration: draft.duration,
+        therapistId: assignedTherapistId,
+        therapistName: assignedTherapistName,
+        date: draft.date,
+        time: draft.time,
+        price: draft.totalPrice,
+        status: 'Confirmed',
+        notes: draft.notes,
+        createdDate: 'Hari Ini'
+      };
+
+      window.appState.bookings.unshift(newBooking);
+
+      // Populate Success Ticket
+      document.getElementById('ticketId').textContent = newBooking.id;
+      document.getElementById('ticketName').textContent = newBooking.name;
+      document.getElementById('ticketService').textContent = `${newBooking.serviceName} (${newBooking.duration} Mnt)`;
+      document.getElementById('ticketTherapist').textContent = newBooking.therapistName;
+      document.getElementById('ticketSchedule').textContent = `${newBooking.date} • ${newBooking.time} WIB`;
+      document.getElementById('ticketTotal').textContent = formatIDR(newBooking.price);
+
+      const adminWaClean = window.appState.siteContent.whatsapp.replace(/[^0-9]/g, '');
+      const waMessage = 
+`Halo ${window.appState.siteContent.brandName}, saya ingin mengonfirmasi booking massage:
+Booking ID: ${newBooking.id}
+Nama: ${newBooking.name}
+Layanan: ${newBooking.serviceName}
+Durasi: ${newBooking.duration} Menit
+Terapis: ${newBooking.therapistName}
+Tanggal: ${newBooking.date}
+Jam: ${newBooking.time} WIB
+Total Biaya: ${formatIDR(newBooking.price)}
+Catatan: ${newBooking.notes || '-'}
+
+Terima kasih.`;
+
+      const encodedMsg = encodeURIComponent(waMessage);
+      const waUrl = `https://wa.me/${adminWaClean}?text=${encodedMsg}`;
+      document.getElementById('btnWhatsAppConfirm').href = waUrl;
+
+      document.getElementById('bookingSuccessModal').classList.remove('hidden');
+
+      updateAdminDashboardData();
+      if (window.syncStateToCloud) {
+        window.syncStateToCloud();
+      }
+    }
+
+    function closeSuccessModal() {
+      document.getElementById('bookingSuccessModal').classList.add('hidden');
+      goToStep(1);
+    }
+
+    function addToGoogleCalendar() {
+      const draft = window.appState.activeBookingDraft;
+      const title = encodeURIComponent(`Sesi Massage - ${window.appState.siteContent.brandName}`);
+      const details = encodeURIComponent(`Layanan Pijat Profesional di ${window.appState.siteContent.address}. Total: ${formatIDR(draft.totalPrice)}`);
+      const location = encodeURIComponent(window.appState.siteContent.address);
+      const dtStart = draft.date.replace(/-/g, '') + 'T' + draft.time.replace(':', '') + '00';
+      const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${location}&dates=${dtStart}/${dtStart}`;
+      window.open(gcalUrl, '_blank');
+    }
+
+    function showCustomAlert(msg) {
+      const toast = document.createElement('div');
+      toast.className = 'fixed top-6 right-6 z-50 bg-brand-charcoal text-white border border-brand-gold px-5 py-3.5 rounded-2xl shadow-2xl text-xs font-semibold flex items-center gap-3 fade-in';
+      toast.innerHTML = `<i data-lucide="alert-circle" class="w-4 h-4 text-brand-gold shrink-0"></i><span>${msg}</span>`;
+      document.body.appendChild(toast);
+      lucide.createIcons();
+      setTimeout(() => {
+        toast.remove();
+      }, 4000);
+    }
+
+    function openAdminModal() {
+      document.getElementById('adminModal').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function closeAdminModal() {
+      document.getElementById('adminModal').classList.add('hidden');
+    }
+
+    function handleAdminLogin() {
+      const user = document.getElementById('adminEmailInput').value.trim();
+      const pass = document.getElementById('adminPassInput').value.trim();
+
+      // Required credentials: kelolaweb2026 / kelolaweb2026
+      if (user === 'kelolaweb2026' && pass === 'kelolaweb2026') {
+        document.getElementById('adminLoginView').classList.add('hidden');
+        document.getElementById('adminDashboardView').classList.remove('hidden');
+        updateAdminDashboardData();
+        populateCmsForm();
+        renderAdminServicesList();
+        switchAdminTab('overview');
+        showCustomAlert("Berhasil masuk ke Admin Panel.");
+      } else {
+        showCustomAlert("Username atau password salah. Silakan periksa kembali.");
+      }
+    }
+
+    function switchAdminTab(tabName) {
+      const tabs = ['overview', 'bookings', 'services', 'cms', 'therapists', 'settings'];
+      tabs.forEach(t => {
+        const pane = document.getElementById(`adminTab-${t}`);
+        if (pane) pane.classList.add('hidden');
+        const btn = document.getElementById(`tabBtn-${t}`);
+        if (btn) {
+          btn.className = 'py-3 px-4 border-b-2 border-transparent text-brand-muted hover:text-brand-charcoal cursor-pointer';
+        }
+      });
+
+      const activePane = document.getElementById(`adminTab-${tabName}`);
+      if (activePane) activePane.classList.remove('hidden');
+      
+      const activeBtn = document.getElementById(`tabBtn-${tabName}`);
+      if (activeBtn) {
+        activeBtn.className = 'py-3 px-4 border-b-2 border-brand-charcoal text-brand-charcoal font-bold cursor-pointer';
+      }
+
+      if (tabName === 'bookings') renderAdminBookingsTable();
+      if (tabName === 'services') renderAdminServicesList();
+      if (tabName === 'therapists') renderAdminTherapistsList();
+
+      lucide.createIcons();
+    }
+
+    function updateAdminDashboardData() {
+      document.getElementById('statTotalBookings').textContent = window.appState.bookings.length;
+      document.getElementById('adminBookingCount').textContent = window.appState.bookings.length;
+      
+      const todayBookings = window.appState.bookings.filter(b => b.createdDate === 'Hari Ini').length;
+      document.getElementById('statTodayBookings').textContent = todayBookings;
+
+      const totalRevenue = window.appState.bookings
+        .filter(b => b.status !== 'Cancelled')
+        .reduce((sum, b) => sum + (b.price || 0), 0);
+      document.getElementById('statEstimatedRevenue').textContent = formatIDR(totalRevenue);
+
+      const recentContainer = document.getElementById('overviewRecentTable');
+      if (recentContainer) {
+        recentContainer.innerHTML = window.appState.bookings.slice(0, 5).map(b => `
+          <tr class="hover:bg-brand-sand/40">
+            <td class="p-3 font-mono font-bold">${b.id}</td>
+            <td class="p-3 font-medium">${b.name} (${b.phone})</td>
+            <td class="p-3">${b.serviceName}</td>
+            <td class="p-3">${b.date} ${b.time}</td>
+            <td class="p-3">${b.therapistName}</td>
+            <td class="p-3">
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold ${
+                b.status === 'Confirmed' ? 'bg-emerald-100 text-emerald-800' :
+                b.status === 'Pending' ? 'bg-amber-100 text-amber-800' :
+                b.status === 'Completed' ? 'bg-blue-100 text-blue-800' :
+                'bg-red-100 text-red-800'
+              }">${b.status}</span>
+            </td>
+          </tr>
+        `).join('');
+      }
+    }
+
+    function renderAdminBookingsTable() {
+      const container = document.getElementById('adminBookingsTableBody');
+      if (!container) return;
+
+      const q = (document.getElementById('bookingSearchInput')?.value || '').toLowerCase().trim();
+      const statusFilter = document.getElementById('bookingStatusFilter')?.value || 'ALL';
+
+      const filtered = window.appState.bookings.filter(b => {
+        const matchesSearch = b.name.toLowerCase().includes(q) || b.id.toLowerCase().includes(q) || b.phone.includes(q);
+        const matchesStatus = statusFilter === 'ALL' || b.status === statusFilter;
+        return matchesSearch && matchesStatus;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<tr><td colspan="9" class="p-6 text-center text-brand-muted">Tidak ada data reservasi yang sesuai kata kunci.</td></tr>`;
+        return;
+      }
+
+      container.innerHTML = filtered.map(b => `
+        <tr class="hover:bg-brand-sand/50">
+          <td class="p-3 font-mono font-bold text-brand-charcoal">
+            ${b.id}
+            <span class="block text-[10px] text-brand-muted font-normal">${b.createdDate}</span>
+          </td>
+          <td class="p-3">
+            <span class="font-bold block text-brand-charcoal">${b.name}</span>
+            <span class="text-brand-muted">${b.phone}</span>
+          </td>
+          <td class="p-3">
+            <span class="font-medium">${b.serviceName}</span>
+            <span class="block text-[10px] text-brand-muted">${b.duration} Menit</span>
+          </td>
+          <td class="p-3 font-semibold">${b.date}<br><span class="text-brand-gold font-mono">${b.time} WIB</span></td>
+          <td class="p-3">${b.therapistName}</td>
+          <td class="p-3 font-bold text-brand-charcoal">${formatIDR(b.price)}</td>
+          <td class="p-3 text-[11px] text-brand-muted max-w-[150px] truncate" title="${b.notes || '-'}">${b.notes || '-'}</td>
+          <td class="p-3">
+            <select onchange="updateBookingStatus('${b.id}', this.value)" class="text-[11px] font-semibold rounded px-2 py-1 border border-brand-stone bg-white cursor-pointer">
+              <option value="Confirmed" ${b.status === 'Confirmed' ? 'selected' : ''}>Confirmed</option>
+              <option value="Pending" ${b.status === 'Pending' ? 'selected' : ''}>Pending</option>
+              <option value="Completed" ${b.status === 'Completed' ? 'selected' : ''}>Completed</option>
+              <option value="Cancelled" ${b.status === 'Cancelled' ? 'selected' : ''}>Cancelled</option>
+            </select>
+          </td>
+          <td class="p-3 text-right">
+            <button onclick="cancelBookingAction('${b.id}')" class="text-red-500 hover:text-red-700 font-semibold text-[11px] p-1 cursor-pointer">
+              Batalkan
+            </button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function updateBookingStatus(bookingId, newStatus) {
+      const b = window.appState.bookings.find(item => item.id === bookingId);
+      if (b) {
+        b.status = newStatus;
+        updateAdminDashboardData();
+        showCustomAlert(`Status booking ${bookingId} diubah ke ${newStatus}`);
+        if (window.syncStateToCloud) window.syncStateToCloud();
+      }
+    }
+
+    function cancelBookingAction(bookingId) {
+      updateBookingStatus(bookingId, 'Cancelled');
+      renderAdminBookingsTable();
+    }
+
+    function filterAdminBookings() {
+      renderAdminBookingsTable();
+    }
+
+    function renderAdminServicesList() {
+      const container = document.getElementById('adminServicesList');
+      if (!container) return;
+      container.innerHTML = window.appState.services.map(srv => {
+        const thumbUrl = formatOptimizedImageUrl(srv.image);
+        return `
+          <div class="p-4 rounded-2xl border border-brand-stone bg-white flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:shadow-sm transition-shadow">
+            <div class="flex items-center gap-4">
+              <img src="${thumbUrl}" onerror="handleImageError(this, '${srv.image}')" alt="${srv.name}" class="w-16 h-16 rounded-xl object-cover border border-brand-stone shrink-0 bg-brand-sand">
+              <div>
+                <span class="text-[10px] font-bold text-brand-gold uppercase tracking-wider">${srv.badge || 'Layanan'}</span>
+                <h5 class="font-serif font-bold text-base text-brand-charcoal">${srv.name}</h5>
+                <p class="text-xs text-brand-muted max-w-xl">${srv.desc.substring(0, 90)}...</p>
+                <div class="flex flex-wrap gap-3 text-xs mt-2 font-semibold text-brand-charcoal">
+                  ${srv.durations.map(d => `<span>${d} Mnt: <b class="text-brand-gold">${formatIDR(srv.prices[d])}</b></span>`).join(' • ')}
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <button onclick="openEditServiceModal('${srv.id}')" class="px-3.5 py-2 rounded-xl border border-brand-charcoal text-xs font-semibold hover:bg-brand-charcoal hover:text-white transition-colors cursor-pointer">
+                Edit Detail
+              </button>
+              <button onclick="deleteServiceAction('${srv.id}')" class="px-3 py-2 rounded-xl text-red-500 hover:bg-red-50 text-xs font-semibold transition-colors cursor-pointer">
+                Hapus
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function openAddServiceModal() {
+      document.getElementById('serviceModalTitle').textContent = "Tambah Layanan Pijat Baru";
+      document.getElementById('srvFormId').value = "";
+      document.getElementById('srvFormName').value = "";
+      document.getElementById('srvFormBadge').value = "";
+      document.getElementById('srvFormDesc').value = "";
+      document.getElementById('srvFormImage').value = "";
+      document.getElementById('srvFormPrice60').value = "";
+      document.getElementById('srvFormPrice90').value = "";
+      document.getElementById('srvFormPrice120').value = "";
+      document.getElementById('serviceEditModal').classList.remove('hidden');
+    }
+
+    function openEditServiceModal(serviceId) {
+      const srv = window.appState.services.find(s => s.id === serviceId);
+      if (!srv) return;
+      document.getElementById('serviceModalTitle').textContent = `Edit Layanan: ${srv.name}`;
+      document.getElementById('srvFormId').value = srv.id;
+      document.getElementById('srvFormName').value = srv.name;
+      document.getElementById('srvFormBadge').value = srv.badge || '';
+      document.getElementById('srvFormDesc').value = srv.desc;
+      document.getElementById('srvFormImage').value = srv.image;
+      document.getElementById('srvFormPrice60').value = srv.prices[60] || '';
+      document.getElementById('srvFormPrice90').value = srv.prices[90] || '';
+      document.getElementById('srvFormPrice120').value = srv.prices[120] || '';
+      document.getElementById('serviceEditModal').classList.remove('hidden');
+    }
+
+    function closeServiceEditModal() {
+      document.getElementById('serviceEditModal').classList.add('hidden');
+    }
+
+    function handleSaveService() {
+      const id = document.getElementById('srvFormId').value;
+      const name = document.getElementById('srvFormName').value.trim();
+      const badge = document.getElementById('srvFormBadge').value.trim();
+      const desc = document.getElementById('srvFormDesc').value.trim();
+      const rawImage = document.getElementById('srvFormImage').value.trim() || WELLNESS_FALLBACK_IMAGE;
+      const p60 = parseInt(document.getElementById('srvFormPrice60').value, 10);
+      const p90 = parseInt(document.getElementById('srvFormPrice90').value, 10);
+      const p120 = parseInt(document.getElementById('srvFormPrice120').value, 10);
+
+      const durations = [60];
+      const prices = { 60: p60 };
+      if (!isNaN(p90) && p90 > 0) {
+        durations.push(90);
+        prices[90] = p90;
+      }
+      if (!isNaN(p120) && p120 > 0) {
+        durations.push(120);
+        prices[120] = p120;
+      }
+
+      if (id) {
+        // Edit existing service
+        const existing = window.appState.services.find(s => s.id === id);
+        if (existing) {
+          existing.name = name;
+          existing.badge = badge;
+          existing.desc = desc;
+          existing.image = rawImage;
+          existing.durations = durations;
+          existing.prices = prices;
+          showCustomAlert(`Layanan "${name}" berhasil diperbarui!`);
+        }
+      } else {
+        // Create new service
+        const newId = 'srv-' + (Date.now());
+        const newSrv = {
+          id: newId,
+          name,
+          badge: badge || 'Layanan Baru',
+          desc,
+          image: rawImage,
+          durations,
+          prices
+        };
+        window.appState.services.push(newSrv);
+        showCustomAlert(`Layanan "${name}" berhasil ditambahkan ke katalog!`);
+      }
+
+      closeServiceEditModal();
+      renderAdminServicesList();
+      renderPublicServices();
+      renderPricingTable();
+      if (window.syncStateToCloud) window.syncStateToCloud();
+    }
+
+    function deleteServiceAction(serviceId) {
+      if (window.appState.services.length <= 1) {
+        showCustomAlert("Minimal harus ada 1 layanan aktif di katalog.");
+        return;
+      }
+      window.appState.services = window.appState.services.filter(s => s.id !== serviceId);
+      renderAdminServicesList();
+      renderPublicServices();
+      renderPricingTable();
+      showCustomAlert("Layanan berhasil dihapus.");
+      if (window.syncStateToCloud) window.syncStateToCloud();
+    }
+
+    function renderAdminTherapistsList() {
+      const container = document.getElementById('adminTherapistsList');
+      if (!container) return;
+      container.innerHTML = window.appState.therapists.map(th => {
+        const photoUrl = formatOptimizedImageUrl(th.photo);
+        return `
+        <div class="p-4 rounded-xl border border-brand-stone bg-white flex items-center justify-between gap-4">
+          <div class="flex items-center gap-3">
+            <img src="${photoUrl}" onerror="handleImageError(this, '${th.photo}')" alt="${th.name}" class="w-12 h-12 rounded-full object-cover">
+            <div>
+              <h5 class="font-bold text-sm text-brand-charcoal">${th.name}</h5>
+              <span class="text-xs text-brand-muted block">${th.role}</span>
+              <span class="text-[10px] text-emerald-600 font-semibold">${th.active ? '● Aktif Bekerja' : '○ Cuti'}</span>
+            </div>
+          </div>
+          <button onclick="toggleTherapistStatus('${th.id}')" class="text-xs px-3 py-1 rounded-lg border cursor-pointer ${th.active ? 'border-amber-400 text-amber-700' : 'border-emerald-500 text-emerald-700'}">
+            ${th.active ? 'Nonaktifkan' : 'Aktifkan'}
+          </button>
+        </div>
+      `;
+      }).join('');
+    }
+
+    function toggleTherapistStatus(therapistId) {
+      const th = window.appState.therapists.find(t => t.id === therapistId);
+      if (th) {
+        th.active = !th.active;
+        renderAdminTherapistsList();
+        renderPublicTherapists();
+        showCustomAlert(`Status kerja ${th.name} telah diubah.`);
+        if (window.syncStateToCloud) window.syncStateToCloud();
+      }
+    }
+
+    function addNewTherapistPrompt() {
+      const name = prompt("Nama Terapis Baru:");
+      if (!name) return;
+      const role = prompt("Spesialisasi (Contoh: Traditional & Reflexology):", "Relaxation Specialist");
+      if (!role) return;
+
+      const newTh = {
+        id: 'th-' + (window.appState.therapists.length + 1),
+        name: name,
+        role: role,
+        exp: '3 Tahun',
+        rating: 4.9,
+        sessions: '100+',
+        photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=600&auto=format&fit=crop',
+        active: true
+      };
+
+      window.appState.therapists.push(newTh);
+      renderAdminTherapistsList();
+      renderPublicTherapists();
+      showCustomAlert(`Terapis ${name} berhasil didaftarkan.`);
+      if (window.syncStateToCloud) window.syncStateToCloud();
+    }
+
+    function populateCmsForm() {
+      document.getElementById('cmsBrandName').value = window.appState.siteContent.brandName;
+      document.getElementById('cmsWhatsapp').value = window.appState.siteContent.whatsapp;
+      document.getElementById('cmsBannerText').value = window.appState.siteContent.bannerText || '';
+      document.getElementById('cmsHeroTitle').value = window.appState.siteContent.heroTitle;
+      document.getElementById('cmsHeroSubtitle').value = window.appState.siteContent.heroSubtitle;
+      document.getElementById('cmsHeroCtaPrimaryText').value = window.appState.siteContent.heroCtaPrimaryText || 'Booking Sekarang';
+      document.getElementById('cmsHeroCtaSecondaryText').value = window.appState.siteContent.heroCtaSecondaryText || 'Lihat Menu Layanan';
+      document.getElementById('cmsNavCtaText').value = window.appState.siteContent.navCtaText || 'Booking Sekarang';
+      document.getElementById('cmsHeroBadge').value = window.appState.siteContent.heroBadge || 'Certified Wellness Sanctuary';
+      document.getElementById('cmsHeroImgUrl').value = window.appState.siteContent.heroImage;
+      document.getElementById('cmsAddress').value = window.appState.siteContent.address;
+    }
+
+    function saveCmsContent() {
+      window.appState.siteContent.brandName = document.getElementById('cmsBrandName').value.trim();
+      window.appState.siteContent.whatsapp = document.getElementById('cmsWhatsapp').value.trim();
+      window.appState.siteContent.bannerText = document.getElementById('cmsBannerText').value.trim();
+      window.appState.siteContent.heroTitle = document.getElementById('cmsHeroTitle').value.trim();
+      window.appState.siteContent.heroSubtitle = document.getElementById('cmsHeroSubtitle').value.trim();
+      window.appState.siteContent.heroCtaPrimaryText = document.getElementById('cmsHeroCtaPrimaryText').value.trim();
+      window.appState.siteContent.heroCtaSecondaryText = document.getElementById('cmsHeroCtaSecondaryText').value.trim();
+      window.appState.siteContent.navCtaText = document.getElementById('cmsNavCtaText').value.trim();
+      window.appState.siteContent.heroBadge = document.getElementById('cmsHeroBadge').value.trim();
+      window.appState.siteContent.heroImage = document.getElementById('cmsHeroImgUrl').value.trim();
+      window.appState.siteContent.address = document.getElementById('cmsAddress').value.trim();
+
+      applyLiveCmsToDom();
+      showCustomAlert("Semua konten, tombol, dan gambar berhasil diperbarui!");
+      if (window.syncStateToCloud) window.syncStateToCloud();
+    }
+
+    function applyLiveCmsToDom() {
+      const c = window.appState.siteContent;
+      
+      const navBrand = document.getElementById('navBrandName');
+      if (navBrand) navBrand.textContent = c.brandName;
+      
+      const footerBrand = document.getElementById('footerBrandName');
+      if (footerBrand) footerBrand.textContent = c.brandName;
+      
+      const bannerEl = document.getElementById('bannerText');
+      if (bannerEl && c.bannerText) bannerEl.textContent = c.bannerText;
+
+      const heroTitleEl = document.getElementById('heroTitle');
+      if (heroTitleEl) heroTitleEl.textContent = c.heroTitle;
+
+      const heroSubEl = document.getElementById('heroSubtitle');
+      if (heroSubEl) heroSubEl.textContent = c.heroSubtitle;
+
+      const heroBadgeEl = document.getElementById('heroBadge');
+      if (heroBadgeEl && c.heroBadge) heroBadgeEl.textContent = c.heroBadge;
+
+      const heroPrimaryBtn = document.getElementById('heroCtaPrimaryText');
+      if (heroPrimaryBtn && c.heroCtaPrimaryText) heroPrimaryBtn.textContent = c.heroCtaPrimaryText;
+
+      const heroSecBtn = document.getElementById('heroCtaSecondaryText');
+      if (heroSecBtn && c.heroCtaSecondaryText) heroSecBtn.textContent = c.heroCtaSecondaryText;
+
+      const navBtn = document.getElementById('navCtaText');
+      if (navBtn && c.navCtaText) navBtn.textContent = c.navCtaText;
+
+      const heroImg = document.getElementById('heroImageSrc');
+      if (heroImg && c.heroImage) {
+        const formattedUrl = formatOptimizedImageUrl(c.heroImage);
+        heroImg.src = formattedUrl;
+        heroImg.onerror = () => handleImageError(heroImg, c.heroImage);
+      }
+
+      const addressEl = document.getElementById('contactAddress');
+      if (addressEl) addressEl.textContent = c.address;
+
+      const waEl = document.getElementById('contactWhatsapp');
+      if (waEl) waEl.textContent = c.whatsapp;
+
+      const cleanWa = c.whatsapp.replace(/[^0-9]/g, '');
+      const floatWa = document.getElementById('mobileFloatingWa');
+      if (floatWa) floatWa.href = `https://wa.me/${cleanWa}`;
+    }
+
+    function confirmResetAllToDefault() {
+      window.appState.siteContent = JSON.parse(JSON.stringify(defaultSiteContent));
+      window.appState.services = JSON.parse(JSON.stringify(defaultServices));
+      window.appState.therapists = JSON.parse(JSON.stringify(defaultTherapists));
+      window.appState.testimonials = JSON.parse(JSON.stringify(defaultTestimonials));
+      window.appState.faqs = JSON.parse(JSON.stringify(defaultFaqs));
+
+      applyLiveCmsToDom();
+      populateCmsForm();
+      renderPublicServices();
+      renderPublicTherapists();
+      renderPricingTable();
+      renderTestimonials();
+      renderFaqs();
+      renderAdminServicesList();
+      renderAdminTherapistsList();
+      updateAdminDashboardData();
+
+      showCustomAlert("Semua data web utama berhasil di-reset kembali ke bawaan pabrik!");
+      if (window.syncStateToCloud) window.syncStateToCloud();
+    }
+
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('mainHeader');
+      if (window.scrollY > 40) {
+        header.classList.add('bg-white', 'shadow-md');
+        header.classList.remove('bg-brand-sand/90');
+      } else {
+        header.classList.remove('bg-white', 'shadow-md');
+        header.classList.add('bg-brand-sand/90');
+      }
+    });
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('hidden');
+    }
+
+    window.onload = function() {
+      document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+      renderPublicServices();
+      renderPublicTherapists();
+      renderPricingTable();
+      renderTestimonials();
+      renderFaqs();
+      applyLiveCmsToDom();
+
+      goToStep(1);
+      lucide.createIcons();
+    };
+  </script>
+</body>
+</html>

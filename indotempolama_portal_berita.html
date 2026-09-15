@@ -60,6 +60,7 @@
     .no-scrollbar {
       -ms-overflow-style: none;
       scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
     }
     @keyframes fadeIn {
       from { opacity: 0; transform: scale(0.98); }
@@ -78,22 +79,22 @@
   </style>
 </head>
 
-<body class="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300 antialiased font-sans flex flex-col justify-between selection:bg-rose-500 selection:text-white">
+<body class="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300 antialiased font-sans flex flex-col justify-between selection:bg-rose-500 selection:text-white overflow-x-hidden">
 
   <!-- Floating Dynamic Toast Container -->
-  <div id="toast-container" class="fixed bottom-6 right-6 z-50 pointer-events-none transition-all duration-300"></div>
+  <div id="toast-container" class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 pointer-events-none transition-all duration-300 max-w-[90vw]"></div>
 
   <div class="w-full">
     <!-- Top Financial & Live Status Bar -->
-    <aside class="border-b text-xs bg-white dark:bg-slate-900/90 border-slate-200 dark:border-slate-800 transition-colors">
-      <div class="max-w-7xl mx-auto px-4 py-2 flex flex-wrap items-center justify-between gap-3">
+    <aside class="border-b text-xs bg-white dark:bg-slate-900/90 border-slate-200 dark:border-slate-800 transition-colors overflow-hidden">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6 py-2 flex flex-wrap items-center justify-between gap-2 sm:gap-3">
         
-        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5 max-w-full">
-          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider text-[10px] bg-rose-600 text-white shrink-0 shadow-sm">
-            <span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
-            Pasaran Langsung
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5 w-full sm:w-auto">
+          <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full font-bold uppercase tracking-wider text-[9px] sm:text-[10px] bg-rose-600 text-white shrink-0 shadow-sm">
+            <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
+            Pasaran
           </span>
-          <div id="market-metrics-bar" class="flex items-center gap-4 text-slate-600 dark:text-slate-300 font-mono text-[11px] whitespace-nowrap">
+          <div id="market-metrics-bar" class="flex items-center gap-3 sm:gap-4 text-slate-600 dark:text-slate-300 font-mono text-[10px] sm:text-[11px] whitespace-nowrap">
             <!-- Populated via JavaScript -->
           </div>
         </div>
@@ -111,16 +112,16 @@
 
     <!-- Sticky Primary Navigation Header -->
     <header class="sticky top-0 z-40 backdrop-blur-xl bg-white/90 dark:bg-slate-950/90 border-b border-slate-200/80 dark:border-slate-800/80 transition-colors">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-20 gap-4">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16 sm:h-20 gap-2 sm:gap-4">
           
           <!-- Brand Logo and Tagline -->
-          <div class="flex items-center gap-4 cursor-pointer" onclick="resetAppFilter()">
-            <div class="group flex items-baseline gap-1 select-none">
-              <span class="text-2xl sm:text-3xl font-extrabold tracking-tight bg-gradient-to-r from-rose-600 via-rose-500 to-amber-500 bg-clip-text text-transparent font-serif">
+          <div class="flex items-center gap-2 sm:gap-4 cursor-pointer" onclick="resetAppFilter()">
+            <div class="group flex items-baseline gap-0.5 sm:gap-1 select-none">
+              <span class="text-xl sm:text-3xl font-extrabold tracking-tight bg-gradient-to-r from-rose-600 via-rose-500 to-amber-500 bg-clip-text text-transparent font-serif">
                 INDOTEMPO
               </span>
-              <span class="text-xl sm:text-2xl font-light text-slate-500 tracking-wider">
+              <span class="text-lg sm:text-2xl font-light text-slate-500 tracking-wider">
                 LAMA<span class="text-rose-600 font-black">.</span>COM
               </span>
             </div>
@@ -130,7 +131,7 @@
             </span>
           </div>
 
-          <!-- Interactive Search Bar -->
+          <!-- Interactive Search Bar (Desktop) -->
           <div class="flex-1 max-w-md hidden md:block">
             <div class="relative">
               <input
@@ -147,7 +148,17 @@
           </div>
 
           <!-- Quick Controls: Audio Trigger, Bookmarks, and Dark/Light Mode -->
-          <div class="flex items-center gap-2 sm:gap-3">
+          <div class="flex items-center gap-1.5 sm:gap-3">
+            <!-- Mobile Search Toggle Button -->
+            <button
+              onclick="toggleMobileSearchBar()"
+              title="Buka Pencarian"
+              class="md:hidden p-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all shadow-sm">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+            </button>
+
             <!-- Narration Audio Button -->
             <button
               id="audio-toggle-btn"
@@ -164,7 +175,7 @@
             <button
               onclick="showBookmarkList()"
               title="Lihat Artikel Tersimpan"
-              class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:border-rose-400 transition-all shadow-sm">
+              class="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full text-xs font-semibold border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:border-rose-400 transition-all shadow-sm">
               <svg id="header-bookmark-icon" class="w-3.5 h-3.5 text-rose-600" fill="currentColor" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                 <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
               </svg>
@@ -187,11 +198,27 @@
           </div>
 
         </div>
+
+        <!-- Mobile Dedicated Search Bar (Collapsible) -->
+        <div id="mobile-search-bar" class="hidden md:hidden pb-3 pt-1 transition-all">
+          <div class="relative">
+            <input
+              id="mobile-search-input"
+              type="text"
+              placeholder="Cari analisis, tokoh, topik..."
+              class="w-full text-xs pl-9 pr-3 py-2 rounded-full border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-rose-500/40"
+              oninput="syncAndSearchMobile(this.value)"
+            />
+            <svg class="w-3.5 h-3.5 absolute left-3 top-2.5 text-slate-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </div>
+        </div>
       </div>
 
       <!-- Category Filter Bar -->
       <div class="border-t border-slate-200/60 dark:border-slate-800/60">
-        <div id="category-pills-bar" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-2 overflow-x-auto no-scrollbar py-2.5">
+        <div id="category-pills-bar" class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar py-2">
           <!-- Rendered via JS -->
         </div>
       </div>
@@ -220,10 +247,10 @@
     </div>
 
     <!-- Main Content Area -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+    <main class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-8 space-y-8 sm:space-y-12 overflow-hidden">
       
       <!-- HERO SECTION: Primary Headline + Right Sidebar Trending -->
-      <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+      <section class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
         
         <!-- Primary Headline Card (8 cols) -->
         <div id="hero-headline-container" class="lg:col-span-8 flex flex-col">
@@ -231,16 +258,16 @@
         </div>
 
         <!-- Trending & Editorial Newsletter (4 cols) -->
-        <div class="lg:col-span-4 rounded-3xl p-6 border border-slate-200/80 dark:border-slate-800/90 bg-white dark:bg-slate-900/40 shadow-md flex flex-col justify-between">
+        <div class="lg:col-span-4 rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-slate-200/80 dark:border-slate-800/90 bg-white dark:bg-slate-900/40 shadow-md flex flex-col justify-between">
           <div>
-            <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-200 dark:border-slate-800">
+            <div class="flex items-center justify-between pb-3 sm:pb-4 mb-4 border-b border-slate-200 dark:border-slate-800">
               <div class="flex items-center gap-2">
-                <svg class="w-5 h-5 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                   <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>
                 </svg>
-                <h3 class="text-base font-extrabold uppercase tracking-wide">Paling Populer</h3>
+                <h3 class="text-sm sm:text-base font-extrabold uppercase tracking-wide">Paling Populer</h3>
               </div>
-              <span class="text-xs text-slate-400 font-mono">24 Jam Terakhir</span>
+              <span class="text-[11px] sm:text-xs text-slate-400 font-mono">24 Jam Terakhir</span>
             </div>
 
             <div id="trending-list-container" class="space-y-4">
@@ -249,20 +276,20 @@
           </div>
 
           <!-- Editorial Newsletter Box -->
-          <div class="mt-8 p-5 rounded-2xl bg-gradient-to-br from-rose-600 to-rose-800 text-white shadow-lg">
-            <div class="flex items-center gap-2 text-xs uppercase font-bold tracking-wider mb-1">
+          <div class="mt-6 sm:mt-8 p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-rose-600 to-rose-800 text-white shadow-lg">
+            <div class="flex items-center gap-2 text-[11px] sm:text-xs uppercase font-bold tracking-wider mb-1">
               <svg class="w-3.5 h-3.5 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                 <path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8L12 2z"/>
               </svg>
               Buletin Esensial Redaksi
             </div>
-            <h4 class="text-base font-bold font-serif leading-snug mb-2">
+            <h4 class="text-sm sm:text-base font-bold font-serif leading-snug mb-1.5 sm:mb-2">
               Dapatkan Rangkuman Pagi Pukul 06:00 WIB
             </h4>
             <p class="text-xs text-rose-100 mb-3 leading-relaxed">
               Analisis geopolitik, pergerakan komoditas, dan kebijakan strategis tanah air langsung ke kotak masuk Anda.
             </p>
-            <form id="newsletter-form" onsubmit="handleNewsletterSubmit(event)" class="flex gap-2">
+            <form id="newsletter-form" onsubmit="handleNewsletterSubmit(event)" class="flex flex-col sm:flex-row gap-2">
               <input
                 id="newsletter-email-input"
                 type="email"
@@ -273,7 +300,7 @@
               <button
                 type="submit"
                 id="newsletter-submit-btn"
-                class="px-4 py-2.5 bg-white text-rose-700 font-bold rounded-lg text-xs hover:bg-rose-50 active:scale-95 transition shrink-0 shadow">
+                class="w-full sm:w-auto px-4 py-2.5 bg-white text-rose-700 font-bold rounded-lg text-xs hover:bg-rose-50 active:scale-95 transition shrink-0 shadow text-center">
                 Daftar
               </button>
             </form>
@@ -283,10 +310,10 @@
       </section>
 
       <!-- SECONDARY NEWS GRID SECTION -->
-      <section class="space-y-6">
+      <section class="space-y-4 sm:space-y-6">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800 gap-2">
           <div>
-            <h2 class="text-2xl font-extrabold font-serif">Kabar Terkini Nusantara</h2>
+            <h2 class="text-xl sm:text-2xl font-extrabold font-serif">Kabar Terkini Nusantara</h2>
             <p id="category-filter-indicator" class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
               Menyajikan artikel terverifikasi pilihan redaksi
             </p>
@@ -303,30 +330,30 @@
         </div>
 
         <!-- 3-Column Responsive Grid -->
-        <div id="news-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div id="news-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           <!-- Rendered via JS -->
         </div>
       </section>
 
       <!-- SPECIAL INVESTIGATION BANNER -->
-      <section class="rounded-3xl overflow-hidden bg-gradient-to-r from-slate-900 via-slate-950 to-rose-950 text-white border border-slate-800 shadow-2xl p-6 sm:p-10 relative group">
-        <div class="relative z-10 max-w-3xl space-y-4">
-          <span class="px-3.5 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest bg-rose-600 text-white inline-block shadow">
+      <section class="rounded-2xl sm:rounded-3xl overflow-hidden bg-gradient-to-r from-slate-900 via-slate-950 to-rose-950 text-white border border-slate-800 shadow-2xl p-5 sm:p-10 relative group">
+        <div class="relative z-10 max-w-3xl space-y-3 sm:space-y-4">
+          <span class="px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-[11px] font-bold uppercase tracking-widest bg-rose-600 text-white inline-block shadow">
             Laporan Investigasi Khusus
           </span>
-          <h2 class="text-2xl sm:text-4xl font-extrabold font-serif leading-tight group-hover:text-rose-200 transition-colors">
+          <h2 class="text-xl sm:text-3xl lg:text-4xl font-extrabold font-serif leading-tight group-hover:text-rose-200 transition-colors">
             Mengurai Gurita Spekulan Tanah di Balik Koridor Wisata Prioritas Danau Toba
           </h2>
-          <p class="text-sm sm:text-base text-slate-300 font-sans leading-relaxed">
+          <p class="text-xs sm:text-base text-slate-300 font-sans leading-relaxed line-clamp-3 sm:line-clamp-none">
             Penelusuran mendalam terhadap puluhan sertifikat tumpang tindih yang mengancam hak ulayat masyarakat adat di kawasan penyangga pariwisata super prioritas.
           </p>
-          <div class="pt-2 flex flex-wrap items-center gap-4">
+          <div class="pt-2 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
             <button 
               onclick="openArticleModalById(4)"
-              class="px-6 py-3 rounded-full bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs transition shadow-lg shadow-rose-600/30 active:scale-95">
+              class="w-full sm:w-auto text-center px-6 py-2.5 sm:py-3 rounded-full bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs transition shadow-lg shadow-rose-600/30 active:scale-95">
               Buka Dokumen Investigasi
             </button>
-            <span class="text-xs text-slate-400">Durasi Baca: 7 Menit • Disertai Dokumen Lapangan</span>
+            <span class="text-[11px] sm:text-xs text-slate-400">Durasi Baca: 7 Menit • Disertai Dokumen Lapangan</span>
           </div>
         </div>
       </section>
@@ -335,31 +362,31 @@
   </div>
 
   <!-- FULL ARTICLE READER MODAL -->
-  <div id="article-reader-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-3 sm:p-6 overflow-y-auto animate-fadeIn">
-    <div class="w-full max-w-3xl my-auto rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-2xl flex flex-col">
+  <div id="article-reader-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-2 sm:p-6 overflow-y-auto animate-fadeIn">
+    <div class="w-full max-w-3xl my-auto rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-2xl flex flex-col max-h-[92vh]">
       
       <!-- Modal Top Control Bar -->
-      <div class="sticky top-0 z-20 backdrop-blur-md px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-white/90 dark:bg-slate-900/90">
-        <div class="flex items-center gap-2">
-          <span id="modal-article-category" class="px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider bg-rose-600 text-white">
+      <div class="sticky top-0 z-20 backdrop-blur-md px-4 py-3 sm:px-6 sm:py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-white/90 dark:bg-slate-900/90 gap-2">
+        <div class="flex items-center gap-1.5 sm:gap-2 truncate">
+          <span id="modal-article-category" class="px-2 sm:px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-bold uppercase tracking-wider bg-rose-600 text-white shrink-0">
             Kategori
           </span>
-          <span id="modal-article-date" class="text-xs text-slate-400 font-mono hidden sm:inline">15 September 2026</span>
+          <span id="modal-article-date" class="text-[11px] sm:text-xs text-slate-400 font-mono hidden sm:inline">15 September 2026</span>
         </div>
 
         <!-- Reader Controls (Font Scale, Bookmark, Share, Close) -->
-        <div class="flex items-center gap-2">
-          <div class="flex items-center border border-slate-200 dark:border-slate-700 rounded-lg p-0.5 text-xs mr-2">
-            <button onclick="setReaderFontSize('text-sm')" id="font-btn-sm" class="px-2 py-0.5 rounded text-slate-600 dark:text-slate-300 hover:text-slate-900">A-</button>
-            <button onclick="setReaderFontSize('text-base')" id="font-btn-md" class="px-2 py-0.5 rounded bg-rose-600 text-white font-bold">A</button>
-            <button onclick="setReaderFontSize('text-lg')" id="font-btn-lg" class="px-2 py-0.5 rounded text-slate-600 dark:text-slate-300 hover:text-slate-900">A+</button>
+        <div class="flex items-center gap-1 sm:gap-2 shrink-0">
+          <div class="flex items-center border border-slate-200 dark:border-slate-700 rounded-lg p-0.5 text-xs mr-0.5 sm:mr-2">
+            <button onclick="setReaderFontSize('text-sm')" id="font-btn-sm" class="px-1.5 sm:px-2 py-0.5 rounded text-[11px] text-slate-600 dark:text-slate-300 hover:text-slate-900">A-</button>
+            <button onclick="setReaderFontSize('text-base')" id="font-btn-md" class="px-1.5 sm:px-2 py-0.5 rounded text-[11px] bg-rose-600 text-white font-bold">A</button>
+            <button onclick="setReaderFontSize('text-lg')" id="font-btn-lg" class="px-1.5 sm:px-2 py-0.5 rounded text-[11px] text-slate-600 dark:text-slate-300 hover:text-slate-900">A+</button>
           </div>
 
           <button
             id="modal-bookmark-btn"
             onclick="handleActiveModalBookmark()"
             title="Simpan Berita Ini"
-            class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+            class="p-1.5 sm:p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition">
             <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
               <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
             </svg>
@@ -368,7 +395,7 @@
           <button
             onclick="copyCurrentArticleLink()"
             title="Bagikan Tautan Berita"
-            class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+            class="p-1.5 sm:p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition">
             <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
               <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
             </svg>
@@ -377,7 +404,7 @@
           <button
             onclick="closeArticleModal()"
             title="Tutup Jendela"
-            class="p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-900 dark:hover:text-white transition ml-1">
+            class="p-1.5 sm:p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-900 dark:hover:text-white transition ml-0.5 sm:ml-1">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
               <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
             </svg>
@@ -386,35 +413,35 @@
       </div>
 
       <!-- Modal Scrollable Body -->
-      <div class="p-6 sm:p-10 space-y-6 max-h-[80vh] overflow-y-auto">
-        <h1 id="modal-article-title" class="text-2xl sm:text-4xl font-extrabold font-serif leading-tight">
+      <div class="p-4 sm:p-8 space-y-5 sm:space-y-6 overflow-y-auto">
+        <h1 id="modal-article-title" class="text-xl sm:text-3xl md:text-4xl font-extrabold font-serif leading-tight">
           Judul Berita Lengkap
         </h1>
 
         <!-- Author & Metric Bar -->
-        <div class="flex items-center justify-between py-3 border-y border-slate-200 dark:border-slate-800 text-xs">
-          <div class="flex items-center gap-3">
+        <div class="flex items-center justify-between py-2.5 sm:py-3 border-y border-slate-200 dark:border-slate-800 text-xs">
+          <div class="flex items-center gap-2.5 sm:gap-3">
             <img
               id="modal-article-author-avatar"
               src=""
               alt="Avatar Penulis"
-              class="w-10 h-10 rounded-full object-cover ring-2 ring-rose-500/20"
+              class="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover ring-2 ring-rose-500/20"
               onerror="this.src='https://placehold.co/100x100/e2e8f0/475569?text=ID'"
             />
             <div>
-              <p id="modal-article-author-name" class="font-bold text-slate-900 dark:text-slate-100">Nama Penulis</p>
-              <p id="modal-article-author-role" class="text-slate-400">Editor</p>
+              <p id="modal-article-author-name" class="font-bold text-slate-900 dark:text-slate-100 text-xs sm:text-sm">Nama Penulis</p>
+              <p id="modal-article-author-role" class="text-[11px] sm:text-xs text-slate-400">Editor</p>
             </div>
           </div>
 
-          <div class="text-right text-slate-400 font-mono">
+          <div class="text-right text-slate-400 font-mono text-[11px] sm:text-xs">
             <p id="modal-article-readtime">4 mnt baca</p>
             <p id="modal-article-reads">42.850 Pembaca</p>
           </div>
         </div>
 
         <!-- Featured Media Image -->
-        <div class="rounded-2xl overflow-hidden aspect-[16/9] bg-slate-800">
+        <div class="rounded-xl sm:rounded-2xl overflow-hidden aspect-[16/9] bg-slate-800">
           <img
             id="modal-article-image"
             src=""
@@ -425,33 +452,33 @@
         </div>
 
         <!-- Audio Synthesizer in Article -->
-        <div class="p-4 rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/50 flex items-center justify-between gap-4">
+        <div class="p-3 sm:p-4 rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/50 flex items-center justify-between gap-3">
           <div class="flex items-center gap-3">
             <button
               id="modal-audio-btn"
               onclick="triggerAudioFromModal()"
-              class="w-10 h-10 rounded-full bg-rose-600 text-white flex items-center justify-center shadow-md hover:bg-rose-700 active:scale-95 transition shrink-0">
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-rose-600 text-white flex items-center justify-center shadow-md hover:bg-rose-700 active:scale-95 transition shrink-0">
+              <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             </button>
             <div>
               <h5 class="text-xs font-bold text-slate-900 dark:text-slate-100">Dengarkan Versi Suara Berita</h5>
-              <p class="text-[11px] text-slate-500 dark:text-slate-400">Narasi otomatis berkecepatan natural dengan AI Audio</p>
+              <p class="text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 line-clamp-1">Narasi otomatis berkecepatan natural dengan AI Audio</p>
             </div>
           </div>
-          <span id="modal-audio-tag" class="text-xs font-mono text-rose-600 font-bold">4 mnt</span>
+          <span id="modal-audio-tag" class="text-xs font-mono text-rose-600 font-bold shrink-0">4 mnt</span>
         </div>
 
         <!-- Formatted Content Paragraphs -->
-        <div id="modal-article-body" class="font-reading leading-relaxed text-slate-800 dark:text-slate-200 space-y-4 text-base">
+        <div id="modal-article-body" class="font-reading leading-relaxed text-slate-800 dark:text-slate-200 space-y-4 text-sm sm:text-base">
           <!-- Populated dynamically -->
         </div>
 
         <!-- Modal Footer Actions -->
-        <div class="pt-6 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+        <div class="pt-4 sm:pt-6 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between gap-2">
           <button
             id="modal-like-btn"
             onclick="handleActiveModalLike()"
-            class="flex items-center gap-2 px-4 py-2 rounded-full border border-slate-300 dark:border-slate-700 hover:border-rose-500 transition text-xs font-bold text-slate-700 dark:text-slate-200">
+            class="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-full border border-slate-300 dark:border-slate-700 hover:border-rose-500 transition text-xs font-bold text-slate-700 dark:text-slate-200">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
               <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
             </svg>
@@ -460,8 +487,8 @@
 
           <button
             onclick="closeArticleModal()"
-            class="px-5 py-2 rounded-full bg-slate-900 text-white dark:bg-white dark:text-slate-900 text-xs font-bold hover:opacity-90 active:scale-95 transition">
-            Selesai Membaca
+            class="px-4 sm:px-5 py-2 rounded-full bg-slate-900 text-white dark:bg-white dark:text-slate-900 text-xs font-bold hover:opacity-90 active:scale-95 transition">
+            Tutup
           </button>
         </div>
       </div>
@@ -771,7 +798,7 @@ Indeks Harga Saham Gabungan (IHSG) sektor energi dan mineral langsung menyambut 
         return `
           <button
             onclick="selectCategory('${cat}')"
-            class="px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
+            class="px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-semibold whitespace-nowrap transition-all ${
               isActive
                 ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-sm'
                 : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-200/50 dark:hover:bg-slate-800/50'
@@ -791,7 +818,10 @@ Indeks Harga Saham Gabungan (IHSG) sektor energi dan mineral langsung menyambut 
     function resetAppFilter() {
       selectedCategory = 'Semua Berita';
       searchQuery = '';
-      document.getElementById('search-input').value = '';
+      const desktopSearch = document.getElementById('search-input');
+      const mobileSearch = document.getElementById('mobile-search-input');
+      if (desktopSearch) desktopSearch.value = '';
+      if (mobileSearch) mobileSearch.value = '';
       renderCategoryPills();
       renderAllArticles();
       showToast("Kembali ke halaman utama.");
@@ -799,12 +829,34 @@ Indeks Harga Saham Gabungan (IHSG) sektor energi dan mineral langsung menyambut 
 
     function handleSearchChange(val) {
       searchQuery = val.trim();
+      const mobileInput = document.getElementById('mobile-search-input');
+      if (mobileInput && mobileInput.value !== val) mobileInput.value = val;
       renderAllArticles();
+    }
+
+    function syncAndSearchMobile(val) {
+      searchQuery = val.trim();
+      const desktopInput = document.getElementById('search-input');
+      if (desktopInput && desktopInput.value !== val) desktopInput.value = val;
+      renderAllArticles();
+    }
+
+    function toggleMobileSearchBar() {
+      const bar = document.getElementById('mobile-search-bar');
+      if (!bar) return;
+      bar.classList.toggle('hidden');
+      if (!bar.classList.contains('hidden')) {
+        const input = document.getElementById('mobile-search-input');
+        if (input) input.focus();
+      }
     }
 
     function resetSearchQuery() {
       searchQuery = '';
-      document.getElementById('search-input').value = '';
+      const desktopInput = document.getElementById('search-input');
+      const mobileInput = document.getElementById('mobile-search-input');
+      if (desktopInput) desktopInput.value = '';
+      if (mobileInput) mobileInput.value = '';
       renderAllArticles();
     }
 
@@ -834,8 +886,8 @@ Indeks Harga Saham Gabungan (IHSG) sektor energi dan mineral langsung menyambut 
 
       if (filtered.length === 0) {
         heroContainer.innerHTML = `
-          <div class="p-12 text-center border rounded-3xl border-dashed border-slate-300 dark:border-slate-800">
-            <h3 class="text-lg font-bold font-serif">Tidak ada artikel yang cocok</h3>
+          <div class="p-8 sm:p-12 text-center border rounded-2xl sm:rounded-3xl border-dashed border-slate-300 dark:border-slate-800">
+            <h3 class="text-base sm:text-lg font-bold font-serif">Tidak ada artikel yang cocok</h3>
             <p class="text-xs text-slate-500 mt-1">Coba kata kunci lain atau pilih kategori Semua Berita.</p>
             <button onclick="resetAppFilter()" class="mt-4 px-4 py-2 bg-rose-600 text-white rounded-full text-xs font-semibold">Tampilkan Semua</button>
           </div>
@@ -847,31 +899,31 @@ Indeks Harga Saham Gabungan (IHSG) sektor energi dan mineral langsung menyambut 
       const mainHeadline = filtered[0];
       const sideArticles = filtered.slice(1);
 
-      // Hero Headline Card (8 cols)
+      // Hero Headline Card (8 cols) - Optimized responsive aspect ratio and typography
       heroContainer.innerHTML = `
         <div onclick="openArticleModalById(${mainHeadline.id})" 
-             class="rounded-3xl overflow-hidden cursor-pointer group border border-slate-200/80 dark:border-slate-800/90 bg-white dark:bg-slate-900/60 transition-all duration-300 hover:shadow-2xl flex flex-col justify-between flex-1">
-          <div class="relative aspect-[16/9] w-full overflow-hidden bg-slate-900">
+             class="rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer group border border-slate-200/80 dark:border-slate-800/90 bg-white dark:bg-slate-900/60 transition-all duration-300 hover:shadow-2xl flex flex-col justify-between flex-1">
+          <div class="relative aspect-[4/3] sm:aspect-[16/9] w-full overflow-hidden bg-slate-900">
             <img
               src="${mainHeadline.image}"
               alt="${mainHeadline.title}"
               class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
               onerror="this.src='https://placehold.co/1200x675/1e293b/ffffff?text=Berita+Utama'"
             />
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent"></div>
             
             <!-- Badges -->
-            <div class="absolute top-4 left-4 flex gap-2">
-              <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-rose-600 text-white shadow-lg">
+            <div class="absolute top-3 left-3 sm:top-4 sm:left-4 flex gap-1.5 sm:gap-2">
+              <span class="px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider bg-rose-600 text-white shadow-lg">
                 ${mainHeadline.badge}
               </span>
-              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-black/60 backdrop-blur-md text-white border border-white/20">
+              <span class="px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full text-[10px] sm:text-xs font-semibold bg-black/60 backdrop-blur-md text-white border border-white/20">
                 ${mainHeadline.category}
               </span>
             </div>
 
-            <div class="absolute bottom-4 left-4 right-4 text-white">
-              <div class="flex items-center gap-2 text-xs font-medium text-slate-300 mb-1.5">
+            <div class="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 text-white">
+              <div class="flex items-center gap-2 text-[11px] sm:text-xs font-medium text-slate-300 mb-1">
                 <span>${mainHeadline.timeAgo}</span>
                 <span>•</span>
                 <span class="flex items-center gap-1">
@@ -879,36 +931,36 @@ Indeks Harga Saham Gabungan (IHSG) sektor energi dan mineral langsung menyambut 
                   ${mainHeadline.readTime}
                 </span>
               </div>
-              <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold font-serif leading-tight group-hover:text-rose-300 transition-colors">
+              <h1 class="text-xl sm:text-3xl md:text-4xl font-extrabold font-serif leading-tight group-hover:text-rose-300 transition-colors line-clamp-3 sm:line-clamp-none">
                 ${mainHeadline.title}
               </h1>
             </div>
           </div>
 
           <!-- Lead Details -->
-          <div class="p-6 sm:p-8 flex flex-col justify-between flex-1 gap-6">
-            <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 font-sans leading-relaxed line-clamp-2">
+          <div class="p-4 sm:p-8 flex flex-col justify-between flex-1 gap-4 sm:gap-6">
+            <p class="text-sm sm:text-lg text-slate-600 dark:text-slate-300 font-sans leading-relaxed line-clamp-2 sm:line-clamp-3">
               ${mainHeadline.excerpt}
             </p>
 
-            <div class="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-slate-800/80">
-              <div class="flex items-center gap-3">
+            <div class="flex items-center justify-between pt-3 sm:pt-4 border-t border-slate-200 dark:border-slate-800/80">
+              <div class="flex items-center gap-2.5 sm:gap-3">
                 <img 
                   src="${mainHeadline.author.avatar}" 
                   alt="${mainHeadline.author.name}"
-                  class="w-10 h-10 rounded-full object-cover ring-2 ring-rose-500/20"
+                  class="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover ring-2 ring-rose-500/20"
                   onerror="this.src='https://placehold.co/100x100/e2e8f0/475569?text=ID'"
                 />
                 <div>
-                  <h4 class="text-sm font-bold text-slate-900 dark:text-slate-100">${mainHeadline.author.name}</h4>
-                  <p class="text-xs text-slate-500 dark:text-slate-400">${mainHeadline.author.role}</p>
+                  <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-slate-100">${mainHeadline.author.name}</h4>
+                  <p class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400">${mainHeadline.author.role}</p>
                 </div>
               </div>
 
-              <div class="flex items-center gap-3">
+              <div class="flex items-center gap-2 sm:gap-3">
                 <button
                   onclick="toggleLike(${mainHeadline.id}, event)"
-                  class="flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-rose-600 transition">
+                  class="flex items-center gap-1 text-xs font-semibold text-slate-500 hover:text-rose-600 transition">
                   <svg class="w-4 h-4 ${likedArticles[mainHeadline.id] ? 'text-rose-600 fill-current' : 'fill-none'}" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                   </svg>
@@ -916,7 +968,7 @@ Indeks Harga Saham Gabungan (IHSG) sektor energi dan mineral langsung menyambut 
                 </button>
                 <button
                   onclick="toggleBookmark(${mainHeadline.id}, event)"
-                  class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+                  class="p-1.5 sm:p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition">
                   <svg class="w-4 h-4 ${bookmarks.includes(mainHeadline.id) ? 'text-rose-600 fill-current' : 'text-slate-400 fill-none'}" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                     <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
                   </svg>

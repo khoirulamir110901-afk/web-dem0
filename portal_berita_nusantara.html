@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nusantara Post - Jurnalisme Independen Masa Depan</title>
+
+  <!-- Google Fonts: Inter & Merriweather -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Merriweather', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeIn {
+      animation: fadeIn 0.25s ease-out forwards;
+    }
+    /* Hide scrollbar for category navigation */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="min-h-screen font-sans bg-stone-50 text-zinc-900 transition-colors duration-200" id="app-body">
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 hidden flex items-center gap-3 px-4 py-3 bg-zinc-900 text-white rounded-xl shadow-2xl border border-zinc-700">
+    <i data-lucide="sparkles" class="w-5 h-5 text-amber-400"></i>
+    <span id="toast-text" class="text-sm font-medium">Notifikasi</span>
+  </div>
+
+  <!-- Top Financial & Weather Bar -->
+  <div id="top-bar" class="border-b text-xs py-2 px-4 transition-colors bg-white border-stone-200 text-zinc-600">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-4">
+        <span class="inline-flex items-center gap-1.5 font-semibold text-red-600 uppercase tracking-wider">
+          <span class="w-2 h-2 rounded-full bg-red-600 animate-ping"></span>
+          Kilas Kilat
+        </span>
+        <span class="hidden sm:inline text-zinc-400">|</span>
+        <div class="overflow-hidden whitespace-nowrap max-w-[280px] md:max-w-lg">
+          <p class="inline-block animate-pulse text-zinc-700 dark:text-zinc-300 font-medium truncate">
+            IKN Terkoneksi Kabel Laut 100 Gbps • IHSG Menguat +0.84% ke 7.890 • Cadangan Devisa RI Catat Surplus US$ 152 Miliar
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-4 text-xs font-mono">
+        <span class="hidden md:flex items-center gap-1">
+          <i data-lucide="calendar" class="w-3.5 h-3.5 text-stone-400"></i>
+          Selasa, 15 September 2026 • WIB
+        </span>
+        <span class="text-emerald-600 dark:text-emerald-400 font-semibold">USD/IDR: Rp15.420 ▲</span>
+        <button
+          id="theme-toggle"
+          onclick="toggleDarkMode()"
+          class="p-1 rounded-md hover:bg-zinc-200 dark:hover:bg-zinc-800 transition"
+          title="Ganti Mode Tampilan"
+        >
+          <span id="theme-icon-container">
+            <i data-lucide="moon" class="w-4 h-4 text-zinc-600"></i>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Header -->
+  <header id="main-header" class="border-b sticky top-0 z-40 backdrop-blur-md transition-colors bg-white/95 border-stone-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6">
+      <div class="flex items-center justify-between gap-4">
+        
+        <!-- Mobile Menu Trigger -->
+        <div class="flex items-center gap-3 lg:hidden">
+          <button
+            id="mobile-menu-btn"
+            onclick="toggleMobileMenu()"
+            class="p-2 rounded-lg text-zinc-600 dark:text-zinc-300 hover:bg-stone-100 dark:hover:bg-zinc-800"
+          >
+            <i id="mobile-menu-icon" data-lucide="menu" class="w-6 h-6"></i>
+          </button>
+        </div>
+
+        <!-- Brand Title -->
+        <div class="flex flex-col cursor-pointer" onclick="resetToHome()">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-red-600 to-rose-500 flex items-center justify-center text-white font-black text-xl shadow-md shadow-red-500/20">
+              N
+            </div>
+            <h1 class="text-2xl sm:text-3xl font-serif font-black tracking-tight text-zinc-900 dark:text-white">
+              NUSANTARA<span class="text-red-600">POST</span>
+            </h1>
+          </div>
+          <span class="text-[10px] uppercase font-bold tracking-widest text-zinc-400 -mt-1 hidden sm:block">
+            Jurnalisme Independen & Suara Kebenaran Masa Depan
+          </span>
+        </div>
+
+        <!-- Search Input Bar -->
+        <div class="hidden md:flex flex-1 max-w-md mx-6">
+          <div class="relative w-full">
+            <i data-lucide="search" class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400"></i>
+            <input
+              id="search-input"
+              type="text"
+              placeholder="Cari isu, figur publik, atau kata kunci..."
+              oninput="handleSearch(this.value)"
+              class="w-full pl-10 pr-9 py-2 text-sm rounded-full border outline-none transition focus:ring-2 focus:ring-red-500/30 bg-stone-100 border-stone-200 text-zinc-900 placeholder-stone-400 focus:border-red-500 focus:bg-white dark:bg-zinc-900 dark:border-zinc-700 dark:text-zinc-100 dark:placeholder-zinc-500"
+            />
+            <button id="clear-search-btn" onclick="clearSearch()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600">
+              <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Action Buttons: Bookmark & Newspaper -->
+        <div class="flex items-center gap-2.5">
+          <button
+            onclick="openBookmarksModal()"
+            class="relative p-2.5 rounded-full border transition flex items-center gap-1.5 text-sm font-medium border-stone-200 bg-stone-50 hover:bg-stone-100 text-zinc-800 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:text-zinc-200"
+            title="Daftar Simpanan"
+          >
+            <i data-lucide="bookmark" class="w-4 h-4 text-red-600"></i>
+            <span class="hidden sm:inline text-xs">Simpanan</span>
+            <span id="bookmark-badge" class="px-1.5 py-0.2 text-[11px] font-bold bg-red-600 text-white rounded-full">
+              2
+            </span>
+          </button>
+
+          <button
+            onclick="showToast('Anda telah mengakses edisi cetak digital')"
+            class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-white bg-red-600 hover:bg-red-700 rounded-full shadow transition shadow-red-600/20"
+          >
+            <i data-lucide="newspaper" class="w-3.5 h-3.5"></i>
+            Koran Digital
+          </button>
+        </div>
+      </div>
+
+      <!-- Categories Navigation Bar -->
+      <nav id="category-nav" class="mt-3 pt-2 border-t border-stone-200 dark:border-zinc-800 flex items-center gap-2 overflow-x-auto no-scrollbar scroll-smooth">
+        <!-- Rendered via JS -->
+      </nav>
+    </div>
+
+    <!-- Mobile Slide-down Navigation -->
+    <div id="mobile-menu" class="hidden lg:hidden border-b border-stone-200 dark:border-zinc-800 px-4 py-4 bg-stone-50 dark:bg-zinc-900">
+      <div class="mb-3">
+        <input
+          id="mobile-search-input"
+          type="text"
+          placeholder="Cari topik hangat..."
+          oninput="handleSearch(this.value)"
+          class="w-full px-3 py-2 text-sm rounded-lg border dark:bg-zinc-800 dark:border-zinc-700"
+        />
+      </div>
+      <div id="mobile-categories-list" class="grid grid-cols-2 gap-2 text-sm">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+    
+    <!-- Reader View (Single Article Display) -->
+    <article id="article-reader-view" class="hidden max-w-4xl mx-auto animate-fadeIn">
+      <!-- Injected via renderActiveArticle() -->
+    </article>
+
+    <!-- Homepage / News Listing View -->
+    <div id="home-view" class="space-y-10">
+
+      <!-- Active Filter Banner (Search or Category) -->
+      <div id="filter-banner" class="hidden flex items-center justify-between bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900 p-4 rounded-xl">
+        <div class="flex items-center gap-2 text-sm text-red-800 dark:text-red-300">
+          <i data-lucide="filter" class="w-4 h-4"></i>
+          <span id="filter-banner-text">Menampilkan hasil...</span>
+        </div>
+        <button
+          onclick="resetToHome()"
+          class="text-xs font-bold text-red-600 hover:underline flex items-center gap-1"
+        >
+          <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+          Reset Filter
+        </button>
+      </div>
+
+      <!-- Featured Hero Article & Trending Side Column -->
+      <section id="hero-section" class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <!-- Big Visual Hero Headline -->
+        <div
+          id="hero-article-card"
+          onclick="openArticleById(1)"
+          class="lg:col-span-8 group cursor-pointer relative overflow-hidden rounded-3xl border border-stone-200 dark:border-zinc-800 bg-zinc-900 shadow-xl"
+        >
+          <div class="relative h-[380px] sm:h-[480px] overflow-hidden">
+            <img
+              id="hero-image"
+              src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&auto=format&fit=crop&q=80"
+              alt="Sorotan Berita"
+              onerror="handleImageError(this, 'article')"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-85"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+          </div>
+
+          <div class="absolute bottom-0 inset-x-0 p-6 sm:p-8 text-white">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="px-3 py-1 text-xs font-bold uppercase tracking-wider bg-red-600 text-white rounded-full flex items-center gap-1">
+                <i data-lucide="flame" class="w-3.5 h-3.5"></i>
+                Sorotan Utama
+              </span>
+              <span id="hero-read-time" class="text-xs font-medium text-stone-300">• 4 menit baca</span>
+            </div>
+
+            <h2 id="hero-title" class="text-2xl sm:text-3xl md:text-4xl font-serif font-black leading-tight group-hover:text-red-400 transition mb-3">
+              Transformasi Digital Nasional: Pusat AI dan Riset Komputasi Kuwanter Resmi Diluncurkan di IKN
+            </h2>
+
+            <p id="hero-summary" class="text-stone-300 text-sm sm:text-base line-clamp-2 max-w-2xl font-light mb-4">
+              Pemerintah meresmikan sentra komputasi awan dan kecerdasan artifisial hijau pertama di Ibu Kota Nusantara dengan kapasitas pemrosesan data mandiri berstandar global.
+            </p>
+
+            <div class="flex items-center justify-between text-xs text-stone-300 pt-2 border-t border-white/20">
+              <div class="flex items-center gap-2">
+                <img
+                  id="hero-author-avatar"
+                  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80"
+                  alt="Dr. Raden Aditya, M.Sc"
+                  onerror="handleImageError(this, 'avatar')"
+                  class="w-7 h-7 rounded-full object-cover border border-white"
+                />
+                <span id="hero-author-name">Dr. Raden Aditya, M.Sc</span>
+              </div>
+              <span class="font-semibold flex items-center gap-1 group-hover:translate-x-1 transition">
+                Baca Selengkapnya <i data-lucide="chevron-right" class="w-4 h-4"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trending Side Column & Public Poll -->
+        <div id="side-column" class="lg:col-span-4 rounded-3xl p-6 border flex flex-col justify-between bg-white border-stone-200 shadow-sm dark:bg-zinc-900/60 dark:border-zinc-800">
+          <div>
+            <div class="flex items-center justify-between pb-4 mb-4 border-b border-stone-200 dark:border-zinc-800">
+              <h3 class="font-serif font-black text-lg flex items-center gap-2">
+                <i data-lucide="trending-up" class="w-5 h-5 text-red-600"></i>
+                Terpopuler Hari Ini
+              </h3>
+              <span class="text-[11px] font-semibold text-stone-400 uppercase tracking-widest">24 Jam</span>
+            </div>
+
+            <!-- Popular Articles List -->
+            <div id="popular-articles-container" class="space-y-4">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <!-- Public Interactive Poll Widget -->
+          <div id="poll-card" class="mt-6 p-4 rounded-2xl border bg-stone-50 border-stone-200 dark:bg-zinc-950 dark:border-zinc-800">
+            <div class="flex items-center gap-1.5 text-xs font-bold text-red-600 uppercase mb-2">
+              <i data-lucide="bar-chart-2" class="w-4 h-4"></i>
+              Jajak Pendapat Publik
+            </div>
+            <p class="text-xs font-semibold mb-3">
+              Sektor mana yang paling krusial bagi akselerasi Indonesia Emas 2045?
+            </p>
+
+            <div id="poll-content">
+              <!-- Voting Options or Results Rendered via JS -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Articles Grid Section -->
+      <section>
+        <div class="flex items-center justify-between mb-6 pb-2 border-b border-stone-200 dark:border-zinc-800">
+          <div class="flex items-center gap-2">
+            <h3 id="section-title" class="font-serif font-black text-2xl tracking-tight">
+              Warta Terkini & Analisis Mendalam
+            </h3>
+          </div>
+          <span class="text-xs text-stone-400 font-medium">Diperbarui setiap menit</span>
+        </div>
+
+        <!-- Article Cards Grid -->
+        <div id="articles-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Rendered via JS -->
+        </div>
+
+        <!-- Empty State Container -->
+        <div id="empty-state" class="hidden text-center py-16 px-4">
+          <i data-lucide="newspaper" class="w-12 h-12 mx-auto text-stone-300 dark:text-zinc-700 mb-3"></i>
+          <h4 class="font-serif font-bold text-lg">Tidak Ada Berita Ditemukan</h4>
+          <p class="text-sm text-stone-500 max-w-sm mx-auto mt-1">
+            Coba ganti kata kunci pencarian atau pilih kategori lain untuk melihat artikel berita.
+          </p>
+        </div>
+      </section>
+
+      <!-- Daily Newsletter Subscription Banner -->
+      <section class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-red-700 via-red-600 to-rose-700 text-white p-8 sm:p-12 shadow-2xl">
+        <div class="relative z-10 max-w-2xl">
+          <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-white/20 backdrop-blur-sm inline-block mb-3">
+            Buletin Pagi & Petang
+          </span>
+          <h3 class="text-2xl sm:text-4xl font-serif font-black mb-3 leading-tight">
+            Tetap Terdepan dengan Ringkasan Berita Terkurasi Nusantara
+          </h3>
+          <p class="text-red-100 text-sm sm:text-base mb-6 font-light">
+            Dapatkan rangkuman isu nasional, dinamika ekonomi makro, dan perkembangan sains langsung ke kotak masuk email Anda setiap pagi pukul 06.00 WIB.
+          </p>
+
+          <form onsubmit="handleSubscribe(event)" class="flex flex-col sm:flex-row gap-3">
+            <input
+              id="newsletter-email"
+              type="email"
+              placeholder="Masukkan alamat email Anda..."
+              required
+              class="px-4 py-3 rounded-xl text-zinc-900 text-sm w-full outline-none focus:ring-2 focus:ring-white"
+            />
+            <button
+              type="submit"
+              class="px-6 py-3 bg-zinc-950 hover:bg-black text-white font-semibold text-sm rounded-xl transition whitespace-nowrap shadow-lg"
+            >
+              Langganan Gratis
+            </button>
+          </form>
+          <span class="text-[11px] text-red-200 mt-2 block">
+            Bebas spam • Anda dapat berhenti berlangganan kapan saja dengan satu klik.
+          </span>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Bookmarks Modal -->
+  <div id="bookmarks-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fadeIn">
+    <div class="w-full max-w-xl rounded-2xl p-6 shadow-2xl border bg-white border-stone-200 dark:bg-zinc-900 dark:border-zinc-800">
+      <div class="flex items-center justify-between pb-4 border-b border-stone-200 dark:border-zinc-800">
+        <div class="flex items-center gap-2 font-serif font-bold text-lg">
+          <i data-lucide="bookmark" class="w-5 h-5 text-red-600"></i>
+          <span id="bookmarks-modal-title">Daftar Bacaan Tersimpan (0)</span>
+        </div>
+        <button onclick="closeBookmarksModal()" class="p-1 rounded-lg hover:bg-stone-100 dark:hover:bg-zinc-800">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div id="bookmarks-modal-list" class="mt-4 max-h-[60vh] overflow-y-auto space-y-3 pr-1">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer id="main-footer" class="mt-20 border-t bg-stone-100 border-stone-200 text-zinc-600 dark:bg-zinc-950 dark:border-zinc-800 dark:text-zinc-400">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="md:col-span-2 space-y-4">
+          <div class="flex items-center gap-2">
+            <div class="w-7 h-7 rounded-lg bg-red-600 flex items-center justify-center text-white font-black text-lg">
+              N
+            </div>
+            <span class="text-xl font-serif font-black tracking-tight text-zinc-900 dark:text-white">
+              NUSANTARA<span class="text-red-600">POST</span>
+            </span>
+          </div>
+          <p class="text-xs leading-relaxed max-w-md">
+            Nusantara Post adalah portal berita digital independen yang berdedikasi menyajikan jurnalisme berimbang, terverifikasi, dan mendalam seputar dinamika politik, ekonomi, sains, dan kebudayaan di seluruh penjuru Tanah Air.
+          </p>
+          <div class="flex items-center gap-2 text-xs font-semibold text-stone-500">
+            <i data-lucide="award" class="w-4 h-4 text-amber-500"></i>
+            Terdaftar & Terverifikasi Dewan Pers RI No. 492/DP/Verifikasi/2026
+          </div>
+        </div>
+
+        <div>
+          <h5 class="text-xs font-bold uppercase tracking-wider text-zinc-900 dark:text-white mb-3">
+            Kanal Berita
+          </h5>
+          <ul class="space-y-2 text-xs">
+            <li><a href="javascript:void(0)" onclick="selectCategory('politik')" class="hover:text-red-600">Politik & Tata Kelola</a></li>
+            <li><a href="javascript:void(0)" onclick="selectCategory('ekonomi')" class="hover:text-red-600">Makroekonomi & Pasar Uang</a></li>
+            <li><a href="javascript:void(0)" onclick="selectCategory('teknologi')" class="hover:text-red-600">Teknologi & Ekosistem Startup</a></li>
+            <li><a href="javascript:void(0)" onclick="selectCategory('olahraga')" class="hover:text-red-600">Olahraga & Prestasi Nasional</a></li>
+            <li><a href="javascript:void(0)" onclick="selectCategory('gaya-hidup')" class="hover:text-red-600">Gaya Hidup & Warisan Budaya</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h5 class="text-xs font-bold uppercase tracking-wider text-zinc-900 dark:text-white mb-3">
+            Pedoman & Redaksi
+          </h5>
+          <ul class="space-y-2 text-xs">
+            <li><a href="javascript:void(0)" onclick="showToast('Pedoman Media Siber Dewan Pers')" class="hover:text-red-600">Pedoman Media Siber</a></li>
+            <li><a href="javascript:void(0)" onclick="showToast('Struktur Redaksi Nusantara Post')" class="hover:text-red-600">Struktur Redaksi & Ombudsman</a></li>
+            <li><a href="javascript:void(0)" onclick="showToast('Kirimkan hak jawab ke redaksi@nusantarapost.id')" class="hover:text-red-600">Hak Jawab & Koreksi Berita</a></li>
+            <li><a href="javascript:void(0)" onclick="showToast('Kebijakan Privasi & Enkripsi Data')" class="hover:text-red-600">Kebijakan Privasi Data</a></li>
+            <li><a href="javascript:void(0)" onclick="showToast('Hubungi tim kemitraan: ads@nusantarapost.id')" class="hover:text-red-600">Kontak Iklan & Kerjasama</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-12 pt-6 border-t border-stone-200 dark:border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-stone-400">
+        <p>© 2026 Nusantara Post Media Network. Seluruh Hak Cipta Dilindungi.</p>
+        <div class="flex items-center gap-4">
+          <span>Jakarta</span>
+          <span>•</span>
+          <span>Nusantara (IKN)</span>
+          <span>•</span>
+          <span>Surabaya</span>
+          <span>•</span>
+          <span>Medan</span>
+          <span>•</span>
+          <span>Makassar</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Data Constants
+    const CATEGORIES = [
+      { id: 'all', label: 'Semua Berita' },
+      { id: 'politik', label: 'Politik & Hukum' },
+      { id: 'ekonomi', label: 'Ekonomi & Bisnis' },
+      { id: 'teknologi', label: 'Teknologi & AI' },
+      { id: 'nasional', label: 'Nasional & IKN' },
+      { id: 'olahraga', label: 'Olahraga' },
+      { id: 'gaya-hidup', label: 'Sains & Gaya Hidup' }
+    ];
+
+    const ARTICLES = [
+      {
+        id: 1,
+        title: 'Transformasi Digital Nasional: Pusat AI dan Riset Komputasi Kuwanter Resmi Diluncurkan di IKN',
+        slug: 'pusat-ai-ikn-resmi-beroperasi',
+        category: 'teknologi',
+        categoryName: 'Teknologi & AI',
+        author: {
+          name: 'Dr. Raden Aditya, M.Sc',
+          role: 'Editor Senior Teknologi',
+          avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80'
+        },
+        date: '15 Menit yang lalu',
+        readTime: '4 menit baca',
+        views: '24.8K',
+        featured: true,
+        breaking: true,
+        image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&auto=format&fit=crop&q=80',
+        summary: 'Pemerintah meresmikan sentra komputasi awan dan kecerdasan artifisial hijau pertama di Ibu Kota Nusantara dengan kapasitas pemrosesan data mandiri berstandar global.',
+        content: [
+          'Pemerintah Indonesia secara resmi mengoperasikan Pusat Riset Kecerdasan Artifisial (AI) dan Sains Data di kawasan Ibu Kota Nusantara (IKN). Fasilitas komputasi berdaya energi terbarukan ini ditargetkan menjadi motor penggerak transformasi digital berdaulat.',
+          'Menteri Komunikasi dan Digital menyampaikan bahwa pusat komputasi ini memanfaatkan infrastruktur pendingin geotermal ramah lingkungan, menekan emisi karbon hingga 70% dibanding pusat data konvensional di Asia Tenggara.',
+          '"Kita ingin memastikan kedaulatan data nasional terlindungi sekaligus memberi panggung akselerasi bagi para periset, developer, dan kampus di tanah air," ungkapnya saat memberikan pidato peresmian.',
+          'Fasilitas ini juga terhubung dengan jaringan pita lebar serat optik Palapa Ring fase terbaru, memangkas latensi transfer data antar pulau dari Sabang sampai Merauke.'
+        ],
+        tags: ['#IKNNusantara', '#TeknologiAI', '#InovasiBangsa', '#DigitalSovereignty'],
+        commentsCount: 42
+      },
+      {
+        id: 2,
+        title: 'IHSG Melonjak ke Rekor Baru Disokong Penguatan Sektor Hilirisasi dan Transisi Energi Bersih',
+        slug: 'ihsg-rekor-baru-transisi-energi',
+        category: 'ekonomi',
+        categoryName: 'Ekonomi & Bisnis',
+        author: {
+          name: 'Siti Sarah Wardani',
+          role: 'Koresponden Pasar Modal',
+          avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80'
+        },
+        date: '42 Menit yang lalu',
+        readTime: '3 menit baca',
+        views: '18.2K',
+        featured: false,
+        breaking: false,
+        image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&auto=format&fit=crop&q=80',
+        summary: 'Indeks Harga Saham Gabungan (IHSG) menembus batas psikologis berkat arus modal asing yang deras pada portofolio industri berkelanjutan.',
+        content: [
+          'Laju Indeks Harga Saham Gabungan (IHSG) di Bursa Efek Indonesia kembali mencetak rekor tertinggi sepanjang sejarah pada penutupan sesi perdagangan pertama hari ini.',
+          'Sektor manufaktur ramah lingkungan, mineral baterai, dan perbankan digital menjadi lokomotif utama penguatan indeks acuan.',
+          'Pengamat pasar modal menyatakan stabilitas suku bunga acuan Bank Indonesia turut memperkuat optimisme investor domestik maupun global.'
+        ],
+        tags: ['#PasarModal', '#IHSG', '#EkonomiRI', '#Investasi'],
+        commentsCount: 19
+      },
+      {
+        id: 3,
+        title: 'Strategi Diplomasi Pangan Nusantara: Swasembada Beras Terpadu Berbasis Sensor Cerdas Petani',
+        slug: 'strategi-diplomasi-pangan-nusantara',
+        category: 'nasional',
+        categoryName: 'Nasional & IKN',
+        author: {
+          name: 'Bambang Kusumo',
+          role: 'Jurnalis Investigasi Kebijakan',
+          avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80'
+        },
+        date: '2 Jam yang lalu',
+        readTime: '5 menit baca',
+        views: '12.4K',
+        featured: false,
+        breaking: false,
+        image: 'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=800&auto=format&fit=crop&q=80',
+        summary: 'Penerapan teknologi precision farming di lumbung padi Merauke dan Karawang berhasil meningkatkan produktivitas panen hingga 35 persen per hektar.',
+        content: [
+          'Kementerian Pertanian menggandeng konsorsium inovator muda kampus menghadirkan sistem sensor kelembapan tanah berbasis IoT hemat biaya untuk jutaan petani lokal.',
+          'Melalui integrasi data cuaca BMKG dan automasi irigasi, efisiensi konsumsi pupuk dapat dioptimalkan tanpa mencemari ekosistem sungai.'
+        ],
+        tags: ['#PertanianCerdas', '#KetahananPangan', '#KaryaAnakBangsa'],
+        commentsCount: 31
+      },
+      {
+        id: 4,
+        title: 'Garuda Muda Kunci Tiket Bersejarah ke Babak Utama Turnamen Asia Usai Laga Sengit',
+        slug: 'garuda-muda-kunci-tiket-asia',
+        category: 'olahraga',
+        categoryName: 'Olahraga',
+        author: {
+          name: 'Dimas Wicaksono',
+          role: 'Analis Olahraga',
+          avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80'
+        },
+        date: '3 Jam yang lalu',
+        readTime: '4 menit baca',
+        views: '35.1K',
+        featured: false,
+        breaking: true,
+        image: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=800&auto=format&fit=crop&q=80',
+        summary: 'Gol tendangan bebas spektakuler di menit ke-89 memastikan langkah Timnas Indonesia mengukir prestasi bersejarah di panggung kontinental.',
+        content: [
+          'Stadion Utama Gelora Bung Karno bergemuruh saat peluit akhir dibunyikan. Tim nasional berhasil menumbangkan lawan unggulan dengan skor dramatis 2-1.',
+          'Kekuatan mental dan disiplin transisi bertahan ke menyerang menjadi kunci keberhasilan taktik racikan staf kepelatihan timnas.'
+        ],
+        tags: ['#TimnasJuara', '#SepakbolaKita', '#GarudaMuda'],
+        commentsCount: 88
+      },
+      {
+        id: 5,
+        title: 'Revisi RUU Perlindungan Data Pribadi: Sanksi Ketat Pelanggaran Siber Berlaku Penuh Bulan Depan',
+        slug: 'uu-pdp-sanksi-ketat-siber',
+        category: 'politik',
+        categoryName: 'Politik & Hukum',
+        author: {
+          name: 'Aisyah Nirmala, S.H.',
+          role: 'Koresponden Hukum & Parlemen',
+          avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80'
+        },
+        date: '4 Jam yang lalu',
+        readTime: '6 menit baca',
+        views: '16.9K',
+        featured: false,
+        breaking: false,
+        image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&auto=format&fit=crop&q=80',
+        summary: 'Lembaga pengawas data independen bersiap menindak tegas korporasi yang lalai mengamankan kredensial jutaan pengguna digital.',
+        content: [
+          'Mulai awal kuartal mendatang, regulasi sanksi denda administratif progresif hingga pemblokiran izin operasional mulai diberlakukan bagi pengendali data nakal.',
+          'Langkah ini disambut baik oleh pegiat hak konsumen digital demi meminimalisir kebocoran data yang kerap merugikan masyarakat luas.'
+        ],
+        tags: ['#HukumDigital', '#KeamananSiber', '#PerlindunganData'],
+        commentsCount: 15
+      },
+      {
+        id: 6,
+        title: 'Pesona Geopark Natuna & Raja Ampat: Terpilih Menjadi Laboratorium Alam Keanekaragaman Hayati Dunia',
+        slug: 'geopark-natuna-raja-ampat-unesco',
+        category: 'gaya-hidup',
+        categoryName: 'Sains & Gaya Hidup',
+        author: {
+          name: 'Mega Maharani',
+          role: 'Pemerhati Lingkungan & Budaya',
+          avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80'
+        },
+        date: '5 Jam yang lalu',
+        readTime: '3 menit baca',
+        views: '9.8K',
+        featured: false,
+        breaking: false,
+        image: 'https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?w=800&auto=format&fit=crop&q=80',
+        summary: 'UNESCO kembali mengakui keunikan kars kepulauan dan terumbu karang tropis Indonesia sebagai warisan geologi dengan status cagar biosfer.',
+        content: [
+          'Delegasi dunia memuji konservasi kearifan lokal masyarakat pesisir melalui tradisi Sasi yang berhasil menjaga kelestarian terumbu karang dari eksploitasi berlebih.',
+          'Pariwisata berbasis kelestarian (ecotourism) kini terus didorong sebagai sumber ekonomi sirkular warga lokal tanpa merusak ekosistem endemik.'
+        ],
+        tags: ['#GeoparkNusantara', '#WisataAlam', '#KonservasiLaut'],
+        commentsCount: 24
+      }
+    ];
+
+    // Fallback SVG Images
+    const SVG_FALLBACK_ARTICLE = "data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22800%22%20height%3D%22450%22%20viewBox%3D%220%200%20800%20450%22%3E%3Crect%20fill%3D%22%2327272a%22%20width%3D%22800%22%20height%3D%22450%22%2F%3E%3Ctext%20fill%3D%22%23ef4444%22%20font-family%3D%22sans-serif%22%20font-size%3D%2228%22%20font-weight%3D%22bold%22%20x%3D%2250%25%22%20y%3D%2246%25%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%3ENUSANTARA%20POST%3C%2Ftext%3E%3Ctext%20fill%3D%22%239ca3af%22%20font-family%3D%22sans-serif%22%20font-size%3D%2214%22%20x%3D%2250%25%22%20y%3D%2256%25%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%3EDokumentasi%20Visual%20Berita%3C%2Ftext%3E%3C%2Fsvg%3E";
+    const SVG_FALLBACK_AVATAR = "data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22100%22%20height%3D%22100%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20fill%3D%22%23dc2626%22%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2250%22%2F%3E%3Ctext%20fill%3D%22%23ffffff%22%20font-family%3D%22sans-serif%22%20font-size%3D%2242%22%20font-weight%3D%22bold%22%20x%3D%2250%25%22%20y%3D%2255%25%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%3EN%3C%2Ftext%3E%3C%2Fsvg%3E";
+
+    function handleImageError(imgElement, type = 'article') {
+      imgElement.onerror = null;
+      imgElement.src = type === 'avatar' ? SVG_FALLBACK_AVATAR : SVG_FALLBACK_ARTICLE;
+    }
+
+    // Application Reactive State
+    let isDarkMode = false;
+    let selectedCategory = 'all';
+    let searchQuery = '';
+    let activeArticleId = null;
+    let bookmarkedIds = [1, 4];
+    let isMobileMenuOpen = false;
+
+    // Reader Mode State
+    let readerFontSize = 'text-base';
+    let isPlayingAudio = false;
+    let likeCount = 142;
+    let hasLiked = false;
+    let comments = [
+      { id: 101, user: 'Aris Pratama', time: '10 menit lalu', text: 'Langkah luar biasa untuk ekosistem AI kita. Semoga infrastruktur internet daerah lekas setara.', likes: 8 },
+      { id: 102, user: 'Dewi Lestari', time: '25 menit lalu', text: 'Bangga melihat IKN dirancang dengan wawasan keberlanjutan dan energi hijau.', likes: 14 }
+    ];
+
+    // Poll State
+    let pollVoted = false;
+    let pollStats = { ai: 54, green: 28, infra: 18 };
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const toastText = document.getElementById('toast-text');
+      toastText.textContent = message;
+      toast.classList.remove('hidden');
+      toast.classList.add('flex');
+
+      clearTimeout(window._toastTimeout);
+      window._toastTimeout = setTimeout(() => {
+        toast.classList.add('hidden');
+        toast.classList.remove('flex');
+      }, 3000);
+    }
+
+    function toggleDarkMode() {
+      isDarkMode = !isDarkMode;
+      const htmlEl = document.documentElement;
+      const appBody = document.getElementById('app-body');
+      const topBar = document.getElementById('top-bar');
+      const mainHeader = document.getElementById('main-header');
+      const iconContainer = document.getElementById('theme-icon-container');
+
+      if (isDarkMode) {
+        htmlEl.classList.add('dark');
+        appBody.className = 'min-h-screen font-sans bg-zinc-950 text-zinc-100 transition-colors duration-200';
+        topBar.className = 'border-b text-xs py-2 px-4 transition-colors bg-zinc-900/80 border-zinc-800 text-zinc-400';
+        mainHeader.className = 'border-b sticky top-0 z-40 backdrop-blur-md transition-colors bg-zinc-950/90 border-zinc-800';
+        iconContainer.innerHTML = '<i data-lucide="sun" class="w-4 h-4 text-amber-400"></i>';
+      } else {
+        htmlEl.classList.remove('dark');
+        appBody.className = 'min-h-screen font-sans bg-stone-50 text-zinc-900 transition-colors duration-200';
+        topBar.className = 'border-b text-xs py-2 px-4 transition-colors bg-white border-stone-200 text-zinc-600';
+        mainHeader.className = 'border-b sticky top-0 z-40 backdrop-blur-md transition-colors bg-white/95 border-stone-200 shadow-sm';
+        iconContainer.innerHTML = '<i data-lucide="moon" class="w-4 h-4 text-zinc-600"></i>';
+      }
+      lucide.createIcons();
+    }
+
+    function toggleMobileMenu() {
+      isMobileMenuOpen = !isMobileMenuOpen;
+      const mobileMenu = document.getElementById('mobile-menu');
+      const mobileMenuIcon = document.getElementById('mobile-menu-icon');
+      if (isMobileMenuOpen) {
+        mobileMenu.classList.remove('hidden');
+        mobileMenuIcon.setAttribute('data-lucide', 'x');
+      } else {
+        mobileMenu.classList.add('hidden');
+        mobileMenuIcon.setAttribute('data-lucide', 'menu');
+      }
+      lucide.createIcons();
+    }
+
+    function getFilteredArticles() {
+      return ARTICLES.filter((item) => {
+        const matchCategory = selectedCategory === 'all' || item.category === selectedCategory;
+        const q = searchQuery.toLowerCase().trim();
+        const matchQuery = !q ||
+          item.title.toLowerCase().includes(q) ||
+          item.summary.toLowerCase().includes(q) ||
+          item.tags.some((t) => t.toLowerCase().includes(q));
+        return matchCategory && matchQuery;
+      });
+    }
+
+    function selectCategory(catId) {
+      selectedCategory = catId;
+      activeArticleId = null;
+      if (isMobileMenuOpen) toggleMobileMenu();
+      renderAll();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function handleSearch(val) {
+      searchQuery = val;
+      activeArticleId = null;
+      const clearBtn = document.getElementById('clear-search-btn');
+      if (val) {
+        clearBtn.classList.remove('hidden');
+      } else {
+        clearBtn.classList.add('hidden');
+      }
+      renderAll();
+    }
+
+    function clearSearch() {
+      searchQuery = '';
+      document.getElementById('search-input').value = '';
+      document.getElementById('mobile-search-input').value = '';
+      document.getElementById('clear-search-btn').classList.add('hidden');
+      renderAll();
+    }
+
+    function resetToHome() {
+      selectedCategory = 'all';
+      searchQuery = '';
+      activeArticleId = null;
+      document.getElementById('search-input').value = '';
+      document.getElementById('mobile-search-input').value = '';
+      document.getElementById('clear-search-btn').classList.add('hidden');
+      renderAll();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleBookmark(id, event) {
+      if (event) event.stopPropagation();
+      const index = bookmarkedIds.indexOf(id);
+      if (index > -1) {
+        bookmarkedIds.splice(index, 1);
+        showToast('Dihapus dari daftar bacaan tersimpan');
+      } else {
+        bookmarkedIds.push(id);
+        showToast('Disimpan ke daftar bacaan');
+      }
+      renderBookmarksBadge();
+      renderArticlesGrid();
+      renderActiveArticle();
+    }
+
+    function renderBookmarksBadge() {
+      const badge = document.getElementById('bookmark-badge');
+      badge.textContent = bookmarkedIds.length;
+    }
+
+    function openBookmarksModal() {
+      const modal = document.getElementById('bookmarks-modal');
+      const title = document.getElementById('bookmarks-modal-title');
+      const listContainer = document.getElementById('bookmarks-modal-list');
+
+      title.textContent = `Daftar Bacaan Tersimpan (${bookmarkedIds.length})`;
+      const savedArticles = ARTICLES.filter((a) => bookmarkedIds.includes(a.id));
+
+      if (savedArticles.length === 0) {
+        listContainer.innerHTML = `
+          <div class="text-center py-8 text-stone-400 text-sm">
+            Belum ada artikel yang disimpan. Klik ikon bookmark pada artikel untuk membaca nanti.
+          </div>
+        `;
+      } else {
+        listContainer.innerHTML = savedArticles.map((art) => `
+          <div
+            onclick="openArticleById(${art.id}); closeBookmarksModal();"
+            class="group flex items-center justify-between gap-3 p-3 rounded-xl border border-stone-200 dark:border-zinc-800 hover:bg-stone-50 dark:hover:bg-zinc-800/50 cursor-pointer transition"
+          >
+            <div class="flex items-center gap-3">
+              <img
+                src="${art.image}"
+                alt="${art.title}"
+                onerror="handleImageError(this, 'article')"
+                class="w-14 h-14 rounded-lg object-cover"
+              />
+              <div>
+                <span class="text-[10px] font-bold uppercase tracking-wider text-red-600">${art.categoryName}</span>
+                <h5 class="text-xs font-bold font-serif line-clamp-1 group-hover:text-red-600">${art.title}</h5>
+                <span class="text-[11px] text-stone-400">${art.date}</span>
+              </div>
+            </div>
+            <button
+              onclick="event.stopPropagation(); toggleBookmark(${art.id}, event); openBookmarksModal();"
+              class="text-stone-400 hover:text-red-600 p-2"
+              title="Hapus"
+            >
+              <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+          </div>
+        `).join('');
+      }
+
+      modal.classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function closeBookmarksModal() {
+      document.getElementById('bookmarks-modal').classList.add('hidden');
+    }
+
+    function renderCategories() {
+      const desktopNav = document.getElementById('category-nav');
+      const mobileList = document.getElementById('mobile-categories-list');
+
+      desktopNav.innerHTML = CATEGORIES.map((cat) => `
+        <button
+          onclick="selectCategory('${cat.id}')"
+          class="whitespace-nowrap px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all ${
+            selectedCategory === cat.id
+              ? 'bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-950 shadow-sm'
+              : 'text-zinc-600 dark:text-zinc-400 hover:bg-stone-200/70 dark:hover:bg-zinc-800'
+          }"
+        >
+          ${cat.label}
+        </button>
+      `).join('');
+
+      mobileList.innerHTML = CATEGORIES.map((cat) => `
+        <button
+          onclick="selectCategory('${cat.id}')"
+          class="text-left p-2 rounded-lg font-medium text-xs ${
+            selectedCategory === cat.id ? 'bg-red-600 text-white' : 'text-zinc-700 dark:text-zinc-300'
+          }"
+        >
+          ${cat.label}
+        </button>
+      `).join('');
+    }
+
+    function renderPopularArticles() {
+      const container = document.getElementById('popular-articles-container');
+      const popularArticles = [...ARTICLES].sort((a, b) => parseFloat(b.views) - parseFloat(a.views)).slice(0, 4);
+
+      container.innerHTML = popularArticles.map((art, idx) => `
+        <div
+          onclick="openArticleById(${art.id})"
+          class="group cursor-pointer flex items-start gap-4 pb-4 border-b border-stone-100 dark:border-zinc-800/80 last:border-0 last:pb-0"
+        >
+          <span class="text-3xl font-black font-serif text-stone-300 dark:text-zinc-700 group-hover:text-red-600 transition w-7">
+            0${idx + 1}
+          </span>
+          <div class="flex-1">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-red-600">
+              ${art.categoryName}
+            </span>
+            <h4 class="text-sm font-bold font-serif leading-snug group-hover:text-red-600 dark:group-hover:text-red-400 transition line-clamp-2 mt-0.5">
+              ${art.title}
+            </h4>
+            <div class="flex items-center gap-3 text-[11px] text-stone-400 mt-1.5 font-sans">
+              <span class="flex items-center gap-1">
+                <i data-lucide="clock" class="w-3 h-3"></i> ${art.date}
+              </span>
+              <span class="flex items-center gap-1">
+                <i data-lucide="eye" class="w-3 h-3"></i> ${art.views}
+              </span>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderPoll() {
+      const container = document.getElementById('poll-content');
+      if (!pollVoted) {
+        container.innerHTML = `
+          <div class="space-y-2 text-xs">
+            <button
+              onclick="votePoll('ai')"
+              class="w-full text-left p-2 rounded-lg border border-stone-300 dark:border-zinc-700 hover:bg-red-50 dark:hover:bg-zinc-800 transition"
+            >
+              A. Penguasaan AI & Teknologi Tinggi
+            </button>
+            <button
+              onclick="votePoll('green')"
+              class="w-full text-left p-2 rounded-lg border border-stone-300 dark:border-zinc-700 hover:bg-red-50 dark:hover:bg-zinc-800 transition"
+            >
+              B. Hilirisasi & Energi Terbarukan
+            </button>
+            <button
+              onclick="votePoll('infra')"
+              class="w-full text-left p-2 rounded-lg border border-stone-300 dark:border-zinc-700 hover:bg-red-50 dark:hover:bg-zinc-800 transition"
+            >
+              C. Pemerataan Infrastruktur & Pendidikan
+            </button>
+          </div>
+        `;
+      } else {
+        container.innerHTML = `
+          <div class="space-y-2 text-xs">
+            <div>
+              <div class="flex justify-between font-medium mb-1">
+                <span>Teknologi & AI</span>
+                <span>${pollStats.ai}%</span>
+              </div>
+              <div class="w-full bg-stone-200 dark:bg-zinc-800 h-2 rounded-full overflow-hidden">
+                <div class="bg-red-600 h-full" style="width: ${pollStats.ai}%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between font-medium mb-1">
+                <span>Energi Terbarukan</span>
+                <span>${pollStats.green}%</span>
+              </div>
+              <div class="w-full bg-stone-200 dark:bg-zinc-800 h-2 rounded-full overflow-hidden">
+                <div class="bg-emerald-600 h-full" style="width: ${pollStats.green}%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between font-medium mb-1">
+                <span>Infrastruktur & Edukasi</span>
+                <span>${pollStats.infra}%</span>
+              </div>
+              <div class="w-full bg-stone-200 dark:bg-zinc-800 h-2 rounded-full overflow-hidden">
+                <div class="bg-blue-600 h-full" style="width: ${pollStats.infra}%"></div>
+              </div>
+            </div>
+            <p class="text-[10px] text-stone-400 mt-2 text-center">Terima kasih atas partisipasi Anda!</p>
+          </div>
+        `;
+      }
+    }
+
+    function votePoll(optionKey) {
+      if (pollVoted) return;
+      pollStats[optionKey] += 1;
+      pollVoted = true;
+      renderPoll();
+      showToast('Pilihan jajak pendapat Anda telah tercatat!');
+    }
+
+    function renderArticlesGrid() {
+      const filtered = getFilteredArticles();
+      const grid = document.getElementById('articles-grid');
+      const emptyState = document.getElementById('empty-state');
+      const filterBanner = document.getElementById('filter-banner');
+      const filterText = document.getElementById('filter-banner-text');
+      const heroSection = document.getElementById('hero-section');
+      const sectionTitle = document.getElementById('section-title');
+
+      const isFiltered = (selectedCategory !== 'all' || searchQuery.trim() !== '');
+
+      if (isFiltered) {
+        heroSection.classList.add('hidden');
+        filterBanner.classList.remove('hidden');
+        const catLabel = selectedCategory !== 'all' ? CATEGORIES.find(c => c.id === selectedCategory)?.label : '';
+        filterText.innerHTML = `Menampilkan hasil untuk: <strong>${catLabel}</strong> ${searchQuery ? `"${searchQuery}"` : ''} (${filtered.length} artikel ditemukan)`;
+        sectionTitle.textContent = catLabel || 'Hasil Pencarian';
+      } else {
+        heroSection.classList.remove('hidden');
+        filterBanner.classList.add('hidden');
+        sectionTitle.textContent = 'Warta Terkini & Analisis Mendalam';
+      }
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+      grid.innerHTML = filtered.map((art) => {
+        const isSaved = bookmarkedIds.includes(art.id);
+        return `
+          <div
+            onclick="openArticleById(${art.id})"
+            class="group cursor-pointer rounded-2xl overflow-hidden border flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-xl bg-white border-stone-200 hover:border-stone-300 shadow-sm dark:bg-zinc-900 dark:border-zinc-800 dark:hover:border-zinc-700"
+          >
+            <div>
+              <!-- Article Card Thumbnail -->
+              <div class="relative h-48 sm:h-52 overflow-hidden">
+                <img
+                  src="${art.image}"
+                  alt="${art.title}"
+                  onerror="handleImageError(this, 'article')"
+                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div class="absolute top-3 left-3">
+                  <span class="px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-wider bg-red-600 text-white rounded-full shadow">
+                    ${art.categoryName}
+                  </span>
+                </div>
+                <button
+                  onclick="toggleBookmark(${art.id}, event)"
+                  class="absolute top-3 right-3 p-1.5 rounded-full bg-black/60 text-white backdrop-blur-sm hover:bg-black/80 transition"
+                  title="Simpan Berita"
+                >
+                  <i data-lucide="${isSaved ? 'bookmark-check' : 'bookmark'}" class="w-4 h-4 ${isSaved ? 'text-red-400' : ''}"></i>
+                </button>
+              </div>
+
+              <!-- Article Info -->
+              <div class="p-5">
+                <div class="flex items-center gap-2 text-xs text-stone-400 mb-2">
+                  <span>${art.date}</span>
+                  <span>•</span>
+                  <span>${art.readTime}</span>
+                </div>
+
+                <h4 class="font-serif font-bold text-lg leading-snug group-hover:text-red-600 dark:group-hover:text-red-400 transition line-clamp-2 mb-2">
+                  ${art.title}
+                </h4>
+
+                <p class="text-xs text-stone-500 dark:text-zinc-400 line-clamp-3 leading-relaxed">
+                  ${art.summary}
+                </p>
+              </div>
+            </div>
+
+            <!-- Card Footer -->
+            <div class="p-5 pt-0 border-t border-stone-100 dark:border-zinc-800/80 mt-4 flex items-center justify-between text-xs text-stone-500">
+              <div class="flex items-center gap-2">
+                <img
+                  src="${art.author.avatar}"
+                  alt="${art.author.name}"
+                  onerror="handleImageError(this, 'avatar')"
+                  class="w-5 h-5 rounded-full object-cover"
+                />
+                <span class="truncate max-w-[110px]">${art.author.name}</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="flex items-center gap-1">
+                  <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+                  ${art.views}
+                </span>
+                <span class="flex items-center gap-1">
+                  <i data-lucide="message-square" class="w-3.5 h-3.5"></i>
+                  ${art.commentsCount}
+                </span>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function openArticleById(id) {
+      activeArticleId = id;
+      isPlayingAudio = false;
+      renderAll();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function closeArticleReader() {
+      activeArticleId = null;
+      isPlayingAudio = false;
+      renderAll();
+    }
+
+    function toggleAudio() {
+      isPlayingAudio = !isPlayingAudio;
+      showToast(isPlayingAudio ? 'Memulai narasi suara berita...' : 'Pembacaan audio dihentikan');
+      renderActiveArticle();
+    }
+
+    function setFontSize(sizeClass) {
+      readerFontSize = sizeClass;
+      renderActiveArticle();
+    }
+
+    function toggleLike() {
+      hasLiked = !hasLiked;
+      likeCount += hasLiked ? 1 : -1;
+      showToast(hasLiked ? 'Terima kasih atas apresiasi Anda!' : 'Apresiasi ditarik');
+      renderActiveArticle();
+    }
+
+    function copyArticleLink() {
+      const dummyInput = document.createElement('input');
+      document.body.appendChild(dummyInput);
+      dummyInput.value = window.location.href;
+      dummyInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(dummyInput);
+      showToast('Tautan artikel disalin ke papan klip!');
+    }
+
+    function submitComment(e) {
+      e.preventDefault();
+      const input = document.getElementById('comment-input');
+      const val = input.value.trim();
+      if (!val) return;
+
+      comments.unshift({
+        id: Date.now(),
+        user: 'Pembaca Tamu',
+        time: 'Baru saja',
+        text: val,
+        likes: 0
+      });
+
+      input.value = '';
+      showToast('Komentar Anda berhasil dipublikasikan!');
+      renderActiveArticle();
+    }
+
+    function renderActiveArticle() {
+      const readerEl = document.getElementById('article-reader-view');
+      const homeEl = document.getElementById('home-view');
+
+      if (!activeArticleId) {
+        readerEl.classList.add('hidden');
+        homeEl.classList.remove('hidden');
+        return;
+      }
+
+      const article = ARTICLES.find((a) => a.id === activeArticleId);
+      if (!article) return;
+
+      homeEl.classList.add('hidden');
+      readerEl.classList.remove('hidden');
+
+      const isSaved = bookmarkedIds.includes(article.id);
+
+      readerEl.innerHTML = `
+        <button
+          onclick="closeArticleReader()"
+          class="inline-flex items-center gap-2 mb-6 text-sm font-semibold text-red-600 hover:text-red-700 transition"
+        >
+          ← Kembali ke Beranda
+        </button>
+
+        <div class="space-y-4">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="px-3 py-1 text-xs font-bold uppercase tracking-wider bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-300 rounded-full">
+              ${article.categoryName}
+            </span>
+            <span class="text-xs text-stone-500">• ${article.date}</span>
+            <span class="text-xs text-stone-500">• ${article.readTime}</span>
+          </div>
+
+          <h1 class="text-3xl sm:text-4xl md:text-5xl font-serif font-black leading-tight text-zinc-900 dark:text-white">
+            ${article.title}
+          </h1>
+
+          <p class="text-lg sm:text-xl font-normal text-zinc-600 dark:text-zinc-300 leading-relaxed border-l-4 border-red-600 pl-4">
+            ${article.summary}
+          </p>
+
+          <!-- Author & Action Bar -->
+          <div class="flex flex-wrap items-center justify-between gap-4 py-4 border-y border-stone-200 dark:border-zinc-800">
+            <div class="flex items-center gap-3">
+              <img
+                src="${article.author.avatar}"
+                alt="${article.author.name}"
+                onerror="handleImageError(this, 'avatar')"
+                class="w-11 h-11 rounded-full object-cover ring-2 ring-red-500/20"
+              />
+              <div>
+                <h4 class="text-sm font-bold text-zinc-900 dark:text-white">${article.author.name}</h4>
+                <p class="text-xs text-stone-500">${article.author.role}</p>
+              </div>
+            </div>
+
+            <!-- Reader Tools -->
+            <div class="flex items-center gap-2">
+              <button
+                onclick="toggleAudio()"
+                class="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg border transition ${
+                  isPlayingAudio
+                    ? 'bg-emerald-600 text-white border-emerald-500 animate-pulse'
+                    : 'border-stone-300 dark:border-zinc-700 hover:bg-stone-100 dark:hover:bg-zinc-800'
+                }"
+              >
+                <i data-lucide="${isPlayingAudio ? 'volume-x' : 'volume-2'}" class="w-4 h-4"></i>
+                ${isPlayingAudio ? 'Jeda Audio' : 'Dengarkan Berita'}
+              </button>
+
+              <div class="flex items-center border rounded-lg border-stone-300 dark:border-zinc-700 p-0.5">
+                <button
+                  onclick="setFontSize('text-sm')"
+                  class="px-2 py-1 text-xs font-bold rounded ${readerFontSize === 'text-sm' ? 'bg-red-600 text-white' : 'text-stone-500'}"
+                  title="Teks Kecil"
+                >
+                  A-
+                </button>
+                <button
+                  onclick="setFontSize('text-base')"
+                  class="px-2 py-1 text-xs font-bold rounded ${readerFontSize === 'text-base' ? 'bg-red-600 text-white' : 'text-stone-500'}"
+                  title="Teks Normal"
+                >
+                  A
+                </button>
+                <button
+                  onclick="setFontSize('text-lg')"
+                  class="px-2 py-1 text-xs font-bold rounded ${readerFontSize === 'text-lg' ? 'bg-red-600 text-white' : 'text-stone-500'}"
+                  title="Teks Besar"
+                >
+                  A+
+                </button>
+              </div>
+
+              <button
+                onclick="toggleBookmark(${article.id}, event)"
+                class="p-2 rounded-lg border border-stone-300 dark:border-zinc-700 hover:text-red-600 transition"
+              >
+                <i data-lucide="${isSaved ? 'bookmark-check' : 'bookmark'}" class="w-4 h-4 ${isSaved ? 'text-red-600' : ''}"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Cover Image -->
+          <div class="relative rounded-2xl overflow-hidden shadow-lg my-6">
+            <img
+              src="${article.image}"
+              alt="${article.title}"
+              onerror="handleImageError(this, 'article')"
+              class="w-full h-80 sm:h-[450px] object-cover"
+            />
+            <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4 text-xs text-white/90">
+              Dokumentasi Foto Khusus Redaksi Nusantara Post • Izin Publikasi Resmi
+            </div>
+          </div>
+
+          <!-- Body Paragraphs -->
+          <div class="space-y-6 leading-relaxed font-serif ${readerFontSize} text-zinc-800 dark:text-zinc-200">
+            ${article.content.map(para => `<p class="indent-4 sm:indent-8">${para}</p>`).join('')}
+          </div>
+
+          <!-- Tag Badges -->
+          <div class="pt-6 flex flex-wrap gap-2">
+            ${article.tags.map(tag => `
+              <span
+                onclick="handleSearch('${tag.replace('#', '')}')"
+                class="px-3 py-1 rounded-full text-xs font-semibold bg-stone-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 hover:text-red-600 cursor-pointer"
+              >
+                ${tag}
+              </span>
+            `).join('')}
+          </div>
+
+          <!-- Like and Share Section -->
+          <div class="flex items-center justify-between pt-6 border-t border-stone-200 dark:border-zinc-800">
+            <button
+              onclick="toggleLike()"
+              class="flex items-center gap-2 px-4 py-2 rounded-full font-semibold text-sm transition ${
+                hasLiked
+                  ? 'bg-red-600 text-white'
+                  : 'bg-stone-100 dark:bg-zinc-800 hover:bg-stone-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-200'
+              }"
+            >
+              <i data-lucide="thumbs-up" class="w-4 h-4 ${hasLiked ? 'fill-current' : ''}"></i>
+              <span>Bermanfaat (${likeCount})</span>
+            </button>
+
+            <div class="flex items-center gap-2 text-xs font-semibold text-stone-500">
+              <button
+                onclick="copyArticleLink()"
+                class="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-stone-100 dark:bg-zinc-800 hover:text-zinc-900 dark:hover:text-white"
+              >
+                <i data-lucide="share-2" class="w-4 h-4"></i>
+                Bagikan
+              </button>
+            </div>
+          </div>
+
+          <!-- Public Discussion Comments -->
+          <section class="mt-12 pt-8 border-t border-stone-200 dark:border-zinc-800">
+            <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+              <i data-lucide="message-square" class="w-5 h-5 text-red-600"></i>
+              Diskusi Publik (${comments.length})
+            </h3>
+
+            <form onsubmit="submitComment(event)" class="mb-8">
+              <textarea
+                id="comment-input"
+                rows="3"
+                required
+                placeholder="Sampaikan pandangan Anda secara kritis dan bijak..."
+                class="w-full p-3 rounded-xl border border-stone-300 dark:border-zinc-700 dark:bg-zinc-900 text-sm focus:ring-2 focus:ring-red-500 outline-none"
+              ></textarea>
+              <div class="flex justify-end mt-2">
+                <button
+                  type="submit"
+                  class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-sm font-semibold flex items-center gap-2"
+                >
+                  <i data-lucide="send" class="w-4 h-4"></i>
+                  Kirim Komentar
+                </button>
+              </div>
+            </form>
+
+            <div class="space-y-4">
+              ${comments.map(c => `
+                <div class="p-4 rounded-xl bg-stone-100/70 dark:bg-zinc-900 border border-stone-200 dark:border-zinc-800">
+                  <div class="flex items-center justify-between text-xs mb-1">
+                    <span class="font-bold text-zinc-900 dark:text-zinc-100">${c.user}</span>
+                    <span class="text-stone-400">${c.time}</span>
+                  </div>
+                  <p class="text-sm text-zinc-700 dark:text-zinc-300">${c.text}</p>
+                </div>
+              `).join('')}
+            </div>
+          </section>
+        </div>
+      `;
+    }
+
+    function handleSubscribe(e) {
+      e.preventDefault();
+      const input = document.getElementById('newsletter-email');
+      const email = input.value.trim();
+      if (!email || !email.includes('@')) {
+        showToast('Masukkan alamat email yang valid');
+        return;
+      }
+      showToast(`Terima kasih! Buletin harian akan dikirim ke ${email}`);
+      input.value = '';
+    }
+
+    function renderAll() {
+      renderCategories();
+      renderPopularArticles();
+      renderPoll();
+      renderArticlesGrid();
+      renderBookmarksBadge();
+      renderActiveArticle();
+      lucide.createIcons();
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      renderAll();
+    });
+  </script>
+</body>
+</html>

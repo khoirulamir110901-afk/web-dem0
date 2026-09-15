@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SuaraMelawan - Jurnalisme Kritis, Independen & Menggugat</title>
+  
+  <!-- Google Fonts: Inter & Newsreader for editorial aesthetic -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;0,6..72,700;0,6..72,800;1,6..72,500;1,6..72,600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Newsreader', 'serif'],
+          },
+          colors: {
+            zinc: {
+              850: '#202024',
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- React 18 and Babel Standalone for single-file browser runtime -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    /* Custom clean scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #09090b;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #27272a;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #facc15;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-zinc-950 text-zinc-100 font-sans selection:bg-amber-400 selection:text-zinc-950 antialiased min-h-screen">
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect, useMemo } = React;
+
+    // SVG Icon components matching Lucide design language
+    const IconWrapper = ({ children, className = "w-4 h-4" }) => (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className={className}
+      >
+        {children}
+      </svg>
+    );
+
+    const Search = ({ className }) => (
+      <IconWrapper className={className}>
+        <circle cx="11" cy="11" r="8" />
+        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+      </IconWrapper>
+    );
+
+    const Bookmark = ({ className, filled = false }) => (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill={filled ? "currentColor" : "none"}
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className={className}
+      >
+        <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+      </svg>
+    );
+
+    const Clock = ({ className }) => (
+      <IconWrapper className={className}>
+        <circle cx="12" cy="12" r="10" />
+        <polyline points="12 6 12 12 16 14" />
+      </IconWrapper>
+    );
+
+    const Eye = ({ className }) => (
+      <IconWrapper className={className}>
+        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+        <circle cx="12" cy="12" r="3" />
+      </IconWrapper>
+    );
+
+    const ShieldAlert = ({ className }) => (
+      <IconWrapper className={className}>
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        <line x1="12" y1="8" x2="12" y2="12" />
+        <line x1="12" y1="16" x2="12.01" y2="16" />
+      </IconWrapper>
+    );
+
+    const Flame = ({ className }) => (
+      <IconWrapper className={className}>
+        <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3.5z" />
+      </IconWrapper>
+    );
+
+    const ArrowUpRight = ({ className }) => (
+      <IconWrapper className={className}>
+        <line x1="7" y1="17" x2="17" y2="7" />
+        <polyline points="7 7 17 7 17 17" />
+      </IconWrapper>
+    );
+
+    const Menu = ({ className }) => (
+      <IconWrapper className={className}>
+        <line x1="3" y1="12" x2="21" y2="12" />
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <line x1="3" y1="18" x2="21" y2="18" />
+      </IconWrapper>
+    );
+
+    const X = ({ className }) => (
+      <IconWrapper className={className}>
+        <line x1="18" y1="6" x2="6" y2="18" />
+        <line x1="6" y1="6" x2="18" y2="18" />
+      </IconWrapper>
+    );
+
+    const ChevronRight = ({ className }) => (
+      <IconWrapper className={className}>
+        <polyline points="9 18 15 12 9 6" />
+      </IconWrapper>
+    );
+
+    const CheckCircle = ({ className }) => (
+      <IconWrapper className={className}>
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+        <polyline points="22 4 12 14.01 9 11.01" />
+      </IconWrapper>
+    );
+
+    const ThumbsUp = ({ className }) => (
+      <IconWrapper className={className}>
+        <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3" />
+      </IconWrapper>
+    );
+
+    const Send = ({ className }) => (
+      <IconWrapper className={className}>
+        <line x1="22" y1="2" x2="11" y2="13" />
+        <polygon points="22 2 15 22 11 13 2 9 22 2" />
+      </IconWrapper>
+    );
+
+    const Lock = ({ className }) => (
+      <IconWrapper className={className}>
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+      </IconWrapper>
+    );
+
+    const Sparkles = ({ className }) => (
+      <IconWrapper className={className}>
+        <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
+        <path d="M5 3v4" />
+        <path d="M19 17v4" />
+        <path d="M3 5h4" />
+        <path d="M17 19h4" />
+      </IconWrapper>
+    );
+
+    const TrendingUp = ({ className }) => (
+      <IconWrapper className={className}>
+        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+        <polyline points="17 6 23 6 23 12" />
+      </IconWrapper>
+    );
+
+    const CATEGORIES = [
+      'Semua',
+      'Investigasi',
+      'Politik & Oligarki',
+      'Hak Asasi & Keadilan',
+      'Krisis Iklim',
+      'Tenaga Kerja & Rakyat',
+      'Opini Kritis'
+    ];
+
+    const INITIAL_ARTICLES = [
+      {
+        id: 1,
+        category: 'Investigasi',
+        tag: 'LAPORAN UTAMA',
+        title: 'Menelusuri Jejak Konsesi Tambang: Bagaimana Hutan Adat Terus Digerus di Balik Dalih Transisi Energi Hijau',
+        excerpt: 'Investigasi tiga bulan tim SuaraMelawan mengungkap alur izin tambang nikel di kawasan hutan lindung yang mengorbankan ruang hidup masyarakat adat demi rantai pasok global.',
+        content: `Selama lebih dari tiga bulan, tim investigasi SuaraMelawan menelusuri ratusan lembar dokumen Analisis Mengenai Dampak Lingkungan (AMDAL) dan izin usaha pertambangan di pesisir timur Indonesia. Apa yang kami temukan adalah pola sistematis manipulasi batas wilayah adat demi memuluskan izin ekstraksi tambang.
+
+Masyarakat adat yang telah mendiami wilayah ini selama tujuh generasi mendadak mendapati ladang sagu dan sumber mata air mereka dikelilingi pagar kawat berduri. Kompensasi yang dijanjikan hanyalah remah-remah di atas meja negosiasi yang tidak setara.
+
+"Kami tidak pernah diajak bermusyawarah secara bebas dan tanpa paksaan. Tiba-tiba alat berat sudah masuk mengoyak hulu sungai kami," ujar salah satu tetua adat yang meminta namanya dirahasiakan demi keamanan keluarganya.
+
+Dokumen internal salah satu korporasi multinasional membuktikan bahwa uji laboratorium independen telah mendeteksi konsentrasi logam berat di hilir sungai 14 kali melebihi ambang batas aman lingkungan, namun laporan tersebut tak pernah dipublikasikan ke publik.`,
+        author: 'Tim Investigasi SuaraMelawan',
+        authorRole: 'Unit Investigasi Khusus',
+        date: '15 Sep 2026',
+        readTime: '9 menit baca',
+        views: '48.2K',
+        likes: 1240,
+        isFeatured: true,
+        isBreaking: true,
+        image: 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=1200&q=80'
+      },
+      {
+        id: 2,
+        category: 'Politik & Oligarki',
+        tag: 'EKSKLUSIF',
+        title: 'Audit Senyap APBD: Misteri Alokasi "Dana Hibah Siluman" Menjelang Tahun Pemilihan',
+        excerpt: 'Temuan dokumen internal menunjukkan lonjakan dana hibah mencurigakan hingga ratusan miliar rupiah yang mengalir ke yayasan fiktif milik kerabat pejabat daerah.',
+        content: `Analisis anggaran komparatif SuaraMelawan menyingkap skema distribusi anggaran yang tidak wajar pada dinas-dinas tertentu. Aliran dana puluhan miliar tercatat mengalir kepada belasan yayasan sosial yang baru terdaftar beberapa bulan sebelum tahun anggaran berjalan.
+
+Ketika tim kami mendatangi alamat-alamat kantor yayasan penerima dana di ibu kota provinsi, sebagian besar hanyalah ruko kosong tak berpenghuni atau rumah tinggal biasa tanpa aktivitas kesekretariatan.`,
+        author: 'Dian Prasetyo',
+        authorRole: 'Jurnalis Kebijakan Publik',
+        date: '15 Sep 2026',
+        readTime: '6 menit baca',
+        views: '32.1K',
+        likes: 890,
+        isFeatured: false,
+        image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80'
+      },
+      {
+        id: 3,
+        category: 'Tenaga Kerja & Rakyat',
+        tag: 'SUARA PEKERJA',
+        title: 'Kutukan Algoritma: Kisah Ratusan Kurir & Ojek Online Melawan Pemotongan Upah Sepihak',
+        excerpt: 'Di balik kemudahan layanan instan, ada jutaan mitra kurir yang terjebak utang kendaraan dan penalti sepihak oleh algoritma aplikasi yang tidak transparan.',
+        content: `Pagi buta sebelum matahari terbit, puluhan ribu kurir logistik dan pengemudi online telah memadati jalanan metropolitan. Namun pembaruan sistem bagi hasil terbaru menekan penghasilan bersih harian mereka hingga 35%. 
+
+"Sistem memotong insentif tanpa alasan jelas. Jika membatalkan pesanan karena hujan badai ekstrem, rating kami dihukum dan akun terancam suspensi," keluh Rahmat (34), pengemudi ojek daring di Jakarta Timur.`,
+        author: 'Siti Rahmawati',
+        authorRole: 'Jurnalis Ketenagakerjaan',
+        date: '14 Sep 2026',
+        readTime: '5 menit baca',
+        views: '27.4K',
+        likes: 1105,
+        isFeatured: false,
+        image: 'https://images.unsplash.com/photo-1526367790999-0150786686a2?auto=format&fit=crop&w=800&q=80'
+      },
+      {
+        id: 4,
+        category: 'Hak Asasi & Keadilan',
+        tag: 'ADVOKASI',
+        title: 'Kriminalisasi Pembela Lingkungan: Mengapa Pasal Karet UU Masih Dipakai Membungkam Warga?',
+        excerpt: 'Catatan merah advokasi hukum rakyat: lebih dari 43 aktivis tani dan warga penolak tambang dipidanakan sepanjang semester pertama dengan delik pencemaran nama baik.',
+        content: `Penggunaan pasal-pasal bermasalah untuk membungkam kritik masyarakat kian marak. Petani yang sekadar menanyakan sertifikat AMDAL di balai desa justru dilaporkan dengan dugaan pencemaran nama baik dan penghasutan. SuaraMelawan merangkum pola-pola pembungkaman hukum (SLAPP) yang semakin terorganisir.`,
+        author: 'Fajar Nugraha',
+        authorRole: 'Koresponden Hukum & HAM',
+        date: '14 Sep 2026',
+        readTime: '7 menit baca',
+        views: '19.8K',
+        likes: 642,
+        isFeatured: false,
+        image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=800&q=80'
+      },
+      {
+        id: 5,
+        category: 'Krisis Iklim',
+        tag: 'DARURAT BUMI',
+        title: 'Pesisir Utara Jawa Tenggelam: Warga Berdamai dengan Air Pasang di Tengah Nihilnya Solusi Permanen',
+        excerpt: 'Tanggul laut darurat terus jebol, rob menenggelamkan ribuan makam leluhur dan pekarangan sekolah, sementara proyek raksasa tak kunjung menyentuh akar masalah penurunan tanah.',
+        content: `Di pesisir Demak dan Pekalongan, batas antara laut dan daratan kini semakin samar. Anak-anak berangkat sekolah dengan perahu kayu karena jalan kampung sudah berubah menjadi kanal permanen air asin. Penurunan muka tanah akibat penyedotan air tanah tak terkendali oleh kawasan industri sekitar memperparah kenaikan permukaan air laut.`,
+        author: 'Maya Kartika',
+        authorRole: 'Liputan Krisis Iklim',
+        date: '13 Sep 2026',
+        readTime: '8 menit baca',
+        views: '24.9K',
+        likes: 780,
+        isFeatured: false,
+        image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80'
+      },
+      {
+        id: 6,
+        category: 'Opini Kritis',
+        tag: 'KOLOM TAJAM',
+        title: 'Demokrasi Yang Dibajak: Ilusi Partisipasi Publik Dalam Pembuatan Kebijakan Kilat',
+        excerpt: 'Ketika undang-undang berdampak jutaan jiwa diketok dalam tempo semalam tanpa partisipasi bermakna, kita wajib bertanya: suara siapa sebenarnya yang diwakili parlemen?',
+        content: `Praktik pembuatan regulasi kilat tanpa naskah akademik terbuka telah menjadi kelaziman baru. Publik hanya disuguhi konferensi pers pasca ketok palu, sementara naskah rancangan sulit diakses bahkan oleh para akademisi dan jurnalis. SuaraMelawan menyajikan evaluasi kritis terhadap dinamika legislasi mutakhir.`,
+        author: 'Dr. Hendra Wibowo',
+        authorRole: 'Kolumnis Tamu & Peneliti Politik',
+        date: '13 Sep 2026',
+        readTime: '4 menit baca',
+        views: '15.3K',
+        likes: 520,
+        isFeatured: false,
+        image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80'
+      }
+    ];
+
+    const FACT_CHECKS = [
+      {
+        id: 1,
+        claim: 'Klaim: "Proyek Reklamasi Teluk Telah Disetujui 100% Nelayan Lokal"',
+        verdict: 'SALAH / MENYESATKAN',
+        verdictType: 'false',
+        explanation: 'Verifikasi lapangan membuktikan 3 rukun nelayan menolak keras dan notulen rapat konsultasi publik diduga dipalsukan.'
+      },
+      {
+        id: 2,
+        claim: 'Klaim: "Kenaikan Anggaran Pendidikan Naik Murni Untuk Kesejahteraan Guru Honorer"',
+        verdict: 'SEBAGIAN BENAR',
+        verdictType: 'mixed',
+        explanation: 'Kenaikan pagu memang ada, namun 78% dialokasikan untuk pembangunan infrastruktur fisik dan pengadaan tablet digital bermasalah.'
+      },
+      {
+        id: 3,
+        claim: 'Klaim: "Kualitas Udara Ibu Kota Membaik 50% Dibanding Tahun Lalu"',
+        verdict: 'MANIPULASI DATA',
+        verdictType: 'false',
+        explanation: 'Data diambil saat libur panjang tahun baru dan sensor diletakkan di dalam kompleks taman kota bervegetasi lebat.'
+      }
+    ];
+
+    function App() {
+      const [articles, setArticles] = useState(INITIAL_ARTICLES);
+      const [selectedCategory, setSelectedCategory] = useState('Semua');
+      const [searchQuery, setSearchQuery] = useState('');
+      const [activeArticle, setActiveArticle] = useState(null);
+      const [bookmarks, setBookmarks] = useState([1]);
+      const [showBookmarksModal, setShowBookmarksModal] = useState(false);
+      const [showWhistleblowerModal, setShowWhistleblowerModal] = useState(false);
+      const [showSubscribeSuccess, setShowSubscribeSuccess] = useState(false);
+      const [subscriberEmail, setSubscriberEmail] = useState('');
+      const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+      const [fontSizeClass, setFontSizeClass] = useState('text-base');
+      const [tipCategory, setTipCategory] = useState('Korupsi & Penyelewengan APBD/APBN');
+      const [tipText, setTipText] = useState('');
+      const [tipSuccess, setTipSuccess] = useState(false);
+
+      // Interactive Polling State
+      const [pollVotes, setPollVotes] = useState({ option1: 742, option2: 128 });
+      const [hasVoted, setHasVoted] = useState(false);
+
+      const totalVotes = pollVotes.option1 + pollVotes.option2;
+      const opt1Percent = Math.round((pollVotes.option1 / totalVotes) * 100);
+      const opt2Percent = 100 - opt1Percent;
+
+      const filteredArticles = useMemo(() => {
+        return articles.filter((art) => {
+          const matchCategory = selectedCategory === 'Semua' || art.category === selectedCategory;
+          const matchSearch =
+            art.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            art.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            art.author.toLowerCase().includes(searchQuery.toLowerCase());
+          return matchCategory && matchSearch;
+        });
+      }, [articles, selectedCategory, searchQuery]);
+
+      const featuredArticle = articles.find((a) => a.isFeatured) || articles[0];
+      const trendingArticles = [...articles].sort((a, b) => parseInt(b.views) - parseInt(a.views));
+
+      const toggleBookmark = (id) => {
+        setBookmarks((prev) =>
+          prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+        );
+      };
+
+      const handleVote = (option) => {
+        if (hasVoted) return;
+        setPollVotes((prev) => ({
+          ...prev,
+          [option]: prev[option] + 1
+        }));
+        setHasVoted(true);
+      };
+
+      const handleSendTip = (e) => {
+        e.preventDefault();
+        if (!tipText.trim()) return;
+        setTipSuccess(true);
+        setTimeout(() => {
+          setTipSuccess(false);
+          setTipText('');
+          setShowWhistleblowerModal(false);
+        }, 2200);
+      };
+
+      const handleSubscribe = (e) => {
+        e.preventDefault();
+        if (!subscriberEmail.trim()) return;
+        setShowSubscribeSuccess(true);
+        setTimeout(() => {
+          setShowSubscribeSuccess(false);
+          setSubscriberEmail('');
+        }, 2500);
+      };
+
+      return (
+        <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans selection:bg-amber-400 selection:text-zinc-950 antialiased">
+          {}
+          <aside aria-label="Ticker Pengumuman Redaksi" className="bg-amber-400 text-zinc-950 px-4 py-2 text-xs md:text-sm font-semibold flex items-center justify-between border-b border-amber-500 overflow-hidden">
+            <div className="flex items-center space-x-3 w-full overflow-hidden">
+              <span className="flex items-center gap-1.5 bg-zinc-950 text-amber-400 px-2.5 py-0.5 rounded uppercase tracking-wider text-[11px] font-black shrink-0 animate-pulse">
+                <Flame className="w-3.5 h-3.5" /> INVESTIGASI AKTIF
+              </span>
+              <p className="truncate text-zinc-900 font-medium tracking-tight">
+                Dokumen Rahasia Aliran Dana Konsesi Pesisir Kini Terbuka Untuk Akses Publik — Memeriksa 47 Pejabat Terkait
+              </p>
+            </div>
+            <div className="hidden lg:flex items-center space-x-4 shrink-0 text-xs font-mono pl-4 text-zinc-900">
+              <span>JAKARTA, INDONESIA</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-zinc-950"></span>
+              <span>WIB (UTC+7)</span>
+            </div>
+          </aside>
+
+          {}
+          <header className="border-b border-zinc-800/80 bg-zinc-950/90 backdrop-blur sticky top-0 z-40">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex items-center justify-between py-4 md:py-6">
+                {/* Logo Section */}
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={() => {
+                      setSelectedCategory('Semua');
+                      setSearchQuery('');
+                    }}
+                    className="text-left group"
+                  >
+                    <div className="flex items-center gap-2">
+                      <span className="bg-amber-400 text-zinc-950 font-black text-2xl md:text-3xl px-2.5 py-1 tracking-tighter rounded-sm transform -rotate-1 group-hover:rotate-0 transition-transform">
+                        SUARA
+                      </span>
+                      <span className="text-2xl md:text-3xl font-extrabold tracking-tighter text-white">
+                        MELAWAN<span className="text-amber-400">.</span>
+                      </span>
+                    </div>
+                    <p className="text-[10px] md:text-xs text-zinc-400 font-mono tracking-widest uppercase mt-0.5 group-hover:text-amber-400 transition-colors">
+                      Jurnalisme Kritis, Independen & Menggugat
+                    </p>
+                  </button>
+                </div>
+
+                {/* Quick Actions Desktop */}
+                <div className="hidden md:flex items-center space-x-4">
+                  <button
+                    onClick={() => setShowWhistleblowerModal(true)}
+                    className="flex items-center gap-2 bg-zinc-900 hover:bg-zinc-800 text-amber-400 border border-amber-400/40 hover:border-amber-400 px-3.5 py-2 rounded-lg text-xs font-bold tracking-wide transition-all shadow-sm group"
+                  >
+                    <ShieldAlert className="w-4 h-4 text-amber-400 group-hover:scale-110 transition-transform" />
+                    <span>KIRIM BOCORAN / TIP RAHASIA</span>
+                  </button>
+
+                  <button
+                    onClick={() => setShowBookmarksModal(true)}
+                    className="relative p-2 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-amber-400 hover:border-zinc-700 transition"
+                    title="Artikel Tersimpan"
+                  >
+                    <Bookmark className="w-5 h-5" filled={bookmarks.length > 0} />
+                    {bookmarks.length > 0 && (
+                      <span className="absolute -top-1 -right-1 bg-amber-400 text-zinc-950 text-[10px] font-black w-4 h-4 rounded-full flex items-center justify-center">
+                        {bookmarks.length}
+                      </span>
+                    )}
+                  </button>
+                </div>
+
+                {/* Mobile Menu Trigger */}
+                <div className="flex md:hidden items-center space-x-2">
+                  <button
+                    onClick={() => setShowWhistleblowerModal(true)}
+                    className="p-2 text-amber-400 bg-zinc-900 rounded-lg border border-amber-400/30"
+                    title="Bocoran"
+                  >
+                    <ShieldAlert className="w-5 h-5" />
+                  </button>
+                  <button
+                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                    className="p-2 text-zinc-300 hover:text-white"
+                  >
+                    {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                  </button>
+                </div>
+              </div>
+
+              {/* Navigation Bar & Category Pills */}
+              <div className="py-2.5 border-t border-zinc-800 flex flex-col md:flex-row md:items-center justify-between gap-3">
+                <nav className="flex items-center space-x-1 overflow-x-auto pb-1 md:pb-0 no-scrollbar">
+                  {CATEGORIES.map((cat) => (
+                    <button
+                      key={cat}
+                      onClick={() => setSelectedCategory(cat)}
+                      className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
+                        selectedCategory === cat
+                          ? 'bg-amber-400 text-zinc-950 shadow-md font-bold'
+                          : 'text-zinc-400 hover:text-white hover:bg-zinc-900'
+                      }`}
+                    >
+                      {cat}
+                    </button>
+                  ))}
+                </nav>
+
+                {/* In-Header Search Input */}
+                <div className="relative min-w-[240px] md:w-64">
+                  <input
+                    type="text"
+                    placeholder="Cari topik, skandal, nama..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full bg-zinc-900 text-xs text-zinc-100 placeholder-zinc-500 rounded-full pl-8 pr-4 py-1.5 border border-zinc-800 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition"
+                  />
+                  <div className="absolute left-3 top-2 text-zinc-400">
+                    <Search className="w-3.5 h-3.5" />
+                  </div>
+                  {searchQuery && (
+                    <button
+                      onClick={() => setSearchQuery('')}
+                      className="text-zinc-500 hover:text-zinc-300 absolute right-3 top-2"
+                    >
+                      <X className="w-3.5 h-3.5" />
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Mobile Dropdown Menu */}
+            {mobileMenuOpen && (
+              <div className="md:hidden bg-zinc-900 border-b border-zinc-800 px-4 py-4 space-y-3">
+                <button
+                  onClick={() => {
+                    setShowBookmarksModal(true);
+                    setMobileMenuOpen(false);
+                  }}
+                  className="w-full flex items-center justify-between text-left py-2 text-zinc-200 border-b border-zinc-800 text-sm"
+                >
+                  <span className="flex items-center gap-2">
+                    <Bookmark className="w-4 h-4 text-amber-400" /> Artikel Tersimpan
+                  </span>
+                  <span className="bg-amber-400 text-zinc-950 text-xs px-2 py-0.5 rounded-full font-bold">
+                    {bookmarks.length}
+                  </span>
+                </button>
+                <button
+                  onClick={() => {
+                    setShowWhistleblowerModal(true);
+                    setMobileMenuOpen(false);
+                  }}
+                  className="w-full flex items-center gap-2 text-amber-400 text-sm font-semibold py-2"
+                >
+                  <ShieldAlert className="w-4 h-4" /> Portal Pengaduan Rahasia (Whistleblower)
+                </button>
+              </div>
+            )}
+          </header>
+
+          {}
+          <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8 space-y-12">
+            {selectedCategory === 'Semua' && !searchQuery && (
+              <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                {/* Main Featured Big Story */}
+                <div className="lg:col-span-8 bg-zinc-900/70 border border-zinc-800 hover:border-zinc-700/80 rounded-2xl overflow-hidden group transition-all duration-300 shadow-xl">
+                  <div className="relative aspect-video sm:aspect-[21/10] overflow-hidden">
+                    <img
+                      src={featuredArticle.image}
+                      alt={featuredArticle.title}
+                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 brightness-90 group-hover:brightness-100"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent" />
+                    <div className="absolute top-4 left-4 flex flex-wrap gap-2">
+                      <span className="bg-amber-400 text-zinc-950 text-xs font-black px-3 py-1 rounded shadow-lg uppercase tracking-wider">
+                        {featuredArticle.tag}
+                      </span>
+                      <span className="bg-zinc-950/80 backdrop-blur text-amber-300 text-xs font-semibold px-2.5 py-1 rounded border border-amber-400/30">
+                        {featuredArticle.category}
+                      </span>
+                    </div>
+                    <button
+                      onClick={() => toggleBookmark(featuredArticle.id)}
+                      className="absolute top-4 right-4 bg-zinc-950/70 hover:bg-amber-400 hover:text-zinc-950 text-zinc-200 p-2 rounded-full backdrop-blur transition"
+                      title="Simpan Bacaan"
+                    >
+                      <Bookmark
+                        className="w-4 h-4"
+                        filled={bookmarks.includes(featuredArticle.id)}
+                      />
+                    </button>
+                  </div>
+
+                  <div className="p-6 md:p-8 space-y-4">
+                    <div className="flex items-center gap-4 text-xs text-zinc-400 font-mono">
+                      <span className="flex items-center gap-1">
+                        <Clock className="w-3.5 h-3.5 text-amber-400" /> {featuredArticle.readTime}
+                      </span>
+                      <span>•</span>
+                      <span>{featuredArticle.date}</span>
+                      <span>•</span>
+                      <span className="flex items-center gap-1 text-zinc-300">
+                        <Eye className="w-3.5 h-3.5" /> {featuredArticle.views} Dibaca
+                      </span>
+                    </div>
+
+                    <h1
+                      onClick={() => setActiveArticle(featuredArticle)}
+                      className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-white leading-tight hover:text-amber-400 transition cursor-pointer font-serif"
+                    >
+                      {featuredArticle.title}
+                    </h1>
+
+                    <p className="text-zinc-300 text-sm sm:text-base leading-relaxed line-clamp-3">
+                      {featuredArticle.excerpt}
+                    </p>
+
+                    <div className="pt-4 border-t border-zinc-800 flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-full bg-amber-400/20 border border-amber-400 flex items-center justify-center font-bold text-xs text-amber-400">
+                          SM
+                        </div>
+                        <div>
+                          <p className="text-xs font-bold text-zinc-100">{featuredArticle.author}</p>
+                          <p className="text-[10px] text-zinc-400">{featuredArticle.authorRole}</p>
+                        </div>
+                      </div>
+
+                      <button
+                        onClick={() => setActiveArticle(featuredArticle)}
+                        className="flex items-center gap-1.5 bg-amber-400 hover:bg-amber-300 text-zinc-950 font-bold px-4 py-2 rounded-lg text-xs transition transform active:scale-95"
+                      >
+                        <span>Baca Laporan Lengkap</span>
+                        <ArrowUpRight className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Sidebar: Editorial Radar & Trending */}
+                <div className="lg:col-span-4 space-y-6">
+                  <div className="bg-gradient-to-br from-amber-400/10 via-zinc-900 to-zinc-900 border border-amber-400/30 rounded-2xl p-5 space-y-3">
+                    <div className="flex items-center gap-2 text-amber-400 font-black text-xs tracking-wider uppercase">
+                      <Sparkles className="w-4 h-4" /> Komitmen Redaksi
+                    </div>
+                    <h2 className="text-sm font-bold text-white uppercase tracking-tight">
+                      Tanpa Sensor Korporasi. Tanpa Pesanan Penguasa.
+                    </h2>
+                    <p className="text-xs text-zinc-400 leading-relaxed">
+                      Semua tulisan dan data di SuaraMelawan diverifikasi ganda oleh dewan etik independen dan didanai melalui donasi publik transparan.
+                    </p>
+                  </div>
+
+                  <div className="bg-zinc-900/60 border border-zinc-800/80 rounded-2xl p-5 space-y-4">
+                    <div className="flex items-center justify-between pb-2 border-b border-zinc-800">
+                      <h2 className="text-xs font-black tracking-widest uppercase text-amber-400 flex items-center gap-1.5">
+                        <TrendingUp className="w-4 h-4" /> Paling Banyak Dibaca
+                      </h2>
+                      <span className="text-[10px] font-mono text-zinc-400">24 JAM TERAKHIR</span>
+                    </div>
+
+                    <div className="space-y-4">
+                      {trendingArticles.slice(0, 4).map((art, idx) => (
+                        <div
+                          key={art.id}
+                          onClick={() => setActiveArticle(art)}
+                          className="flex items-start gap-3 cursor-pointer group pb-3 border-b border-zinc-800/50 last:border-0 last:pb-0"
+                        >
+                          <span className="font-mono text-xl font-black text-amber-400/60 group-hover:text-amber-400 transition-colors w-6 shrink-0">
+                            0{idx + 1}
+                          </span>
+                          <div className="space-y-1">
+                            <span className="text-[10px] font-semibold text-amber-300 uppercase">
+                              {art.category}
+                            </span>
+                            <h3 className="text-xs font-bold text-zinc-200 group-hover:text-amber-400 transition line-clamp-2 leading-snug">
+                              {art.title}
+                            </h3>
+                            <div className="flex items-center gap-2 text-[10px] text-zinc-400 font-mono">
+                              <span>{art.readTime}</span>
+                              <span>•</span>
+                              <span>{art.views} views</span>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </section>
+            )}
+
+            {}
+            <section className="space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-800">
+                <div>
+                  <h2 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white flex items-center gap-2">
+                    <span className="w-2.5 h-6 bg-amber-400 inline-block rounded-sm"></span>
+                    {selectedCategory === 'Semua' ? 'Arsip Investigasi & Liputan Mendalam' : selectedCategory}
+                  </h2>
+                  <p className="text-xs text-zinc-400 mt-0.5">
+                    Menampilkan {filteredArticles.length} artikel terverifikasi
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-2 text-xs font-mono text-zinc-400">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                  <span>UPDATE REAL-TIME REDAKSI</span>
+                </div>
+              </div>
+
+              {filteredArticles.length === 0 ? (
+                <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-12 text-center space-y-4">
+                  <div className="mx-auto w-12 h-12 text-amber-400 flex items-center justify-center opacity-70">
+                    <ShieldAlert className="w-12 h-12" />
+                  </div>
+                  <h3 className="text-base font-bold text-zinc-200">Tidak ada artikel yang cocok</h3>
+                  <p className="text-xs text-zinc-400 max-w-sm mx-auto">
+                    Coba gunakan kata kunci pencarian lain atau pilih kategori yang tersedia di menu atas.
+                  </p>
+                  <button
+                    onClick={() => {
+                      setSelectedCategory('Semua');
+                      setSearchQuery('');
+                    }}
+                    className="bg-amber-400 text-zinc-950 px-4 py-2 rounded-lg text-xs font-bold hover:bg-amber-300 transition"
+                  >
+                    Reset Filter
+                  </button>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {filteredArticles.map((article) => (
+                    <article
+                      key={article.id}
+                      className="bg-zinc-900/60 border border-zinc-800 hover:border-amber-400/50 rounded-xl overflow-hidden flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-amber-400/5"
+                    >
+                      <div>
+                        <div className="relative aspect-[16/10] overflow-hidden">
+                          <img
+                            src={article.image}
+                            alt={article.title}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 brightness-90 group-hover:brightness-100"
+                          />
+                          <div className="absolute top-3 left-3 flex gap-1.5">
+                            <span className="bg-zinc-950/80 backdrop-blur text-amber-400 text-[10px] font-black px-2 py-0.5 rounded border border-amber-400/20">
+                              {article.category}
+                            </span>
+                          </div>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              toggleBookmark(article.id);
+                            }}
+                            className="absolute top-3 right-3 bg-zinc-950/70 hover:bg-amber-400 hover:text-zinc-950 text-zinc-300 p-1.5 rounded-full backdrop-blur transition"
+                          >
+                            <Bookmark
+                              className="w-3.5 h-3.5"
+                              filled={bookmarks.includes(article.id)}
+                            />
+                          </button>
+                        </div>
+
+                        <div className="p-5 space-y-3">
+                          <div className="flex items-center gap-2 text-[11px] text-zinc-400 font-mono">
+                            <span>{article.date}</span>
+                            <span>•</span>
+                            <span>{article.readTime}</span>
+                          </div>
+
+                          <h3
+                            onClick={() => setActiveArticle(article)}
+                            className="text-base font-bold text-zinc-100 group-hover:text-amber-400 transition cursor-pointer font-serif line-clamp-2 leading-snug"
+                          >
+                            {article.title}
+                          </h3>
+
+                          <p className="text-xs text-zinc-400 line-clamp-3 leading-relaxed">
+                            {article.excerpt}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="p-5 pt-0 border-t border-zinc-800/60 mt-4 flex items-center justify-between">
+                        <div className="text-[11px] text-zinc-400">
+                          Oleh <span className="font-semibold text-zinc-300">{article.author}</span>
+                        </div>
+                        <button
+                          onClick={() => setActiveArticle(article)}
+                          className="text-amber-400 hover:text-amber-300 font-bold text-xs flex items-center gap-1"
+                        >
+                          <span>Baca</span>
+                          <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                        </button>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              )}
+            </section>
+
+            {}
+            <section className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+              {/* Fact-Check / Cek Fakta */}
+              <div className="lg:col-span-7 bg-zinc-900/50 border border-zinc-800 rounded-2xl p-6 space-y-5">
+                <div className="flex items-center justify-between pb-3 border-b border-zinc-800">
+                  <div className="flex items-center gap-2">
+                    <span className="p-2 bg-amber-400 text-zinc-950 rounded-lg">
+                      <CheckCircle className="w-4 h-4" />
+                    </span>
+                    <div>
+                      <h2 className="text-base font-bold text-white tracking-tight">
+                        Uji Fakta & Anti-Disinformasi
+                      </h2>
+                      <p className="text-xs text-zinc-400">
+                        Membedah klaim pejabat publik & narasi viral di media sosial
+                      </p>
+                    </div>
+                  </div>
+                  <span className="hidden sm:inline-block text-[10px] bg-zinc-800 text-amber-400 font-mono px-2 py-1 rounded">
+                    DEWAN VERIFIKASI
+                  </span>
+                </div>
+
+                <div className="space-y-4">
+                  {FACT_CHECKS.map((item) => (
+                    <div
+                      key={item.id}
+                      className="bg-zinc-950/80 border border-zinc-850 p-4 rounded-xl space-y-2 hover:border-zinc-700 transition"
+                    >
+                      <div className="flex items-start justify-between gap-3">
+                        <h3 className="text-xs sm:text-sm font-bold text-zinc-200 leading-snug">
+                          {item.claim}
+                        </h3>
+                        <span
+                          className={`text-[10px] font-black px-2 py-0.5 rounded tracking-wider shrink-0 uppercase ${
+                            item.verdictType === 'false'
+                              ? 'bg-rose-950 text-rose-400 border border-rose-800/50'
+                              : 'bg-amber-950 text-amber-400 border border-amber-800/50'
+                          }`}
+                        >
+                          {item.verdict}
+                        </span>
+                      </div>
+                      <p className="text-xs text-zinc-400 leading-relaxed">{item.explanation}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Interactive Poll & Whistleblower CTA */}
+              <div className="lg:col-span-5 space-y-6">
+                {/* Interactive Poll */}
+                <div className="bg-zinc-900/60 border border-zinc-800 rounded-2xl p-6 space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-black tracking-wider text-amber-400 uppercase font-mono">
+                      JAJAK PENDAPAT RAKYAT
+                    </span>
+                    <span className="text-[10px] text-zinc-400">{totalVotes} partisipan</span>
+                  </div>
+                  <h2 className="text-sm font-bold text-zinc-100">
+                    Apakah Anda merasa perlindungan terhadap jurnalis dan pembela HAM di Indonesia sudah memadai?
+                  </h2>
+
+                  <div className="space-y-3 pt-2">
+                    <button
+                      onClick={() => handleVote('option2')}
+                      disabled={hasVoted}
+                      className={`w-full text-left p-3 rounded-xl border transition-all relative overflow-hidden ${
+                        hasVoted
+                          ? 'border-zinc-700 bg-zinc-800/40'
+                          : 'border-zinc-800 hover:border-amber-400/50 bg-zinc-950'
+                      }`}
+                    >
+                      <div className="flex justify-between items-center text-xs relative z-10 font-medium">
+                        <span>Belum, masih sangat rawan intimidasi</span>
+                        {hasVoted && <span className="font-bold text-amber-400">{opt1Percent}%</span>}
+                      </div>
+                      {hasVoted && (
+                        <div
+                          className="absolute inset-y-0 left-0 bg-amber-400/20 transition-all duration-700"
+                          style={{ width: `${opt1Percent}%` }}
+                        />
+                      )}
+                    </button>
+
+                    <button
+                      onClick={() => handleVote('option1')}
+                      disabled={hasVoted}
+                      className={`w-full text-left p-3 rounded-xl border transition-all relative overflow-hidden ${
+                        hasVoted
+                          ? 'border-zinc-700 bg-zinc-800/40'
+                          : 'border-zinc-800 hover:border-amber-400/50 bg-zinc-950'
+                      }`}
+                    >
+                      <div className="flex justify-between items-center text-xs relative z-10 font-medium">
+                        <span>Sudah cukup terlindungi hukum</span>
+                        {hasVoted && <span className="font-bold text-zinc-300">{opt2Percent}%</span>}
+                      </div>
+                      {hasVoted && (
+                        <div
+                          className="absolute inset-y-0 left-0 bg-zinc-700/30 transition-all duration-700"
+                          style={{ width: `${opt2Percent}%` }}
+                        />
+                      )}
+                    </button>
+                  </div>
+
+                  {hasVoted && (
+                    <p className="text-[11px] text-amber-400/90 font-mono text-center pt-1">
+                      ✓ Suara Anda telah dicatat secara anonim.
+                    </p>
+                  )}
+                </div>
+
+                {/* Whistleblower Spotlight Box */}
+                <div className="bg-gradient-to-br from-amber-400 via-amber-500 to-yellow-600 rounded-2xl p-6 text-zinc-950 shadow-xl space-y-3">
+                  <div className="flex items-center gap-2 font-black text-xs uppercase tracking-wider">
+                    <Lock className="w-4 h-4" /> Saluran Aman Terenkripsi
+                  </div>
+                  <h2 className="text-lg font-black leading-tight tracking-tight">
+                    Punya Bukti Dokumen Korupsi atau Pelanggaran Publik?
+                  </h2>
+                  <p className="text-xs text-zinc-900 font-medium leading-relaxed">
+                    Kami menjamin 100% perlindungan identitas narasumber sesuai amanat UU Pers No. 40/1999 dengan enkripsi tanpa jejak digital.
+                  </p>
+                  <button
+                    onClick={() => setShowWhistleblowerModal(true)}
+                    className="w-full mt-2 bg-zinc-950 hover:bg-zinc-900 text-amber-400 font-black py-2.5 rounded-lg text-xs tracking-wider uppercase transition shadow-md flex items-center justify-center gap-2"
+                  >
+                    <span>Buka Formulir Pengaduan</span>
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            {}
+            <section className="bg-zinc-900 border border-amber-400/30 rounded-2xl p-6 sm:p-10 relative overflow-hidden">
+              <div className="absolute -right-10 -bottom-10 w-48 h-48 bg-amber-400/10 rounded-full blur-3xl pointer-events-none" />
+              <div className="max-w-2xl mx-auto text-center space-y-4 relative z-10">
+                <span className="inline-block bg-amber-400 text-zinc-950 text-[11px] font-black px-3 py-1 rounded-full uppercase tracking-wider">
+                  Warta Investigasi Mingguan
+                </span>
+                <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+                  Dapatkan Laporan Yang Tak Diberitakan Media Utama
+                </h2>
+                <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+                  Kajian mendalam, grafik data anggaran, dan investigasi eksklusif dikirim setiap Jumat pagi langsung ke kotak masuk email Anda. Bebas spam.
+                </p>
+
+                <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto pt-2">
+                  <input
+                    type="email"
+                    required
+                    placeholder="Masukkan alamat email Anda..."
+                    value={subscriberEmail}
+                    onChange={(e) => setSubscriberEmail(e.target.value)}
+                    className="flex-1 bg-zinc-950 border border-zinc-800 text-zinc-100 placeholder-zinc-500 rounded-lg px-4 py-2.5 text-xs focus:outline-none focus:border-amber-400"
+                  />
+                  <button
+                    type="submit"
+                    className="bg-amber-400 hover:bg-amber-300 text-zinc-950 font-bold px-5 py-2.5 rounded-lg text-xs tracking-wide transition flex items-center justify-center gap-1.5 shrink-0"
+                  >
+                    <span>Langganan</span>
+                    <Send className="w-3.5 h-3.5" />
+                  </button>
+                </form>
+
+                {showSubscribeSuccess && (
+                  <p className="text-xs text-amber-400 font-mono">
+                    ✓ Terima kasih! Anda telah terdaftar dalam buletin publik SuaraMelawan.
+                  </p>
+                )}
+              </div>
+            </section>
+          </main>
+
+          {}
+          {activeArticle && (
+            <div className="fixed inset-0 z-50 overflow-y-auto bg-zinc-950/90 backdrop-blur-md flex justify-center p-3 sm:p-6 md:p-10">
+              <div className="bg-zinc-900 border border-zinc-800 w-full max-w-4xl rounded-2xl overflow-hidden shadow-2xl relative my-auto">
+                {/* Modal Bar */}
+                <div className="sticky top-0 bg-zinc-900/95 backdrop-blur border-b border-zinc-800 p-4 flex items-center justify-between z-20">
+                  <div className="flex items-center space-x-2">
+                    <span className="bg-amber-400 text-zinc-950 text-xs font-black px-2.5 py-0.5 rounded">
+                      {activeArticle.category}
+                    </span>
+                    <span className="text-xs text-zinc-400 font-mono hidden sm:inline-block">
+                      {activeArticle.readTime}
+                    </span>
+                  </div>
+
+                  {/* Reader Controls */}
+                  <div className="flex items-center space-x-3">
+                    <div className="flex items-center bg-zinc-950 rounded-lg p-1 border border-zinc-800 text-xs">
+                      <button
+                        onClick={() => setFontSizeClass('text-sm')}
+                        className={`px-2 py-1 rounded ${fontSizeClass === 'text-sm' ? 'bg-zinc-800 text-amber-400' : 'text-zinc-400'}`}
+                      >
+                        A-
+                      </button>
+                      <button
+                        onClick={() => setFontSizeClass('text-base')}
+                        className={`px-2 py-1 rounded ${fontSizeClass === 'text-base' ? 'bg-zinc-800 text-amber-400' : 'text-zinc-400'}`}
+                      >
+                        A
+                      </button>
+                      <button
+                        onClick={() => setFontSizeClass('text-lg')}
+                        className={`px-2 py-1 rounded ${fontSizeClass === 'text-lg' ? 'bg-zinc-800 text-amber-400' : 'text-zinc-400'}`}
+                      >
+                        A+
+                      </button>
+                    </div>
+
+                    <button
+                      onClick={() => toggleBookmark(activeArticle.id)}
+                      className="p-2 text-zinc-400 hover:text-amber-400 bg-zinc-950 rounded-lg border border-zinc-800 transition"
+                      title="Simpan Bacaan"
+                    >
+                      <Bookmark
+                        className="w-4 h-4"
+                        filled={bookmarks.includes(activeArticle.id)}
+                      />
+                    </button>
+
+                    <button
+                      onClick={() => setActiveArticle(null)}
+                      className="p-2 text-zinc-400 hover:text-white bg-zinc-950 rounded-lg border border-zinc-800 transition"
+                    >
+                      <X className="w-5 h-5" />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Article Content Body */}
+                <div className="p-6 sm:p-10 space-y-6 max-h-[80vh] overflow-y-auto">
+                  <div className="space-y-3">
+                    <div className="text-xs font-mono text-amber-400 flex items-center gap-2">
+                      <span>DITERBITKAN: {activeArticle.date}</span>
+                      <span>•</span>
+                      <span>{activeArticle.views} PEMBACA</span>
+                    </div>
+
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white font-serif leading-tight">
+                      {activeArticle.title}
+                    </h1>
+
+                    <p className="text-base sm:text-lg text-zinc-300 font-medium italic border-l-2 border-amber-400 pl-4 py-1">
+                      {activeArticle.excerpt}
+                    </p>
+                  </div>
+
+                  {/* Author Strip */}
+                  <div className="flex items-center justify-between py-3 border-y border-zinc-800 text-xs">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-amber-400 text-zinc-950 font-bold flex items-center justify-center text-sm">
+                        {activeArticle.author.slice(0, 2).toUpperCase()}
+                      </div>
+                      <div>
+                        <p className="font-bold text-zinc-100">{activeArticle.author}</p>
+                        <p className="text-zinc-400">{activeArticle.authorRole}</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => {
+                          setArticles((prev) =>
+                            prev.map((a) =>
+                              a.id === activeArticle.id ? { ...a, likes: a.likes + 1 } : a
+                            )
+                          );
+                          setActiveArticle((prev) => ({ ...prev, likes: prev.likes + 1 }));
+                        }}
+                        className="flex items-center gap-1.5 bg-zinc-950 hover:bg-zinc-800 text-amber-400 border border-zinc-800 px-3 py-1.5 rounded-lg transition"
+                      >
+                        <ThumbsUp className="w-3.5 h-3.5" />
+                        <span>{activeArticle.likes}</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Article Hero Image */}
+                  <div className="rounded-xl overflow-hidden aspect-video max-h-96">
+                    <img
+                      src={activeArticle.image}
+                      alt={activeArticle.title}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+
+                  {/* Text Paragraphs */}
+                  <div
+                    className={`space-y-4 text-zinc-200 leading-relaxed font-sans ${fontSizeClass}`}
+                  >
+                    {activeArticle.content.split('\n\n').map((para, i) => (
+                      <p key={i}>{para}</p>
+                    ))}
+                  </div>
+
+                  {/* Disclaimer / Protection Note */}
+                  <div className="bg-zinc-950 border border-amber-400/20 rounded-xl p-4 text-xs text-zinc-400 space-y-1">
+                    <p className="font-bold text-amber-400">Catatan Independensi:</p>
+                    <p>
+                      Artikel ini diproduksi di bawah pedoman ketat Kode Etik Jurnalistik SuaraMelawan. Kami menolak segala bentuk kompensasi atau intervensi dari pihak berkepentingan.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {}
+          {showWhistleblowerModal && (
+            <div className="fixed inset-0 z-50 overflow-y-auto bg-zinc-950/95 backdrop-blur flex items-center justify-center p-4">
+              <div className="bg-zinc-900 border border-amber-400/50 w-full max-w-lg rounded-2xl p-6 sm:p-8 space-y-5 shadow-2xl relative">
+                <button
+                  onClick={() => setShowWhistleblowerModal(false)}
+                  className="absolute top-5 right-5 text-zinc-400 hover:text-white"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+
+                <div className="flex items-center gap-3">
+                  <div className="p-3 bg-amber-400 text-zinc-950 rounded-xl">
+                    <ShieldAlert className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-black text-white">Bocorkan Fakta (Whistleblower)</h3>
+                    <p className="text-xs text-amber-400 font-mono">ENKRIPSI ANTIMATA-MATA</p>
+                  </div>
+                </div>
+
+                <p className="text-xs text-zinc-300 leading-relaxed">
+                  Kirimkan informasi dugaan korupsi, penyalahgunaan wewenang, atau kejahatan korporasi. Alamat IP dan metadata Anda otomatis dihapus oleh server pelindung kami.
+                </p>
+
+                <form onSubmit={handleSendTip} className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-semibold text-zinc-300 mb-1">
+                      Kategori Pelanggaran
+                    </label>
+                    <select
+                      value={tipCategory}
+                      onChange={(e) => setTipCategory(e.target.value)}
+                      className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-2.5 text-xs text-zinc-200 focus:outline-none focus:border-amber-400"
+                    >
+                      <option>Korupsi & Penyelewengan APBD/APBN</option>
+                      <option>Pelanggaran HAM & Aparat</option>
+                      <option>Kerusakan Lingkungan & Tambang Ilegal</option>
+                      <option>Eksploitasi Pekerja & Upah</option>
+                      <option>Lainnya</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-zinc-300 mb-1">
+                      Rincian Informasi / Kronologi
+                    </label>
+                    <textarea
+                      required
+                      rows={4}
+                      placeholder="Jelaskan instansi terkait, nama tokoh, lokasi kejadian, atau tautan dokumen bukti aman..."
+                      value={tipText}
+                      onChange={(e) => setTipText(e.target.value)}
+                      className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-3 text-xs text-zinc-200 placeholder-zinc-500 focus:outline-none focus:border-amber-400"
+                    />
+                  </div>
+
+                  <div className="bg-zinc-950 p-3 rounded-lg border border-zinc-800 text-[11px] text-zinc-400 flex items-center gap-2">
+                    <Lock className="w-4 h-4 text-amber-400 shrink-0" />
+                    <span>Koneksi aman melalui protokol PGP redaksi SuaraMelawan.</span>
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="w-full bg-amber-400 hover:bg-amber-300 text-zinc-950 font-black py-3 rounded-lg text-xs uppercase tracking-wider transition"
+                  >
+                    {tipSuccess ? '✓ Laporan Berhasil Dikirim Secara Anonim' : 'Kirim Informasi Terenkripsi'}
+                  </button>
+                </form>
+              </div>
+            </div>
+          )}
+
+          {}
+          {showBookmarksModal && (
+            <div className="fixed inset-0 z-50 overflow-y-auto bg-zinc-950/90 backdrop-blur flex items-center justify-center p-4">
+              <div className="bg-zinc-900 border border-zinc-800 w-full max-w-md rounded-2xl p-6 space-y-4 shadow-2xl relative">
+                <div className="flex items-center justify-between pb-3 border-b border-zinc-800">
+                  <h3 className="text-sm font-bold text-white flex items-center gap-2">
+                    <Bookmark className="w-4 h-4 text-amber-400" />
+                    Artikel Yang Anda Simpan ({bookmarks.length})
+                  </h3>
+                  <button
+                    onClick={() => setShowBookmarksModal(false)}
+                    className="text-zinc-400 hover:text-white"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+
+                {bookmarks.length === 0 ? (
+                  <p className="text-xs text-zinc-400 text-center py-6">
+                    Belum ada artikel yang Anda simpan ke daftar baca nanti.
+                  </p>
+                ) : (
+                  <div className="space-y-3 max-h-80 overflow-y-auto pr-1">
+                    {articles
+                      .filter((a) => bookmarks.includes(a.id))
+                      .map((item) => (
+                        <div
+                          key={item.id}
+                          className="p-3 bg-zinc-950 border border-zinc-800 rounded-lg flex items-center justify-between gap-3 group"
+                        >
+                          <div
+                            onClick={() => {
+                              setActiveArticle(item);
+                              setShowBookmarksModal(false);
+                            }}
+                            className="cursor-pointer space-y-0.5 flex-1"
+                          >
+                            <span className="text-[10px] font-bold text-amber-400 uppercase">
+                              {item.category}
+                            </span>
+                            <h4 className="text-xs font-bold text-zinc-200 group-hover:text-amber-300 line-clamp-1">
+                              {item.title}
+                            </h4>
+                          </div>
+                          <button
+                            onClick={() => toggleBookmark(item.id)}
+                            className="text-zinc-500 hover:text-rose-400 p-1"
+                            title="Hapus dari simpanan"
+                          >
+                            <X className="w-4 h-4" />
+                          </button>
+                        </div>
+                      ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {}
+          <footer className="border-t border-zinc-800 bg-zinc-950 text-zinc-400 mt-16 pt-12 pb-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                {/* Brand column */}
+                <div className="md:col-span-2 space-y-4">
+                  <div className="flex items-center gap-2">
+                    <span className="bg-amber-400 text-zinc-950 font-black text-xl px-2 py-0.5 rounded-sm">
+                      SUARA
+                    </span>
+                    <span className="text-xl font-black text-white">MELAWAN.</span>
+                  </div>
+                  <p className="text-xs text-zinc-400 leading-relaxed max-w-sm">
+                    Portal jurnalisme warga dan investigasi independen berdedikasi mengabarkan kebenaran, membongkar ketidakadilan, dan mengawal hak-hak publik di seluruh Nusantara.
+                  </p>
+                  <div className="text-xs font-mono text-zinc-300">
+                    Lembaga Berita Terdaftar & Dilindungi UU Pokok Pers No. 40 Tahun 1999.
+                  </div>
+                </div>
+
+                {/* Rubrik Nav */}
+                <div className="space-y-2">
+                  <h4 className="text-xs font-bold text-amber-400 uppercase tracking-wider">
+                    Kanal Liputan
+                  </h4>
+                  <ul className="text-xs space-y-1.5">
+                    <li><a href="#" className="hover:text-amber-400 transition">Investigasi Khusus</a></li>
+                    <li><a href="#" className="hover:text-amber-400 transition">Politik & Oligarki</a></li>
+                    <li><a href="#" className="hover:text-amber-400 transition">Hak Asasi Manusia</a></li>
+                    <li><a href="#" className="hover:text-amber-400 transition">Krisis Iklim & Lingkungan</a></li>
+                    <li><a href="#" className="hover:text-amber-400 transition">Cek Fakta Publik</a></li>
+                  </ul>
+                </div>
+
+                {/* Redaksi & Etik */}
+                <div className="space-y-2">
+                  <h4 className="text-xs font-bold text-amber-400 uppercase tracking-wider">
+                    Integritas & Kontak
+                  </h4>
+                  <ul className="text-xs space-y-1.5">
+                    <li><a href="#" className="hover:text-amber-400 transition">Pedoman Media Siber</a></li>
+                    <li><a href="#" className="hover:text-amber-400 transition">Kunci Publik PGP Redaksi</a></li>
+                    <li><a href="#" className="hover:text-amber-400 transition">Hak Jawab & Koreksi</a></li>
+                    <li><a href="#" className="hover:text-amber-400 transition">Laporan Keuangan Terbuka</a></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="pt-8 border-t border-zinc-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-300 font-mono">
+                <p>© 2026 SUARAMELAWAN. Media Independen Indonesia. Hak cipta dilindungi undang-undang.</p>
+                <p className="text-amber-400 font-semibold">Suara Untuk Yang Dibungkam.</p>
+              </div>
+            </div>
+          </footer>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>

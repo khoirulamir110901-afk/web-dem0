@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RakyatBerfikir — Jurnalisme Kritis, Berimbang, & Berdaya</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Google Fonts: News Serif & Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .font-serif {
+      font-family: 'Merriweather', Georgia, serif;
+    }
+    /* Running Text / Marquee Animation */
+    @keyframes runningTicker {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-ticker-smooth {
+      display: inline-flex;
+      white-space: nowrap;
+      animation: runningTicker 48s linear infinite;
+    }
+    .animate-ticker-smooth:hover {
+      animation-play-state: paused;
+    }
+    /* Hide scrollbar utility */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body id="app-body" class="min-h-screen transition-colors duration-200 bg-[#FBF9F4] text-[#1F2421]">
+
+  <div id="toast-container" class="fixed bottom-6 right-6 z-50 hidden flex items-center gap-3 bg-stone-900 text-white px-5 py-3 rounded-xl shadow-2xl border border-stone-700 text-sm font-medium animate-bounce">
+    <i data-lucide="check-circle-2" class="w-4 h-4 text-rose-400"></i>
+    <span id="toast-text">Pemberitahuan</span>
+  </div>
+
+  <div id="top-bar" class="border-b text-xs py-2 px-4 md:px-8 flex flex-wrap justify-between items-center bg-[#F4EFE6]/95 border-[#E2D9C8]">
+    <div class="flex items-center gap-4 text-stone-500">
+      <span class="flex items-center gap-1.5 font-medium">
+        <i data-lucide="calendar" class="w-3.5 h-3.5 text-rose-600"></i>
+        Selasa, 15 September 2026 • Edisi Daring Independen
+      </span>
+      <span class="hidden sm:inline text-stone-300">|</span>
+      <span class="hidden sm:inline italic text-stone-600">
+        "Mencerdaskan Ruang Publik, Menghormati Akal Sehat"
+      </span>
+    </div>
+
+    <div class="flex items-center gap-3 mt-1 sm:mt-0">
+      <span class="text-[11px] font-semibold tracking-wider uppercase text-stone-400">Mode Baca:</span>
+      <button id="btn-theme-sepia" onclick="setTheme('sepia')" class="px-2 py-0.5 rounded text-[11px] font-medium transition bg-[#D9CEBA] text-stone-900 font-bold" title="Mode Koran Klasik (Sepia)">
+        Koran
+      </button>
+      <button id="btn-theme-light" onclick="setTheme('light')" class="p-1 rounded text-stone-600 hover:text-stone-900 transition" title="Mode Bersih Terang">
+        <i data-lucide="sun" class="w-3.5 h-3.5"></i>
+      </button>
+      <button id="btn-theme-dark" onclick="setTheme('dark')" class="p-1 rounded text-stone-400 hover:text-stone-100 transition" title="Mode Gelap">
+        <i data-lucide="moon" class="w-3.5 h-3.5"></i>
+      </button>
+    </div>
+  </div>
+
+  <header id="main-header" class="sticky top-0 z-40 backdrop-blur-md border-b transition-colors duration-200 bg-[#F4EFE6]/95 border-[#E2D9C8]">
+    <div class="max-w-7xl mx-auto px-4 md:px-8 py-4 flex items-center justify-between gap-4">
+      <!-- Mobile Menu Trigger -->
+      <button id="btn-mobile-menu" onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-lg border border-stone-300" aria-label="Buka Menu">
+        <i id="icon-mobile-menu" data-lucide="menu" class="w-5 h-5"></i>
+      </button>
+
+      <!-- Editorial Logo Brand -->
+      <div class="text-left cursor-pointer select-none" onclick="filterCategory('semua')">
+        <div class="flex items-center gap-2">
+          <span class="h-8 w-2 bg-rose-600 rounded-full inline-block"></span>
+          <h1 class="text-2xl md:text-3xl font-serif font-black tracking-tight tracking-[-0.03em] uppercase">
+            Rakyat<span class="text-rose-600 font-light italic">Berfikir</span>
+          </h1>
+        </div>
+        <p class="text-[10px] tracking-widest uppercase font-semibold text-stone-500 ml-4">
+          Jurnalisme Kritis, Berimbang, & Berdaya
+        </p>
+      </div>
+
+      <div class="hidden md:flex flex-1 max-w-md mx-6 relative">
+        <i data-lucide="search" class="w-4 h-4 text-stone-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
+        <input
+          id="search-input"
+          type="text"
+          placeholder="Cari liputan, investigasi, atau tokoh..."
+          oninput="handleSearch(this.value)"
+          class="w-full pl-9 pr-8 py-1.5 rounded-full text-sm bg-stone-100/80 border border-stone-200 focus:outline-none focus:ring-2 focus:ring-rose-500/50"
+        />
+        <button id="btn-clear-search" onclick="clearSearch()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-xs text-stone-400 hover:text-stone-600">
+          ✕
+        </button>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center gap-3">
+        <button onclick="openBookmarksModal()" class="relative flex items-center gap-2 px-3 py-1.5 rounded-lg border border-stone-300 text-xs font-semibold hover:bg-stone-100 transition">
+          <i data-lucide="bookmark" class="w-4 h-4 text-rose-600"></i>
+          <span class="hidden sm:inline">Simpanan</span>
+          <span id="bookmark-badge-count" class="bg-rose-600 text-white rounded-full px-1.5 py-0.2 text-[10px]">1</span>
+        </button>
+
+        <button onclick="openOpinionModal()" class="bg-rose-600 hover:bg-rose-700 text-white px-4 py-1.5 rounded-lg text-xs font-semibold shadow-sm transition flex items-center gap-1.5">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+          <span>Tulis Opini Warga</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Category Nav Buttons -->
+    <nav class="max-w-7xl mx-auto px-4 md:px-8 border-t border-stone-200/60 overflow-x-auto no-scrollbar py-2">
+      <div id="category-pills" class="flex items-center gap-2 min-w-max">
+        <!-- Injected dynamically via JS -->
+      </div>
+    </nav>
+  </header>
+
+  <div id="mobile-menu-drawer" class="hidden md:hidden border-b border-stone-300 p-4 space-y-3 bg-stone-100">
+    <div class="relative">
+      <i data-lucide="search" class="w-4 h-4 text-stone-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
+      <input
+        type="text"
+        placeholder="Cari berita..."
+        oninput="handleSearch(this.value)"
+        class="w-full pl-9 pr-3 py-2 text-sm rounded-lg border border-stone-300"
+      />
+    </div>
+    <div class="flex flex-col gap-2 pt-2">
+      <span class="text-xs font-bold text-stone-500 uppercase">Rubrik Utama:</span>
+      <div id="mobile-category-list" class="flex flex-col gap-1">
+        <!-- Injected dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-stone-900 text-white text-xs py-2.5 px-4 md:px-8 overflow-hidden border-b border-stone-800 select-none">
+    <div class="max-w-7xl mx-auto flex items-center gap-3 overflow-hidden">
+      <!-- Live Indicator Badge -->
+      <div class="flex items-center gap-1.5 bg-rose-600 text-white font-extrabold uppercase px-2.5 py-1 rounded tracking-wider text-[10px] shrink-0 z-10 shadow-sm">
+        <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
+        <span>Kilas Fakta</span>
+      </div>
+
+      <!-- Seamless Automatic Running Text -->
+      <div class="overflow-hidden relative w-full flex items-center cursor-pointer" title="Arahkan kursor untuk menjeda">
+        <div id="ticker-content" class="animate-ticker-smooth text-stone-300 text-xs font-medium">
+          <!-- Continuous ticker text injected via JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="max-w-7xl mx-auto px-4 md:px-8 py-8">
+    <!-- Trending Bar -->
+    <div class="flex items-center gap-3 pb-6 border-b border-stone-200 mb-8 overflow-x-auto no-scrollbar">
+      <span class="flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-rose-600 shrink-0">
+        <i data-lucide="trending-up" class="w-3.5 h-3.5"></i>
+        Topik Hangat:
+      </span>
+      <div id="trending-tags-container" class="flex items-center gap-2 shrink-0">
+        <!-- Tags injected via JS -->
+      </div>
+    </div>
+
+    <!-- Hero Featured Article Area -->
+    <section id="hero-article-container" class="mb-12">
+      <!-- Injected dynamically when applicable -->
+    </section>
+
+    <!-- Content Grid Layout -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <!-- Main Feed Column -->
+      <div class="lg:col-span-8 space-y-8">
+        <div class="flex items-center justify-between pb-3 border-b border-stone-300">
+          <h3 id="feed-heading" class="font-serif font-bold text-xl flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-rose-600 inline-block"></span>
+            Kumpulan Laporan Terkini
+          </h3>
+          <span id="article-count-label" class="text-xs text-stone-500">Menampilkan 6 liputan</span>
+        </div>
+
+        <!-- Article Card Grid -->
+        <div id="articles-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Injected dynamically via JS -->
+        </div>
+      </div>
+
+      <aside class="lg:col-span-4 space-y-8">
+        <!-- Widget 1: Live Radar Fakta -->
+        <div id="sidebar-fact-check" class="p-6 rounded-2xl border bg-white border-[#E8E2D5] shadow-sm">
+          <div class="flex items-center justify-between pb-3 border-b border-stone-200 mb-4">
+            <div class="flex items-center gap-2">
+              <i data-lucide="shield-check" class="w-5 h-5 text-emerald-600"></i>
+              <h4 class="font-serif font-bold text-base">Radar Fakta Warga</h4>
+            </div>
+            <span class="text-[10px] bg-emerald-100 text-emerald-700 font-bold px-2 py-0.5 rounded">
+              Live Audit
+            </span>
+          </div>
+          <p class="text-xs text-stone-500 mb-4">
+            Setiap laporan diverifikasi lewat metode triangulasi dokumen negara dan investigasi data terbuka:
+          </p>
+
+          <div class="space-y-3">
+            <div class="p-3 rounded-lg bg-stone-100/70 border border-stone-200/70">
+              <div class="flex items-center justify-between text-[11px] font-bold text-emerald-600 mb-1">
+                <span>AKURAT & DOKUMENTATIF</span>
+                <span>100% Verified</span>
+              </div>
+              <p class="text-xs font-semibold text-stone-800">Aliran Gratifikasi Izin HGB & Tata Ruang Bogor</p>
+              <span class="text-[10px] text-stone-400">Diverifikasi via dokumen BAP & bukti sitaan KPK</span>
+            </div>
+
+            <div class="p-3 rounded-lg bg-stone-100/70 border border-stone-200/70">
+              <div class="flex items-center justify-between text-[11px] font-bold text-amber-600 mb-1">
+                <span>PERLU PENGAWASAN</span>
+                <span>Uji Laboratorium</span>
+              </div>
+              <p class="text-xs font-semibold text-stone-800">Manipulasi Kandungan Gizi Beras Fortifikasi Kemasan</p>
+              <span class="text-[10px] text-stone-400">Hasil uji sampel gabungan Satgas Pangan & Kementan</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Widget 2: Manifesto RakyatBerfikir -->
+        <div class="p-6 rounded-2xl border border-stone-800 bg-gradient-to-br from-rose-900 to-stone-900 text-white shadow-lg">
+          <div class="flex items-center gap-2 mb-3">
+            <i data-lucide="book-open" class="w-5 h-5 text-rose-400"></i>
+            <h4 class="font-serif font-bold text-lg">Pilar Independensi</h4>
+          </div>
+          <p class="text-xs text-stone-300 leading-relaxed mb-4">
+            <strong>RakyatBerfikir</strong> tidak terafiliasi dengan partai politik atau konglomerasi modal. Kami dibiayai oleh iuran pembaca dan dana abadi jurnalisme publik agar kebenaran tak bersyarat.
+          </p>
+          <button
+            onclick="triggerToast('Terima kasih! Formulir donasi komunitas akan dibuka di rilis publik.')"
+            class="w-full py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-lg text-xs font-bold transition flex items-center justify-center gap-2"
+          >
+            <span>Dukung Jurnalisme Warga</span>
+            <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <!-- Widget 3: Newsletter Critical Digest -->
+        <div id="sidebar-newsletter" class="p-6 rounded-2xl border bg-white border-[#E8E2D5] shadow-sm">
+          <h4 class="font-serif font-bold text-base mb-2">Buletin Mingguan: Berpikir Kritis</h4>
+          <p class="text-xs text-stone-500 mb-4">
+            Dapatkan 3 intisari riset dan pembongkaran data krusial setiap hari Jumat langsung di email Anda.
+          </p>
+          <form onsubmit="handleNewsletterSubmit(event)" class="space-y-2">
+            <input
+              type="email"
+              required
+              placeholder="Ketik alamat surel (email)..."
+              class="w-full px-3 py-2 text-xs rounded-lg border border-stone-300 bg-stone-50 focus:outline-none focus:ring-1 focus:ring-rose-500"
+            />
+            <button
+              type="submit"
+              class="w-full py-2 bg-stone-900 text-white rounded-lg text-xs font-bold hover:bg-stone-800 transition"
+            >
+              Langganan Bebas Biaya
+            </button>
+          </form>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <div id="reader-modal" class="fixed inset-0 z-50 hidden bg-black/70 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+    <div id="reader-modal-card" class="w-full max-w-3xl my-auto rounded-2xl border overflow-hidden shadow-2xl transition-all duration-300 bg-white border-stone-200">
+      <!-- Modal Navigation Header -->
+      <div id="reader-header" class="flex items-center justify-between p-4 border-b border-stone-200 sticky top-0 bg-inherit z-10">
+        <div class="flex items-center gap-3">
+          <span id="reader-badge" class="text-xs font-bold text-rose-600 uppercase tracking-wider">LIPUTAN KHUSUS</span>
+          <span class="text-stone-300">|</span>
+          <div class="flex items-center gap-1 text-xs">
+            <span class="text-stone-400">Ukuran Font:</span>
+            <button id="font-btn-normal" onclick="setFontSize('normal')" class="px-2 py-0.5 rounded text-xs bg-rose-600 text-white font-bold">A</button>
+            <button id="font-btn-large" onclick="setFontSize('large')" class="px-2 py-0.5 rounded text-sm hover:bg-stone-200">A+</button>
+            <button id="font-btn-xl" onclick="setFontSize('xl')" class="px-2 py-0.5 rounded text-base hover:bg-stone-200">A++</button>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button id="btn-audio-player" onclick="toggleAudioReading()" class="p-2 rounded-lg border border-stone-300 text-xs flex items-center gap-1.5 hover:bg-stone-100 transition" title="Dengarkan Artikel">
+            <i data-lucide="volume-2" class="w-4 h-4"></i>
+            <span id="audio-btn-label" class="hidden sm:inline">Dengarkan</span>
+          </button>
+          <button id="btn-reader-bookmark" onclick="toggleActiveBookmark()" class="p-2 rounded-lg border border-stone-300 hover:bg-stone-100 transition" title="Simpan">
+            <i id="reader-bookmark-icon" data-lucide="bookmark" class="w-4 h-4 text-stone-400"></i>
+          </button>
+          <button onclick="shareArticleUrl()" class="p-2 rounded-lg border border-stone-300 hover:bg-stone-100 transition" title="Bagikan">
+            <i data-lucide="share-2" class="w-4 h-4 text-stone-500"></i>
+          </button>
+          <button onclick="closeReaderModal()" class="p-2 rounded-lg bg-stone-200 hover:bg-rose-600 hover:text-white transition">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Modal Body Reader -->
+      <div class="p-6 sm:p-10 max-h-[80vh] overflow-y-auto">
+        <div class="mb-6">
+          <div id="reader-meta" class="flex items-center gap-2 text-xs text-stone-500 mb-2"></div>
+          <h1 id="reader-title" class="text-2xl sm:text-3xl lg:text-4xl font-serif font-black leading-tight mb-4"></h1>
+
+          <!-- Author Box -->
+          <div class="flex items-center gap-3 py-4 border-y border-stone-200 mb-6">
+            <img id="reader-author-avatar" src="" alt="" class="w-12 h-12 rounded-full object-cover border-2 border-rose-600" />
+            <div>
+              <div id="reader-author-name" class="font-bold text-sm"></div>
+              <div id="reader-author-role" class="text-xs text-stone-500"></div>
+            </div>
+          </div>
+
+          <!-- Featured Photo in Article -->
+          <div class="rounded-xl overflow-hidden mb-6">
+            <img id="reader-cover-image" src="" alt="" class="w-full h-72 sm:h-96 object-cover" />
+            <div class="text-[11px] text-stone-400 italic py-1 px-2 text-right">
+              Dokumentasi Investigasi Tim RakyatBerfikir
+            </div>
+          </div>
+
+          <!-- Paragraphs -->
+          <div id="reader-body-text" class="space-y-4 font-serif leading-relaxed text-stone-800 text-base"></div>
+
+          <!-- Fact Check Callout -->
+          <div id="reader-factcheck-box" class="my-8 p-4 rounded-xl border border-emerald-500/30 bg-emerald-500/10 flex items-start gap-3">
+            <i data-lucide="shield-check" class="w-5 h-5 text-emerald-600 shrink-0 mt-0.5"></i>
+            <div>
+              <h5 id="reader-factcheck-title" class="font-bold text-sm text-emerald-800"></h5>
+              <p class="text-xs text-emerald-700/90 mt-1">
+                Liputan ini telah ditinjau dengan metode triangulasi data terbuka, dokumen perizinan negara, dan kesaksian narasumber di lapangan.
+              </p>
+            </div>
+          </div>
+
+          <!-- Reader Reactions -->
+          <div class="mt-10 pt-6 border-t border-stone-200">
+            <h4 class="font-sans font-bold text-sm mb-3">Bagaimana penilaian kritis Anda terhadap tulisan ini?</h4>
+            <div class="flex flex-wrap gap-3">
+              <button onclick="handleReaction('kritis')" class="px-4 py-2 rounded-xl border border-stone-300 text-xs font-semibold hover:border-rose-600 hover:text-rose-600 transition flex items-center gap-2">
+                <span>🔥 Kritis & Berbobot</span>
+                <span id="reaction-kritis-count" class="font-mono bg-stone-200/50 px-2 py-0.5 rounded text-[11px]">0</span>
+              </button>
+              <button onclick="handleReaction('setuju')" class="px-4 py-2 rounded-xl border border-stone-300 text-xs font-semibold hover:border-emerald-600 hover:text-emerald-600 transition flex items-center gap-2">
+                <span>💡 Mencerahkan</span>
+                <span id="reaction-setuju-count" class="font-mono bg-stone-200/50 px-2 py-0.5 rounded text-[11px]">0</span>
+              </button>
+              <button onclick="handleReaction('ragu')" class="px-4 py-2 rounded-xl border border-stone-300 text-xs font-semibold hover:border-amber-600 hover:text-amber-600 transition flex items-center gap-2">
+                <span>❓ Butuh Bukti Tambahan</span>
+                <span id="reaction-ragu-count" class="font-mono bg-stone-200/50 px-2 py-0.5 rounded text-[11px]">0</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="bookmarks-modal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div id="bookmarks-modal-card" class="w-full max-w-lg rounded-2xl border p-6 bg-white border-[#E8E2D5] shadow-xl">
+      <div class="flex items-center justify-between pb-3 border-b border-stone-200 mb-4">
+        <div class="flex items-center gap-2">
+          <i data-lucide="bookmark" class="w-5 h-5 text-rose-600"></i>
+          <h3 class="font-serif font-bold text-lg">Daftar Bacaan Anda</h3>
+        </div>
+        <button onclick="closeBookmarksModal()" class="p-1 rounded-lg hover:bg-stone-200">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div id="bookmarks-list-container" class="space-y-3 max-h-80 overflow-y-auto">
+        <!-- Rendered bookmarks -->
+      </div>
+    </div>
+  </div>
+
+  <div id="opinion-modal" class="fixed inset-0 z-50 hidden bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+    <div id="opinion-modal-card" class="w-full max-w-xl rounded-2xl border p-6 sm:p-8 bg-white border-[#E8E2D5] shadow-2xl">
+      <div class="flex items-center justify-between pb-3 border-b border-stone-200 mb-4">
+        <div class="flex items-center gap-2">
+          <i data-lucide="sparkles" class="w-5 h-5 text-rose-600"></i>
+          <h3 class="font-serif font-bold text-lg">Kirim Esai & Opini Warga</h3>
+        </div>
+        <button onclick="closeOpinionModal()" class="p-1 rounded-lg hover:bg-stone-200">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <p class="text-xs text-stone-500 mb-4">
+        Ruang bagi publik untuk menyuarakan analisis berbasis argumen rasional, data sahih, dan nilai-nilai kemanusiaan. Naskah lolos kurasi akan terbit di rubrik <strong>Ruang Pikir</strong>.
+      </p>
+
+      <form onsubmit="handleOpinionSubmit(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold mb-1">Nama Lengkap & Afiliasi</label>
+          <input
+            id="opinion-author"
+            type="text"
+            required
+            placeholder="Misal: Budi Santoso (Peneliti Independen, Solo)"
+            class="w-full text-xs px-3 py-2 rounded-lg border border-stone-300 focus:outline-none focus:ring-1 focus:ring-rose-500"
+          />
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold mb-1">Judul Esai</label>
+          <input
+            id="opinion-title"
+            type="text"
+            required
+            placeholder="Judul lugas dan mengundang dialektika sehat..."
+            class="w-full text-xs px-3 py-2 rounded-lg border border-stone-300 focus:outline-none focus:ring-1 focus:ring-rose-500"
+          />
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold mb-1">Isi Pokok Pikiran (Maks. 800 kata)</label>
+          <textarea
+            id="opinion-content"
+            rows="6"
+            required
+            placeholder="Jelaskan pokok persoalan, analisis argumentatif, serta solusi yang ditawarkan..."
+            class="w-full text-xs p-3 rounded-lg border border-stone-300 focus:outline-none focus:ring-1 focus:ring-rose-500"
+          ></textarea>
+        </div>
+
+        <div class="flex justify-end gap-3 pt-2">
+          <button
+            type="button"
+            onclick="closeOpinionModal()"
+            class="px-4 py-2 text-xs font-semibold rounded-lg border border-stone-300 hover:bg-stone-100"
+          >
+            Batal
+          </button>
+          <button
+            type="submit"
+            class="px-5 py-2 text-xs font-semibold rounded-lg bg-rose-600 hover:bg-rose-700 text-white flex items-center gap-1.5 shadow"
+          >
+            <i data-lucide="send" class="w-3.5 h-3.5"></i>
+            Kirim ke Meja Redaksi
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="mt-20 border-t border-stone-300 bg-stone-900 text-stone-300">
+    <div class="max-w-7xl mx-auto px-4 md:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div class="md:col-span-2 space-y-3">
+          <div class="flex items-center gap-2">
+            <span class="h-6 w-2 bg-rose-600 rounded-full inline-block"></span>
+            <span class="font-serif font-black text-xl tracking-tight text-white uppercase">
+              Rakyat<span class="text-rose-500 font-light italic">Berfikir</span>
+            </span>
+          </div>
+          <p class="text-xs text-stone-400 max-w-md leading-relaxed">
+            Platform jurnalisme warga dan riset kritis Indonesia. Berkomitmen menolak sensasionalisme klik (clickbait) dan mendedikasikan setiap laporan demi kebebasan berfikir, keadilan sosial, dan kedaulatan informasi publik.
+          </p>
+          <div class="pt-2 text-[11px] text-stone-500">
+            Terakreditasi Dewan Etik Pemeriksa Fakta Independen Indonesia.
+          </div>
+        </div>
+
+        <div>
+          <h5 class="text-xs font-bold text-white uppercase tracking-wider mb-3">Rubrik Liputan</h5>
+          <ul class="space-y-2 text-xs text-stone-400">
+            <li class="hover:text-white cursor-pointer" onclick="filterCategory('investigasi')">Investigasi Mandiri</li>
+            <li class="hover:text-white cursor-pointer" onclick="filterCategory('kebijakan')">Kajian Tata Kelola</li>
+            <li class="hover:text-white cursor-pointer" onclick="filterCategory('ekonomi')">Ekonomi & Koperasi</li>
+            <li class="hover:text-white cursor-pointer" onclick="filterCategory('cek-fakta')">Radar Cek Fakta</li>
+            <li class="hover:text-white cursor-pointer" onclick="filterCategory('opini')">Ruang Pikir Publik</li>
+          </ul>
+        </div>
+
+        <div>
+          <h5 class="text-xs font-bold text-white uppercase tracking-wider mb-3">Etika & Transparansi</h5>
+          <ul class="space-y-2 text-xs text-stone-400">
+            <li class="hover:text-white cursor-pointer" onclick="triggerToast('Pedoman Hak Jawab tersedia di arsip dewan redaksi.')">Pedoman Hak Jawab</li>
+            <li class="hover:text-white cursor-pointer" onclick="triggerToast('Laporan Keuangan diaudit berkala setiap triwulan.')">Laporan Transparansi Keuangan</li>
+            <li class="hover:text-white cursor-pointer" onclick="triggerToast('Kode Etik Investigasi berpedoman pada standar Dewan Pers.')">Kode Etik Investigasi</li>
+            <li class="hover:text-white cursor-pointer" onclick="triggerToast('Protokol enkripsi aktif melindungi identitas whistleblower.')">Perlindungan Narasumber</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-stone-800 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-stone-500 gap-2">
+        <span>© 2026 RakyatBerfikir Media Siber. Seluruh hak cipta dilindungi undang-undang.</span>
+        <span>Dibangun demi akal sehat bangsa.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const CATEGORIES = [
+      { id: 'semua', label: 'Semua Liputan' },
+      { id: 'investigasi', label: 'Investigasi Mendalam' },
+      { id: 'kebijakan', label: 'Politik & Tata Kelola' },
+      { id: 'ekonomi', label: 'Ekonomi Kerakyatan' },
+      { id: 'cek-fakta', label: 'Radar Fakta & Mitos' },
+      { id: 'opini', label: 'Ruang Pikir (Opini)' },
+      { id: 'lingkungan', label: 'Sains & Lingkungan' }
+    ];
+
+    const ARTICLES = [
+      {
+        id: 1,
+        category: 'investigasi',
+        badge: 'Liputan Khusus',
+        title: 'Gurita Mafia Tanah di Balik Izin HGB: Mengapa OTT KPK di Bogor Jadi Alarm Keras Tata Ruang Nasional',
+        excerpt: 'Operasi tangkap tangan yang menyeret pejabat tata ruang, korporasi properti, dan politisi menyingkap borok menahun sertifikasi lahan di lingkar penyangga ibu kota.',
+        author: {
+          name: 'Rian Dewantoro',
+          role: 'Editor Investigasi Hukum',
+          avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80'
+        },
+        date: '15 Sep 2026',
+        readTime: '9 menit baca',
+        views: '48.6K',
+        featured: true,
+        image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&auto=format&fit=crop&q=80',
+        factChecked: true,
+        verdict: 'Terverifikasi Berdasarkan Dokumen BAP',
+        body: `Operasi tangkap tangan (OTT) yang dilakukan lembaga antirasuah di lingkungan kantor pertanahan dan tata ruang baru-baru ini bukan sekadar penindakan suap individu, melainkan fenomena puncak gunung es konflik agraria di Indonesia.\n\nInvestigasi lapangan RakyatBerfikir menemukan bahwa tumpang tindih Hak Guna Bangunan (HGB) dan pengalihan sepihak lahan serapan air telah berlangsung terencana selama bertahun-tahun. Kongkalikong ini menyulap zona hijau dan perkampungan warga menjadi klaster elite tanpa analisis risiko lingkungan yang memadai.\n\n"Warga memegang girik dan leter C puluhan tahun, tiba-tiba patok korporasi berdiri dalam semalam dengan izin resmi dari meja pejabat," ungkap perwakilan konsorsium pembaruan agraria setempat.\n\nLaporan ini membedah aliran gratifikasi perizinan dan mendesak audit digital terbuka pada seluruh warkah tanah negara demi menjamin hak rakyat atas kepastian ruang hidup.`
+      },
+      {
+        id: 2,
+        category: 'kebijakan',
+        badge: 'Sorotan Fiskal',
+        title: 'Estafet Kursi Menteri Keuangan: Menguji Nyali Disiplin Anggaran di Tengah Tekanan Utang',
+        excerpt: 'Pergantian mendadak nakhoda fiskal memicu dinamika di pasar obligasi. Publik menagih komitmen transparansi penarikan utang dan penjagaan batas aman defisit APBN.',
+        author: {
+          name: 'Farhan Maulana, Ph.D',
+          role: 'Peneliti Makroekonomi & Fiskal',
+          avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80'
+        },
+        date: '15 Sep 2026',
+        readTime: '6 menit baca',
+        views: '35.4K',
+        featured: false,
+        image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&auto=format&fit=crop&q=80',
+        factChecked: true,
+        verdict: 'Analisis Data Kemenkeu & BPS',
+        body: `Reshuffle di pos Kementerian Keuangan memantik sorotan tajam dari kalangan ekonom independen. Di satu sisi, akselerasi proyek infrastruktur dan program jaminan sosial menuntut ruang fiskal yang lapang. Di sisi lain, biaya bunga utang negara kian menekan belanja produktif daerah.\n\nNakhoda baru bendahara negara dihadapkan pada ujian berat: mempertahankan rasio pajak yang adil bagi kelas menengah yang kian terjepit, tanpa mengorbankan stabilitas nilai tukar Rupiah di hadapan guncangan geopolitik global.`
+      },
+      {
+        id: 3,
+        category: 'cek-fakta',
+        badge: 'Radar Pangan',
+        title: 'Uji Mutu Beras: Polemik Fortifikasi Abal-abal dan Transparansi Subsidi Pasar',
+        excerpt: 'Mencuatnya temuan puluhan merek beras kemasan yang diduga memanipulasi label fortifikasi nutrisi memicu kebingungan konsumen rumah tangga. Kami membedah temuannya.',
+        author: {
+          name: 'Dewi Sekar',
+          role: 'Koordinator Verifikasi Mutu',
+          avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80'
+        },
+        date: '15 Sep 2026',
+        readTime: '5 menit baca',
+        views: '29.1K',
+        featured: false,
+        image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=800&auto=format&fit=crop&q=80',
+        factChecked: true,
+        verdict: 'Temuan Lapangan Terkonfirmasi',
+        body: `Kementan dan Satgas Pangan baru saja mengungkap praktik pengoplosan beras medium menjadi beras berlabel nutrisi tinggi dengan selisih margin keuntungan yang luar biasa tinggi.\n\nHasil penelusuran silang laboratorium membuktikan: sebagian besar merek yang diselidiki gagal memenuhi standar kandungan zat besi dan vitamin B9 yang dijanjikan pada kemasan. RakyatBerfikir menyediakan panduan praktis bagi ibu rumah tangga dan pedagang warung untuk mendeteksi ciri-ciri fisik beras yang tidak lolos sertifikasi berkala.`
+      },
+      {
+        id: 4,
+        category: 'lingkungan',
+        badge: 'Darurat Ekologi',
+        title: 'Kabut Asap Selimuti Sumatra & Kalimantan: Ketika Audit Konsesi Mandek di Meja Birokrasi',
+        excerpt: 'Lonjakan titik panas akibat pembukaan lahan gambut kembali melumpuhkan aktivitas belajar mengajar. Komitmen nol toleransi pembakaran hutan kembali diuji.',
+        author: {
+          name: 'Taufik Hidayat',
+          role: 'Jurnalis Investigasi Lingkungan',
+          avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&auto=format&fit=crop&q=80'
+        },
+        date: '14 Sep 2026',
+        readTime: '7 menit baca',
+        views: '27.8K',
+        featured: false,
+        image: 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=800&auto=format&fit=crop&q=80',
+        factChecked: true,
+        verdict: 'Verifikasi Citra Satelit LAPAN',
+        body: `Indeks Standar Pencemar Udara (ISPU) di sejumlah kota menembus level sangat tidak sehat. Ribuan anak-anak terpapar infeksi saluran pernapasan akut (ISPA), sementara penerbangan antar-pulau terganggu jarak pandang.\n\nMeskipun regulasi melarang keras teknik tebas-bakar (slash-and-burn), lemahnya sanksi pencabutan izin konsesi bagi korporasi pemilik konsesi gambut menjadi celah basah yang terus berulang setiap musim kemarau panjang.`
+      },
+      {
+        id: 5,
+        category: 'ekonomi',
+        badge: 'Ekonomi Kerakyatan',
+        title: 'Jerat Tarif dan Algoritma: Mengapa Regulasi Ketenagakerjaan Wajib Melindungi Pekerja Gig',
+        excerpt: 'Jutaan pengendara ojek daring dan kurir logistik menuntut kejelasan status hubungan kemitraan agar tidak terus menanggung risiko sepihak biaya operasional dan kesehatan.',
+        author: {
+          name: 'Nadia Larasati',
+          role: 'Koresponden Buruh & Ekonomi Digital',
+          avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80'
+        },
+        date: '13 Sep 2026',
+        readTime: '6 menit baca',
+        views: '31.2K',
+        featured: false,
+        image: 'https://images.unsplash.com/photo-1526367790999-0150786686a2?w=800&auto=format&fit=crop&q=80',
+        factChecked: true,
+        verdict: 'Riset Komparasi Asosiasi Driver',
+        body: `Istilah "mitra" yang digaungkan aplikator teknologi kian menjauh dari cita-cita kesetaraan. Dengan jam kerja harian yang menembus 12 hingga 14 jam demi memenuhi target algoritma, pengemudi menghadapi penurunan pendapatan bersih akibat potongan platform dan lonjakan harga suku cadang.\n\nRUU Perlindungan Tenaga Kerja Lepas menjadi desakan mutlak agar jaminan kecelakaan kerja, jam istirahat yang layak, dan upah minimum per kilometer memiliki landasan hukum yang mengikat.`
+      },
+      {
+        id: 6,
+        category: 'opini',
+        badge: 'Ruang Pikir',
+        title: 'Bahaya Normalisasi Hoaks dan Politik Kebencian Menjelang Pembahasan Regulasi Pemilu',
+        excerpt: 'Ketika polarisasi digital dirawat demi kepentingan elektoral sesaat, bangsa ini kehilangan kapasitas untuk berdebat secara rasional dan santun.',
+        author: {
+          name: 'Prof. Baskoro Adi',
+          role: 'Guru Besar Filsafat Sosial',
+          avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80'
+        },
+        date: '12 Sep 2026',
+        readTime: '8 menit baca',
+        views: '24.5K',
+        featured: false,
+        image: 'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=800&auto=format&fit=crop&q=80',
+        factChecked: false,
+        verdict: 'Esai Kritis Akademik',
+        body: `Demokrasi yang sehat tidak lahir dari keseragaman pendapat, melainkan dari kedewasaan merawat dialektika. Saat narasi emosional dan rekayasa bot di media sosial menggantikan adu gagasan berbasis naskah akademik, akal budi warga dipaksa tunduk pada fanatisme golongan.\n\nRakyatBerfikir menegaskan kembali komitmennya sebagai ruang aman bagi warga untuk skeptis terhadap klaim penguasa, tanpa tergelincir menjadi pemuja kebencian partisan.`
+      }
+    ];
+
+    const BREAKING_NEWS = [
+      'KPK Gelar OTT Pejabat Tata Ruang & Petinggi Properti di Bogor, Sita Puluhan Miliar Barang Bukti Kasus Sertifikasi HGB.',
+      'Sertijab Menteri Keuangan: Pasar Pantau Arah Disiplin Defisit Fiskal dan Stabilitas Nilai Tukar Rupiah.',
+      'Kementan Sidak Pasar Pangan: 25 Merek Beras Ditemukan Tak Penuhi Standar Fortifikasi Gizi.',
+      'ISPU Sumatra dan Kalimantan Merah: KLHK Desak Pencabutan Izin Korporasi Terbukti Pembakar Lahan.',
+      'Aliansi Pengemudi Desak Pengesahan Payung Hukum Perlindungan Tarif Minimum dan Jaminan Kesehatan Kerja Gig.'
+    ];
+
+    const TRENDING_TAGS = ['#OTTMafiaTanah', '#ReshuffleKemenkeu', '#MutuBerasNasional', '#DaruratKabutAsap', '#UpahPekerjaGig', '#AkalSehatPublik'];
+
+    // State Variables
+    let currentTheme = 'sepia';
+    let selectedCategory = 'semua';
+    let searchQuery = '';
+    let bookmarks = [1];
+    let activeArticle = null;
+    let fontSize = 'normal'; // 'normal', 'large', 'xl'
+    let isAudioPlaying = false;
+    let reactionsState = {
+      1: { kritis: 142, setuju: 310, ragu: 18 },
+      2: { kritis: 88, setuju: 154, ragu: 12 },
+      3: { kritis: 95, setuju: 180, ragu: 9 },
+      4: { kritis: 120, setuju: 240, ragu: 15 },
+      5: { kritis: 160, setuju: 290, ragu: 22 },
+      6: { kritis: 75, setuju: 198, ragu: 30 }
+    };
+
+    let toastTimeout = null;
+    function triggerToast(message) {
+      const container = document.getElementById('toast-container');
+      const textSpan = document.getElementById('toast-text');
+      textSpan.textContent = message;
+      container.classList.remove('hidden');
+
+      if (toastTimeout) clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        container.classList.add('hidden');
+      }, 3000);
+    }
+
+    function setTheme(mode) {
+      currentTheme = mode;
+      const body = document.getElementById('app-body');
+      const topBar = document.getElementById('top-bar');
+      const header = document.getElementById('main-header');
+      const btnSepia = document.getElementById('btn-theme-sepia');
+      const btnLight = document.getElementById('btn-theme-light');
+      const btnDark = document.getElementById('btn-theme-dark');
+
+      // Reset button styles
+      btnSepia.className = 'px-2 py-0.5 rounded text-[11px] font-medium transition text-stone-600 hover:bg-stone-200/50';
+      btnLight.className = 'p-1 rounded text-stone-600 hover:text-stone-900 transition';
+      btnDark.className = 'p-1 rounded text-stone-400 hover:text-stone-100 transition';
+
+      if (mode === 'sepia') {
+        body.className = 'min-h-screen transition-colors duration-200 bg-[#FBF9F4] text-[#1F2421]';
+        topBar.className = 'border-b text-xs py-2 px-4 md:px-8 flex flex-wrap justify-between items-center bg-[#F4EFE6]/95 border-[#E2D9C8]';
+        header.className = 'sticky top-0 z-40 backdrop-blur-md border-b transition-colors duration-200 bg-[#F4EFE6]/95 border-[#E2D9C8]';
+        btnSepia.className = 'px-2 py-0.5 rounded text-[11px] font-medium transition bg-[#D9CEBA] text-stone-900 font-bold';
+      } else if (mode === 'light') {
+        body.className = 'min-h-screen transition-colors duration-200 bg-stone-50 text-stone-900';
+        topBar.className = 'border-b text-xs py-2 px-4 md:px-8 flex flex-wrap justify-between items-center bg-white/95 border-stone-200';
+        header.className = 'sticky top-0 z-40 backdrop-blur-md border-b transition-colors duration-200 bg-white/95 border-stone-200';
+        btnLight.className = 'p-1 rounded bg-stone-200 font-bold text-stone-950';
+      } else if (mode === 'dark') {
+        body.className = 'min-h-screen transition-colors duration-200 bg-[#0E1116] text-[#E6EDF3]';
+        topBar.className = 'border-b text-xs py-2 px-4 md:px-8 flex flex-wrap justify-between items-center bg-[#151922]/95 border-stone-800 text-stone-300';
+        header.className = 'sticky top-0 z-40 backdrop-blur-md border-b transition-colors duration-200 bg-[#151922]/95 border-stone-800';
+        btnDark.className = 'p-1 rounded bg-stone-800 font-bold text-white';
+      }
+
+      renderCategories();
+      renderFeed();
+      renderSidebarWidgets();
+      lucide.createIcons();
+    }
+
+    function getCardBgClass() {
+      if (currentTheme === 'sepia') return 'bg-[#FFFFFF] border-[#E8E2D5] shadow-[0_4px_20px_-4px_rgba(40,30,20,0.05)] text-[#1F2421]';
+      if (currentTheme === 'light') return 'bg-white border-stone-200 shadow-sm text-stone-900';
+      return 'bg-[#161B22] border-stone-800 text-stone-100 shadow-none';
+    }
+
+    function handleSearch(val) {
+      searchQuery = val.trim();
+      const clearBtn = document.getElementById('btn-clear-search');
+      if (searchQuery.length > 0) {
+        clearBtn.classList.remove('hidden');
+      } else {
+        clearBtn.classList.add('hidden');
+      }
+      renderFeed();
+    }
+
+    function clearSearch() {
+      searchQuery = '';
+      document.getElementById('search-input').value = '';
+      document.getElementById('btn-clear-search').classList.add('hidden');
+      renderFeed();
+    }
+
+    function filterCategory(catId) {
+      selectedCategory = catId;
+      renderCategories();
+      renderFeed();
+      // Close mobile drawer if open
+      document.getElementById('mobile-menu-drawer').classList.add('hidden');
+      document.getElementById('icon-mobile-menu').setAttribute('data-lucide', 'menu');
+      lucide.createIcons();
+    }
+
+    function toggleMobileMenu() {
+      const drawer = document.getElementById('mobile-menu-drawer');
+      const isHidden = drawer.classList.contains('hidden');
+      if (isHidden) {
+        drawer.classList.remove('hidden');
+        document.getElementById('icon-mobile-menu').setAttribute('data-lucide', 'x');
+      } else {
+        drawer.classList.add('hidden');
+        document.getElementById('icon-mobile-menu').setAttribute('data-lucide', 'menu');
+      }
+      lucide.createIcons();
+    }
+
+    function renderCategories() {
+      const navContainer = document.getElementById('category-pills');
+      const mobileContainer = document.getElementById('mobile-category-list');
+      navContainer.innerHTML = '';
+      mobileContainer.innerHTML = '';
+
+      CATEGORIES.forEach(cat => {
+        const isSelected = cat.id === selectedCategory;
+        // Desktop nav pill
+        const pill = document.createElement('button');
+        pill.onclick = () => filterCategory(cat.id);
+        pill.textContent = cat.label;
+        pill.className = `px-3 py-1 rounded-full text-xs font-medium transition ${
+          isSelected
+            ? 'bg-stone-900 text-white font-semibold'
+            : 'text-stone-600 hover:bg-stone-200/50'
+        }`;
+        navContainer.appendChild(pill);
+
+        // Mobile drawer item
+        const mobileBtn = document.createElement('button');
+        mobileBtn.onclick = () => filterCategory(cat.id);
+        mobileBtn.textContent = cat.label;
+        mobileBtn.className = `text-left text-sm py-1.5 px-2 rounded ${
+          isSelected ? 'bg-rose-600 text-white font-medium' : 'text-stone-700'
+        }`;
+        mobileContainer.appendChild(mobileBtn);
+      });
+    }
+
+    function renderTicker() {
+      const container = document.getElementById('ticker-content');
+      const textItem = BREAKING_NEWS.join('   ◆   ');
+      container.innerHTML = `
+        <span class="inline-block px-3">${textItem}</span>
+        <span class="inline-block px-3">${textItem}</span>
+      `;
+    }
+
+    function renderTrendingTags() {
+      const container = document.getElementById('trending-tags-container');
+      container.innerHTML = '';
+      TRENDING_TAGS.forEach(tag => {
+        const span = document.createElement('span');
+        span.textContent = tag;
+        span.className = 'text-xs px-2.5 py-1 rounded-md bg-stone-200/60 text-stone-700 cursor-pointer hover:bg-rose-100 hover:text-rose-700 transition shrink-0';
+        span.onclick = () => {
+          const keyword = tag.replace('#', '');
+          document.getElementById('search-input').value = keyword;
+          handleSearch(keyword);
+        };
+        container.appendChild(span);
+      });
+    }
+
+    function renderFeed() {
+      const cardClass = getCardBgClass();
+      const heroContainer = document.getElementById('hero-article-container');
+      const gridContainer = document.getElementById('articles-grid');
+      const feedHeading = document.getElementById('feed-heading');
+      const countLabel = document.getElementById('article-count-label');
+
+      // Filter articles
+      const filtered = ARTICLES.filter(art => {
+        const matchesCategory = selectedCategory === 'semua' || art.category === selectedCategory;
+        const queryLower = searchQuery.toLowerCase();
+        const matchesSearch =
+          art.title.toLowerCase().includes(queryLower) ||
+          art.excerpt.toLowerCase().includes(queryLower) ||
+          art.author.name.toLowerCase().includes(queryLower);
+        return matchesCategory && matchesSearch;
+      });
+
+      // Update feed title and count
+      const activeCatObj = CATEGORIES.find(c => c.id === selectedCategory);
+      feedHeading.innerHTML = `
+        <span class="w-3 h-3 rounded-full bg-rose-600 inline-block"></span>
+        ${selectedCategory === 'semua' ? 'Kumpulan Laporan Terkini' : 'Rubrik: ' + activeCatObj.label}
+      `;
+      countLabel.textContent = `Menampilkan ${filtered.length} liputan`;
+
+      // Hero Article handling
+      const heroArt = ARTICLES.find(a => a.featured);
+      if (heroArt && selectedCategory === 'semua' && !searchQuery) {
+        heroContainer.innerHTML = `
+          <div onclick="openReaderModal(${heroArt.id})" class="group rounded-2xl overflow-hidden border cursor-pointer transition-all duration-300 hover:shadow-xl ${cardClass}">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-0">
+              <div class="lg:col-span-7 relative h-72 sm:h-96 lg:h-full min-h-[340px] overflow-hidden">
+                <img src="${heroArt.image}" alt="${heroArt.title}" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent lg:hidden"></div>
+                <div class="absolute top-4 left-4 flex gap-2">
+                  <span class="bg-rose-600 text-white font-bold text-xs uppercase px-3 py-1 rounded-full shadow-lg">
+                    ${heroArt.badge}
+                  </span>
+                  ${heroArt.factChecked ? `
+                    <span class="bg-emerald-600 text-white flex items-center gap-1 text-xs font-medium px-2.5 py-1 rounded-full shadow-lg">
+                      <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+                      ${heroArt.verdict}
+                    </span>` : ''}
+                </div>
+              </div>
+
+              <div class="lg:col-span-5 p-6 sm:p-8 md:p-10 flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center gap-3 text-xs text-stone-500 mb-3">
+                    <span class="flex items-center gap-1 font-semibold text-rose-600 uppercase">
+                      Rubrik ${heroArt.category}
+                    </span>
+                    <span>•</span>
+                    <span class="flex items-center gap-1">
+                      <i data-lucide="clock" class="w-3.5 h-3.5"></i>
+                      ${heroArt.readTime}
+                    </span>
+                  </div>
+
+                  <h2 class="text-2xl sm:text-3xl lg:text-4xl font-serif font-black leading-tight mb-4 group-hover:text-rose-600 transition">
+                    ${heroArt.title}
+                  </h2>
+
+                  <p class="text-sm sm:text-base leading-relaxed text-stone-600 mb-6 line-clamp-3">
+                    ${heroArt.excerpt}
+                  </p>
+                </div>
+
+                <div class="pt-6 border-t border-stone-200 flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <img src="${heroArt.author.avatar}" alt="${heroArt.author.name}" class="w-10 h-10 rounded-full object-cover border border-rose-500" />
+                    <div>
+                      <div class="text-sm font-bold">${heroArt.author.name}</div>
+                      <div class="text-xs text-stone-500">${heroArt.author.role}</div>
+                    </div>
+                  </div>
+
+                  <button onclick="toggleBookmark(${heroArt.id}, event)" class="p-2.5 rounded-full hover:bg-stone-200/50 transition" title="Simpan Bacaan">
+                    <i data-lucide="${bookmarks.includes(heroArt.id) ? 'bookmark-check' : 'bookmark'}" class="w-5 h-5 ${bookmarks.includes(heroArt.id) ? 'text-rose-600' : 'text-stone-400'}"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+        heroContainer.classList.remove('hidden');
+      } else {
+        heroContainer.innerHTML = '';
+        heroContainer.classList.add('hidden');
+      }
+
+      // Empty State
+      if (filtered.length === 0) {
+        gridContainer.innerHTML = `
+          <div class="col-span-1 md:col-span-2 p-12 text-center rounded-xl border ${cardClass}">
+            <i data-lucide="alert-triangle" class="w-10 h-10 text-stone-400 mx-auto mb-3"></i>
+            <h4 class="font-bold text-lg mb-1">Tidak Ditemukan Berita</h4>
+            <p class="text-sm text-stone-500 mb-4">Coba gunakan kata kunci pencarian lain atau pilih rubrik yang berbeda.</p>
+            <button onclick="filterCategory('semua'); clearSearch();" class="px-4 py-2 bg-stone-900 text-white rounded-lg text-xs font-semibold">
+              Reset Filter
+            </button>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      // Grid Articles (exclude featured when showing all and not searching)
+      const displayArticles = filtered.filter(art => !(art.featured && selectedCategory === 'semua' && !searchQuery));
+      gridContainer.innerHTML = '';
+
+      displayArticles.forEach(art => {
+        const isSaved = bookmarks.includes(art.id);
+        const card = document.createElement('article');
+        card.onclick = () => openReaderModal(art.id);
+        card.className = `group rounded-xl border flex flex-col justify-between cursor-pointer transition duration-200 hover:-translate-y-1 hover:shadow-md ${cardClass}`;
+        card.innerHTML = `
+          <div>
+            <div class="relative h-48 w-full overflow-hidden rounded-t-xl">
+              <img src="${art.image}" alt="${art.title}" class="w-full h-full object-cover transition duration-500 group-hover:scale-105" />
+              <div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+                <span class="bg-stone-900/90 backdrop-blur-sm text-white text-[11px] font-bold px-2.5 py-0.5 rounded">
+                  ${art.badge}
+                </span>
+                ${art.factChecked ? `
+                  <span class="bg-emerald-600/90 text-white text-[10px] font-semibold px-2 py-0.5 rounded flex items-center gap-1">
+                    <i data-lucide="shield-check" class="w-3 h-3"></i>
+                    Terverifikasi
+                  </span>` : ''}
+              </div>
+            </div>
+
+            <div class="p-5">
+              <div class="flex items-center gap-2 text-[11px] text-stone-500 mb-2 font-medium">
+                <span class="text-rose-600 uppercase font-bold">${art.category}</span>
+                <span>•</span>
+                <span class="flex items-center gap-1">
+                  <i data-lucide="clock" class="w-3 h-3"></i>
+                  ${art.readTime}
+                </span>
+              </div>
+
+              <h3 class="font-serif font-bold text-lg leading-snug mb-2 group-hover:text-rose-600 transition line-clamp-2">
+                ${art.title}
+              </h3>
+
+              <p class="text-xs text-stone-600 line-clamp-3 leading-relaxed">
+                ${art.excerpt}
+              </p>
+            </div>
+          </div>
+
+          <div class="px-5 pb-5 pt-2 flex items-center justify-between border-t border-stone-100 text-xs text-stone-500">
+            <div class="flex items-center gap-2">
+              <img src="${art.author.avatar}" alt="${art.author.name}" class="w-6 h-6 rounded-full object-cover" />
+              <span class="font-semibold text-stone-700 text-[11px]">
+                ${art.author.name}
+              </span>
+            </div>
+
+            <button onclick="toggleBookmark(${art.id}, event)" class="p-1 hover:text-rose-600 transition" title="Simpan">
+              <i data-lucide="${isSaved ? 'bookmark-check' : 'bookmark'}" class="w-4 h-4 ${isSaved ? 'text-rose-600' : 'text-stone-400'}"></i>
+            </button>
+          </div>
+        `;
+        gridContainer.appendChild(card);
+      });
+
+      lucide.createIcons();
+    }
+
+    function renderSidebarWidgets() {
+      const cardClass = getCardBgClass();
+      document.getElementById('sidebar-fact-check').className = `p-6 rounded-2xl border ${cardClass}`;
+      document.getElementById('sidebar-newsletter').className = `p-6 rounded-2xl border ${cardClass}`;
+    }
+
+    function toggleBookmark(id, event) {
+      if (event) event.stopPropagation();
+      if (bookmarks.includes(id)) {
+        bookmarks = bookmarks.filter(bId => bId !== id);
+        triggerToast('Liputan dihapus dari Simpanan Baca');
+      } else {
+        bookmarks.push(id);
+        triggerToast('Tersimpan di Daftar Baca Pribadi');
+      }
+      document.getElementById('bookmark-badge-count').textContent = bookmarks.length;
+      renderFeed();
+      renderBookmarksList();
+      updateReaderBookmarkStatus();
+    }
+
+    function toggleActiveBookmark() {
+      if (!activeArticle) return;
+      toggleBookmark(activeArticle.id);
+    }
+
+    function updateReaderBookmarkStatus() {
+      if (!activeArticle) return;
+      const icon = document.getElementById('reader-bookmark-icon');
+      const isSaved = bookmarks.includes(activeArticle.id);
+      if (isSaved) {
+        icon.setAttribute('data-lucide', 'bookmark-check');
+        icon.className = 'w-4 h-4 text-rose-600';
+      } else {
+        icon.setAttribute('data-lucide', 'bookmark');
+        icon.className = 'w-4 h-4 text-stone-400';
+      }
+      lucide.createIcons();
+    }
+
+    function handleReaction(type) {
+      if (!activeArticle) return;
+      if (!reactionsState[activeArticle.id]) {
+        reactionsState[activeArticle.id] = { kritis: 10, setuju: 20, ragu: 5 };
+      }
+      reactionsState[activeArticle.id][type] += 1;
+      updateReactionCounts();
+      triggerToast(`Tanggapan dicatat: ${type.toUpperCase()}`);
+    }
+
+    function updateReactionCounts() {
+      if (!activeArticle) return;
+      const r = reactionsState[activeArticle.id] || { kritis: 0, setuju: 0, ragu: 0 };
+      document.getElementById('reaction-kritis-count').textContent = r.kritis;
+      document.getElementById('reaction-setuju-count').textContent = r.setuju;
+      document.getElementById('reaction-ragu-count').textContent = r.ragu;
+    }
+
+    function openReaderModal(articleId) {
+      activeArticle = ARTICLES.find(a => a.id === articleId);
+      if (!activeArticle) return;
+
+      document.getElementById('reader-badge').textContent = activeArticle.badge;
+      document.getElementById('reader-title').textContent = activeArticle.title;
+      document.getElementById('reader-meta').innerHTML = `
+        <span class="font-semibold">${activeArticle.date}</span>
+        <span>•</span>
+        <span>${activeArticle.readTime}</span>
+        <span>•</span>
+        <span>${activeArticle.views} dibaca</span>
+      `;
+      document.getElementById('reader-author-avatar').src = activeArticle.author.avatar;
+      document.getElementById('reader-author-name').textContent = activeArticle.author.name;
+      document.getElementById('reader-author-role').textContent = activeArticle.author.role;
+      document.getElementById('reader-cover-image').src = activeArticle.image;
+
+      // Body paragraphs
+      const bodyContainer = document.getElementById('reader-body-text');
+      bodyContainer.innerHTML = '';
+      activeArticle.body.split('\n\n').forEach(para => {
+        const p = document.createElement('p');
+        p.className = 'leading-loose mb-4';
+        p.textContent = para;
+        bodyContainer.appendChild(p);
+      });
+
+      // Fact-check callout
+      const factBox = document.getElementById('reader-factcheck-box');
+      if (activeArticle.factChecked) {
+        factBox.classList.remove('hidden');
+        document.getElementById('reader-factcheck-title').textContent = `Status Cek Fakta: ${activeArticle.verdict}`;
+      } else {
+        factBox.classList.add('hidden');
+      }
+
+      // Reactions & Bookmark status
+      updateReactionCounts();
+      updateReaderBookmarkStatus();
+      setFontSize(fontSize);
+
+      // Reset Audio button
+      isAudioPlaying = false;
+      const audioBtn = document.getElementById('btn-audio-player');
+      audioBtn.className = 'p-2 rounded-lg border border-stone-300 text-xs flex items-center gap-1.5 hover:bg-stone-100 transition';
+      document.getElementById('audio-btn-label').textContent = 'Dengarkan';
+
+      // Card theme adaptation
+      document.getElementById('reader-modal-card').className = `w-full max-w-3xl my-auto rounded-2xl border overflow-hidden shadow-2xl transition-all duration-300 ${getCardBgClass()}`;
+
+      // Open Modal
+      document.getElementById('reader-modal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      lucide.createIcons();
+    }
+
+    function closeReaderModal() {
+      document.getElementById('reader-modal').classList.add('hidden');
+      document.body.style.overflow = 'auto';
+      activeArticle = null;
+      isAudioPlaying = false;
+    }
+
+    function setFontSize(size) {
+      fontSize = size;
+      const textContainer = document.getElementById('reader-body-text');
+      const btnN = document.getElementById('font-btn-normal');
+      const btnL = document.getElementById('font-btn-large');
+      const btnXL = document.getElementById('font-btn-xl');
+
+      // Reset active button class
+      [btnN, btnL, btnXL].forEach(b => b.className = 'px-2 py-0.5 rounded text-xs hover:bg-stone-200');
+
+      if (size === 'normal') {
+        textContainer.className = 'space-y-4 font-serif leading-relaxed text-base';
+        btnN.className = 'px-2 py-0.5 rounded text-xs bg-rose-600 text-white font-bold';
+      } else if (size === 'large') {
+        textContainer.className = 'space-y-4 font-serif leading-relaxed text-lg';
+        btnL.className = 'px-2 py-0.5 rounded text-sm bg-rose-600 text-white font-bold';
+      } else if (size === 'xl') {
+        textContainer.className = 'space-y-4 font-serif leading-relaxed text-xl';
+        btnXL.className = 'px-2 py-0.5 rounded text-base bg-rose-600 text-white font-bold';
+      }
+    }
+
+    function toggleAudioReading() {
+      isAudioPlaying = !isAudioPlaying;
+      const audioBtn = document.getElementById('btn-audio-player');
+      const label = document.getElementById('audio-btn-label');
+
+      if (isAudioPlaying) {
+        audioBtn.className = 'p-2 rounded-lg border border-stone-300 text-xs flex items-center gap-1.5 bg-rose-600 text-white transition';
+        label.textContent = 'Memutar';
+        triggerToast('Memutar narasi intisari (Text-to-Speech)...');
+      } else {
+        audioBtn.className = 'p-2 rounded-lg border border-stone-300 text-xs flex items-center gap-1.5 hover:bg-stone-100 transition';
+        label.textContent = 'Dengarkan';
+        triggerToast('Audio pembacaan dijeda');
+      }
+    }
+
+    function shareArticleUrl() {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(window.location.href);
+      }
+      triggerToast('Tautan liputan berhasil disalin!');
+    }
+
+    function openBookmarksModal() {
+      renderBookmarksList();
+      document.getElementById('bookmarks-modal-card').className = `w-full max-w-lg rounded-2xl border p-6 shadow-xl ${getCardBgClass()}`;
+      document.getElementById('bookmarks-modal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      lucide.createIcons();
+    }
+
+    function closeBookmarksModal() {
+      document.getElementById('bookmarks-modal').classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    }
+
+    function renderBookmarksList() {
+      const container = document.getElementById('bookmarks-list-container');
+      container.innerHTML = '';
+
+      if (bookmarks.length === 0) {
+        container.innerHTML = `
+          <p class="text-xs text-stone-500 text-center py-8">
+            Belum ada artikel yang disimpan. Tekan tombol bookmark pada liputan untuk menyimpannya di sini.
+          </p>
+        `;
+        return;
+      }
+
+      bookmarks.forEach(bId => {
+        const art = ARTICLES.find(a => a.id === bId);
+        if (!art) return;
+        const item = document.createElement('div');
+        item.className = 'flex items-center gap-3 p-3 rounded-xl border border-stone-200 hover:bg-stone-100/50 cursor-pointer transition';
+        item.onclick = () => {
+          closeBookmarksModal();
+          openReaderModal(art.id);
+        };
+        item.innerHTML = `
+          <img src="${art.image}" alt="${art.title}" class="w-14 h-14 rounded-lg object-cover" />
+          <div class="flex-1 min-w-0">
+            <span class="text-[10px] text-rose-600 font-bold uppercase">${art.category}</span>
+            <h5 class="text-xs font-bold truncate">${art.title}</h5>
+            <span class="text-[10px] text-stone-400">${art.readTime}</span>
+          </div>
+          <button onclick="event.stopPropagation(); toggleBookmark(${art.id})" class="text-stone-400 hover:text-rose-600 text-xs p-2" title="Hapus">
+            ✕
+          </button>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    function openOpinionModal() {
+      document.getElementById('opinion-modal-card').className = `w-full max-w-xl rounded-2xl border p-6 sm:p-8 shadow-2xl ${getCardBgClass()}`;
+      document.getElementById('opinion-modal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      lucide.createIcons();
+    }
+
+    function closeOpinionModal() {
+      document.getElementById('opinion-modal').classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    }
+
+    function handleOpinionSubmit(e) {
+      e.preventDefault();
+      closeOpinionModal();
+      document.getElementById('opinion-author').value = '';
+      document.getElementById('opinion-title').value = '';
+      document.getElementById('opinion-content').value = '';
+      triggerToast('Naskah berhasil terkirim ke dewan kurasi redaksi RakyatBerfikir!');
+    }
+
+    function handleNewsletterSubmit(e) {
+      e.preventDefault();
+      e.target.reset();
+      triggerToast('Berhasil terdaftar di Buletin Mingguan Berpikir Kritis!');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      renderCategories();
+      renderTicker();
+      renderTrendingTags();
+      renderFeed();
+      renderSidebarWidgets();
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>

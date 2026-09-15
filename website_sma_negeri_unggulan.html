@@ -1,0 +1,2627 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMA Negeri 1 Nusantara - Cerdas, Berkarakter, Mendunia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            800: '#0c2340',
+                            900: '#07182c',
+                            950: '#040d18'
+                        },
+                        emas: {
+                            500: '#d4af37',
+                            600: '#c59b27',
+                            700: '#9d7817'
+                        },
+                        kemendikbud: '#0284c7'
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .batik-pattern {
+            background-color: #07182c;
+            background-image: radial-gradient(#d4af37 0.75px, transparent 0.75px), radial-gradient(#0284c7 0.75px, #07182c 0.75px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            background-opacity: 0.08;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(7, 24, 44, 0.95) 0%, rgba(12, 35, 64, 0.90) 50%, rgba(2, 132, 199, 0.82) 100%);
+        }
+        .badge-shadow {
+            box-shadow: 0 4px 20px -2px rgba(212, 175, 55, 0.25);
+        }
+        /* Admin drawer transition */
+        .admin-drawer {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+    </style>
+
+    <script>
+        // Define smart image error handler immediately in <head> so inline onerror handlers never encounter ReferenceError
+        window.handleSmartImageError = function(imgElement, backupUrl) {
+            if (!imgElement) return;
+            imgElement.onerror = null; // Prevent circular error cascades immediately
+            var currentSrc = imgElement.src || "";
+            var safeBackup = backupUrl || "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=600&q=80";
+
+            // If format lh3 failed, attempt Google Drive thumbnail?id= format
+            if (currentSrc.indexOf('lh3.googleusercontent.com/d/') !== -1) {
+                var parts = currentSrc.split('/d/');
+                if (parts.length > 1 && parts[1]) {
+                    var driveId = parts[1].split('?')[0].split('&')[0];
+                    imgElement.onerror = function() {
+                        this.onerror = null;
+                        this.src = safeBackup;
+                    };
+                    imgElement.src = "https://drive.google.com/thumbnail?id=" + driveId;
+                    return;
+                }
+            }
+            imgElement.src = safeBackup;
+        };
+
+        window.formatGoogleDriveUrl = function(inputUrl, fallbackUrl) {
+            var defaultFallback = fallbackUrl || 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=600&q=80';
+            if (!inputUrl || typeof inputUrl !== 'string' || inputUrl.trim() === '') {
+                return defaultFallback;
+            }
+            var trimmed = inputUrl.trim();
+            if ((trimmed.indexOf('http://') === 0 || trimmed.indexOf('https://') === 0) && trimmed.indexOf('drive.google.com') === -1 && trimmed.indexOf('googleusercontent.com') === -1) {
+                return trimmed;
+            }
+            var driveId = null;
+            if (/^[a-zA-Z0-9_-]{25,}$/.test(trimmed)) {
+                driveId = trimmed;
+            } else {
+                var match = trimmed.match(/(?:\/d\/|id=|file\/d\/)([a-zA-Z0-9_-]{20,})/);
+                if (match && match[1]) {
+                    driveId = match[1];
+                }
+            }
+            if (driveId) {
+                return 'https://lh3.googleusercontent.com/d/' + driveId;
+            }
+            return (trimmed.indexOf('http://') === 0 || trimmed.indexOf('https://') === 0) ? trimmed : defaultFallback;
+        };
+
+        window.preloadImage = function(url) {
+            if (!url) return;
+            var link = document.createElement('link');
+            link.rel = 'preload';
+            link.as = 'image';
+            link.href = url;
+            document.head.appendChild(link);
+        };
+    </script>
+</head>
+<body class="font-sans text-slate-800 bg-[#f8fafc] antialiased selection:bg-emas-500 selection:text-white">
+
+    <!-- Top Bar: Kredensial Resmi Kemdikbudristek -->
+    <header class="border-b border-slate-200 bg-white text-xs text-slate-600 sticky top-0 z-50">
+        <div class="bg-navy-950 text-slate-300 py-1.5 px-4">
+            <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+                <div class="flex items-center space-x-4">
+                    <span class="inline-flex items-center text-emerald-400 font-medium">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse mr-1.5"></span>
+                        PPDB T.P. 2026/2027 Resmi Dibuka
+                    </span>
+                    <span class="hidden md:inline text-slate-500">|</span>
+                    <span class="hidden md:inline">NPSN: <strong>10801244</strong></span>
+                    <span class="hidden md:inline text-slate-500">|</span>
+                    <span class="hidden lg:inline">Akreditasi BAN-PDM: <strong class="text-amber-300">A (Unggul) 97/100</strong></span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="#kontak" class="hover:text-amber-300 transition-colors"><i class="fa-solid fa-phone text-xs mr-1"></i> (021) 7890-1234</a>
+                    <a href="mailto:info@sman1nusantara.sch.id" class="hidden sm:inline hover:text-amber-300 transition-colors"><i class="fa-solid fa-envelope text-xs mr-1"></i> info@sman1nusantara.sch.id</a>
+                    <button onclick="togglePortalModal()" class="bg-emas-600 hover:bg-emas-500 text-navy-950 font-bold px-2.5 py-0.5 rounded text-[11px] transition-all flex items-center gap-1 shadow-sm">
+                        <i class="fa-solid fa-graduation-cap"></i> Portal Siswa / Guru
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Navbar -->
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
+            <div class="flex items-center">
+                <div>
+                    <div class="flex items-center gap-1.5">
+                        <span class="text-[10px] tracking-wider uppercase font-extrabold bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded">Sekolah Rujukan Nasional</span>
+                    </div>
+                    <h1 class="text-lg md:text-xl font-bold font-serif text-navy-900 leading-tight">SMA NEGERI 1 NUSANTARA</h1>
+                    <p class="text-[11px] text-slate-500 font-medium">Bina Talenta Cerdas Berakhlak Mulia • Didirikan 1968</p>
+                </div>
+            </div>
+
+            <!-- Desktop Links -->
+            <div class="hidden lg:flex items-center space-x-7 text-sm font-semibold text-slate-700">
+                <a href="#beranda" class="text-kemendikbud hover:text-navy-900 transition-colors">Beranda</a>
+                <div class="relative group">
+                    <button class="flex items-center gap-1 hover:text-kemendikbud py-2">
+                        Profil <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 group-hover:rotate-180 transition-transform"></i>
+                    </button>
+                    <div class="absolute top-full left-0 hidden group-hover:block bg-white shadow-xl rounded-xl border border-slate-100 p-2 w-52 text-xs">
+                        <a href="#sambutan" class="block px-3 py-2 rounded-lg hover:bg-slate-50">Sambutan Kepala Sekolah</a>
+                        <a href="#visimisi" class="block px-3 py-2 rounded-lg hover:bg-slate-50">Visi, Misi & Karakter P5</a>
+                        <a href="#guru" class="block px-3 py-2 rounded-lg hover:bg-slate-50">Dewan Guru & Tenaga Edukatif</a>
+                        <a href="#sarpras" class="block px-3 py-2 rounded-lg hover:bg-slate-50">Sarana & Prasarana</a>
+                    </div>
+                </div>
+                <a href="#kurikulum" class="hover:text-kemendikbud transition-colors">Akademik & Riset</a>
+                <a href="#kesiswaan" class="hover:text-kemendikbud transition-colors">Kesiswaan</a>
+                <a href="#katalog" class="hover:text-kemendikbud transition-colors">Katalog Koperasi</a>
+                <a href="#prestasi" class="hover:text-kemendikbud transition-colors">Prestasi</a>
+                <a href="#berita" class="hover:text-kemendikbud transition-colors">Kabar Sekolah</a>
+                <a href="#ppdb" class="bg-navy-900 hover:bg-navy-800 text-white px-4 py-2 rounded-lg font-medium transition-all shadow hover:shadow-md flex items-center gap-2">
+                    <i class="fa-solid fa-file-pen text-emas-500"></i> SPMB / PPDB
+                </a>
+            </div>
+
+            <!-- Mobile Hamburger Button -->
+            <button onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-100" aria-label="Menu Utama">
+                <i class="fa-solid fa-bars text-xl" id="menuIcon"></i>
+            </button>
+        </nav>
+
+        <div id="mobileMenu" class="hidden lg:hidden bg-white border-b border-slate-200 px-6 py-4 space-y-3 text-sm font-medium">
+            <a href="#beranda" onclick="toggleMobileMenu()" class="block py-1 text-kemendikbud font-bold">Beranda</a>
+            <a href="#sambutan" onclick="toggleMobileMenu()" class="block py-1 text-slate-700">Profil & Sambutan</a>
+            <a href="#kurikulum" onclick="toggleMobileMenu()" class="block py-1 text-slate-700">Akademik Kurikulum Merdeka</a>
+            <a href="#kesiswaan" onclick="toggleMobileMenu()" class="block py-1 text-slate-700">Kesiswaan & Ekstrakurikuler</a>
+            <a href="#katalog" onclick="toggleMobileMenu()" class="block py-1 text-slate-700">Katalog Koperasi & Seragam</a>
+            <a href="#prestasi" onclick="toggleMobileMenu()" class="block py-1 text-slate-700">Prestasi Siswa</a>
+            <a href="#berita" onclick="toggleMobileMenu()" class="block py-1 text-slate-700">Agenda & Pengumuman</a>
+            <a href="#ppdb" onclick="toggleMobileMenu()" class="block py-2 text-center bg-navy-900 text-white rounded-lg font-bold">Pendaftaran PPDB 2026</a>
+        </div>
+    </header>
+
+    <main id="beranda">
+        <section class="relative batik-pattern text-white overflow-hidden py-16 md:py-24">
+            <div class="absolute inset-0 hero-gradient opacity-95"></div>
+            
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-semibold text-amber-300">
+                        <i class="fa-solid fa-award"></i>
+                        <span id="editable-hero-badge">Peringkat 15 Nasional Rerata UTBK & Peraih Adiwiyata Mandiri</span>
+                    </div>
+
+                    <h2 id="editable-hero-title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold font-serif leading-tight tracking-tight">
+                        Membentuk Insan Unggul, Berbudi Luhur, dan Berjiwa <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-amber-500">Pancasila</span>.
+                    </h2>
+
+                    <p id="editable-hero-desc" class="text-slate-200 text-sm md:text-base leading-relaxed max-w-2xl font-normal">
+                        Selamat datang di portal resmi SMA Negeri 1 Nusantara. Pusat pembelajaran terintegrasi dengan implementasi <strong>Kurikulum Merdeka</strong>, membekali generasi muda Indonesia menuju persaingan global dengan pondasi adab dan kepemimpinan berintegritas.
+                    </p>
+
+                    <div class="flex flex-wrap gap-3 pt-2">
+                        <a id="editable-btn-primary" href="#ppdb" class="px-6 py-3 bg-gradient-to-r from-emas-600 to-emas-500 text-navy-950 font-bold rounded-xl shadow-lg hover:shadow-emas-500/30 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                            <span id="editable-btn-primary-text">Pendaftaran PPDB 2026/2027</span>
+                        </a>
+                        <a id="editable-btn-secondary" href="#katalog" class="px-6 py-3 bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold rounded-xl backdrop-blur-sm transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-store"></i>
+                            <span id="editable-btn-secondary-text">Katalog Koperasi & Atribut</span>
+                        </a>
+                    </div>
+
+                    <!-- Keunggulan Cepat -->
+                    <div class="grid grid-cols-3 gap-4 pt-6 border-t border-white/10">
+                        <div>
+                            <div class="text-2xl md:text-3xl font-extrabold text-amber-300">92.4%</div>
+                            <div class="text-xs text-slate-300">Diterima PTN Unggulan & Kedinasan</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl md:text-3xl font-extrabold text-white">48+</div>
+                            <div class="text-xs text-slate-300">Medali OSN & FLS2N Tingkat Nasional</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl md:text-3xl font-extrabold text-white">100%</div>
+                            <div class="text-xs text-slate-300">Guru Bersertifikasi Pendidik</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5">
+                    <div class="bg-white text-slate-800 rounded-2xl shadow-2xl p-6 border-4 border-white/20 backdrop-blur relative">
+                        <div class="flex items-center justify-between border-b pb-4 mb-4">
+                            <div>
+                                <span class="text-xs uppercase font-bold tracking-wider text-kemendikbud">Layanan Mandiri Terpadu</span>
+                                <h3 class="font-bold text-lg text-navy-900">Cek Status Seleksi PPDB</h3>
+                            </div>
+                            <span class="p-2 bg-blue-50 text-kemendikbud rounded-lg">
+                                <i class="fa-solid fa-magnifying-glass-chart text-xl"></i>
+                            </span>
+                        </div>
+
+                        <!-- Form Simulasi Cek Kelulusan / NISN -->
+                        <form id="cekStatusForm" onsubmit="event.preventDefault(); prosesPencarian();" class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Nomor Induk Siswa Nasional (NISN)</label>
+                                <div class="relative">
+                                    <input type="text" id="inputNisn" required pattern="[0-9]{10}" placeholder="Contoh: 0071234567 (10 Digit)" class="w-full text-sm px-3.5 py-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-kemendikbud bg-slate-50 font-mono">
+                                    <i class="fa-solid fa-id-card absolute right-3 top-3 text-slate-400"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Jalur Pendaftaran</label>
+                                <select id="inputJalur" class="w-full text-sm px-3 py-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-kemendikbud bg-slate-50">
+                                    <option value="Zonasi">Jalur Zonasi Domisili</option>
+                                    <option value="Prestasi">Jalur Prestasi Akademik & Kejuaraan</option>
+                                    <option value="Afirmasi">Jalur Afirmasi / KIP</option>
+                                    <option value="Perpindahan">Jalur Perpindahan Tugas Orang Tua</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="w-full py-2.5 bg-navy-900 hover:bg-navy-800 text-white rounded-lg text-sm font-semibold transition-all shadow hover:shadow-md flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-search"></i> Periksa Status Pendaftaran
+                            </button>
+                        </form>
+
+                        <!-- Area Hasil Cek Status -->
+                        <div id="hasilPencarian" class="mt-4 hidden p-3.5 rounded-xl border text-xs leading-relaxed"></div>
+
+                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
+                            <span><i class="fa-solid fa-shield-halved text-emerald-600"></i> Terintegrasi Dapodik</span>
+                            <a href="#agenda" class="text-kemendikbud hover:underline font-semibold">Lihat Kalender Akademik →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Profil & Sambutan Kepala Sekolah -->
+        <section id="sambutan" class="py-16 bg-white border-b border-slate-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                    <!-- Foto Kepala Sekolah Bergaya Formal Indonesia -->
+                    <div class="lg:col-span-4 flex flex-col items-center text-center">
+                        <div class="relative">
+                            <div class="w-56 h-64 sm:w-64 sm:h-72 rounded-2xl overflow-hidden border-4 border-slate-100 shadow-xl bg-slate-200">
+                                <img id="editable-foto-kepsek"
+                                     src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80" 
+                                     alt="Kepala SMAN 1 Nusantara" 
+                                     class="w-full h-full object-cover object-top filter contrast-[1.03]"
+                                     onerror="handleSmartImageError(this, 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80')">
+                            </div>
+                            <div class="absolute -bottom-3 -right-2 bg-emas-600 text-navy-950 px-3 py-1 rounded-lg text-xs font-extrabold shadow-md flex items-center gap-1.5">
+                                <i class="fa-solid fa-certificate"></i> Pendidik Teladan
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <h4 id="editable-nama-kepsek" class="font-serif font-bold text-navy-900 text-base">Dr. H. Bambang Suryonegoro, M.Pd.</h4>
+                            <p id="editable-jabatan-kepsek" class="text-xs text-slate-500">Kepala SMA Negeri 1 Nusantara</p>
+                            <p class="text-[11px] text-slate-400 font-mono mt-0.5">NIP. 19690817 199403 1 005</p>
+                        </div>
+                    </div>
+
+                    <!-- Isi Sambutan Khas Institusi Pendidikan -->
+                    <div class="lg:col-span-8 space-y-4">
+                        <div class="inline-block px-3 py-1 bg-blue-50 text-kemendikbud rounded-full text-xs font-bold uppercase tracking-wider">
+                            Prakata Pimpinan
+                        </div>
+                        <h3 id="editable-judul-sambutan" class="text-2xl md:text-3xl font-serif font-bold text-navy-900">
+                            Menyiapkan Pemimpin Peradaban Berpijak pada Karakter Luhur Bangsa
+                        </h3>
+                        <div id="editable-isi-sambutan" class="text-slate-600 text-sm leading-relaxed space-y-3 text-justify">
+                            <p>
+                                <em>Assalamu’alaikum Warahmatullahi Wabarakatuh, Salam Sejahtera, Om Swastiastu, Namo Buddhaya, Salam Kebajikan.</em>
+                            </p>
+                            <p>
+                                Puji syukur kita panjatkan ke hadirat Tuhan Yang Maha Esa atas limpahan rahmat-Nya sehingga SMA Negeri 1 Nusantara terus istiqomah mengawal tunas-tunas bangsa menjadi insan yang tidak hanya mahir dalam sains dan teknologi, namun teguh memegang nilai moralitas serta Profil Pelajar Pancasila.
+                            </p>
+                            <p>
+                                Di era transformasi digital dan revolusi industri kecerdasan buatan, kami mengedepankan pendekatan holistik melalui pembelajaran berdiferensiasi dan riset aplikatif. Kami percaya setiap peserta didik memiliki fitrah keunikan yang siap diasah menjadi karya nyata bagi kemajuan Nusantara dan dunia internasional.
+                            </p>
+                        </div>
+
+                        <!-- Visi Singkat -->
+                        <div class="pt-4 grid sm:grid-cols-2 gap-3">
+                            <div class="p-3 bg-slate-50 rounded-xl border-l-4 border-emas-600">
+                                <span class="font-bold text-navy-900 text-xs block">Visi Utama</span>
+                                <p class="text-xs text-slate-600 italic">"Terwujudnya insan pembelajar sejati yang religius, inovatif, berwawasan ekologis, serta berdaya saing global pada 2030."</p>
+                            </div>
+                            <div class="p-3 bg-slate-50 rounded-xl border-l-4 border-kemendikbud">
+                                <span class="font-bold text-navy-900 text-xs block">Motto Kehormatan</span>
+                                <p class="text-xs text-slate-600 italic">"Vidya Karya Dharma: Berilmu luhur, berdedikasi nyata, dan berbakti bagi nusa bangsa."</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Akademik & Kurikulum Merdeka -->
+        <section id="kurikulum" class="py-16 bg-slate-50 border-b border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <span class="text-xs font-bold uppercase tracking-wider text-kemendikbud bg-sky-100 px-3 py-1 rounded-full">Standar Kurikulum Nasional</span>
+                    <h3 class="text-2xl md:text-3xl font-serif font-bold text-navy-900 mt-3">Struktur Akademik & Fase Belajar</h3>
+                    <p class="text-xs md:text-sm text-slate-600 mt-2">Penerapan penuh Kurikulum Merdeka yang fleksibel, berfokus pada esensi materi, pengembangan karakter kepribadian, serta Projek P5.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Fase E (Kelas X) -->
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="w-12 h-12 rounded-xl bg-blue-50 text-kemendikbud flex items-center justify-center text-xl mb-4 font-bold">
+                            X
+                        </div>
+                        <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wide">Fase E (Tingkat Awal)</span>
+                        <h4 class="text-lg font-bold text-navy-900 mt-1">Eksplorasi Fondasi & Minat</h4>
+                        <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                            Membangun fondasi mata pelajaran umum yang komprehensif, pemetaan minat bakat melalui asesmen psikologis, serta orientasi awal pengenalan riset ilmiah.
+                        </p>
+                        <ul class="mt-4 space-y-2 text-xs text-slate-700">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500 text-xs"></i> Seluruh mata pelajaran dasar terpadu</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500 text-xs"></i> 3 Tema Projek P5 tematik pertahun</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500 text-xs"></i> Pembinaan Matrikulasi Sains & Bahasa</li>
+                        </ul>
+                    </div>
+
+                    <!-- Fase F (Kelas XI - XII MIPA / Sains Terapan) -->
+                    <div class="bg-white p-6 rounded-2xl border-2 border-emas-500 shadow-md relative">
+                        <div class="absolute -top-3 right-6 bg-emas-600 text-navy-950 font-extrabold text-[10px] px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+                            Peminatan Unggulan
+                        </div>
+                        <div class="w-12 h-12 rounded-xl bg-amber-50 text-emas-600 flex items-center justify-center text-xl mb-4 font-bold">
+                            XI-XII
+                        </div>
+                        <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wide">Fase F (Konsentrasi MIPA)</span>
+                        <h4 class="text-lg font-bold text-navy-900 mt-1">Sains Maju, Kedokteran & Keteknikan</h4>
+                        <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                            Mata pelajaran pilihan Matematika Lanjut, Fisika, Kimia, Biologi tingkat tinggi, serta praktikum laboratorium riset modern.
+                        </p>
+                        <ul class="mt-4 space-y-2 text-xs text-slate-700">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500 text-xs"></i> Laboratorium Terpadu bersertifikasi ISO</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500 text-xs"></i> Bimbingan Intensif OSN & KSN</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500 text-xs"></i> Kolaborasi Riset Perguruan Tinggi Negeri</li>
+                        </ul>
+                    </div>
+
+                    <!-- Fase F (Kelas XI - XII Sosio-Humaniora & Bisnis) -->
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-xl mb-4 font-bold">
+                            XI-XII
+                        </div>
+                        <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wide">Fase F (Konsentrasi Humaniora)</span>
+                        <h4 class="text-lg font-bold text-navy-900 mt-1">Sosial, Hukum, Ekonomi & Diplomasi</h4>
+                        <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                            Mata pelajaran pilihan Ekonomi Makro, Sosiologi Analitis, Geografi Geopolitik, serta Bahasa Asing (Inggris, Jepang, Jerman).
+                        </p>
+                        <ul class="mt-4 space-y-2 text-xs text-slate-700">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500 text-xs"></i> Simulasi Sidang PBB (Model UN)</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500 text-xs"></i> Inkubator Kewirausahaan & Literasi Finansial</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500 text-xs"></i> Program Debat Parlemen Nusantara</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Pameran P5 Banner -->
+                <div class="mt-10 bg-navy-900 rounded-2xl p-6 sm:p-8 text-white relative overflow-hidden">
+                    <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+                        <div class="space-y-2">
+                            <span class="text-xs text-amber-300 font-bold tracking-wider uppercase">Implementasi Kurikulum Merdeka</span>
+                            <h4 class="text-xl sm:text-2xl font-bold font-serif">Gelar Karya Projek Penguatan Profil Pelajar Pancasila (P5)</h4>
+                            <p class="text-xs sm:text-sm text-slate-300 max-w-2xl">
+                                Menyemai 6 dimensi utama: Beriman & Bertakwa, Berkebinekaan Global, Bergotong Royong, Mandiri, Bernalar Kritis, dan Kreatif melalui pameran karya tahunan.
+                            </p>
+                        </div>
+                        <button onclick="bukaModalP5()" class="whitespace-nowrap px-5 py-2.5 bg-emas-600 hover:bg-emas-500 text-navy-950 font-bold rounded-xl text-xs transition-all shadow">
+                            <i class="fa-solid fa-shapes mr-1.5"></i> Lihat Galeri Karya Siswa
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kesiswaan & Ekstrakurikuler Khas Indonesia -->
+        <section id="kesiswaan" class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-kemendikbud">Keluarga Besar Kesiswaan</span>
+                        <h3 class="text-2xl md:text-3xl font-serif font-bold text-navy-900 mt-1">Ekstrakurikuler & Organisasi Siswa</h3>
+                        <p class="text-xs md:text-sm text-slate-600 mt-1">Mengasah kepemimpinan, patriotisme, seni tradisi, serta bakat olahraga.</p>
+                    </div>
+
+                    <!-- Tab Filter Kategori Ekstra -->
+                    <div class="flex flex-wrap gap-2 mt-4 md:mt-0" id="ekstraTabs">
+                        <button onclick="filterEkstra('semua')" class="tab-btn active px-3.5 py-1.5 rounded-lg text-xs font-bold bg-navy-900 text-white">Semua</button>
+                        <button onclick="filterEkstra('kepemimpinan')" class="tab-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">Kepemimpinan</button>
+                        <button onclick="filterEkstra('akademik')" class="tab-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">Sains & KIR</button>
+                        <button onclick="filterEkstra('seni')" class="tab-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">Seni Budaya</button>
+                        <button onclick="filterEkstra('olahraga')" class="tab-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">Olahraga</button>
+                    </div>
+                </div>
+
+                <!-- Grid Ekstrakurikuler -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="ekstraGrid">
+                    <!-- PASKIBRA -->
+                    <div class="ekstra-card kepemimpinan bg-white border border-slate-200 rounded-2xl p-5 hover:border-emas-500 hover:shadow-lg transition-all group">
+                        <div class="w-12 h-12 rounded-xl bg-red-50 text-red-600 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-flag"></i>
+                        </div>
+                        <span class="text-[10px] font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded">Bela Negara</span>
+                        <h5 class="font-bold text-navy-900 text-base mt-2">PASKIBRA Satria Nusantara</h5>
+                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">Disiplin tinggi baris-berbaris dan konsisten mengirimkan perwakilan Paskibraka ke tingkat Istana Negara.</p>
+                        <div class="mt-4 pt-3 border-t text-[11px] text-slate-500 font-medium flex justify-between">
+                            <span>Latihan: Sab & Min</span>
+                            <span class="text-navy-900 font-bold">120 Anggota</span>
+                        </div>
+                    </div>
+
+                    <!-- PRAMUKA -->
+                    <div class="ekstra-card kepemimpinan bg-white border border-slate-200 rounded-2xl p-5 hover:border-emas-500 hover:shadow-lg transition-all group">
+                        <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-800 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-campground"></i>
+                        </div>
+                        <span class="text-[10px] font-bold text-amber-800 bg-amber-50 px-2 py-0.5 rounded">Wajib Nasional</span>
+                        <h5 class="font-bold text-navy-900 text-base mt-2">Pramuka Gudep 01.125</h5>
+                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">Penegak Bantara & Laksana yang tangguh, mandiri, peduli kelestarian alam, serta survival kecakapan hidup.</p>
+                        <div class="mt-4 pt-3 border-t text-[11px] text-slate-500 font-medium flex justify-between">
+                            <span>Latihan: Jumat</span>
+                            <span class="text-navy-900 font-bold">Ambalan Wijaya</span>
+                        </div>
+                    </div>
+
+                    <!-- KIR / KARYA ILMIAH REMAJA -->
+                    <div class="ekstra-card akademik bg-white border border-slate-200 rounded-2xl p-5 hover:border-emas-500 hover:shadow-lg transition-all group">
+                        <div class="w-12 h-12 rounded-xl bg-blue-50 text-kemendikbud flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-microscope"></i>
+                        </div>
+                        <span class="text-[10px] font-bold text-kemendikbud bg-blue-50 px-2 py-0.5 rounded">Riset Ilmiah</span>
+                        <h5 class="font-bold text-navy-900 text-base mt-2">KIR (Karya Ilmiah Remaja)</h5>
+                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">Laboratorium peneliti muda bidang sains terapan, humaniora, dan teknologi tepat guna berstandar BRIN.</p>
+                        <div class="mt-4 pt-3 border-t text-[11px] text-slate-500 font-medium flex justify-between">
+                            <span>Latihan: Selasa & Kamis</span>
+                            <span class="text-navy-900 font-bold">Juara LKTI 2025</span>
+                        </div>
+                    </div>
+
+                    <!-- PMR (PALANG MERAH REMAJA) -->
+                    <div class="ekstra-card kepemimpinan bg-white border border-slate-200 rounded-2xl p-5 hover:border-emas-500 hover:shadow-lg transition-all group">
+                        <div class="w-12 h-12 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-kit-medical"></i>
+                        </div>
+                        <span class="text-[10px] font-bold text-rose-600 bg-rose-50 px-2 py-0.5 rounded">Kemanusiaan</span>
+                        <h5 class="font-bold text-navy-900 text-base mt-2">PMR Wira Nusantara</h5>
+                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">Kesiapsiagaan pertolongan pertama, tanggap darurat bencana, dan bakti sosial donor darah PMI.</p>
+                        <div class="mt-4 pt-3 border-t text-[11px] text-slate-500 font-medium flex justify-between">
+                            <span>Latihan: Rabu</span>
+                            <span class="text-navy-900 font-bold">Siaga Bencana</span>
+                        </div>
+                    </div>
+
+                    <!-- SENI TARI TRADISIONAL -->
+                    <div class="ekstra-card seni bg-white border border-slate-200 rounded-2xl p-5 hover:border-emas-500 hover:shadow-lg transition-all group">
+                        <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-masks-theater"></i>
+                        </div>
+                        <span class="text-[10px] font-bold text-purple-600 bg-purple-50 px-2 py-0.5 rounded">Kebudayaan</span>
+                        <h5 class="font-bold text-navy-900 text-base mt-2">Tari Tradisi Citra Kirana</h5>
+                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">Pelestarian mahakarya seni tari daerah Nusantara mulai dari Saman, Jaipong, hingga Tari Piring kontemporer.</p>
+                        <div class="mt-4 pt-3 border-t text-[11px] text-slate-500 font-medium flex justify-between">
+                            <span>Latihan: Sabtu</span>
+                            <span class="text-navy-900 font-bold">Penyaji Terbaik FLS2N</span>
+                        </div>
+                    </div>
+
+                    <!-- PADUAN SUARA / GITA SWARA -->
+                    <div class="ekstra-card seni bg-white border border-slate-200 rounded-2xl p-5 hover:border-emas-500 hover:shadow-lg transition-all group">
+                        <div class="w-12 h-12 rounded-xl bg-pink-50 text-pink-600 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-music"></i>
+                        </div>
+                        <span class="text-[10px] font-bold text-pink-600 bg-pink-50 px-2 py-0.5 rounded">Paduan Suara</span>
+                        <h5 class="font-bold text-navy-900 text-base mt-2">Gita Swara SMANSA</h5>
+                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">Koor harmoni lagu nasional, lagu daerah, dan repertoar klasik pada upacara kenegaraan dan festival padus.</p>
+                        <div class="mt-4 pt-3 border-t text-[11px] text-slate-500 font-medium flex justify-between">
+                            <span>Latihan: Senin & Kamis</span>
+                            <span class="text-navy-900 font-bold">Gold Medal Choral</span>
+                        </div>
+                    </div>
+
+                    <!-- BASKETBALL (DBL) -->
+                    <div class="ekstra-card olahraga bg-white border border-slate-200 rounded-2xl p-5 hover:border-emas-500 hover:shadow-lg transition-all group">
+                        <div class="w-12 h-12 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-basketball"></i>
+                        </div>
+                        <span class="text-[10px] font-bold text-orange-600 bg-orange-50 px-2 py-0.5 rounded">Prestasi Atlet</span>
+                        <h5 class="font-bold text-navy-900 text-base mt-2">Basket Putra & Putri (DBL)</h5>
+                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">Tim basket tangguh langganan Fantastic Four Honda DBL Indonesia Series dengan pembina berlisensi Perbasi.</p>
+                        <div class="mt-4 pt-3 border-t text-[11px] text-slate-500 font-medium flex justify-between">
+                            <span>Latihan: Sore Hari</span>
+                            <span class="text-navy-900 font-bold">Gelar Juara 2025</span>
+                        </div>
+                    </div>
+
+                    <!-- PENCAK SILAT / MERPATI PUTIH -->
+                    <div class="ekstra-card olahraga bg-white border border-slate-200 rounded-2xl p-5 hover:border-emas-500 hover:shadow-lg transition-all group">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-hand-fist"></i>
+                        </div>
+                        <span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Bela Diri Tradisi</span>
+                        <h5 class="font-bold text-navy-900 text-base mt-2">Pencak Silat IPSI</h5>
+                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">Mengolah nafas naluri, ketangkasan fisik, dan keluhuran budi pekerti warisan leluhur bangsa Indonesia.</p>
+                        <div class="mt-4 pt-3 border-t text-[11px] text-slate-500 font-medium flex justify-between">
+                            <span>Latihan: Minggu Pagi</span>
+                            <span class="text-navy-900 font-bold">Juara Popda</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Organisasi Siswa (OSIS & MPK) Info -->
+                <div class="mt-8 bg-slate-50 border border-slate-200 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-navy-900 text-emas-500 flex items-center justify-center text-2xl">
+                            <i class="fa-solid fa-users-gear"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-navy-900 text-base">OSIS & MPK Masa Bakti 2025/2026</h4>
+                            <p class="text-xs text-slate-600">Dipilih secara demokratis melalui Pemilos (Pemilihan Ketua OSIS berbasis digital e-Voting).</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-3">
+                        <button onclick="bukaModalOsis()" class="px-4 py-2 border border-slate-300 hover:bg-white text-navy-900 rounded-lg text-xs font-semibold transition-all">
+                            Struktur Pengurus
+                        </button>
+                        <a href="#agenda" class="px-4 py-2 bg-navy-900 hover:bg-navy-800 text-white rounded-lg text-xs font-semibold transition-all">
+                            Program Kerja Tahunan
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEKSI BARU: Katalog Koperasi Siswa, Seragam, & Karya P5 (Editable via Admin) -->
+        <section id="katalog" class="py-16 bg-slate-50 border-b border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-kemendikbud bg-sky-100 px-3 py-1 rounded-full">
+                            Unit Koperasi & Sentra Kreativitas Siswa
+                        </span>
+                        <h3 class="text-2xl md:text-3xl font-serif font-bold text-navy-900 mt-2">Katalog Resmi Perlengkapan & Karya Siswa</h3>
+                        <p class="text-xs md:text-sm text-slate-600 mt-1">Pemesanan resmi atribut seragam sekolah, modul kurikulum, serta produk kewirausahaan P5.</p>
+                    </div>
+                    <div class="mt-4 md:mt-0 flex gap-2">
+                        <button onclick="filterKatalog('semua')" class="kat-btn active px-3.5 py-1.5 rounded-lg text-xs font-bold bg-navy-900 text-white">Semua</button>
+                        <button onclick="filterKatalog('seragam')" class="kat-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:bg-slate-100">Seragam</button>
+                        <button onclick="filterKatalog('buku')" class="kat-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:bg-slate-100">Buku & Modul</button>
+                        <button onclick="filterKatalog('karya-p5')" class="kat-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:bg-slate-100">Karya P5</button>
+                    </div>
+                </div>
+
+                <!-- Product Grid -->
+                <div id="produkGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Produk dirender secara dinamis oleh JavaScript / Firestore -->
+                </div>
+
+                <div class="mt-8 bg-white border border-slate-200 rounded-2xl p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-amber-50 text-emas-600 flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-truck-fast"></i>
+                        </div>
+                        <p class="text-xs text-slate-600">
+                            Pengambilan barang dapat dilakukan langsung di <strong>Koperasi Siswa SMANSA Lantai 1</strong> atau dikirim ke rumah siswa terdaftar.
+                        </p>
+                    </div>
+                    <button onclick="bukaModalLacakBooking()" class="text-xs font-bold text-navy-900 border border-slate-300 hover:bg-slate-50 px-4 py-2 rounded-xl transition-colors shrink-0">
+                        <i class="fa-solid fa-receipt mr-1.5 text-kemendikbud"></i> Lacak Status Pesanan
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Prestasi Terkini Siswa -->
+        <section id="prestasi" class="py-16 bg-[#0c2340] text-white relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <span class="text-xs font-bold uppercase tracking-wider text-amber-300 bg-amber-400/10 border border-amber-400/30 px-3 py-1 rounded-full">
+                        Jejak Prestasi Gemilang
+                    </span>
+                    <h3 class="text-2xl md:text-3xl font-serif font-bold text-white mt-3">Tradisi Juara Berkelanjutan</h3>
+                    <p class="text-xs md:text-sm text-slate-300 mt-2">Kebanggaan almamater dalam kancah olimpiade sains, olahraga, seni budaya, serta inovasi kepemudaan.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Medali Emas OSN Fisika -->
+                    <div class="bg-navy-900/90 border border-white/10 rounded-2xl p-6 relative group hover:border-amber-400 transition-all">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-2.5 py-1 bg-amber-500/20 text-amber-300 border border-amber-400/40 rounded text-[11px] font-bold">
+                                <i class="fa-solid fa-medal mr-1"></i> Medali Emas
+                            </span>
+                            <span class="text-xs text-slate-400">Oktober 2025</span>
+                        </div>
+                        <h4 class="font-bold text-lg text-white group-hover:text-amber-300 transition-colors">Olimpiade Sains Nasional (OSN) Fisika</h4>
+                        <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+                            Diraih oleh ananda <strong>Muhammad Farhan Pratama (Kelas XII MIPA 1)</strong> yang kini mewakili delegasi Indonesia di International Physics Olympiad (IPhO).
+                        </p>
+                        <div class="mt-4 pt-3 border-t border-white/10 text-[11px] text-slate-400 flex items-center justify-between">
+                            <span>Tingkat: Nasional (Puspresnas)</span>
+                            <span class="text-amber-300"><i class="fa-solid fa-award"></i> Puspresnas RI</span>
+                        </div>
+                    </div>
+
+                    <!-- Juara 1 DBL Basket Regional -->
+                    <div class="bg-navy-900/90 border border-white/10 rounded-2xl p-6 relative group hover:border-amber-400 transition-all">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-2.5 py-1 bg-amber-500/20 text-amber-300 border border-amber-400/40 rounded text-[11px] font-bold">
+                                <i class="fa-solid fa-trophy mr-1"></i> Champion
+                            </span>
+                            <span class="text-xs text-slate-400">November 2025</span>
+                        </div>
+                        <h4 class="font-bold text-lg text-white group-hover:text-amber-300 transition-colors">Honda DBL Basketball League Series</h4>
+                        <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+                            Tim Basket Putra SMANSA berhasil mempertahankan gelar Juara 1 Utama secara berturut-turut setelah menundukkan lawan di partai final yang dramatis.
+                        </p>
+                        <div class="mt-4 pt-3 border-t border-white/10 text-[11px] text-slate-400 flex items-center justify-between">
+                            <span>Kategori: Tim Putra Pelajar</span>
+                            <span class="text-amber-300"><i class="fa-solid fa-certificate"></i> DBL Indonesia</span>
+                        </div>
+                    </div>
+
+                    <!-- Juara LKTI Tingkat Nasional BRIN -->
+                    <div class="bg-navy-900/90 border border-white/10 rounded-2xl p-6 relative group hover:border-amber-400 transition-all">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-2.5 py-1 bg-amber-500/20 text-amber-300 border border-amber-400/40 rounded text-[11px] font-bold">
+                                <i class="fa-solid fa-award mr-1"></i> Juara 1 & Best Paper
+                            </span>
+                            <span class="text-xs text-slate-400">Januari 2026</span>
+                        </div>
+                        <h4 class="font-bold text-lg text-white group-hover:text-amber-300 transition-colors">Lomba Karya Ilmiah Remaja Nasional (LKIR)</h4>
+                        <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+                            Inovasi biosensor limbah batik ramah lingkungan karya <strong>Nadhira Aulia & Tim KIR SMANSA</strong> mendapatkan apresiasi riset pendanaan penuh.
+                        </p>
+                        <div class="mt-4 pt-3 border-t border-white/10 text-[11px] text-slate-400 flex items-center justify-between">
+                            <span>Afiliasi: Riset Bioteknologi Lingkungan</span>
+                            <span class="text-amber-300"><i class="fa-solid fa-star"></i> BRIN</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Banner Alumni Lolos SNBT & Perguruan Tinggi Kedinasan -->
+                <div class="mt-8 bg-gradient-to-r from-navy-950 to-blue-950 border border-amber-400/30 rounded-2xl p-6">
+                    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+                        <div>
+                            <h5 class="text-base font-bold text-white">Sebaran Alumni di Perguruan Tinggi Negeri Terbaik (2025)</h5>
+                            <p class="text-xs text-slate-300 mt-1">ITB (45 Siswa) • UI (52 Siswa) • UGM (61 Siswa) • Kedokteran (28 Siswa) • STAN, Akmil & Akpol (19 Siswa)</p>
+                        </div>
+                        <button onclick="bukaModalAlumni()" class="px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/30 text-white rounded-xl text-xs font-semibold whitespace-nowrap transition-all">
+                            Lihat Statistik Alumni →
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PPDB & SPMB T.P. 2026/2027 -->
+        <section id="ppdb" class="py-16 bg-white border-b border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full">
+                        <i class="fa-solid fa-bullhorn mr-1"></i> Informasi Resmi Pendaftaran
+                    </span>
+                    <h3 class="text-2xl md:text-3xl font-serif font-bold text-navy-900 mt-3">Penerimaan Peserta Didik Baru (PPDB) 2026</h3>
+                    <p class="text-xs md:text-sm text-slate-600 mt-2">Transparan, Akuntabel, dan Berkeadilan sesuai Permendikbudristek No. 1 Tahun 2021.</p>
+                </div>
+
+                <!-- Jalur Pendaftaran Tabs Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div class="p-5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white hover:border-kemendikbud transition-all">
+                        <div class="text-2xl font-black text-navy-900 mb-1">50%</div>
+                        <h4 class="font-bold text-navy-900 text-sm">Jalur Zonasi Domisili</h4>
+                        <p class="text-xs text-slate-600 mt-2 leading-relaxed">Berdasarkan jarak tempat tinggal resmi calon siswa sesuai Kartu Keluarga dengan titik koordinat sekolah.</p>
+                        <span class="inline-block mt-3 text-[11px] font-bold text-kemendikbud">Radius maks. terlayani ~ 2.8 km</span>
+                    </div>
+
+                    <div class="p-5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white hover:border-emas-500 transition-all">
+                        <div class="text-2xl font-black text-emas-600 mb-1">30%</div>
+                        <h4 class="font-bold text-navy-900 text-sm">Jalur Prestasi</h4>
+                        <p class="text-xs text-slate-600 mt-2 leading-relaxed">Nilai rapor semester 1-5 SMP/MTs sederajat dan sertifikat piagam kejuaraan kejuaraan resmi berjenjang.</p>
+                        <span class="inline-block mt-3 text-[11px] font-bold text-emas-700">Akademik & Non-Akademik</span>
+                    </div>
+
+                    <div class="p-5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white hover:border-emerald-600 transition-all">
+                        <div class="text-2xl font-black text-emerald-600 mb-1">15%</div>
+                        <h4 class="font-bold text-navy-900 text-sm">Jalur Afirmasi KIP</h4>
+                        <p class="text-xs text-slate-600 mt-2 leading-relaxed">Diperuntukkan bagi calon peserta didik dari keluarga ekonomi tidak mampu (pemegang KIP, PKH) dan disabilitas.</p>
+                        <span class="inline-block mt-3 text-[11px] font-bold text-emerald-700">Terdaftar di DTKS Kemensos</span>
+                    </div>
+
+                    <div class="p-5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white hover:border-purple-600 transition-all">
+                        <div class="text-2xl font-black text-purple-600 mb-1">5%</div>
+                        <h4 class="font-bold text-navy-900 text-sm">Mutasi Tugas Orang Tua</h4>
+                        <p class="text-xs text-slate-600 mt-2 leading-relaxed">Perpindahan tugas instansi/kantor dinas pemerintah, TNI/Polri, BUMN, atau anak kandung pendidik.</p>
+                        <span class="inline-block mt-3 text-[11px] font-bold text-purple-700">SK Pindah Tugas Resmi</span>
+                    </div>
+                </div>
+
+                <div class="mt-8 bg-slate-50 border border-slate-200 rounded-2xl p-6 sm:p-8">
+                    <h4 class="text-base font-bold text-navy-900 flex items-center gap-2">
+                        <i class="fa-solid fa-calculator text-kemendikbud"></i>
+                        Simulasi Peluang Jalur Seleksi Mandiri
+                    </h4>
+                    <p class="text-xs text-slate-500 mt-1">Gunakan alat estimasi ini untuk mengecek rekomendasi jalur terbaik sebelum mendaftar ke portal dinas pendidikan.</p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Estimasi Jarak Rumah (KM)</label>
+                            <input type="number" id="simJarak" step="0.1" min="0.1" value="1.4" class="w-full text-xs p-2.5 rounded-lg border border-slate-300 bg-white">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Rata-rata Nilai Rapor SMP (Sem 1-5)</label>
+                            <input type="number" id="simNilai" step="0.1" min="50" max="100" value="89.5" class="w-full text-xs p-2.5 rounded-lg border border-slate-300 bg-white">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Kepemilikan Piagam Kejuaraan</label>
+                            <select id="simSertifikat" class="w-full text-xs p-2.5 rounded-lg border border-slate-300 bg-white">
+                                <option value="nasional">Tingkat Nasional (Juara 1-3)</option>
+                                <option value="provinsi">Tingkat Provinsi (Juara 1-3)</option>
+                                <option value="kota">Tingkat Kota / Kabupaten</option>
+                                <option value="tidak">Belum Memiliki Piagam</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 flex items-center justify-between flex-wrap gap-4">
+                        <button onclick="hitungSimulasiPPDB()" class="px-5 py-2.5 bg-kemendikbud hover:bg-sky-600 text-white font-bold rounded-lg text-xs transition-all shadow">
+                            <i class="fa-solid fa-chart-pie mr-1"></i> Analisis Peluang Sekarang
+                        </button>
+                        <div id="simulasiHasil" class="text-xs font-semibold text-navy-900 bg-white px-4 py-2 rounded-lg border border-slate-200">
+                            Peluang: <span class="text-emerald-600">Sangat Kuat di Jalur Zonasi & Jalur Prestasi</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Berita & Kalender Agenda -->
+        <section id="berita" class="py-16 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+                    <!-- Artikel & Berita Terkini -->
+                    <div class="lg:col-span-8 space-y-6">
+                        <div class="flex items-center justify-between border-b pb-3">
+                            <div>
+                                <span class="text-xs font-bold uppercase tracking-wider text-kemendikbud">Kabar Almamater</span>
+                                <h3 class="text-xl md:text-2xl font-serif font-bold text-navy-900">Warta & Informasi Sekolah</h3>
+                            </div>
+                            <button onclick="tampilkanSemuaBerita()" class="text-xs font-bold text-kemendikbud hover:underline flex items-center gap-1">
+                                <span>Arsip Berita</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </button>
+                        </div>
+
+                        <!-- Card Berita Utama -->
+                        <div onclick="bacaDetailBerita(1)" class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-lg hover:border-kemendikbud transition-all duration-300 grid sm:grid-cols-12 cursor-pointer group">
+                            <div class="sm:col-span-5 bg-slate-200 h-48 sm:h-auto overflow-hidden relative">
+                                <img src="https://images.unsplash.com/photo-1581092921461-eab62e97a780?auto=format&fit=crop&w=700&q=80" 
+                                     alt="Laboratorium Kecerdasan Buatan" 
+                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                     onerror="handleSmartImageError(this, 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=700&q=80')">
+                                <span class="absolute top-3 left-3 bg-navy-900/80 backdrop-blur-sm text-amber-300 text-[10px] font-bold px-2 py-0.5 rounded">
+                                    Berita Utama
+                                </span>
+                            </div>
+                            <div class="sm:col-span-7 p-5 flex flex-col justify-between">
+                                <div>
+                                    <div class="flex items-center gap-2 text-[11px] text-slate-500 mb-2">
+                                        <span class="bg-sky-100 text-kemendikbud font-bold px-2 py-0.5 rounded">Riset & Teknologi</span>
+                                        <span>•</span>
+                                        <span>12 September 2026</span>
+                                    </div>
+                                    <h4 class="font-bold text-navy-900 text-base leading-snug group-hover:text-kemendikbud transition-colors">
+                                        Peresmian Laboratorium Kecerdasan Buatan & Digital Studio Hibah Industri
+                                    </h4>
+                                    <p class="text-xs text-slate-600 mt-2 line-clamp-3 leading-relaxed">
+                                        SMAN 1 Nusantara meresmikan fasilitas komputasi mutakhir guna mendukung mata pelajaran Informatika Fase F serta pengembangan bakat robotika siswa binaan.
+                                    </p>
+                                </div>
+                                <div class="mt-4 pt-3 border-t text-xs text-slate-500 flex items-center justify-between">
+                                    <span class="flex items-center gap-1.5"><i class="fa-solid fa-user-pen text-kemendikbud"></i> Humas SMANSA</span>
+                                    <span class="text-kemendikbud font-bold flex items-center gap-1">
+                                        Baca Rilis <i class="fa-solid fa-chevron-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 2 Card Berita Pendukung -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div onclick="bacaDetailBerita(2)" class="bg-white rounded-xl border border-slate-200 p-4 hover:shadow-md hover:border-emerald-500 transition-all cursor-pointer group flex flex-col justify-between">
+                                <div>
+                                    <div class="aspect-video w-full rounded-lg overflow-hidden bg-slate-100 mb-3 relative">
+                                        <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=500&q=80" 
+                                             alt="Adiwiyata Hari Bumi" 
+                                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                             onerror="handleSmartImageError(this, 'https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=500&q=80')">
+                                        <span class="absolute top-2 left-2 bg-emerald-700 text-white text-[9px] font-bold px-1.5 py-0.5 rounded">
+                                            Adiwiyata
+                                        </span>
+                                    </div>
+                                    <span class="text-[11px] text-slate-400 block">08 September 2026</span>
+                                    <h5 class="font-bold text-sm text-navy-900 mt-1 group-hover:text-emerald-700 transition-colors">
+                                        Gerakan Pungut Sampah & Pembuatan Biopori Massal Peringatan Hari Bumi
+                                    </h5>
+                                    <p class="text-xs text-slate-600 mt-1.5 line-clamp-2">Siswa kelas X antusias mempraktikkan konservasi air tanah pada pekarangan arboretum sekolah.</p>
+                                </div>
+                                <div class="mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between text-[11px] text-emerald-700 font-bold">
+                                    <span>Program Sekolah Hijau</span>
+                                    <span>Baca →</span>
+                                </div>
+                            </div>
+
+                            <div onclick="bacaDetailBerita(3)" class="bg-white rounded-xl border border-slate-200 p-4 hover:shadow-md hover:border-purple-500 transition-all cursor-pointer group flex flex-col justify-between">
+                                <div>
+                                    <div class="aspect-video w-full rounded-lg overflow-hidden bg-slate-100 mb-3 relative">
+                                        <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=500&q=80" 
+                                             alt="LDKS OSIS SMANSA" 
+                                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                             onerror="handleSmartImageError(this, 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=500&q=80')">
+                                        <span class="absolute top-2 left-2 bg-purple-700 text-white text-[9px] font-bold px-1.5 py-0.5 rounded">
+                                            Kesiswaan
+                                        </span>
+                                    </div>
+                                    <span class="text-[11px] text-slate-400 block">02 September 2026</span>
+                                    <h5 class="font-bold text-sm text-navy-900 mt-1 group-hover:text-purple-700 transition-colors">
+                                        Latihan Dasar Kepemimpinan Siswa (LDKS) Calon Pengurus OSIS 2026/2027
+                                    </h5>
+                                    <p class="text-xs text-slate-600 mt-1.5 line-clamp-2">Membekali calon pengurus terpilih dengan etika manajerial organisasi dan wawasan kebangsaan.</p>
+                                </div>
+                                <div class="mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between text-[11px] text-purple-700 font-bold">
+                                    <span>Kepemimpinan Pemuda</span>
+                                    <span>Baca →</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Agenda & Kalender Kegiatan Sekolah (Sidebar) -->
+                    <div class="lg:col-span-4 space-y-6" id="agenda">
+                        <div class="flex items-center justify-between border-b pb-3">
+                            <div>
+                                <span class="text-xs font-bold uppercase tracking-wider text-amber-600">Jadwal Terdekat</span>
+                                <h3 class="text-xl font-serif font-bold text-navy-900">Agenda Akademik</h3>
+                            </div>
+                            <button onclick="unduhKalender()" class="text-xs font-semibold text-kemendikbud hover:underline flex items-center gap-1">
+                                <i class="fa-solid fa-file-pdf"></i> Unduh
+                            </button>
+                        </div>
+
+                        <div class="space-y-3">
+                            <div class="bg-white p-4 rounded-xl border border-slate-200 hover:border-kemendikbud transition-all flex items-start gap-3.5 shadow-sm">
+                                <div class="w-12 h-12 rounded-xl bg-sky-50 border border-sky-200 text-kemendikbud flex flex-col items-center justify-center shrink-0">
+                                    <span class="text-[10px] font-bold uppercase">SEP</span>
+                                    <span class="text-base font-extrabold leading-none">22</span>
+                                </div>
+                                <div>
+                                    <h5 class="text-xs font-bold text-navy-900">Asesmen Sumatif Tengah Semester (ASTS)</h5>
+                                    <p class="text-[11px] text-slate-500 mt-0.5">Penilaian capaian belajar peserta didik Fase E & Fase F berbasis Computer Based Test (CBT).</p>
+                                    <span class="inline-block text-[10px] text-kemendikbud font-semibold mt-1">
+                                        <i class="fa-regular fa-clock mr-1"></i> 22 - 29 Sep 2026
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="bg-white p-4 rounded-xl border border-slate-200 hover:border-emas-500 transition-all flex items-start gap-3.5 shadow-sm">
+                                <div class="w-12 h-12 rounded-xl bg-amber-50 border border-amber-200 text-emas-700 flex flex-col items-center justify-center shrink-0">
+                                    <span class="text-[10px] font-bold uppercase">OKT</span>
+                                    <span class="text-base font-extrabold leading-none">14</span>
+                                </div>
+                                <div>
+                                    <h5 class="text-xs font-bold text-navy-900">Pameran Panen Karya Projek P5</h5>
+                                    <p class="text-[11px] text-slate-500 mt-0.5">Eksibisi kewirausahaan, gelar seni budaya tradisional, dan produk rekayasa teknologi siswa.</p>
+                                    <span class="inline-block text-[10px] text-emas-700 font-semibold mt-1">
+                                        <i class="fa-regular fa-clock mr-1"></i> Aula Graha Nusantara
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="bg-white p-4 rounded-xl border border-slate-200 hover:border-emerald-500 transition-all flex items-start gap-3.5 shadow-sm">
+                                <div class="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 flex flex-col items-center justify-center shrink-0">
+                                    <span class="text-[10px] font-bold uppercase">NOV</span>
+                                    <span class="text-base font-extrabold leading-none">10</span>
+                                </div>
+                                <div>
+                                    <h5 class="text-xs font-bold text-navy-900">Peringatan Hari Pahlawan & Donor Darah PMR</h5>
+                                    <p class="text-[11px] text-slate-500 mt-0.5">Upacara bendera kenegaraan dan bakti sosial kemanusiaan bekerjasama dengan PMI Kota.</p>
+                                    <span class="inline-block text-[10px] text-emerald-700 font-semibold mt-1">
+                                        <i class="fa-regular fa-clock mr-1"></i> Lapangan Upacara
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Buku Tamu & Aspirasi Box -->
+                        <div class="bg-gradient-to-br from-navy-900 to-navy-950 text-white p-5 rounded-2xl shadow-md space-y-3">
+                            <div class="flex items-center gap-2 text-amber-300 text-xs font-bold uppercase">
+                                <i class="fa-solid fa-envelope-open-text"></i> Buku Tamu & Layanan Aspirasi
+                            </div>
+                            <p class="text-[11px] text-slate-300 leading-relaxed">
+                                Sampaikan masukan, apresiasi, atau pengaduan terpadu kepada manajemen sekolah.
+                            </p>
+                            <form id="formBukuTamu" onsubmit="event.preventDefault(); simpanBukuTamu();" class="space-y-2 text-xs">
+                                <input type="text" required placeholder="Nama Lengkap / Instansi" class="w-full p-2 rounded-lg bg-navy-800 text-white placeholder-slate-400 border border-navy-700 text-xs focus:ring-1 focus:ring-amber-300">
+                                <input type="email" required placeholder="Alamat Surel (Email)" class="w-full p-2 rounded-lg bg-navy-800 text-white placeholder-slate-400 border border-navy-700 text-xs focus:ring-1 focus:ring-amber-300">
+                                <textarea rows="2" required placeholder="Pesan atau aspirasi Anda..." class="w-full p-2 rounded-lg bg-navy-800 text-white placeholder-slate-400 border border-navy-700 text-xs focus:ring-1 focus:ring-amber-300"></textarea>
+                                <button type="submit" class="w-full py-2 bg-emas-600 hover:bg-emas-500 text-navy-950 font-bold rounded-lg text-xs transition-colors">
+                                    Kirimkan Aspirasi
+                                </button>
+                            </form>
+                            <div id="toastSukses" class="hidden text-emerald-400 text-[11px] font-semibold text-center">
+                                <i class="fa-solid fa-circle-check"></i> Pesan Anda berhasil dikirim ke pengelola sekolah.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sarana & Prasarana Sekolah -->
+        <section id="sarpras" class="py-16 bg-white border-b border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-kemendikbud">Lingkungan Belajar Kondusif</span>
+                        <h3 class="text-2xl md:text-3xl font-serif font-bold text-navy-900 mt-1">Fasilitas Standar Nasional Pendidikan</h3>
+                        <p class="text-xs md:text-sm text-slate-600 mt-1">Lahan asri seluas 2,4 hektare berpredikat Sekolah Sehat & Ramah Anak.</p>
+                    </div>
+                    <div class="mt-4 md:mt-0 flex gap-2">
+                        <span class="inline-flex items-center gap-1.5 text-xs text-emerald-700 bg-emerald-50 px-3 py-1.5 rounded-lg font-semibold border border-emerald-200">
+                            <i class="fa-solid fa-leaf"></i> Kampus Hijau Adiwiyata
+                        </span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="group relative rounded-xl overflow-hidden shadow-sm aspect-video bg-slate-200">
+                        <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=600&q=80" 
+                             alt="Perpustakaan Digital" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                             onerror="handleSmartImageError(this, 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=600&q=80')">
+                        <div class="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-transparent flex items-end p-3 text-white">
+                            <div>
+                                <h6 class="text-xs font-bold">Perpustakaan & e-Library</h6>
+                                <p class="text-[10px] text-slate-300">15.000+ Koleksi Buku & Jurnal</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="group relative rounded-xl overflow-hidden shadow-sm aspect-video bg-slate-200">
+                        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80" 
+                             alt="Lab Sains" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                             onerror="handleSmartImageError(this, 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=600&q=80')">
+                        <div class="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-transparent flex items-end p-3 text-white">
+                            <div>
+                                <h6 class="text-xs font-bold">Lab Kimia, Fisika & Hayati</h6>
+                                <p class="text-[10px] text-slate-300">Alat Ukur Digital Presisi</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="group relative rounded-xl overflow-hidden shadow-sm aspect-video bg-slate-200">
+                        <img src="https://images.unsplash.com/photo-1517649763962-0c623266ddc0?auto=format&fit=crop&w=600&q=80" 
+                             alt="Gelanggang Olahraga" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                             onerror="handleSmartImageError(this, 'https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=600&q=80')">
+                        <div class="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-transparent flex items-end p-3 text-white">
+                            <div>
+                                <h6 class="text-xs font-bold">GOR & Lapangan Multifungsi</h6>
+                                <p class="text-[10px] text-slate-300">Futsal, Basket, Voli & Atletik</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="group relative rounded-xl overflow-hidden shadow-sm aspect-video bg-slate-200">
+                        <img src="https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&w=600&q=80" 
+                             alt="Masjid Sekolah" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                             onerror="handleSmartImageError(this, 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=600&q=80')">
+                        <div class="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-transparent flex items-end p-3 text-white">
+                            <div>
+                                <h6 class="text-xs font-bold">Masjid & Ruang Ibadah</h6>
+                                <p class="text-[10px] text-slate-300">Kapasitas 1.000 Jamaah</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Khas Sekolah Negeri Indonesia -->
+    <footer class="bg-navy-950 text-slate-400 text-xs border-t-2 border-emas-600">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+                <!-- Kolom 1 & 2: Identitas Resmi -->
+                <div class="lg:col-span-2 space-y-3">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-lg bg-navy-900 border border-emas-500 flex items-center justify-center text-emas-500 text-xl font-bold">
+                            <i class="fa-solid fa-school"></i>
+                        </div>
+                        <div>
+                            <h5 class="text-sm font-bold text-white tracking-wide">SMA NEGERI 1 NUSANTARA</h5>
+                            <p class="text-[11px] text-slate-400">Pemerintah Provinsi DKI Jakarta • Dinas Pendidikan</p>
+                        </div>
+                    </div>
+                    <p class="text-[12px] text-slate-400 leading-relaxed pr-4">
+                        Lembaga pendidikan menengah atas negeri berstandar nasional yang senantiasa mengedepankan integritas akademik, toleransi kebinekaan, serta kepedulian sosial bagi nusa dan bangsa.
+                    </p>
+                    <div class="pt-2 flex items-center space-x-3 text-slate-300 text-sm">
+                        <a href="javascript:void(0)" class="w-8 h-8 rounded-full bg-navy-900 flex items-center justify-center hover:text-amber-300 transition-colors"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="javascript:void(0)" class="w-8 h-8 rounded-full bg-navy-900 flex items-center justify-center hover:text-amber-300 transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="javascript:void(0)" class="w-8 h-8 rounded-full bg-navy-900 flex items-center justify-center hover:text-amber-300 transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="javascript:void(0)" class="w-8 h-8 rounded-full bg-navy-900 flex items-center justify-center hover:text-amber-300 transition-colors"><i class="fa-brands fa-tiktok"></i></a>
+                    </div>
+                </div>
+
+                <!-- Kolom 3: Tautan Pintas -->
+                <div>
+                    <h6 class="text-white font-bold text-xs uppercase tracking-wider mb-3">Tautan Terkait</h6>
+                    <ul class="space-y-2 text-[12px]">
+                        <li><a href="https://kemdikbud.go.id" target="_blank" rel="noopener" class="hover:text-amber-300">Kemendikbudristek RI</a></li>
+                        <li><a href="https://dapo.kemdikbud.go.id" target="_blank" rel="noopener" class="hover:text-amber-300">Data Pokok Pendidikan (Dapodik)</a></li>
+                        <li><a href="https://ban-pdm.kemdikbud.go.id" target="_blank" rel="noopener" class="hover:text-amber-300">BAN-PDM (Badan Akreditasi)</a></li>
+                        <li><a href="https://snpmb.bppp.kemdikbud.go.id" target="_blank" rel="noopener" class="hover:text-amber-300">Portal SNPMB PTN 2026</a></li>
+                        <li><a href="#ppdb" class="hover:text-amber-300">PPDB Online Dinas Pendidikan</a></li>
+                    </ul>
+                </div>
+
+                <!-- Kolom 4: Fasilitas & Program -->
+                <div>
+                    <h6 class="text-white font-bold text-xs uppercase tracking-wider mb-3">Layanan Siswa</h6>
+                    <ul class="space-y-2 text-[12px]">
+                        <li><a href="javascript:void(0)" onclick="togglePortalModal()" class="hover:text-amber-300">e-Rapor Kemendikbud</a></li>
+                        <li><a href="javascript:void(0)" onclick="togglePortalModal()" class="hover:text-amber-300">Perpustakaan Digital (e-Perpus)</a></li>
+                        <li><a href="javascript:void(0)" onclick="togglePortalModal()" class="hover:text-amber-300">Bank Soal & Asesmen Mandiri</a></li>
+                        <li><a href="javascript:void(0)" onclick="bukaModalAlumni()" class="hover:text-amber-300">Ikatan Alumni SMANSA (IKASMANSA)</a></li>
+                        <li><a href="#kesiswaan" class="hover:text-amber-300">Daftar Ekstrakurikuler</a></li>
+                    </ul>
+                </div>
+
+                <!-- Kolom 5: Sertifikasi & Akreditasi Badge -->
+                <div>
+                    <h6 class="text-white font-bold text-xs uppercase tracking-wider mb-3">Kualitas Terjamin</h6>
+                    <div class="bg-navy-900 p-3 rounded-xl border border-slate-800 space-y-2">
+                        <div class="flex items-center gap-2 text-white text-xs font-bold">
+                            <i class="fa-solid fa-shield-check text-emerald-400"></i>
+                            ISO 9001:2015
+                        </div>
+                        <p class="text-[11px] text-slate-400">Sistem Manajemen Mutu Pelayanan Pendidikan No. 8912/ID-JJK</p>
+                        <div class="pt-2 border-t border-slate-800 text-[10px] text-amber-300">
+                            Status: Sekolah Penggerak Angkatan I
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 pt-6 border-t border-slate-800 text-center md:flex md:justify-between items-center text-[11px] text-slate-400">
+                <p>© 2026 SMA Negeri 1 Nusantara. Hak Cipta Dilindungi Undang-Undang Republik Indonesia.</p>
+                <div class="mt-3 md:mt-0 flex items-center justify-center gap-3">
+                    <span class="font-mono">Dibangun untuk Dedikasi Pendidikan Ibu Pertiwi</span>
+                    <span>•</span>
+                    <!-- Tombol Login Akses Kelola Admin Panel -->
+                    <button onclick="bukaLoginAdminModal()" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-800/80 hover:bg-emas-600 hover:text-navy-950 text-slate-300 font-semibold transition-all text-[10px]" title="Akses Administrator Web">
+                        <i class="fa-solid fa-lock text-[9px]"></i> Kelola Web
+                    </button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL 1: Login Admin Panel -->
+    <div id="adminLoginModal" class="hidden fixed inset-0 z-50 bg-navy-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl relative border border-slate-200 animate-in fade-in zoom-in duration-200">
+            <button onclick="tutupLoginAdminModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="text-center mb-5">
+                <div class="w-12 h-12 rounded-xl bg-navy-900 text-emas-500 flex items-center justify-center text-xl mx-auto mb-2 shadow-md">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <h4 class="font-bold text-navy-900 text-lg">Otorisasi Kelola Web</h4>
+                <p class="text-xs text-slate-500">Panel Manajemen Konten & Katalog Sekolah</p>
+            </div>
+
+            <form id="adminAuthForm" onsubmit="event.preventDefault(); prosesLoginAdmin();" class="space-y-3.5 text-xs">
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Username Pengelola</label>
+                    <div class="relative">
+                        <input type="text" id="adminUser" required placeholder="kelolaweb2026" class="w-full p-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-navy-900 font-mono text-xs">
+                        <i class="fa-solid fa-user absolute right-3 top-3 text-slate-400"></i>
+                    </div>
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Kata Sandi</label>
+                    <div class="relative">
+                        <input type="password" id="adminPass" required placeholder="••••••••" class="w-full p-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-navy-900 font-mono text-xs">
+                        <i class="fa-solid fa-key absolute right-3 top-3 text-slate-400"></i>
+                    </div>
+                </div>
+
+                <div id="adminLoginError" class="hidden p-2.5 bg-rose-50 border border-rose-200 text-rose-700 rounded-lg text-[11px] flex items-center gap-1.5">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <span>Username atau kata sandi tidak sesuai!</span>
+                </div>
+
+                <button type="submit" class="w-full py-2.5 bg-navy-900 hover:bg-navy-800 text-white font-bold rounded-lg transition-all shadow mt-2 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-right-to-bracket text-emas-500"></i> Masuk ke Panel Kontrol
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 2: Admin Control Panel (Comprehensive CMS Drawer/Modal) -->
+    <div id="adminDashboard" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex justify-end">
+        <div class="bg-white w-full max-w-2xl h-full shadow-2xl flex flex-col admin-drawer overflow-hidden">
+            <!-- Header Panel -->
+            <div class="p-5 bg-navy-950 text-white flex items-center justify-between border-b border-slate-800">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-lg bg-emas-600 text-navy-950 flex items-center justify-center font-bold">
+                        <i class="fa-solid fa-sliders"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-sm text-white">Panel Administrasi Web SMANSA</h4>
+                        <span class="text-[10px] text-emerald-400 flex items-center gap-1">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> Realtime Database Aktif
+                        </span>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <!-- Tombol Reset Default Data -->
+                    <button onclick="konfirmasiResetDefault()" class="px-2.5 py-1.5 bg-rose-900/80 hover:bg-rose-800 text-rose-200 rounded-lg text-xs font-bold transition-all flex items-center gap-1" title="Kembalikan semua data ke pengaturan awal">
+                        <i class="fa-solid fa-rotate-left"></i> Riset Default
+                    </button>
+                    <button onclick="tutupAdminDashboard()" class="text-slate-400 hover:text-white p-1.5 rounded-lg hover:bg-white/10">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Navigasi Tab Admin -->
+            <div class="bg-slate-100 border-b border-slate-200 px-4 flex gap-2 overflow-x-auto text-xs py-2">
+                <button onclick="gantiTabAdmin('katalog')" id="tabBtnKatalog" class="admin-tab active font-bold bg-white text-navy-900 shadow-sm px-3 py-1.5 rounded-lg border border-slate-200">
+                    <i class="fa-solid fa-boxes-stacked mr-1 text-emas-600"></i> Katalog Produk
+                </button>
+                <button onclick="gantiTabAdmin('konten')" id="tabBtnKonten" class="admin-tab font-semibold text-slate-600 px-3 py-1.5 rounded-lg hover:bg-white/70">
+                    <i class="fa-solid fa-pen-to-square mr-1 text-kemendikbud"></i> Teks & Tombol
+                </button>
+                <button onclick="gantiTabAdmin('gambar')" id="tabBtnGambar" class="admin-tab font-semibold text-slate-600 px-3 py-1.5 rounded-lg hover:bg-white/70">
+                    <i class="fa-solid fa-image mr-1 text-purple-600"></i> Kelola Gambar
+                </button>
+                <button onclick="gantiTabAdmin('booking')" id="tabBtnBooking" class="admin-tab font-semibold text-slate-600 px-3 py-1.5 rounded-lg hover:bg-white/70">
+                    <i class="fa-solid fa-clipboard-list mr-1 text-emerald-600"></i> Lacak Booking
+                </button>
+            </div>
+
+            <!-- Konten Tab Panel -->
+            <div class="p-6 overflow-y-auto flex-1 space-y-6 text-xs text-slate-800">
+                
+                <!-- TAB 1: MANAJEMEN KATALOG PRODUK -->
+                <div id="panelTabKatalog" class="space-y-6">
+                    <div class="flex items-center justify-between bg-blue-50 p-4 rounded-xl border border-blue-200">
+                        <div>
+                            <h5 class="font-bold text-navy-900 text-sm">Kelola Produk Koperasi & Seragam</h5>
+                            <p class="text-[11px] text-slate-600">Tambah, ubah, atau hapus item katalog yang tampil di halaman depan.</p>
+                        </div>
+                        <button onclick="tampilkanFormTambahProduk()" class="px-3 py-2 bg-navy-900 hover:bg-navy-800 text-white rounded-lg font-bold flex items-center gap-1.5 shadow-sm">
+                            <i class="fa-solid fa-plus text-emas-500"></i> Tambah Produk
+                        </button>
+                    </div>
+
+                    <!-- Form Tambah / Edit Produk (Hidden by Default) -->
+                    <div id="formProdukContainer" class="hidden bg-slate-50 p-4 rounded-xl border border-slate-300 space-y-3">
+                        <div class="flex items-center justify-between border-b pb-2">
+                            <strong id="formProdukTitle" class="text-navy-900 text-xs">Formulir Tambah Produk Baru</strong>
+                            <button onclick="sembunyikanFormProduk()" class="text-slate-400 hover:text-slate-700"><i class="fa-solid fa-xmark"></i></button>
+                        </div>
+                        <input type="hidden" id="editProdukId" value="">
+                        
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block font-semibold mb-1">Nama Produk *</label>
+                                <input type="text" id="prodNama" required placeholder="Contoh: Seragam Batik SMANSA" class="w-full p-2 border rounded-lg bg-white">
+                            </div>
+                            <div>
+                                <label class="block font-semibold mb-1">Kategori</label>
+                                <select id="prodKategori" class="w-full p-2 border rounded-lg bg-white">
+                                    <option value="seragam">Seragam & Atribut</option>
+                                    <option value="buku">Buku & Modul Belajar</option>
+                                    <option value="karya-p5">Karya Siswa / P5</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block font-semibold mb-1">Harga (Rp) *</label>
+                                <input type="number" id="prodHarga" required placeholder="Contoh: 125000" class="w-full p-2 border rounded-lg bg-white">
+                            </div>
+                            <div>
+                                <label class="block font-semibold mb-1">Stok Tersedia</label>
+                                <input type="number" id="prodStok" value="25" class="w-full p-2 border rounded-lg bg-white">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block font-semibold mb-1">URL Gambar (Mendukung ID Google Drive / Direct Link)</label>
+                            <input type="text" id="prodGambar" placeholder="Contoh ID Drive atau https://lh3.googleusercontent.com/d/..." class="w-full p-2 border rounded-lg bg-white font-mono">
+                            <p class="text-[10px] text-slate-500 mt-1">Sistem otomatis memformat `lh3.googleusercontent.com/d/` dengan fallback `thumbnail?id=`.</p>
+                        </div>
+
+                        <div>
+                            <label class="block font-semibold mb-1">Deskripsi Singkat</label>
+                            <textarea id="prodDeskripsi" rows="2" placeholder="Keterangan bahan, spesifikasi, dan panduan ukuran..." class="w-full p-2 border rounded-lg bg-white"></textarea>
+                        </div>
+
+                        <div class="flex justify-end gap-2 pt-2 border-t">
+                            <button type="button" onclick="sembunyikanFormProduk()" class="px-3 py-1.5 border rounded-lg bg-white">Batal</button>
+                            <button type="button" onclick="simpanProdukData()" class="px-4 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold">Simpan Produk</button>
+                        </div>
+                    </div>
+
+                    <!-- Tabel Daftar Produk -->
+                    <div class="border border-slate-200 rounded-xl overflow-hidden">
+                        <table class="w-full text-left border-collapse">
+                            <thead class="bg-slate-100 text-slate-700 font-bold border-b border-slate-200">
+                                <tr>
+                                    <th class="p-3">Produk</th>
+                                    <th class="p-3">Kategori</th>
+                                    <th class="p-3">Harga</th>
+                                    <th class="p-3">Stok</th>
+                                    <th class="p-3 text-right">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabelProdukBody" class="divide-y divide-slate-200">
+                                <!-- Terisi lewat JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- TAB 2: EDIT TEKS & TOMBOL HALAMAN UTAMA -->
+                <div id="panelTabKonten" class="hidden space-y-4">
+                    <div class="p-4 bg-amber-50 rounded-xl border border-amber-200">
+                        <h5 class="font-bold text-navy-900 text-sm">Ubah Teks & Tombol Utama</h5>
+                        <p class="text-[11px] text-slate-600">Perubahan langsung tersimpan ke basis data realtime dan halaman web.</p>
+                    </div>
+
+                    <div class="space-y-3 bg-white p-4 rounded-xl border border-slate-200">
+                        <strong class="text-navy-900 block border-b pb-1">Bagian Banner Beranda (Hero Section)</strong>
+                        <div>
+                            <label class="block font-semibold mb-1">Teks Badge Beranda</label>
+                            <input type="text" id="inputHeroBadge" class="w-full p-2 border rounded-lg bg-slate-50">
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1">Judul Utama Beranda</label>
+                            <textarea id="inputHeroTitle" rows="2" class="w-full p-2 border rounded-lg bg-slate-50"></textarea>
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1">Deskripsi Singkat Beranda</label>
+                            <textarea id="inputHeroDesc" rows="3" class="w-full p-2 border rounded-lg bg-slate-50"></textarea>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3 pt-2">
+                            <div>
+                                <label class="block font-semibold mb-1">Teks Tombol Utama</label>
+                                <input type="text" id="inputBtnPrimaryText" class="w-full p-2 border rounded-lg bg-slate-50">
+                            </div>
+                            <div>
+                                <label class="block font-semibold mb-1">Tautan Tombol Utama</label>
+                                <input type="text" id="inputBtnPrimaryLink" class="w-full p-2 border rounded-lg bg-slate-50">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block font-semibold mb-1">Teks Tombol Kedua</label>
+                                <input type="text" id="inputBtnSecondaryText" class="w-full p-2 border rounded-lg bg-slate-50">
+                            </div>
+                            <div>
+                                <label class="block font-semibold mb-1">Tautan Tombol Kedua</label>
+                                <input type="text" id="inputBtnSecondaryLink" class="w-full p-2 border rounded-lg bg-slate-50">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3 bg-white p-4 rounded-xl border border-slate-200">
+                        <strong class="text-navy-900 block border-b pb-1">Bagian Sambutan Kepala Sekolah</strong>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block font-semibold mb-1">Nama Kepala Sekolah</label>
+                                <input type="text" id="inputNamaKepsek" class="w-full p-2 border rounded-lg bg-slate-50">
+                            </div>
+                            <div>
+                                <label class="block font-semibold mb-1">Jabatan</label>
+                                <input type="text" id="inputJabatanKepsek" class="w-full p-2 border rounded-lg bg-slate-50">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1">Judul Sambutan</label>
+                            <input type="text" id="inputJudulSambutan" class="w-full p-2 border rounded-lg bg-slate-50">
+                        </div>
+                    </div>
+
+                    <button onclick="simpanPengaturanKonten()" class="w-full py-2.5 bg-navy-900 hover:bg-navy-800 text-white font-bold rounded-lg shadow flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-floppy-disk text-emas-500"></i> Terapkan Pembaruan Konten
+                    </button>
+                </div>
+
+                <!-- TAB 3: KELOLA GAMBAR DENGAN GOOGLE DRIVE SMART HANDLER -->
+                <div id="panelTabGambar" class="hidden space-y-4">
+                    <div class="p-4 bg-purple-50 rounded-xl border border-purple-200">
+                        <h5 class="font-bold text-navy-900 text-sm">Pengaturan URL Gambar Cerdas</h5>
+                        <p class="text-[11px] text-slate-600 mt-0.5">
+                            Otomatis mengonversi link berbagi Google Drive ke format <strong>lh3.googleusercontent.com/d/</strong> dengan backup <strong>thumbnail?id=</strong> serta cadangan Unsplash.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4 bg-white p-4 rounded-xl border border-slate-200">
+                        <div>
+                            <label class="block font-semibold mb-1">Foto Kepala Sekolah</label>
+                            <input type="text" id="inputGambarKepsek" placeholder="ID Google Drive atau Direct Image URL" class="w-full p-2 border rounded-lg bg-slate-50 font-mono text-xs">
+                            <div class="mt-2 flex items-center gap-3">
+                                <img id="previewGambarKepsek" src="" alt="Pratinjau" class="w-14 h-16 object-cover rounded-lg border bg-slate-100">
+                                <span class="text-[11px] text-slate-500">Pratinjau otomatis tersinkronisasi.</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-3 border-t">
+                            <button onclick="simpanPengaturanGambar()" class="w-full py-2.5 bg-purple-900 hover:bg-purple-800 text-white font-bold rounded-lg shadow flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-cloud-arrow-up text-amber-300"></i> Simpan Tautan Gambar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 4: LACAK STATUS BOOKING & PPDB -->
+                <div id="panelTabBooking" class="hidden space-y-4">
+                    <div class="p-4 bg-emerald-50 rounded-xl border border-emerald-200 flex items-center justify-between">
+                        <div>
+                            <h5 class="font-bold text-navy-900 text-sm">Lacak Pendaftaran & Pemesanan</h5>
+                            <p class="text-[11px] text-slate-600">Data pemesanan produk seragam/buku dan pendaftar mandiri PPDB.</p>
+                        </div>
+                        <span class="text-xs bg-emerald-200 text-emerald-800 font-bold px-2.5 py-1 rounded-full" id="jumlahBookingBadge">
+                            0 Transaksi
+                        </span>
+                    </div>
+
+                    <div class="space-y-2" id="daftarBookingAdmin">
+                        <!-- Daftar pesanan & booking masuk -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 3: Form Pemesanan / Booking Produk untuk Siswa -->
+    <div id="bookingProdukModal" class="hidden fixed inset-0 z-50 bg-navy-950/70 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative border border-slate-200">
+            <button onclick="tutupModalBooking()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            
+            <div class="flex items-center gap-3 mb-4 pb-3 border-b">
+                <img id="modalBookImg" src="" alt="Produk" class="w-14 h-14 rounded-xl object-cover bg-slate-100 border">
+                <div>
+                    <span id="modalBookKategori" class="text-[10px] font-bold text-kemendikbud uppercase tracking-wider">Koperasi Siswa</span>
+                    <h4 id="modalBookNama" class="font-bold text-navy-900 text-sm">Nama Produk</h4>
+                    <p id="modalBookHarga" class="font-bold text-emas-600 text-xs mt-0.5">Rp 0</p>
+                </div>
+            </div>
+
+            <form id="formPemesananSiswa" onsubmit="event.preventDefault(); prosesPemesananProduk();" class="space-y-3 text-xs">
+                <input type="hidden" id="modalBookId">
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">Nama Lengkap Siswa *</label>
+                        <input type="text" id="orderNama" required placeholder="Nama siswa/pemesan" class="w-full p-2.5 border rounded-lg bg-slate-50">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">Kelas / Tingkat *</label>
+                        <input type="text" id="orderKelas" required placeholder="Misal: X-MIPA 1 / Calon Siswa" class="w-full p-2.5 border rounded-lg bg-slate-50">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">Nomor WhatsApp Aktif *</label>
+                        <input type="tel" id="orderWa" required placeholder="08123456789" class="w-full p-2.5 border rounded-lg bg-slate-50">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">Jumlah Pesanan</label>
+                        <input type="number" id="orderJumlah" min="1" max="10" value="1" class="w-full p-2.5 border rounded-lg bg-slate-50">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Metode Pengambilan</label>
+                    <select id="orderMetode" class="w-full p-2.5 border rounded-lg bg-slate-50">
+                        <option value="Ambil di Koperasi">Ambil di Gerai Koperasi Sekolah (Jam Istirahat)</option>
+                        <option value="Kirim ke Alamat Rumah">Pengantaran ke Alamat Siswa (Jabodetabek)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Catatan Tambahan (Ukuran Seragam / Request)</label>
+                    <input type="text" id="orderCatatan" placeholder="Contoh: Ukuran L (Lengan Panjang)" class="w-full p-2.5 border rounded-lg bg-slate-50">
+                </div>
+
+                <button type="submit" class="w-full py-2.5 bg-navy-900 hover:bg-navy-800 text-white font-bold rounded-lg transition-all shadow mt-3 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-bag-shopping text-emas-500"></i> Konfirmasi Pemesanan
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 4: Lacak Booking Mandiri untuk Publik -->
+    <div id="lacakBookingModal" class="hidden fixed inset-0 z-50 bg-navy-950/70 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative border border-slate-200">
+            <button onclick="tutupModalLacakBooking()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="text-center mb-4">
+                <div class="w-12 h-12 rounded-xl bg-blue-50 text-kemendikbud flex items-center justify-center text-xl mx-auto mb-2">
+                    <i class="fa-solid fa-receipt"></i>
+                </div>
+                <h4 class="font-bold text-navy-900 text-base">Lacak Status Pesanan / Booking</h4>
+                <p class="text-xs text-slate-500">Masukkan kode pemesanan (contoh: BKG-10291) atau No. WhatsApp Anda</p>
+            </div>
+            <div class="space-y-3">
+                <div class="flex gap-2">
+                    <input type="text" id="inputCariBooking" placeholder="BKG-XXXXX / 0812..." class="flex-1 p-2.5 border rounded-lg bg-slate-50 text-xs font-mono uppercase">
+                    <button onclick="cariStatusPesananPublik()" class="px-4 py-2.5 bg-navy-900 text-white rounded-lg text-xs font-bold hover:bg-navy-800 transition-colors">
+                        Cari
+                    </button>
+                </div>
+                <div id="hasilLacakPublik" class="hidden p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 5: Pop-up Detail Berita Sekolah Interaktif -->
+    <div id="beritaModal" class="hidden fixed inset-0 z-50 bg-navy-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] shadow-2xl relative border border-slate-200 overflow-hidden flex flex-col animate-in fade-in zoom-in duration-200">
+            <!-- Header Modal -->
+            <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/80">
+                <div class="flex items-center gap-2">
+                    <span id="beritaModalKategori" class="text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800">
+                        Kabar Sekolah
+                    </span>
+                    <span id="beritaModalWaktu" class="text-xs text-slate-400 font-medium">12 September 2026</span>
+                </div>
+                <button onclick="tutupModalBerita()" class="text-slate-400 hover:text-slate-700 p-1.5 rounded-lg hover:bg-slate-200 transition-colors">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Konten Artikel Scrollable -->
+            <div class="p-6 overflow-y-auto space-y-4 text-slate-700">
+                <h3 id="beritaModalJudul" class="text-xl sm:text-2xl font-serif font-bold text-navy-900 leading-tight">
+                    Judul Warta Sekolah
+                </h3>
+
+                <!-- Meta Penulis & Info -->
+                <div class="flex flex-wrap items-center justify-between text-xs text-slate-500 py-2 border-y border-slate-100 gap-2">
+                    <div class="flex items-center gap-2">
+                        <div class="w-7 h-7 rounded-full bg-navy-900 text-emas-500 flex items-center justify-center text-xs font-bold">
+                            <i class="fa-solid fa-feather"></i>
+                        </div>
+                        <div>
+                            <span id="beritaModalPenulis" class="font-semibold text-slate-800 block">Humas SMAN 1 Nusantara</span>
+                            <span class="text-[10px] text-slate-400">Liputan Resmi Almamater</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 text-[11px]">
+                        <span id="beritaModalEstimasi"><i class="fa-regular fa-clock mr-1"></i> 3 Menit Baca</span>
+                        <span class="text-slate-300">|</span>
+                        <span><i class="fa-regular fa-eye mr-1"></i> Terbaca 840+ kali</span>
+                    </div>
+                </div>
+
+                <!-- Gambar Utama Berita -->
+                <div class="rounded-xl overflow-hidden aspect-video bg-slate-100 border border-slate-200">
+                    <img id="beritaModalGambar" src="" alt="Warta Sekolah" class="w-full h-full object-cover" onerror="handleSmartImageError(this, 'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=700&q=80')">
+                </div>
+
+                <!-- Isi Lengkap Berita -->
+                <div id="beritaModalIsi" class="text-xs sm:text-sm leading-relaxed space-y-3 text-justify text-slate-700">
+                    <!-- Terisi via Javascript -->
+                </div>
+            </div>
+
+            <!-- Footer Modal Berita -->
+            <div class="px-6 py-3.5 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-xs">
+                <div class="flex items-center gap-2">
+                    <button onclick="salinTautanBerita()" class="px-3 py-1.5 bg-white border border-slate-200 hover:bg-slate-100 text-navy-900 font-semibold rounded-lg flex items-center gap-1.5 transition-colors">
+                        <i class="fa-solid fa-share-nodes text-kemendikbud"></i> Bagikan
+                    </button>
+                    <button onclick="window.print()" class="px-3 py-1.5 bg-white border border-slate-200 hover:bg-slate-100 text-slate-600 font-semibold rounded-lg hidden sm:flex items-center gap-1.5 transition-colors">
+                        <i class="fa-solid fa-print"></i> Cetak
+                    </button>
+                </div>
+                <button onclick="tutupModalBerita()" class="px-4 py-1.5 bg-navy-900 hover:bg-navy-800 text-white font-bold rounded-lg transition-colors">
+                    Tutup
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Informasi P5 & Alumni Universal -->
+    <div id="universalModal" class="hidden fixed inset-0 z-50 bg-navy-950/70 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative border border-slate-200">
+            <button onclick="tutupModalUniversal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div id="universalModalContent"></div>
+        </div>
+    </div>
+
+    <!-- FIREBASE MODULE & REALTIME CMS ENGINE -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, doc, setDoc, getDoc, getDocs, onSnapshot, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Konfigurasi Kredensial Firebase (Tanpa mencantumkan kredensial di form UI Admin)
+        const DEFAULT_FIREBASE_CONFIG = {
+            apiKey: "AIzaSyBZyvA6_cy2k42eU_Ktt13wFVTDYgZaXkI",
+            authDomain: "sman1-nusantara.firebaseapp.com",
+            projectId: "sman1-nusantara",
+            storageBucket: "sman1-nusantara.appspot.com"
+        };
+
+        const firebaseConfig = typeof __firebase_config !== 'undefined' 
+            ? JSON.parse(__firebase_config) 
+            : DEFAULT_FIREBASE_CONFIG;
+
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'sman1-nusantara-app';
+
+        let app, db, auth, currentUser = null;
+        let isFirebaseReady = false;
+
+        // Inisialisasi Firebase Aman
+        try {
+            app = initializeApp(firebaseConfig);
+            db = getFirestore(app);
+            auth = getAuth(app);
+            
+            // Autentikasi terlebih dahulu sebelum query Firestore
+            const initAuth = async () => {
+                try {
+                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                        await signInWithCustomToken(auth, __initial_auth_token);
+                    } else {
+                        await signInAnonymously(auth);
+                    }
+                } catch (e) {
+                    console.warn("Auth token fallback to anonymous:", e);
+                    await signInAnonymously(auth);
+                }
+            };
+
+            await initAuth();
+            currentUser = auth.currentUser;
+            isFirebaseReady = true;
+            console.log("Firebase connection established.");
+        } catch (err) {
+            console.warn("Mode Fallback Lokal Aktif:", err);
+            isFirebaseReady = false;
+        }
+
+        // Blueprints Data Awal (Default Data untuk Fitur Riset Default)
+        window.DEFAULT_DATA_STATE = {
+            konten: {
+                heroBadge: "Peringkat 15 Nasional Rerata UTBK & Peraih Adiwiyata Mandiri",
+                heroTitle: "Membentuk Insan Unggul, Berbudi Luhur, dan Berjiwa <span class='text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-amber-500'>Pancasila</span>.",
+                heroDesc: "Selamat datang di portal resmi SMA Negeri 1 Nusantara. Pusat pembelajaran terintegrasi dengan implementasi Kurikulum Merdeka, membekali generasi muda Indonesia menuju persaingan global dengan pondasi adab dan kepemimpinan berintegritas.",
+                btnPrimaryText: "Pendaftaran PPDB 2026/2027",
+                btnPrimaryLink: "#ppdb",
+                btnSecondaryText: "Katalog Koperasi & Atribut",
+                btnSecondaryLink: "#katalog",
+                namaKepsek: "Dr. H. Bambang Suryonegoro, M.Pd.",
+                jabatanKepsek: "Kepala SMA Negeri 1 Nusantara",
+                judulSambutan: "Menyiapkan Pemimpin Peradaban Berpijak pada Karakter Luhur Bangsa"
+            },
+            gambar: {
+                fotoKepsek: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80"
+            },
+            katalog: [
+                {
+                    id: "prod-1",
+                    nama: "Seragam Batik Khas SMANSA (Lengan Panjang/Pendek)",
+                    kategori: "seragam",
+                    harga: 135000,
+                    stok: 50,
+                    gambar: "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=600&q=80",
+                    deskripsi: "Bahan katun primisima dingin bermotif flora nusantara resmi almamater SMAN 1 Nusantara."
+                },
+                {
+                    id: "prod-2",
+                    nama: "Jas Almamater & Dasi Lambang Kemendikbud",
+                    kategori: "seragam",
+                    harga: 180000,
+                    stok: 35,
+                    gambar: "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=600&q=80",
+                    deskripsi: "Bahan drill super warna biru navy dengan puring lembut dan emblem rajut presisi."
+                },
+                {
+                    id: "prod-3",
+                    nama: "Paket Buku Modul Ajar Kurikulum Merdeka (Fase E/F)",
+                    kategori: "buku",
+                    harga: 95000,
+                    stok: 120,
+                    gambar: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=600&q=80",
+                    deskripsi: "Edisi revisi terbaru resmi terbitan Kemendikbudristek dilengkapi lembar kerja riset sains."
+                },
+                {
+                    id: "prod-4",
+                    nama: "Sabun Organik Minyak Atsiri - Hasil Karya Siswa P5",
+                    kategori: "karya-p5",
+                    harga: 25000,
+                    stok: 40,
+                    gambar: "https://images.unsplash.com/photo-1607006483224-8149174092b3?auto=format&fit=crop&w=600&q=80",
+                    deskripsi: "Dibuat dari ekstrak sereh wangi kebun sekolah oleh tim Projek Gaya Hidup Berkelanjutan."
+                }
+            ],
+            booking: [
+                {
+                    id: "BKG-10291",
+                    nama: "Rian Aditya",
+                    kelas: "X-MIPA 3",
+                    wa: "081298765432",
+                    produk: "Seragam Batik Khas SMANSA",
+                    jumlah: 1,
+                    metode: "Ambil di Koperasi",
+                    status: "Siap Diambil",
+                    waktu: "14 Sep 2026 10:15 WIB"
+                }
+            ]
+        };
+
+        // Cache lokal data aktif
+        window.appState = JSON.parse(JSON.stringify(window.DEFAULT_DATA_STATE));
+
+        /**
+         * Sistem Penanganan URL Gambar Google Drive Cerdas
+         * Format 1: lh3.googleusercontent.com/d/{id} (Paling stabil & cepat)
+         * Format 2: drive.google.com/thumbnail?id={id} (Backup kedua)
+         * Fallback : Gambar Unsplash / Placeholder beresolusi optimal
+         */
+        window.formatGoogleDriveUrl = function(inputUrl, fallbackUrl) {
+            const defaultFallback = fallbackUrl || 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=600&q=80';
+            if (!inputUrl || typeof inputUrl !== 'string' || inputUrl.trim() === '') {
+                return defaultFallback;
+            }
+            
+            const trimmed = inputUrl.trim();
+
+            // Jika URL berupa direct link web biasa (http/https) bukan Google Drive
+            if ((trimmed.startsWith('http://') || trimmed.startsWith('https://')) && !trimmed.includes('drive.google.com') && !trimmed.includes('googleusercontent.com')) {
+                return trimmed;
+            }
+
+            let driveId = null;
+
+            // Jika input hanyalah ID Drive murni (karakter alphanumeric dan dash/underscore minimal 25 karakter)
+            if (/^[a-zA-Z0-9_-]{25,}$/.test(trimmed)) {
+                driveId = trimmed;
+            } else {
+                // Regex pencarian ID Google Drive dari berbagai format link
+                const regexDrive = /(?:\/d\/|id=|file\/d\/)([a-zA-Z0-9_-]{20,})/;
+                const match = trimmed.match(regexDrive);
+                if (match && match[1]) {
+                    driveId = match[1];
+                }
+            }
+
+            if (driveId) {
+                // Return format stabil Google User Content
+                return `https://lh3.googleusercontent.com/d/${driveId}`;
+            }
+
+            // Jika bukan format link valid, gunakan fallback
+            if (!trimmed.startsWith('http://') && !trimmed.startsWith('https://')) {
+                return defaultFallback;
+            }
+
+            return trimmed;
+        };
+
+        // Fallback handler yang dipasang pada event onerror tag img
+        window.handleSmartImageError = function(imgElement, backupUrl) {
+            if (!imgElement) return;
+            const currentSrc = imgElement.src || "";
+            const safeBackup = backupUrl || "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=600&q=80";
+
+            // Jika format lh3 gagal, coba thumbnail?id=
+            if (currentSrc.includes('lh3.googleusercontent.com/d/')) {
+                const parts = currentSrc.split('/d/');
+                if (parts.length > 1 && parts[1]) {
+                    const driveId = parts[1].split('?')[0];
+                    imgElement.onerror = function() {
+                        imgElement.onerror = null;
+                        imgElement.src = safeBackup;
+                    };
+                    imgElement.src = `https://drive.google.com/thumbnail?id=${driveId}`;
+                    return;
+                }
+            }
+            // Fallback cadangan langsung
+            imgElement.onerror = null;
+            imgElement.src = safeBackup;
+        };
+
+        // Preload Image Utility
+        window.preloadImage = function(url) {
+            if (!url) return;
+            const link = document.createElement('link');
+            link.rel = 'preload';
+            link.as = 'image';
+            link.href = url;
+            document.head.appendChild(link);
+        };
+
+        window.renderAppContent = function() {
+            const data = window.appState;
+            
+            // Render Konten Teks & Tombol
+            if (data.konten) {
+                const k = data.konten;
+                if (document.getElementById('editable-hero-badge')) document.getElementById('editable-hero-badge').textContent = k.heroBadge;
+                if (document.getElementById('editable-hero-title')) document.getElementById('editable-hero-title').innerHTML = k.heroTitle;
+                if (document.getElementById('editable-hero-desc')) document.getElementById('editable-hero-desc').innerHTML = k.heroDesc;
+                
+                const btnPri = document.getElementById('editable-btn-primary');
+                const btnPriText = document.getElementById('editable-btn-primary-text');
+                if (btnPri && btnPriText) {
+                    btnPri.href = k.btnPrimaryLink || '#ppdb';
+                    btnPriText.textContent = k.btnPrimaryText || 'Pendaftaran PPDB';
+                }
+
+                const btnSec = document.getElementById('editable-btn-secondary');
+                const btnSecText = document.getElementById('editable-btn-secondary-text');
+                if (btnSec && btnSecText) {
+                    btnSec.href = k.btnSecondaryLink || '#katalog';
+                    btnSecText.textContent = k.btnSecondaryText || 'Katalog Koperasi';
+                }
+
+                if (document.getElementById('editable-nama-kepsek')) document.getElementById('editable-nama-kepsek').textContent = k.namaKepsek;
+                if (document.getElementById('editable-jabatan-kepsek')) document.getElementById('editable-jabatan-kepsek').textContent = k.jabatanKepsek;
+                if (document.getElementById('editable-judul-sambutan')) document.getElementById('editable-judul-sambutan').textContent = k.judulSambutan;
+            }
+
+            // Render Gambar Kepala Sekolah
+            if (data.gambar && data.gambar.fotoKepsek) {
+                const imgEl = document.getElementById('editable-foto-kepsek');
+                if (imgEl) {
+                    const formatted = window.formatGoogleDriveUrl(data.gambar.fotoKepsek, window.DEFAULT_DATA_STATE.gambar.fotoKepsek);
+                    imgEl.src = formatted;
+                    window.preloadImage(formatted);
+                }
+            }
+
+            // Render Katalog Produk
+            window.renderKatalogGrid(window.activeKatalogCategory || 'semua');
+            window.renderTabelProdukAdmin();
+            window.renderDaftarBookingAdmin();
+        };
+
+        // Render Kartu Katalog Publik
+        window.renderKatalogGrid = function(filter) {
+            window.activeKatalogCategory = filter;
+            const container = document.getElementById('produkGrid');
+            if (!container) return;
+
+            const produkList = window.appState.katalog || [];
+            const filtered = filter === 'semua' 
+                ? produkList 
+                : produkList.filter(p => p.kategori === filter);
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full py-12 text-center text-slate-400">
+                        <i class="fa-solid fa-box-open text-4xl mb-2 text-slate-300"></i>
+                        <p class="text-xs">Belum ada produk untuk kategori ini.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = filtered.map(item => {
+                const imgUrl = window.formatGoogleDriveUrl(item.gambar, 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=600&q=80');
+                const hargaFormat = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(item.harga || 0);
+                
+                return `
+                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-lg hover:border-emas-500 transition-all flex flex-col justify-between group">
+                        <div>
+                            <div class="aspect-video w-full bg-slate-100 overflow-hidden relative">
+                                <img src="${imgUrl}" alt="${item.nama}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="handleSmartImageError(this, 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=600&q=80')">
+                                <span class="absolute top-2.5 right-2.5 bg-navy-950/80 backdrop-blur-md text-amber-300 text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase">
+                                    ${item.kategori}
+                                </span>
+                            </div>
+                            <div class="p-4">
+                                <h5 class="font-bold text-navy-900 text-sm leading-snug line-clamp-2">${item.nama}</h5>
+                                <p class="text-[11px] text-slate-500 mt-1.5 line-clamp-2 leading-relaxed">${item.deskripsi || ''}</p>
+                            </div>
+                        </div>
+
+                        <div class="p-4 pt-0">
+                            <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                                <div>
+                                    <span class="text-[10px] text-slate-400 block">Harga Satuan</span>
+                                    <span class="text-sm font-extrabold text-emas-700">${hargaFormat}</span>
+                                </div>
+                                <button onclick="bukaModalBooking('${item.id}')" class="px-3 py-1.5 bg-navy-900 hover:bg-navy-800 text-white rounded-lg text-xs font-bold transition-all shadow hover:shadow-md flex items-center gap-1.5">
+                                    <i class="fa-solid fa-cart-plus text-emas-500"></i> Pesan
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        };
+
+        // Render Tabel Produk di Admin Panel
+        window.renderTabelProdukAdmin = function() {
+            const tbody = document.getElementById('tabelProdukBody');
+            if (!tbody) return;
+
+            const list = window.appState.katalog || [];
+            if (list.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-slate-400">Belum ada data produk.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = list.map(item => {
+                const hargaFormat = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(item.harga || 0);
+                return `
+                    <tr class="hover:bg-slate-50 text-slate-700">
+                        <td class="p-3">
+                            <div class="font-bold text-navy-900">${item.nama}</div>
+                            <span class="text-[10px] text-slate-400 font-mono">${item.id}</span>
+                        </td>
+                        <td class="p-3 uppercase text-[10px] font-bold text-slate-600">${item.kategori}</td>
+                        <td class="p-3 font-semibold text-emerald-700">${hargaFormat}</td>
+                        <td class="p-3 font-semibold">${item.stok || 0}</td>
+                        <td class="p-3 text-right whitespace-nowrap">
+                            <button onclick="editProdukItem('${item.id}')" class="p-1.5 text-kemendikbud hover:bg-blue-50 rounded-lg mr-1" title="Edit Produk">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </button>
+                            <button onclick="hapusProdukItem('${item.id}')" class="p-1.5 text-rose-600 hover:bg-rose-50 rounded-lg" title="Hapus Produk">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        };
+
+        // Render Lacak Booking di Admin Panel
+        window.renderDaftarBookingAdmin = function() {
+            const container = document.getElementById('daftarBookingAdmin');
+            const badge = document.getElementById('jumlahBookingBadge');
+            if (!container) return;
+
+            const bookings = window.appState.booking || [];
+            if (badge) badge.textContent = `${bookings.length} Transaksi Masuk`;
+
+            if (bookings.length === 0) {
+                container.innerHTML = `<div class="p-4 text-center text-slate-400 border rounded-xl">Belum ada data transaksi booking yang masuk.</div>`;
+                return;
+            }
+
+            container.innerHTML = bookings.map(b => `
+                <div class="bg-white p-3.5 rounded-xl border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-sm">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="font-mono font-bold text-navy-900">${b.id}</span>
+                            <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">${b.status || 'Terkonfirmasi'}</span>
+                        </div>
+                        <p class="text-xs font-semibold text-slate-800 mt-1">${b.nama} (${b.kelas}) • <span class="text-slate-500">${b.wa}</span></p>
+                        <p class="text-[11px] text-slate-500">Item: <strong>${b.produk}</strong> (Qty: ${b.jumlah}) • ${b.metode}</p>
+                    </div>
+                    <div class="flex items-center gap-2 self-end sm:self-center">
+                        <a href="https://wa.me/${b.wa.replace(/[^0-9]/g, '')}?text=Halo%20${encodeURIComponent(b.nama)},%20pesanan%20koperasi%20SMANSA%20Anda%20dengan%20kode%20${b.id}%20telah%20siap." target="_blank" class="px-2.5 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-bold flex items-center gap-1">
+                            <i class="fa-brands fa-whatsapp"></i> Hubungi
+                        </a>
+                        <button onclick="ubahStatusBooking('${b.id}')" class="px-2.5 py-1.5 border border-slate-300 hover:bg-slate-50 text-slate-700 rounded-lg text-xs font-semibold">
+                            Ubah Status
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        };
+
+        // Sinkronisasi data publik Firestore
+        window.syncFromFirestore = function() {
+            if (!isFirebaseReady || !auth.currentUser) {
+                // Fallback memuat data dari memory / render awal
+                window.renderAppContent();
+                return;
+            }
+
+            try {
+                // Strict path: /artifacts/{appId}/public/data/site_config
+                const configDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'site_config', 'main');
+                
+                onSnapshot(configDocRef, (docSnap) => {
+                    if (docSnap.exists()) {
+                        const cloudData = docSnap.data();
+                        if (cloudData.konten) window.appState.konten = { ...window.appState.konten, ...cloudData.konten };
+                        if (cloudData.gambar) window.appState.gambar = { ...window.appState.gambar, ...cloudData.gambar };
+                        if (cloudData.katalog) window.appState.katalog = cloudData.katalog;
+                        if (cloudData.booking) window.appState.booking = cloudData.booking;
+                        window.renderAppContent();
+                    } else {
+                        // Jika dokumen belum ada di Firestore, simpan blueprint default awal
+                        setDoc(configDocRef, window.DEFAULT_DATA_STATE).catch(e => console.warn("Firestore seed warn:", e));
+                        window.renderAppContent();
+                    }
+                }, (error) => {
+                    console.warn("Firestore onSnapshot error:", error);
+                    window.renderAppContent();
+                });
+            } catch (err) {
+                console.warn("Sinkronisasi gagal:", err);
+                window.renderAppContent();
+            }
+        };
+
+        // Simpan pembaruan ke Firestore
+        window.persistToFirestore = async function(partialState) {
+            // Update in-memory
+            window.appState = { ...window.appState, ...partialState };
+            window.renderAppContent();
+
+            if (!isFirebaseReady || !auth.currentUser) {
+                return true;
+            }
+
+            try {
+                const configDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'site_config', 'main');
+                await setDoc(configDocRef, window.appState, { merge: true });
+                return true;
+            } catch (err) {
+                console.error("Gagal menyimpan ke Firestore:", err);
+                return false;
+            }
+        };
+
+        // Eksekusi sinkronisasi saat runtime dimulai
+        window.syncFromFirestore();
+    </script>
+
+    <!-- ADMIN LOGIC & INTERACTION SCRIPTS -->
+    <script>
+        const ADMIN_USER_CORRECT = "kelolaweb2026";
+        const ADMIN_PASS_CORRECT = "kelolaweb2026";
+
+        function bukaLoginAdminModal() {
+            document.getElementById('adminLoginModal').classList.remove('hidden');
+            document.getElementById('adminLoginError').classList.add('hidden');
+            document.getElementById('adminUser').focus();
+        }
+
+        function tutupLoginAdminModal() {
+            document.getElementById('adminLoginModal').classList.add('hidden');
+        }
+
+        function prosesLoginAdmin() {
+            const user = document.getElementById('adminUser').value.trim();
+            const pass = document.getElementById('adminPass').value.trim();
+            const errBox = document.getElementById('adminLoginError');
+
+            if (user === ADMIN_USER_CORRECT && pass === ADMIN_PASS_CORRECT) {
+                tutupLoginAdminModal();
+                bukaAdminDashboard();
+                document.getElementById('adminAuthForm').reset();
+            } else {
+                errBox.classList.remove('hidden');
+            }
+        }
+
+        function bukaAdminDashboard() {
+            document.getElementById('adminDashboard').classList.remove('hidden');
+            sinkronkanFormAdminDenganState();
+            gantiTabAdmin('katalog');
+        }
+
+        function tutupAdminDashboard() {
+            document.getElementById('adminDashboard').classList.add('hidden');
+        }
+
+        function gantiTabAdmin(tabId) {
+            // Update buttons
+            const tabs = ['katalog', 'konten', 'gambar', 'booking'];
+            tabs.forEach(t => {
+                const btn = document.getElementById('tabBtn' + t.charAt(0).toUpperCase() + t.slice(1));
+                const panel = document.getElementById('panelTab' + t.charAt(0).toUpperCase() + t.slice(1));
+                if (t === tabId) {
+                    btn.className = "admin-tab active font-bold bg-white text-navy-900 shadow-sm px-3 py-1.5 rounded-lg border border-slate-200";
+                    panel.classList.remove('hidden');
+                } else {
+                    btn.className = "admin-tab font-semibold text-slate-600 px-3 py-1.5 rounded-lg hover:bg-white/70";
+                    panel.classList.add('hidden');
+                }
+            });
+        }
+
+        function sinkronkanFormAdminDenganState() {
+            const data = window.appState || window.DEFAULT_DATA_STATE;
+            if (data.konten) {
+                const k = data.konten;
+                document.getElementById('inputHeroBadge').value = k.heroBadge || '';
+                document.getElementById('inputHeroTitle').value = k.heroTitle || '';
+                document.getElementById('inputHeroDesc').value = k.heroDesc || '';
+                document.getElementById('inputBtnPrimaryText').value = k.btnPrimaryText || '';
+                document.getElementById('inputBtnPrimaryLink').value = k.btnPrimaryLink || '';
+                document.getElementById('inputBtnSecondaryText').value = k.btnSecondaryText || '';
+                document.getElementById('inputBtnSecondaryLink').value = k.btnSecondaryLink || '';
+                document.getElementById('inputNamaKepsek').value = k.namaKepsek || '';
+                document.getElementById('inputJabatanKepsek').value = k.jabatanKepsek || '';
+                document.getElementById('inputJudulSambutan').value = k.judulSambutan || '';
+            }
+
+            if (data.gambar) {
+                document.getElementById('inputGambarKepsek').value = data.gambar.fotoKepsek || '';
+                document.getElementById('previewGambarKepsek').src = window.formatGoogleDriveUrl(data.gambar.fotoKepsek);
+            }
+        }
+
+        function simpanPengaturanKonten() {
+            const baru = {
+                konten: {
+                    heroBadge: document.getElementById('inputHeroBadge').value,
+                    heroTitle: document.getElementById('inputHeroTitle').value,
+                    heroDesc: document.getElementById('inputHeroDesc').value,
+                    btnPrimaryText: document.getElementById('inputBtnPrimaryText').value,
+                    btnPrimaryLink: document.getElementById('inputBtnPrimaryLink').value,
+                    btnSecondaryText: document.getElementById('inputBtnSecondaryText').value,
+                    btnSecondaryLink: document.getElementById('inputBtnSecondaryLink').value,
+                    namaKepsek: document.getElementById('inputNamaKepsek').value,
+                    jabatanKepsek: document.getElementById('inputJabatanKepsek').value,
+                    judulSambutan: document.getElementById('inputJudulSambutan').value
+                }
+            };
+
+            window.persistToFirestore(baru);
+            tampilkanNotifikasiAdmin("Konten teks & tautan tombol berhasil diperbarui secara realtime!");
+        }
+
+        function simpanPengaturanGambar() {
+            const val = document.getElementById('inputGambarKepsek').value.trim();
+            const formatted = window.formatGoogleDriveUrl(val);
+            document.getElementById('previewGambarKepsek').src = formatted;
+
+            const baru = {
+                gambar: {
+                    fotoKepsek: val
+                }
+            };
+
+            window.persistToFirestore(baru);
+            tampilkanNotifikasiAdmin("URL Gambar Kepala Sekolah diperbarui dengan format stabil!");
+        }
+
+        function filterKatalog(kategori) {
+            const buttons = document.querySelectorAll('.kat-btn');
+            buttons.forEach(b => {
+                b.className = "kat-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:bg-slate-100";
+            });
+            event.currentTarget.className = "kat-btn active px-3.5 py-1.5 rounded-lg text-xs font-bold bg-navy-900 text-white";
+            window.renderKatalogGrid(kategori);
+        }
+
+        function tampilkanFormTambahProduk() {
+            document.getElementById('formProdukContainer').classList.remove('hidden');
+            document.getElementById('formProdukTitle').textContent = "Formulir Tambah Produk Baru";
+            document.getElementById('editProdukId').value = "";
+            document.getElementById('prodNama').value = "";
+            document.getElementById('prodKategori').value = "seragam";
+            document.getElementById('prodHarga').value = "";
+            document.getElementById('prodStok').value = "20";
+            document.getElementById('prodGambar').value = "";
+            document.getElementById('prodDeskripsi').value = "";
+            document.getElementById('prodNama').focus();
+        }
+
+        function sembunyikanFormProduk() {
+            document.getElementById('formProdukContainer').classList.add('hidden');
+        }
+
+        function editProdukItem(id) {
+            const item = (window.appState.katalog || []).find(p => p.id === id);
+            if (!item) return;
+
+            document.getElementById('formProdukContainer').classList.remove('hidden');
+            document.getElementById('formProdukTitle').textContent = `Ubah Produk: ${item.nama}`;
+            document.getElementById('editProdukId').value = item.id;
+            document.getElementById('prodNama').value = item.nama || '';
+            document.getElementById('prodKategori').value = item.kategori || 'seragam';
+            document.getElementById('prodHarga').value = item.harga || 0;
+            document.getElementById('prodStok').value = item.stok || 0;
+            document.getElementById('prodGambar').value = item.gambar || '';
+            document.getElementById('prodDeskripsi').value = item.deskripsi || '';
+        }
+
+        function simpanProdukData() {
+            const id = document.getElementById('editProdukId').value;
+            const nama = document.getElementById('prodNama').value.trim();
+            const kategori = document.getElementById('prodKategori').value;
+            const harga = parseInt(document.getElementById('prodHarga').value) || 0;
+            const stok = parseInt(document.getElementById('prodStok').value) || 0;
+            const gambar = document.getElementById('prodGambar').value.trim();
+            const deskripsi = document.getElementById('prodDeskripsi').value.trim();
+
+            if (!nama || harga <= 0) {
+                alert("Harap isi nama produk dan harga yang valid.");
+                return;
+            }
+
+            let katalogList = [...(window.appState.katalog || [])];
+
+            if (id) {
+                // Update
+                katalogList = katalogList.map(p => {
+                    if (p.id === id) {
+                        return { ...p, nama, kategori, harga, stok, gambar, deskripsi };
+                    }
+                    return p;
+                });
+            } else {
+                // Tambah baru
+                const newId = "prod-" + Date.now();
+                katalogList.unshift({ id: newId, nama, kategori, harga, stok, gambar, deskripsi });
+            }
+
+            window.persistToFirestore({ katalog: katalogList });
+            sembunyikanFormProduk();
+            tampilkanNotifikasiAdmin(id ? "Produk berhasil diperbarui!" : "Produk baru berhasil ditambahkan!");
+        }
+
+        function hapusProdukItem(id) {
+            if (!window.confirm("Apakah Anda yakin ingin menghapus produk ini dari katalog?")) return;
+            const katalogList = (window.appState.katalog || []).filter(p => p.id !== id);
+            window.persistToFirestore({ katalog: katalogList });
+            tampilkanNotifikasiAdmin("Produk telah dihapus dari katalog.");
+        }
+
+        function bukaModalBooking(id) {
+            const item = (window.appState.katalog || []).find(p => p.id === id);
+            if (!item) return;
+
+            document.getElementById('modalBookId').value = item.id;
+            document.getElementById('modalBookNama').textContent = item.nama;
+            document.getElementById('modalBookKategori').textContent = `Koperasi • ${item.kategori.toUpperCase()}`;
+            document.getElementById('modalBookHarga').textContent = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(item.harga || 0);
+            
+            const imgEl = document.getElementById('modalBookImg');
+            imgEl.src = window.formatGoogleDriveUrl(item.gambar, 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=400&q=80');
+            imgEl.onerror = function() {
+                window.handleSmartImageError(this, 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=400&q=80');
+            };
+
+            document.getElementById('bookingProdukModal').classList.remove('hidden');
+        }
+
+        function tutupModalBooking() {
+            document.getElementById('bookingProdukModal').classList.add('hidden');
+        }
+
+        function prosesPemesananProduk() {
+            const id = document.getElementById('modalBookId').value;
+            const nama = document.getElementById('orderNama').value.trim();
+            const kelas = document.getElementById('orderKelas').value.trim();
+            const wa = document.getElementById('orderWa').value.trim();
+            const jumlah = parseInt(document.getElementById('orderJumlah').value) || 1;
+            const metode = document.getElementById('orderMetode').value;
+            const catatan = document.getElementById('orderCatatan').value.trim();
+
+            const item = (window.appState.katalog || []).find(p => p.id === id);
+            const kodeBooking = "BKG-" + Math.floor(10000 + Math.random() * 90000);
+
+            const transaksiBaru = {
+                id: kodeBooking,
+                nama: nama,
+                kelas: kelas,
+                wa: wa,
+                produk: item ? item.nama : "Produk Sekolah",
+                jumlah: jumlah,
+                metode: metode,
+                catatan: catatan,
+                status: "Menunggu Pengambilan / Verifikasi",
+                waktu: new Date().toLocaleString('id-ID')
+            };
+
+            const bookingList = [transaksiBaru, ...(window.appState.booking || [])];
+            window.persistToFirestore({ booking: bookingList });
+            tutupModalBooking();
+
+            // Tampilkan dialog kode booking kepada siswa
+            bukaModalUniversalInfo(
+                "Pemesanan Berhasil Dicatat!",
+                `
+                <div class="text-center space-y-3">
+                    <div class="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto text-xl">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+                    <p class="text-xs text-slate-600">Simpan Kode Pemesanan Anda untuk verifikasi pengambilan:</p>
+                    <div class="p-3 bg-slate-100 rounded-xl font-mono text-base font-extrabold text-navy-900 select-all border border-slate-300">
+                        ${kodeBooking}
+                    </div>
+                    <p class="text-[11px] text-slate-500">Konfirmasi rincian juga dapat Anda lacak kapan saja melalui menu <strong>Lacak Pesanan</strong>.</p>
+                </div>
+                `
+            );
+        }
+
+        function bukaModalLacakBooking() {
+            document.getElementById('lacakBookingModal').classList.remove('hidden');
+            document.getElementById('hasilLacakPublik').classList.add('hidden');
+        }
+
+        function tutupModalLacakBooking() {
+            document.getElementById('lacakBookingModal').classList.add('hidden');
+        }
+
+        function cariStatusPesananPublik() {
+            const q = document.getElementById('inputCariBooking').value.trim().toLowerCase();
+            const hasilBox = document.getElementById('hasilLacakPublik');
+            if (!q) return;
+
+            const list = window.appState.booking || [];
+            const found = list.find(b => b.id.toLowerCase() === q || b.wa.includes(q));
+
+            hasilBox.classList.remove('hidden');
+            if (found) {
+                hasilBox.innerHTML = `
+                    <div class="space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <strong class="font-mono text-navy-900">${found.id}</strong>
+                            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">${found.status}</span>
+                        </div>
+                        <p class="text-xs">Atas Nama: <strong>${found.nama}</strong> (${found.kelas})</p>
+                        <p class="text-xs text-slate-600">Item: ${found.produk} (Qty: ${found.jumlah})</p>
+                        <p class="text-[11px] text-slate-500">Metode: ${found.metode}</p>
+                    </div>
+                `;
+            } else {
+                hasilBox.innerHTML = `<p class="text-xs text-rose-600">Kode atau nomor WhatsApp tidak ditemukan dalam catatan sistem.</p>`;
+            }
+        }
+
+        function ubahStatusBooking(bookingId) {
+            const list = (window.appState.booking || []).map(b => {
+                if (b.id === bookingId) {
+                    const statusBerikutnya = b.status === "Siap Diambil" ? "Selesai / Diterima" : "Siap Diambil";
+                    return { ...b, status: statusBerikutnya };
+                }
+                return b;
+            });
+            window.persistToFirestore({ booking: list });
+            tampilkanNotifikasiAdmin("Status transaksi berhasil diubah!");
+        }
+
+        function konfirmasiResetDefault() {
+            const yakin = window.confirm("PENTING: Apakah Anda yakin ingin meriset SELURUH data web (teks, gambar, tombol, dan katalog) kembali ke pengaturan default awal institusi?");
+            if (!yakin) return;
+
+            // Kembalikan ke state awal
+            window.appState = JSON.parse(JSON.stringify(window.DEFAULT_DATA_STATE));
+            window.persistToFirestore(window.DEFAULT_DATA_STATE);
+            sinkronkanFormAdminDenganState();
+            tampilkanNotifikasiAdmin("Semua data berhasil di-reset ke bawaan resmi institusi!");
+        }
+
+        function tampilkanNotifikasiAdmin(pesan) {
+            const notif = document.createElement('div');
+            notif.className = "fixed bottom-5 left-5 bg-navy-900 text-white text-xs px-4 py-3 rounded-xl shadow-2xl border border-emas-500 z-50 flex items-center gap-2 animate-bounce";
+            notif.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-400"></i> <span>${pesan}</span>`;
+            document.body.appendChild(notif);
+            setTimeout(() => notif.remove(), 3500);
+        }
+
+        function bukaModalUniversalInfo(judul, htmlContent) {
+            const modal = document.getElementById('universalModal');
+            const content = document.getElementById('universalModalContent');
+            content.innerHTML = `
+                <div>
+                    <h4 class="font-bold text-navy-900 text-base mb-3">${judul}</h4>
+                    ${htmlContent}
+                </div>
+            `;
+            modal.classList.remove('hidden');
+        }
+
+        function tutupModalUniversal() {
+            const modal = document.getElementById('universalModal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        const DAFTAR_BERITA_SEKOLAH = [
+            {
+                id: 1,
+                judul: "Peresmian Laboratorium Kecerdasan Buatan & Digital Studio Hibah Industri",
+                kategori: "Riset & Teknologi",
+                tanggal: "12 September 2026",
+                penulis: "Tim Humas & Komite Informatika SMANSA",
+                gambar: "https://images.unsplash.com/photo-1581092921461-eab62e97a780?auto=format&fit=crop&w=900&q=80",
+                fallbackGambar: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80",
+                durasi: "4 Menit Baca",
+                isi: `
+                    <p><strong>JAKARTA</strong> — SMA Negeri 1 Nusantara resmi mengoperasikan <em>Integrated Artificial Intelligence & Digital Creative Studio</em> yang dibangun melalui kolaborasi strategis dengan konsorsium industri teknologi nasional dan Kemendikbudristek RI.</p>
+                    <p>Fasilitas komputasi berkecepatan tinggi ini dilengkapi dengan 36 unit workstation berkemampuan komputasi paralel GPU, studio rekaman podcast edukasi kedap suara, perangkat sensor IoT untuk praktikum mikrokontroler, serta papan interaktif digital cerdas.</p>
+                    <div class="p-4 bg-sky-50 rounded-xl border-l-4 border-kemendikbud my-3 italic text-xs text-slate-700">
+                        "Laboratorium AI ini bukan sekadar ruang komputer biasa, melainkan inkubator riset terapan bagi siswa Fase E dan Fase F untuk menciptakan solusi nyata, mulai dari klasifikasi citra satelit Adiwiyata hingga otomasi perpustakaan sekolah." — <strong>Dr. H. Bambang Suryonegoro, M.Pd.</strong>, Kepala SMAN 1 Nusantara.
+                    </div>
+                    <p>Dengan adanya studio ini, ekstrakurikuler Karya Ilmiah Remaja (KIR) dan klub Robotika SMANSA kini memiliki basis riset yang sejajar dengan laboratorium terpadu perguruan tinggi negeri.</p>
+                `
+            },
+            {
+                id: 2,
+                judul: "Gerakan Pungut Sampah & Pembuatan Biopori Massal Peringatan Hari Bumi",
+                kategori: "Adiwiyata & Lingkungan",
+                tanggal: "08 September 2026",
+                penulis: "Pokja Adiwiyata Mandiri SMANSA",
+                gambar: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=900&q=80",
+                fallbackGambar: "https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=900&q=80",
+                durasi: "3 Menit Baca",
+                isi: `
+                    <p>Sebagai wujud komitmen mempertahankan predikat Sekolah Adiwiyata Mandiri, seluruh peserta didik, dewan guru, dan staf tata usaha menggelar aksi peduli lingkungan terpadu.</p>
+                    <p>Sebanyak 120 titik lubang resapan biopori baru berhasil dipasang di area arboretum dan pekarangan hijau sekolah guna meningkatkan daya serap air tanah serta mengolah dedaunan kering menjadi kompos organik bermutu tinggi.</p>
+                    <p>Kegiatan ini juga dirangkaikan dengan pemilahan sampah plastik terpilah yang kemudian disalurkan ke Bank Sampah Unit Siswa untuk dikonversi menjadi poin tabungan ramah lingkungan.</p>
+                `
+            },
+            {
+                id: 3,
+                judul: "Latihan Dasar Kepemimpinan Siswa (LDKS) Calon Pengurus OSIS & MPK 2026/2027",
+                kategori: "Kesiswaan & Karakter",
+                tanggal: "02 September 2026",
+                penulis: "Kesiswaan & Pembina OSIS",
+                gambar: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=80",
+                fallbackGambar: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=900&q=80",
+                durasi: "3 Menit Baca",
+                isi: `
+                    <p>Bertempat di Aula Utama Graha Nusantara, sebanyak 64 calon fungsionaris Organisasi Siswa Intra Sekolah (OSIS) dan Majelis Permusyawaratan Kelas (MPK) masa bakti 2026/2027 mengikuti Latihan Dasar Kepemimpinan Siswa (LDKS).</p>
+                    <p>Pelatihan menitikberatkan pada penguatan 6 dimensi Profil Pelajar Pancasila, manajemen konflik organisasi, tata kelola proposal kegiatan transparan, serta kecakapan <em>public speaking</em> dan diplomasi rapat pleno.</p>
+                    <p>Seluruh calon pengurus juga dilatih menyusun program kerja tahunan berbasis digital untuk mendukung transparansi aspirasi siswa di lingkungan sekolah.</p>
+                `
+            }
+        ];
+
+        function bacaDetailBerita(id) {
+            const item = DAFTAR_BERITA_SEKOLAH.find(b => b.id === Number(id)) || DAFTAR_BERITA_SEKOLAH[0];
+            
+            document.getElementById('beritaModalKategori').textContent = item.kategori;
+            document.getElementById('beritaModalWaktu').textContent = item.tanggal;
+            document.getElementById('beritaModalJudul').textContent = item.judul;
+            document.getElementById('beritaModalPenulis').textContent = item.penulis;
+            document.getElementById('beritaModalEstimasi').innerHTML = `<i class="fa-regular fa-clock mr-1"></i> ${item.durasi}`;
+            
+            const imgEl = document.getElementById('beritaModalGambar');
+            imgEl.src = item.gambar;
+            imgEl.onerror = function() {
+                window.handleSmartImageError(this, item.fallbackGambar);
+            };
+
+            document.getElementById('beritaModalIsi').innerHTML = item.isi;
+            document.getElementById('beritaModal').classList.remove('hidden');
+        }
+
+        function tutupModalBerita() {
+            document.getElementById('beritaModal').classList.add('hidden');
+        }
+
+        function salinTautanBerita() {
+            const inputDummy = document.createElement('input');
+            inputDummy.value = window.location.origin + window.location.pathname + '#berita';
+            document.body.appendChild(inputDummy);
+            inputDummy.select();
+            document.execCommand('copy');
+            document.body.removeChild(inputDummy);
+            tampilkanNotifikasiAdmin("Tautan rilis warta sekolah berhasil disalin ke clipboard!");
+        }
+
+        function tampilkanSemuaBerita() {
+            let htmlList = `
+                <div class="space-y-3 max-h-96 overflow-y-auto pr-1">
+            `;
+            DAFTAR_BERITA_SEKOLAH.forEach(b => {
+                htmlList += `
+                    <div onclick="tutupModalUniversal(); bacaDetailBerita(${b.id});" class="p-3 bg-slate-50 hover:bg-sky-50 border border-slate-200 rounded-xl cursor-pointer transition-all flex items-start gap-3 group">
+                        <img src="${b.gambar}" alt="${b.judul}" class="w-16 h-16 rounded-lg object-cover bg-slate-200 shrink-0" onerror="handleSmartImageError(this, '${b.fallbackGambar}')">
+                        <div>
+                            <span class="text-[10px] font-bold text-kemendikbud uppercase tracking-wider">${b.kategori} • ${b.tanggal}</span>
+                            <h5 class="text-xs font-bold text-navy-900 group-hover:text-kemendikbud transition-colors line-clamp-2">${b.judul}</h5>
+                            <span class="text-[11px] text-slate-400 mt-0.5 block">${b.durasi}</span>
+                        </div>
+                    </div>
+                `;
+            });
+            htmlList += `</div>`;
+            bukaModalUniversalInfo("Arsip Publikasi & Berita SMANSA", htmlList);
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        function togglePortalModal() {
+            const modal = document.getElementById('portalModal');
+            modal.classList.toggle('hidden');
+        }
+
+        function simulasiMasukPortal() {
+            togglePortalModal();
+            bukaModalUniversalInfo("Akses Portal Akademik", `
+                <div class="text-center space-y-3 py-2">
+                    <div class="w-12 h-12 rounded-full bg-blue-50 text-kemendikbud flex items-center justify-center mx-auto text-xl">
+                        <i class="fa-solid fa-server"></i>
+                    </div>
+                    <h5 class="font-bold text-navy-900 text-sm">Sinkronisasi Server SSO Dapodik</h5>
+                    <p class="text-xs text-slate-600">Simulasi otentikasi berhasil. Pada lingkungan terintegrasi Dapodikdasmen, Anda akan diarahkan langsung ke dasbor e-Rapor dan sistem presensi digital.</p>
+                </div>
+            `);
+        }
+
+        function bantuanAkses() {
+            togglePortalModal();
+            bukaModalUniversalInfo("Bantuan Akun Siswa & Guru", `
+                <div class="text-xs text-slate-600 space-y-2">
+                    <p>Bagi peserta didik baru dan guru yang belum memiliki akun aktif, silakan menghubungi <strong>Tim Helpdesk TIK SMAN 1 Nusantara</strong> melalui Bagian Tata Usaha atau nomor layanan resmi sekolah dengan membawa salinan Kartu Keluarga / SK Penugasan.</p>
+                </div>
+            `);
+        }
+
+        function bukaModalP5() {
+            bukaModalUniversalInfo("Galeri Projek Penguatan Profil Pelajar Pancasila (P5)", `
+                <div class="space-y-4 text-xs text-slate-700">
+                    <p>Implementasi Kurikulum Merdeka di SMAN 1 Nusantara mengusung 3 tema utama tahun ajaran 2026/2027:</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-center">
+                        <div class="p-2.5 bg-emerald-50 border border-emerald-200 rounded-xl">
+                            <i class="fa-solid fa-seedling text-emerald-600 text-lg mb-1 block"></i>
+                            <strong class="text-emerald-900 text-[11px] block">Gaya Hidup Berkelanjutan</strong>
+                            <span class="text-[10px] text-slate-500">Pengolahan Limbah & Biopori</span>
+                        </div>
+                        <div class="p-2.5 bg-blue-50 border border-blue-200 rounded-xl">
+                            <i class="fa-solid fa-people-roof text-blue-600 text-lg mb-1 block"></i>
+                            <strong class="text-blue-900 text-[11px] block">Bhinneka Tunggal Ika</strong>
+                            <span class="text-[10px] text-slate-500">Pentas Budaya Nusantara</span>
+                        </div>
+                        <div class="p-2.5 bg-amber-50 border border-amber-200 rounded-xl">
+                            <i class="fa-solid fa-lightbulb text-amber-600 text-lg mb-1 block"></i>
+                            <strong class="text-amber-900 text-[11px] block">Rekayasa & Teknologi</strong>
+                            <span class="text-[10px] text-slate-500">Alat Ukur Otomasi Tanaman</span>
+                        </div>
+                    </div>
+                </div>
+            `);
+        }
+
+        function bukaModalOsis() {
+            bukaModalUniversalInfo("Struktur Fungsionaris OSIS & MPK", `
+                <div class="text-xs space-y-3 text-slate-700">
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                        <span class="text-[10px] font-bold text-kemendikbud block uppercase">Ketua OSIS Terpilih</span>
+                        <strong class="text-sm text-navy-900">Arya Satria Pratama (XI MIPA 1)</strong>
+                        <p class="text-[11px] text-slate-500 mt-0.5">Visi: Mewujudkan SMANSA yang progresif, adaptif teknologi, dan berdaya saing global.</p>
+                    </div>
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                        <span class="text-[10px] font-bold text-emas-700 block uppercase">Ketua MPK</span>
+                        <strong class="text-sm text-navy-900">Siti Rahma Azzahra (XI IPS 2)</strong>
+                        <p class="text-[11px] text-slate-500 mt-0.5">Mengawal aspirasi kelas dan fungsi legislasi organisasi kesiswaan.</p>
+                    </div>
+                </div>
+            `);
+        }
+
+        function bukaModalAlumni() {
+            bukaModalUniversalInfo("Sebaran Jejak Alumni SMAN 1 Nusantara", `
+                <div class="text-xs text-slate-700 space-y-3">
+                    <p>Alumni SMAN 1 Nusantara tersebar di berbagai universitas terbaik nasional dan kedinasan:</p>
+                    <ul class="list-disc pl-4 space-y-1">
+                        <li><strong>Universitas Indonesia (UI):</strong> 52 Mahasiswa (Fakultas Kedokteran, Hukum, FT)</li>
+                        <li><strong>Institut Teknologi Bandung (ITB):</strong> 45 Mahasiswa (STEI, FTI, FTSL)</li>
+                        <li><strong>Universitas Gadjah Mada (UGM):</strong> 61 Mahasiswa</li>
+                        <li><strong>Ikatan Kedinasan:</strong> 19 Taruna (STAN, Akmil, Akpol, IPDN)</li>
+                    </ul>
+                </div>
+            `);
+        }
+
+        function filterEkstra(kategori) {
+            const buttons = document.querySelectorAll('#ekstraTabs .tab-btn');
+            buttons.forEach(b => {
+                b.className = "tab-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200";
+            });
+            event.currentTarget.className = "tab-btn active px-3.5 py-1.5 rounded-lg text-xs font-bold bg-navy-900 text-white";
+
+            const cards = document.querySelectorAll('#ekstraGrid .ekstra-card');
+            cards.forEach(card => {
+                if (kategori === 'semua' || card.classList.contains(kategori)) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+
+        function prosesPencarian() {
+            const nisn = document.getElementById('inputNisn').value.trim();
+            const jalur = document.getElementById('inputJalur').value;
+            const hasilBox = document.getElementById('hasilPencarian');
+
+            hasilBox.classList.remove('hidden');
+            if (nisn.length === 10) {
+                hasilBox.className = "mt-4 p-3.5 rounded-xl border border-emerald-300 bg-emerald-50 text-emerald-900 text-xs leading-relaxed";
+                hasilBox.innerHTML = `
+                    <div class="flex items-center gap-2 font-bold mb-1">
+                        <i class="fa-solid fa-circle-check text-emerald-600"></i> Berkas Terverifikasi Sistem
+                    </div>
+                    <span>NISN <strong>${nisn}</strong> pada <strong>Jalur ${jalur}</strong> telah memenuhi syarat berkas administrasi PPDB 2026. Pantau pemeringkatan jurnal harian resmi dinas.</span>
+                `;
+            } else {
+                hasilBox.className = "mt-4 p-3.5 rounded-xl border border-rose-300 bg-rose-50 text-rose-900 text-xs leading-relaxed";
+                hasilBox.innerHTML = `<span>NISN harus terdiri dari 10 digit angka resmi Kemendikbud.</span>`;
+            }
+        }
+
+        function hitungSimulasiPPDB() {
+            const jarak = parseFloat(document.getElementById('simJarak').value) || 0;
+            const nilai = parseFloat(document.getElementById('simNilai').value) || 0;
+            const hasilEl = document.getElementById('simulasiHasil');
+
+            let rekomendasi = "";
+            if (jarak <= 2.5 && nilai >= 85) {
+                rekomendasi = `<span class="text-emerald-600 font-bold">Peluang Sangat Tinggi di Jalur Zonasi & Prestasi</span>`;
+            } else if (jarak <= 2.5) {
+                rekomendasi = `<span class="text-emerald-600 font-bold">Peluang Utama melalui Jalur Zonasi Domisili (${jarak} KM)</span>`;
+            } else if (nilai >= 88) {
+                rekomendasi = `<span class="text-kemendikbud font-bold">Direkomendasikan fokus Jalur Prestasi Akademik (Rapor: ${nilai})</span>`;
+            } else {
+                rekomendasi = `<span class="text-amber-600 font-bold">Pertimbangkan Jalur Prestasi Kejuaraan / Jalur Afirmasi</span>`;
+            }
+            hasilEl.innerHTML = `Hasil Analisis: ${rekomendasi}`;
+        }
+
+        function simpanBukuTamu() {
+            const form = document.getElementById('formBukuTamu');
+            const toast = document.getElementById('toastSukses');
+            toast.classList.remove('hidden');
+            form.reset();
+            setTimeout(() => toast.classList.add('hidden'), 4000);
+        }
+
+        function unduhKalender() {
+            bukaModalUniversalInfo("Kalender Akademik 2026/2027", `
+                <div class="text-center py-3 text-xs space-y-3">
+                    <i class="fa-solid fa-file-pdf text-4xl text-rose-600"></i>
+                    <p class="text-slate-600">Dokumen Kalender Pendidikan Semester Ganjil & Genap Tahun Ajaran 2026/2027 telah siap diunduh.</p>
+                    <button onclick="salinTautanBerita();" class="px-4 py-2 bg-navy-900 text-white rounded-lg font-bold">
+                        <i class="fa-solid fa-download mr-1"></i> Simpan Dokumen PDF
+                    </button>
+                </div>
+            `);
+        }
+    </script>
+</body>
+</html>

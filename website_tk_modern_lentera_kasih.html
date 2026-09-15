@@ -1,0 +1,2271 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TK Lentera Bangsa — Tempat Tumbuh, Bermain, dan Belajar dengan Bahagia</title>
+  
+  <!-- Preload primary visual image for fast loading -->
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=1000&q=80">
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#F0F7FF',
+              100: '#E0F0FE',
+              200: '#BAE0FD',
+              500: '#0284C7',
+              600: '#0369A1',
+              700: '#075985',
+              800: '#0C4A6E',
+              900: '#0F3750',
+            },
+            warm: {
+              cream: '#FAF9F5',
+              surface: '#FFFFFF',
+              border: '#EAE7DF',
+            },
+            accent: {
+              yellow: '#F59E0B',
+              yellowLight: '#FEF3C7',
+              green: '#10B981',
+              greenLight: '#E6F4EA',
+              coral: '#E11D48',
+              coralLight: '#FFE4E6',
+            },
+            charcoal: {
+              800: '#1E293B',
+              900: '#0F172A',
+              muted: '#64748B',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #FAF9F5;
+      color: #1E293B;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    /* Subtle decorative blur shapes */
+    .bg-blob-blue {
+      background: radial-gradient(circle, rgba(186, 224, 253, 0.45) 0%, rgba(240, 247, 255, 0) 70%);
+    }
+    .bg-blob-yellow {
+      background: radial-gradient(circle, rgba(254, 243, 199, 0.6) 0%, rgba(250, 249, 245, 0) 70%);
+    }
+    
+    /* Clean image framing */
+    .photo-shadow {
+      box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(226, 232, 240, 0.8);
+    }
+    .card-shadow {
+      box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 0 0 1px rgba(226, 232, 240, 0.7);
+    }
+  </style>
+</head>
+<body class="selection:bg-brand-100 selection:text-brand-900">
+
+  <!-- Top micro bar for parents -->
+  <aside aria-label="Informasi Pendaftaran" class="bg-brand-50 border-b border-brand-100/80 py-2 px-4 text-xs text-charcoal-muted font-medium">
+    <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-accent-yellowLight text-amber-800 border border-amber-200">
+          Penerimaan Siswa Baru
+        </span>
+        <span>Tahun Ajaran 2026/2027 telah dibuka — Kuota terbatas per kelas.</span>
+      </div>
+      <div class="hidden md:flex items-center gap-5 text-charcoal-muted">
+        <span class="inline-flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5 text-brand-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          Senin - Jumat: 07.30 - 14.00 WIB
+        </span>
+        <span class="inline-flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5 text-brand-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+          (021) 789-2345
+        </span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Sticky Navbar -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 transition-all duration-200">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#beranda" class="flex items-center gap-3.5 group">
+        <div class="w-11 h-11 rounded-2xl bg-brand-50 border border-brand-100 flex items-center justify-center text-brand-700 shadow-sm group-hover:scale-105 transition duration-200">
+          <!-- Clean School/Building Emblem -->
+          <svg class="w-6 h-6 stroke-[1.8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
+          </svg>
+        </div>
+        <div>
+          <span class="block text-lg font-bold tracking-tight text-charcoal-900 leading-tight">TK Lentera Bangsa</span>
+          <span class="block text-[11px] font-medium text-brand-700 tracking-wider uppercase">Pendidikan Karakter & Kreativitas</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <div class="hidden lg:flex items-center gap-7 text-sm font-medium text-charcoal-800">
+        <a href="#beranda" class="text-brand-600 font-semibold hover:text-brand-700 transition">Beranda</a>
+        <a href="#tentang" class="hover:text-brand-600 transition">Tentang Kami</a>
+        <a href="#program" class="hover:text-brand-600 transition">Program</a>
+        <a href="#kegiatan" class="hover:text-brand-600 transition">Kegiatan</a>
+        <a href="#keunggulan" class="hover:text-brand-600 transition">Keunggulan</a>
+        <a href="#fasilitas" class="hover:text-brand-600 transition">Fasilitas</a>
+        <a href="#galeri" class="hover:text-brand-600 transition">Galeri</a>
+        <a href="#berita" class="hover:text-brand-600 transition">Berita</a>
+      </div>
+
+      <!-- CTA and Action Group -->
+      <div class="hidden lg:flex items-center gap-3">
+        <a href="#kontak" class="text-sm font-medium text-charcoal-800 hover:text-brand-700 px-3 py-2 transition">
+          Kontak
+        </a>
+        <button onclick="openModal('daftarModal')" class="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 active:bg-brand-800 text-white text-sm font-semibold px-5 py-2.5 rounded-full shadow-sm hover:shadow transition duration-200">
+          <span>Daftar Sekarang</span>
+          <svg class="w-4 h-4 stroke-[2]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+        </button>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button id="mobileMenuBtn" aria-label="Buka Menu Navigasi" class="lg:hidden p-2.5 rounded-xl border border-slate-200 text-charcoal-800 hover:bg-slate-50 focus:outline-none">
+        <svg class="w-6 h-6 stroke-[1.8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path id="menuIconPath" stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+      </button>
+    </nav>
+
+    <!-- Mobile Drawer -->
+    <div id="mobileMenu" class="hidden lg:hidden bg-white border-b border-slate-200 px-6 py-6 transition-all duration-300 shadow-xl">
+      <div class="flex flex-col gap-4 text-base font-medium text-charcoal-800">
+        <a href="#beranda" class="mobile-nav-link text-brand-600 font-semibold py-1">Beranda</a>
+        <a href="#tentang" class="mobile-nav-link hover:text-brand-600 py-1">Tentang Kami</a>
+        <a href="#program" class="mobile-nav-link hover:text-brand-600 py-1">Program Pembelajaran</a>
+        <a href="#kegiatan" class="mobile-nav-link hover:text-brand-600 py-1">Kegiatan Harian</a>
+        <a href="#keunggulan" class="mobile-nav-link hover:text-brand-600 py-1">Keunggulan Sekolah</a>
+        <a href="#fasilitas" class="mobile-nav-link hover:text-brand-600 py-1">Fasilitas</a>
+        <a href="#galeri" class="mobile-nav-link hover:text-brand-600 py-1">Galeri Foto</a>
+        <a href="#berita" class="mobile-nav-link hover:text-brand-600 py-1">Berita & Acara</a>
+        <a href="#kontak" class="mobile-nav-link hover:text-brand-600 py-1">Kontak & Lokasi</a>
+        <div class="pt-3 border-t border-slate-100 flex flex-col gap-2.5">
+          <button onclick="openModal('daftarModal'); toggleMobileMenu()" class="w-full text-center bg-brand-600 text-white font-semibold py-3 rounded-xl shadow-sm">
+            Daftar Siswa Baru
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section id="beranda" class="relative pt-12 pb-20 lg:pt-20 lg:pb-28 overflow-hidden">
+    <!-- Subtle Background Accents -->
+    <div class="absolute -top-24 -left-24 w-96 h-96 bg-blob-blue rounded-full pointer-events-none"></div>
+    <div class="absolute top-1/2 -right-32 w-[32rem] h-[32rem] bg-blob-yellow rounded-full pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        
+        <!-- Left: Value Proposition & Copy -->
+        <div class="lg:col-span-6 xl:col-span-7 space-y-7">
+          
+          <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-brand-50 border border-brand-200/70 text-brand-800 text-xs font-semibold tracking-wide">
+            <span class="w-2 h-2 rounded-full bg-accent-green animate-pulse"></span>
+            Taman Kanak-Kanak Berstandar Nasional & Ramah Anak
+          </div>
+
+          <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-extrabold text-charcoal-900 tracking-tight leading-[1.18]">
+            <span id="viewHeroHeadline">Tempat Tumbuh, Bermain, dan Belajar dengan <span class="text-brand-600 relative inline-block">Bahagia</span></span>
+          </h1>
+
+          <p id="viewHeroSubheadline" class="text-base sm:text-lg text-charcoal-muted max-w-2xl font-normal leading-relaxed">
+            Mendampingi setiap langkah kecil anak dengan pembelajaran yang menyenangkan, lingkungan yang aman, dan pendidikan yang penuh kasih untuk membentuk pondasi masa depan yang kuat.
+          </p>
+
+          <!-- Primary & Secondary CTA -->
+          <div class="flex flex-wrap items-center gap-3.5 pt-2">
+            <button onclick="openModal('daftarModal')" class="inline-flex items-center justify-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-semibold text-base px-6 py-3.5 rounded-full shadow-sm hover:shadow-md transition duration-200 group">
+              <span id="viewHeroCtaText">Daftar Sekarang</span>
+              <svg class="w-4 h-4 stroke-[2.2] group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+            </button>
+            <a href="#tentang" class="inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-50 border border-slate-300 text-charcoal-800 font-semibold text-base px-6 py-3.5 rounded-full transition duration-200">
+              Kenali Sekolah Kami
+            </a>
+          </div>
+
+          <!-- Quick Statistics for Trust -->
+          <div class="pt-6 border-t border-slate-200/80 grid grid-cols-3 gap-4 max-w-lg">
+            <div>
+              <p class="text-2xl lg:text-3xl font-bold text-charcoal-900">1:8</p>
+              <p class="text-xs font-medium text-charcoal-muted mt-0.5">Rasio Guru & Murid</p>
+            </div>
+            <div>
+              <p class="text-2xl lg:text-3xl font-bold text-brand-600">14+ Thn</p>
+              <p class="text-xs font-medium text-charcoal-muted mt-0.5">Dedikasi Pendidikan</p>
+            </div>
+            <div>
+              <p class="text-2xl lg:text-3xl font-bold text-accent-green">Akreditasi A</p>
+              <p class="text-xs font-medium text-charcoal-muted mt-0.5">Kemendikbudristek</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Realistic Photography Showcase -->
+        <div class="lg:col-span-6 xl:col-span-5 relative">
+          <div class="relative mx-auto max-w-md lg:max-w-none">
+            
+            <!-- Main Hero Image: Clean, bright classroom learning -->
+            <div class="relative rounded-3xl overflow-hidden photo-shadow bg-slate-100 aspect-[4/5] sm:aspect-[4/4.5] border border-white">
+              <img 
+                id="viewHeroImage"
+                src="https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=1000&q=80" 
+                alt="Anak-anak TK sedang belajar bersama dengan penuh kegembiraan di ruang kelas yang terang" 
+                class="w-full h-full object-cover object-center"
+                loading="eager"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+              
+              <!-- Floating Caption inside bottom -->
+              <div class="absolute bottom-5 left-5 right-5 p-4 rounded-2xl bg-white/90 backdrop-blur-md border border-white/80 shadow-sm flex items-center justify-between">
+                <div>
+                  <p class="text-xs font-bold text-charcoal-900">Suasana Belajar Natural & Eksploratif</p>
+                  <p class="text-[11px] text-charcoal-muted">Kurikulum Merdeka berbasis karakter</p>
+                </div>
+                <span class="w-8 h-8 rounded-full bg-brand-50 flex items-center justify-center text-brand-600">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                </span>
+              </div>
+            </div>
+
+            <!-- Floating Mini Card 1: Safe Playground Badge -->
+            <div class="absolute -top-4 -left-4 sm:-left-6 p-3.5 bg-white rounded-2xl card-shadow border border-slate-100 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-accent-greenLight text-emerald-700 flex items-center justify-center">
+                <svg class="w-5 h-5 stroke-[2]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+              </div>
+              <div>
+                <p class="text-xs font-bold text-charcoal-900">Area Aman & Terpantau</p>
+                <p class="text-[11px] text-charcoal-muted">CCTV 24 Jam & Sertifikasi Sanitasi</p>
+              </div>
+            </div>
+
+            <!-- Floating Mini Card 2: Parent approval -->
+            <div class="absolute -bottom-4 -right-2 sm:-right-4 p-3.5 bg-white rounded-2xl card-shadow border border-slate-100 flex items-center gap-3 hidden sm:flex">
+              <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center">
+                <svg class="w-5 h-5 stroke-[2]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              </div>
+              <div>
+                <p class="text-xs font-bold text-charcoal-900">98% Kepuasan Orang Tua</p>
+                <p class="text-[11px] text-charcoal-muted">Berdasarkan survei tahunan 2025</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST / HIGHLIGHT SECTION -->
+  <section class="py-12 bg-white border-y border-slate-200/70">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+        
+        <!-- Pillar 1: Lingkungan Aman -->
+        <div class="flex items-start gap-4 p-4 rounded-2xl hover:bg-slate-50/80 transition duration-200">
+          <div class="w-12 h-12 shrink-0 rounded-xl bg-brand-50 border border-brand-100 text-brand-600 flex items-center justify-center">
+            <!-- ShieldCheck Icon -->
+            <svg class="w-6 h-6 stroke-[1.8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+            </svg>
+          </div>
+          <div>
+            <h2 class="text-base font-bold text-charcoal-900">Lingkungan Aman</h2>
+            <p class="text-sm text-charcoal-muted mt-1 leading-relaxed">
+              Lingkungan belajar yang ramah anak, bersih, dan dilengkapi pengawasan ketat.
+            </p>
+          </div>
+        </div>
+
+        <!-- Pillar 2: Guru Berpengalaman -->
+        <div class="flex items-start gap-4 p-4 rounded-2xl hover:bg-slate-50/80 transition duration-200">
+          <div class="w-12 h-12 shrink-0 rounded-xl bg-brand-50 border border-brand-100 text-brand-600 flex items-center justify-center">
+            <!-- GraduationCap Icon -->
+            <svg class="w-6 h-6 stroke-[1.8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
+            </svg>
+          </div>
+          <div>
+            <h2 class="text-base font-bold text-charcoal-900">Guru Berpengalaman</h2>
+            <p class="text-sm text-charcoal-muted mt-1 leading-relaxed">
+              Pendidik berlatar belakang PG-PAUD yang tulus memahami keunikan tiap anak.
+            </p>
+          </div>
+        </div>
+
+        <!-- Pillar 3: Belajar Menyenangkan -->
+        <div class="flex items-start gap-4 p-4 rounded-2xl hover:bg-slate-50/80 transition duration-200">
+          <div class="w-12 h-12 shrink-0 rounded-xl bg-brand-50 border border-brand-100 text-brand-600 flex items-center justify-center">
+            <!-- Puzzle Icon -->
+            <svg class="w-6 h-6 stroke-[1.8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14.25 6.087c0-.355.186-.676.401-.959.349-.462.825-.805 1.399-.958a3.125 3.125 0 013.91 3.91c-.153.574-.496 1.05-.958 1.399a1.536 1.536 0 00-.592.8c-.068.225-.098.463-.098.713v.75m0 0v4.5m0 0h4.5a1.5 1.5 0 001.5-1.5v-3.75a1.5 1.5 0 00-1.5-1.5h-4.5m0 6.75H9.75m0 0a1.5 1.5 0 01-1.5-1.5v-4.5m0 0H4.5A1.5 1.5 0 013 9.75V6a1.5 1.5 0 011.5-1.5h4.5m0 0v1.5" />
+            </svg>
+          </div>
+          <div>
+            <h2 class="text-base font-bold text-charcoal-900">Belajar Menyenangkan</h2>
+            <p class="text-sm text-charcoal-muted mt-1 leading-relaxed">
+              Aktivitas berbasis play-based learning yang menumbuhkan rasa ingin tahu.
+            </p>
+          </div>
+        </div>
+
+        <!-- Pillar 4: Karakter Positif -->
+        <div class="flex items-start gap-4 p-4 rounded-2xl hover:bg-slate-50/80 transition duration-200">
+          <div class="w-12 h-12 shrink-0 rounded-xl bg-brand-50 border border-brand-100 text-brand-600 flex items-center justify-center">
+            <!-- HeartHandshake Icon -->
+            <svg class="w-6 h-6 stroke-[1.8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+            </svg>
+          </div>
+          <div>
+            <h2 class="text-base font-bold text-charcoal-900">Karakter Positif</h2>
+            <p class="text-sm text-charcoal-muted mt-1 leading-relaxed">
+              Membentuk kemandirian, empati, sopan santun, dan rasa percaya diri sejak dini.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TENTANG SEKOLAH -->
+  <section id="tentang" class="py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        
+        <!-- Left: Realistic School Activity Photo -->
+        <div class="lg:col-span-6 order-2 lg:order-1">
+          <div class="relative">
+            <div class="rounded-3xl overflow-hidden photo-shadow bg-slate-100 border border-white">
+              <img 
+                src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1000&q=80" 
+                alt="Guru TK sedang membimbing anak-anak dengan penuh kesabaran dan kehangatan" 
+                class="w-full h-[460px] object-cover object-center"
+                loading="lazy"
+                onerror="this.src='https://placehold.co/800x600/f0f7ff/0369a1?text=Guru+dan+Siswa'"
+              />
+            </div>
+            
+            <!-- Quality Badge Overlay -->
+            <div class="absolute -bottom-6 -right-4 sm:right-6 bg-white p-5 rounded-2xl card-shadow border border-slate-100 max-w-xs">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-brand-50 flex items-center justify-center text-brand-600 shrink-0">
+                  <svg class="w-5 h-5 stroke-[2]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg>
+                </div>
+                <div>
+                  <p class="text-xs font-bold text-charcoal-900">Kurikulum Merdeka</p>
+                  <p class="text-[11px] text-charcoal-muted">Integrasi holistik sensorial, kognitif, dan sosio-emosional</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Narrative & Educational Vision -->
+        <div class="lg:col-span-6 order-1 lg:order-2 space-y-6">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-brand-50 text-brand-700 text-xs font-bold uppercase tracking-wider">
+            Tentang Kami
+          </div>
+          
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-charcoal-900 tracking-tight leading-snug">
+            Awal yang Baik untuk Langkah Besar Mereka
+          </h2>
+          
+          <p class="text-base text-charcoal-muted leading-relaxed font-normal">
+            Di TK Lentera Bangsa, kami percaya bahwa tahun-tahun awal adalah masa emas yang menentukan kecintaan anak terhadap belajar. Setiap anak memiliki keunikan, minat, dan kecepatan tumbuh kembang yang patut dihargai.
+          </p>
+
+          <p class="text-base text-charcoal-muted leading-relaxed font-normal">
+            Melalui pendekatan pembelajaran aktif berbasis eksplorasi dan bermain terarah, kami merancang pengalaman harian yang mengasah kecerdasan intelektual sekaligus menanamkan empati, rasa syukur, serta budi pekerti luhur.
+          </p>
+
+          <!-- Core Values Mini Checklist -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+            <div class="flex items-center gap-2.5 text-sm font-semibold text-charcoal-800">
+              <svg class="w-4 h-4 text-emerald-600 stroke-[2.2]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              <span>Pendekatan Individual</span>
+            </div>
+            <div class="flex items-center gap-2.5 text-sm font-semibold text-charcoal-800">
+              <svg class="w-4 h-4 text-emerald-600 stroke-[2.2]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              <span>Gizi & Makanan Sehat</span>
+            </div>
+            <div class="flex items-center gap-2.5 text-sm font-semibold text-charcoal-800">
+              <svg class="w-4 h-4 text-emerald-600 stroke-[2.2]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              <span>Kemitraan Erat Orang Tua</span>
+            </div>
+            <div class="flex items-center gap-2.5 text-sm font-semibold text-charcoal-800">
+              <svg class="w-4 h-4 text-emerald-600 stroke-[2.2]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              <span>Kebiasaan Literasi Dini</span>
+            </div>
+          </div>
+
+          <div class="pt-4">
+            <a href="#program" class="inline-flex items-center gap-2 text-sm font-bold text-brand-600 hover:text-brand-700 transition group">
+              <span>Selengkapnya Tentang Kami</span>
+              <svg class="w-4 h-4 stroke-[2.5] group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAM PEMBELAJARAN -->
+  <section id="program" class="py-20 bg-white border-t border-slate-200/70">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+        <span class="inline-block px-3 py-1 rounded-md bg-brand-50 text-brand-700 text-xs font-bold uppercase tracking-wider">
+          Jenjang Pendidikan & Layanan
+        </span>
+        <h2 id="viewProgramTitle" class="text-3xl sm:text-4xl font-extrabold text-charcoal-900 tracking-tight">
+          Program yang Dirancang untuk Setiap Tahap Perkembangan Anak
+        </h2>
+        <p id="viewProgramSubtitle" class="text-base text-charcoal-muted font-normal">
+          Materi dan aktivitas diselaraskan secara proporsional sesuai dengan fase kognitif, motorik, dan emosi putra-putri Anda.
+        </p>
+      </div>
+
+      <!-- Dynamic Programs & Services Catalog Grid -->
+      <div id="programsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7">
+        <!-- Dynamic program items rendered via JS and Firestore -->
+      </div>
+    </div>
+  </section>
+
+  <!-- KEGIATAN HARIAN -->
+  <section id="kegiatan" class="py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-4">
+        <div class="space-y-2">
+          <span class="inline-block px-3 py-1 rounded-md bg-brand-50 text-brand-700 text-xs font-bold uppercase tracking-wider">
+            Aktivitas Kami
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-charcoal-900 tracking-tight">
+            Keseharian Penuh Eksplorasi Bermakna
+          </h2>
+        </div>
+        <p class="text-charcoal-muted text-sm max-w-md">
+          Dokumentasi nyata kegiatan siswa-siswi kami dalam suasana yang aktif, bersih, tertib, dan menyenangkan.
+        </p>
+      </div>
+
+      <!-- Professional Realistic Photo Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- Activity 1: Belajar Bersama -->
+        <div class="group relative rounded-2xl overflow-hidden card-shadow bg-white">
+          <div class="aspect-[4/3] overflow-hidden bg-slate-100">
+            <img 
+              src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80" 
+              alt="Anak-anak belajar membaca dan berdiskusi bersama guru" 
+              class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+              loading="lazy"
+              onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=800&q=80';"
+            />
+          </div>
+          <div class="p-5">
+            <div class="flex items-center gap-2 text-xs font-semibold text-brand-600 mb-1">
+              <span>Circle Time & Literasi</span>
+            </div>
+            <h3 class="text-base font-bold text-charcoal-900">Belajar Bersama & Berbagi Cerita</h3>
+            <p class="text-xs text-charcoal-muted mt-1 leading-relaxed">
+              Membangun keberanian berbicara di depan kawan dan mendengarkan dengan penuh empati.
+            </p>
+          </div>
+        </div>
+
+        <!-- Activity 2: Bermain di Luar Ruangan -->
+        <div class="group relative rounded-2xl overflow-hidden card-shadow bg-white">
+          <div class="aspect-[4/3] overflow-hidden bg-slate-100">
+            <img 
+              src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=800&q=80" 
+              alt="Anak-anak bermain di area playground outdoor yang bersih dan aman" 
+              class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+              loading="lazy"
+              onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80';"
+            />
+          </div>
+          <div class="p-5">
+            <div class="flex items-center gap-2 text-xs font-semibold text-emerald-600 mb-1">
+              <span>Aktivitas Fisik & Motorik</span>
+            </div>
+            <h3 class="text-base font-bold text-charcoal-900">Bermain di Luar Ruangan</h3>
+            <p class="text-xs text-charcoal-muted mt-1 leading-relaxed">
+              Melatih ketangkasan fisik, koordinasi gerak, dan asupan vitamin D di bawah sinar pagi yang hangat.
+            </p>
+          </div>
+        </div>
+
+        <!-- Activity 3: Menggambar dan Mewarnai -->
+        <div class="group relative rounded-2xl overflow-hidden card-shadow bg-white">
+          <div class="aspect-[4/3] overflow-hidden bg-slate-100">
+            <img 
+              src="https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=800&q=80" 
+              alt="Anak sedang mewarnai gambar dengan gembira" 
+              class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+              loading="lazy"
+              onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80';"
+            />
+          </div>
+          <div class="p-5">
+            <div class="flex items-center gap-2 text-xs font-semibold text-amber-600 mb-1">
+              <span>Seni & Imajinasi</span>
+            </div>
+            <h3 class="text-base font-bold text-charcoal-900">Menggambar & Mewarnai</h3>
+            <p class="text-xs text-charcoal-muted mt-1 leading-relaxed">
+              Mengekspresikan ide, melatih kekuatan jari jemari (pre-writing skills), serta kepekaan warna.
+            </p>
+          </div>
+        </div>
+
+        <!-- Activity 4: Eksperimen Sederhana -->
+        <div class="group relative rounded-2xl overflow-hidden card-shadow bg-white">
+          <div class="aspect-[4/3] overflow-hidden bg-slate-100">
+            <img 
+              src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" 
+              alt="Anak melakukan percobaan air dan warna dalam mini sains" 
+              class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+              loading="lazy"
+              onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80';"
+            />
+          </div>
+          <div class="p-5">
+            <div class="flex items-center gap-2 text-xs font-semibold text-brand-600 mb-1">
+              <span>Sains & Eksplorasi</span>
+            </div>
+            <h3 class="text-base font-bold text-charcoal-900">Eksperimen Sederhana (Mini Lab)</h3>
+            <p class="text-xs text-charcoal-muted mt-1 leading-relaxed">
+              Mengenal reaksi alam sederhana seperti percampuran warna dan tanaman tumbuh dengan riang.
+            </p>
+          </div>
+        </div>
+
+        <!-- Activity 5: Membaca Buku -->
+        <div class="group relative rounded-2xl overflow-hidden card-shadow bg-white">
+          <div class="aspect-[4/3] overflow-hidden bg-slate-100">
+            <img 
+              src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=800&q=80" 
+              alt="Anak membaca buku cerita bergambar di pojok baca" 
+              class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+              loading="lazy"
+              onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80';"
+            />
+          </div>
+          <div class="p-5">
+            <div class="flex items-center gap-2 text-xs font-semibold text-rose-600 mb-1">
+              <span>Literasi Cinta Buku</span>
+            </div>
+            <h3 class="text-base font-bold text-charcoal-900">Pojok Baca & Dongeng</h3>
+            <p class="text-xs text-charcoal-muted mt-1 leading-relaxed">
+              Menumbuhkan budaya gemar membaca sejak usia dini melalui buku cerita bergambar berkualitas.
+            </p>
+          </div>
+        </div>
+
+        <!-- Activity 6: Pentas Gerak & Musik -->
+        <div class="group relative rounded-2xl overflow-hidden card-shadow bg-white">
+          <div class="aspect-[4/3] overflow-hidden bg-slate-100">
+            <img 
+              src="https://images.unsplash.com/photo-1465847899084-d164df4dedc6?auto=format&fit=crop&w=800&q=80" 
+              alt="Anak-anak bernyanyi dan menari bersama guru" 
+              class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+              loading="lazy"
+              onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80';"
+            />
+          </div>
+          <div class="p-5">
+            <div class="flex items-center gap-2 text-xs font-semibold text-brand-600 mb-1">
+              <span>Ekspresi & Ritme</span>
+            </div>
+            <h3 class="text-base font-bold text-charcoal-900">Aktivitas Musik & Seni Pertunjukan</h3>
+            <p class="text-xs text-charcoal-muted mt-1 leading-relaxed">
+              Mengenal nada, irama alat musik perkusi sederhana, dan mengekspresikan rasa percaya diri.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- KEUNGGULAN SEKOLAH -->
+  <section id="keunggulan" class="py-20 lg:py-28 bg-brand-50/70 border-y border-brand-100/70">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+        <span class="inline-block px-3 py-1 rounded-md bg-white border border-brand-200 text-brand-700 text-xs font-bold uppercase tracking-wider">
+          Standar Kualitas Kami
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-charcoal-900 tracking-tight">
+          Mengapa Memilih Kami?
+        </h2>
+        <p class="text-base text-charcoal-muted font-normal">
+          Kami memberikan kepastian kenyamanan bagi orang tua dan lingkungan yang paling tepat untuk pertumbuhan awal buah hati.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+        
+        <!-- Point 1 -->
+        <div class="bg-white p-7 rounded-2xl border border-slate-200/80 card-shadow">
+          <div class="w-11 h-11 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center mb-5">
+            <svg class="w-5 h-5 stroke-[2]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+          </div>
+          <h3 class="text-lg font-bold text-charcoal-900 mb-2">Lingkungan Belajar Aman & Nyaman</h3>
+          <p class="text-sm text-charcoal-muted leading-relaxed">
+            Perabotan dengan sudut tumpul ramah anak, lantai anti-slip, udara bersih bertukar lancar, dan sterilisasi berkala.
+          </p>
+        </div>
+
+        <!-- Point 2 -->
+        <div class="bg-white p-7 rounded-2xl border border-slate-200/80 card-shadow">
+          <div class="w-11 h-11 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center mb-5">
+            <svg class="w-5 h-5 stroke-[2]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.25 6.087c0-.355.186-.676.401-.959.349-.462.825-.805 1.399-.958a3.125 3.125 0 013.91 3.91c-.153.574-.496 1.05-.958 1.399a1.536 1.536 0 00-.592.8c-.068.225-.098.463-.098.713v.75m0 0v4.5m0 0h4.5a1.5 1.5 0 001.5-1.5v-3.75a1.5 1.5 0 00-1.5-1.5h-4.5m0 6.75H9.75m0 0a1.5 1.5 0 01-1.5-1.5v-4.5m0 0H4.5A1.5 1.5 0 013 9.75V6a1.5 1.5 0 011.5-1.5h4.5m0 0v1.5"/></svg>
+          </div>
+          <h3 class="text-lg font-bold text-charcoal-900 mb-2">Pendekatan Pembelajaran Berbasis Bermain</h3>
+          <p class="text-sm text-charcoal-muted leading-relaxed">
+            Anak tidak dipaksa menghafal kaku, melainkan memahami konsep melalui perabaan, penglihatan, dan rasa penasaran nyata.
+          </p>
+        </div>
+
+        <!-- Point 3 -->
+        <div class="bg-white p-7 rounded-2xl border border-slate-200/80 card-shadow">
+          <div class="w-11 h-11 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center mb-5">
+            <svg class="w-5 h-5 stroke-[2]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
+          </div>
+          <h3 class="text-lg font-bold text-charcoal-900 mb-2">Guru yang Perhatian & Profesional</h3>
+          <p class="text-sm text-charcoal-muted leading-relaxed">
+            Tersertifikasi, terlatih dalam psikologi perkembangan anak, serta mengasuh dengan kesabaran tinggi dan senyuman tulus.
+          </p>
+        </div>
+
+        <!-- Point 4 -->
+        <div class="bg-white p-7 rounded-2xl border border-slate-200/80 card-shadow">
+          <div class="w-11 h-11 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center mb-5">
+            <svg class="w-5 h-5 stroke-[2]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"/></svg>
+          </div>
+          <h3 class="text-lg font-bold text-charcoal-900 mb-2">Kegiatan Kreatif & Edukatif</h3>
+          <p class="text-sm text-charcoal-muted leading-relaxed">
+            Mulai dari cooking class sederhana, berkebun di mini garden, hingga kunjungan lapangan ke perpustakaan & museum.
+          </p>
+        </div>
+
+        <!-- Point 5 -->
+        <div class="bg-white p-7 rounded-2xl border border-slate-200/80 card-shadow">
+          <div class="w-11 h-11 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center mb-5">
+            <svg class="w-5 h-5 stroke-[2]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"/></svg>
+          </div>
+          <h3 class="text-lg font-bold text-charcoal-900 mb-2">Komunikasi Aktif dengan Orang Tua</h3>
+          <p class="text-sm text-charcoal-muted leading-relaxed">
+            Buku penghubung digital harian, dokumentasi foto kegiatan, serta konsultasi tumbuh kembang per caturwulan.
+          </p>
+        </div>
+
+        <!-- Point 6 -->
+        <div class="bg-white p-7 rounded-2xl border border-slate-200/80 card-shadow">
+          <div class="w-11 h-11 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center mb-5">
+            <svg class="w-5 h-5 stroke-[2]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
+          </div>
+          <h3 class="text-lg font-bold text-charcoal-900 mb-2">Fokus pada Perkembangan Karakter</h3>
+          <p class="text-sm text-charcoal-muted leading-relaxed">
+            Menanamkan adab, kebiasaan mengantre, merapikan mainan sendiri, dan saling menghormati keberagaman.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FASILITAS -->
+  <section id="fasilitas" class="py-20 lg:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+        <span class="inline-block px-3 py-1 rounded-md bg-brand-50 text-brand-700 text-xs font-bold uppercase tracking-wider">
+          Sarana & Prasarana
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-charcoal-900 tracking-tight">
+          Fasilitas yang Mendukung Petualangan Belajar Anak
+        </h2>
+        <p class="text-base text-charcoal-muted font-normal">
+          Dirancang khusus dengan standar higienitas tinggi, pencahayaan alami optimal, dan keamanan teruji.
+        </p>
+      </div>
+
+      <!-- Facility Cards Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <!-- Facility 1: Ruang Kelas -->
+        <div class="rounded-2xl overflow-hidden card-shadow bg-white border border-slate-200/80 group">
+          <div class="h-56 overflow-hidden bg-slate-100">
+            <img 
+              src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=800&q=80" 
+              alt="Ruang kelas TK bersih, modern, dan luas dengan ventilasi yang baik" 
+              class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+              loading="lazy"
+            />
+          </div>
+          <div class="p-6">
+            <h3 class="text-lg font-bold text-charcoal-900">Ruang Kelas Terang & Bersih</h3>
+            <p class="text-xs text-charcoal-muted mt-2 leading-relaxed">
+              Dilengkapi pendingin ruangan ramah anak, pencahayaan matahari alami, furnitur ergonomis, dan air purifier.
+            </p>
+          </div>
+        </div>
+
+        <!-- Facility 2: Area Bermain -->
+        <div class="rounded-2xl overflow-hidden card-shadow bg-white border border-slate-200/80 group">
+          <div class="h-56 overflow-hidden bg-slate-100">
+            <img 
+              src="https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=800&q=80" 
+              alt="Area bermain anak dengan matras pengaman dan permainan edukasi" 
+              class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+              loading="lazy"
+            />
+          </div>
+          <div class="p-6">
+            <h3 class="text-lg font-bold text-charcoal-900">Area Bermain Indoor Edukatif</h3>
+            <p class="text-xs text-charcoal-muted mt-2 leading-relaxed">
+              Dilengkapi matras busa berstandar internasional, balok kayu non-toxic, dan permainan logika konstruktif.
+            </p>
+          </div>
+        </div>
+
+        <!-- Facility 3: Perpustakaan Mini -->
+        <div class="rounded-2xl overflow-hidden card-shadow bg-white border border-slate-200/80 group">
+          <div class="h-56 overflow-hidden bg-slate-100">
+            <img 
+              src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=800&q=80" 
+              alt="Perpustakaan mini yang nyaman dengan bantal duduk" 
+              class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+              loading="lazy"
+            />
+          </div>
+          <div class="p-6">
+            <h3 class="text-lg font-bold text-charcoal-900">Perpustakaan Mini</h3>
+            <p class="text-xs text-charcoal-muted mt-2 leading-relaxed">
+              Koleksi ratusan buku cerita anak berbahasa Indonesia dan bilingual dengan sofa lembut serta bantal lesehan.
+            </p>
+          </div>
+        </div>
+
+        <!-- Facility 4: Ruang Kreativitas -->
+        <div class="rounded-2xl overflow-hidden card-shadow bg-white border border-slate-200/80 group">
+          <div class="h-56 overflow-hidden bg-slate-100">
+            <img 
+              src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=800&q=80" 
+              alt="Ruang kreativitas dan seni dengan meja melukis" 
+              class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+              loading="lazy"
+            />
+          </div>
+          <div class="p-6">
+            <h3 class="text-lg font-bold text-charcoal-900">Ruang Kreativitas & Seni</h3>
+            <p class="text-xs text-charcoal-muted mt-2 leading-relaxed">
+              Wadah melukis, membentuk tanah liat/playdough aman, dan eksperimen craft tanpa takut kotor.
+            </p>
+          </div>
+        </div>
+
+        <!-- Facility 5: Area Outdoor -->
+        <div class="rounded-2xl overflow-hidden card-shadow bg-white border border-slate-200/80 group">
+          <div class="h-56 overflow-hidden bg-slate-100">
+            <img 
+              src="https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=800&q=80" 
+              alt="Taman bermain outdoor berumput hijau" 
+              class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+              loading="lazy"
+            />
+          </div>
+          <div class="p-6">
+            <h3 class="text-lg font-bold text-charcoal-900">Area Outdoor & Kebun Mini</h3>
+            <p class="text-xs text-charcoal-muted mt-2 leading-relaxed">
+              Lapangan rumput sintetis higienis, ayunan aman berperedam, serta lahan menanam sayuran hidroponik sederhana.
+            </p>
+          </div>
+        </div>
+
+        <!-- Facility 6: Toilet Khusus Anak -->
+        <div class="rounded-2xl overflow-hidden card-shadow bg-white border border-slate-200/80 group">
+          <div class="h-56 overflow-hidden bg-slate-100">
+            <img 
+              src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80" 
+              alt="Toilet anak bersih dengan ukuran kloset dan wastafel proporsional" 
+              class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+              loading="lazy"
+            />
+          </div>
+          <div class="p-6">
+            <h3 class="text-lg font-bold text-charcoal-900">Toilet & Sanitasi Ramah Anak</h3>
+            <p class="text-xs text-charcoal-muted mt-2 leading-relaxed">
+              Kloset dan wastafel proporsional sesuai tinggi badan anak, lantai bertekstur, serta asisten toilet training berdedikasi.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONI ORANG TUA -->
+  <section class="py-20 lg:py-28 bg-brand-50/50 border-t border-slate-200/70">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+        <span class="inline-block px-3 py-1 rounded-md bg-white border border-brand-200 text-brand-700 text-xs font-bold uppercase tracking-wider">
+          Suara Orang Tua
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-charcoal-900 tracking-tight">
+          Cerita dari Keluarga Besar Lentera Bangsa
+        </h2>
+        <p class="text-base text-charcoal-muted font-normal">
+          Kepercayaan Anda adalah amanah terbesar bagi seluruh tim pendidik dan staf sekolah kami.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Testimonial 1 -->
+        <div class="bg-white p-8 rounded-2xl border border-slate-200/80 card-shadow flex flex-col justify-between relative">
+          <div>
+            <!-- Clean Quote Icon -->
+            <svg class="w-8 h-8 text-brand-200 mb-4" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-8.983z"/></svg>
+            <p class="text-charcoal-800 text-sm leading-relaxed mb-6 font-normal">
+              “Anak saya sekarang jauh lebih percaya diri dan selalu bersemangat ketika berangkat sekolah di pagi hari. Guru-gurunya sangat perhatian dan mampu mengenali bakat anak saya dalam menggambar.”
+            </p>
+          </div>
+          <div class="flex items-center gap-3.5 pt-4 border-t border-slate-100">
+            <div class="w-11 h-11 rounded-full bg-brand-100 text-brand-800 font-bold flex items-center justify-center text-sm">
+              DA
+            </div>
+            <div>
+              <p class="text-sm font-bold text-charcoal-900">Dian Anggraini, M.Psi.</p>
+              <p class="text-xs text-charcoal-muted">Orang Tua Siswa TK B</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="bg-white p-8 rounded-2xl border border-slate-200/80 card-shadow flex flex-col justify-between relative">
+          <div>
+            <svg class="w-8 h-8 text-brand-200 mb-4" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-8.983z"/></svg>
+            <p class="text-charcoal-800 text-sm leading-relaxed mb-6 font-normal">
+              “Sebagai orang tua bekerja, saya sangat tenang menitipkan anak di sini. Laporan harian di aplikasi sangat rinci, lingkungannya super bersih, dan toilet training anak saya tuntas tanpa ada trauma.”
+            </p>
+          </div>
+          <div class="flex items-center gap-3.5 pt-4 border-t border-slate-100">
+            <div class="w-11 h-11 rounded-full bg-emerald-100 text-emerald-800 font-bold flex items-center justify-center text-sm">
+              BP
+            </div>
+            <div>
+              <p class="text-sm font-bold text-charcoal-900">Bramantyo Prakoso</p>
+              <p class="text-xs text-charcoal-muted">Orang Tua Siswa Kelompok Bermain</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="bg-white p-8 rounded-2xl border border-slate-200/80 card-shadow flex flex-col justify-between relative">
+          <div>
+            <svg class="w-8 h-8 text-brand-200 mb-4" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-8.983z"/></svg>
+            <p class="text-charcoal-800 text-sm leading-relaxed mb-6 font-normal">
+              “Pembelajaran karakternya luar biasa terasa di rumah. Anak terbiasa mengucapkan tolong, maaf, terima kasih, dan suka membantu membereskan mainannya sendiri. Terimakasih para ibu guru!”
+            </p>
+          </div>
+          <div class="flex items-center gap-3.5 pt-4 border-t border-slate-100">
+            <div class="w-11 h-11 rounded-full bg-amber-100 text-amber-800 font-bold flex items-center justify-center text-sm">
+              SK
+            </div>
+            <div>
+              <p class="text-sm font-bold text-charcoal-900">Siti Khadijah, S.E.</p>
+              <p class="text-xs text-charcoal-muted">Orang Tua Siswa TK A</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- BERITA & KEGIATAN -->
+  <section id="berita" class="py-20 lg:py-28 bg-white border-t border-slate-200/70">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
+        <div class="space-y-2">
+          <span class="inline-block px-3 py-1 rounded-md bg-brand-50 text-brand-700 text-xs font-bold uppercase tracking-wider">
+            Kabar Terkini
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-charcoal-900 tracking-tight">
+            Cerita dan Kegiatan Terbaru
+          </h2>
+        </div>
+        <p class="text-charcoal-muted text-sm max-w-md">
+          Dapatkan rangkuman momen berharga, pembelajaran inspiratif, dan prestasi buah hati kami setiap bulannya.
+        </p>
+      </div>
+
+      <!-- Articles Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Article 1 -->
+        <article class="bg-white rounded-2xl overflow-hidden border border-slate-200/80 card-shadow flex flex-col group cursor-pointer" onclick="openArticleModal('outbound')">
+          <div class="h-48 overflow-hidden bg-slate-100">
+            <img 
+              src="https://images.unsplash.com/photo-1472162072942-cd5147eb3902?auto=format&fit=crop&w=800&q=80" 
+              alt="Anak-anak sedang melakukan kegiatan outbound di alam terbuka" 
+              class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+              loading="lazy"
+              onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80';"
+            />
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-2.5 text-xs text-charcoal-muted mb-2.5">
+                <span class="px-2 py-0.5 rounded-full bg-brand-50 text-brand-700 font-semibold">Edukasi Alam</span>
+                <span>•</span>
+                <time datetime="2026-03-08">8 Maret 2026</time>
+              </div>
+              <h3 class="text-base font-bold text-charcoal-900 group-hover:text-brand-600 transition">
+                Keseruan Outbound Edukatif: Mengenal Satwa & Flora di Agrowisata
+              </h3>
+              <p class="text-xs text-charcoal-muted mt-2 leading-relaxed line-clamp-3 font-normal">
+                Siswa-siswi TK A dan TK B diajak mengenal ragam tanaman obat, memberi makan kelinci, dan melatih keberanian di jembatan tali gantung ramah anak.
+              </p>
+            </div>
+            <div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between">
+              <span class="inline-flex items-center gap-1.5 text-xs font-bold text-brand-600 group-hover:text-brand-700">
+                <span>Baca Selengkapnya</span>
+                <svg class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+              </span>
+              <span class="text-[11px] text-slate-400">3 menit baca</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Article 2 -->
+        <article class="bg-white rounded-2xl overflow-hidden border border-slate-200/80 card-shadow flex flex-col group cursor-pointer" onclick="openArticleModal('pentas')">
+          <div class="h-48 overflow-hidden bg-slate-100">
+            <img 
+              src="https://images.unsplash.com/photo-1460518451285-97b6aa326961?auto=format&fit=crop&w=800&q=80" 
+              alt="Pentas seni anak memakai kostum tradisional nusantara" 
+              class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+              loading="lazy"
+              onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80';"
+            />
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-2.5 text-xs text-charcoal-muted mb-2.5">
+                <span class="px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 font-semibold">Pentas Budaya</span>
+                <span>•</span>
+                <time datetime="2026-02-20">20 Februari 2026</time>
+              </div>
+              <h3 class="text-base font-bold text-charcoal-900 group-hover:text-brand-600 transition">
+                Pentas Seni & Budaya Nusantara: Bangga Menjadi Anak Indonesia
+              </h3>
+              <p class="text-xs text-charcoal-muted mt-2 leading-relaxed line-clamp-3 font-normal">
+                Panggung apresiasi bakat yang menampilkan tarian daerah sederhana, paduan suara anak-anak, dan parade busana adat dari berbagai penjuru tanah air.
+              </p>
+            </div>
+            <div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between">
+              <span class="inline-flex items-center gap-1.5 text-xs font-bold text-brand-600 group-hover:text-brand-700">
+                <span>Baca Selengkapnya</span>
+                <svg class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+              </span>
+              <span class="text-[11px] text-slate-400">4 menit baca</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Article 3 -->
+        <article class="bg-white rounded-2xl overflow-hidden border border-slate-200/80 card-shadow flex flex-col group cursor-pointer" onclick="openArticleModal('kreativitas')">
+          <div class="h-48 overflow-hidden bg-slate-100">
+            <img 
+              src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80" 
+              alt="Hari kreativitas dan mini sains anak-anak" 
+              class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+              loading="lazy"
+              onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80';"
+            />
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-2.5 text-xs text-charcoal-muted mb-2.5">
+                <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-semibold">Kreativitas</span>
+                <span>•</span>
+                <time datetime="2026-02-05">5 Februari 2026</time>
+              </div>
+              <h3 class="text-base font-bold text-charcoal-900 group-hover:text-brand-600 transition">
+                Hari Kreativitas Anak: Pameran Karya Daur Ulang & Origami
+              </h3>
+              <p class="text-xs text-charcoal-muted mt-2 leading-relaxed line-clamp-3 font-normal">
+                Mengajak anak mencintai lingkungan dengan menyulap kardus bekas menjadi mobil-mobilan dan rumah mini yang dihiasi cat warna ceria.
+              </p>
+            </div>
+            <div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between">
+              <span class="inline-flex items-center gap-1.5 text-xs font-bold text-brand-600 group-hover:text-brand-700">
+                <span>Baca Selengkapnya</span>
+                <svg class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+              </span>
+              <span class="text-[11px] text-slate-400">3 menit baca</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA PENDAFTARAN -->
+  <section id="pendaftaran" class="py-20 relative overflow-hidden bg-brand-600 text-white">
+    <!-- Subtle geometric background rings -->
+    <div class="absolute -right-20 -bottom-20 w-96 h-96 rounded-full border border-white/10 pointer-events-none"></div>
+    <div class="absolute -left-20 -top-20 w-80 h-80 rounded-full border border-white/10 pointer-events-none"></div>
+    
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-6">
+      
+      <span class="inline-block px-3.5 py-1 rounded-full bg-white/15 text-white text-xs font-semibold backdrop-blur-sm border border-white/20">
+        Penerimaan Murid Baru T.A. 2026/2027
+      </span>
+
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight text-white">
+        Siap Menjadi Bagian dari Keluarga Kami?
+      </h2>
+
+      <p class="text-base sm:text-lg text-brand-100 max-w-2xl mx-auto font-normal leading-relaxed">
+        Mari berikan pengalaman belajar pertama yang menyenangkan, aman, dan penuh makna untuk buah hati Anda. Kunjungi sekolah atau hubungi tim pendaftaran kami sekarang.
+      </p>
+
+      <div class="flex flex-wrap justify-center items-center gap-4 pt-3">
+        <button onclick="openModal('daftarModal')" class="inline-flex items-center gap-2 bg-white text-brand-700 hover:bg-slate-50 font-bold text-base px-7 py-3.5 rounded-full shadow-lg hover:shadow-xl transition duration-200">
+          <span>Daftar Sekarang</span>
+          <svg class="w-4 h-4 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+        </button>
+        <a href="https://wa.me/6281234567890?text=Halo%20TK%20Lentera%20Bangsa,%20saya%20ingin%20konsultasi%20pendaftaran%20anak." target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-brand-700/60 hover:bg-brand-700 text-white border border-white/25 font-semibold text-base px-6 py-3.5 rounded-full transition duration-200">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"/></svg>
+          <span>Chat WhatsApp Kami</span>
+        </a>
+      </div>
+
+      <div class="pt-4 flex items-center justify-center gap-6 text-xs text-brand-100 font-medium">
+        <span class="inline-flex items-center gap-1.5">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+          Tersedia Trial Class Gratis
+        </span>
+        <span class="inline-flex items-center gap-1.5">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+          Tur Sekolah Setiap Sabtu
+        </span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="kontak" class="bg-charcoal-900 text-slate-300 pt-16 pb-12 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-14 border-b border-slate-800/80">
+        
+        <!-- Column 1: School Identity & Description (Col 4) -->
+        <div class="lg:col-span-4 space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-600 text-white flex items-center justify-center">
+              <svg class="w-6 h-6 stroke-[1.8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
+              </svg>
+            </div>
+            <div>
+              <span class="block text-base font-bold text-white leading-tight">TK Lentera Bangsa</span>
+              <span class="block text-[11px] text-slate-400 uppercase tracking-wider">Taman Kanak-Kanak Modern</span>
+            </div>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed max-w-sm">
+            Lembaga pendidikan anak usia dini yang berfokus pada pembentukan karakter mandiri, empati sosial, dan kecintaan belajar seumur hidup dalam naungan lingkungan yang aman dan penuh kasih.
+          </p>
+          <div class="pt-2">
+            <span class="inline-flex items-center gap-2 text-xs text-emerald-400 font-medium">
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+              NPSN: 69824102 • Terakreditasi A BAN-PAUD
+            </span>
+          </div>
+        </div>
+
+        <!-- Column 2: Navigation Links (Col 2) -->
+        <div class="lg:col-span-2 space-y-3">
+          <p class="text-sm font-bold text-white tracking-wide uppercase text-xs">Navigasi</p>
+          <ul class="space-y-2 text-xs">
+            <li><a href="#beranda" class="hover:text-white transition">Beranda</a></li>
+            <li><a href="#tentang" class="hover:text-white transition">Tentang Kami</a></li>
+            <li><a href="#program" class="hover:text-white transition">Program</a></li>
+            <li><a href="#kegiatan" class="hover:text-white transition">Kegiatan Harian</a></li>
+            <li><a href="#keunggulan" class="hover:text-white transition">Keunggulan</a></li>
+            <li><a href="#fasilitas" class="hover:text-white transition">Fasilitas</a></li>
+            <li><a href="#berita" class="hover:text-white transition">Berita & Acara</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Contact & Visit Information (Col 3) -->
+        <div class="lg:col-span-3 space-y-3">
+          <p class="text-sm font-bold text-white tracking-wide uppercase text-xs">Informasi & Lokasi</p>
+          <ul class="space-y-2.5 text-xs text-slate-400">
+            <li class="flex items-start gap-2.5">
+              <svg class="w-4 h-4 text-brand-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+              <span>Jl. Cendrawasih No. 18, Kebayoran Baru, Jakarta Selatan 12150</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <svg class="w-4 h-4 text-brand-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+              <span>(021) 789-2345 / 789-2346</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <svg class="w-4 h-4 text-brand-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+              <span>halo@lenterabangsa.sch.id</span>
+            </li>
+            <li class="flex items-center gap-2.5 text-emerald-400 font-medium">
+              <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"/></svg>
+              <span>WhatsApp: +62 812-3456-7890</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Social Media & Working Hours (Col 3) -->
+        <div class="lg:col-span-3 space-y-3">
+          <p class="text-sm font-bold text-white tracking-wide uppercase text-xs">Ikuti Media Sosial</p>
+          <p class="text-xs text-slate-400">Ikuti kegiatan seru murid-murid kami setiap hari:</p>
+          <div class="flex items-center gap-3 pt-1">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram TK Lentera Bangsa" class="w-9 h-9 rounded-xl bg-slate-800 hover:bg-brand-600 text-slate-300 hover:text-white flex items-center justify-center transition">
+              <svg class="w-4 h-4 stroke-[1.8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 16a4 4 0 100-8 4 4 0 000 8z"/><rect width="20" height="20" x="2" y="2" rx="5" ry="5" stroke-width="1.8"/><path stroke-linecap="round" stroke-linejoin="round" d="M17.5 6.5h.01"/></svg>
+            </a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook TK Lentera Bangsa" class="w-9 h-9 rounded-xl bg-slate-800 hover:bg-brand-600 text-slate-300 hover:text-white flex items-center justify-center transition">
+              <svg class="w-4 h-4 stroke-[1.8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube TK Lentera Bangsa" class="w-9 h-9 rounded-xl bg-slate-800 hover:bg-brand-600 text-slate-300 hover:text-white flex items-center justify-center transition">
+              <svg class="w-4 h-4 stroke-[1.8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor"/></svg>
+            </a>
+          </div>
+          <div class="pt-3">
+            <p class="text-[11px] text-slate-500">Jam Operasional Kantor:</p>
+            <p class="text-xs text-slate-300 font-medium">Senin - Jumat (07.30 - 15.00 WIB)</p>
+            <p class="text-xs text-slate-300 font-medium">Sabtu Tour Terjadwal (08.30 - 12.00 WIB)</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Copyright Bar -->
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+        <p id="viewFooterCopyright">© 2026 TK Lentera Bangsa. Seluruh Hak Cipta Dilindungi Undang-Undang.</p>
+        <div class="flex items-center flex-wrap gap-4">
+          <a href="#" onclick="showSimpleToast('Kebijakan Privasi Siswa & Dokumen Sekolah')" class="hover:text-slate-300 transition">Kebijakan Privasi</a>
+          <a href="#" onclick="showSimpleToast('Pedoman Tata Tertib & Keamanan Anak')" class="hover:text-slate-300 transition">Standar Keamanan Anak</a>
+          <!-- Admin Panel Access Button in Footer -->
+          <button onclick="openAdminPanelAuth()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 active:bg-slate-600 text-slate-300 hover:text-white border border-slate-700/80 transition-all text-[11px] font-medium shadow-sm">
+            <svg class="w-3.5 h-3.5 text-brand-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/></svg>
+            <span>Kelola Web (Admin)</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ======================= MODAL FORMULIR PENDAFTARAN ======================= -->
+  <div id="daftarModal" class="fixed inset-0 z-50 hidden bg-charcoal-900/70 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 card-shadow relative my-auto">
+      <button onclick="closeModal('daftarModal')" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-100 text-charcoal-muted hover:text-charcoal-900 flex items-center justify-center transition">
+        <svg class="w-4 h-4 stroke-[2]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+      
+      <div class="mb-5">
+        <span class="inline-block px-2.5 py-1 rounded-md bg-brand-50 text-brand-700 text-xs font-bold uppercase tracking-wider mb-2">Penerimaan Siswa Baru</span>
+        <h3 class="text-xl font-bold text-charcoal-900">Formulir Pendaftaran & Kunjungan</h3>
+        <p class="text-xs text-charcoal-muted mt-1 leading-relaxed">
+          Isi formulir di bawah ini. Tim admisi kami akan segera menghubungi Anda melalui WhatsApp untuk konfirmasi jadwal tur sekolah atau trial class gratis.
+        </p>
+      </div>
+
+      <form id="admissionForm" onsubmit="handleFormSubmit(event)" class="space-y-3.5 text-xs">
+        <div>
+          <label class="block font-semibold text-charcoal-900 mb-1">Nama Orang Tua / Wali *</label>
+          <input type="text" required placeholder="Contoh: Ibu Dian Anggraini" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-brand-100 focus:border-brand-500 transition" />
+        </div>
+        <div>
+          <label class="block font-semibold text-charcoal-900 mb-1">Nama Calon Siswa *</label>
+          <input type="text" required placeholder="Contoh: Ananda Arya" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-brand-100 focus:border-brand-500 transition" />
+        </div>
+        <div>
+          <label class="block font-semibold text-charcoal-900 mb-1">Pilihan Program *</label>
+          <select required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white outline-none focus:ring-2 focus:ring-brand-100 focus:border-brand-500 transition">
+            <option value="Kelompok Bermain (2-3 Tahun)">Kelompok Bermain (2 - 3 Tahun)</option>
+            <option value="TK A (4-5 Tahun)">Taman Kanak-Kanak A (4 - 5 Tahun)</option>
+            <option value="TK B (5-6 Tahun)">Taman Kanak-Kanak B (5 - 6 Tahun)</option>
+            <option value="Program Kreatif & Eksplorasi">Program Kreatif & Eksplorasi</option>
+          </select>
+        </div>
+        <div>
+          <label class="block font-semibold text-charcoal-900 mb-1">Nomor WhatsApp Aktif *</label>
+          <input type="tel" required placeholder="Contoh: 08123456789" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-brand-100 focus:border-brand-500 transition" />
+        </div>
+        <div>
+          <label class="block font-semibold text-charcoal-900 mb-1">Rencana Jadwal Kunjungan / Trial Class</label>
+          <input type="text" placeholder="Contoh: Sabtu Pagi (09.00 WIB) / Hari Kerja" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-brand-100 focus:border-brand-500 transition" />
+        </div>
+
+        <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 rounded-xl shadow-sm text-xs mt-2 transition">
+          Kirim Pendaftaran & Reservasi Tur
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ======================= MODAL BACA ARTIKEL ======================= -->
+  <div id="articleModal" class="fixed inset-0 z-50 hidden bg-charcoal-900/70 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 card-shadow relative my-auto max-h-[90vh] overflow-y-auto">
+      <button onclick="closeModal('articleModal')" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-100 text-charcoal-muted hover:text-charcoal-900 flex items-center justify-center transition">
+        <svg class="w-4 h-4 stroke-[2]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+
+      <div class="mb-4">
+        <span id="articleCategoryBadge" class="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-brand-50 text-brand-700 mb-2">Edukasi Alam</span>
+        <h3 id="articleTitle" class="text-xl sm:text-2xl font-bold text-charcoal-900 leading-snug">Judul Artikel Berita</h3>
+        <p id="articleDate" class="text-xs text-charcoal-muted mt-1">8 Maret 2026</p>
+      </div>
+
+      <div class="rounded-2xl overflow-hidden mb-5 bg-slate-100 aspect-video">
+        <img id="articleImage" src="" alt="" class="w-full h-full object-cover" />
+      </div>
+
+      <div id="articleBody" class="text-sm text-charcoal-800 leading-relaxed space-y-3 font-normal">
+        <!-- Dynamic content filled by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================= GLOBAL SCRIPTS & MODAL HELPERS ======================= -->
+  <script>
+    window.openModal = function(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) {
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+    };
+
+    window.closeModal = function(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) {
+        modal.classList.add('hidden');
+        const anyOpen = document.querySelectorAll('[id$="Modal"]:not(.hidden)');
+        if (anyOpen.length === 0) {
+          document.body.style.overflow = '';
+        }
+      }
+    };
+
+    window.toggleMobileMenu = function() {
+      const menu = document.getElementById('mobileMenu');
+      if (menu) {
+        menu.classList.toggle('hidden');
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const btn = document.getElementById('mobileMenuBtn');
+      if (btn) {
+        btn.addEventListener('click', window.toggleMobileMenu);
+      }
+      document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          document.getElementById('mobileMenu')?.classList.add('hidden');
+        });
+      });
+    });
+
+    window.showSimpleToast = function(message) {
+      let toast = document.getElementById('simpleToast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'simpleToast';
+        toast.className = 'fixed bottom-5 right-5 z-[70] bg-charcoal-900 text-white px-5 py-3 rounded-2xl shadow-xl flex items-center gap-3 transition-all duration-300 transform translate-y-20 opacity-0 text-xs font-medium border border-slate-700';
+        document.body.appendChild(toast);
+      }
+      toast.innerHTML = `
+        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+        <span>${message}</span>
+      `;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      clearTimeout(window.toastTimer);
+      window.toastTimer = setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 3500);
+    };
+
+    const ARTICLES_DATA = {
+      outbound: {
+        title: "Keseruan Outbound Edukatif: Mengenal Satwa & Flora di Agrowisata",
+        category: "Edukasi Alam",
+        date: "8 Maret 2026",
+        image: "https://images.unsplash.com/photo-1472162072942-cd5147eb3902?auto=format&fit=crop&w=800&q=80",
+        content: `
+          <p>Kegiatan outbound tahunan TK Lentera Bangsa kali ini menghadirkan pengalaman langsung di alam terbuka agrowisata. Anak-anak diajak mengenal beragam jenis tanaman obat keluarga, melihat proses pertumbuhan sayuran hidroponik, hingga memberi makan kelinci secara langsung.</p>
+          <p>Kegiatan ini dirancang untuk menumbuhkan rasa cinta dan kepedulian terhadap lingkungan, melatih ketangkasan fisik melalui jembatan tali gantung ramah anak, serta mempererat kerja sama antarsiswa dalam suasana gembira dan aman.</p>
+        `
+      },
+      pentas: {
+        title: "Pentas Seni & Budaya Nusantara: Bangga Menjadi Anak Indonesia",
+        category: "Pentas Budaya",
+        date: "20 Februari 2026",
+        image: "https://images.unsplash.com/photo-1460518451285-97b6aa326961?auto=format&fit=crop&w=800&q=80",
+        content: `
+          <p>Panggung ekspresi kreativitas TK Lentera Bangsa dipenuhi keceriaan saat siswa-siswi menampilkan busana tradisional nusantara, tarian daerah sederhana, dan nyanyian lagu wajib nasional.</p>
+          <p>Melalui perhelatan ini, anak-anak sejak usia dini diajak mengenal keanekaragaman budaya bangsa, menumbuhkan rasa saling menghargai, serta melatih keberanian untuk tampil dan berekspresi di hadapan orang banyak.</p>
+        `
+      },
+      kreativitas: {
+        title: "Hari Kreativitas Anak: Pameran Karya Daur Ulang & Origami",
+        category: "Kreativitas",
+        date: "5 Februari 2026",
+        image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80",
+        content: `
+          <p>Dalam rangka Hari Kreativitas, seluruh kelas mengadakan workshop kreasi dari bahan kardus bekas dan kertas lipat ramah lingkungan. Setiap anak memamerkan karya rumah mini, mobil mainan, dan hiasan dinding yang dibuat bersama guru.</p>
+          <p>Aktivitas ini mengasah motorik halus, memicu daya imajinasi spasial, serta menanamkan kesadaran tentang pentingnya menjaga kebersihan bumi melalui konsep daur ulang sederhana.</p>
+        `
+      }
+    };
+
+    window.openArticleModal = function(key) {
+      const data = ARTICLES_DATA[key];
+      if (!data) return;
+
+      document.getElementById('articleCategoryBadge').textContent = data.category;
+      document.getElementById('articleTitle').textContent = data.title;
+      document.getElementById('articleDate').textContent = data.date;
+      document.getElementById('articleImage').src = data.image;
+      document.getElementById('articleBody').innerHTML = data.content;
+
+      window.openModal('articleModal');
+    };
+  </script>
+
+  <!-- ======================= ADMIN LOGIN MODAL ======================= -->
+  <div id="adminLoginModal" class="fixed inset-0 z-50 hidden bg-charcoal-900/70 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 card-shadow relative">
+      <button onclick="closeModal('adminLoginModal')" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-100 text-charcoal-muted hover:text-charcoal-900 flex items-center justify-center transition">
+        <svg class="w-4 h-4 stroke-[2]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+      <div class="mb-5 text-center">
+        <div class="w-12 h-12 rounded-2xl bg-brand-50 text-brand-600 border border-brand-100 mx-auto flex items-center justify-center mb-3">
+          <svg class="w-6 h-6 stroke-[2]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/></svg>
+        </div>
+        <h3 class="text-xl font-bold text-charcoal-900">Masuk Panel Admin</h3>
+        <p class="text-xs text-charcoal-muted mt-1">Masukkan kredensial pengelola website sekolah</p>
+      </div>
+      <form id="adminLoginForm" onsubmit="handleAdminLogin(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-charcoal-900 mb-1">Username</label>
+          <input type="text" id="adminUser" required placeholder="kelolaweb2026" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-100 transition" />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-charcoal-900 mb-1">Password</label>
+          <input type="password" id="adminPass" required placeholder="••••••••" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-100 transition" />
+        </div>
+        <p id="adminLoginErr" class="text-xs text-red-500 hidden font-medium text-center">Username atau Password salah!</p>
+        <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-semibold py-3 rounded-xl shadow-sm text-sm transition">
+          Buka Dashboard Pengelola
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ======================= ADMIN DASHBOARD MODAL ======================= -->
+  <div id="adminPanelModal" class="fixed inset-0 z-50 hidden bg-charcoal-900/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-5xl w-full my-auto card-shadow overflow-hidden flex flex-col max-h-[92vh]">
+      
+      <!-- Admin Header -->
+      <div class="px-6 py-4 bg-slate-900 text-white flex items-center justify-between shrink-0 border-b border-slate-800">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-brand-600 flex items-center justify-center font-bold text-white text-sm">
+            TK
+          </div>
+          <div>
+            <h2 class="text-sm sm:text-base font-bold text-white flex items-center gap-2">
+              <span>Panel Pengelola Website</span>
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                Realtime Aktif
+              </span>
+            </h2>
+            <p class="text-[11px] text-slate-400">Kelola konten, katalog produk/program, dan data booking pendaftaran</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="handleAdminLogout()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-rose-900/60 text-slate-300 hover:text-rose-200 text-xs font-semibold transition border border-slate-700">
+            Keluar
+          </button>
+          <button onclick="closeModal('adminPanelModal')" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center transition">
+            <svg class="w-4 h-4 stroke-[2]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <div class="bg-slate-100/90 border-b border-slate-200 px-6 flex flex-wrap gap-2 text-xs font-semibold text-charcoal-muted shrink-0">
+        <button onclick="switchAdminTab('katalog')" id="tabBtn-katalog" class="py-3 px-3.5 border-b-2 border-brand-600 text-brand-600 font-bold transition flex items-center gap-1.5">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg>
+          <span>Katalog Program & Layanan</span>
+        </button>
+        <button onclick="switchAdminTab('booking')" id="tabBtn-booking" class="py-3 px-3.5 border-b-2 border-transparent hover:text-charcoal-900 transition flex items-center gap-1.5">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z"/></svg>
+          <span>Lacak Booking & Pendaftar</span>
+          <span id="bookingCountBadge" class="ml-1 px-1.5 py-0.2 rounded-full text-[10px] bg-brand-100 text-brand-700">0</span>
+        </button>
+        <button onclick="switchAdminTab('konten')" id="tabBtn-konten" class="py-3 px-3.5 border-b-2 border-transparent hover:text-charcoal-900 transition flex items-center gap-1.5">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg>
+          <span>Edit Konten & Tampilan Web</span>
+        </button>
+        <button onclick="switchAdminTab('reset')" id="tabBtn-reset" class="py-3 px-3.5 border-b-2 border-transparent hover:text-charcoal-900 transition flex items-center gap-1.5 text-rose-600">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"/></svg>
+          <span>Reset Default Data</span>
+        </button>
+      </div>
+
+      <!-- Tab Bodies (Scrollable) -->
+      <div class="p-6 overflow-y-auto flex-1 space-y-6">
+        
+        <!-- TAB 1: KATALOG PRODUK / PROGRAM -->
+        <div id="tabContent-katalog" class="space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-brand-50/60 p-4 rounded-2xl border border-brand-100">
+            <div>
+              <h3 class="text-sm font-bold text-charcoal-900">Manajemen Katalog Program & Layanan</h3>
+              <p class="text-xs text-charcoal-muted">Tambahkan paket baru, ubah rincian umur, jadwal belajar, dan deskripsi secara realtime.</p>
+            </div>
+            <button onclick="openCatalogEditModal(null)" class="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold px-4 py-2.5 rounded-xl shadow-sm transition">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+              <span>+ Tambah Program / Produk Baru</span>
+            </button>
+          </div>
+
+          <!-- Catalog List Table / Grid -->
+          <div id="adminCatalogList" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- TAB 2: LACAK BOOKING & PENDAFTARAN -->
+        <div id="tabContent-booking" class="hidden space-y-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-sm font-bold text-charcoal-900">Daftar Formulir Minat & Tur Sekolah</h3>
+              <p class="text-xs text-charcoal-muted">Pantau data pendaftar baru yang masuk secara otomatis ke database.</p>
+            </div>
+            <span class="text-xs text-slate-500">Auto-refresh Realtime</span>
+          </div>
+
+          <div class="overflow-x-auto rounded-2xl border border-slate-200">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-50 text-charcoal-900 font-semibold border-b border-slate-200">
+                <tr>
+                  <th class="p-3.5">Tanggal</th>
+                  <th class="p-3.5">Nama Wali & Murid</th>
+                  <th class="p-3.5">Program</th>
+                  <th class="p-3.5">Jadwal Tur</th>
+                  <th class="p-3.5">Kontak WhatsApp</th>
+                  <th class="p-3.5">Status</th>
+                  <th class="p-3.5 text-right">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="adminBookingTableBody" class="divide-y divide-slate-100 text-charcoal-800">
+                <!-- Dynamic Booking rows -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TAB 3: EDIT KONTEN & TAMPILAN WEB -->
+        <div id="tabContent-konten" class="hidden space-y-6">
+          <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-4">
+            <h3 class="text-sm font-bold text-charcoal-900">1. Hero Section (Halaman Utama)</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="sm:col-span-2">
+                <label class="block text-xs font-semibold text-charcoal-900 mb-1">Headline Utama</label>
+                <input type="text" id="editHeroHeadline" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-brand-100 outline-none" />
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block text-xs font-semibold text-charcoal-900 mb-1">Subheadline</label>
+                <textarea id="editHeroSubheadline" rows="2" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-brand-100 outline-none"></textarea>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-charcoal-900 mb-1">Teks Tombol CTA</label>
+                <input type="text" id="editHeroCtaText" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-brand-100 outline-none" />
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-charcoal-900 mb-1">Foto Hero (Mendukung link Google Drive / URL Langsung)</label>
+                <input type="text" id="editHeroImageUrl" placeholder="https://lh3.googleusercontent.com/d/... atau Unsplash" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-brand-100 outline-none" />
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-4">
+            <h3 class="text-sm font-bold text-charcoal-900">2. Kontak & Informasi Sekolah</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-semibold text-charcoal-900 mb-1">Nomor Telepon Kantor</label>
+                <input type="text" id="editSchoolPhone" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-brand-100 outline-none" />
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-charcoal-900 mb-1">Nomor WhatsApp Resmi</label>
+                <input type="text" id="editSchoolWA" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-brand-100 outline-none" />
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block text-xs font-semibold text-charcoal-900 mb-1">Alamat Lengkap</label>
+                <input type="text" id="editSchoolAddress" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-brand-100 outline-none" />
+              </div>
+            </div>
+          </div>
+
+          <div class="flex justify-end gap-3 pt-2">
+            <button onclick="saveMainContentChanges()" class="bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold px-6 py-2.5 rounded-xl shadow transition">
+              Simpan Perubahan Konten
+            </button>
+          </div>
+        </div>
+
+        <!-- TAB 4: RESET DEFAULT DATA -->
+        <div id="tabContent-reset" class="hidden space-y-4">
+          <div class="bg-rose-50 border border-rose-200 p-5 rounded-2xl">
+            <div class="flex items-start gap-3">
+              <div class="w-10 h-10 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center shrink-0">
+                <svg class="w-6 h-6 stroke-[2]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/></svg>
+              </div>
+              <div>
+                <h3 class="text-sm font-bold text-rose-900">Reset Semua Data Halaman Utama ke Default Pabrik</h3>
+                <p class="text-xs text-rose-700 mt-1 leading-relaxed">
+                  Fitur ini akan mengembalikan semua teks, tombol, gambar bawaan, dan katalog program awal sekolah. Data pendaftaran murid tidak akan dihapus.
+                </p>
+                <div class="pt-4">
+                  <button onclick="confirmResetToDefault()" class="bg-rose-600 hover:bg-rose-700 active:bg-rose-800 text-white text-xs font-bold px-5 py-2.5 rounded-xl shadow-sm transition">
+                    Kembalikan ke Tampilan Awal (Reset Default)
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======================= MODAL EDIT / TAMBAH KATALOG ======================= -->
+  <div id="catalogItemModal" class="fixed inset-0 z-50 hidden bg-charcoal-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-7 card-shadow relative">
+      <button onclick="closeModal('catalogItemModal')" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-100 text-charcoal-muted hover:text-charcoal-900 flex items-center justify-center transition">
+        <svg class="w-4 h-4 stroke-[2]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+
+      <h3 id="catalogModalTitle" class="text-lg font-bold text-charcoal-900 mb-1">Tambah Program / Produk</h3>
+      <p class="text-xs text-charcoal-muted mb-4">Lengkapi detail penawaran untuk ditampilkan di bagian Program Pembelajaran.</p>
+
+      <form id="catalogItemForm" onsubmit="handleCatalogSave(event)" class="space-y-3.5 text-xs">
+        <input type="hidden" id="catalogItemId" />
+        
+        <div>
+          <label class="block font-semibold text-charcoal-900 mb-1">Nama Program / Produk Layanan</label>
+          <input type="text" id="catalogItemName" required placeholder="Misal: Kelompok Bermain / Kelas Musik Anak" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-brand-100" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-semibold text-charcoal-900 mb-1">Rentang Usia</label>
+            <input type="text" id="catalogItemAge" required placeholder="Misal: Usia 2 - 3 Tahun" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-brand-100" />
+          </div>
+          <div>
+            <label class="block font-semibold text-charcoal-900 mb-1">Jadwal / Keterangan Biaya</label>
+            <input type="text" id="catalogItemSchedule" required placeholder="Misal: 3 Pertemuan / Minggu" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-brand-100" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-semibold text-charcoal-900 mb-1">Jam Belajar / Durasi</label>
+          <input type="text" id="catalogItemHours" placeholder="Misal: 08.00 - 10.30 WIB" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-brand-100" />
+        </div>
+
+        <div>
+          <label class="block font-semibold text-charcoal-900 mb-1">Deskripsi Singkat</label>
+          <textarea id="catalogItemDesc" rows="3" required placeholder="Jelaskan stimulasi, pendekatan, dan materi pengajaran..." class="w-full px-3.5 py-2 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-brand-100"></textarea>
+        </div>
+
+        <div>
+          <label class="block font-semibold text-charcoal-900 mb-1">Pilihan Warna Aksen Kartu</label>
+          <select id="catalogItemColor" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-white outline-none">
+            <option value="brand">Biru Edukasi (Soft Blue)</option>
+            <option value="amber">Kuning Hangat (Soft Amber)</option>
+            <option value="emerald">Hijau Tumbuh (Soft Green)</option>
+            <option value="rose">Merah Muda Kreatif (Soft Coral)</option>
+          </select>
+        </div>
+
+        <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-semibold py-2.5 rounded-xl shadow-sm text-xs mt-2 transition">
+          Simpan Data Program
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Custom Confirmation Modal (No Browser Alert/Confirm) -->
+  <div id="confirmModal" class="fixed inset-0 z-50 hidden bg-charcoal-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-sm w-full p-6 card-shadow text-center">
+      <div class="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 mx-auto flex items-center justify-center mb-3">
+        <svg class="w-6 h-6 stroke-[2]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
+      </div>
+      <h4 id="confirmModalTitle" class="text-base font-bold text-charcoal-900 mb-1">Konfirmasi Tindakan</h4>
+      <p id="confirmModalDesc" class="text-xs text-charcoal-muted mb-5 leading-relaxed">Apakah Anda yakin ingin melanjutkan tindakan ini?</p>
+      <div class="flex gap-2">
+        <button onclick="closeModal('confirmModal')" class="flex-1 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-charcoal-800 hover:bg-slate-50 transition">
+          Batal
+        </button>
+        <button id="confirmModalActionBtn" class="flex-1 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold transition">
+          Ya, Lanjutkan
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FIREBASE SCRIPTS & REALTIME ADMIN CONTROLLER -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, doc, getDoc, setDoc, updateDoc, deleteDoc, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    // Application & Firebase Initialization
+    const appId = typeof __app_id !== 'undefined' ? __app_id : 'tk-lentera-bangsa';
+    const firebaseConfig = typeof __firebase_config !== 'undefined'
+      ? JSON.parse(__firebase_config)
+      : {
+          apiKey: "AIzaSyBZyvA6_cy2k42eU_Ktt13wFVTDYgZaXkI",
+          authDomain: "tk-lentera-bangsa.firebaseapp.com",
+          projectId: "tk-lentera-bangsa",
+          storageBucket: "tk-lentera-bangsa.appspot.com",
+          appId: "1:tk-lentera-bangsa:web"
+        };
+
+    const fbApp = initializeApp(firebaseConfig);
+    const auth = getAuth(fbApp);
+    const db = getFirestore(fbApp);
+
+    let currentUser = null;
+
+    // Helper: Google Drive lh3 primary format, thumbnail backup, and Unsplash fallback
+    window.resolveSmartImageUrl = function(inputUrl, defaultFallback) {
+      if (!inputUrl || typeof inputUrl !== 'string') return defaultFallback;
+      let driveId = null;
+      const m1 = inputUrl.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+      const m2 = inputUrl.match(/id=([a-zA-Z0-9_-]+)/);
+      const m3 = inputUrl.match(/lh3\.googleusercontent\.com\/d\/([a-zA-Z0-9_-]+)/);
+      if (m1) driveId = m1[1];
+      else if (m2) driveId = m2[1];
+      else if (m3) driveId = m3[1];
+      else if (/^[a-zA-Z0-9_-]{25,}$/.test(inputUrl.trim())) driveId = inputUrl.trim();
+
+      if (driveId) {
+        return {
+          primary: `https://lh3.googleusercontent.com/d/${driveId}`,
+          backup: `https://drive.google.com/thumbnail?id=${driveId}&sz=w1200`,
+          fallback: defaultFallback
+        };
+      }
+      return {
+        primary: inputUrl,
+        backup: inputUrl,
+        fallback: defaultFallback
+      };
+    };
+
+    window.attachSmartImage = function(imgElement, inputUrl, fallback) {
+      if (!imgElement) return;
+      const meta = window.resolveSmartImageUrl(inputUrl, fallback);
+      imgElement.src = meta.primary;
+      let usedBackup = false;
+      imgElement.onerror = function() {
+        if (!usedBackup && meta.backup && meta.backup !== meta.primary) {
+          usedBackup = true;
+          imgElement.src = meta.backup;
+        } else {
+          imgElement.onerror = null;
+          imgElement.src = meta.fallback;
+        }
+      };
+    };
+
+    const DEFAULT_SITE_CONFIG = {
+      heroHeadline: "Tempat Tumbuh, Bermain, dan Belajar dengan Bahagia",
+      heroSubheadline: "Mendampingi setiap langkah kecil anak dengan pembelajaran yang menyenangkan, lingkungan yang aman, dan pendidikan yang penuh kasih untuk membentuk pondasi masa depan yang kuat.",
+      heroCtaText: "Daftar Sekarang",
+      heroImageUrl: "https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=1000&q=80",
+      schoolPhone: "(021) 789-2345 / 789-2346",
+      schoolWA: "+62 812-3456-7890",
+      schoolAddress: "Jl. Cendrawasih No. 18, Kebayoran Baru, Jakarta Selatan 12150"
+    };
+
+    const DEFAULT_CATALOG = [
+      {
+        id: "kb-01",
+        name: "Kelompok Bermain",
+        age: "Usia 2 - 3 Tahun",
+        schedule: "3 Pertemuan / Minggu",
+        hours: "08.00 - 10.30",
+        desc: "Aktivitas bermain sensori, pengenalan bahasa awal, dan stimulasi motorik kasar dalam suasana hangat dan penuh kasih sayang.",
+        color: "amber"
+      },
+      {
+        id: "tka-02",
+        name: "Taman Kanak-Kanak A",
+        age: "Usia 4 - 5 Tahun",
+        schedule: "5 Pertemuan / Minggu",
+        hours: "07.30 - 11.30",
+        desc: "Mengembangkan fondasi pra-membaca, pra-matematika sederhana, serta melatih interaksi sosial positif dengan teman sebaya.",
+        color: "brand"
+      },
+      {
+        id: "tkb-03",
+        name: "Taman Kanak-Kanak B",
+        age: "Usia 5 - 6 Tahun",
+        schedule: "5 Pertemuan / Minggu",
+        hours: "07.30 - 12.00",
+        desc: "Mempersiapkan kemandirian, kemampuan literasi fungsional, dan kesiapan mental menuju jenjang Sekolah Dasar (SD) secara matang.",
+        color: "emerald"
+      },
+      {
+        id: "kreatif-04",
+        name: "Program Kreatif & Eksplorasi",
+        age: "Seluruh Jenjang",
+        schedule: "Aktivitas Mingguan",
+        hours: "Terintegrasi",
+        desc: "Eksplorasi seni lukis, musik & ritmis, sains cilik sederhana, berkebun organik, dan pengenalan percakapan bahasa Inggris ringan.",
+        color: "rose"
+      }
+    ];
+
+    let currentSiteConfig = { ...DEFAULT_SITE_CONFIG };
+    let currentCatalog = [...DEFAULT_CATALOG];
+    let currentBookings = [];
+
+    async function initAuth() {
+      try {
+        if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+          await signInWithCustomToken(auth, __initial_auth_token);
+        } else {
+          await signInAnonymously(auth);
+        }
+        currentUser = auth.currentUser;
+        setupRealtimeListeners();
+      } catch (err) {
+        console.warn("Autentikasi mode lokal aktif:", err);
+        renderCatalogItems();
+      }
+    }
+
+    function setupRealtimeListeners() {
+      if (!auth.currentUser) return;
+
+      // 1. Site Content Config listener
+      const contentDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'site_content', 'main_config');
+      onSnapshot(contentDocRef, (docSnap) => {
+        if (docSnap.exists()) {
+          currentSiteConfig = { ...DEFAULT_SITE_CONFIG, ...docSnap.data() };
+        } else {
+          currentSiteConfig = { ...DEFAULT_SITE_CONFIG };
+        }
+        applySiteConfigToUI();
+      }, (err) => console.error("Error fetching content config:", err));
+
+      // 2. Catalog Collection listener
+      const catalogColRef = collection(db, 'artifacts', appId, 'public', 'data', 'katalog_program');
+      onSnapshot(catalogColRef, (snap) => {
+        if (!snap.empty) {
+          const list = [];
+          snap.forEach(d => list.push({ id: d.id, ...d.data() }));
+          currentCatalog = list;
+        } else {
+          currentCatalog = [...DEFAULT_CATALOG];
+        }
+        renderCatalogItems();
+        renderAdminCatalogTable();
+      }, (err) => console.error("Error fetching catalog:", err));
+
+      // 3. Bookings Collection listener
+      const bookingsColRef = collection(db, 'artifacts', appId, 'public', 'data', 'pendaftaran');
+      onSnapshot(bookingsColRef, (snap) => {
+        const list = [];
+        snap.forEach(d => list.push({ id: d.id, ...d.data() }));
+        currentBookings = list.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+        renderBookingTable();
+      }, (err) => console.error("Error fetching bookings:", err));
+    }
+
+    function applySiteConfigToUI() {
+      const headlineEl = document.getElementById('viewHeroHeadline');
+      const subheadlineEl = document.getElementById('viewHeroSubheadline');
+      const ctaBtnEl = document.getElementById('viewHeroCtaText');
+      const heroImgEl = document.getElementById('viewHeroImage');
+
+      if (headlineEl) headlineEl.innerHTML = currentSiteConfig.heroHeadline;
+      if (subheadlineEl) subheadlineEl.textContent = currentSiteConfig.heroSubheadline;
+      if (ctaBtnEl) ctaBtnEl.textContent = currentSiteConfig.heroCtaText;
+      if (heroImgEl) {
+        window.attachSmartImage(heroImgEl, currentSiteConfig.heroImageUrl, DEFAULT_SITE_CONFIG.heroImageUrl);
+      }
+
+      // Populate Admin Edit Inputs
+      const editHeadline = document.getElementById('editHeroHeadline');
+      const editSubheadline = document.getElementById('editHeroSubheadline');
+      const editCta = document.getElementById('editHeroCtaText');
+      const editImg = document.getElementById('editHeroImageUrl');
+      const editPhone = document.getElementById('editSchoolPhone');
+      const editWA = document.getElementById('editSchoolWA');
+      const editAddress = document.getElementById('editSchoolAddress');
+
+      if (editHeadline) editHeadline.value = currentSiteConfig.heroHeadline || '';
+      if (editSubheadline) editSubheadline.value = currentSiteConfig.heroSubheadline || '';
+      if (editCta) editCta.value = currentSiteConfig.heroCtaText || '';
+      if (editImg) editImg.value = currentSiteConfig.heroImageUrl || '';
+      if (editPhone) editPhone.value = currentSiteConfig.schoolPhone || '';
+      if (editWA) editWA.value = currentSiteConfig.schoolWA || '';
+      if (editAddress) editAddress.value = currentSiteConfig.schoolAddress || '';
+    }
+
+    function renderCatalogItems() {
+      const container = document.getElementById('programsContainer');
+      if (!container) return;
+
+      const colorMap = {
+        brand: { bg: 'bg-brand-50', text: 'text-brand-600', border: 'border-brand-100', stroke: 'text-brand-600' },
+        amber: { bg: 'bg-amber-50', text: 'text-amber-600', border: 'border-amber-100', stroke: 'text-amber-600' },
+        emerald: { bg: 'bg-emerald-50', text: 'text-emerald-600', border: 'border-emerald-100', stroke: 'text-emerald-600' },
+        rose: { bg: 'bg-rose-50', text: 'text-rose-600', border: 'border-rose-100', stroke: 'text-rose-600' }
+      };
+
+      container.innerHTML = currentCatalog.map(item => {
+        const theme = colorMap[item.color] || colorMap.brand;
+        return `
+          <div class="bg-white rounded-[20px] p-7 border border-slate-200/90 card-shadow hover:border-brand-200 hover:-translate-y-1.5 transition duration-200 flex flex-col justify-between group">
+            <div>
+              <div class="w-12 h-12 rounded-2xl ${theme.bg} ${theme.text} border ${theme.border} flex items-center justify-center mb-6 shadow-sm">
+                <svg class="w-6 h-6 stroke-[1.8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                </svg>
+              </div>
+              <span class="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-slate-100 text-charcoal-muted mb-2">${escapeHtml(item.age || '')}</span>
+              <h3 class="text-xl font-bold text-charcoal-900 mb-2">${escapeHtml(item.name || '')}</h3>
+              <p class="text-sm text-charcoal-muted leading-relaxed mb-4">${escapeHtml(item.desc || '')}</p>
+            </div>
+            <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-brand-600">
+              <span>${escapeHtml(item.schedule || '')}</span>
+              <span class="text-slate-400 font-normal">${escapeHtml(item.hours || '')}</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      return String(text).replace(/[&<>"']/g, function(m) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
+      });
+    }
+
+    function renderAdminCatalogTable() {
+      const container = document.getElementById('adminCatalogList');
+      if (!container) return;
+
+      container.innerHTML = currentCatalog.map(item => `
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 card-shadow flex flex-col justify-between gap-3">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1">
+              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-slate-100 text-slate-700">${escapeHtml(item.age)}</span>
+              <span class="text-[11px] text-brand-600 font-medium">${escapeHtml(item.schedule)}</span>
+            </div>
+            <h4 class="text-sm font-bold text-charcoal-900">${escapeHtml(item.name)}</h4>
+            <p class="text-xs text-charcoal-muted mt-1 leading-relaxed">${escapeHtml(item.desc)}</p>
+          </div>
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-end gap-2">
+            <button onclick="openCatalogEditModal('${item.id}')" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-brand-50 text-brand-700 font-semibold text-xs transition">
+              Edit
+            </button>
+            <button onclick="deleteCatalogItem('${item.id}')" class="px-3 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 font-semibold text-xs transition">
+              Hapus
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    window.openCatalogEditModal = function(id) {
+      const form = document.getElementById('catalogItemForm');
+      form.reset();
+      const title = document.getElementById('catalogModalTitle');
+      const idInput = document.getElementById('catalogItemId');
+
+      if (id) {
+        const item = currentCatalog.find(c => c.id === id);
+        if (item) {
+          title.textContent = "Edit Program / Layanan";
+          idInput.value = item.id;
+          document.getElementById('catalogItemName').value = item.name || '';
+          document.getElementById('catalogItemAge').value = item.age || '';
+          document.getElementById('catalogItemSchedule').value = item.schedule || '';
+          document.getElementById('catalogItemHours').value = item.hours || '';
+          document.getElementById('catalogItemDesc').value = item.desc || '';
+          document.getElementById('catalogItemColor').value = item.color || 'brand';
+        }
+      } else {
+        title.textContent = "Tambah Program / Layanan Baru";
+        idInput.value = '';
+      }
+      openModal('catalogItemModal');
+    };
+
+    window.handleCatalogSave = async function(e) {
+      e.preventDefault();
+      const id = document.getElementById('catalogItemId').value || ('item-' + Date.now());
+      const data = {
+        name: document.getElementById('catalogItemName').value,
+        age: document.getElementById('catalogItemAge').value,
+        schedule: document.getElementById('catalogItemSchedule').value,
+        hours: document.getElementById('catalogItemHours').value,
+        desc: document.getElementById('catalogItemDesc').value,
+        color: document.getElementById('catalogItemColor').value,
+        updatedAt: Date.now()
+      };
+
+      try {
+        if (auth.currentUser) {
+          const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'katalog_program', id);
+          await setDoc(docRef, data, { merge: true });
+        } else {
+          const idx = currentCatalog.findIndex(c => c.id === id);
+          if (idx >= 0) currentCatalog[idx] = { id, ...data };
+          else currentCatalog.push({ id, ...data });
+          renderCatalogItems();
+          renderAdminCatalogTable();
+        }
+        closeModal('catalogItemModal');
+        showSimpleToast('Program berhasil disimpan!');
+      } catch (err) {
+        console.error("Gagal menyimpan katalog:", err);
+        showSimpleToast('Terjadi kendala saat menyimpan data.');
+      }
+    };
+
+    window.deleteCatalogItem = function(id) {
+      showConfirmModal(
+        'Hapus Program Ini?',
+        'Program akan dihapus dari daftar website dan katalog.',
+        async () => {
+          try {
+            if (auth.currentUser) {
+              const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'katalog_program', id);
+              await deleteDoc(docRef);
+            } else {
+              currentCatalog = currentCatalog.filter(c => c.id !== id);
+              renderCatalogItems();
+              renderAdminCatalogTable();
+            }
+            showSimpleToast('Program berhasil dihapus.');
+          } catch (err) {
+            console.error("Gagal menghapus:", err);
+          }
+        }
+      );
+    };
+
+    function renderBookingTable() {
+      const tbody = document.getElementById('adminBookingTableBody');
+      const badge = document.getElementById('bookingCountBadge');
+      if (badge) badge.textContent = currentBookings.length;
+      if (!tbody) return;
+
+      if (currentBookings.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" class="p-4 text-center text-charcoal-muted">Belum ada booking atau pendaftaran murid baru.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = currentBookings.map(b => {
+        const dateStr = b.createdAt ? new Date(b.createdAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) : '-';
+        const cleanWa = (b.phone || '').replace(/[^0-9]/g, '');
+        const waLink = cleanWa ? `https://wa.me/${cleanWa.startsWith('0') ? '62' + cleanWa.slice(1) : cleanWa}?text=Halo%20${encodeURIComponent(b.parentName || 'Bapak/Ibu')},%20terima%20kasih%20telah%20mendaftar%20di%20TK%20Lentera%20Bangsa.` : '#';
+
+        const statusClass = b.status === 'Dihubungi' ? 'bg-amber-100 text-amber-800' : (b.status === 'Selesai' ? 'bg-emerald-100 text-emerald-800' : 'bg-blue-100 text-blue-800');
+
+        return `
+          <tr class="hover:bg-slate-50 transition">
+            <td class="p-3.5 text-slate-500 whitespace-nowrap">${dateStr}</td>
+            <td class="p-3.5 font-medium text-charcoal-900">
+              <div>${escapeHtml(b.parentName || '-')}</div>
+              <div class="text-[11px] text-slate-500">Murid: ${escapeHtml(b.childName || '-')}</div>
+            </td>
+            <td class="p-3.5 font-medium">${escapeHtml(b.program || '-')}</td>
+            <td class="p-3.5 text-slate-600">${escapeHtml(b.tourSchedule || '-')}</td>
+            <td class="p-3.5">
+              <a href="${waLink}" target="_blank" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-100 transition font-semibold">
+                <span>${escapeHtml(b.phone || '-')}</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
+              </a>
+            </td>
+            <td class="p-3.5">
+              <select onchange="updateBookingStatus('${b.id}', this.value)" class="text-[11px] font-semibold rounded-lg px-2 py-1 border border-slate-200 ${statusClass}">
+                <option value="Baru" ${b.status === 'Baru' ? 'selected' : ''}>Baru</option>
+                <option value="Dihubungi" ${b.status === 'Dihubungi' ? 'selected' : ''}>Dihubungi</option>
+                <option value="Selesai" ${b.status === 'Selesai' ? 'selected' : ''}>Selesai</option>
+              </select>
+            </td>
+            <td class="p-3.5 text-right">
+              <button onclick="deleteBookingItem('${b.id}')" class="p-1.5 text-slate-400 hover:text-rose-600 transition" title="Hapus Data">
+                <svg class="w-4 h-4 stroke-[2]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/></svg>
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    window.updateBookingStatus = async function(id, newStatus) {
+      try {
+        if (auth.currentUser) {
+          const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'pendaftaran', id);
+          await updateDoc(docRef, { status: newStatus });
+        } else {
+          const item = currentBookings.find(b => b.id === id);
+          if (item) item.status = newStatus;
+          renderBookingTable();
+        }
+        showSimpleToast(`Status diperbarui ke "${newStatus}"`);
+      } catch (err) {
+        console.error("Gagal update status booking:", err);
+      }
+    };
+
+    window.deleteBookingItem = function(id) {
+      showConfirmModal('Hapus Booking?', 'Data pendaftaran ini akan dihapus dari sistem pelacakan.', async () => {
+        try {
+          if (auth.currentUser) {
+            const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'pendaftaran', id);
+            await deleteDoc(docRef);
+          } else {
+            currentBookings = currentBookings.filter(b => b.id !== id);
+            renderBookingTable();
+          }
+          showSimpleToast('Data pendaftaran berhasil dihapus.');
+        } catch (err) {
+          console.error("Gagal menghapus data booking:", err);
+        }
+      });
+    };
+
+    // Form pendaftaran submission (saving to Firestore directly)
+    window.handleFormSubmit = async function(event) {
+      event.preventDefault();
+      const form = document.getElementById('admissionForm');
+      const inputs = form.querySelectorAll('input, select');
+      
+      const newBooking = {
+        parentName: inputs[0].value,
+        childName: inputs[1].value,
+        program: inputs[2].value,
+        phone: inputs[3].value,
+        tourSchedule: inputs[4].value,
+        status: 'Baru',
+        createdAt: Date.now()
+      };
+
+      try {
+        if (auth.currentUser) {
+          const id = 'reg-' + Date.now();
+          const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'pendaftaran', id);
+          await setDoc(docRef, newBooking);
+        } else {
+          currentBookings.unshift({ id: 'local-' + Date.now(), ...newBooking });
+          renderBookingTable();
+        }
+        closeModal('daftarModal');
+        showSimpleToast('Terima kasih! Pendaftaran berhasil tercatat dan admisi kami akan segera menghubungi Anda.');
+        form.reset();
+      } catch (err) {
+        console.error("Gagal submit pendaftaran:", err);
+        closeModal('daftarModal');
+        showSimpleToast('Pendaftaran tersimpan. Admisi kami akan segera merespons.');
+      }
+    };
+
+    window.saveMainContentChanges = async function() {
+      const updated = {
+        heroHeadline: document.getElementById('editHeroHeadline').value,
+        heroSubheadline: document.getElementById('editHeroSubheadline').value,
+        heroCtaText: document.getElementById('editHeroCtaText').value,
+        heroImageUrl: document.getElementById('editHeroImageUrl').value,
+        schoolPhone: document.getElementById('editSchoolPhone').value,
+        schoolWA: document.getElementById('editSchoolWA').value,
+        schoolAddress: document.getElementById('editSchoolAddress').value,
+        updatedAt: Date.now()
+      };
+
+      try {
+        if (auth.currentUser) {
+          const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'site_content', 'main_config');
+          await setDoc(docRef, updated, { merge: true });
+        } else {
+          currentSiteConfig = { ...currentSiteConfig, ...updated };
+          applySiteConfigToUI();
+        }
+        showSimpleToast('Konten website berhasil diperbarui secara realtime!');
+      } catch (err) {
+        console.error("Gagal simpan konfigurasi:", err);
+        showSimpleToast('Gagal menyimpan perubahan konten.');
+      }
+    };
+
+    window.confirmResetToDefault = function() {
+      showConfirmModal(
+        'Reset Default Website?',
+        'Seluruh teks headline, foto utama, dan paket program awal akan dikembalikan seperti semula. Apakah Anda ingin melanjutkan?',
+        async () => {
+          try {
+            if (auth.currentUser) {
+              const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'site_content', 'main_config');
+              await setDoc(docRef, DEFAULT_SITE_CONFIG);
+
+              // Restore default catalog items
+              for (const item of DEFAULT_CATALOG) {
+                const cRef = doc(db, 'artifacts', appId, 'public', 'data', 'katalog_program', item.id);
+                await setDoc(cRef, item);
+              }
+            } else {
+              currentSiteConfig = { ...DEFAULT_SITE_CONFIG };
+              currentCatalog = [...DEFAULT_CATALOG];
+              applySiteConfigToUI();
+              renderCatalogItems();
+              renderAdminCatalogTable();
+            }
+            showSimpleToast('Website telah berhasil di-reset kembali ke tampilan awal!');
+          } catch (err) {
+            console.error("Gagal reset:", err);
+            showSimpleToast('Gagal melakukan reset data.');
+          }
+        }
+      );
+    };
+
+    window.openAdminPanelAuth = function() {
+      const isLogged = sessionStorage.getItem('admin_logged_tk') === 'true';
+      if (isLogged) {
+        openModal('adminPanelModal');
+        applySiteConfigToUI();
+        renderAdminCatalogTable();
+        renderBookingTable();
+      } else {
+        openModal('adminLoginModal');
+      }
+    };
+
+    window.handleAdminLogin = function(e) {
+      e.preventDefault();
+      const u = document.getElementById('adminUser').value;
+      const p = document.getElementById('adminPass').value;
+      const errEl = document.getElementById('adminLoginErr');
+
+      if (u === 'kelolaweb2026' && p === 'kelolaweb2026') {
+        sessionStorage.setItem('admin_logged_tk', 'true');
+        errEl.classList.add('hidden');
+        closeModal('adminLoginModal');
+        openModal('adminPanelModal');
+        applySiteConfigToUI();
+        renderAdminCatalogTable();
+        renderBookingTable();
+        showSimpleToast('Selamat datang di Panel Admin TK Lentera Bangsa!');
+      } else {
+        errEl.classList.remove('hidden');
+      }
+    };
+
+    window.handleAdminLogout = function() {
+      sessionStorage.removeItem('admin_logged_tk');
+      closeModal('adminPanelModal');
+      showSimpleToast('Anda telah keluar dari panel admin.');
+    };
+
+    window.switchAdminTab = function(tabName) {
+      const tabs = ['katalog', 'booking', 'konten', 'reset'];
+      tabs.forEach(t => {
+        const content = document.getElementById(`tabContent-${t}`);
+        const btn = document.getElementById(`tabBtn-${t}`);
+        if (t === tabName) {
+          if (content) content.classList.remove('hidden');
+          if (btn) {
+            btn.classList.add('border-brand-600', 'text-brand-600', 'font-bold');
+            btn.classList.remove('border-transparent');
+          }
+        } else {
+          if (content) content.classList.add('hidden');
+          if (btn) {
+            btn.classList.remove('border-brand-600', 'text-brand-600', 'font-bold');
+            btn.classList.add('border-transparent');
+          }
+        }
+      });
+    };
+
+    function showConfirmModal(title, desc, actionFn) {
+      const modal = document.getElementById('confirmModal');
+      document.getElementById('confirmModalTitle').textContent = title;
+      document.getElementById('confirmModalDesc').textContent = desc;
+      const btn = document.getElementById('confirmModalActionBtn');
+      btn.onclick = function() {
+        closeModal('confirmModal');
+        actionFn();
+      };
+      openModal('confirmModal');
+    }
+
+    // Start Firebase Authentication
+    initAuth();
+  </script>
+
+</body>
+</html>

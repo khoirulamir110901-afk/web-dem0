@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Indotempolama.com - Jurnalisme Presisi & Masa Depan Nusantara</title>
+  
+  <!-- Google Fonts: Inter & Newsreader/Playfair for editorial elegance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Playfair Display', 'Georgia', 'serif'],
+            reading: ['Merriweather', 'Georgia', 'serif'],
+          },
+          colors: {
+            brand: {
+              50: '#fff1f2',
+              100: '#ffe4e6',
+              500: '#f43f5e',
+              600: '#e11d48',
+              700: '#be123c',
+              800: '#9f1239',
+              900: '#881337',
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* Custom Scrollbar for sleek appearance */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(148, 163, 184, 0.4);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(148, 163, 184, 0.7);
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.98); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .animate-fadeIn {
+      animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-slideUp {
+      animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300 antialiased font-sans flex flex-col justify-between selection:bg-rose-500 selection:text-white">
+
+  <!-- Floating Dynamic Toast Container -->
+  <div id="toast-container" class="fixed bottom-6 right-6 z-50 pointer-events-none transition-all duration-300"></div>
+
+  <div class="w-full">
+    <!-- Top Financial & Live Status Bar -->
+    <aside class="border-b text-xs bg-white dark:bg-slate-900/90 border-slate-200 dark:border-slate-800 transition-colors">
+      <div class="max-w-7xl mx-auto px-4 py-2 flex flex-wrap items-center justify-between gap-3">
+        
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5 max-w-full">
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider text-[10px] bg-rose-600 text-white shrink-0 shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
+            Pasaran Langsung
+          </span>
+          <div id="market-metrics-bar" class="flex items-center gap-4 text-slate-600 dark:text-slate-300 font-mono text-[11px] whitespace-nowrap">
+            <!-- Populated via JavaScript -->
+          </div>
+        </div>
+
+        <div class="hidden sm:flex items-center gap-3 text-slate-500 dark:text-slate-400 text-xs">
+          <span id="current-date-display">Selasa, 15 September 2026</span>
+          <span class="text-slate-300 dark:text-slate-700">•</span>
+          <span class="font-medium text-slate-700 dark:text-slate-300 flex items-center gap-1">
+            <svg class="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            Edisi Digital Terverifikasi
+          </span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Sticky Primary Navigation Header -->
+    <header class="sticky top-0 z-40 backdrop-blur-xl bg-white/90 dark:bg-slate-950/90 border-b border-slate-200/80 dark:border-slate-800/80 transition-colors">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20 gap-4">
+          
+          <!-- Brand Logo and Tagline -->
+          <div class="flex items-center gap-4 cursor-pointer" onclick="resetAppFilter()">
+            <div class="group flex items-baseline gap-1 select-none">
+              <span class="text-2xl sm:text-3xl font-extrabold tracking-tight bg-gradient-to-r from-rose-600 via-rose-500 to-amber-500 bg-clip-text text-transparent font-serif">
+                INDOTEMPO
+              </span>
+              <span class="text-xl sm:text-2xl font-light text-slate-500 tracking-wider">
+                LAMA<span class="text-rose-600 font-black">.</span>COM
+              </span>
+            </div>
+            <div class="hidden xl:block h-6 w-px bg-slate-300 dark:bg-slate-700"></div>
+            <span class="hidden xl:inline-block text-xs text-slate-500 dark:text-slate-400 font-medium tracking-wide">
+              Jurnalisme Presisi & Kebijakan Strategis
+            </span>
+          </div>
+
+          <!-- Interactive Search Bar -->
+          <div class="flex-1 max-w-md hidden md:block">
+            <div class="relative">
+              <input
+                id="search-input"
+                type="text"
+                placeholder="Cari analisis, tokoh, isu strategis..."
+                class="w-full text-sm pl-10 pr-4 py-2 rounded-full border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-rose-500/40 focus:border-rose-500 transition-all"
+                oninput="handleSearchChange(this.value)"
+              />
+              <svg class="w-4 h-4 absolute left-3.5 top-3 text-slate-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Quick Controls: Audio Trigger, Bookmarks, and Dark/Light Mode -->
+          <div class="flex items-center gap-2 sm:gap-3">
+            <!-- Narration Audio Button -->
+            <button
+              id="audio-toggle-btn"
+              onclick="toggleAudioNarrator()"
+              title="Dengarkan Berita Utama Hari Ini"
+              class="hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:border-slate-300 dark:hover:border-slate-700 shadow-sm transition-all">
+              <span id="audio-icon-wrap">
+                <svg class="w-3.5 h-3.5 text-rose-600" fill="currentColor" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </span>
+              <span id="audio-btn-text">Dengar Berita</span>
+            </button>
+
+            <!-- Bookmarked Articles Count -->
+            <button
+              onclick="showBookmarkList()"
+              title="Lihat Artikel Tersimpan"
+              class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:border-rose-400 transition-all shadow-sm">
+              <svg id="header-bookmark-icon" class="w-3.5 h-3.5 text-rose-600" fill="currentColor" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+              </svg>
+              <span id="bookmark-count-badge">2</span>
+            </button>
+
+            <!-- Light/Dark Mode Switcher -->
+            <button
+              id="theme-toggle-btn"
+              onclick="toggleDarkMode()"
+              title="Alihkan Tema Tampilan"
+              class="p-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-amber-400 hover:bg-slate-100 dark:hover:bg-slate-800 shadow-sm transition-all">
+              <svg id="theme-icon-sun" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+              </svg>
+              <svg id="theme-icon-moon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+              </svg>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Category Filter Bar -->
+      <div class="border-t border-slate-200/60 dark:border-slate-800/60">
+        <div id="category-pills-bar" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-2 overflow-x-auto no-scrollbar py-2.5">
+          <!-- Rendered via JS -->
+        </div>
+      </div>
+    </header>
+
+    <!-- Audio Narration Banner (Controlled via state) -->
+    <div id="audio-synthesizer-bar" class="hidden bg-gradient-to-r from-rose-950 via-slate-900 to-slate-950 text-white px-4 py-3 border-b border-rose-800/40 animate-slideUp">
+      <div class="max-w-7xl mx-auto flex items-center justify-between gap-4 text-xs font-medium">
+        <div class="flex items-center gap-3 truncate">
+          <div class="flex gap-1 items-end h-4 shrink-0">
+            <span class="w-1 bg-rose-400 animate-bounce h-3 rounded-full"></span>
+            <span class="w-1 bg-amber-400 animate-bounce h-4 delay-75 rounded-full"></span>
+            <span class="w-1 bg-rose-300 animate-bounce h-2 delay-150 rounded-full"></span>
+          </div>
+          <span id="audio-synthesizer-text" class="truncate font-sans">Memutar kilasan berita pilihan hari ini...</span>
+        </div>
+        <div class="flex items-center gap-3 shrink-0">
+          <span class="hidden md:inline text-slate-400 font-mono text-[11px]">Sintesis Suara AI 4.0</span>
+          <button 
+            onclick="toggleAudioNarrator()"
+            class="px-2.5 py-1 rounded bg-white/10 hover:bg-white/20 text-xs transition font-semibold">
+            Tutup
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+      
+      <!-- HERO SECTION: Primary Headline + Right Sidebar Trending -->
+      <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+        
+        <!-- Primary Headline Card (8 cols) -->
+        <div id="hero-headline-container" class="lg:col-span-8 flex flex-col">
+          <!-- Injected dynamically -->
+        </div>
+
+        <!-- Trending & Editorial Newsletter (4 cols) -->
+        <div class="lg:col-span-4 rounded-3xl p-6 border border-slate-200/80 dark:border-slate-800/90 bg-white dark:bg-slate-900/40 shadow-md flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-200 dark:border-slate-800">
+              <div class="flex items-center gap-2">
+                <svg class="w-5 h-5 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>
+                </svg>
+                <h3 class="text-base font-extrabold uppercase tracking-wide">Paling Populer</h3>
+              </div>
+              <span class="text-xs text-slate-400 font-mono">24 Jam Terakhir</span>
+            </div>
+
+            <div id="trending-list-container" class="space-y-4">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <!-- Editorial Newsletter Box -->
+          <div class="mt-8 p-5 rounded-2xl bg-gradient-to-br from-rose-600 to-rose-800 text-white shadow-lg">
+            <div class="flex items-center gap-2 text-xs uppercase font-bold tracking-wider mb-1">
+              <svg class="w-3.5 h-3.5 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8L12 2z"/>
+              </svg>
+              Buletin Esensial Redaksi
+            </div>
+            <h4 class="text-base font-bold font-serif leading-snug mb-2">
+              Dapatkan Rangkuman Pagi Pukul 06:00 WIB
+            </h4>
+            <p class="text-xs text-rose-100 mb-3 leading-relaxed">
+              Analisis geopolitik, pergerakan komoditas, dan kebijakan strategis tanah air langsung ke kotak masuk Anda.
+            </p>
+            <form id="newsletter-form" onsubmit="handleNewsletterSubmit(event)" class="flex gap-2">
+              <input
+                id="newsletter-email-input"
+                type="email"
+                required
+                placeholder="nama@email.com"
+                class="w-full text-xs px-3.5 py-2.5 rounded-lg bg-white/20 placeholder:text-rose-200 text-white focus:outline-none focus:ring-2 focus:ring-white border border-transparent"
+              />
+              <button
+                type="submit"
+                id="newsletter-submit-btn"
+                class="px-4 py-2.5 bg-white text-rose-700 font-bold rounded-lg text-xs hover:bg-rose-50 active:scale-95 transition shrink-0 shadow">
+                Daftar
+              </button>
+            </form>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- SECONDARY NEWS GRID SECTION -->
+      <section class="space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800 gap-2">
+          <div>
+            <h2 class="text-2xl font-extrabold font-serif">Kabar Terkini Nusantara</h2>
+            <p id="category-filter-indicator" class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+              Menyajikan artikel terverifikasi pilihan redaksi
+            </p>
+          </div>
+          
+          <div id="search-reset-btn-wrap" class="hidden">
+            <button 
+              onclick="resetSearchQuery()"
+              class="text-xs font-semibold text-rose-600 hover:text-rose-700 dark:hover:text-rose-400 flex items-center gap-1">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+              <span>Reset Pencarian</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 3-Column Responsive Grid -->
+        <div id="news-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Rendered via JS -->
+        </div>
+      </section>
+
+      <!-- SPECIAL INVESTIGATION BANNER -->
+      <section class="rounded-3xl overflow-hidden bg-gradient-to-r from-slate-900 via-slate-950 to-rose-950 text-white border border-slate-800 shadow-2xl p-6 sm:p-10 relative group">
+        <div class="relative z-10 max-w-3xl space-y-4">
+          <span class="px-3.5 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest bg-rose-600 text-white inline-block shadow">
+            Laporan Investigasi Khusus
+          </span>
+          <h2 class="text-2xl sm:text-4xl font-extrabold font-serif leading-tight group-hover:text-rose-200 transition-colors">
+            Mengurai Gurita Spekulan Tanah di Balik Koridor Wisata Prioritas Danau Toba
+          </h2>
+          <p class="text-sm sm:text-base text-slate-300 font-sans leading-relaxed">
+            Penelusuran mendalam terhadap puluhan sertifikat tumpang tindih yang mengancam hak ulayat masyarakat adat di kawasan penyangga pariwisata super prioritas.
+          </p>
+          <div class="pt-2 flex flex-wrap items-center gap-4">
+            <button 
+              onclick="openArticleModalById(4)"
+              class="px-6 py-3 rounded-full bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs transition shadow-lg shadow-rose-600/30 active:scale-95">
+              Buka Dokumen Investigasi
+            </button>
+            <span class="text-xs text-slate-400">Durasi Baca: 7 Menit • Disertai Dokumen Lapangan</span>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- FULL ARTICLE READER MODAL -->
+  <div id="article-reader-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-3 sm:p-6 overflow-y-auto animate-fadeIn">
+    <div class="w-full max-w-3xl my-auto rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-2xl flex flex-col">
+      
+      <!-- Modal Top Control Bar -->
+      <div class="sticky top-0 z-20 backdrop-blur-md px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-white/90 dark:bg-slate-900/90">
+        <div class="flex items-center gap-2">
+          <span id="modal-article-category" class="px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider bg-rose-600 text-white">
+            Kategori
+          </span>
+          <span id="modal-article-date" class="text-xs text-slate-400 font-mono hidden sm:inline">15 September 2026</span>
+        </div>
+
+        <!-- Reader Controls (Font Scale, Bookmark, Share, Close) -->
+        <div class="flex items-center gap-2">
+          <div class="flex items-center border border-slate-200 dark:border-slate-700 rounded-lg p-0.5 text-xs mr-2">
+            <button onclick="setReaderFontSize('text-sm')" id="font-btn-sm" class="px-2 py-0.5 rounded text-slate-600 dark:text-slate-300 hover:text-slate-900">A-</button>
+            <button onclick="setReaderFontSize('text-base')" id="font-btn-md" class="px-2 py-0.5 rounded bg-rose-600 text-white font-bold">A</button>
+            <button onclick="setReaderFontSize('text-lg')" id="font-btn-lg" class="px-2 py-0.5 rounded text-slate-600 dark:text-slate-300 hover:text-slate-900">A+</button>
+          </div>
+
+          <button
+            id="modal-bookmark-btn"
+            onclick="handleActiveModalBookmark()"
+            title="Simpan Berita Ini"
+            class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+            <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+            </svg>
+          </button>
+
+          <button
+            onclick="copyCurrentArticleLink()"
+            title="Bagikan Tautan Berita"
+            class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+            <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+            </svg>
+          </button>
+
+          <button
+            onclick="closeArticleModal()"
+            title="Tutup Jendela"
+            class="p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-900 dark:hover:text-white transition ml-1">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Modal Scrollable Body -->
+      <div class="p-6 sm:p-10 space-y-6 max-h-[80vh] overflow-y-auto">
+        <h1 id="modal-article-title" class="text-2xl sm:text-4xl font-extrabold font-serif leading-tight">
+          Judul Berita Lengkap
+        </h1>
+
+        <!-- Author & Metric Bar -->
+        <div class="flex items-center justify-between py-3 border-y border-slate-200 dark:border-slate-800 text-xs">
+          <div class="flex items-center gap-3">
+            <img
+              id="modal-article-author-avatar"
+              src=""
+              alt="Avatar Penulis"
+              class="w-10 h-10 rounded-full object-cover ring-2 ring-rose-500/20"
+              onerror="this.src='https://placehold.co/100x100/e2e8f0/475569?text=ID'"
+            />
+            <div>
+              <p id="modal-article-author-name" class="font-bold text-slate-900 dark:text-slate-100">Nama Penulis</p>
+              <p id="modal-article-author-role" class="text-slate-400">Editor</p>
+            </div>
+          </div>
+
+          <div class="text-right text-slate-400 font-mono">
+            <p id="modal-article-readtime">4 mnt baca</p>
+            <p id="modal-article-reads">42.850 Pembaca</p>
+          </div>
+        </div>
+
+        <!-- Featured Media Image -->
+        <div class="rounded-2xl overflow-hidden aspect-[16/9] bg-slate-800">
+          <img
+            id="modal-article-image"
+            src=""
+            alt="Foto Berita"
+            class="w-full h-full object-cover"
+            onerror="this.src='https://placehold.co/1200x675/1e293b/ffffff?text=Berita+Nusantara'"
+          />
+        </div>
+
+        <!-- Audio Synthesizer in Article -->
+        <div class="p-4 rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/50 flex items-center justify-between gap-4">
+          <div class="flex items-center gap-3">
+            <button
+              id="modal-audio-btn"
+              onclick="triggerAudioFromModal()"
+              class="w-10 h-10 rounded-full bg-rose-600 text-white flex items-center justify-center shadow-md hover:bg-rose-700 active:scale-95 transition shrink-0">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </button>
+            <div>
+              <h5 class="text-xs font-bold text-slate-900 dark:text-slate-100">Dengarkan Versi Suara Berita</h5>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400">Narasi otomatis berkecepatan natural dengan AI Audio</p>
+            </div>
+          </div>
+          <span id="modal-audio-tag" class="text-xs font-mono text-rose-600 font-bold">4 mnt</span>
+        </div>
+
+        <!-- Formatted Content Paragraphs -->
+        <div id="modal-article-body" class="font-reading leading-relaxed text-slate-800 dark:text-slate-200 space-y-4 text-base">
+          <!-- Populated dynamically -->
+        </div>
+
+        <!-- Modal Footer Actions -->
+        <div class="pt-6 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+          <button
+            id="modal-like-btn"
+            onclick="handleActiveModalLike()"
+            class="flex items-center gap-2 px-4 py-2 rounded-full border border-slate-300 dark:border-slate-700 hover:border-rose-500 transition text-xs font-bold text-slate-700 dark:text-slate-200">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+            <span id="modal-like-count-text">342 Apresiasi</span>
+          </button>
+
+          <button
+            onclick="closeArticleModal()"
+            class="px-5 py-2 rounded-full bg-slate-900 text-white dark:bg-white dark:text-slate-900 text-xs font-bold hover:opacity-90 active:scale-95 transition">
+            Selesai Membaca
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- COMPREHENSIVE EDITORIAL FOOTER -->
+  <footer class="mt-16 border-t bg-slate-900 text-slate-300 border-slate-800 dark:bg-slate-950 dark:border-slate-800/80 transition-colors">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+      
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        
+        <div class="space-y-3">
+          <div class="flex items-baseline gap-1 select-none">
+            <span class="text-xl font-black tracking-tight text-white font-serif">
+              INDOTEMPO
+            </span>
+            <span class="text-lg font-light text-slate-400">
+              LAMA<span class="text-rose-500 font-bold">.</span>COM
+            </span>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Portal jurnalisme independen terkemuka di Indonesia. Mengedepankan verifikasi berbasis fakta, data presisi, dan integritas narasumber tanpa kompromi.
+          </p>
+        </div>
+
+        <div>
+          <h5 class="text-xs font-bold uppercase tracking-wider text-white mb-3">Rubrik Utama</h5>
+          <ul class="space-y-2 text-xs">
+            <li><a href="#" onclick="selectCategory('Nasional'); return false;" class="hover:text-rose-400 transition">Nasional & Kebijakan Publik</a></li>
+            <li><a href="#" onclick="selectCategory('Ekonomi & Bisnis'); return false;" class="hover:text-rose-400 transition">Ekonomi, Pasar & Komoditas</a></li>
+            <li><a href="#" onclick="selectCategory('Teknologi & AI'); return false;" class="hover:text-rose-400 transition">Riset Teknologi & AI Nusantara</a></li>
+            <li><a href="#" onclick="selectCategory('Investigasi'); return false;" class="hover:text-rose-400 transition">Laporan Investigasi Eksklusif</a></li>
+            <li><a href="#" onclick="selectCategory('Opini & Kolom'); return false;" class="hover:text-rose-400 transition">Opini Pakar & Kolom Khusus</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h5 class="text-xs font-bold uppercase tracking-wider text-white mb-3">Pedoman Redaksi</h5>
+          <ul class="space-y-2 text-xs text-slate-400">
+            <li><span class="hover:text-rose-400 transition cursor-pointer" onclick="showToast('Kode Etik Jurnalistik Dewan Pers RI diterapkan secara ketat.')">Kode Etik Jurnalistik PWI / AJI</span></li>
+            <li><span class="hover:text-rose-400 transition cursor-pointer" onclick="showToast('Setiap klaim berita melalui verifikasi minimal 2 sumber independen.')">Standar Verifikasi & Cek Fakta</span></li>
+            <li><span class="hover:text-rose-400 transition cursor-pointer" onclick="showToast('Silakan kirim sanggahan ke redaksi@indotempolama.com')">Hak Jawab & Koreksi Terbuka</span></li>
+            <li><span class="hover:text-rose-400 transition cursor-pointer" onclick="showToast('Audit independen tahunan terbuka untuk publik.')">Transparansi Finansial Media</span></li>
+          </ul>
+        </div>
+
+        <div class="space-y-3">
+          <h5 class="text-xs font-bold uppercase tracking-wider text-white">Hubungi Redaksi</h5>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Gedung Graha Warta Nusantara Lt. 12<br />
+            Jl. Medan Merdeka Barat No. 8, Jakarta Pusat<br />
+            Surel: <span class="text-rose-400 font-mono">redaksi@indotempolama.com</span>
+          </p>
+        </div>
+
+      </div>
+
+      <div class="pt-8 border-t border-slate-800 flex flex-wrap justify-between items-center gap-4 text-xs text-slate-500">
+        <span>© 2026 Indotempolama.com Media Siber. Hak Cipta Dilindungi Undang-Undang Pers Republik Indonesia.</span>
+        <div class="flex items-center gap-4">
+          <span class="flex items-center gap-1">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            CDN Terdistribusi: 14ms
+          </span>
+          <span>•</span>
+          <span>Enkripsi SSL SHA-256</span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <script>
+    /* Application State */
+    const ARTICLES = [
+      {
+        id: 1,
+        title: "Akselerasi Koridor Hijau IKN: Menuju Kota Nol Emisi dengan Jaringan Kereta Cepat Otonom",
+        slug: "akselerasi-koridor-hijau-ikn",
+        category: "Nasional",
+        readTime: "4 mnt baca",
+        date: "15 September 2026",
+        timeAgo: "25 menit lalu",
+        author: {
+          name: "Rizky Firmansyah",
+          role: "Editor Kebijakan Publik",
+          avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80"
+        },
+        reads: "42.850",
+        likes: 342,
+        badge: "Laporan Utama",
+        image: "https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=1200&auto=format&fit=crop&q=80",
+        excerpt: "Pembangunan infrastruktur transportasi berbasis energi terbarukan di Ibu Kota Nusantara memasuki babak final dengan uji coba rangkaian trem otonom nirkabel berdaya hidrogen.",
+        content: `Kawasan Inti Pusat Pemerintahan (KIPP) Nusantara kini telah terhubung mulus dengan jalur trem otonom terintegrasi. Uji coba perdana yang dihadiri oleh jajaran kementerian teknis membuktikan efisiensi energi mencapai 35% lebih hemat dibandingkan sistem transportasi rel konvensional.
+
+Menurut Kepala Otorita IKN, sistem transportasi ini tidak hanya mengandalkan sensor lidar mutakhir buatan insinyur tanah air, tetapi juga dipasok langsung oleh ladang pembangkit listrik tenaga surya (PLTS) terapung di pesisir Kalimantan Timur.
+
+"Target nol emisi karbon pada 2045 dimulai dari desain transportasi massal yang tanpa kompromi," ungkap juru bicara Otorita dalam konferensi pers pagi tadi.
+
+Selain mengurangi kemacetan antarzona pemerintahan, sistem terintegrasi ini juga memprioritaskan pejalan kaki dengan koridor berkanopi kanopi panel surya yang ramah cuaca tropis basah.`,
+        isTrending: true,
+        trendingRank: 1
+      },
+      {
+        id: 2,
+        title: "Lompatan Semikonduktor Nusantara: Ekosistem Baterai EV RI Masuki Rantai Pasok Global",
+        slug: "lompatan-semikonduktor-nusantara",
+        category: "Ekonomi & Bisnis",
+        readTime: "5 mnt baca",
+        date: "15 September 2026",
+        timeAgo: "1 jam lalu",
+        author: {
+          name: "Nadira Anastasia",
+          role: "Koresponden Finansial & Industri",
+          avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&auto=format&fit=crop&q=80"
+        },
+        reads: "28.190",
+        likes: 198,
+        badge: "Eksklusif",
+        image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&auto=format&fit=crop&q=80",
+        excerpt: "Pabrik pemurnian katoda generasi terbaru di Morowali resmi mengekspor kloter perdana sel baterai nikel-mangan ke tiga pabrikan otomotif terkemuka Eropa.",
+        content: `Keberhasilan ini menandai tonggak sejarah baru dalam peta hilirisasi mineral Indonesia. Dari negara pengekspor bijih mentah, kini korporasi nasional mampu memproduksi sel baterai berstandar presisi tinggi dengan jejak karbon terendah di kawasan Asia Tenggara.
+
+Indeks Harga Saham Gabungan (IHSG) sektor energi dan mineral langsung menyambut positif kabar ini dengan kenaikan rerata 2,4% pada pembukaan perdagangan sesi pertama hari ini.`,
+        isTrending: true,
+        trendingRank: 2
+      },
+      {
+        id: 3,
+        title: "Revolusi LLM Bahasa Daerah: Menjaga 700+ Bahasa Ibu Melalui Model AI Preservasi Budaya",
+        slug: "revolusi-llm-bahasa-daerah",
+        category: "Teknologi & AI",
+        readTime: "3 mnt baca",
+        date: "15 September 2026",
+        timeAgo: "2 jam lalu",
+        author: {
+          name: "Fauzan Wicaksono",
+          role: "Teknologi & Sains",
+          avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80"
+        },
+        reads: "19.340",
+        likes: 275,
+        badge: "Trending Tech",
+        image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
+        excerpt: "Konsorsium peneliti Bandung dan Yogyakarta meluncurkan fondasi model kecerdasan buatan sumber terbuka yang mampu menerjemahkan dialek langka Nusantara dengan akurasi 96%.",
+        content: `Di tengah kekhawatiran kepunahan puluhan bahasa daerah di wilayah kepulauan terluar, teknologi hadir sebagai penyelamat. Model bahasa 'Nusa-AI' dilatih menggunakan puluhan ribu jam rekaman lisan tuturan adat, manuskrip lontar, serta sastra tutur dari pelosok Maluku hingga Sumatera Barat.`,
+        isTrending: true,
+        trendingRank: 3
+      },
+      {
+        id: 4,
+        title: "Investigasi: Mengurai Gurita Spekulan Tanah di Balik Koridor Wisata Prioritas Danau Toba",
+        slug: "investigasi-spekulan-tanah-danau-toba",
+        category: "Investigasi",
+        readTime: "7 mnt baca",
+        date: "14 September 2026",
+        timeAgo: "Kemarin",
+        author: {
+          name: "Bima Santoso",
+          role: "Tim Investigasi Khusus",
+          avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop&q=80"
+        },
+        reads: "36.400",
+        likes: 512,
+        badge: "Liputan Khusus",
+        image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&auto=format&fit=crop&q=80",
+        excerpt: "Penelusuran mendalam terhadap puluhan sertifikat tumpang tindih yang mengancam hak ulayat masyarakat adat di kawasan penyangga pariwisata super prioritas.",
+        content: `Selama enam bulan terakhir, tim investigasi menelusuri alur perizinan lahan seluas 1.400 hektare di sekitar lereng bukit kaldera Toba. Ditemukan indikasi persekongkolan antara pemodal siluman dan oknum agraria setempat yang meminggirkan warga lokal pemegang hak waris leluhur.`,
+        isTrending: false,
+        trendingRank: null
+      },
+      {
+        id: 5,
+        title: "Menilik Fenomena 'Slow Living' Pekerja Urban Jakarta: Eksodus Menuju Lembah Bukit Sentul",
+        slug: "fenomena-slow-living-pekerja-urban",
+        category: "Gaya Hidup",
+        readTime: "4 mnt baca",
+        date: "14 September 2026",
+        timeAgo: "Kemarin",
+        author: {
+          name: "Clara Devina",
+          role: "Gaya Hidup & Urban",
+          avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&auto=format&fit=crop&q=80"
+        },
+        reads: "15.800",
+        likes: 180,
+        badge: "Urban Feature",
+        image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&auto=format&fit=crop&q=80",
+        excerpt: "Tren kerja hibrida memicu gelombang kepindahan para profesional muda ke dataran tinggi yang menawarkan udara bersih, pangan organik, dan keseimbangan jiwa raga.",
+        content: `Bukan lagi impian pensiun hari tua; kini mereka yang berusia akhir 20-an memilih menetap di kaki bukit dengan koneksi internet serat optik berkecepatan tinggi, memelihara kebun selada, dan memangkas stres ritme komuter kota megapolitan.`,
+        isTrending: true,
+        trendingRank: 4
+      },
+      {
+        id: 6,
+        title: "Kolom Opini: Menjaga Independensi Jurnalisme di Era Algoritma Mesin Pencari",
+        slug: "kolom-opini-independensi-jurnalisme",
+        category: "Opini & Kolom",
+        readTime: "5 mnt baca",
+        date: "14 September 2026",
+        timeAgo: "1 hari lalu",
+        author: {
+          name: "Prof. Hendrawan Kusuma",
+          role: "Dewan Guru Besar Komunikasi UI",
+          avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&auto=format&fit=crop&q=80"
+        },
+        reads: "12.450",
+        likes: 210,
+        badge: "Sudut Pandang",
+        image: "https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=800&auto=format&fit=crop&q=80",
+        excerpt: "Ketika clickbait dan perang metadata mengikis kedalaman informasi, kembali ke jurnalisme verifikatif adalah satu-satunya obat penawar krisis kepercayaan publik.",
+        content: `Media berita bukan sekadar pabrik konten. Di era di mana kecerdasan buatan dapat memproduksi seribu artikel generik dalam hitungan detik, sentuhan investigasi lapangan, keberanian moral reporter, dan ketegasan kode etik adalah komoditas paling mahal yang tak tergantikan.`,
+        isTrending: false,
+        trendingRank: null
+      }
+    ];
+
+    const CATEGORIES = [
+      'Semua Berita',
+      'Nasional',
+      'Ekonomi & Bisnis',
+      'Teknologi & AI',
+      'Investigasi',
+      'Gaya Hidup',
+      'Opini & Kolom'
+    ];
+
+    const MARKET_METRICS = [
+      { label: "IHSG", value: "7.842,50", change: "+0,82%", isUp: true },
+      { label: "USD / IDR", value: "15.420", change: "-0,15%", isUp: true },
+      { label: "Emas Antam", value: "Rp 1.480.000/g", change: "+0,45%", isUp: true },
+      { label: "Minyak Brent", value: "$76,40/brl", change: "-0,60%", isUp: false },
+      { label: "Cuaca IKN", value: "27°C Cerah", change: "AQI 14 (Baik)", isUp: true }
+    ];
+
+    /* Dynamic runtime state */
+    let selectedCategory = 'Semua Berita';
+    let searchQuery = '';
+    let bookmarks = [1, 3];
+    let likedArticles = {};
+    let isDarkMode = false;
+    let isPlayingAudio = false;
+    let activeModalArticle = null;
+    let readerFontSize = 'text-base';
+
+    function showToast(message) {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = "bg-slate-900/95 dark:bg-rose-600/95 text-white backdrop-blur-md px-5 py-3 rounded-xl shadow-2xl border border-slate-700/50 flex items-center gap-3 text-sm font-medium animate-fadeIn mb-2 pointer-events-auto";
+      toast.innerHTML = `
+        <svg class="w-4 h-4 text-amber-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8L12 2z"/>
+        </svg>
+        <span>${message}</span>
+      `;
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(10px)';
+        toast.style.transition = 'all 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
+    }
+
+    function toggleDarkMode() {
+      isDarkMode = !isDarkMode;
+      applyTheme();
+      showToast(isDarkMode ? "Mode Gelap diaktifkan." : "Mode Terang diaktifkan.");
+    }
+
+    function applyTheme() {
+      const html = document.documentElement;
+      const sunIcon = document.getElementById('theme-icon-sun');
+      const moonIcon = document.getElementById('theme-icon-moon');
+      
+      if (isDarkMode) {
+        html.classList.add('dark');
+        sunIcon.classList.remove('hidden');
+        moonIcon.classList.add('hidden');
+      } else {
+        html.classList.remove('dark');
+        sunIcon.classList.add('hidden');
+        moonIcon.classList.remove('hidden');
+      }
+    }
+
+    function renderMarketMetrics() {
+      const bar = document.getElementById('market-metrics-bar');
+      bar.innerHTML = MARKET_METRICS.map(m => `
+        <div class="flex items-center gap-1.5">
+          <span class="font-semibold text-slate-800 dark:text-slate-200">${m.label}:</span>
+          <span>${m.value}</span>
+          <span class="${m.isUp ? 'text-emerald-600 dark:text-emerald-400 font-bold' : 'text-rose-500 font-bold'}">
+            ${m.change}
+          </span>
+        </div>
+      `).join('');
+    }
+
+    function renderCategoryPills() {
+      const bar = document.getElementById('category-pills-bar');
+      bar.innerHTML = CATEGORIES.map(cat => {
+        const isActive = selectedCategory === cat;
+        return `
+          <button
+            onclick="selectCategory('${cat}')"
+            class="px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
+              isActive
+                ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-sm'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-200/50 dark:hover:bg-slate-800/50'
+            }">
+            ${cat}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function selectCategory(cat) {
+      selectedCategory = cat;
+      renderCategoryPills();
+      renderAllArticles();
+    }
+
+    function resetAppFilter() {
+      selectedCategory = 'Semua Berita';
+      searchQuery = '';
+      document.getElementById('search-input').value = '';
+      renderCategoryPills();
+      renderAllArticles();
+      showToast("Kembali ke halaman utama.");
+    }
+
+    function handleSearchChange(val) {
+      searchQuery = val.trim();
+      renderAllArticles();
+    }
+
+    function resetSearchQuery() {
+      searchQuery = '';
+      document.getElementById('search-input').value = '';
+      renderAllArticles();
+    }
+
+    /* Filter logic */
+    function getFilteredArticles() {
+      return ARTICLES.filter(art => {
+        const matchCategory = selectedCategory === 'Semua Berita' || art.category === selectedCategory;
+        const matchQuery = !searchQuery || 
+          art.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          art.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          art.author.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          art.category.toLowerCase().includes(searchQuery.toLowerCase());
+        return matchCategory && matchQuery;
+      });
+    }
+
+    function renderAllArticles() {
+      const filtered = getFilteredArticles();
+      const heroContainer = document.getElementById('hero-headline-container');
+      const gridContainer = document.getElementById('news-grid-container');
+      const indicator = document.getElementById('category-filter-indicator');
+      const resetBtnWrap = document.getElementById('search-reset-btn-wrap');
+
+      // Update indicator text
+      indicator.innerHTML = `Menyajikan <strong>${filtered.length}</strong> artikel dalam kategori <strong>${selectedCategory}</strong>`;
+      resetBtnWrap.classList.toggle('hidden', !searchQuery);
+
+      if (filtered.length === 0) {
+        heroContainer.innerHTML = `
+          <div class="p-12 text-center border rounded-3xl border-dashed border-slate-300 dark:border-slate-800">
+            <h3 class="text-lg font-bold font-serif">Tidak ada artikel yang cocok</h3>
+            <p class="text-xs text-slate-500 mt-1">Coba kata kunci lain atau pilih kategori Semua Berita.</p>
+            <button onclick="resetAppFilter()" class="mt-4 px-4 py-2 bg-rose-600 text-white rounded-full text-xs font-semibold">Tampilkan Semua</button>
+          </div>
+        `;
+        gridContainer.innerHTML = '';
+        return;
+      }
+
+      const mainHeadline = filtered[0];
+      const sideArticles = filtered.slice(1);
+
+      // Hero Headline Card (8 cols)
+      heroContainer.innerHTML = `
+        <div onclick="openArticleModalById(${mainHeadline.id})" 
+             class="rounded-3xl overflow-hidden cursor-pointer group border border-slate-200/80 dark:border-slate-800/90 bg-white dark:bg-slate-900/60 transition-all duration-300 hover:shadow-2xl flex flex-col justify-between flex-1">
+          <div class="relative aspect-[16/9] w-full overflow-hidden bg-slate-900">
+            <img
+              src="${mainHeadline.image}"
+              alt="${mainHeadline.title}"
+              class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+              onerror="this.src='https://placehold.co/1200x675/1e293b/ffffff?text=Berita+Utama'"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
+            
+            <!-- Badges -->
+            <div class="absolute top-4 left-4 flex gap-2">
+              <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-rose-600 text-white shadow-lg">
+                ${mainHeadline.badge}
+              </span>
+              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-black/60 backdrop-blur-md text-white border border-white/20">
+                ${mainHeadline.category}
+              </span>
+            </div>
+
+            <div class="absolute bottom-4 left-4 right-4 text-white">
+              <div class="flex items-center gap-2 text-xs font-medium text-slate-300 mb-1.5">
+                <span>${mainHeadline.timeAgo}</span>
+                <span>•</span>
+                <span class="flex items-center gap-1">
+                  <svg class="w-3.5 h-3.5 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  ${mainHeadline.readTime}
+                </span>
+              </div>
+              <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold font-serif leading-tight group-hover:text-rose-300 transition-colors">
+                ${mainHeadline.title}
+              </h1>
+            </div>
+          </div>
+
+          <!-- Lead Details -->
+          <div class="p-6 sm:p-8 flex flex-col justify-between flex-1 gap-6">
+            <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 font-sans leading-relaxed line-clamp-2">
+              ${mainHeadline.excerpt}
+            </p>
+
+            <div class="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-slate-800/80">
+              <div class="flex items-center gap-3">
+                <img 
+                  src="${mainHeadline.author.avatar}" 
+                  alt="${mainHeadline.author.name}"
+                  class="w-10 h-10 rounded-full object-cover ring-2 ring-rose-500/20"
+                  onerror="this.src='https://placehold.co/100x100/e2e8f0/475569?text=ID'"
+                />
+                <div>
+                  <h4 class="text-sm font-bold text-slate-900 dark:text-slate-100">${mainHeadline.author.name}</h4>
+                  <p class="text-xs text-slate-500 dark:text-slate-400">${mainHeadline.author.role}</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3">
+                <button
+                  onclick="toggleLike(${mainHeadline.id}, event)"
+                  class="flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-rose-600 transition">
+                  <svg class="w-4 h-4 ${likedArticles[mainHeadline.id] ? 'text-rose-600 fill-current' : 'fill-none'}" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                  </svg>
+                  <span>${mainHeadline.likes + (likedArticles[mainHeadline.id] ? 1 : 0)}</span>
+                </button>
+                <button
+                  onclick="toggleBookmark(${mainHeadline.id}, event)"
+                  class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+                  <svg class="w-4 h-4 ${bookmarks.includes(mainHeadline.id) ? 'text-rose-600 fill-current' : 'text-slate-400 fill-none'}" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                  </svg>
+                </button>
+                <span class="hidden sm:inline-block text-xs font-bold text-rose-600 group-hover:translate-x-1 transition-transform">
+                  Baca Selengkapnya &rarr;
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Secondary News Card Grid
+      gridContainer.innerHTML = sideArticles.map(art => `
+        <article
+          onclick="openArticleModalById(${art.id})"
+          class="group cursor-pointer rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-slate-900/40 hover:border-slate-300 dark:hover:border-slate-700 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl flex flex-col justify-between">
+          
+          <div>
+            <div class="relative aspect-[16/10] w-full overflow-hidden bg-slate-800">
+              <img
+                src="${art.image}"
+                alt="${art.title}"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                onerror="this.src='https://placehold.co/800x500/1e293b/ffffff?text=Berita'"
+              />
+              <div class="absolute top-3 left-3">
+                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider bg-slate-950/80 backdrop-blur-md text-white border border-white/10">
+                  ${art.category}
+                </span>
+              </div>
+            </div>
+
+            <div class="p-5">
+              <div class="flex items-center gap-2 text-xs text-slate-400 mb-2">
+                <span>${art.timeAgo}</span>
+                <span>•</span>
+                <span class="flex items-center gap-1 font-mono text-[11px]">
+                  <svg class="w-3 h-3 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  ${art.readTime}
+                </span>
+              </div>
+
+              <h3 class="text-lg font-bold font-serif leading-snug group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors line-clamp-2 mb-2">
+                ${art.title}
+              </h3>
+
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-sans leading-relaxed line-clamp-2">
+                ${art.excerpt}
+              </p>
+            </div>
+          </div>
+
+          <div class="p-5 pt-0 flex items-center justify-between border-t border-slate-100 dark:border-slate-800/50 mt-2">
+            <div class="flex items-center gap-2">
+              <img 
+                src="${art.author.avatar}" 
+                alt="${art.author.name}"
+                class="w-6 h-6 rounded-full object-cover"
+                onerror="this.src='https://placehold.co/100x100/e2e8f0/475569?text=ID'"
+              />
+              <span class="text-xs font-semibold text-slate-700 dark:text-slate-300 truncate max-w-[120px]">
+                ${art.author.name}
+              </span>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button
+                onclick="toggleLike(${art.id}, event)"
+                class="p-1 text-slate-400 hover:text-rose-600 transition">
+                <svg class="w-4 h-4 ${likedArticles[art.id] ? 'text-rose-600 fill-current' : 'fill-none'}" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                </svg>
+              </button>
+              <button
+                onclick="toggleBookmark(${art.id}, event)"
+                class="p-1 text-slate-400 hover:text-rose-600 transition">
+                <svg class="w-4 h-4 ${bookmarks.includes(art.id) ? 'text-rose-600 fill-current' : 'fill-none'}" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+        </article>
+      `).join('');
+
+      renderTrendingSidebar();
+      updateBookmarkCounter();
+    }
+
+    function renderTrendingSidebar() {
+      const trendingContainer = document.getElementById('trending-list-container');
+      const trending = ARTICLES.filter(a => a.isTrending).sort((a, b) => (a.trendingRank || 99) - (b.trendingRank || 99)).slice(0, 4);
+
+      trendingContainer.innerHTML = trending.map((art, idx) => `
+        <div
+          onclick="openArticleModalById(${art.id})"
+          class="group cursor-pointer flex gap-4 items-start pb-4 border-b border-slate-100 dark:border-slate-800/60 last:border-none">
+          <span class="text-3xl font-black font-serif text-slate-300 dark:text-slate-700 group-hover:text-rose-600 transition-colors">
+            0${idx + 1}
+          </span>
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-semibold text-rose-600 dark:text-rose-400 mb-1">
+              <span>${art.category}</span>
+              <span>•</span>
+              <span class="text-slate-400">${art.timeAgo}</span>
+            </div>
+            <h4 class="text-sm font-bold font-serif leading-snug group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors line-clamp-2">
+              ${art.title}
+            </h4>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function toggleBookmark(id, event) {
+      if (event) event.stopPropagation();
+      if (bookmarks.includes(id)) {
+        bookmarks = bookmarks.filter(b => b !== id);
+        showToast("Artikel dihapus dari simpanan.");
+      } else {
+        bookmarks.push(id);
+        showToast("Artikel tersimpan ke koleksi bacaan.");
+      }
+      renderAllArticles();
+      if (activeModalArticle && activeModalArticle.id === id) {
+        updateModalBookmarkIcon();
+      }
+    }
+
+    function toggleLike(id, event) {
+      if (event) event.stopPropagation();
+      likedArticles[id] = !likedArticles[id];
+      showToast(likedArticles[id] ? "Terima kasih atas apresiasi Anda!" : "Apresiasi dibatalkan.");
+      renderAllArticles();
+      if (activeModalArticle && activeModalArticle.id === id) {
+        updateModalLikeButton();
+      }
+    }
+
+    function updateBookmarkCounter() {
+      const badge = document.getElementById('bookmark-count-badge');
+      if (badge) badge.innerText = bookmarks.length;
+    }
+
+    function showBookmarkList() {
+      if (bookmarks.length === 0) {
+        showToast("Anda belum menyimpan artikel.");
+        return;
+      }
+      showToast(`Ada ${bookmarks.length} artikel tersimpan di koleksi Anda.`);
+    }
+
+    function toggleAudioNarrator(customTitle) {
+      isPlayingAudio = !isPlayingAudio;
+      const bar = document.getElementById('audio-synthesizer-bar');
+      const text = document.getElementById('audio-synthesizer-text');
+      const btnText = document.getElementById('audio-btn-text');
+      const iconWrap = document.getElementById('audio-icon-wrap');
+      const btn = document.getElementById('audio-toggle-btn');
+
+      if (isPlayingAudio) {
+        bar.classList.remove('hidden');
+        text.innerText = `Memutar audio narasi: "${customTitle || ARTICLES[0].title}"`;
+        btnText.innerText = "Sedang Narasi";
+        iconWrap.innerHTML = `<svg class="w-3.5 h-3.5 text-white animate-pulse" fill="currentColor" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>`;
+        btn.classList.add('bg-rose-600', 'text-white', 'border-rose-600');
+        showToast("Memulai pemutaran narasi berita audio.");
+      } else {
+        bar.classList.add('hidden');
+        btnText.innerText = "Dengar Berita";
+        iconWrap.innerHTML = `<svg class="w-3.5 h-3.5 text-rose-600" fill="currentColor" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>`;
+        btn.classList.remove('bg-rose-600', 'text-white', 'border-rose-600');
+        showToast("Audio narasi dijeda.");
+      }
+    }
+
+    function triggerAudioFromModal() {
+      if (activeModalArticle) {
+        toggleAudioNarrator(activeModalArticle.title);
+      }
+    }
+
+    function openArticleModalById(id) {
+      const art = ARTICLES.find(a => a.id === id);
+      if (!art) return;
+      activeModalArticle = art;
+
+      document.getElementById('modal-article-category').innerText = art.category;
+      document.getElementById('modal-article-date').innerText = art.date;
+      document.getElementById('modal-article-title').innerText = art.title;
+      document.getElementById('modal-article-author-name').innerText = art.author.name;
+      document.getElementById('modal-article-author-role').innerText = art.author.role;
+      document.getElementById('modal-article-author-avatar').src = art.author.avatar;
+      document.getElementById('modal-article-readtime').innerText = art.readTime;
+      document.getElementById('modal-article-reads').innerText = `${art.reads} Pembaca`;
+      document.getElementById('modal-article-image').src = art.image;
+      document.getElementById('modal-audio-tag').innerText = art.readTime;
+
+      // Body paragraphs
+      const bodyContainer = document.getElementById('modal-article-body');
+      bodyContainer.innerHTML = art.content.split('\n\n').map(p => `
+        <p class="text-justify indent-4 leading-relaxed">${p}</p>
+      `).join('');
+
+      updateModalBookmarkIcon();
+      updateModalLikeButton();
+
+      const modal = document.getElementById('article-reader-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.classList.add('overflow-hidden');
+    }
+
+    function closeArticleModal() {
+      const modal = document.getElementById('article-reader-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.classList.remove('overflow-hidden');
+      activeModalArticle = null;
+    }
+
+    function updateModalBookmarkIcon() {
+      if (!activeModalArticle) return;
+      const btn = document.getElementById('modal-bookmark-btn');
+      const isBookmarked = bookmarks.includes(activeModalArticle.id);
+      btn.innerHTML = `
+        <svg class="w-4 h-4 ${isBookmarked ? 'text-rose-600 fill-current' : 'text-slate-400 fill-none'}" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+        </svg>
+      `;
+    }
+
+    function updateModalLikeButton() {
+      if (!activeModalArticle) return;
+      const isLiked = !!likedArticles[activeModalArticle.id];
+      const count = activeModalArticle.likes + (isLiked ? 1 : 0);
+      const btn = document.getElementById('modal-like-btn');
+      const text = document.getElementById('modal-like-count-text');
+      
+      text.innerText = `${count} Apresiasi`;
+      if (isLiked) {
+        btn.className = "flex items-center gap-2 px-4 py-2 rounded-full border border-rose-600 bg-rose-600 text-white transition text-xs font-bold shadow";
+        btn.querySelector('svg').classList.add('fill-current');
+      } else {
+        btn.className = "flex items-center gap-2 px-4 py-2 rounded-full border border-slate-300 dark:border-slate-700 hover:border-rose-500 transition text-xs font-bold text-slate-700 dark:text-slate-200";
+        btn.querySelector('svg').classList.remove('fill-current');
+      }
+    }
+
+    function handleActiveModalBookmark() {
+      if (activeModalArticle) {
+        toggleBookmark(activeModalArticle.id);
+      }
+    }
+
+    function handleActiveModalLike() {
+      if (activeModalArticle) {
+        toggleLike(activeModalArticle.id);
+      }
+    }
+
+    function setReaderFontSize(sizeClass) {
+      readerFontSize = sizeClass;
+      const body = document.getElementById('modal-article-body');
+      body.classList.remove('text-sm', 'text-base', 'text-lg');
+      body.classList.add(sizeClass);
+
+      const btnSm = document.getElementById('font-btn-sm');
+      const btnMd = document.getElementById('font-btn-md');
+      const btnLg = document.getElementById('font-btn-lg');
+
+      [btnSm, btnMd, btnLg].forEach(b => {
+        b.className = "px-2 py-0.5 rounded text-slate-600 dark:text-slate-300 hover:text-slate-900";
+      });
+
+      if (sizeClass === 'text-sm') btnSm.className = "px-2 py-0.5 rounded bg-rose-600 text-white font-bold";
+      if (sizeClass === 'text-base') btnMd.className = "px-2 py-0.5 rounded bg-rose-600 text-white font-bold";
+      if (sizeClass === 'text-lg') btnLg.className = "px-2 py-0.5 rounded bg-rose-600 text-white font-bold";
+    }
+
+    function copyCurrentArticleLink() {
+      try {
+        const dummy = document.createElement('input');
+        document.body.appendChild(dummy);
+        dummy.value = window.location.href;
+        dummy.select();
+        document.execCommand('copy');
+        document.body.removeChild(dummy);
+        showToast("Tautan berita berhasil disalin ke papan klip!");
+      } catch (err) {
+        showToast("Tautan berita disiapkan untuk dibagikan.");
+      }
+    }
+
+    function handleNewsletterSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById('newsletter-email-input');
+      const btn = document.getElementById('newsletter-submit-btn');
+      if (!input.value) return;
+
+      btn.innerText = "Terdaftar ✓";
+      btn.disabled = true;
+      showToast("Selamat bergabung! Buletin harian pukul 06.00 WIB akan dikirim.");
+      input.value = '';
+      setTimeout(() => {
+        btn.innerText = "Daftar";
+        btn.disabled = false;
+      }, 4000);
+    }
+
+    /* Close modal when clicking on outer backdrop */
+    window.addEventListener('click', (e) => {
+      const modal = document.getElementById('article-reader-modal');
+      if (e.target === modal) {
+        closeArticleModal();
+      }
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      renderMarketMetrics();
+      renderCategoryPills();
+      renderAllArticles();
+      applyTheme();
+    });
+  </script>
+</body>
+</html>
